@@ -137,6 +137,37 @@ async function runSteps(meta) {
   return { targets, status };
 }
 
+
+// ---------- orbital catalog: data/orbits.json, loaded only by the 3D globe ----------
+// Every active satellite plus the debris clouds CelesTrak republishes publicly (no account needed).
+// CelesTrak asks clients not to re-download unchanged data more often than every 2 hours; we refresh every 6.
+const ORBIT_GROUPS = [['active', 'a'], ['cosmos-1408-debris', 'd'], ['fengyun-1c-debris', 'd'], ['iridium-33-debris', 'd'], ['cosmos-2251-debris', 'd']];
+async function orbits(meta) {
+  let p = {};
+  if (PREV) { try { const r = await fetch(`${PREV}/data/orbits.json?t=${Date.now()}`, { signal: AbortSignal.timeout(60000) }); if (r.ok) p = await r.json(); } catch { } }
+  meta.orbits = meta.orbits || {};
+  if (p.sats && !due(meta.orbits, 'catalog', 360)) return { out: p, status: 'kept' };
+  const sats = []; const groups = []; const seen = new Set(); const errs = [];
+  for (const [g, kind] of ORBIT_GROUPS) {
+    try {
+      const r = await fetch(`https://celestrak.org/NORAD/elements/gp.php?GROUP=${g}&FORMAT=tle`, { headers: { 'User-Agent': 'OpenPlanetObservatory/1.0 (open-source research dashboard)' }, signal: AbortSignal.timeout(90000) });
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const L = (await r.text()).split(/\r?\n/).map(x => x.trimEnd()).filter(Boolean); let n = 0;
+      for (let i = 0; i + 2 < L.length + 1; i++) {
+        if (L[i + 1]?.startsWith('1 ') && L[i + 2]?.startsWith('2 ') && !L[i].startsWith('1 ') && !L[i].startsWith('2 ')) {
+          const id = L[i + 1].slice(2, 7).trim(); if (!seen.has(id)) { seen.add(id); sats.push([L[i].trim(), kind, L[i + 1], L[i + 2]]); n++; } i += 2;
+        }
+      }
+      if (!n) throw new Error('no elements');
+      groups.push([g, kind, n]);
+    } catch (e) { errs.push(g + ': ' + e.message); if (g === 'active') break; }
+    await new Promise(r => setTimeout(r, 1500));
+  }
+  if (!groups.some(x => x[0] === 'active')) return { out: p, status: 'error: ' + errs.join('; ').slice(0, 160) };
+  meta.orbits.catalog = now.toISOString();
+  return { out: { asOf: stamp, source: 'CelesTrak GP data (celestrak.org)', groups, sats }, status: errs.length ? 'ok (partial: ' + errs.join('; ').slice(0, 120) + ')' : 'ok' };
+}
+
 // ---------- main ----------
 // Load everything last published first. If any of it had to come from the sample seed,
 // forget the refresh schedule so every source is collected fresh this run.
@@ -149,7 +180,9 @@ meta.snap = meta.snap || {}; meta.nature = meta.nature || {}; meta.steps = meta.
 const snap = await runGroups('snap', GROUPS, EVERY, 'snap');
 const nature = await runGroups('nature', NGROUPS, NEVERY, 'nature');
 const steps = await runSteps(meta);
+const orb = await orbits(meta); log('orbits', orb.status, (orb.out.sats || []).length + ' objects');
 await fs.mkdir(OUT, { recursive: true });
+if (orb.out.sats) await fs.writeFile(path.join(OUT, 'orbits.json'), JSON.stringify(orb.out));
 const files = { snap: ['SNAP', snap.out], nature: ['NAT', nature.out], situations: ['SIT', steps.targets.situations], watch: ['WATCH', steps.targets.watch || {}], economy: ['ECON', steps.targets.economy || {}], signals: ['SIG', steps.targets.signals], disruptions: ['DIS', steps.targets.disruptions] };
 for (const [name, [g, obj]] of Object.entries(files)) {
   const json = JSON.stringify(obj);
@@ -157,10 +190,10 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
-const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status }).some(v => v === 'ok');
+const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
 await fs.writeFile(path.join(OUT, 'meta.json'), JSON.stringify(meta, null, 1));
-const bad = Object.values({ ...snap.status, ...nature.status, ...steps.status }).filter(s => s.startsWith('error')).length;
+const bad = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).filter(s => s.startsWith('error')).length;
 log(`done: ${bad} error(s). Files in ${OUT}`);
