@@ -43,11 +43,13 @@ viewer.clock.shouldAnimate=true;viewer.clock.multiplier=1;viewer.clock.currentTi
 scene.screenSpaceCameraController.minimumZoomDistance=12000;scene.screenSpaceCameraController.maximumZoomDistance=6e7;
 viewer.camera.setView({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7)});
 
-let baseLayer=null;
+let baseLayer=null,nightLayer=null;
+// The night side keeps a dim base plus NASA's "Earth at Night" city lights, like a real view from orbit.
+async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012','500m',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});viewer.imageryLayers.add(nightLayer)}catch(e){}}
 async function setImagery(k){const def=IMAGERY[k]||IMAGERY.bluemarble;
- try{const p=await def.make();const layer=new C.ImageryLayer(p);
+ try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});
   p.errorEvent.addEventListener(()=>{if(k!=='basic'&&!layer.__failed){layer.__failed=true;note('Imagery from '+def.name+' did not load; showing the offline map instead.');setImagery('basic')}});
-  if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);
+  if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);addNightLights();if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer);
   imageryChoice=k;try{localStorage.setItem('obs-imagery',k)}catch(e){}
   document.querySelectorAll('#imgSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  }catch(e){if(k!=='basic')setImagery('basic')}}

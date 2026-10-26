@@ -95,10 +95,15 @@ async function radar(T) {
   return 'ok';
 }
 
+// Volcano positions rarely change: keep every coordinate ever resolved, so a failed lookup still places the markers.
+function rememberVolcanoCoords(T) { T.volcanoKnown = T.volcanoKnown || {}; (T.volcano?.items || []).forEach(it => { if (it[5] != null) T.volcanoKnown[it[0]] = [it[5], it[6]]; }); }
+function fillVolcanoCoordsFromMemory(T) { const k = T.volcanoKnown || {}; let n = 0; (T.volcano?.items || []).forEach(it => { if (it[5] == null && k[it[0]]) { it[5] = k[it[0]][0]; it[6] = k[it[0]][1]; n++; } }); log('step', 'volcano coords', `${n} filled from earlier runs`); }
+
 async function runSteps(meta) {
   const cfg = JSON.parse(await fs.readFile(path.join(HERE, 'collectors.json'), 'utf8'));
   const targets = {}; const status = {};
   for (const t of Object.keys(cfg.docs)) targets[t] = await prev(t);
+  if (targets.signals) rememberVolcanoCoords(targets.signals);
   for (const [i, step] of cfg.steps.entries()) {
     const key = i + ':' + step.name.slice(0, 40);
     const T = targets[step.target];
@@ -108,6 +113,7 @@ async function runSteps(meta) {
       if (out.volcanoCoords) { // fill volcano item coordinates (see the step's note)
         const strip = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         (T.volcano?.items || []).forEach(it => { const c = out.volcanoCoords[strip(it[0])]; if (c) { it[5] = c[0]; it[6] = c[1]; } });
+        rememberVolcanoCoords(T);
       } else {
         // Steps catch their own per-source errors and return empty lists for them.
         // An empty result must never replace good earlier data, so empty values are skipped.
@@ -121,7 +127,7 @@ async function runSteps(meta) {
         T.asOf = stamp;
       }
       meta.steps[key] = now.toISOString(); status[key] = 'ok';
-    } catch (e) { status[key] = 'error: ' + e.message.slice(0, 160); }
+    } catch (e) { status[key] = 'error: ' + e.message.slice(0, 160); if (/volcano coordinates/.test(step.name)) fillVolcanoCoordsFromMemory(T); }
     log('step', key, status[key]);
   }
   try { status.radar = await radar(targets.disruptions); } catch (e) { status.radar = 'error: ' + e.message.slice(0, 160); }
