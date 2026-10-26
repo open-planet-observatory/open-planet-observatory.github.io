@@ -129,3 +129,17 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .sat-card .sc-note a{color:var(--ink-2)}
 .sat-card .sc-act{display:flex;gap:6px}
 @media (max-width:640px){#ops-map .sat-card{left:14px;right:14px;bottom:120px;width:auto}}
+/* Moon + AI releases */
+:root{--l-ai:#8b5cf6;--moon:#e9e4d4}
+.linkbtn{border:0;background:none;padding:0;color:var(--ink-2);text-decoration:underline;cursor:pointer;font:inherit}
+.moon-card .moon-top{display:flex;gap:14px;align-items:center;margin:4px 0 8px}
+.moon-card .moon-name{font-weight:700;font-size:1.05rem}
+.ai-bars{display:flex;flex-direction:column;gap:4px}
+.ai-bar{display:grid;grid-template-columns:minmax(90px,38%) 1fr auto;gap:8px;align-items:center;font-size:.8rem}
+.ai-bar .t{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ai-bar .b{height:8px;background:var(--glass-2);border-radius:4px;overflow:hidden}
+.ai-bar .b i{display:block;height:100%;background:var(--l-ai);border-radius:4px}
+.ai-bar .v{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+.ai-b{display:inline-block;font-size:.66rem;font-weight:700;border-radius:999px;padding:1px 6px;margin-left:5px;vertical-align:1px;border:1px solid var(--glass-line);color:var(--ink-2)}
+.ai-b.fr{border-color:var(--l-ai);color:var(--l-ai)}
+#aiCard .tbl td{vertical-align:top}

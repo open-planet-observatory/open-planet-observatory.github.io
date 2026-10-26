@@ -14,6 +14,7 @@
     "build:claude": "node build/build.mjs claude data-seed dist-claude/index.html"
   },
   "dependencies": {
+    "astronomy-engine": "^2.1.19",
     "cesium": "^1.146.0",
     "d3": "7.9.0",
     "h3-js": "4.1.0",
