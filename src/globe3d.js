@@ -116,15 +116,15 @@ function buildSnap(){const S=window.SNAP||{};
 const SAT_CATS={
  station:{name:'Crewed space station',color:'#ffd166',size:9,chip:'sat'},
  science:{name:'Space telescope / science',color:'#f4f1de',size:6,chip:'sat'},
- nav:{name:'Navigation (GPS, Galileo, GLONASS, BeiDou…)',color:'#f6bd60',size:5,chip:'sat-nav',chipName:'Navigation (GPS, Galileo…)',on:true},
- broadband:{name:'Broadband constellation (Starlink, OneWeb, Kuiper…)',color:'#4cc9f0',size:2.5,chip:'sat-broadband',chipName:'Broadband (Starlink, OneWeb…)',on:true},
- earth:{name:'Weather / Earth observation',color:'#80ed99',size:4,chip:'sat-earth',chipName:'Weather & Earth observation',on:true},
+ nav:{name:'Navigation (GPS, Galileo, GLONASS, BeiDou…)',color:'#f6bd60',size:5,chip:'sat-nav',chipName:'Navigation (GPS…)',on:true},
+ broadband:{name:'Broadband constellation (Starlink, OneWeb, Kuiper…)',color:'#4cc9f0',size:2.5,chip:'sat-broadband',chipName:'Starlink & broadband',on:true},
+ earth:{name:'Weather / Earth observation',color:'#80ed99',size:4,chip:'sat-earth',chipName:'Weather & Earth obs.',on:true},
  geo:{name:'Geostationary',color:'#c77dff',size:4,chip:'sat-geo',chipName:'Geostationary',on:true},
- other:{name:'Other active satellite',color:'#cfd8e3',size:3,chip:'sat-other',chipName:'Other active satellites',on:true},
- 'deb-fy':{name:'Debris from China’s 2007 anti-satellite test (Fengyun-1C)',color:'#ff6b6b',size:2,chip:'deb-fy',chipName:'Debris: 2007 Chinese ASAT test',on:false},
- 'deb-coll':{name:'Debris from the 2009 Iridium 33 – Cosmos 2251 collision',color:'#ff9f43',size:2,chip:'deb-coll',chipName:'Debris: 2009 satellite collision',on:false},
- 'deb-asat':{name:'Debris from Russia’s 2021 anti-satellite test (Cosmos 1408)',color:'#f15bb5',size:2,chip:'deb-asat',chipName:'Debris: 2021 Russian ASAT test',on:false},
- debris:{name:'Debris (from a major break-up)',color:'#e5e5e5',size:2,chip:'deb-other',chipName:'Debris: other break-ups',on:false},
+ other:{name:'Other active satellite',color:'#cfd8e3',size:3,chip:'sat-other',chipName:'Other satellites',on:true},
+ 'deb-fy':{name:'Debris from China’s 2007 anti-satellite test (Fengyun-1C)',color:'#ff6b6b',size:2,chip:'deb-fy',chipName:'Debris: 2007 China test',on:false},
+ 'deb-coll':{name:'Debris from the 2009 Iridium 33 – Cosmos 2251 collision',color:'#ff9f43',size:2,chip:'deb-coll',chipName:'Debris: 2009 collision',on:false},
+ 'deb-asat':{name:'Debris from Russia’s 2021 anti-satellite test (Cosmos 1408)',color:'#f15bb5',size:2,chip:'deb-asat',chipName:'Debris: 2021 Russia test',on:false},
+ debris:{name:'Debris (from a major break-up)',color:'#e5e5e5',size:2,chip:'deb-other',chipName:'Debris: other',on:false},
 };
 function satCat(name,l2,kind){const n=name.toUpperCase();if(kind==='d')return /FENGYUN 1C/.test(n)?'deb-fy':/IRIDIUM 33|COSMOS 2251/.test(n)?'deb-coll':/COSMOS 1408/.test(n)?'deb-asat':'debris';
  if(/^ISS \(|^CSS \(|TIANHE|TIANGONG|^ISS$/.test(n))return 'station';
@@ -136,7 +136,7 @@ function satCat(name,l2,kind){const n=name.toUpperCase();if(kind==='d')return /F
 // one switch per kind of satellite and per debris cloud (the 'sat' chip for stations & telescopes comes from the page)
 Object.values(SAT_CATS).forEach(c=>document.documentElement.style.setProperty('--c-'+c.chip,c.color));
 Object.values(SAT_CATS).filter(c=>c.chip!=='sat').forEach(c=>{O.addLayer({id:c.chip,name:c.chipName,color:'--c-'+c.chip,shape:'circle',count:'3D only',on:c.on,group:'Space'});
- const b=document.getElementById('chip-'+c.chip);if(b&&c.chip==='deb-other')b.hidden=true});
+ const b=document.getElementById('chip-'+c.chip);if(b){b.title=c.name;if(c.chip==='deb-other')b.hidden=true}});
 const SAT={list:[],pts:[],labels:[],snaps:[],busy:false,worker:null,step:2000,sel:-1,ready:false,asOf:null};
 const satPts=scene.primitives.add(new C.PointPrimitiveCollection());
 const satLbl=scene.primitives.add(new C.LabelCollection());
@@ -169,7 +169,7 @@ async function startSats(){if(!window.satellite)return;const list=await loadCata
  const lblFont='600 12px Public Sans, sans-serif';
  list.forEach((s,i)=>{const c=SAT_CATS[s.cat];const p=satPts.add({position:C.Cartesian3.ZERO,pixelSize:c.size,color:C.Color.fromCssColorString(c.color).withAlpha(s.cat==='broadband'||/deb/.test(s.cat)?.75:.95),
    outlineColor:C.Color.BLACK.withAlpha(.5),outlineWidth:c.size>=5?1:0,scaleByDistance:new C.NearFarScalar(1.5e6,1.8,4e7,.7),id:{sat:i},show:false});p.__ok=false;SAT.pts.push(p);
-  if(s.cat==='station'||(s.cat==='science'&&/HST/.test(s.name))){const short=s.name.replace(/^ISS \(ZARYA\)$/,'ISS').replace(/^CSS \(TIANHE\)$/,'Tiangong').replace(/^HST$/,'Hubble');
+  if(/^(ISS \(ZARYA\)|CSS \(TIANHE\)|HST)$/.test(s.name)){const short=s.name.replace(/^ISS \(ZARYA\)$/,'ISS').replace(/^CSS \(TIANHE\)$/,'Tiangong').replace(/^HST$/,'Hubble');
    SAT.labels[i]=satLbl.add({text:short,font:lblFont,fillColor:C.Color.WHITE,outlineColor:C.Color.BLACK,outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,show:false})}});
  if(SAT.worker)SAT.worker.terminate();SAT.worker=makeWorker();if(SAT.worker)SAT.worker.postMessage({init:list.map(s=>[s.l1,s.l2])});
  SAT.ready=true;
