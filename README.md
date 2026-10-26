@@ -8,6 +8,7 @@ A free, open-source live map of the planet from public data: earthquakes, fires,
 GitHub Actions (every 10 min)
   collector/collect.mjs ──► dist/data/*.json + *.js   (each source on its own schedule;
   │   ├─ snap.mjs          map layers                  failures keep the last good data)
+  │   ├─ orbits            CelesTrak catalog → data/orbits.json (every 6 h, 3D globe only)
   │   └─ collectors.json   situations, signals, disruptions
   build/build.mjs ───────► dist/index.html             (libraries served locally)
   deploy ────────────────► GitHub Pages
@@ -41,7 +42,7 @@ Local build: `npm ci`, then `npm run collect && npm run build` (needs internet),
 | `src/nature.js` | Nature layers and panel (sightings, seasonal movement, threatened, trends). |
 | `src/country.js` | Country briefs (click a country) and the browser-only watchlist. |
 | `src/ops.js`, `src/ops.css` | The full-screen "ops room" shell: map, layer rail, panels, region presets, ticker. |
-| `src/globe3d.js` | The 3D globe (CesiumJS): NASA GIBS imagery, satellites on real orbits, fireballs at burst altitude, see-through Earth for quake depths. Falls back to the 2D map without WebGL. |
+| `src/globe3d.js` | The 3D globe (CesiumJS): NASA GIBS imagery sharpening to Sentinel-2 cloudless up close, every active satellite and major debris cloud propagated in a Web Worker (click one for its orbit), fireballs at burst altitude, see-through Earth for quake depths. Trackpad pinch and scroll zoom. Falls back to the 2D map without WebGL. |
 | `docs/DATA.md` | What each published data file contains. |
 | `src/live.js` | Live updates on the public site. |
 | `collector/` | Data collection: `snap.mjs` (map layers), `nature.mjs` (iNaturalist, GBIF, eBird), `collectors.json` steps (situations, signals, disruptions, watch) run in Node. |

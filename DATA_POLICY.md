@@ -38,7 +38,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Satellites
 
-- Orbits are computed from public CelesTrak elements for spacecraft only. Nothing on the globe tracks an aircraft, ship, vehicle or person.
+- The 3D globe shows every active satellite and the debris clouds from major break-ups that CelesTrak republishes publicly, computed in the visitor's browser from CelesTrak orbital elements (accurate to a few km). Objects are spacecraft and debris only. Nothing on the globe tracks an aircraft, ship, vehicle or person.
+- The full U.S. Space Force catalog (Space-Track) is not republished here without Space-Track's approval.
+
+## Imagery
+
+- NASA GIBS (public domain) for the planet and yesterday's view; EOX Sentinel-2 cloudless 2016 (CC BY 4.0, Contains modified Copernicus Sentinel data 2016 & 2017) for close-up detail. Attribution is shown on the page. No paid or per-visitor imagery is used.
 
 ## Visitors
 
