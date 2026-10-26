@@ -1,0 +1,63 @@
+# Collects every feed, builds the page and publishes it to GitHub Pages.
+# Runs every 10 minutes. Each source has its own refresh interval (collector/snap.mjs, collector/collect.mjs);
+# anything not due, or anything that fails, keeps its last good value from the live site.
+name: Collect and publish
+
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - id: pages
+        uses: actions/configure-pages@v5
+      - name: Collect data
+        env:
+          # Optional repository secrets. Without them the collector uses the shared demo keys.
+          NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+          EBIRD_API_KEY: ${{ secrets.EBIRD_API_KEY }}
+          OPENSKY_CLIENT_ID: ${{ secrets.OPENSKY_CLIENT_ID }}
+          OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
+          CLOUDFLARE_RADAR_TOKEN: ${{ secrets.CLOUDFLARE_RADAR_TOKEN }}
+          # The live site, so a failed source keeps its last good data.
+          PREV_BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: node collector/collect.mjs dist/data
+      - name: Build page
+        env:
+          CESIUM_ION_TOKEN: ${{ secrets.CESIUM_ION_TOKEN }}
+        run: node build/build.mjs hosted dist/data dist
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

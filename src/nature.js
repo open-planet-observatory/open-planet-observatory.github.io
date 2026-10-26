@@ -1,0 +1,64 @@
+// ---------- Nature: sightings, seasonal movement, threatened species, long-run trends ----------
+(function(){
+const O=window.__obs;if(!O)return;
+const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtN=n=>n==null?'–':Number(n).toLocaleString('en-US');
+const GROUPS=[['birds','Birds','--n-bird'],['butterflies','Butterflies & moths','--n-bfly'],['whales','Whales & dolphins','--n-whale'],['mammals','Other mammals','--n-mammal'],['amphibians','Amphibians & reptiles','--n-amph'],['plants','Plants in bloom','--n-plant']];
+const sel={};
+const parseCells=s=>String(s||'').split(';').filter(Boolean).map(x=>{const [lon,lat,n]=x.split(',').map(Number);return {lon,lat,n,geo:O.cellPoly(lon,lat,0.95)}});
+
+// layers
+GROUPS.forEach(([id,name,color])=>{O.addLayer({id:'nat-'+id,name,color,shape:'square',count:'',on:id==='whales',group:'Nature'})});
+O.addLayer({id:'nat-threat',name:'Threatened species seen',color:'--n-threat',shape:'diamond',count:'',on:false,group:'Nature'});
+O.addLayer({id:'nat-mig',name:'Seasonal movement',color:'--n-mig',shape:'circle',count:'',on:true,group:'Nature'});
+O.addLayer({id:'nat-ebird',name:'Rare bird reports (US)',color:'--n-bird',shape:'triangle',count:'',on:false,group:'Nature'});
+
+function buildLayers(){const N=window.NAT||{};
+ const setCount=(id,t)=>{const c=document.querySelector('#chip-'+id+' .ct');if(c)c.textContent=t};
+ for(const [id] of GROUPS){const g=(N.sightings?.groups||[]).find(x=>x.id===id);const cells=g?parseCells(g.cells):[];const mx=d3.max(cells,d=>d.n)||1;const op=d3.scaleSqrt().domain([1,mx]).range([.25,.9]);
+  const G=d3.select('#g-nat-'+id);sel[id]=G.selectAll('path').data(cells).join('path').attr('class','nc').attr('fill',`var(${GROUPS.find(x=>x[0]===id)[2]})`).attr('fill-opacity',d=>op(d.n));
+  O.bindTip(sel[id],d=>`<b>${fmtN(d.n)} ${g.name.toLowerCase()} sightings</b>in this 2° cell, in a sample of ${fmtN(g.sampled)} of ${fmtN(g.total)} research-grade observations this week<br><span style="opacity:.75">iNaturalist · counts follow where people look</span>`);
+  setCount('nat-'+id,g?fmtN(g.total)+' / 7 d':'–')}
+ const th=N.threatened;const tc=th?parseCells(th.cells):[];sel.threat=d3.select('#g-nat-threat').selectAll('path').data(tc).join('path').attr('class','nc nt').attr('fill','var(--n-threat)').attr('fill-opacity',d=>Math.min(.9,.3+d.n/20));
+ O.bindTip(sel.threat,d=>`<b>${fmtN(d.n)} sightings of threatened species</b>in this 2° cell this week · exact locations are blurred by iNaturalist and again here<br><span style="opacity:.75">iNaturalist, IUCN / national status lists</span>`);
+ setCount('nat-threat',th?fmtN(th.total)+' / 7 d':'–');
+ const eb=N.ebird;const ec=eb?parseCells(eb.cells):[];sel.ebird=d3.select('#g-nat-ebird').selectAll('path').data(ec).join('path').attr('class','nc').attr('fill','var(--n-bird)').attr('fill-opacity',d=>Math.min(.9,.3+d.n/10));
+ O.bindTip(sel.ebird,d=>`<b>${fmtN(d.n)} notable bird reports</b>in this 2° cell, past 7 days<br><span style="opacity:.75">eBird (Cornell Lab) · "notable" = rare for the place and season</span>`);
+ setCount('nat-ebird',eb?fmtN(eb.count)+' / 7 d':'needs key');
+ // migration: a line through the monthly median positions, newest month marked
+ const mig=(N.migration||[]).map(m=>{const pts=m.months.filter(x=>x[1]!=null);return {name:m.name,pts,geo:{type:'LineString',coordinates:pts.map(x=>[x[1],x[2]])},last:pts[pts.length-1]}}).filter(m=>m.pts.length>1);
+ const G=d3.select('#g-nat-mig');sel.migL=G.selectAll('path').data(mig).join('path').attr('class','nm').attr('fill','none').attr('stroke','var(--n-mig)').attr('stroke-width',2).attr('stroke-linejoin','round');
+ sel.migP=G.selectAll('g').data(mig).join(e=>{const g=e.append('g');g.append('circle').attr('r',4.5).attr('fill','var(--n-mig)').attr('stroke','var(--panel)').attr('stroke-width',1.5);g.append('text').attr('class','nml').attr('dx',7).attr('dy',4);return g});
+ sel.migP.select('text').text(d=>d.name);
+ O.bindTip(sel.migP,d=>`<b>${d.name}</b>Median position of ${fmtN(d.last[3])} sightings in ${d.last[0]}. The line joins the past 12 months.<br><span style="opacity:.75">iNaturalist · a seasonal centre of attention, not a tracked animal</span>`);
+ O.bindTip(sel.migL,d=>`<b>${d.name}: where sightings centred, month by month</b>${d.pts[0][0]} → ${d.last[0]}<br><span style="opacity:.75">iNaturalist research-grade observations</span>`);
+ setCount('nat-mig',mig.length+' species');
+ O.render();
+}
+O.onRender(()=>{const path=O.path();for(const [id] of GROUPS)if(sel[id])sel[id].attr('d',d=>path(d.geo));
+ if(sel.threat)sel.threat.attr('d',d=>path(d.geo));if(sel.ebird)sel.ebird.attr('d',d=>path(d.geo));
+ if(sel.migL)sel.migL.attr('d',d=>path(d.geo)||null);if(sel.migP)O.place(sel.migP,d=>[d.last[1],d.last[2]])});
+
+// panel
+const IUCN={CR:'Critically endangered',EN:'Endangered',VU:'Vulnerable',NT:'Near threatened',LC:'Least concern',DD:'Data deficient',EX:'Extinct',EW:'Extinct in the wild'};
+let tab='sightings';
+const TABS=[['sightings','Sightings this week'],['migration','Seasonal movement'],['threatened','Threatened'],['trends','Long-run trends'],['links','Where to look']];
+function renderNature(){const N=window.NAT||{};const el=document.getElementById('natBody');if(!el)return;
+ document.getElementById('natTabs').innerHTML=TABS.map(([k,l])=>`<button data-k="${k}" aria-pressed="${k===tab}">${l}</button>`).join('');
+ document.querySelectorAll('#natTabs button').forEach(b=>b.onclick=()=>{tab=b.dataset.k;renderNature()});
+ const asOf=document.getElementById('natAsOf');if(asOf)asOf.textContent=N.asOf?'Collected '+N.asOf.replace('T',' ')+' UTC':'';
+ const warn=N.sample?`<div class="notice" role="note"><div><b>Sample layout.</b> The numbers below are placeholders so you can see the design. Real iNaturalist, eBird and GBIF data appears after the public site's first collection run.</div></div>`:(!N.sightings?`<p class="small muted">No nature data yet. It appears after the first collection run.</p>`:'');
+ let h='';
+ if(tab==='sightings'){h=`<div class="sg-grid">${(N.sightings?.groups||[]).map(g=>`<article class="sg"><div class="sg-h"><h3>${esc(g.name)}</h3><span class="cad">7 days</span></div><div class="bignum">${fmtN(g.total)}<small>research-grade sightings</small></div><div class="sg-list">${(g.top||[]).map(t=>`<div class="sg-row"><span class="t"><a href="${esc(t[5])}" target="_blank" rel="noopener">${esc(t[0])}</a>${t[4]?` <span class="badge-r">${esc(t[3]||'threatened')}</span>`:''}<span class="sub"><i>${esc(t[1])}</i></span></span><span class="v">${fmtN(t[2])}</span></div>`).join('')}</div><div class="sg-foot"><span>${g.obscured?fmtN(g.obscured)+' of the sample had blurred locations':''}</span><button class="more" data-layer="nat-${g.id}">Show on map</button></div></article>`).join('')}</div>
+  <p class="note-line">Counts are research-grade observations on <a href="https://www.inaturalist.org" target="_blank" rel="noopener">iNaturalist</a>, where two or more people agreed on the species. They show where people are looking as much as where animals are: cities and English-speaking countries are over-represented. Observer names and exact coordinates are never stored here.</p>`}
+ if(tab==='migration'){h=`<p class="small">For each species, the dot is the median position of this month's sightings and the line joins the past 12 months. When a population moves, the centre of sightings moves with it. It is a crowd's attention, not a tagged animal, so a line can also mean people started looking somewhere new.</p><div class="sg-grid">${(N.migration||[]).map(m=>{const pts=m.months.filter(x=>x[1]!=null);if(pts.length<2)return '';const lat=pts.map(p=>p[2]);const span=(d3.max(lat)-d3.min(lat)).toFixed(1);const mx=d3.max(pts,p=>p[3])||1;return `<article class="sg"><div class="sg-h"><h3>${esc(m.name)}</h3><span class="cad">12 months</span></div><div class="bignum">${span}°<small>of latitude between the northern-most and southern-most monthly centre</small></div><div class="bars-v">${pts.map(p=>`<i style="height:${Math.max(3,p[3]/mx*60)}px" title="${p[0]}: ${fmtN(p[3])} sightings, centre ${p[2]}°, ${p[1]}°"></i>`).join('')}</div><div class="bars-lbl"><span>${pts[0][0]}</span><span>sightings per month</span><span>${pts[pts.length-1][0]}</span></div><div class="sg-foot"><span>Latest centre: ${pts[pts.length-1][2]}°, ${pts[pts.length-1][1]}°</span><a href="https://www.inaturalist.org/taxa/${m.taxon}" target="_blank" rel="noopener">iNaturalist</a></div></article>`}).join('')}</div>
+  <p class="note-line">Real tracking data for individual animals lives on <a href="https://www.movebank.org" target="_blank" rel="noopener">Movebank</a> (research studies) and nightly bird-migration radar forecasts on <a href="https://birdcast.info" target="_blank" rel="noopener">BirdCast</a>; both are linked rather than copied.</p>`}
+ if(tab==='threatened'){const t=N.threatened;h=t?`<div class="bignum">${fmtN(t.total)}<small>sightings of threatened species this week, worldwide</small></div><div class="sg-list">${(t.top||[]).map(x=>`<div class="sg-row"><span class="t"><a href="${esc(x[5])}" target="_blank" rel="noopener">${esc(x[0])}</a> <span class="badge-r">${esc(x[3]||'threatened')}</span><span class="sub"><i>${esc(x[1])}</i></span></span><span class="v">${fmtN(x[2])}</span></div>`).join('')}</div><p class="note-line" style="margin-top:10px">"Threatened" follows the status iNaturalist records from the IUCN Red List and national lists. Locations of these species are blurred at the source and shown here only as 2° cells, so a map cell is never a place to go looking.</p><button class="more" data-layer="nat-threat">Show on map</button>`:'<p class="small muted">Not collected yet.</p>'}
+ if(tab==='trends'){h=`<p class="small">Records per year in <a href="https://www.gbif.org" target="_blank" rel="noopener">GBIF</a>, the world's shared biodiversity database, for a few species people worry about. Read with care: record counts rise as more people record, so a rising line can hide a falling population. Range shrinkage and status changes are the better signals.</p><div class="sg-grid">${(N.trends||[]).map(s=>{const mx=d3.max(s.years,y=>y[1])||1;return `<article class="sg"><div class="sg-h"><h3>${esc(s.common||s.name)}</h3><span class="cad">${s.iucn?`IUCN ${esc(s.iucn)}`:''}</span></div><div class="bignum">${IUCN[s.iucn]||'Status not listed'}<small><i>${esc(s.name)}</i></small></div><div class="bars-v">${s.years.map(y=>`<i style="height:${Math.max(2,y[1]/mx*60)}px" title="${y[0]}: ${fmtN(y[1])} records"></i>`).join('')}</div><div class="bars-lbl"><span>${s.years[0]?.[0]||''}</span><span>records per year</span><span>${s.years[s.years.length-1]?.[0]||''}</span></div><div class="sg-foot"><span>${fmtN(s.total)} georeferenced records in all</span><a href="https://www.gbif.org/species/${s.key}" target="_blank" rel="noopener">GBIF</a></div></article>`}).join('')}</div>`}
+ if(tab==='links'){h=`<div class="sg-list">${[['iNaturalist','Photograph anything living; the community identifies it. The source of the sightings here.','https://www.inaturalist.org'],['eBird','Bird checklists from a million birders; rarity alerts by region.','https://ebird.org'],['BirdCast','Nightly radar forecasts of bird migration over the United States.','https://birdcast.info'],['Journey North','Monarch butterfly and hummingbird migration, reported by volunteers.','https://journeynorth.org'],['Happywhale','Whale sightings matched by fluke photos; follow an individual whale.','https://happywhale.com'],['OBIS','The Ocean Biodiversity Information System: every marine species record scientists have shared.','https://obis.org'],['Movebank','Animal tracking studies, from storks to sharks.','https://www.movebank.org'],['IUCN Red List','The world list of threatened species and why each is at risk.','https://www.iucnredlist.org'],['GBIF','Two billion biodiversity records, open to everyone.','https://www.gbif.org']].map(([n,d,u])=>`<div class="sg-row"><span class="t"><a href="${u}" target="_blank" rel="noopener">${n}</a><span class="sub">${d}</span></span></div>`).join('')}</div>`}
+ el.innerHTML=warn+h;
+ el.querySelectorAll('button[data-layer]').forEach(b=>b.onclick=()=>{const chip=document.getElementById('chip-'+b.dataset.layer);if(chip&&chip.getAttribute('aria-pressed')!=='true')chip.click();document.getElementById('map-sec')?.scrollIntoView({behavior:'smooth'})});
+}
+buildLayers();renderNature();
+O.renderNature=renderNature;O.buildNatureLayers=buildLayers;
+})();

@@ -1,0 +1,42 @@
+/* ---- added: nav, themes, cams, classroom, keep-it-free ---- */
+.topnav{display:flex;gap:4px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:600}
+.topnav a{color:var(--ink-2);text-decoration:none}
+.topnav a:hover{color:var(--accent);text-decoration:underline}
+.sponsor-line{font-size:.76rem;color:var(--ink-3)}
+.sponsor-line b{font-weight:600;color:var(--ink-2)}
+.themes{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:10px}
+.themes .lab{font-size:.78rem;color:var(--ink-3);margin-right:4px}
+.themes button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:6px 13px;cursor:pointer;font-weight:700;font-size:.84rem;color:var(--ink-2)}
+.themes button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.theme-note{font-size:.82rem;color:var(--ink-2);margin:-2px 0 10px}
+.cam-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:12px}
+.cam{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.cam h3{font-size:1rem}
+.cam .by{font-size:.8rem;color:var(--ink-3)}
+.cam .why{font-size:.8rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:8px}
+.cam .go{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.86rem;text-decoration:none}
+.cam .go:hover{text-decoration:underline}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.rules > div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.rules ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:.88rem}
+.lessons{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
+.lesson{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.lesson .meta{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.lesson ol{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px;font-size:.88rem}
+.lesson .uses{font-size:.8rem;color:var(--ink-2)}
+.pledge{border:1px solid var(--line);border-left:4px solid var(--ok);background:var(--panel);border-radius:10px;padding:14px 16px;font-size:.95rem}
+.pledge b{font-family:var(--display);font-stretch:112%}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+.tier{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:10px}
+.tier.main{border:2px solid var(--ink)}
+.tier .price{font-family:var(--display);font-stretch:112%;font-weight:700;font-size:1.5rem}
+.tier .price small{font-family:var(--body);font-size:.82rem;font-weight:600;color:var(--ink-2)}
+.tier ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:.88rem}
+.tier .soon{align-self:flex-start;font-family:var(--mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;border-radius:4px;padding:2px 7px;background:var(--warn-soft);color:var(--warn)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;border-radius:999px;padding:8px 16px;font-weight:700;font-size:.88rem;border:1px solid var(--ink);color:var(--ink);background:var(--panel);text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
+.support-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sponsor-box{border:1px dashed var(--line);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--ink-2);display:flex;flex-direction:column;gap:4px}
+.dl{display:flex;gap:6px 14px;flex-wrap:wrap;font-family:var(--mono);font-size:.82rem}
+.livebadge{font-family:var(--mono);font-size:.7rem;color:var(--ok)}

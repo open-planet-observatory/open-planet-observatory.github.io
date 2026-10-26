@@ -1,0 +1,48 @@
+<!--PART:nav-->
+  <nav class="topnav" aria-label="Sections"><a href="#map-sec">Map</a><a href="#situations">Situations</a><a href="#disruptions">Disruptions</a><a href="#signals">Signals</a><a href="#cams">Live cams</a><a href="#library">Sources</a><a href="#classroom">Classroom</a><a href="#free">Keep it free</a></nav>
+<!--PART:themes-->
+  <div class="themes" id="themes" role="group" aria-label="Theme views"><span class="lab">View</span></div>
+  <p class="theme-note" id="themeNote"></p>
+<!--PART:cams-->
+<section aria-labelledby="h-cams" id="cams">
+  <div class="sec-head">
+    <div class="eyebrow">Live cams</div>
+    <h2 id="h-cams">Watch the planet, not the people</h2>
+    <p class="muted">Official cameras pointed at volcanoes, wildlife, the sky and Earth from orbit. Each card opens the owner's own page; nothing is re-streamed or recorded here. Some cams are seasonal or only light up in daylight.</p>
+  </div>
+  <div class="sit-tabs" id="camTabs" role="group" aria-label="Filter cams"></div>
+  <div class="cam-grid" id="camGrid"></div>
+  <div class="sec-head" style="margin-top:6px"><h3>Stories from NASA</h3><p class="small muted">Official NASA channels, each paired with the layer it explains. Specific videos can be added as cards here; NASA's own videos are public domain, embedded or linked under YouTube's rules (never behind a paywall, never with ads on the player).</p></div>
+  <div class="cam-grid" id="storyGrid"></div>
+  <div class="rules">
+    <div><h3>A cam is listed only if</h3><ul><li>It's run by or with the owner of the place: a science agency, park, observatory, aquarium or nonprofit</li><li>It points at nature, the sky, space or a science site</li><li>People in view are too small or far away to be identified</li><li>We link to it rather than copy, store or re-stream the video</li></ul></div>
+    <div><h3>Never listed</h3><ul><li>Street, traffic, city-square and business cams</li><li>Private or unsecured cameras found by scanning the internet</li><li>Beach, campus or venue cams where faces or plates are readable</li><li>Any cam in or near an active conflict zone</li></ul></div>
+    <div><h3>If something changes</h3><ul><li>A cam whose view changes to show identifiable people is removed</li><li>Owners can ask for removal at any time, no questions asked</li><li>Spotted a problem? Report it on the project's issue tracker</li></ul></div>
+  </div>
+</section>
+<!--PART:classroom-->
+<section aria-labelledby="h-class" id="classroom">
+  <div class="sec-head">
+    <div class="eyebrow">Classroom</div>
+    <h2 id="h-class">Lessons built on live data</h2>
+    <p class="muted">Sample lesson plans that use the layers above. Each one works with whatever the data shows on the day you teach it. Full packs with worksheets and answer guides are planned; see <a href="#free">Keep it free</a>.</p>
+  </div>
+  <div class="lessons" id="lessons"></div>
+</section>
+<!--PART:free-->
+<section aria-labelledby="h-free" id="free">
+  <div class="sec-head">
+    <div class="eyebrow">Keep it free</div>
+    <h2 id="h-free">Free for everyone, funded by people who want it to stay that way</h2>
+  </div>
+  <div class="pledge"><b>Our pledge.</b> Everything on this page stays free, with no account, no ad networks and no tracking. The code is open source. Paid options only ever add convenience on top; the free page never shrinks.</div>
+  <div class="tiers">
+    <div class="tier main"><h3>Free</h3><div class="price">$0 <small>forever</small></div><ul><li>Every map layer, situation, signal and cam on this page</li><li>Theme views</li><li>Open data downloads (below)</li><li>Full source code to run your own copy</li></ul></div>
+    <div class="tier"><span class="soon">Planned</span><h3>Supporter</h3><div class="price"><small>Price to be set</small></div><ul><li>Alerts by email for places and topics you choose</li><li>A weekly briefing email</li><li>Saved views and watchlists across your devices</li><li>Higher-volume API access</li></ul></div>
+    <div class="tier"><span class="soon">Planned</span><h3>Classroom</h3><div class="price"><small>Free for schools that can't pay</small></div><ul><li>Full lesson packs with worksheets and answer guides</li><li>A class view that hides news and conflict sections</li><li>Funded by district licences, grants and supporters</li></ul></div>
+  </div>
+  <div class="support-row"><a class="btn primary" aria-disabled="true" href="#free" title="Coming soon">Support on Ko-fi · soon</a><a class="btn" aria-disabled="true" href="#free" title="Coming soon">GitHub Sponsors · soon</a><span class="small muted">One-time or monthly. Donations pay for hosting and keep the free page free.</span></div>
+  <div class="sponsor-box"><b>Sponsor slot (open)</b><span>One clearly labeled sponsor at a time, limited to science, education and public-data organizations. Sponsors never get visitor data and never influence what the page shows. No ad networks, no tracking pixels.</span></div>
+  <div class="sec-head"><h3>Open data</h3><p class="small muted">The exact files this page runs on. Each source's own license applies; see the source library.</p></div>
+  <div class="dl" id="dl"></div>
+</section>
