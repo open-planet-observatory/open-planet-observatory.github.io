@@ -1,0 +1,24 @@
+{
+  "name": "open-planet-observatory",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-or-later",
+  "description": "Free, open-source live map of public Earth and space data. Built to inform, not to surveil.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "collect": "node collector/collect.mjs dist/data",
+    "build": "node build/build.mjs hosted dist/data dist",
+    "build:seed": "node build/build.mjs hosted data-seed dist",
+    "build:claude": "node build/build.mjs claude data-seed dist-claude/index.html"
+  },
+  "dependencies": {
+    "cesium": "^1.146.0",
+    "d3": "7.9.0",
+    "h3-js": "4.1.0",
+    "linkedom": "0.18.5",
+    "satellite.js": "5.0.0",
+    "topojson-client": "3.1.0"
+  }
+}
