@@ -83,6 +83,31 @@ export const GROUPS = {
   },
 
   // Active satellites per constellation (CelesTrak groups). Slow-changing; refreshed daily.
+  // AI model releases with the developer's country: Epoch AI "Data on AI models" (CC BY 4.0, updated daily).
+  // Keeps the past 120 days (newest first) and a 365-day count per country. Names and countries are Epoch's own.
+  async aiModels() {
+    const t = await T('https://epoch.ai/data/all_ai_models.csv');
+    const rows = []; let row = [], f = '', q = false;
+    for (let i = 0; i < t.length; i++) { const c = t[i];
+      if (q) { if (c === '"') { if (t[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+      else if (c === '"') q = true; else if (c === ',') { row.push(f); f = ''; } else if (c === '\n') { row.push(f); rows.push(row); row = []; f = ''; } else if (c !== '\r') f += c; }
+    if (f || row.length) { row.push(f); rows.push(row); }
+    const H = rows[0], ix = n => H.indexOf(n);
+    const need = ['Model', 'Organization', 'Publication date', 'Country (of organization)', 'Link'];
+    if (need.some(n => ix(n) < 0)) throw new Error('Epoch CSV columns changed');
+    const day = 864e5, now = Date.now();
+    const all = rows.slice(1).filter(r => r.length > 5 && /^\d{4}-\d{2}-\d{2}/.test(r[ix('Publication date')] || ''))
+      .map(r => ({ d: r[ix('Publication date')].slice(0, 10), m: r[ix('Model')], o: r[ix('Organization')], c: r[ix('Country (of organization)')], l: r[ix('Link')],
+        dom: r[ix('Domain')] || '', ow: r[ix('Open model weights?')] || '', fr: /true|yes/i.test(r[ix('Frontier model')] || '') ? 1 : 0, nt: (r[ix('Notability criteria')] || '').trim() ? 1 : 0 }))
+      .filter(x => new Date(x.d).getTime() <= now + day);
+    const recent = all.filter(x => now - new Date(x.d).getTime() <= 120 * day).sort((a, b) => b.d.localeCompare(a.d));
+    const year = {}; all.filter(x => now - new Date(x.d).getTime() <= 365 * day).forEach(x => [...new Set(String(x.c || '').split(',').map(s => s.trim()).filter(Boolean))].forEach(c => { year[c] = (year[c] || 0) + 1; }));
+    if (!recent.length) throw new Error('no releases in 120 days');
+    return { aiModels: { asOf: new Date().toISOString().slice(0, 16) + 'Z', total: all.length,
+      models: recent.map(x => [x.d, x.m, x.o, x.c, x.ow === 'Yes' ? 'Y' : x.ow === 'No' ? 'N' : '', x.fr, x.nt, x.dom.split(',')[0].trim(), x.l]),
+      byCountry365: Object.entries(year).sort((a, b) => b[1] - a[1]) } };
+  },
+
   async satGroups() {
     const G = [['Starlink', 'starlink', 'SpaceX broadband'], ['OneWeb', 'oneweb', 'Eutelsat broadband'], ['Kuiper', 'kuiper', 'Amazon broadband'],
       ['All geostationary', 'geo', 'TV, weather, comms at 35,786 km'], ['Planet', 'planet', 'Daily Earth imaging'], ['Iridium NEXT', 'iridium-NEXT', 'Satellite phones'],
@@ -146,4 +171,4 @@ export const GROUPS = {
 
 // How often each group is refreshed, in minutes. The workflow runs every 10 minutes.
 export const EVERY = { quakes: 10, alerts: 10, eonet: 30, air: process.env.OPENSKY_CLIENT_ID ? 10 : 30, // anonymous OpenSky access has a small daily allowance
-  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360 };
+  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360 };

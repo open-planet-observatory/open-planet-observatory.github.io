@@ -40,6 +40,8 @@ Local build: `npm ci`, then `npm run collect && npm run build` (needs internet),
 | `src/page.tmpl.html` | The page. `<!--DATA:x-->` and `<!--EXTRAS_JS-->` are filled by the build. |
 | `src/extras.js` | Theme views, live cams, NASA story links, classroom samples, open-data links. |
 | `src/nature.js` | Nature layers and panel (sightings, seasonal movement, threatened, trends). |
+| `src/moon.js` | The Moon: phase, distance, overhead point, next quarters and eclipses (Astronomy Engine, in the browser). |
+| `src/ai.js` | AI model releases by the developer's country (Epoch AI): Watch card and map layer. |
 | `src/country.js` | Country briefs (click a country) and the browser-only watchlist. |
 | `src/ops.js`, `src/ops.css` | The full-screen "ops room" shell: map, layer rail, panels, region presets, ticker. |
 | `src/globe3d.js` | The 3D globe (CesiumJS): NASA GIBS imagery sharpening to Sentinel-2 cloudless up close, every active satellite and major debris cloud propagated in a Web Worker (click one for its orbit), fireballs at burst altitude, see-through Earth for quake depths. Trackpad pinch and scroll zoom. Falls back to the 2D map without WebGL. |

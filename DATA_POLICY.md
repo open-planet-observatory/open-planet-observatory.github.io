@@ -41,6 +41,14 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - The 3D globe shows every active satellite and the debris clouds from major break-ups that CelesTrak republishes publicly, computed in the visitor's browser from CelesTrak orbital elements (accurate to a few km). Objects are spacecraft and debris only. Nothing on the globe tracks an aircraft, ship, vehicle or person.
 - The full U.S. Space Force catalog (Space-Track) is not republished here without Space-Track's approval.
 
+## AI model releases
+
+- Model names, organisations, dates and countries are Epoch AI's own records (CC BY 4.0). The country is the developing organisation's, not where a model is used or hosted. Counts are releases, not a ranking.
+
+## The Moon
+
+- Phase, distance, overhead point, quarters and eclipses are computed in the visitor's browser (Astronomy Engine, MIT). Nothing is fetched.
+
 ## Imagery
 
 - NASA GIBS (public domain) for the planet and yesterday's view; EOX Sentinel-2 cloudless 2016 (CC BY 4.0, Contains modified Copernicus Sentinel data 2016 & 2017) for close-up detail. Attribution is shown on the page. No paid or per-visitor imagery is used.

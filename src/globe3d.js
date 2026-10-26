@@ -15,19 +15,21 @@ try{const t=document.createElement('canvas');if(!(t.getContext('webgl2')||t.getC
 
 // ----- imagery -----
 const yesterday=()=>new Date(Date.now()-864e5).toISOString().slice(0,10);
-const GIBS='https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/';
-const geo=new C.GeographicTilingScheme();
-const gibs=(layer,set,levels,ext,time)=>new C.UrlTemplateImageryProvider({url:GIBS+layer+'/default/'+(time?time+'/':'')+set+'/{z}/{y}/{x}.'+ext,tilingScheme:geo,tileWidth:512,tileHeight:512,maximumLevel:levels,credit:new C.Credit('Imagery: NASA GIBS',false)});
+// NASA GIBS in the standard web-map grid (EPSG:3857, 256 px tiles, levels double cleanly). The degree-based EPSG:4326
+// grid does not double per level, which produced missing and misplaced tiles.
+const GIBS='https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/';
+const merc=new C.WebMercatorTilingScheme();
+const gibs=(layer,level,ext,time)=>new C.UrlTemplateImageryProvider({url:GIBS+layer+'/default/'+(time?time+'/':'')+'GoogleMapsCompatible_Level'+level+'/{z}/{y}/{x}.'+ext,tilingScheme:merc,maximumLevel:level,credit:new C.Credit('Imagery: NASA GIBS',false)});
 // Cloud-free 10 m detail for close zoom: EOX Sentinel-2 cloudless 2016 (CC BY 4.0, free with this attribution).
 const EOX_CREDIT='<a href="https://s2maps.eu" target="_blank" rel="noopener">Sentinel-2 cloudless</a> by <a href="https://eox.at" target="_blank" rel="noopener">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017), CC BY 4.0';
 const eox=()=>new C.UrlTemplateImageryProvider({url:'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:14,credit:new C.Credit(EOX_CREDIT,false)});
 const IMAGERY={
- bluemarble:{name:'Clear sky: NASA Blue Marble, sharpening to Sentinel-2 (10 m) as you zoom in',label:'Clear',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry','500m',8,'jpeg'),detail:true},
- daily:{name:'Yesterday’s satellite view (NASA VIIRS, 250 m, with that day’s clouds)',label:'Yesterday',make:()=>gibs('VIIRS_SNPP_CorrectedReflectance_TrueColor','250m',8,'jpg',yesterday())},
+ bluemarble:{name:'Clear sky: NASA Blue Marble, sharpening to Sentinel-2 (10 m) as you zoom in',label:'Clear',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),detail:true},
+ daily:{name:'Yesterday’s satellite view (NASA VIIRS, 250 m, with that day’s clouds)',label:'Yesterday',make:()=>gibs('VIIRS_SNPP_CorrectedReflectance_TrueColor',9,'jpg',yesterday())},
  bing:{name:'Bing aerial (Cesium ion)',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
  basic:{name:'Basic (offline)',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
 };
-let imageryChoice='bluemarble';try{imageryChoice=localStorage.getItem('obs-imagery')||imageryChoice}catch(e){}
+let imageryChoice='bluemarble';try{imageryChoice=localStorage.getItem('obs-imagery2')||imageryChoice}catch(e){}
 if(window.OBS_ION_TOKEN)C.Ion.defaultAccessToken=window.OBS_ION_TOKEN;
 if(IMAGERY[imageryChoice]?.needsToken&&!window.OBS_ION_TOKEN)imageryChoice='bluemarble';
 if(window.OBS_OFFLINE_IMAGERY)imageryChoice='basic';
@@ -62,14 +64,16 @@ viewer.camera.percentageChanged=0.02;viewer.camera.changed.addEventListener(()=>
 function setDetail(on){if(on&&!detailLayer&&!window.OBS_OFFLINE_IMAGERY){try{detailLayer=new C.ImageryLayer(eox(),{show:false});viewer.imageryLayers.add(detailLayer,1)}catch(e){}}
  if(!on&&detailLayer){viewer.imageryLayers.remove(detailLayer,true);detailLayer=null}syncDetail()}
 // The night side keeps a dim base plus NASA's "Earth at Night" city lights, like a real view from orbit.
-async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012','500m',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});viewer.imageryLayers.add(nightLayer)}catch(e){}}
-async function setImagery(k){const def=IMAGERY[k]||IMAGERY.bluemarble;
+async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});viewer.imageryLayers.add(nightLayer)}catch(e){}}
+async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
  try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});
-  p.errorEvent.addEventListener(()=>{if(k!=='basic'&&!layer.__failed){layer.__failed=true;note('Imagery from '+def.name+' did not load; showing the offline map instead.');setImagery('basic')}});
+  // Fall back to the offline map only if the source is really down (many errors, nothing loaded), and don't remember that.
+  let bad=0,good=0;p.errorEvent.addEventListener(()=>{bad++;if(k!=='basic'&&!layer.__failed&&bad>=25&&good===0){layer.__failed=true;note(def.label+' imagery did not load; showing the offline map for now. Choose it again to retry.');setImagery('basic',true)}});
+  const origReq=p.requestImage.bind(p);p.requestImage=function(){const r=origReq.apply(p,arguments);if(r&&r.then)r.then(x=>{if(x)good++},()=>{});return r};
   if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);setDetail(!!def.detail);addNightLights();if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer);
-  imageryChoice=k;try{localStorage.setItem('obs-imagery',k)}catch(e){}
+  imageryChoice=k;if(!auto){note('');try{localStorage.setItem('obs-imagery2',k)}catch(e){}}
   document.querySelectorAll('#imgSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
- }catch(e){if(k!=='basic')setImagery('basic')}}
+ }catch(e){if(k!=='basic')setImagery('basic',true)}}
 setImagery(imageryChoice);
 function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t}
 
@@ -251,6 +255,28 @@ function buildEcon(){const e=clear('econ');document.querySelectorAll('#g-econ pa
 const cty=new C.CustomDataSource('cty');viewer.dataSources.add(cty);
 O.countries.forEach(f=>polys(f).forEach(h=>cty.entities.add({polygon:{hierarchy:h,material:C.Color.WHITE.withAlpha(0.004),classificationType:C.ClassificationType.TERRAIN},properties:{country:f.properties.name}})));
 
+
+const LABEL=(text)=>({text,font:'600 12px Public Sans, sans-serif',fillColor:col('--ink'),outlineColor:col('--ocean'),outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,disableDepthTestDistance:Number.POSITIVE_INFINITY});
+// ----- the Moon: marker where it is overhead, and an Earth-and-Moon view (CesiumJS draws the real Moon) -----
+function buildMoon(){if(!O.moonNow)return;const m=O.moonNow();const e=clear('moon');
+ e.add({position:deg(m.lon,m.lat,0),point:{pixelSize:12,color:C.Color.fromCssColorString('#f2efe4'),outlineColor:C.Color.fromCssColorString('#2b2f36'),outlineWidth:2,disableDepthTestDistance:Number.POSITIVE_INFINITY},
+  label:LABEL('Moon overhead · '+Math.round(m.frac*100)+'% lit'),description:`<b>The Moon is straight overhead here</b>${m.name}, ${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km up<br><span style="opacity:.75">Astronomy Engine, computed in your browser</span>`})}
+scene.moon=new C.Moon({onlySunLighting:true});
+let moonView=false;const homeMax=sscc.maximumZoomDistance;
+function setMoonView(v){moonView=v;const b=document.getElementById('moonViewBtn');if(b)b.setAttribute('aria-pressed',v);
+ if(!v){sscc.maximumZoomDistance=homeMax;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.6});return}
+ if(!O.moonNow)return;const m=O.moonNow();sscc.maximumZoomDistance=1.5e9;spin=false;
+ const mp=C.Cartesian3.fromDegrees(m.lon,m.lat,m.dist*1000-6371000),mid=C.Cartesian3.multiplyByScalar(mp,.5,new C.Cartesian3());
+ const side=C.Cartesian3.normalize(C.Cartesian3.cross(mp,C.Cartesian3.UNIT_Z,new C.Cartesian3()),new C.Cartesian3());
+ const dest=C.Cartesian3.add(mid,C.Cartesian3.multiplyByScalar(side,C.Cartesian3.magnitude(mp)*.95,new C.Cartesian3()),new C.Cartesian3());
+ const dir=C.Cartesian3.normalize(C.Cartesian3.subtract(mid,dest,new C.Cartesian3()),new C.Cartesian3());
+ viewer.camera.flyTo({destination:dest,orientation:{direction:dir,up:C.Cartesian3.UNIT_Z},duration:2.5})}
+// ----- AI model releases by country -----
+function buildAi(){const e=clear('ai');if(!O.aiByCountry)return;O.aiByCountry().filter(d=>d.lon!=null).forEach(d=>e.add({position:deg(d.lon,d.lat,0),
+ point:{pixelSize:9+5*Math.sqrt(d.n),color:col('--l-ai',.85),outlineColor:col('--panel'),outlineWidth:1.5,disableDepthTestDistance:Number.POSITIVE_INFINITY},
+ label:{...LABEL(d.n>1?String(d.n):''),pixelOffset:new C.Cartesian2(0,0),horizontalOrigin:C.HorizontalOrigin.CENTER,font:'700 11px Public Sans, sans-serif'},description:O.aiTip(d)}))}
+setInterval(buildMoon,60e3);
+
 // ----- see-through Earth (earthquake depth) -----
 let xray=false;const DEPTH_X=25;
 function setXray(v){xray=v;globe.translucency.enabled=v;globe.translucency.frontFaceAlpha=v?.55:1;globe.translucency.backFaceAlpha=v?.1:1;buildSnap();document.getElementById('xrayBtn')?.setAttribute('aria-pressed',v)}
@@ -273,7 +299,7 @@ O.flyTo=(lon,lat)=>{if(active){spin=false;viewer.camera.flyTo({destination:C.Car
 O.setSpin=v=>{spin=v;origSpin(v)};
 // zoom buttons drive the 3D camera while it is active
 const zc=document.getElementById('zoomctl')||document.querySelector('.zoomctl');if(zc){host.appendChild(zc);zc.style.zIndex=4;
- const Z={zin:()=>viewer.camera.zoomIn(viewer.camera.positionCartographic.height*.4),zout:()=>viewer.camera.zoomOut(viewer.camera.positionCartographic.height*.6),zreset:()=>{spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
+ const Z={zin:()=>viewer.camera.zoomIn(viewer.camera.positionCartographic.height*.4),zout:()=>viewer.camera.zoomOut(viewer.camera.positionCartographic.height*.6),zreset:()=>{if(moonView){setMoonView(false);return}spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
  Object.entries(Z).forEach(([id,fn])=>{const b=document.getElementById(id);if(b)b.addEventListener('click',e=>{if(!active)return;e.stopImmediatePropagation();fn()},true)})}
 let active=true;
 function setActive(v){active=v;el.style.display=v?'block':'none';if(mapbox)mapbox.style.visibility=v?'hidden':'visible';if(!v&&origSpin)origSpin(spin);document.querySelectorAll('#viewseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===(v?'3d':O.mode())));if(v)viewer.resize();const zs=document.getElementById('zspin');if(zs)zs.hidden=false}
@@ -282,17 +308,18 @@ if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textConte
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}
 // imagery + see-through controls in the rail
 const rail=document.getElementById('ops-rail');
-if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><p class="theme-note" id="imgNote"></p><button class="chip" id="lightBtn" aria-pressed="true" style="width:100%"><span>Real day and night</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
+if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><p class="theme-note" id="imgNote"></p><button class="chip" id="lightBtn" aria-pressed="true" style="width:100%"><span>Real day and night</span></button><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
  const mapGroup=[...rail.querySelectorAll('.rail-group')].find(g=>g.querySelector('.gl')?.textContent==='Map');rail.insertBefore(d,mapGroup?mapGroup.nextSibling:rail.children[1]);
  d.querySelectorAll('#imgSeg button').forEach(b=>b.onclick=()=>setImagery(b.dataset.k));document.getElementById('xrayBtn').onclick=()=>setXray(!xray);
+ document.getElementById('moonViewBtn').onclick=()=>setMoonView(!moonView);
  document.getElementById('lightBtn').onclick=e=>{const b=e.currentTarget;const v=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',v);globe.enableLighting=v;if(nightLayer)nightLayer.show=v;try{localStorage.setItem('obs-light',v?'1':'0')}catch(x){}};
  try{if(localStorage.getItem('obs-light')==='0')document.getElementById('lightBtn').click()}catch(x){}
  const foot=rail.querySelector('.rail-foot');if(foot)foot.appendChild(credits)}
 
 // ----- wire live rebuilds -----
 const wrap=(fn,after)=>{const f=O[fn];if(!f)return;O[fn]=function(){const r=f.apply(this,arguments);try{after()}catch(e){}return r}};
-wrap('setSnap',buildSnap);wrap('setQuakes',buildSnap);wrap('buildSitLayers',buildSit);wrap('buildSigLayers',buildSig);wrap('buildNatureLayers',buildNat);wrap('buildEconLayer',buildEcon);
-buildSnap();buildSit();buildSig();buildNat();buildEcon();
+wrap('setSnap',()=>{buildSnap();buildAi()});wrap('setQuakes',buildSnap);wrap('buildSitLayers',buildSit);wrap('buildSigLayers',buildSig);wrap('buildNatureLayers',buildNat);wrap('buildEconLayer',buildEcon);
+buildSnap();buildSit();buildSig();buildNat();buildEcon();buildMoon();buildAi();
 startSats();
 setActive(true);
 // If the globe surface never appears (a sandbox blocking tiles or workers), fall back to the 2D map and say so.
@@ -301,6 +328,6 @@ function giveUp(why){if(gaveUp)return;gaveUp=true;setActive(false);const b=seg&&
 window.addEventListener('securitypolicyviolation',e=>{if(/cesium|gibs|jsdelivr/i.test(e.blockedURI||'')&&/worker|img|connect/.test(e.violatedDirective||''))giveUp('The 3D globe can\u2019t load here (this preview blocks map tiles and background workers). It works on the public site.')});
 const probe=setInterval(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(n>0){clearInterval(probe);return}}catch(e){}},1000);
 setTimeout(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(!n)giveUp('The 3D globe could not start here (no map tiles arrived). It works on the public site; showing the 2D globe instead.')}catch(e){}},12000);
-new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
-window.__obs3d={viewer,setImagery,setXray,DS,SAT,selectSat};
+new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon();buildMoon();buildAi()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+window.__obs3d={viewer,setImagery,setXray,DS,SAT,selectSat,setMoonView};
 })();
