@@ -38,7 +38,11 @@ rail.innerHTML=`<div class="rh"><span class="eyebrow">Views</span><button class=
 const seg=$('#viewseg');if(seg){const segRow=document.createElement('div');segRow.className='rail-group';segRow.innerHTML='<span class="gl">Map</span>';segRow.appendChild(seg);rail.appendChild(segRow)}
 const chips=[...document.querySelectorAll('#layerbar .chip')];
 const groupEl={};for(const g of Object.keys(GROUPS)){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">${g}</span>`;groupEl[g]=d;rail.appendChild(d)}
-chips.forEach(c=>{const id=c.id.slice(5);let g=Object.keys(GROUPS).find(k=>GROUPS[k].includes(id));if(!g&&c.dataset.group)g=c.dataset.group;if(!g&&id.startsWith('nat-'))g='Nature';(groupEl[g]||groupEl.Earth).appendChild(c)});
+const place=c=>{const id=c.id.slice(5);let g=Object.keys(GROUPS).find(k=>GROUPS[k].includes(id));if(!g&&c.dataset.group)g=c.dataset.group;if(!g&&id.startsWith('nat-'))g='Nature';if(!g&&/^(sat|deb)-/.test(id))g='Space';
+ if(g&&!groupEl[g]){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">${g}</span>`;groupEl[g]=d;rail.appendChild(d)}(groupEl[g]||groupEl.Earth).appendChild(c)};
+chips.forEach(place);
+// Switches created later (satellites, debris, Moon, AI releases…) are moved into their group as they appear.
+const lb=document.getElementById('layerbar');if(lb)new MutationObserver(()=>lb.querySelectorAll('.chip').forEach(place)).observe(lb,{childList:true});
 const foot=document.createElement('div');foot.className='rail-foot';if($('#keys'))foot.appendChild($('#keys'));foot.insertAdjacentHTML('beforeend','<span>Drag to turn, scroll to zoom, tap a mark for its source.</span>');rail.appendChild(foot);
 $('#railClose').onclick=()=>html.classList.add('rail-closed');$('#railOpen').onclick=()=>html.classList.remove('rail-closed');
 
