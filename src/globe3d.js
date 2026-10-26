@@ -80,7 +80,7 @@ function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t
 // ----- layers: one data source per chip id, synced with the chip's pressed state -----
 const DS={};
 function ds(id){if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);const chip=document.getElementById('chip-'+id);d.show=!chip||chip.getAttribute('aria-pressed')==='true';DS[id]=d}return DS[id]}
-new MutationObserver(ms=>ms.forEach(m=>{const id=m.target.id.replace(/^chip-/,'');if(DS[id])DS[id].show=m.target.getAttribute('aria-pressed')==='true';if(/^(sat|sats|debris)$/.test(id)&&typeof syncSatVis==='function')syncSatVis()})).observe(document.getElementById('layerbar')||document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
+new MutationObserver(ms=>ms.forEach(m=>{const id=m.target.id.replace(/^chip-/,'');if(DS[id])DS[id].show=m.target.getAttribute('aria-pressed')==='true';if(/^(sat|sat-.+|deb-.+)$/.test(id)&&typeof syncSatVis==='function')syncSatVis()})).observe(document.getElementById('layerbar')||document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
 const BANDS={};let nearNow=null;const NEAR=2.5e6;
 const clear=id=>{const d=ds(id);d.entities.removeAll();BANDS[id]=[];return d.entities};
 // Area layers: shaded cells when zoomed out; below ~2,500 km they turn into sized markers so the ground stays visible.
@@ -116,28 +116,33 @@ function buildSnap(){const S=window.SNAP||{};
 const SAT_CATS={
  station:{name:'Crewed space station',color:'#ffd166',size:9,chip:'sat'},
  science:{name:'Space telescope / science',color:'#f4f1de',size:6,chip:'sat'},
- nav:{name:'Navigation (GPS, Galileo, GLONASS, BeiDou…)',color:'#f6bd60',size:5,chip:'sats'},
- broadband:{name:'Broadband constellation (Starlink, OneWeb, Kuiper…)',color:'#4cc9f0',size:2.5,chip:'sats'},
- earth:{name:'Weather / Earth observation',color:'#80ed99',size:4,chip:'sats'},
- geo:{name:'Geostationary',color:'#c77dff',size:4,chip:'sats'},
- other:{name:'Other active satellite',color:'#cfd8e3',size:3,chip:'sats'},
- debris:{name:'Debris (from a major break-up)',color:'#ff6b6b',size:2,chip:'debris'},
+ nav:{name:'Navigation (GPS, Galileo, GLONASS, BeiDou…)',color:'#f6bd60',size:5,chip:'sat-nav',chipName:'Navigation (GPS, Galileo…)',on:true},
+ broadband:{name:'Broadband constellation (Starlink, OneWeb, Kuiper…)',color:'#4cc9f0',size:2.5,chip:'sat-broadband',chipName:'Broadband (Starlink, OneWeb…)',on:true},
+ earth:{name:'Weather / Earth observation',color:'#80ed99',size:4,chip:'sat-earth',chipName:'Weather & Earth observation',on:true},
+ geo:{name:'Geostationary',color:'#c77dff',size:4,chip:'sat-geo',chipName:'Geostationary',on:true},
+ other:{name:'Other active satellite',color:'#cfd8e3',size:3,chip:'sat-other',chipName:'Other active satellites',on:true},
+ 'deb-fy':{name:'Debris from China’s 2007 anti-satellite test (Fengyun-1C)',color:'#ff6b6b',size:2,chip:'deb-fy',chipName:'Debris: 2007 Chinese ASAT test',on:false},
+ 'deb-coll':{name:'Debris from the 2009 Iridium 33 – Cosmos 2251 collision',color:'#ff9f43',size:2,chip:'deb-coll',chipName:'Debris: 2009 satellite collision',on:false},
+ 'deb-asat':{name:'Debris from Russia’s 2021 anti-satellite test (Cosmos 1408)',color:'#f15bb5',size:2,chip:'deb-asat',chipName:'Debris: 2021 Russian ASAT test',on:false},
+ debris:{name:'Debris (from a major break-up)',color:'#e5e5e5',size:2,chip:'deb-other',chipName:'Debris: other break-ups',on:false},
 };
-function satCat(name,l2,kind){if(kind==='d')return 'debris';const n=name.toUpperCase();
+function satCat(name,l2,kind){const n=name.toUpperCase();if(kind==='d')return /FENGYUN 1C/.test(n)?'deb-fy':/IRIDIUM 33|COSMOS 2251/.test(n)?'deb-coll':/COSMOS 1408/.test(n)?'deb-asat':'debris';
  if(/^ISS \(|^CSS \(|TIANHE|TIANGONG|^ISS$/.test(n))return 'station';
  if(/^HST$|HUBBLE|CHANDRA|SWIFT|FERMI|TESS|NUSTAR|XMM|INTEGRAL|IXPE|NEOWISE/.test(n))return 'science';
  if(/STARLINK|ONEWEB|KUIPER|QIANFAN|GUOWANG|SPACESAIL/.test(n))return 'broadband';
  if(/NAVSTAR|GPS |GLONASS|GALILEO|BEIDOU|QZS|IRNSS|NVS-/.test(n))return 'nav';
  if(/NOAA|GOES|METEOSAT|METOP|HIMAWARI|FENGYUN|FY-|SENTINEL|LANDSAT|TERRA|AQUA|SUOMI|JPSS|DMSP|ELEKTRO|GOSAT|WORLDVIEW|FLOCK|SKYSAT|GCOM|CBERS|RESURS|SMAP|ICESAT|GRACE|CRYOSAT|SWOT|JASON/.test(n))return 'earth';
  const mm=parseFloat(String(l2).slice(52,63));return mm>0.95&&mm<1.05?'geo':'other'}
-O.addLayer({id:'sats',name:'Active satellites',color:'--l-sat',shape:'circle',count:'3D only',on:true,group:'Space'});
-O.addLayer({id:'debris',name:'Debris from major break-ups',color:'--sev-red',shape:'circle',count:'3D only',on:false,group:'Space'});
+// one switch per kind of satellite and per debris cloud (the 'sat' chip for stations & telescopes comes from the page)
+Object.values(SAT_CATS).forEach(c=>document.documentElement.style.setProperty('--c-'+c.chip,c.color));
+Object.values(SAT_CATS).filter(c=>c.chip!=='sat').forEach(c=>{O.addLayer({id:c.chip,name:c.chipName,color:'--c-'+c.chip,shape:'circle',count:'3D only',on:c.on,group:'Space'});
+ const b=document.getElementById('chip-'+c.chip);if(b&&c.chip==='deb-other')b.hidden=true});
 const SAT={list:[],pts:[],labels:[],snaps:[],busy:false,worker:null,step:2000,sel:-1,ready:false,asOf:null};
 const satPts=scene.primitives.add(new C.PointPrimitiveCollection());
 const satLbl=scene.primitives.add(new C.LabelCollection());
 const satPath=new C.CustomDataSource('satpath');viewer.dataSources.add(satPath);
 const chipOn=id=>{const c=document.getElementById('chip-'+id);return !c||c.getAttribute('aria-pressed')==='true'};
-function syncSatVis(){const v={sat:chipOn('sat'),sats:chipOn('sats'),debris:chipOn('debris')};
+function syncSatVis(){const v={};Object.values(SAT_CATS).forEach(c=>{v[c.chip]=chipOn(c.chip)});
  SAT.list.forEach((s,i)=>{const on=v[SAT_CATS[s.cat].chip];const p=SAT.pts[i];if(p)p.show=on&&p.__ok;const l=SAT.labels[i];if(l)l.show=on&&p.__ok})}
 const nowMs=()=>C.JulianDate.toDate(viewer.clock.currentTime).getTime();
 function propAll(t){const d=new Date(t),g=satellite.gstime(d),o=new Float64Array(SAT.list.length*3);
@@ -162,15 +167,16 @@ async function loadCatalog(){let src=null;
 async function startSats(){if(!window.satellite)return;const list=await loadCatalog();if(!list.length)return;
  satPts.removeAll();satLbl.removeAll();SAT.list=list;SAT.snaps=[];SAT.busy=false;SAT.pts=[];SAT.labels=[];
  const lblFont='600 12px Public Sans, sans-serif';
- list.forEach((s,i)=>{const c=SAT_CATS[s.cat];const p=satPts.add({position:C.Cartesian3.ZERO,pixelSize:c.size,color:C.Color.fromCssColorString(c.color).withAlpha(s.cat==='broadband'||s.cat==='debris'?.75:.95),
+ list.forEach((s,i)=>{const c=SAT_CATS[s.cat];const p=satPts.add({position:C.Cartesian3.ZERO,pixelSize:c.size,color:C.Color.fromCssColorString(c.color).withAlpha(s.cat==='broadband'||/deb/.test(s.cat)?.75:.95),
    outlineColor:C.Color.BLACK.withAlpha(.5),outlineWidth:c.size>=5?1:0,scaleByDistance:new C.NearFarScalar(1.5e6,1.8,4e7,.7),id:{sat:i},show:false});p.__ok=false;SAT.pts.push(p);
   if(s.cat==='station'||(s.cat==='science'&&/HST/.test(s.name))){const short=s.name.replace(/^ISS \(ZARYA\)$/,'ISS').replace(/^CSS \(TIANHE\)$/,'Tiangong').replace(/^HST$/,'Hubble');
    SAT.labels[i]=satLbl.add({text:short,font:lblFont,fillColor:C.Color.WHITE,outlineColor:C.Color.BLACK,outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,show:false})}});
  if(SAT.worker)SAT.worker.terminate();SAT.worker=makeWorker();if(SAT.worker)SAT.worker.postMessage({init:list.map(s=>[s.l1,s.l2])});
  SAT.ready=true;
- const counts={sat:0,sats:0,debris:0};list.forEach(s=>{counts[SAT_CATS[s.cat].chip]++});
+ const counts={};Object.values(SAT_CATS).forEach(c=>{counts[c.chip]=0});list.forEach(s=>{counts[SAT_CATS[s.cat].chip]++});
  const ct=(id,t)=>{const c=document.querySelector('#chip-'+id+' .ct');if(c)c.textContent=t};
- ct('sats',fmtN(counts.sats)+(SAT.fromCatalog?'':' sample'));ct('sat',counts.sat+' live');ct('debris',counts.debris?fmtN(counts.debris):'after next collection')}
+ Object.entries(counts).forEach(([id,n])=>{if(id==='sat')ct(id,n+' live');else if(/^deb-/.test(id)&&!SAT.fromCatalog)ct(id,'after next collection');else ct(id,fmtN(n))});
+ const ob=document.getElementById('chip-deb-other');if(ob)ob.hidden=!counts['deb-other'];syncSatVis()}
 const scr=new C.Cartesian3();
 scene.preUpdate.addEventListener(()=>{if(!SAT.ready)return;const t=nowMs();let s=SAT.snaps;const last=s[s.length-1];
  if(last&&last.t<t-SAT.step*2){SAT.snaps=s=[];}
