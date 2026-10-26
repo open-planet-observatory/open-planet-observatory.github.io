@@ -80,7 +80,8 @@ function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t
 // ----- layers: one data source per chip id, synced with the chip's pressed state -----
 const DS={};
 function ds(id){if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);const chip=document.getElementById('chip-'+id);d.show=!chip||chip.getAttribute('aria-pressed')==='true';DS[id]=d}return DS[id]}
-new MutationObserver(ms=>ms.forEach(m=>{const id=m.target.id.replace(/^chip-/,'');if(DS[id])DS[id].show=m.target.getAttribute('aria-pressed')==='true';if(/^(sat|sat-.+|deb-.+)$/.test(id)&&typeof syncSatVis==='function')syncSatVis()})).observe(document.getElementById('layerbar')||document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
+// Switches live in the rail (moved there by ops.js), so listen page-wide, not just in the old layer bar.
+new MutationObserver(ms=>ms.forEach(m=>{if(!/^chip-/.test(m.target.id||''))return;const id=m.target.id.replace(/^chip-/,'');if(DS[id])DS[id].show=m.target.getAttribute('aria-pressed')==='true';if(/^(sat|sat-.+|deb-.+)$/.test(id)&&typeof syncSatVis==='function')syncSatVis()})).observe(document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
 const BANDS={};let nearNow=null;const NEAR=2.5e6;
 const clear=id=>{const d=ds(id);d.entities.removeAll();BANDS[id]=[];return d.entities};
 // Area layers: shaded cells when zoomed out; below ~2,500 km they turn into sized markers so the ground stays visible.
