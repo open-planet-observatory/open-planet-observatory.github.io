@@ -54,6 +54,8 @@ Code: AGPL-3.0-or-later. Data: each source's own terms (see the source library o
 
 ## Notes
 
+- GDELT (news volume and disruption headlines) refuses requests from GitHub's runners on some days; the page keeps the last good news data and says when it was collected.
+
 - One `economy` step (Alpha Vantage via a connected MCP server) only works inside Claude; in GitHub Actions it fails harmlessly and the previous values are kept.
 
 - GitHub runs scheduled workflows on a best-effort basis; runs can be delayed during busy periods.
