@@ -11,7 +11,7 @@ let s = fs.readFileSync(process.argv[2], 'utf8');
 const check = process.argv.includes('--check');
 s = s.replace(/^<!doctype html><html><head>.*?<body>\n/s, '').replace(/\n<\/body><\/html>\s*$/, '\n');
 const L = s.split('\n'); const out = [];
-const DATA = { SNAP: 'snap', NAT: 'nature', SIT: 'situations', WATCH: 'watch', ECON: 'economy', SIG: 'signals', DIS: 'disruptions' };
+const DATA = { SNAP: 'snap', NAT: 'nature', SIT: 'situations', WATCH: 'watch', ECON: 'economy', UNEXP: 'unexplained', SIG: 'signals', DIS: 'disruptions' };
 const CDN = [
   ['// https://d3js.org v7', 'https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js'],
   ['// https://github.com/topojson/topojson-client', 'https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js'],

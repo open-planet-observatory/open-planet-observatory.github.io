@@ -256,6 +256,8 @@ function buildNat(){const N=window.NAT||{};
   (O.migLines?O.migLines(m):[pts.map(p=>[p[1],p[2]])]).forEach(line=>mg.add({polyline:{positions:C.Cartesian3.fromDegreesArrayHeights(line.flatMap(p=>[p[0],p[1],20000])),width:2.5,material:new C.PolylineGlowMaterialProperty({glowPower:.25,color:col('--n-mig')}),arcType:C.ArcType.RHUMB},description:`<b>${esc(m.name)}: where sightings centred, month by month</b>${m.population?esc(m.population)+' · ':''}${pts[0][0]} → ${last[0]}${m.marine?'<br>Drawn offshore between months; the real route is not tracked':''}<br><span style="opacity:.75">iNaturalist · a seasonal centre of attention, not a tracked animal</span>`}));
   mg.add({position:deg(last[1],last[2],20000),point:{pixelSize:8,color:col('--n-mig'),outlineColor:col('--panel'),outlineWidth:1.5,disableDepthTestDistance:Number.POSITIVE_INFINITY},label:{text:m.name,font:'600 12px Public Sans, sans-serif',fillColor:col('--ink'),outlineColor:col('--ocean'),outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,disableDepthTestDistance:Number.POSITIVE_INFINITY},description:`<b>${esc(m.name)}${m.population?' · '+esc(m.population):''}</b>The most central of ${fmtN(last[4]||last[3])} sightings in ${last[0]}<br><span style="opacity:.75">iNaturalist</span>`})});
 }
+// unexplained: seismic events that were not earthquakes (USGS ComCat); unclassified types drawn larger, in red
+function buildOdd(){const U=window.UNEXP||{};const e=clear('odd');const R=/other event|not reported|sonic boom|meteor|acoustic|nuclear|experimental|induced|rock burst|collapse/;(U.seismic?.odd||[]).forEach(p=>{const rare=R.test(p[0]);e.add({position:deg(p[4],p[5],0),point:{pixelSize:rare?10:5,color:col(rare?'--sev-red':'--l-odd',.9),outlineColor:col('--panel'),outlineWidth:1,disableDepthTestDistance:Number.POSITIVE_INFINITY},description:`<b>${esc(p[1])}</b>${esc(p[0])} · ${esc(String(p[3]).replace('T',' '))}${p[7]?' · '+p[7]+' felt reports':''}<br><span style="opacity:.75">USGS ComCat, classified by the reporting network</span>`})})}
 // economy choropleth: reuse the colors the 2D layer computed
 function buildEcon(){const e=clear('econ');document.querySelectorAll('#g-econ path').forEach(p=>{const f=d3.select(p).datum();const fill=p.getAttribute('fill');if(!f||!fill||fill.startsWith('var('))return;polys(f).forEach(h=>e.add({polygon:{hierarchy:h,material:col(fill,.5),classificationType:C.ClassificationType.TERRAIN},description:`<b>${esc(f.properties.name)}</b>${esc(p.querySelector('title')?.textContent||'')}<br><span style="opacity:.75">World Bank</span>`}))})}
 // invisible country shapes for clicking
@@ -326,8 +328,8 @@ if(rail){const d=document.createElement('div');d.className='rail-group';d.innerH
 
 // ----- wire live rebuilds -----
 const wrap=(fn,after)=>{const f=O[fn];if(!f)return;O[fn]=function(){const r=f.apply(this,arguments);try{after()}catch(e){}return r}};
-wrap('setSnap',()=>{buildSnap();buildAi()});wrap('setQuakes',buildSnap);wrap('buildSitLayers',buildSit);wrap('buildSigLayers',buildSig);wrap('buildNatureLayers',buildNat);wrap('buildEconLayer',buildEcon);
-buildSnap();buildSit();buildSig();buildNat();buildEcon();buildMoon();buildAi();
+wrap('setSnap',()=>{buildSnap();buildAi()});wrap('setQuakes',buildSnap);wrap('buildSitLayers',buildSit);wrap('buildSigLayers',buildSig);wrap('buildNatureLayers',buildNat);wrap('buildEconLayer',buildEcon);wrap('buildOddLayer',buildOdd);
+buildSnap();buildSit();buildSig();buildNat();buildEcon();buildOdd();buildMoon();buildAi();
 startSats();
 setActive(true);
 // If the globe surface never appears (a sandbox blocking tiles or workers), fall back to the 2D map and say so.
@@ -336,6 +338,6 @@ function giveUp(why){if(gaveUp)return;gaveUp=true;setActive(false);const b=seg&&
 window.addEventListener('securitypolicyviolation',e=>{if(/cesium|gibs|jsdelivr/i.test(e.blockedURI||'')&&/worker|img|connect/.test(e.violatedDirective||''))giveUp('The 3D globe can\u2019t load here (this preview blocks map tiles and background workers). It works on the public site.')});
 const probe=setInterval(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(n>0){clearInterval(probe);return}}catch(e){}},1000);
 setTimeout(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(!n)giveUp('The 3D globe could not start here (no map tiles arrived). It works on the public site; showing the 2D globe instead.')}catch(e){}},12000);
-new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon();buildMoon();buildAi()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon();buildOdd();buildMoon();buildAi()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 window.__obs3d={viewer,setImagery,setXray,DS,SAT,selectSat,setMoonView};
 })();

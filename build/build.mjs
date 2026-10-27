@@ -14,7 +14,7 @@ const VENDORS = [
   ['https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js', 'h3-js/dist/h3-js.umd.js', 'h3-js.umd.js'],
 ];
 const await_hooks = await read('src/hooks.js'); const opsCss = await read('src/ops.css');
-const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
+const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', unexplained: 'UNEXP', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
 const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js');
 const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.png'))).toString('base64');
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');

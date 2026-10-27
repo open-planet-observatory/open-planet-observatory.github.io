@@ -56,7 +56,7 @@ async function runGroups(name, groups, every, metaKey) {
 // ---------- browser-style steps from collectors.json ----------
 const STEP_EVERY = s =>
   /GDELT/.test(s.name) ? 360 : /CISA|volcano|sea ice|NSIDC|GPSJAM/i.test(s.name) ? 360 :
-  s.target === 'situations' ? 60 : s.target === 'signals' ? 180 : s.target === 'watch' ? 180 : s.target === 'economy' ? 360 : 10;
+  s.target === 'situations' ? 60 : s.target === 'signals' ? 180 : s.target === 'watch' ? 180 : s.target === 'economy' ? 360 : s.target === 'unexplained' ? 60 : 10;
 
 function sandboxFetch(origin) {
   return (u, opt = {}) => {
@@ -67,6 +67,9 @@ function sandboxFetch(origin) {
 }
 
 async function runStep(step, merged) {
+  // static://: figures carried forward unchanged (e.g. an annual report's numbers); mcp://: needs an MCP connector, not available on runners
+  if (step.origin.startsWith('static://')) { const o = JSON.parse(step.script); delete o.note; return o; }
+  if (step.origin.startsWith('mcp://')) throw new Error('skipped: needs the ' + step.origin.slice(6) + ' connector (runs in the Claude refresh task only)');
   let script = step.script;
   // Use real keys from repo secrets when present; DEMO_KEY is shared and rate-limited.
   if (process.env.NASA_API_KEY) script = script.replace(/api\.nasa\.gov([^'"`]*?)DEMO_KEY/g, (m, a) => 'api.nasa.gov' + a + process.env.NASA_API_KEY);
@@ -173,7 +176,7 @@ async function orbits(meta) {
 // Load everything last published first. If any of it had to come from the sample seed,
 // forget the refresh schedule so every source is collected fresh this run.
 const loaded = {};
-for (const n of ['meta', 'snap', 'nature', 'situations', 'signals', 'disruptions', 'watch', 'economy']) loaded[n] = await prev(n);
+for (const n of ['meta', 'snap', 'nature', 'situations', 'signals', 'disruptions', 'watch', 'economy', 'unexplained']) loaded[n] = await prev(n);
 const prevLive = prev; prev = async n => loaded[n] ?? prevLive(n); // later calls reuse what was loaded
 const meta = usedSeed ? {} : (loaded.meta || {});
 if (usedSeed) log('no complete published data found; collecting every source');
@@ -189,7 +192,7 @@ let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbit
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
-const files = { snap: ['SNAP', snap.out], nature: ['NAT', nature.out], situations: ['SIT', steps.targets.situations], watch: ['WATCH', steps.targets.watch || {}], economy: ['ECON', steps.targets.economy || {}], signals: ['SIG', steps.targets.signals], disruptions: ['DIS', steps.targets.disruptions] };
+const files = { snap: ['SNAP', snap.out], nature: ['NAT', nature.out], situations: ['SIT', steps.targets.situations], watch: ['WATCH', steps.targets.watch || {}], economy: ['ECON', steps.targets.economy || {}], unexplained: ['UNEXP', steps.targets.unexplained || {}], signals: ['SIG', steps.targets.signals], disruptions: ['DIS', steps.targets.disruptions] };
 for (const [name, [g, obj]] of Object.entries(files)) {
   const json = JSON.stringify(obj);
   await fs.writeFile(path.join(OUT, name + '.json'), json);
