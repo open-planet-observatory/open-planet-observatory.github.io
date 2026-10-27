@@ -64,7 +64,7 @@ viewer.camera.percentageChanged=0.02;viewer.camera.changed.addEventListener(()=>
 function setDetail(on){if(on&&!detailLayer&&!window.OBS_OFFLINE_IMAGERY){try{detailLayer=new C.ImageryLayer(eox(),{show:false});viewer.imageryLayers.add(detailLayer,1)}catch(e){}}
  if(!on&&detailLayer){viewer.imageryLayers.remove(detailLayer,true);detailLayer=null}syncDetail()}
 // The night side keeps a dim base plus NASA's "Earth at Night" city lights, like a real view from orbit.
-async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});viewer.imageryLayers.add(nightLayer)}catch(e){}}
+async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});nightLayer.show=globe.enableLighting;viewer.imageryLayers.add(nightLayer)}catch(e){}}
 async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
  try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});
   // Fall back to the offline map only if the source is really down (many errors, nothing loaded), and don't remember that.
@@ -315,12 +315,13 @@ if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textConte
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}
 // imagery + see-through controls in the rail
 const rail=document.getElementById('ops-rail');
-if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><p class="theme-note" id="imgNote"></p><button class="chip" id="lightBtn" aria-pressed="true" style="width:100%"><span>Real day and night</span></button><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
+if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><p class="theme-note" id="imgNote"></p><span class="gl" style="padding-top:8px">Lighting</span><div class="seg" id="lightSeg" role="group" aria-label="Lighting"><button data-l="sun" aria-pressed="true" title="Sunlight where the Sun is shining right now; city lights on the night side">Real sun</button><button data-l="day" aria-pressed="false" title="The whole planet lit evenly, no night side">Whole globe lit</button></div><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
  const mapGroup=[...rail.querySelectorAll('.rail-group')].find(g=>g.querySelector('.gl')?.textContent==='Map');rail.insertBefore(d,mapGroup?mapGroup.nextSibling:rail.children[1]);
  d.querySelectorAll('#imgSeg button').forEach(b=>b.onclick=()=>setImagery(b.dataset.k));document.getElementById('xrayBtn').onclick=()=>setXray(!xray);
  document.getElementById('moonViewBtn').onclick=()=>setMoonView(!moonView);
- document.getElementById('lightBtn').onclick=e=>{const b=e.currentTarget;const v=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',v);globe.enableLighting=v;if(nightLayer)nightLayer.show=v;try{localStorage.setItem('obs-light',v?'1':'0')}catch(x){}};
- try{if(localStorage.getItem('obs-light')==='0')document.getElementById('lightBtn').click()}catch(x){}
+ const setLight=v=>{globe.enableLighting=v;if(nightLayer)nightLayer.show=v;O.lightingOn=v;document.querySelectorAll('#lightSeg button').forEach(x=>x.setAttribute('aria-pressed',(x.dataset.l==='sun')===v));try{localStorage.setItem('obs-light',v?'1':'0')}catch(x){}};
+ document.querySelectorAll('#lightSeg button').forEach(x=>x.onclick=()=>setLight(x.dataset.l==='sun'));
+ try{if(localStorage.getItem('obs-light')==='0')setLight(false)}catch(x){}
  const foot=rail.querySelector('.rail-foot');if(foot)foot.appendChild(credits)}
 
 // ----- wire live rebuilds -----
