@@ -15,6 +15,7 @@ import path from 'node:path';
 import { DOMParser } from 'linkedom';
 import { GROUPS, EVERY } from './snap.mjs';
 import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
+import { runChecks } from './checks.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -183,6 +184,11 @@ const steps = await runSteps(meta);
 const orb = await orbits(meta); log('orbits', orb.status, (orb.out.sats || []).length + ' objects');
 await fs.mkdir(OUT, { recursive: true });
 if (orb.out.sats) await fs.writeFile(path.join(OUT, 'orbits.json'), JSON.stringify(orb.out));
+// Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
+await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
+log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
 const files = { snap: ['SNAP', snap.out], nature: ['NAT', nature.out], situations: ['SIT', steps.targets.situations], watch: ['WATCH', steps.targets.watch || {}], economy: ['ECON', steps.targets.economy || {}], signals: ['SIG', steps.targets.signals], disruptions: ['DIS', steps.targets.disruptions] };
 for (const [name, [g, obj]] of Object.entries(files)) {
   const json = JSON.stringify(obj);
@@ -190,7 +196,7 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
