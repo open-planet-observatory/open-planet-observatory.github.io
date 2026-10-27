@@ -14,7 +14,7 @@ Open Planet Observatory is built to inform, not to surveil. These rules are part
 
 - Community sightings (iNaturalist, eBird) are counted in 2-degree cells. Exact coordinates, observer names and photos are never stored or shown.
 - Threatened species keep the location blurring their sources apply, and are shown only as cells, never as a place to go looking.
-- Every count is labeled as observer effort, not population. "Seasonal movement" lines are monthly medians of sightings, never tracked animals.
+- Every count is labeled as observer effort, not population. "Seasonal movement" lines join each month's most central sighting for one named population, never tracked animals. Marine species are kept at sea; a segment with no sea route is left out. Species ids are verified against iNaturalist on every update and a layer is withheld if one does not match.
 
 ## Country briefs
 
