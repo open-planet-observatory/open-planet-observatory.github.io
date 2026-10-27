@@ -4,8 +4,9 @@
 // - Sightings are counted in 2-degree map cells. Exact coordinates, observer names and photos are never stored.
 // - iNaturalist already blurs locations of threatened species; cells blur them further.
 // - Counts reflect where people look, not how many animals exist. The page says so next to every number.
-// - Migration lines are the monthly median position of sightings over the past year: a seasonal centre of
-//   attention, not a tracked animal.
+// - Migration lines join one month's most central real sighting (the medoid) for one population, over the past
+//   year: a seasonal centre of attention, not a tracked animal. Marine species' points and segments are checked
+//   against land; a segment that would cross land is not drawn, and the page says so.
 
 const UA = { 'User-Agent': 'OpenPlanetObservatory/1.0 (open-source research dashboard)' };
 const J = async (u, h = {}) => { const r = await fetch(u, { headers: { ...UA, ...h }, signal: AbortSignal.timeout(60000) }); if (!r.ok) throw new Error('HTTP ' + r.status + ' ' + u.slice(0, 80)); return r.json(); };
@@ -13,21 +14,62 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const iso = d => d.toISOString().slice(0, 10);
 const r1 = x => Math.round(x * 10) / 10;
 
-// Groups shown as map layers. iNaturalist taxon ids.
+// Groups shown as map layers: [id, label, iNaturalist query, the scientific names those ids must resolve to].
+// The names are checked against iNaturalist every run (see verifyTaxa): a wrong id stops the layer instead of
+// silently drawing the wrong animal.
 export const GROUPS_INAT = [
-  ['birds', 'Birds', 3],
-  ['butterflies', 'Butterflies & moths', 47157],
-  ['whales', 'Whales & dolphins', 152871],
-  ['mammals', 'Other mammals', 40151],
-  ['amphibians', 'Amphibians & reptiles', 20978],
-  ['plants', 'Plants in bloom', 47126],
+  ['birds', 'Birds', '3', ['Aves']],
+  ['butterflies', 'Butterflies & moths', '47157', ['Lepidoptera']],
+  ['whales', 'Whales & dolphins', '152871', ['Cetacea']],
+  ['mammals', 'Other mammals', '40151&without_taxon_id=152871', ['Mammalia']],
+  ['amphibians', 'Amphibians & reptiles', '20978,26036', ['Amphibia', 'Reptilia']],
+  ['plants', 'Plants in bloom', '47126&term_id=12&term_value_id=13', ['Plantae']],
 ];
 
-// Species whose seasonal movement is drawn as a line. iNaturalist taxon ids.
+// Species whose seasonal movement is drawn: [label, taxon id, scientific name it must be, population box
+// [west, south, east, north] so one population's journey is shown, marine (true = must stay at sea)].
 export const MIGRANTS = [
-  ['Monarch butterfly', 48662], ['Humpback whale', 41945], ['Gray whale', 41956],
-  ['Arctic tern', 4345], ['Ruby-throated hummingbird', 6432], ['Barn swallow', 11901],
+  ['Monarch butterfly', 48662, 'Danaus plexippus', [-110, 14, -60, 55], false, 'Eastern North America'],
+  ['Humpback whale', 41566, 'Megaptera novaeangliae', [-180, 10, -105, 66], true, 'North Pacific (Hawaii and Mexico to Alaska)'],
+  ['Gray whale', 41478, 'Eschrichtius robustus', [-180, 18, -105, 75], true, 'Eastern North Pacific (Baja California to the Arctic)'],
+  ['Arctic tern', 4449, 'Sterna paradisaea', [-70, -80, 30, 85], false, 'Atlantic flyway (Arctic to Antarctica)'],
+  ['Ruby-throated hummingbird', 6432, 'Archilochus colubris', [-110, 5, -55, 60], false, 'Eastern North America to Central America'],
+  ['Barn swallow', 11901, 'Hirundo rustica', [-25, -40, 60, 72], false, 'Europe and Africa'],
 ];
+
+// Taxon check: every id must still resolve to the name we expect. Throws with the mismatch.
+export async function verifyTaxa(pairs) {
+  const ids = [...new Set(pairs.map(p => String(p[0]).split(/[&,]/).filter(x => /^\d+$/.test(x))).flat())];
+  const d = await J('https://api.inaturalist.org/v1/taxa/' + ids.join(','));
+  const got = new Map(d.results.map(t => [String(t.id), t.name]));
+  const bad = [];
+  for (const [q, names] of pairs) { const idList = String(q).split('&')[0].split(','); idList.forEach((id, i) => { const want = names[i] ?? names[0]; if (got.get(id) !== want) bad.push(`${id} is "${got.get(id) || 'missing'}", expected "${want}"`); }); }
+  if (bad.length) throw new Error('taxon check failed: ' + bad.join('; '));
+  return true;
+}
+
+// Land test for marine paths, from the same 1:110m land outline the page draws.
+import { readFileSync } from 'node:fs';
+import { feature } from 'topojson-client';
+import { geoContains } from 'd3-geo';
+const LAND = (() => { const t = JSON.parse(readFileSync(new URL('./land-110m.json', import.meta.url))); return feature(t, t.objects.land); })();
+const onLand = (lon, lat) => geoContains(LAND, [lon, lat]);
+// "Deep land": the point and every point 0.4 degrees around it are on land (coastal sightings still count as sea).
+export const deepLand = (lon, lat) => onLand(lon, lat) && [[.4, 0], [-.4, 0], [0, .4], [0, -.4], [.3, .3], [-.3, .3], [.3, -.3], [-.3, -.3]].every(([a, b]) => onLand(lon + a, lat + b));
+// A sea route between two points: straight if possible, otherwise bend through up to two offshore waypoints.
+// Returns the intermediate points ([] = straight), or null when no sea route was found.
+export function seaRoute(a, b, depth = 0) {
+  if (!segmentCrossesLand(a, b)) return [];
+  if (depth > 2) return null;
+  const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2, dx = b[0] - a[0], dy = b[1] - a[1], L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
+  for (const k of [1, 2, 3, 5, 7, 10, 14]) for (const sgn of [1, -1]) {
+    const w = [mx + nx * k * sgn, my + ny * k * sgn]; if (onLand(w[0], w[1])) continue;
+    const r1 = seaRoute(a, w, depth + 1); if (r1 == null) continue; const r2 = seaRoute(w, b, depth + 1); if (r2 == null) continue;
+    return [...r1, w, ...r2];
+  }
+  return null;
+}
+export function segmentCrossesLand(a, b) { const L = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.max(2, Math.ceil(L / 0.2)); for (let i = 1; i < n; i++) { const t = i / n; if (t * L < 0.6 || (1 - t) * L < 0.6) continue; if (onLand(a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)) return true; } return false; }
 
 // GBIF species names for long-run observation trends (resolved to keys at run time).
 export const TREND_SPECIES = ['Danaus plexippus', 'Eubalaena glacialis', 'Bombus affinis', 'Vanessa cardui', 'Megaptera novaeangliae'];
@@ -56,6 +98,7 @@ export const GROUPS = {
   // Past 7 days, per group: cells + the most-seen species. ~30 requests, run hourly.
   async sightings() {
     const d1 = iso(new Date(Date.now() - 7 * 864e5)); const groups = [];
+    await verifyTaxa(GROUPS_INAT.map(g => [g[2], g[3]]));
     for (const [id, name, tid] of GROUPS_INAT) {
       const c = await inatCells(tid, d1); await sleep(1100);
       const top = await inatTop(tid, d1); await sleep(1100);
@@ -66,20 +109,30 @@ export const GROUPS = {
 
 
   // Seasonal movement: monthly median sighting position over the past 12 months, per species. Daily.
-  async migration() {
+  // (named migration2 so the verified method runs at once instead of waiting for the old daily slot)
+  async migration2() {
+    await verifyTaxa(MIGRANTS.map(m => [m[1], [m[2]]]));
     const now = new Date(); const out = [];
-    for (const [name, tid] of MIGRANTS) {
-      const pts = [];
+    const hav = (a, b) => { const R = Math.PI / 180, dl = (b[1] - a[1]) * R, dn = (b[0] - a[0]) * R; const h = Math.sin(dl / 2) ** 2 + Math.cos(a[1] * R) * Math.cos(b[1] * R) * Math.sin(dn / 2) ** 2; return 2 * Math.asin(Math.sqrt(h)); };
+    for (const [name, tid, sci, box, marine, pop] of MIGRANTS) {
+      const pts = []; let dropped = 0;
       for (let m = 11; m >= 0; m--) {
         const a = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - m, 1)), b = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - m + 1, 0));
-        const d = await J(`https://api.inaturalist.org/v1/observations?quality_grade=research&geo=true&d1=${iso(a)}&d2=${iso(b)}&taxon_id=${tid}&per_page=200&order_by=random`);
-        const lons = [], lats = [];
-        for (const o of d.results) { const c = o.geojson?.coordinates; if (c) { lons.push(c[0]); lats.push(c[1]); } }
-        const med = arr => { if (!arr.length) return null; const s = arr.slice().sort((x, y) => x - y); return r1(s[Math.floor(s.length / 2)]); };
-        pts.push([iso(a).slice(0, 7), med(lons), med(lats), d.total_results]);
+        const [w, sth, e, nth] = box;
+        const d = await J(`https://api.inaturalist.org/v1/observations?quality_grade=research&geo=true&d1=${iso(a)}&d2=${iso(b)}&taxon_id=${tid}&swlng=${w}&swlat=${sth}&nelng=${e}&nelat=${nth}&per_page=200&order_by=random`);
+        let c = d.results.map(o => o.geojson?.coordinates).filter(Boolean);
+        if (marine) c = c.filter(p => !deepLand(p[0], p[1])); // drop sightings logged far inland (museum or wrong-location records)
+        let best = null;
+        if (c.length >= 10) { let bs = Infinity; for (const p of c) { let s2 = 0; for (const q of c) s2 += hav(p, q); if (s2 < bs) { bs = s2; best = p; } } }
+        if (!best) dropped++;
+        pts.push([iso(a).slice(0, 7), best ? r1(best[0]) : null, best ? r1(best[1]) : null, d.total_results, c.length]);
         await sleep(1100);
       }
-      out.push({ name, taxon: tid, months: pts });
+      // for marine species, mark segments that would cross land: the page draws only the sea-going ones
+      // marine species: each month-to-month segment goes by sea (offshore waypoints) or is not drawn at all
+      const breaks = [], via = {};
+      if (marine) { const v = pts.filter(p => p[1] != null); for (let i = 1; i < v.length; i++) { const r = seaRoute([v[i - 1][1], v[i - 1][2]], [v[i][1], v[i][2]]); if (r == null) breaks.push(v[i][0]); else if (r.length) via[v[i][0]] = r.map(p => [r1(p[0]), r1(p[1])]); } }
+      out.push({ name, taxon: tid, sci, population: pop, marine, months: pts, via, breaks, monthsTooFew: dropped });
     }
     return { migration: out };
   },
@@ -125,4 +178,4 @@ GROUPS.threatened = async function () {
   return { threatened: { since: d1, total, sampled: n, cells: [...by].map(([k, v]) => k + ',' + v).join(';'), top } };
 };
 
-export const EVERY = { sightings: 60, threatened: 60, ebird: 60, migration: 1440, trends: 1440 };
+export const EVERY = { sightings: 60, threatened: 60, ebird: 60, migration2: 1440, trends: 1440 };
