@@ -8,7 +8,7 @@ const satellite = satNS.default || satNS, A = astroNS.default || astroNS;
 
 // Seasonal facts per species: [months (1-12), test on latitude, plain-language rule]. Months with no data are skipped.
 const SEASONS = {
-  'Gray whale': [[[1, 2], lat => lat < 34, 'In January–February gray whales are at their Baja California / southern California winter grounds (south of 34°N)'],
+  'Gray whale': [[[2], lat => lat < 34, 'In February gray whales are at their Baja California breeding lagoons (south of 34°N); in January and March they are still passing California, so those months are not tested'],
                  [[6, 7, 8, 9], lat => lat > 36, 'In June–September they feed off the Pacific Northwest and Alaska (north of 36°N)']],
   'Humpback whale': [[[1, 2], lat => lat < 30, 'In January–February North Pacific humpbacks are on their Hawaii / Mexico breeding grounds (south of 30°N)'],
                      [[6, 7, 8, 9], lat => lat > 36, 'In June–September they feed off California, British Columbia and Alaska (north of 36°N)']],
