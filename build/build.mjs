@@ -16,6 +16,7 @@ const VENDORS = [
 const await_hooks = await read('src/hooks.js'); const opsCss = await read('src/ops.css');
 const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
 const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js');
+const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.png'))).toString('base64');
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');
 const CESIUM_VERSION = JSON.parse(await read('node_modules/cesium/package.json')).version;
 const ionToken = process.env.CESIUM_ION_TOKEN || '';
@@ -32,6 +33,9 @@ if (mode === 'hosted') {
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="description" content="Free, open-source live map of earthquakes, fires, storms, satellites, disruptions and the planet's vital signs, from public sources. Built to inform, not to surveil.">
 <meta property="og:title" content="Open Planet Observatory">
+<link rel="icon" type="image/png" sizes="32x32" href="brand/owlmanac-32.png">
+<link rel="apple-touch-icon" href="brand/owlmanac-192.png">
+<meta property="og:image" content="https://open-planet-observatory.github.io/brand/owlmanac-192.png">
 <meta property="og:description" content="Free public data on one map. Every number sourced, blind spots shown, no tracking.">
 <style>body{margin:0}</style>
 <script>window.OBS_HOSTED=true</script>
@@ -51,6 +55,7 @@ if (mode === 'hosted') {
     await fs.copyFile(path.join(ROOT, 'node_modules', mod), path.join(out, 'vendor', name));
   }
   await fs.copyFile(path.join(ROOT, 'node_modules', 'astronomy-engine', 'astronomy.browser.min.js'), path.join(out, 'vendor', 'astronomy.browser.min.js'));
+  await fs.cp(path.join(ROOT, 'src', 'brand'), path.join(out, 'brand'), { recursive: true });
   // CesiumJS (3D globe): the whole build folder, served from the site
   await fs.rm(path.join(out, 'vendor', 'cesium'), { recursive: true, force: true });
   await fs.cp(path.join(ROOT, 'node_modules', 'cesium', 'Build', 'Cesium'), path.join(out, 'vendor', 'cesium'), { recursive: true });
@@ -70,7 +75,7 @@ if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script>window.${NAMES[n]}=${parts[n]};</script>`);
   // The prototype loads Cesium from a CDN (too large to inline); imagery falls back to the offline map if the sandbox blocks NASA tiles.
   s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script>${astro}</script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>window.CESIUM_BASE_URL='https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/';</script>\n<style>${widgetsCss}</style>\n<script src="https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>\n<script>${globe3d}</script>`);
-  s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style>`);
+  s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style><script>window.OBS_LOGO='data:image/png;base64,${logoB64}'</script>`);
   // Inline the libraries so the prototype does not depend on CDNs either.
   for (const [cdn, mod] of VENDORS) {
     const code = (await fs.readFile(path.join(ROOT, 'node_modules', mod), 'utf8')).replace(/<\/script/g, '<\\/script');
