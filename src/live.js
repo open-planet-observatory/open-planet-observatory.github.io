@@ -24,7 +24,7 @@ async function data(){try{
  if(updated&&t<=updated){setPill();return}
  const first=!updated;updated=t;if(m.seed){isSeed=true;if(pill){pill.className='pill snap';pill.innerHTML='<i></i>Sample data · first collection pending'}return}setPill(); // on first load too: the browser may have served cached data files
  const get=n=>fetch('data/'+n+'.json',{cache:'no-store'}).then(r=>r.json());
- const [sit,sig,dis,snap,nat,wat,eco]=await Promise.all(['situations','signals','disruptions','snap','nature','watch','economy'].map(n=>get(n).catch(()=>null)));
+ const [sit,sig,dis,snap,nat,wat,eco,une]=await Promise.all(['situations','signals','disruptions','snap','nature','watch','economy','unexplained'].map(n=>get(n).catch(()=>null)));
  if(sit?.asOf>(window.SIT?.asOf||'')){window.SIT=sit;O.renderSit();O.buildSitLayers()}
  if(sig?.asOf>(window.SIG?.asOf||'')){window.SIG=sig;O.renderSig();O.buildSigLayers()}
  if(dis?.asOf>(window.DIS?.asOf||'')){window.DIS=dis;O.renderDis()}
@@ -32,6 +32,7 @@ async function data(){try{
  if(nat?.asOf>(window.NAT?.asOf||'')){window.NAT=nat;O.buildNatureLayers?.();O.renderNature?.()}
  if(wat?.asOf>(window.WATCH?.asOf||'')){window.WATCH=wat;O.renderWatchLists?.()}
  if(eco?.asOf>(window.ECON?.asOf||'')){window.ECON=eco;O.renderEcon?.();O.buildEconLayer?.()}
+ if(une?.asOf>(window.UNEXP?.asOf||'')){window.UNEXP=une;O.renderUnexp?.();O.buildOddLayer?.()}
  O.render();
 }catch(e){}}
 

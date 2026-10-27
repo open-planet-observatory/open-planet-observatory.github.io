@@ -32,7 +32,7 @@ const tb=$('#themeBtn');const tlabel=()=>tb.textContent=theme==='dark'?'Light mo
 
 // rail: view presets + map mode + layer groups
 const rail=$('#ops-rail');
-const GROUPS={Earth:['quake','fire','event','alert','volc','gdacs'],Space:['sat','gs','fb'],'People & systems':['air','gps','war','econ'],Nature:[]};
+const GROUPS={Earth:['quake','fire','event','alert','volc','gdacs','odd'],Space:['sat','gs','fb'],'People & systems':['air','gps','war','econ'],Nature:[]};
 rail.innerHTML=`<div class="rh"><span class="eyebrow">Views</span><button class="iconbtn" id="railClose" aria-label="Hide layers" title="Hide">‹</button></div>`;
 [$('#themes'),$('#themeNote')].forEach(e=>{if(e)rail.appendChild(e)});
 const seg=$('#viewseg');if(seg){const segRow=document.createElement('div');segRow.className='rail-group';segRow.innerHTML='<span class="gl">Map</span>';segRow.appendChild(seg);rail.appendChild(segRow)}
@@ -52,6 +52,7 @@ const PANELS=[
  ['disruptions','Disruptions',['#disruptions']],
  ['signals','Signals',['#readings','#signals']],
  ['watch','Watch',['#watch']],
+ ['unexplained','Unexplained',['#unexplained']],
  ['economy','Economy',['#economy']],
  ['nature','Nature',['#nature']],
  ['watchlist','Watchlist',['#watchlist']],
