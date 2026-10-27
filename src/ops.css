@@ -145,3 +145,21 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .ai-b{display:inline-block;font-size:.66rem;font-weight:700;border-radius:999px;padding:1px 6px;margin-left:5px;vertical-align:1px;border:1px solid var(--glass-line);color:var(--ink-2)}
 .ai-b.fr{border-color:var(--l-ai);color:var(--l-ai)}
 #aiCard .tbl td{vertical-align:top}
+/* The Owlmanac brand */
+:root{--owl-yellow:#f2c43c;--owl-navy:#1f2d4a;--owl-rust:#b5532a}
+#ops-top .lockup{display:flex;flex-direction:column;line-height:1.05;min-width:0}
+#ops-top .owl-kicker{font-family:var(--mono,ui-monospace,monospace);font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--owl-yellow);text-decoration:none}
+#ops-top .owl-kicker:hover{text-decoration:underline}
+#ops-top .brand>a{display:flex;flex:none;border-radius:50%}
+#ops-top .brand-logo{box-shadow:0 0 0 1.5px var(--owl-yellow)}
+.owl-yt{display:inline-flex;align-items:center;gap:6px;text-decoration:none;border-color:color-mix(in srgb,var(--owl-yellow) 55%,transparent)!important;color:var(--ink)!important}
+.owl-yt:hover{background:color-mix(in srgb,var(--owl-yellow) 18%,transparent)}
+.owl-yt .yt,.owl-ep .yt{width:16px;height:16px;color:#ff3d3d;flex:none}
+.owl-ep{border-color:color-mix(in srgb,var(--owl-yellow) 35%,var(--line,transparent))}
+.owl-ep .owl-kind{background:color-mix(in srgb,var(--owl-yellow) 20%,transparent);color:var(--ink)}
+.owl-ep .owl-act{margin-top:auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.owl-ep .go{display:inline-flex;align-items:center;gap:6px;margin-top:0}
+.owl-moon a{color:var(--ink-2)}
+@media (max-width:640px){.owl-yt span{display:none}}
+[data-theme="light"] #ops-top .owl-kicker{color:#a07800}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) #ops-top .owl-kicker{color:#a07800}}
