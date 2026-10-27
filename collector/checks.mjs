@@ -31,6 +31,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now 
   for (const g of ['sightings', 'migration2']) { const s = nlr[g] || ''; if (/taxon check failed/.test(s)) add('Nature', 'taxa-' + g, 'fail', 'Every species id resolves to the species named on the page (checked against iNaturalist)', s.slice(0, 200)); }
   if (!Object.values(nlr).some(s => /taxon check failed/.test(s || ''))) add('Nature', 'taxa', 'pass', 'Every species id resolves to the species named on the page (checked against iNaturalist)');
   for (const m of nature.migration || []) {
+    delete m.withheld; // decided afresh every run
     if (!m.sci) { m.withheld = 'made by the old, unverified method'; add('Nature', 'mig-' + m.name, 'fail', `${m.name}: path made by the verified method`, 'withheld'); continue; }
     const pts = m.months.filter(p => p[1] != null); const problems = [];
     for (const [months, test, rule] of SEASONS[m.name] || []) {
