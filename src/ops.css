@@ -163,3 +163,14 @@ html.ops.drawer-closed #ops-drawer{display:none}
 @media (max-width:640px){.owl-yt span{display:none}}
 [data-theme="light"] #ops-top .owl-kicker{color:#a07800}
 @media (prefers-color-scheme: light){:root:not([data-theme="dark"]) #ops-top .owl-kicker{color:#a07800}}
+/* data checks */
+.pill.checks{cursor:pointer;font:inherit;border:1px solid var(--glass-line)}
+.pill.checks i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.pill.checks.ok i{background:var(--ok,#3fb27f)}.pill.checks.warn i{background:var(--warn,#e0a526)}.pill.checks.bad i{background:var(--sev-red,#e5484d)}
+.checks-card .chk .ic{display:inline-flex;width:18px;height:18px;border-radius:50%;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;margin-right:4px}
+.checks-card .chk.pass .ic{background:color-mix(in srgb,var(--ok,#3fb27f) 22%,transparent);color:var(--ok,#3fb27f)}
+.checks-card .chk.fail .ic{background:color-mix(in srgb,var(--sev-red,#e5484d) 22%,transparent);color:var(--sev-red,#e5484d)}
+.checks-card .chk.warn .ic{background:color-mix(in srgb,var(--warn,#e0a526) 22%,transparent);color:var(--warn,#e0a526)}
+.checks-card .chk.skip .ic{background:var(--glass-2);color:var(--ink-3)}
+.checks-card .chk.fail .v{color:var(--sev-red,#e5484d);font-weight:700}
+.checks-card .sg-row .t{white-space:normal;overflow:visible}
