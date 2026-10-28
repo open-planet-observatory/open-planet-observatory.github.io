@@ -76,6 +76,21 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now 
   try { const v = A.GeoMoon(now); const km = Math.hypot(v.x, v.y, v.z) * 149597870.7;
     ok(km > 356000 && km < 407000, 'Space', 'moon', 'The Moon computes to 356,000–407,000 km away', `${Math.round(km).toLocaleString('en-US')} km`); } catch (e) { add('Space', 'moon', 'fail', 'Moon calculation runs', e.message); }
 
+  // ----- El Niño (NOAA CPC) and space radiation (NOAA SWPC) -----
+  const E = snap.enso; if (E) {
+    const w = E.weekly?.[E.weekly.length - 1], o = E.oni?.[E.oni.length - 1];
+    ok(w && w.slice(1).every(v => v > -6 && v < 7), 'Ocean', 'enso-weekly', 'Weekly Niño-region anomalies are within −6 to +7 °C', w ? `Niño 3.4 ${w[3]} °C, week of ${w[0]}` : 'missing');
+    ok(o && o[2] > -3.5 && o[2] < 4, 'Ocean', 'enso-oni', 'The Oceanic Niño Index is within −3.5 to +4 °C', o ? `${o[0]} ${o[1]}: ${o[2]}` : 'missing');
+    ok(w && o && (now - new Date(w[0])) / 864e5 < 21, 'Ocean', 'enso-age', 'The latest weekly Niño reading is less than 3 weeks old', w ? w[0] : '', 'warn');
+    ok(!!E.status, 'Ocean', 'enso-status', "NOAA's ENSO alert status was read from its own page", E.status || 'not found', 'warn');
+    if (E.status && o) { const warmSaid = /El Niño/.test(E.status), coolSaid = /La Niña/.test(E.status), adv = /Advisory/.test(E.status);
+      ok(!adv || (warmSaid ? o[2] > 0 : coolSaid ? o[2] < 0 : true), 'Ocean', 'enso-agree', "NOAA's advisory and the index point the same way (warm with El Niño, cool with La Niña)", `${E.status}; ONI ${o[2]}`); }
+  }
+  const RAD = snap.radiation; if (RAD) {
+    ok(RAD.flux10 > 0 && RAD.flux10 < 1e6, 'Space', 'rad-range', 'Proton flux (≥10 MeV) is between 0 and 1,000,000 pfu', `${RAD.flux10} pfu`);
+    ok((now - new Date(RAD.time)) / 6e4 < 120, 'Space', 'rad-age', 'The latest proton reading is less than 2 hours old', RAD.time, 'warn');
+  }
+
   // ----- AI releases -----
   const ai = snap.aiModels; if (ai?.models) { const today = now.toISOString().slice(0, 10);
     const future = ai.models.filter(m => m[0] > today); ok(!future.length, 'Technology', 'ai-dates', 'No AI release is dated in the future', future.map(m => m[1]).join(', '));

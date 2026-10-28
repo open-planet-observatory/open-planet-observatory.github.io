@@ -286,6 +286,40 @@ function buildAi(){const e=clear('ai');if(!O.aiByCountry)return;O.aiByCountry().
  label:{...LABEL(d.n>1?String(d.n):''),pixelOffset:new C.Cartesian2(0,0),horizontalOrigin:C.HorizontalOrigin.CENTER,font:'700 11px Public Sans, sans-serif'},description:O.aiTip(d)}))}
 setInterval(buildMoon,60e3);
 
+
+// ----- weather & ocean overlays (NASA GIBS, public domain; 3D globe only) -----
+// Clouds: geostationary infrared (GOES-East, GOES-West, Himawari), cold cloud tops kept, warm ground made transparent.
+// Rain & snow: NASA IMERG, last half hour. Sea temperature vs normal: GHRSST MUR 0.25° daily anomaly (EPSG:4326 grid).
+const GIBS3857='https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/',GIBS4326='https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/';
+const gibs4326=(layer,set,maxLevel)=>new C.UrlTemplateImageryProvider({url:GIBS4326+layer+'/default/'+set+'/{z}/{y}/{x}.png',
+ // GIBS geographic tiles start from a 2x1 grid of 512 px tiles covering 576° x 288° (the extra width is empty)
+ tilingScheme:new C.GeographicTilingScheme({rectangle:C.Rectangle.fromDegrees(-180,-198,396,90),numberOfLevelZeroTilesX:2,numberOfLevelZeroTilesY:1}),
+ tileWidth:512,tileHeight:512,maximumLevel:maxLevel,credit:new C.Credit('NASA GIBS',false)});
+const gibs3857=(layer,level)=>new C.UrlTemplateImageryProvider({url:GIBS3857+layer+'/default/GoogleMapsCompatible_Level'+level+'/{z}/{y}/{x}.png',tilingScheme:merc,maximumLevel:level,credit:new C.Credit('NASA GIBS',false)});
+const WX={
+ 'wx-clouds':{name:'Clouds now (infrared)',color:'#e8eef5',legend:'https://gibs.earthdata.nasa.gov/legends/Clean_Longwave_Infrared_Window_Band_H.svg',
+  note:'Every 10 minutes from GOES-East, GOES-West and Himawari. Not covered: Europe, Africa and the Indian Ocean (their Meteosat satellites are not in NASA GIBS).',
+  make:()=>['GOES-East_ABI_Band13_Clean_Infrared','GOES-West_ABI_Band13_Clean_Infrared','Himawari_AHI_Band13_Clean_Infrared'].map(l=>{const L=new C.ImageryLayer(gibs3857(l,6),{alpha:.75});L.colorToAlpha=C.Color.BLACK;L.colorToAlphaThreshold=.38;return L})},
+ 'wx-rain':{name:'Rain & snow, last 30 min',color:'#4cc9f0',legend:'https://gibs.earthdata.nasa.gov/legends/GPM_Precipitation_Rate_H.svg',
+  note:'NASA IMERG satellite estimate, about 4–6 hours behind real time.',make:()=>[new C.ImageryLayer(gibs3857('IMERG_Precipitation_Rate_30min',6),{alpha:.85})]},
+ 'wx-sst':{name:'Sea temperature vs normal',color:'#ff6b6b',legend:'https://gibs.earthdata.nasa.gov/legends/GHRSST_Sea_Surface_Temperature_Anomalies_H.svg',
+  note:'Daily difference from the long-term average (GHRSST MUR, 0.25°). The warm tongue along the equator in the Pacific is El Niño.',make:()=>[new C.ImageryLayer(gibs4326('GHRSST_L4_MUR25_Sea_Surface_Temperature_Anomalies','2km',5),{alpha:.8})]},
+};
+const wxLayers={};
+Object.entries(WX).forEach(([id,w])=>{document.documentElement.style.setProperty('--c-'+id,w.color);O.addLayer({id,name:w.name,color:'--c-'+id,shape:'square',count:'3D only',on:false,group:'Weather & ocean'});
+ const b=document.getElementById('chip-'+id);if(b)b.title=w.note});
+function syncWx(){Object.entries(WX).forEach(([id,w])=>{const on=chipOn(id)&&active;if(on&&!wxLayers[id]){wxLayers[id]=w.make();wxLayers[id].forEach(L=>viewer.imageryLayers.add(L));if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer)}
+ if(wxLayers[id])wxLayers[id].forEach(L=>L.show=on);
+ let lg=document.getElementById('lg-'+id);const chip=document.getElementById('chip-'+id);
+ if(on&&!lg&&chip){lg=document.createElement('div');lg.id='lg-'+id;lg.className='wx-legend';lg.innerHTML=`<img src="${w.legend}" alt="Legend: ${esc(w.name)}" loading="lazy"><span>${esc(w.note)}</span>`;chip.after(lg)}
+ if(lg)lg.hidden=!on})}
+// the Niño 3.4 box (5°N–5°S, 170°W–120°W) where NOAA measures El Niño
+const n34=clear('nino34');n34.add({polyline:{positions:C.Cartesian3.fromDegreesArray([-170,-5,-120,-5,-120,5,-170,5,-170,-5]),width:2.5,clampToGround:true,material:new C.PolylineDashMaterialProperty({color:C.Color.fromCssColorString('#ffd166'),dashLength:14})},
+ position:deg(-145,5.6,0),label:{...LABEL('Niño 3.4 region'),horizontalOrigin:C.HorizontalOrigin.CENTER,pixelOffset:new C.Cartesian2(0,-10)},description:'<b>Niño 3.4 region</b>5°N–5°S, 170°W–120°W. NOAA declares El Niño or La Niña from the sea temperature here.'});
+DS.nino34.show=false;
+O.showNino34=(v=true)=>{DS.nino34.show=v;if(v){const c=document.getElementById('chip-wx-sst');if(c&&c.getAttribute('aria-pressed')!=='true')c.click();spin=false;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-140,0,1.6e7),duration:1.6})}};
+new MutationObserver(ms=>{if(ms.some(m=>/^chip-wx-/.test(m.target.id||'')))syncWx()}).observe(document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
+
 // ----- see-through Earth (earthquake depth) -----
 let xray=false;const DEPTH_X=25;
 function setXray(v){xray=v;globe.translucency.enabled=v;globe.translucency.frontFaceAlpha=v?.55:1;globe.translucency.backFaceAlpha=v?.1:1;buildSnap();document.getElementById('xrayBtn')?.setAttribute('aria-pressed',v)}
@@ -311,7 +345,7 @@ const zc=document.getElementById('zoomctl')||document.querySelector('.zoomctl');
  const Z={zin:()=>viewer.camera.zoomIn(viewer.camera.positionCartographic.height*.4),zout:()=>viewer.camera.zoomOut(viewer.camera.positionCartographic.height*.6),zreset:()=>{if(moonView){setMoonView(false);return}spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
  Object.entries(Z).forEach(([id,fn])=>{const b=document.getElementById(id);if(b)b.addEventListener('click',e=>{if(!active)return;e.stopImmediatePropagation();fn()},true)})}
 let active=true;
-function setActive(v){active=v;el.style.display=v?'block':'none';if(mapbox)mapbox.style.visibility=v?'hidden':'visible';if(!v&&origSpin)origSpin(spin);document.querySelectorAll('#viewseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===(v?'3d':O.mode())));if(v)viewer.resize();const zs=document.getElementById('zspin');if(zs)zs.hidden=false}
+function setActive(v){active=v;try{syncWx()}catch(e){}el.style.display=v?'block':'none';if(mapbox)mapbox.style.visibility=v?'hidden':'visible';if(!v&&origSpin)origSpin(spin);document.querySelectorAll('#viewseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===(v?'3d':O.mode())));if(v)viewer.resize();const zs=document.getElementById('zspin');if(zs)zs.hidden=false}
 const seg=document.getElementById('viewseg');
 if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textContent='3D';b.setAttribute('aria-pressed','true');b.onclick=()=>setActive(true);seg.insertBefore(b,seg.firstChild);
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}

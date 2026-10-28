@@ -51,6 +51,7 @@ const PANELS=[
  ['situations','Situations',['#situations']],
  ['disruptions','Disruptions',['#disruptions']],
  ['signals','Signals',['#readings','#signals']],
+ ['climate','Climate',['#climate']],
  ['watch','Watch',['#watch']],
  ['unexplained','Unexplained',['#unexplained']],
  ['economy','Economy',['#economy']],
