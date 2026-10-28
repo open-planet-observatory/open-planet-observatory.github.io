@@ -91,6 +91,35 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now 
     ok((now - new Date(RAD.time)) / 6e4 < 120, 'Space', 'rad-age', 'The latest proton reading is less than 2 hours old', RAD.time, 'warn');
   }
 
+  // ----- tropical storms (GDACS), ground radiation (Safecast), relief appeals (IFRC GO) -----
+  const ST = snap.storms; if (ST) {
+    const bad = (ST.items || []).filter(s => !s.pts.length || s.pts.some(p => !(Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 60)));
+    ok(!bad.length, 'Weather', 'storm-pos', 'Every tropical storm position is a real place within 60° of the equator', bad.map(s => s.name).join(', ') || `${(ST.items || []).length} storms`);
+    const jump = (ST.items || []).filter(s => s.pts.some((p, i) => i && Math.hypot(((p[0] - s.pts[i - 1][0] + 540) % 360) - 180, p[1] - s.pts[i - 1][1]) > 15));
+    ok(!jump.length, 'Weather', 'storm-track', 'No storm track jumps more than 15° between consecutive positions', jump.map(s => s.name).join(', '));
+    ok((ST.items || []).every(s => /^(Green|Orange|Red)$/.test(s.alert)), 'Weather', 'storm-alert', 'Every storm carries a GDACS alert level (Green, Orange or Red)');
+    const old = (ST.items || []).filter(s => (now - new Date(s.adv + 'Z')) / 36e5 > 36);
+    ok(!old.length, 'Weather', 'storm-age', 'Every storm on the map has a GDACS update less than 36 hours old', old.map(s => `${s.name} (${s.adv.slice(0, 16)} UTC)`).join(', '), 'warn');
+  }
+  const GR = snap.groundRad; if (GR) {
+    const cells = String(GR.cells || '').split(';').filter(Boolean).map(c => c.split(',').map(Number));
+    ok(cells.length && cells.every(c => c.length === 4 && c.every(Number.isFinite) && Math.abs(c[0]) < 180 && Math.abs(c[1]) < 90 && c[3] >= 1), 'Earth', 'grad-shape', 'Ground radiation is published only as 1° cells (position, median, sensor count): no device ids, owners or exact positions', `${cells.length} cells from ${GR.sensors} sensors`);
+    const out = cells.filter(c => c[2] < 5 || c[2] > 5000);
+    ok(!out.length, 'Earth', 'grad-range', 'Every cell median is between 5 and 5,000 counts per minute (a working LND 7318 tube)', out.map(c => `${c[0]},${c[1]}: ${c[2]}`).join('; '));
+    const all = cells.map(c => c[2]).sort((a, b) => a - b), mid = all[all.length >> 1];
+    ok(mid > 15 && mid < 80, 'Earth', 'grad-typical', 'The typical cell reads normal background (median of cells 15–80 CPM, about 0.05–0.25 µSv/h)', `${mid} CPM`);
+  }
+  const RL = snap.relief; if (RL) {
+    const A = RL.appeals || [];
+    ok(A.length >= 10 && A.length < 1000, 'People', 'relief-count', 'IFRC lists between 10 and 1,000 active appeals and DREF operations', `${A.length} active`);
+    const placed = A.filter(a => a[5] != null).length;
+    ok(placed / Math.max(1, A.length) > 0.85, 'People', 'relief-placed', 'At least 85% of appeals have an IFRC country position (the rest are regional or global)', `${placed} of ${A.length}`, 'warn');
+    const neg = A.filter(a => a[7] < 0 || a[8] < 0);
+    ok(!neg.length, 'People', 'relief-amounts', 'No appeal reports a negative amount requested or funded', neg.map(a => a[0]).join(', '));
+    const today = now.toISOString().slice(0, 10); const ended = A.filter(a => a[10] && a[10] < today);
+    ok(!ended.length, 'People', 'relief-ended', 'Appeals whose end date has passed are not shown as active', ended.map(a => a[0]).join(', '));
+  }
+
   // ----- AI releases -----
   const ai = snap.aiModels; if (ai?.models) { const today = now.toISOString().slice(0, 10);
     const future = ai.models.filter(m => m[0] > today); ok(!future.length, 'Technology', 'ai-dates', 'No AI release is dated in the future', future.map(m => m[1]).join(', '));
@@ -98,7 +127,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now 
 
   // ----- freshness: has each source updated as often as it should? -----
   const age = t => t ? (now - new Date(t)) / 6e4 : Infinity;
-  for (const [k, lim, label] of [['quakes', 60, 'Earthquakes'], ['fires', 240, 'Fires'], ['tle', 1440, 'Space stations'], ['aiModels', 2880, 'AI releases']]) {
+  for (const [k, lim, label] of [['quakes', 60, 'Earthquakes'], ['fires', 240, 'Fires'], ['tle', 1440, 'Space stations'], ['aiModels', 2880, 'AI releases'], ['storms', 120, 'Tropical storms'], ['groundRad', 120, 'Ground radiation'], ['relief', 1440, 'Relief appeals']]) {
     const a = age(meta.snap?.[k]); ok(a < lim, 'Freshness', 'fresh-' + k, `${label} updated within ${lim >= 120 ? lim / 60 + ' h' : lim + ' min'}`, isFinite(a) ? `${Math.round(a)} min ago` : 'never', 'warn'); }
   { const a = age(meta.orbits?.catalog); ok(a < 1440, 'Freshness', 'fresh-orbits', 'Satellite catalog updated within 24 h', isFinite(a) ? `${Math.round(a / 60)} h ago` : 'never', 'warn'); }
 

@@ -53,6 +53,16 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 - NASA GIBS (public domain) for the planet and yesterday's view; EOX Sentinel-2 cloudless 2016 (CC BY 4.0, Contains modified Copernicus Sentinel data 2016 & 2017) for close-up detail. Attribution is shown on the page. No paid or per-visitor imagery is used.
 
+## Storms, ground radiation and relief
+
+- Tropical storm tracks, forecast tracks and cones are GDACS's automatic estimates, shown with GDACS's own labels and a link to the official forecaster for each ocean basin. The page says plainly that they are not official forecasts.
+- Ground radiation comes from Safecast's volunteer sensors (CC0). The collector keeps only each reading's counts and position, then publishes 1° area medians with a sensor count. Device ids, owners, contact details and exact positions are dropped before anything is saved.
+- Relief appeals are IFRC GO's records, in IFRC's own names and Swiss-franc amounts. Sorting by unfunded amount is a sort, not a rating. The "How to help" list is the site's own guide, not an endorsement, and no group on it pays or is paid.
+
+## Forecast where you click
+
+- Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.
+
 ## Visitors
 
 - No account, no ad networks, no tracking scripts, no visitor logs kept by the project.
