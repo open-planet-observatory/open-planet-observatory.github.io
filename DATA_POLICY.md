@@ -64,6 +64,11 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - GRACE-FO ice-mass series and the monthly water map are NASA JPL's mascon solution, downloaded from NASA PO.DAAC with the project's own free NASA Earthdata Login (kept as repository secrets, never in the page). JPL's trend line is quoted in its own words; the site computes no trends. The water map is coloured by this site from JPL's values and shown over land only.
 - The geoid layer is NGA's EGM96 model (public domain), rendered once to an image.
 
+## Solar System view
+
+- Planets, the Moon and Jupiter's four large moons are computed in the visitor's browser (Astronomy Engine, MIT). Spacecraft positions are NASA JPL Horizons' own; comet orbits come from the JPL Small-Body Database and are propagated as simple two-body orbits (stated on the page); close approaches are JPL CNEOS's list. Collected once a day by the project; nothing is sent from the visitor except the page's own file requests (and one NASA image request for Earth's surface map).
+- Distances are always real. "Visible sizes" enlarges bodies smaller than a few pixels and moves moons out from enlarged planets, and the page says so; "True scale" shows everything at its real size. No invented stars or scenery: the background stays empty until real star catalogues are added.
+
 ## Forecast where you click
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.

@@ -22,6 +22,7 @@
     "linkedom": "0.18.5",
     "pngjs": "7.0.0",
     "satellite.js": "5.0.0",
+    "three": "0.185.1",
     "topojson-client": "3.1.0"
   }
 }

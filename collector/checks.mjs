@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -129,6 +129,17 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, m
     if (grace.grid) { const G = grace.grid; const months = (now - new Date(G.month + '-15')) / (864e5 * 30.4);
       ok(Math.abs(G.p02) < 1000 && Math.abs(G.p98) < 1000 && G.landCells > 50000, 'Earth', 'grace-grid', 'The water map covers the land and 96% of values are within ±10 m (ice-sheet edges legitimately reach several metres)', `${G.landCells} land cells, ${G.p02} to ${G.p98} ${G.units}`);
       ok(months < 10, 'Earth', 'grace-age', 'The latest GRACE-FO month is less than 10 months old (NASA releases months after the fact)', G.month, 'warn'); }
+  }
+
+  // ----- Solar System view (JPL Horizons, SBDB, CNEOS) -----
+  if (solar) {
+    const C = solar.craft || [], jd = now / 864e5 + 2440587.5;
+    ok(C.length >= 10, 'Space', 'solar-craft', 'At least 10 deep-space spacecraft have JPL positions', `${C.length} spacecraft${C.some(c => c.stale) ? ', some from the last good copy' : ''}`, 'warn');
+    const near = (c, t) => { const p = c.pts; let best = p[0]; for (const x of p) if (Math.abs(x[0] - t) < Math.abs(best[0] - t)) best = x; return best; };
+    const v1 = C.find(c => c.id === '-31'); if (v1) { const p = near(v1, jd), r = Math.hypot(p[1], p[2], p[3]); ok(r > 160 && r < 200, 'Space', 'solar-voyager1', 'Voyager 1 is 160–200 AU from the Sun (it gains about 3.6 AU a year)', `${r.toFixed(1)} AU`); }
+    const jw = C.find(c => c.id === '-170'); if (jw) { const p = near(jw, jd), r = Math.hypot(p[1], p[2], p[3]); ok(r > 0.98 && r < 1.03, 'Space', 'solar-jwst', 'JWST stays about 1.01 AU from the Sun (it sits beyond Earth at L2)', `${r.toFixed(3)} AU`); }
+    const badC = (solar.comets || []).filter(c => !(c.q > 0 && c.e >= 0 && c.e < 1.2 && c.i >= 0 && c.i <= 180)); ok(!badC.length, 'Space', 'solar-comets', 'Comet orbits are physical (perihelion above 0, eccentricity 0–1.2, inclination 0–180°)', `${(solar.comets || []).length} comets${badC.length ? '; bad: ' + badC.map(c => c.name).join(', ') : ''}`);
+    const badA = (solar.approaches || []).filter(a => !(a.dist > 0 && a.dist <= 0.05)); ok(!badA.length, 'Space', 'solar-approaches', 'Every listed asteroid approach is within 0.05 AU of Earth', `${(solar.approaches || []).length} in the next 60 days`);
   }
 
   // ----- AI releases -----

@@ -15,7 +15,7 @@ const VENDORS = [
 ];
 const await_hooks = await read('src/hooks.js'); const opsCss = await read('src/ops.css');
 const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', unexplained: 'UNEXP', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
-const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js'), clim = await read('src/climate.js'), haz = await read('src/hazards.js'), grav = await read('src/gravity.js');
+const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js'), clim = await read('src/climate.js'), haz = await read('src/hazards.js'), grav = await read('src/gravity.js'), uni = await read('src/universe.js');
 const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.png'))).toString('base64');
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');
 const CESIUM_VERSION = JSON.parse(await read('node_modules/cesium/package.json')).version;
@@ -25,7 +25,7 @@ s = s.replace('/*HOOKS_JS*/', () => (await_hooks));
 
 if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script src="data/${n}.js"></script>`);
-  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>`);
+  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>\n<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>\n<script type="module">${uni}</script>`);
   s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style>`);
   const head = `<!doctype html>
 <html lang="en"><head>
@@ -60,6 +60,9 @@ if (mode === 'hosted') {
   // CesiumJS (3D globe): the whole build folder, served from the site
   await fs.rm(path.join(out, 'vendor', 'cesium'), { recursive: true, force: true });
   await fs.cp(path.join(ROOT, 'node_modules', 'cesium', 'Build', 'Cesium'), path.join(out, 'vendor', 'cesium'), { recursive: true });
+  await fs.mkdir(path.join(out, 'vendor', 'three', 'addons', 'controls'), { recursive: true });
+  for (const f of ['three.module.min.js', 'three.core.min.js']) await fs.copyFile(path.join(ROOT, 'node_modules', 'three', 'build', f), path.join(out, 'vendor', 'three', f));
+  await fs.copyFile(path.join(ROOT, 'node_modules', 'three', 'examples', 'jsm', 'controls', 'OrbitControls.js'), path.join(out, 'vendor', 'three', 'addons', 'controls', 'OrbitControls.js'));
   await fs.mkdir(path.join(out, 'data'), { recursive: true });
   await fs.writeFile(path.join(out, 'index.html'), head + s + '\n</body></html>\n');
   for (const f of await fs.readdir(dataDir)) await fs.copyFile(path.join(dataDir, f), path.join(out, 'data', f));
