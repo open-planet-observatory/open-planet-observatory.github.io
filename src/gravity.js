@@ -13,7 +13,7 @@ O.addLayer({id:'geoid',name:'Gravity: geoid height',color:'--c-geoid',shape:'squ
 O.addLayer({id:'grace',name:'Water & ice change (GRACE-FO)',color:'--c-grace',shape:'square',count:'3D only',on:false,group:'Earth'});
 document.documentElement.style.setProperty('--c-geoid','#d6604d');document.documentElement.style.setProperty('--c-grace','#35978f');
 const LEG={geoid:{grad:'linear-gradient(90deg,#214ca0,#4393c3,#92c5de,#f7f7f7,#f4a582,#d6604d,#961428)',lo:'−100 m',mid:'0',hi:'+100 m',note:'How far the geoid (sea level under gravity alone) sits above or below the smooth ellipsoid. NGA EGM96 model.'},
- grace:{grad:'linear-gradient(90deg,#8c2d04,#cc7016,#f1ba68,#f5f5f0,#80cdc1,#35978f,#014663)',lo:'−40 cm',mid:'0',hi:'+40 cm',note:'Water and ice on land compared with JPL’s 2004–2009 average, as a depth of water. NASA JPL GRACE-FO.'}};
+ grace:{grad:'linear-gradient(90deg,#8c2d04,#cc7016,#f1ba68,#f5f5f0,#80cdc1,#35978f,#014663)',lo:'−40 cm or less',mid:'0',hi:'+40 cm or more',note:'Water and ice on land compared with JPL’s 2004–2009 average, as a depth of water. Melting ice-sheet edges go far past this scale (several metres). NASA JPL GRACE-FO.'}};
 const tip={geoid:'Where the sea would sit under gravity alone: up to about 85 m higher or 107 m lower than a smooth Earth.',grace:'Latest GRACE-FO month: water and ice gained (blue-green) or lost (brown) on land.'};
 Object.entries(tip).forEach(([k,v])=>{const b=document.getElementById('chip-'+k);if(b)b.title=v});
 const chipOn=id=>{const c=document.getElementById('chip-'+id);return !!c&&c.getAttribute('aria-pressed')==='true'};
