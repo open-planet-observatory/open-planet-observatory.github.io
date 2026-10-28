@@ -18,7 +18,9 @@
     "cesium": "^1.146.0",
     "d3": "7.9.0",
     "h3-js": "4.1.0",
+    "h5wasm": "0.10.3",
     "linkedom": "0.18.5",
+    "pngjs": "7.0.0",
     "satellite.js": "5.0.0",
     "topojson-client": "3.1.0"
   }

@@ -59,6 +59,11 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Ground radiation comes from Safecast's volunteer sensors (CC0). The collector keeps only each reading's counts and position, then publishes 1° area medians with a sensor count. Device ids, owners, contact details and exact positions are dropped before anything is saved.
 - Relief appeals are IFRC GO's records, in IFRC's own names and Swiss-franc amounts. Sorting by unfunded amount is a sort, not a rating. The "How to help" list is the site's own guide, not an endorsement, and no group on it pays or is paid.
 
+## Gravity, water and ice
+
+- GRACE-FO ice-mass series and the monthly water map are NASA JPL's mascon solution, downloaded from NASA PO.DAAC with the project's own free NASA Earthdata Login (kept as repository secrets, never in the page). JPL's trend line is quoted in its own words; the site computes no trends. The water map is coloured by this site from JPL's values and shown over land only.
+- The geoid layer is NGA's EGM96 model (public domain), rendered once to an image.
+
 ## Forecast where you click
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.
