@@ -247,7 +247,7 @@ async function openUniverse() {
   if (g && g.viewer) g.viewer.useDefaultRenderLoop = false; // pause the globe while the Solar System is open
   simMs = Date.now(); rate = 0; update();
   const e = S.byName.Earth; const ep = V().fromArray(e.pos); const sunDir = ep.clone().negate().normalize();
-  S.controls.target.copy(ep); S.camera.position.copy(ep).add(sunDir.clone().multiplyScalar(-1).add(new T.Vector3(0, 0, 0.35)).normalize().multiplyScalar(6.6e-4).applyAxisAngle(new T.Vector3(0, 0, 1), 0.9));
+  S.controls.target.copy(ep); S.camera.position.copy(ep).add(sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).multiplyScalar(6.6e-4)); // start on Earth's sunlit side
   S.focus = null; lastFrame = 0; requestAnimationFrame(frame);
   setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
   try { history.replaceState(null, '', '#view=solar'); } catch (x) { }
@@ -256,6 +256,6 @@ function closeUniverse() { if (!open) return; const e = S.byName.Earth; animateT
   setTimeout(() => { open = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
     const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }
     try { history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
-O && (O.openUniverse = openUniverse);
+O && (O.openUniverse = openUniverse, O.uniState = () => S);
 if (/view=solar/.test(location.hash)) setTimeout(openUniverse, 2500);
 addEventListener('keydown', e => { if (open && e.key === 'Escape') closeUniverse(); });
