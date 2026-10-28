@@ -26,7 +26,7 @@ const ui = {};
 // ---------- entry points ----------
 function addButtons() {
   const zc = document.querySelector('#ops-map .zoomctl') || document.querySelector('.zoomctl');
-  if (zc && !document.getElementById('zuni')) { const b = document.createElement('button'); b.id = 'zuni'; b.setAttribute('aria-label', 'Zoom out to the Solar System'); b.title = 'Zoom out to the Solar System'; b.textContent = '☉'; b.style.fontSize = '1.15rem'; b.onclick = () => openUniverse(); zc.appendChild(b); }
+  if (zc && !document.getElementById('zuni')) { const b = document.createElement('button'); b.id = 'zuni'; b.setAttribute('aria-label', 'Zoom out to the Solar System'); b.title = 'Fly out from Earth to the Solar System: planets, moons, spacecraft and comets, live'; b.className = 'zuni'; b.innerHTML = '<span class="zi">☉</span><span class="zt">Solar System</span>'; b.onclick = () => openUniverse(); zc.appendChild(b); }
   const after = document.getElementById('moonViewBtn');
   if (after && !document.getElementById('uniBtn')) { const b = document.createElement('button'); b.id = 'uniBtn'; b.className = after.className; b.textContent = 'Solar System view'; b.title = 'Zoom out from Earth to the planets, spacecraft and comets, live'; b.onclick = () => openUniverse(); after.after(b); }
 }
