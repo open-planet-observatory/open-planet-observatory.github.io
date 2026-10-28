@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -118,6 +118,17 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, meta = {}, now 
     ok(!neg.length, 'People', 'relief-amounts', 'No appeal reports a negative amount requested or funded', neg.map(a => a[0]).join(', '));
     const today = now.toISOString().slice(0, 10); const ended = A.filter(a => a[10] && a[10] < today);
     ok(!ended.length, 'People', 'relief-ended', 'Appeals whose end date has passed are not shown as active', ended.map(a => a[0]).join(', '));
+  }
+
+  // ----- GRACE-FO ice and water (NASA JPL) -----
+  if (!grace) add('Earth', 'grace', 'skip', 'GRACE-FO ice and water data collected', 'not collected yet (needs the NASA Earthdata Login secrets)');
+  else {
+    for (const k of ['greenland', 'antarctica']) { const S = grace[k]; if (!S) continue; const r = S.rows;
+      ok(r.length > 100 && r.every(x => Math.abs(x[1]) < 1e4 && x[0] > 2002 && x[0] < now.getUTCFullYear() + 1), 'Earth', 'grace-' + k, `${k[0].toUpperCase() + k.slice(1)} ice mass series has 100+ months, all within ±10,000 Gt and dated 2002 onward`, `${r.length} months, latest ${r[r.length - 1][0]}: ${r[r.length - 1][1]} Gt`); }
+    if (grace.greenland) { const r = grace.greenland.rows; ok(r[r.length - 1][1] < -2000, 'Earth', 'grace-greenland-loss', 'Greenland shows a net loss of more than 2,000 Gt since 2002 (it has lost roughly 270 Gt a year)', `${r[r.length - 1][1]} Gt`); }
+    if (grace.grid) { const G = grace.grid; const months = (now - new Date(G.month + '-15')) / (864e5 * 30.4);
+      ok(Math.abs(G.p02) < 200 && Math.abs(G.p98) < 200 && G.landCells > 50000, 'Earth', 'grace-grid', 'The water map covers the land and 96% of values are within ±200 cm', `${G.landCells} land cells, ${G.p02} to ${G.p98} ${G.units}`);
+      ok(months < 10, 'Earth', 'grace-age', 'The latest GRACE-FO month is less than 10 months old (NASA releases months after the fact)', G.month, 'warn'); }
   }
 
   // ----- AI releases -----

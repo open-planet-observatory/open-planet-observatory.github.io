@@ -15,7 +15,7 @@ const VENDORS = [
 ];
 const await_hooks = await read('src/hooks.js'); const opsCss = await read('src/ops.css');
 const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', unexplained: 'UNEXP', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
-const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js'), clim = await read('src/climate.js'), haz = await read('src/hazards.js');
+const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js'), clim = await read('src/climate.js'), haz = await read('src/hazards.js'), grav = await read('src/gravity.js');
 const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.png'))).toString('base64');
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');
 const CESIUM_VERSION = JSON.parse(await read('node_modules/cesium/package.json')).version;
@@ -25,7 +25,7 @@ s = s.replace('/*HOOKS_JS*/', () => (await_hooks));
 
 if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script src="data/${n}.js"></script>`);
-  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${live}</script>`);
+  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>`);
   s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style>`);
   const head = `<!doctype html>
 <html lang="en"><head>
@@ -56,6 +56,7 @@ if (mode === 'hosted') {
   }
   await fs.copyFile(path.join(ROOT, 'node_modules', 'astronomy-engine', 'astronomy.browser.min.js'), path.join(out, 'vendor', 'astronomy.browser.min.js'));
   await fs.cp(path.join(ROOT, 'src', 'brand'), path.join(out, 'brand'), { recursive: true });
+  await fs.cp(path.join(ROOT, 'src', 'assets'), path.join(out, 'assets'), { recursive: true });
   // CesiumJS (3D globe): the whole build folder, served from the site
   await fs.rm(path.join(out, 'vendor', 'cesium'), { recursive: true, force: true });
   await fs.cp(path.join(ROOT, 'node_modules', 'cesium', 'Build', 'Cesium'), path.join(out, 'vendor', 'cesium'), { recursive: true });
@@ -74,7 +75,7 @@ if (mode === 'hosted') {
   for (const n of Object.keys(NAMES)) { let t = '{}'; try { t = await fs.readFile(path.join(dataDir, n + '.json'), 'utf8'); } catch {} parts[n] = t.replace(/</g, '\\u003c'); }
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script>window.${NAMES[n]}=${parts[n]};</script>`);
   // The prototype loads Cesium from a CDN (too large to inline); imagery falls back to the offline map if the sandbox blocks NASA tiles.
-  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script>${astro}</script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/';</script>\n<style>${widgetsCss}</style>\n<script src="https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>`);
+  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script>${astro}</script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/';</script>\n<style>${widgetsCss}</style>\n<script src="https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>`);
   s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style><script>window.OBS_LOGO='data:image/png;base64,${logoB64}'</script>`);
   // Inline the libraries so the prototype does not depend on CDNs either.
   for (const [cdn, mod] of VENDORS) {

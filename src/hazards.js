@@ -1,4 +1,5 @@
 // ---------- Storms, ground radiation, relief appeals, and a forecast wherever you click ----------
+// Markers sit 3 km up and are depth-tested, so storms on the far side of the globe stay hidden.
 // Storm tracks and cones: GDACS (automatic estimates, not official forecasts; the page says so and links the official
 // agency for each ocean basin). Ground radiation: Safecast sensors, published only as 1° cell medians. Relief: IFRC GO
 // appeals in IFRC's own words and numbers. Forecast: Open-Meteo, fetched by the visitor's browser for the clicked point only.
@@ -37,31 +38,35 @@ let G3=null;
 function ds(id){const C=window.Cesium,{viewer,DS}=G3;if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);DS[id]=d}DS[id].show=chipOn(id);DS[id].entities.removeAll();return DS[id].entities}
 function drawStorms(){if(!G3)return;const C=window.Cesium,E=ds('storm');const st=S().storms;const items=(st&&st.items)||[];
  const col=(h,a=1)=>C.Color.fromCssColorString(h).withAlpha(a);
+ const up=pts=>C.Cartesian3.fromDegreesArrayHeights(pts.flatMap(([x,y])=>[x,y,2500]));
  items.forEach(s=>{const short=s.name.replace(/^Tropical Cyclone\s+/,'');
-  if(s.cone&&s.cone.length>3)E.add({polygon:{hierarchy:C.Cartesian3.fromDegreesArray(s.cone.flat()),material:col('#ffffff',.13),height:0},
+  if(s.cone&&s.cone.length>3)E.add({polygon:{hierarchy:C.Cartesian3.fromDegreesArray(s.cone.flat()),material:col('#ffffff',.13),height:1500},
    description:`<b>${esc(short)}: forecast uncertainty cone</b>Where GDACS expects the centre to be, with its uncertainty. Automatic estimate, not an official forecast.<br><span style="opacity:.75">GDACS</span>`});
-  if(s.cone&&s.cone.length>3)E.add({polyline:{positions:C.Cartesian3.fromDegreesArray(s.cone.concat([s.cone[0]]).flat()),width:1.2,material:col('#ffffff',.55),arcType:C.ArcType.GEODESIC}});
-  s.seg.forEach(g=>{const [nm,c]=catOf(g[4]);E.add({polyline:{positions:C.Cartesian3.fromDegreesArray([g[0],g[1],g[2],g[3]]),width:g[5]?2.5:3.5,arcType:C.ArcType.GEODESIC,
+  if(s.cone&&s.cone.length>3)E.add({polyline:{positions:up(s.cone.concat([s.cone[0]])),width:1.2,material:col('#ffffff',.55),arcType:C.ArcType.GEODESIC}});
+  s.seg.forEach(g=>{const [nm,c]=catOf(g[4]);E.add({polyline:{positions:up([[g[0],g[1]],[g[2],g[3]]]),width:g[5]?2.5:3.5,arcType:C.ArcType.GEODESIC,
    material:g[5]?new C.PolylineDashMaterialProperty({color:col(c,.95),dashLength:10}):col(c,.95)},description:`<b>${esc(short)}</b>${esc(nm)} (${esc(g[4])})${g[5]?' · forecast':' · observed'}<br><span style="opacity:.75">GDACS</span>`})});
   const now=lastObs(s),t0=s.adv.slice(0,16);
-  s.pts.forEach(p=>{const fc=p[3]>t0,isNow=p===now;E.add({position:C.Cartesian3.fromDegrees(p[0],p[1],0),
-   point:{pixelSize:isNow?13:fc?5:4,color:isNow?col(ALERT[s.alert]||'#ffd166'):col('#ffffff',fc?.9:.6),outlineColor:col('#0b1220',.9),outlineWidth:isNow?2:1,disableDepthTestDistance:Number.POSITIVE_INFINITY},
-   label:isNow?{text:short,font:'700 12px Public Sans, sans-serif',fillColor:C.Color.WHITE,outlineColor:col('#0b1220'),outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,disableDepthTestDistance:Number.POSITIVE_INFINITY}:undefined,
+  s.pts.forEach(p=>{const fc=p[3]>t0,isNow=p===now;E.add({position:C.Cartesian3.fromDegrees(p[0],p[1],3000),
+   point:{pixelSize:isNow?13:fc?5:4,color:isNow?col(ALERT[s.alert]||'#ffd166'):col('#ffffff',fc?.9:.6),outlineColor:col('#0b1220',.9),outlineWidth:isNow?2:1,disableDepthTestDistance:0},
+   label:isNow?{text:short,font:'700 12px Public Sans, sans-serif',fillColor:C.Color.WHITE,outlineColor:col('#0b1220'),outlineWidth:3,style:C.LabelStyle.FILL_AND_OUTLINE,pixelOffset:new C.Cartesian2(10,0),horizontalOrigin:C.HorizontalOrigin.LEFT,disableDepthTestDistance:0}:undefined,
    description:`<b>${esc(short)} · ${esc(p[2])}</b>${fc?'Forecast position':'Observed position'}${isNow?' (latest)':''}<br>${esc(s.sev)}<br><span style="opacity:.75">GDACS ${esc(s.alert)} alert</span>`})})});
  setCount('storm',items.length?String(items.length):'none')}
 const usvh=cpm=>cpm/((S().groundRad||{}).cpmPerUsvh||334);
 const gradCol=v=>v<.1?'#80ed99':v<.2?'#c7f464':v<.5?'#ffd166':v<1?'#ff9f43':'#ff5d5d';
 function gradCells(){return String((S().groundRad||{}).cells||'').split(';').filter(Boolean).map(x=>{const [lon,lat,cpm,n]=x.split(',').map(Number);return {lon,lat,cpm,n}})}
 function drawGrad(){if(!G3)return;const C=window.Cesium,E=ds('grad');const cells=gradCells();
- cells.forEach(c=>{const v=usvh(c.cpm);E.add({position:C.Cartesian3.fromDegrees(c.lon,c.lat,0),point:{pixelSize:6+3*Math.sqrt(c.n),color:C.Color.fromCssColorString(gradCol(v)).withAlpha(.9),outlineColor:C.Color.fromCssColorString('#0b1220').withAlpha(.8),outlineWidth:1,disableDepthTestDistance:Number.POSITIVE_INFINITY},
+ cells.forEach(c=>{const v=usvh(c.cpm);E.add({position:C.Cartesian3.fromDegrees(c.lon,c.lat,3000),point:{pixelSize:6+3*Math.sqrt(c.n),color:C.Color.fromCssColorString(gradCol(v)).withAlpha(.9),outlineColor:C.Color.fromCssColorString('#0b1220').withAlpha(.8),outlineWidth:1,disableDepthTestDistance:0},
   description:`<b>About ${v.toFixed(2)} µSv/h</b>Median of ${c.n} Safecast sensor${c.n>1?'s':''} in this 1° area, past 24 h (${fmtN(c.cpm)} counts per minute)<br><span style="opacity:.75">Safecast, CC0 · placed at the area centre, not the sensor</span>`})});
  setCount('grad',cells.length?cells.length+' areas':'')}
 function reliefByCountry(){const by={};((S().relief||{}).appeals||[]).forEach(a=>{if(a[5]==null)return;const k=a[4]||a[3];(by[k]=by[k]||{name:a[3],lon:a[5],lat:a[6],req:0,fund:0,list:[]});by[k].req+=a[7];by[k].fund+=a[8];by[k].list.push(a)});return Object.values(by)}
 function drawRelief(){if(!G3)return;const C=window.Cesium,E=ds('relief');const R=reliefByCountry();const mx=Math.max(1,...R.map(r=>r.req));
- R.forEach(r=>E.add({position:C.Cartesian3.fromDegrees(r.lon,r.lat,0),point:{pixelSize:7+16*Math.sqrt(r.req/mx),color:C.Color.fromCssColorString('#e63946').withAlpha(.85),outlineColor:C.Color.WHITE.withAlpha(.9),outlineWidth:1.5,disableDepthTestDistance:Number.POSITIVE_INFINITY},
+ R.forEach(r=>E.add({position:C.Cartesian3.fromDegrees(r.lon,r.lat,3000),point:{pixelSize:7+16*Math.sqrt(r.req/mx),color:C.Color.fromCssColorString('#e63946').withAlpha(.85),outlineColor:C.Color.WHITE.withAlpha(.9),outlineWidth:1.5,disableDepthTestDistance:0},
   description:`<b>${esc(r.name)}: ${r.list.length} active IFRC operation${r.list.length>1?'s':''}</b>${r.list.slice(0,4).map(a=>'· '+esc(a[0])+' ('+esc(a[1])+')').join('<br>')}${r.list.length>4?'<br>· and '+(r.list.length-4)+' more':''}<br>CHF ${chf(r.fund)} funded of ${chf(r.req)} requested<br><span style="opacity:.75">IFRC GO · placed at IFRC's country position</span>`}));
  setCount('relief',R.length?String(((S().relief||{}).appeals||[]).length):'')}
-function draw3d(){try{drawStorms()}catch(e){console.warn(e)}try{drawGrad()}catch(e){console.warn(e)}try{drawRelief()}catch(e){console.warn(e)}}
+// Markers are drawn on top of everything, so hide the ones on the far side of the Earth ourselves.
+function cullFar(){if(!G3)return;const C=window.Cesium,{viewer,DS}=G3;const occ=new C.EllipsoidalOccluder(C.Ellipsoid.WGS84,viewer.camera.positionWC);const t=viewer.clock.currentTime;
+ ['storm','grad','relief'].forEach(id=>{const d=DS[id];if(!d)return;d.entities.values.forEach(e=>{if(!e.position)return;const p=e.position.getValue(t);if(p)e.show=occ.isPointVisible(p)})})}
+function draw3d(){try{drawStorms()}catch(e){console.warn(e)}try{drawGrad()}catch(e){console.warn(e)}try{drawRelief()}catch(e){console.warn(e)}try{cullFar()}catch(e){}}
 
 // ----- forecast where you click (Open-Meteo, browser-side) -----
 const WMO={0:'Clear sky',1:'Mainly clear',2:'Partly cloudy',3:'Overcast',45:'Fog',48:'Depositing rime fog',51:'Light drizzle',53:'Moderate drizzle',55:'Dense drizzle',56:'Light freezing drizzle',57:'Dense freezing drizzle',61:'Slight rain',63:'Moderate rain',65:'Heavy rain',66:'Light freezing rain',67:'Heavy freezing rain',71:'Slight snowfall',73:'Moderate snowfall',75:'Heavy snowfall',77:'Snow grains',80:'Slight rain showers',81:'Moderate rain showers',82:'Violent rain showers',85:'Slight snow showers',86:'Heavy snow showers',95:'Thunderstorm',96:'Thunderstorm with slight hail',99:'Thunderstorm with heavy hail'};
@@ -87,6 +92,7 @@ async function forecast(lon,lat){if(!wxCard)return;wxLast=[lon,lat];if(wxCtl)wxC
 O.forecastAt=forecast;
 function hook3d(){const g=window.__obs3d;if(!g||!window.Cesium)return false;G3=g;const C=window.Cesium,viewer=g.viewer;
  const host=document.getElementById('satCard')?.parentElement||viewer.container;wxCard=document.createElement('div');wxCard.id='wxCard';wxCard.className='sat-card wx-card';wxCard.hidden=true;host.appendChild(wxCard);
+ viewer.camera.changed.addEventListener(()=>{try{cullFar()}catch(e){}});
  const h=new C.ScreenSpaceEventHandler(viewer.scene.canvas);
  h.setInputAction(m=>{if(!chipOn('wx-fc'))return;const picked=viewer.scene.drillPick(m.position,4);if(picked.some(p=>p.id&&p.id.sat!=null))return;
   const cart=viewer.camera.pickEllipsoid(m.position,viewer.scene.globe.ellipsoid);if(!cart)return;const cg=C.Cartographic.fromCartesian(cart);

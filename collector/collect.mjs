@@ -16,6 +16,7 @@ import { DOMParser } from 'linkedom';
 import { GROUPS, EVERY } from './snap.mjs';
 import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
 import { runChecks } from './checks.mjs';
+import { collectGrace } from './grace.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -187,8 +188,17 @@ const steps = await runSteps(meta);
 const orb = await orbits(meta); log('orbits', orb.status, (orb.out.sats || []).length + ' objects');
 await fs.mkdir(OUT, { recursive: true });
 if (orb.out.sats) await fs.writeFile(path.join(OUT, 'orbits.json'), JSON.stringify(orb.out));
+// GRACE-FO water and ice (collector/grace.mjs): data/grace.json + data/grace.png, loaded only when asked for.
+let grace = { json: null, png: null, status: 'not run' };
+{ let pj = {}, pp = null;
+  if (PREV) { try { const r = await fetch(`${PREV}/data/grace.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) pj = await r.json(); } catch { }
+    if (pj.grid) { try { const r = await fetch(`${PREV}/data/grace.png?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) pp = Buffer.from(await r.arrayBuffer()); } catch { } } }
+  try { grace = await collectGrace({ prev: pj, prevPng: pp, now }); } catch (e) { grace = { json: pj.grid ? pj : null, png: pp, status: 'error: ' + e.message.slice(0, 160) }; }
+  if (grace.json) await fs.writeFile(path.join(OUT, 'grace.json'), JSON.stringify(grace.json));
+  if (grace.png) await fs.writeFile(path.join(OUT, 'grace.png'), grace.png);
+  log('grace', grace.status); }
 // Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
-let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
@@ -199,7 +209,7 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;

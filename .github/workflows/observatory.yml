@@ -41,6 +41,9 @@ jobs:
           OPENSKY_CLIENT_ID: ${{ secrets.OPENSKY_CLIENT_ID }}
           OPENSKY_CLIENT_SECRET: ${{ secrets.OPENSKY_CLIENT_SECRET }}
           CLOUDFLARE_RADAR_TOKEN: ${{ secrets.CLOUDFLARE_RADAR_TOKEN }}
+          # NASA Earthdata Login (free) for GRACE-FO ice and water data from PO.DAAC.
+          EARTHDATA_USERNAME: ${{ secrets.EARTHDATA_USERNAME }}
+          EARTHDATA_PASSWORD: ${{ secrets.EARTHDATA_PASSWORD }}
           # The live site, so a failed source keeps its last good data.
           PREV_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: node collector/collect.mjs dist/data
