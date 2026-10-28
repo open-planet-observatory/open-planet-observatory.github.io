@@ -132,6 +132,41 @@ export const GROUPS = {
       scales: { R: +(cur.R?.Scale || 0), S: +(cur.S?.Scale || 0), G: +(cur.G?.Scale || 0) } };
   },
 
+  // El Niño / La Niña from NOAA's Climate Prediction Center (public domain): weekly Niño-region sea temperature
+  // anomalies, the 3-month Oceanic Niño Index (ONI) back to 1950, and the ENSO Alert System status in CPC's own words.
+  async enso() {
+    const wk = (await T('https://www.cpc.ncep.noaa.gov/data/indices/wksst9120.for')).split('\n')
+      .map(l => l.match(/^\s*(\d{2}[A-Z]{3}\d{4})\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)\s+([-\d.]+)/)).filter(Boolean)
+      .map(m => [new Date(m[1].replace(/(\d{2})([A-Z]{3})(\d{4})/, '$1 $2 $3') + ' UTC').toISOString().slice(0, 10), +m[3], +m[5], +m[7], +m[9]]);
+    if (wk.length < 20) throw new Error('weekly Niño file unreadable');
+    const oni = (await T('https://www.cpc.ncep.noaa.gov/data/indices/oni.ascii.txt')).split('\n')
+      .map(l => l.trim().split(/\s+/)).filter(r => r.length === 4 && /^\d{4}$/.test(r[1])).map(r => [r[0], +r[1], +r[3]]);
+    if (oni.length < 100) throw new Error('ONI file unreadable');
+    // Peaks of past events, read from the ONI file itself (no outside list): each run of ≥5 seasons at or past ±0.5.
+    const events = []; let run = [];
+    const close = () => { if (run.length >= 5) { const warm = run[0][2] > 0; const pk = run.reduce((a, b) => (warm ? b[2] > a[2] : b[2] < a[2]) ? b : a); events.push([warm ? 'El Niño' : 'La Niña', run[0][1], run[run.length - 1][1], pk[0] + ' ' + pk[1], pk[2]]); } run = []; };
+    for (const r of oni) { if (Math.abs(r[2]) >= 0.5 && (!run.length || Math.sign(run[0][2]) === Math.sign(r[2]))) run.push(r); else { close(); if (Math.abs(r[2]) >= 0.5) run.push(r); } }
+    const ongoing = run.length ? run.slice() : null; close();
+    let status = '', synopsis = '', issued = '';
+    try { const h = (await T('https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml')).replace(/<[^>]+>/g, ' ').replace(/&nbsp;/g, ' ').replace(/&ntilde;/g, 'ñ').replace(/&Ntilde;/g, 'Ñ').replace(/&deg;/g, '°').replace(/&#(\d+);/g, (m, n) => String.fromCharCode(+n)).replace(/&amp;/g, '&').replace(/\s+/g, ' ');
+      status = (h.match(/ENSO Alert System Status:\s*([^.]+?)(?:\s{2}|Synopsis|$)/i) || [])[1]?.trim() || '';
+      synopsis = (h.match(/Synopsis:\s*([^]*?\.)\s/i) || [])[1]?.trim() || '';
+      issued = (h.match(/issued by\s+CLIMATE PREDICTION CENTER[^]*?(\d{1,2}\s+\w+\s+\d{4})/i) || h.match(/(\d{1,2}\s+(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+20\d{2})/) || [])[1] || ''; } catch { }
+    return { enso: { weekly: wk.slice(-26), oni: oni.slice(-36), strongest: events.filter(e => Math.abs(e[4]) >= 1.5).sort((a, b) => Math.abs(b[4]) - Math.abs(a[4])).slice(0, 8),
+      ongoing: ongoing ? [ongoing[0][0] + ' ' + ongoing[0][1], ongoing.length, Math.max(...ongoing.map(r => Math.abs(r[2])))] : null, status, synopsis, issued } };
+  },
+
+  // Space radiation: GOES proton flux (NOAA SWPC, public domain). ≥10 MeV protons define NOAA's S-scale
+  // (S1 at 10 pfu, S2 at 100, S3 at 1,000, S4 at 10,000, S5 at 100,000).
+  async radiation() {
+    const d = await J('https://services.swpc.noaa.gov/json/goes/primary/integral-protons-1-day.json');
+    const p10 = d.filter(x => x.energy === '>=10 MeV' && x.flux > 0);
+    if (!p10.length) throw new Error('no >=10 MeV proton data');
+    const last = p10[p10.length - 1]; const max = p10.reduce((a, b) => b.flux > a.flux ? b : a);
+    const hourly = []; for (let i = 0; i < p10.length; i += 12) hourly.push([p10[i].time_tag.slice(0, 16), +p10[i].flux.toPrecision(3)]);
+    return { radiation: { time: last.time_tag.slice(0, 16) + 'Z', flux10: +last.flux.toPrecision(3), max24: +max.flux.toPrecision(3), max24at: max.time_tag.slice(0, 16) + 'Z', satellite: 'GOES-' + last.satellite, hourly } };
+  },
+
   // Aircraft from The OpenSky Network, aggregated to 10-degree cells. Individual aircraft are never kept.
   // OpenSky needs an API client for reliable access: set OPENSKY_CLIENT_ID / OPENSKY_CLIENT_SECRET as repo secrets.
   async air() {
@@ -171,4 +206,4 @@ export const GROUPS = {
 
 // How often each group is refreshed, in minutes. The workflow runs every 10 minutes.
 export const EVERY = { quakes: 10, alerts: 10, eonet: 30, air: process.env.OPENSKY_CLIENT_ID ? 10 : 30, // anonymous OpenSky access has a small daily allowance
-  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360 };
+  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10 };

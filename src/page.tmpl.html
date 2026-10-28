@@ -477,6 +477,17 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
 </section>
 
 
+<section aria-labelledby="h-climate" id="climate">
+  <div class="sec-head">
+    <div class="eyebrow">Climate</div>
+    <h2 id="h-climate">What's unusual right now, and the El Niño behind much of it</h2>
+    <p class="muted">Only departures that the source itself measures against its own baseline: NOAA's El Niño index, NOAA's temperature ranking, NSIDC's sea-ice average, NOAA's space-weather scales. Nothing here is scored or predicted by this site.</p>
+  </div>
+  <div id="unusualHost"></div>
+  <div id="ensoHost"></div>
+  <div id="ensoLearn"></div>
+</section>
+
 <section aria-labelledby="h-econ" id="economy">
   <div class="sec-head">
     <div class="eyebrow">Economy</div>
@@ -719,6 +730,11 @@ window.LIBRARY=[
 ["Weather & climate","NOAA National Hurricane Center","Atlantic and Pacific storm tracks and cones","Every 6 h","go","Public domain","https://www.nhc.noaa.gov/","link"],
 ["Weather & climate","Copernicus Climate Data Store","Climate reanalysis, temperatures since 1940","Daily","go","Free with attribution","https://cds.climate.copernicus.eu/","link"],
 ["Weather & climate","OpenAQ","Air quality readings from 100+ countries","Hourly","go","Open data, mostly CC BY","https://openaq.org/","link"],
+["Weather & climate","NOAA Climate Prediction Center: ENSO","El Niño / La Niña status in NOAA's words, weekly Niño-region sea temperatures and the Oceanic Niño Index since 1950","Weekly / monthly","go","Public domain","https://www.cpc.ncep.noaa.gov/products/analysis_monitoring/enso_advisory/ensodisc.shtml","panel"],
+["Weather & climate","NASA GIBS: GOES and Himawari infrared","Cloud tops every 10 minutes from three geostationary satellites (Americas, Pacific, Asia)","Every 10 minutes","go","Public domain (NASA/NOAA)","https://nasa-gibs.github.io/gibs-api-docs/","map"],
+["Weather & climate","NASA GIBS: IMERG precipitation","Rain and snow rate from satellites, worldwide, half-hourly","Half-hourly, ~5 h delay","go","Public domain (NASA)","https://gpm.nasa.gov/data/imerg","map"],
+["Weather & climate","NASA GIBS: GHRSST MUR sea temperature anomaly","Daily sea surface temperature compared with the long-term average","Daily","go","Public domain (NASA JPL)","https://podaac.jpl.nasa.gov/MEaSUREs-MUR","map"],
+["Space","NOAA SWPC: GOES proton flux","High-energy protons from the Sun; the basis of NOAA's solar radiation storm scale","Every 5 minutes","go","Public domain","https://www.swpc.noaa.gov/products/goes-proton-flux","panel"],
 ["Space","Astronomy Engine","Moon phase, distance, overhead point, quarters and eclipses, computed in your browser","Live","go","MIT licence","https://github.com/cosinekitty/astronomy","map"],
 ["Space","EOX Sentinel-2 cloudless 2016","10 m cloud-free imagery the 3D globe sharpens to when you zoom in (Contains modified Copernicus Sentinel data 2016 & 2017)","Fixed mosaic","go","CC BY 4.0","https://s2maps.eu/","map"],
 ["Space","CelesTrak","Orbital elements for every tracked satellite","Every few hours","go","Free","https://celestrak.org/","map"],

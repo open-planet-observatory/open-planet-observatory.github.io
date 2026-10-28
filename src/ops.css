@@ -174,3 +174,26 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .checks-card .chk.skip .ic{background:var(--glass-2);color:var(--ink-3)}
 .checks-card .chk.fail .v{color:var(--sev-red,#e5484d);font-weight:700}
 .checks-card .sg-row .t{white-space:normal;overflow:visible}
+/* weather legends in the rail */
+#ops-rail .wx-legend{display:flex;flex-direction:column;gap:4px;padding:4px 6px 8px;font-size:.7rem;color:var(--ink-3);line-height:1.35}
+#ops-rail .wx-legend[hidden]{display:none}
+#ops-rail .wx-legend img{width:100%;height:auto;background:#fff;border-radius:4px;padding:2px}
+/* climate panel */
+.unusual{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:10px;margin-bottom:14px}
+.dis.un .un-tag{display:inline-block;font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--owl-yellow,#f2c43c);margin-bottom:2px}
+.enso-card .enso-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:6px}
+.enso-badge{font-weight:800;font-size:.86rem;border-radius:999px;padding:3px 11px;background:var(--glass-2);border:1px solid var(--glass-line)}
+.enso-badge.warm{background:color-mix(in srgb,#e5484d 22%,transparent);border-color:#e5484d}
+.enso-badge.cool{background:color-mix(in srgb,#2a78d6 22%,transparent);border-color:#2a78d6}
+.enso-q{margin:6px 0 10px;padding:8px 12px;border-left:3px solid var(--owl-yellow,#f2c43c);font-size:.88rem;background:var(--glass-2);border-radius:0 8px 8px 0}
+.enso-q cite{display:block;font-size:.72rem;color:var(--ink-3);font-style:normal;margin-top:4px}
+.enso-nums{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin:6px 0}
+.enso-nums div{display:flex;flex-direction:column;gap:2px}
+.enso-nums b{font-size:1.25rem;font-variant-numeric:tabular-nums}
+.enso-nums span{font-size:.72rem;color:var(--ink-3);line-height:1.3}
+.enso-card tr.enso-now td{font-weight:700;color:#e5484d}
+.learn h4{font-size:.9rem;margin:12px 0 4px}
+.learn-tabs{display:flex;gap:6px;margin:8px 0}
+.learn-tabs button{border:1px solid var(--glass-line);background:var(--glass-2);border-radius:999px;padding:4px 12px;cursor:pointer;font-weight:700;font-size:.8rem;color:var(--ink-2)}
+.learn-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.learn-fig{color:var(--ink-2);max-width:520px}
