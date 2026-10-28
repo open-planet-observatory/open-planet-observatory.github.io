@@ -278,3 +278,12 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-note{position:absolute;left:14px;top:52px;max-width:520px;font-size:.74rem;color:#aab4c3;margin:0}
 @media (max-width:640px){.uni-note{display:none}.uni-ctl{bottom:10px;left:10px;right:10px;max-width:none}.uni-scale{top:auto;bottom:196px;right:12px}#uni .uni-card{top:80px;bottom:auto;left:10px;right:10px;width:auto;max-height:38%}#uni .uni-neo{top:80px;max-height:50%}}
 #uni .seg button[aria-pressed="true"]{color:#0b1220;background:#e9eef5}
+/* quick hover tips, Solar System entry */
+#qtip{position:fixed;z-index:3000;pointer-events:none;background:rgba(12,17,27,.96);color:#eef2f7;border:1px solid rgba(255,255,255,.16);border-radius:8px;padding:6px 9px;font-size:.78rem;line-height:1.35;box-shadow:0 6px 20px rgba(0,0,0,.35)}
+#qtip[hidden]{display:none}
+.zoomctl .zuni{width:auto!important;padding:0 10px;display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;white-space:nowrap;border-color:var(--owl-yellow,#f2c43c)!important}
+.zoomctl .zuni .zi{font-size:1.15rem;line-height:1}
+@media (max-width:860px){.zoomctl .zuni .zt{display:none}.zoomctl .zuni{padding:0;justify-content:center;width:32px!important}}
+.hint-bubble{position:fixed;z-index:2500;background:#f2c43c;color:#14161b;border-radius:10px;padding:8px 30px 8px 12px;font-size:.82rem;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:260px}
+.hint-bubble::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#f2c43c}
+.hint-bubble button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:1rem;cursor:pointer;color:#14161b}
