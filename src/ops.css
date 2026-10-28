@@ -197,3 +197,28 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .learn-tabs button{border:1px solid var(--glass-line);background:var(--glass-2);border-radius:999px;padding:4px 12px;cursor:pointer;font-weight:700;font-size:.8rem;color:var(--ink-2)}
 .learn-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
 .learn-fig{color:var(--ink-2);max-width:520px}
+/* forecast card, storms, relief */
+#ops-map .wx-card{right:auto;left:calc(var(--rail-w) + 24px);bottom:140px;width:min(360px,calc(100% - 28px));max-height:calc(100% - 200px);overflow:auto}
+html.ops.rail-closed #ops-map .wx-card{left:14px}
+html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24px)}
+@media (max-width:860px){#ops-map .wx-card,html.ops:not(.drawer-closed) #ops-map .wx-card{left:14px;right:14px;width:auto;bottom:120px;max-height:55%}html.ops:not(.drawer-closed) #ops-map .sat-card{right:14px}}
+.wx-card .wx-now{display:flex;align-items:baseline;gap:10px;margin:4px 0 6px}
+.wx-card .wx-now b{font-size:1.6rem;font-variant-numeric:tabular-nums}
+.wx-card .wx-now span{color:var(--ink-2);font-size:.82rem}
+.wx-card .wx-days{width:100%;border-collapse:collapse;font-size:.76rem}
+.wx-card .wx-days th{text-align:left;font-weight:700;padding:3px 6px 3px 0;white-space:nowrap}
+.wx-card .wx-days td{padding:3px 4px;border-top:1px solid var(--glass-line);color:var(--ink-2)}
+.wx-card .wx-days tr:first-child td{border-top:0}
+.wx-card .wx-days td.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.st-key{display:inline-flex;align-items:center;gap:4px;margin-right:6px}
+.st-key::before{content:"";width:14px;height:3px;border-radius:2px;background:var(--k)}
+.al-dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.relief-list{display:flex;flex-direction:column;gap:8px;margin:6px 0 10px}
+.rl-row{display:grid;grid-template-columns:1fr;gap:3px;padding:8px 0;border-top:1px solid var(--line,rgba(127,127,127,.2))}
+.rl-t a{font-weight:700}
+.rl-t .sub{display:block;font-size:.74rem;color:var(--ink-3)}
+.rl-bar{height:6px;border-radius:3px;background:rgba(127,127,127,.25);overflow:hidden}
+.rl-bar i{display:block;height:100%;background:#e63946}
+.rl-n{font-size:.74rem;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.help-list{margin:4px 0;padding-left:18px;font-size:.84rem;line-height:1.5}
+.help-list .muted{font-size:.76rem}

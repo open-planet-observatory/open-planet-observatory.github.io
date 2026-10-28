@@ -167,6 +167,82 @@ export const GROUPS = {
     return { radiation: { time: last.time_tag.slice(0, 16) + 'Z', flux10: +last.flux.toPrecision(3), max24: +max.flux.toPrecision(3), max24at: max.time_tag.slice(0, 16) + 'Z', satellite: 'GOES-' + last.satellite, hourly } };
   },
 
+  // Tropical cyclones now: GDACS (UN / European Commission JRC) track, forecast track and uncertainty cone for every
+  // current storm. GDACS says its data are automatic estimates, not official forecasts; the page says so too.
+  async storms() {
+    const L = await J('https://www.gdacs.org/gdacsapi/api/events/geteventlist/SEARCH?eventlist=TC&alertlevel=green;orange;red');
+    const cur = (L.features || []).filter(f => String(f.properties.iscurrent) === 'true');
+    const r2 = x => Math.round(x * 100) / 100, items = [];
+    for (const f of cur.slice(0, 15)) {
+      const p = f.properties;
+      try {
+        const g = await J(`https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=${p.eventid}&episodeid=${p.episodeid}`);
+        const F = g.features || [];
+        const adv = (F.find(x => x.properties.polygondate) || {}).properties?.polygondate || p.todate;
+        const yr = +String(adv).slice(0, 4), advMon = +String(adv).slice(5, 7);
+        // Points: GDACS draws each position as a small circle; its centre is the position. Label is GDACS's own "dd/mm hh:mm UTC".
+        const pts = F.filter(x => /^Point_Polygon_Point_/.test(x.properties.Class) && x.geometry.type === 'Polygon').map(x => {
+          const ring = x.geometry.coordinates[0]; let a = 1e9, b = -1e9, c = 1e9, d = -1e9;
+          for (const [lo, la] of ring) { a = Math.min(a, lo); b = Math.max(b, lo); c = Math.min(c, la); d = Math.max(d, la); }
+          const lab = x.properties.polygonlabel || ''; const m = lab.match(/(\d{2})\/(\d{2}) (\d{2}):(\d{2})/);
+          let t = null; if (m) { let y = yr; if (+m[2] < advMon - 6) y++; else if (+m[2] > advMon + 6) y--; t = `${y}-${m[2]}-${m[1]}T${m[3]}:${m[4]}`; }
+          return [r2((a + b) / 2), r2((c + d) / 2), lab, t];
+        }).filter(x => x[3]).sort((x, y) => x[3].localeCompare(y[3]));
+        // Segments between positions, with GDACS's category label (TD, TS, HU...) and its forecast flag.
+        const seg = F.filter(x => /^Line_Line_/.test(x.properties.Class) && x.geometry.type === 'LineString')
+          .map(x => { const c = x.geometry.coordinates; return [r2(c[0][0]), r2(c[0][1]), r2(c[c.length - 1][0]), r2(c[c.length - 1][1]), x.properties.polygonlabel || '', x.properties.forecast ? 1 : 0]; });
+        const coneF = F.find(x => x.properties.Class === 'Poly_Cones');
+        let cone = null; if (coneF && coneF.geometry.type === 'Polygon') { const ring = coneF.geometry.coordinates[0]; const step = Math.max(1, Math.ceil(ring.length / 180)); cone = ring.filter((_, i) => i % step === 0).map(([lo, la]) => [r2(lo), r2(la)]); }
+        if (!pts.length && !seg.length) continue;
+        items.push({ id: p.eventid, ep: p.episodeid, name: p.name, alert: p.alertlevel, sev: p.severitydata?.severitytext || '', desc: p.htmldescription || '',
+          from: p.fromdate, to: p.todate, adv, countries: p.affectedcountries ? p.affectedcountries.map(c => c.countryname).filter(Boolean) : [],
+          url: p.url?.report || `https://www.gdacs.org/report.aspx?eventtype=TC&eventid=${p.eventid}`, pts, seg, cone });
+      } catch (e) { /* one storm's geometry failing does not drop the others */ }
+      await sleep(400);
+    }
+    if (cur.length && !items.length) throw new Error('GDACS storm geometry unreadable');
+    return { storms: { asOf: new Date().toISOString().slice(0, 16) + 'Z', items } };
+  },
+
+  // Ground radiation: Safecast realtime sensors (CC0). Only LND 7318 Geiger tubes (the common Safecast pancake tube),
+  // readings from the past 24 h, averaged into 1° cells (median counts per minute). Device ids, owners, contacts and exact
+  // positions are dropped here and never published.
+  async groundRad() {
+    const d = await J('https://tt.safecast.org/devices');
+    const now = Date.now(), by = new Map(); let n = 0; const cc = new Set();
+    for (const x of d) {
+      if (x.dev_test === true || x.loc_lat == null || x.loc_lon == null || !x.when_captured) continue;
+      if (now - new Date(x.when_captured).getTime() > 864e5) continue;
+      const cpm = x.lnd_7318u ?? x.lnd_7318c; if (!(cpm > 0)) continue;
+      n++; if (x.loc_country) cc.add(x.loc_country);
+      const k = (Math.floor(x.loc_lon) + 0.5) + ',' + (Math.floor(x.loc_lat) + 0.5);
+      (by.get(k) || by.set(k, []).get(k)).push(cpm);
+    }
+    if (n < 10) throw new Error('fewer than 10 Safecast sensors reported in 24 h');
+    const med = a => { const s = a.slice().sort((p, q) => p - q), m = s.length >> 1; return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2; };
+    const cells = [...by].map(([k, a]) => k + ',' + Math.round(med(a)) + ',' + a.length).join(';');
+    return { groundRad: { asOf: new Date().toISOString().slice(0, 16) + 'Z', sensors: n, countries: cc.size, cell: 1, cpmPerUsvh: 334, cells } };
+  },
+
+  // Red Cross / Red Crescent emergency appeals and DREF allocations that are active now: IFRC GO (open to the public).
+  // Amounts in Swiss francs as IFRC reports them; placed at IFRC's own country centroid.
+  async relief() {
+    const all = []; let url = 'https://goadmin.ifrc.org/api/v2/appeal/?status=0&ordering=-start_date&limit=200&format=json';
+    for (let i = 0; url && i < 6; i++) { const j = await J(url); all.push(...(j.results || [])); url = j.next && j.next.replace(/^http:/, 'https:'); await sleep(300); }
+    const cj = await J('https://goadmin.ifrc.org/api/v2/country/?limit=400&format=json');
+    const C = {}; for (const c of cj.results || []) C[c.iso3] = c;
+    const today = new Date().toISOString().slice(0, 10);
+    const appeals = all.filter(a => !a.end_date || a.end_date.slice(0, 10) >= today).map(a => {
+      const c = a.country || {}, cc = C[c.iso3] || {}, xy = cc.centroid?.coordinates || [null, null];
+      return [a.name, a.atype_display, a.dtype?.name || '', c.name || '', c.iso3 || '', xy[0] == null ? null : r1(xy[0]), xy[1] == null ? null : r1(xy[1]),
+        Math.round(+a.amount_requested || 0), Math.round(+a.amount_funded || 0), (a.start_date || '').slice(0, 10), (a.end_date || '').slice(0, 10),
+        a.event ? `https://go.ifrc.org/emergencies/${a.event}` : c.id ? `https://go.ifrc.org/countries/${c.id}` : 'https://go.ifrc.org/',
+        c.society_name || cc.society_name || '', cc.society_url || '', a.code || ''];
+    });
+    if (!appeals.length) throw new Error('IFRC returned no active appeals');
+    return { relief: { asOf: new Date().toISOString().slice(0, 16) + 'Z', currency: 'CHF', appeals } };
+  },
+
   // Aircraft from The OpenSky Network, aggregated to 10-degree cells. Individual aircraft are never kept.
   // OpenSky needs an API client for reliable access: set OPENSKY_CLIENT_ID / OPENSKY_CLIENT_SECRET as repo secrets.
   async air() {
@@ -206,4 +282,4 @@ export const GROUPS = {
 
 // How often each group is refreshed, in minutes. The workflow runs every 10 minutes.
 export const EVERY = { quakes: 10, alerts: 10, eonet: 30, air: process.env.OPENSKY_CLIENT_ID ? 10 : 30, // anonymous OpenSky access has a small daily allowance
-  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10 };
+  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10, storms: 30, groundRad: 30, relief: 360 };
