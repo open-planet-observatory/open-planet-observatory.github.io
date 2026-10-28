@@ -127,7 +127,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, m
       ok(r.length > 100 && r.every(x => Math.abs(x[1]) < 1e4 && x[0] > 2002 && x[0] < now.getUTCFullYear() + 1), 'Earth', 'grace-' + k, `${k[0].toUpperCase() + k.slice(1)} ice mass series has 100+ months, all within ±10,000 Gt and dated 2002 onward`, `${r.length} months, latest ${r[r.length - 1][0]}: ${r[r.length - 1][1]} Gt`); }
     if (grace.greenland) { const r = grace.greenland.rows; ok(r[r.length - 1][1] < -2000, 'Earth', 'grace-greenland-loss', 'Greenland shows a net loss of more than 2,000 Gt since 2002 (it has lost roughly 270 Gt a year)', `${r[r.length - 1][1]} Gt`); }
     if (grace.grid) { const G = grace.grid; const months = (now - new Date(G.month + '-15')) / (864e5 * 30.4);
-      ok(Math.abs(G.p02) < 200 && Math.abs(G.p98) < 200 && G.landCells > 50000, 'Earth', 'grace-grid', 'The water map covers the land and 96% of values are within ±200 cm', `${G.landCells} land cells, ${G.p02} to ${G.p98} ${G.units}`);
+      ok(Math.abs(G.p02) < 1000 && Math.abs(G.p98) < 1000 && G.landCells > 50000, 'Earth', 'grace-grid', 'The water map covers the land and 96% of values are within ±10 m (ice-sheet edges legitimately reach several metres)', `${G.landCells} land cells, ${G.p02} to ${G.p98} ${G.units}`);
       ok(months < 10, 'Earth', 'grace-age', 'The latest GRACE-FO month is less than 10 months old (NASA releases months after the fact)', G.month, 'warn'); }
   }
 
