@@ -116,9 +116,9 @@ export async function createStars({ T, S, ui, onProgress }) {
     col3(i, r < 4 ? [1.0, 0.86, 0.66] : [0.82, 0.84, 0.95], 0.08); gS[i] = 1.2; gA[i] = 0.008; }
   // the arms: young, bluer stars, with pink star-forming knots
   for (; i < NG; i++) { const p = armPoint(1.2, false); if (!p) { gA[i] = 0; continue; } const knot = R() < 0.05;
-    put(gP, i, p.X, p.Y, gauss() * (knot ? 0.05 : 0.09));
+    put(gP, i, p.X, p.Y, gauss() * (knot ? 0.05 : 0.09)); const rr = Math.hypot(p.X, p.Y); const inner = Math.min(1, Math.max(0.25, (rr - 3) / 3)); /* inner arms overlap the bulge and burn out to white */
     if (knot) { col3(i, [1.0, 0.42, 0.62], 0.1); gS[i] = 0.14 + R() * 0.12; gA[i] = 0.22; } else { col3(i, R() < 0.3 ? [0.92, 0.94, 1.0] : [0.58, 0.72, 1.0], 0.08); gS[i] = 0.6; gA[i] = 0.028; }
-    if (!p.measured) gA[i] *= 0.75; }
+    if (!p.measured) gA[i] *= 0.75; gA[i] *= inner; }
   for (let k = 0; k < ND; k++) { const p = armPoint(0.55, true); if (!p) { dA[k] = 0; continue; } const q = gc2ecl(p.X, p.Y, gauss() * 0.05); dP.set(q, k * 3); dS[k] = 0.45 + R() * 0.25; dA[k] = 0.05; }
   const gVert = `attribute vec3 aCol; attribute float aSize; attribute float aA; uniform float uK; uniform float uFade; uniform float uNear; varying vec3 vCol; varying float vA;
    void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); float d = length(mv.xyz); float px = aSize * ${KPC.toFixed(1)} / d * uK;
@@ -154,11 +154,11 @@ export async function createStars({ T, S, ui, onProgress }) {
     // arms: blue-white young stars along the measured spirals, continued fainter past the measured stretches
     const armBlob = blob(150, 180, 255), whiteBlob = blob(235, 238, 255);
     for (const a of ARMS) { for (let b = a[1] - a[8]; b <= a[2] + a[8]; b += 0.12) { const Rr = armR(a, b); if (Rr < 3 || Rr > 16.5) continue; const meas = b >= a[1] && b <= a[2];
-        const wv = Math.max(a[7], 0.3) * 2.4; const s1 = Math.sin(b * D), c1 = Math.cos(b * D); const fall = Math.exp(-Rr / 9);
+        const wv = Math.max(a[7], 0.3) * 2.4; const s1 = Math.sin(b * D), c1 = Math.cos(b * D); const fall = Math.exp(-Rr / 9) * Math.min(1, Math.max(0.3, (Rr - 3) / 3));
         stamp(armBlob, Rr * s1, Rr * c1, wv, (meas ? 0.022 : 0.015) * fall * 3);
         if (R2() < 0.25) { const o = (R2() - 0.5) * wv; stamp(whiteBlob, (Rr + o) * s1, (Rr + o) * c1, wv * 0.3, 0.025 * fall * 3); } } }
-    // bar and bulge: older, yellow stars
-    const ba = BAR.angle * D; x.save(); x.translate(cu, cv); x.rotate(-ba); x.scale(1, 0.34); const bar = x.createRadialGradient(0, 0, 0, 0, 0, BAR.half * K);
+    // bar and bulge: older, yellow stars (full opacity: the stamps above leave globalAlpha low)
+    x.globalAlpha = 1; const ba = BAR.angle * D; x.save(); x.translate(cu, cv); x.rotate(-ba); x.scale(1, 0.34); const bar = x.createRadialGradient(0, 0, 0, 0, 0, BAR.half * K);
     bar.addColorStop(0, 'rgba(255,232,185,0.8)'); bar.addColorStop(0.25, 'rgba(255,205,135,0.42)'); bar.addColorStop(1, 'rgba(255,190,120,0)'); x.fillStyle = bar; x.fillRect(-BAR.half * K, -BAR.half * K, 2 * BAR.half * K, 2 * BAR.half * K); x.restore();
     const bul = x.createRadialGradient(cu, cv, 0, cu, cv, 1.6 * K); bul.addColorStop(0, 'rgba(255,246,222,1)'); bul.addColorStop(0.3, 'rgba(255,222,160,0.6)'); bul.addColorStop(1, 'rgba(255,200,140,0)'); x.fillStyle = bul; x.fillRect(0, 0, S2, S2);
     // dust lanes: dust collects on the inner (concave) edges of the arms; drawn darkening
