@@ -1,0 +1,36 @@
+# Fetches ESA Gaia's all-sky image (the real Milky Way as seen from the Sun) for the star view's sky, once.
+# Run by hand from the Actions tab. Source: ESA/Gaia/DPAC, CC BY-SA 3.0 IGO (credit required; share-alike),
+# https://sci.esa.int/web/gaia/-/60196-gaia-s-sky-in-colour-equirectangular-projection
+# Equirectangular, galactic coordinates, galactic centre in the middle, longitude increasing to the left.
+name: Build sky image
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sky:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and convert (4000×2000 PNG → JPEG)
+        run: |
+          set -e
+          curl -fsSL -o /tmp/gaia-sky.png 'https://sci.esa.int/documents/33580/35361/1567215018536-ESA_Gaia_DR2_AllSky_Brightness_Colour_Cartesian_4000x2000.png/1cc58917-c0b0-1aca-ec41-be321c5c36d0?version=1.0&t=1567215037140&download=true'
+          ls -la /tmp/gaia-sky.png
+          file /tmp/gaia-sky.png | grep -i png
+          mkdir -p src/assets/stars
+          convert /tmp/gaia-sky.png -strip -quality 82 src/assets/stars/gaia-sky.jpg
+          identify src/assets/stars/gaia-sky.jpg
+          ls -la src/assets/stars/gaia-sky.jpg
+          echo '{"about":"ESA Gaia DR2 all-sky brightness and colour map, equirectangular, galactic coordinates (centre in the middle, longitude increasing to the left). Credit: ESA/Gaia/DPAC, CC BY-SA 3.0 IGO. Source: https://sci.esa.int/web/gaia/-/60196-gaia-s-sky-in-colour-equirectangular-projection","built":"'"$(date -u +%F)"'"}' > src/assets/stars/gaia-sky.json
+      - name: Commit
+        run: |
+          git config user.name "observatory-bot"
+          git config user.email "observatory-bot@users.noreply.github.com"
+          git add src/assets/stars/gaia-sky.jpg src/assets/stars/gaia-sky.json
+          git commit -m "Sky image: ESA Gaia DR2 all-sky map (credit: ESA/Gaia/DPAC, CC BY-SA 3.0 IGO)" || echo "no change"
+          git push
