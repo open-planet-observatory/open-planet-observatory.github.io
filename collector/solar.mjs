@@ -60,3 +60,20 @@ export async function collectSolar({ prev = {}, now = new Date() }) {
   if (out.craft.length < 5) throw new Error('only ' + out.craft.length + ' spacecraft: ' + out.errors.slice(0, 3).join('; '));
   return out;
 }
+
+// Confirmed exoplanets grouped by host star (NASA Exoplanet Archive, Planetary Systems Composite table; public).
+// Host positions as ecliptic J2000 lon/lat (deg) and distance (pc) as the archive gives them.
+export async function collectExoplanets() {
+  const q = 'select pl_name,hostname,ra,dec,sy_dist,discoverymethod,disc_year,pl_rade,pl_bmasse,pl_orbper from pscomppars where sy_dist is not null';
+  const r = await fetch('https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=' + encodeURIComponent(q) + '&format=json', { headers: UA, signal: AbortSignal.timeout(120000) });
+  if (!r.ok) throw new Error('Exoplanet Archive HTTP ' + r.status);
+  const rows = await r.json(); if (rows.length < 3000) throw new Error('only ' + rows.length + ' planets');
+  const E = 23.4392911 * Math.PI / 180, Dg = Math.PI / 180, by = new Map();
+  for (const p of rows) { let h = by.get(p.hostname);
+    if (!h) { const x = Math.cos(p.dec * Dg) * Math.cos(p.ra * Dg), y = Math.cos(p.dec * Dg) * Math.sin(p.ra * Dg), z = Math.sin(p.dec * Dg);
+      const ye = y * Math.cos(E) + z * Math.sin(E), ze = -y * Math.sin(E) + z * Math.cos(E);
+      h = { h: p.hostname, lon: +(((Math.atan2(ye, x) / Dg) + 360) % 360).toFixed(4), lat: +(Math.asin(ze) / Dg).toFixed(4), d: +(+p.sy_dist).toFixed(3), p: [] }; by.set(p.hostname, h); }
+    const n = v => v == null ? null : +(+v).toPrecision(4);
+    h.p.push([p.pl_name, p.discoverymethod, p.disc_year, n(p.pl_rade), n(p.pl_bmasse), n(p.pl_orbper)]); }
+  return { asOf: new Date().toISOString().slice(0, 16) + 'Z', planets: rows.length, hosts: [...by.values()] };
+}

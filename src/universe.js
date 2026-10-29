@@ -8,8 +8,8 @@ const O = window.__obs, A = window.Astronomy;
 const AU_KM = 149597870.7, C_KM_S = 299792.458, DAY = 864e5, K_GAUSS = 0.01720209895;
 const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtN = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
-const lightTime = au => { const s = au * AU_KM / C_KM_S; if (s < 1) return Math.max(1, Math.round(s * 1000)) + ' ms'; if (s < 90) return s.toFixed(1) + ' s'; if (s < 3600) return Math.floor(s / 60) + ' min ' + Math.round(s % 60) + ' s'; if (s < 86400 * 2) return Math.floor(s / 3600) + ' h ' + Math.round(s % 3600 / 60) + ' min'; return (s / 86400).toFixed(1) + ' days'; };
-const distTxt = au => au < 0.01 ? fmtN(au * AU_KM) + ' km' : au < 2 ? fmtN(au, 3) + ' AU (' + fmtN(au * AU_KM / 1e6, 1) + ' million km)' : fmtN(au, au < 20 ? 2 : 1) + ' AU (' + fmtN(au * AU_KM / 1e9, 2) + ' billion km)';
+const lightTime = au => { const s = au * AU_KM / C_KM_S; if (s < 1) return Math.max(1, Math.round(s * 1000)) + ' ms'; if (s < 90) return s.toFixed(1) + ' s'; if (s < 3600) return Math.floor(s / 60) + ' min ' + Math.round(s % 60) + ' s'; if (s < 86400 * 2) return Math.floor(s / 3600) + ' h ' + Math.round(s % 3600 / 60) + ' min'; if (s < 86400 * 365.25 * 2) return (s / 86400).toFixed(1) + ' days'; const y = s / (86400 * 365.25); return y < 100 ? y.toFixed(y < 10 ? 2 : 1) + ' years' : fmtN(y) + ' years'; };
+const LY_AU = 63241.077; const distTxt = au => au >= LY_AU * 0.1 ? (au / LY_AU < 100 ? fmtN(au / LY_AU, 2) : fmtN(au / LY_AU)) + ' light-years (' + fmtN(au * AU_KM / 1e12, au * AU_KM / 1e12 < 100 ? 1 : 0) + ' trillion km)' : au < 0.01 ? fmtN(au * AU_KM) + ' km' : au < 2 ? fmtN(au, 3) + ' AU (' + fmtN(au * AU_KM / 1e6, 1) + ' million km)' : fmtN(au, au < 20 ? 2 : 1) + ' AU (' + fmtN(au * AU_KM / 1e9, 2) + ' billion km)';
 const jdOf = ms => ms / DAY + 2440587.5;
 
 // Bodies drawn from Astronomy Engine. Radii are mean radii in km (IAU / NASA fact sheets). Colours are approximate.
@@ -19,7 +19,7 @@ const PLANETS = [
   ['Uranus', 25362, '#a9dbe3', 30685.4], ['Neptune', 24622, '#5b7fe0', 60189], ['Pluto', 1188.3, '#c9b8a4', 90560]];
 const JUP_MOONS = [['io', 'Io', 1821.6], ['europa', 'Europa', 1560.8], ['ganymede', 'Ganymede', 2634.1], ['callisto', 'Callisto', 2410.3]];
 
-let T = null, ctl = null, built = false, open = false, S = null; // three module, OrbitControls, state
+let T = null, ctl = null, built = false, open = false, S = null, SM = null, STARS = null; // three module, OrbitControls, state
 let simMs = Date.now(), rate = 0, lastFrame = 0; // simulated time; rate = sim days per real second
 const ui = {};
 
@@ -70,8 +70,9 @@ async function build() {
    <div class="uni-ctl" role="group" aria-label="Solar System controls">
     <div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div>
     <div class="seg" role="group" aria-label="Time"><button data-rate="-30" title="Back 30 days per second">◀◀</button><button data-rate="0" aria-pressed="true" title="Live: now">Now</button><button data-rate="1" title="Forward 1 day per second">▶</button><button data-rate="30" title="Forward 30 days per second">▶▶</button></div>
-    <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label></div>
-    <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniNeo">Asteroids passing Earth</button></div>
+    <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label><input type="checkbox" data-show="constellations" checked> Constellations</label><label><input type="checkbox" data-show="exo" checked> Stars with planets</label></div>
+    <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniNeo">Asteroids passing Earth</button><button class="more" id="uniNear">Nearest stars</button><button class="more" id="uniGal">Milky Way</button></div>
+    <p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Spiral arms: model by Reid et al. 2019 · Constellation figures: d3-celestial</p>
    </div>
    <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div>
    <div class="sat-card uni-card" id="uniCard" hidden></div>
@@ -82,10 +83,10 @@ async function build() {
   const renderer = new T.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true });
   renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
   const scene = new T.Scene(); scene.background = new T.Color('#03050b');
-  const camera = new T.PerspectiveCamera(45, 1, 1e-8, 1e5); camera.up.set(0, 0, 1);
-  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 3000; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6;
+  const camera = new T.PerspectiveCamera(45, 1, 1e-8, 1e13); camera.up.set(0, 0, 1);
+  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 2e10; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6;
   scene.add(new T.AmbientLight(0xffffff, 0.08)); const sunLight = new T.PointLight(0xffffff, 3.2, 0, 0); scene.add(sunLight);
-  S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true }, focus: null, anim: null, solar: null };
+  S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true, constellations: true, exo: true }, focus: null, anim: null, solar: null };
   for (const k of ['orbits', 'craft', 'comets', 'bodies']) { S.groups[k] = new T.Group(); scene.add(S.groups[k]); }
   const sphere = new T.SphereGeometry(1, 48, 32);
   const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,244,214,1)'); r.addColorStop(.25, 'rgba(255,214,140,.55)'); r.addColorStop(1, 'rgba(255,190,90,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
@@ -144,7 +145,11 @@ async function build() {
   let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
   canvas.addEventListener('pointerup', e => { if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return; const r = canvas.getBoundingClientRect(); const hit = pick(e.clientX - r.left, e.clientY - r.top); if (hit) focusOn(hit, true); });
   canvas.addEventListener('wheel', e => { if (e.deltaY < 0 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { closeUniverse(); } }, { passive: true });
+  root.querySelector('#uniNear').onclick = () => nearCard();
+  root.querySelector('#uniGal').onclick = () => galaxyView();
   new ResizeObserver(resize).observe(root); resize();
+  try { SM = await import('./stars.js'); STARS = await SM.createStars({ T, S, ui, onProgress: f => { const n = document.getElementById('uniNote'); if (n && f < 1) n.textContent = 'Loading a million stars from ESA Gaia\u2026 ' + Math.round(f * 100) + '%'; else note(); } });
+    S.objs.push(...STARS.objs); for (const o of STARS.objs) if (!S.byName[o.name]) S.byName[o.name] = o; } catch (e) { console.warn('stars unavailable', e); }
   built = true;
 }
 function resize() { if (!S) return; const w = ui.root.clientWidth || innerWidth, h = ui.root.clientHeight || innerHeight; S.renderer.setSize(w, h, false); S.camera.aspect = w / h; S.camera.updateProjectionMatrix(); }
@@ -182,7 +187,7 @@ function earthSpin(o, d) { // texture: prime meridian at Greenwich apparent side
 function project(p) { const v = V().fromArray(p).project(S.camera); if (v.z > 1 || v.z < -1) return null; const w = ui.root.clientWidth, h = ui.root.clientHeight; return [(v.x + 1) / 2 * w, (1 - v.y) / 2 * h]; }
 function labels() {
   if (!S.show.labels) return; const placed = [], html = [];
-  const list = S.objs.filter(o => (o.shown || o.pos) && (!o.group || S.show[o.group])).sort((a, b) => a.prio - b.prio);
+  const cd = S.camera.position.length(); const list = S.objs.filter(o => (o.shown || o.pos) && (!o.group || S.show[o.group]) && (!o.nolabel || o === S.focus) && (!o.minCam || cd > o.minCam || o === S.focus) && (!o.maxCam || cd < o.maxCam)).sort((a, b) => a.prio - b.prio);
   for (const o of list) { const s = project(o.shown || o.pos); if (!s) continue; const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
     if (x < 0 || y < 0 || x > ui.root.clientWidth || y > ui.root.clientHeight) continue;
     if (placed.some(r => x < r[0] + r[2] && x + w > r[0] && y < r[1] + 14 && y + 14 > r[1])) continue; placed.push([x, y, w]);
@@ -193,14 +198,15 @@ function pick(x, y) { let best = null, bd = 16; for (const o of S.objs) { const 
 function scaleBar() { const t = S.controls.target, dist = S.camera.position.distanceTo(t); const H = ui.root.clientHeight || innerHeight; const perPx = 2 * dist * Math.tan(S.camera.fov * Math.PI / 360) / H;
   const raw = perPx * 110; const km = raw * AU_KM; let val, label;
   if (km < 1e6) { const n = Math.pow(10, Math.floor(Math.log10(km))); const m = [1, 2, 5].map(x => x * n).filter(x => x <= km).pop() || n; val = m / AU_KM; label = fmtN(m) + ' km'; }
+  else if (raw > LY_AU * 0.1) { const ly = raw / LY_AU; const n = Math.pow(10, Math.floor(Math.log10(ly))); const m = [1, 2, 5].map(x => x * n).filter(x => x <= ly).pop() || n; val = m * LY_AU; label = (m < 1 ? m.toPrecision(1) : fmtN(m)) + ' light-year' + (m === 1 ? '' : 's'); }
   else { const n = Math.pow(10, Math.floor(Math.log10(raw))); const m = [1, 2, 5].map(x => x * n).filter(x => x <= raw).pop() || n; val = m; label = (m < 0.1 ? m.toPrecision(1) : fmtN(m, m < 1 ? 1 : 0)) + ' AU'; }
   document.getElementById('uniBar').style.width = (val / perPx).toFixed(0) + 'px'; document.getElementById('uniScale').textContent = `${label} · light crosses it in ${lightTime(val)}`; }
 
 // ---------- focus, info card, close approaches ----------
 function focusOn(o, fly) { S.focus = o; const p = o.shown || o.pos; if (!p) return; const target = V().fromArray(p);
-  const dist = o.name === 'Sun' ? 3.2 : o.rKm ? o.rKm / AU_KM * (o.name === 'Saturn' ? 14 : 6) : 0.08; // bodies: close enough to see them at true size
+  const dist = o.kind === 'galactic centre' ? 9e8 : o.model ? 7e8 : o.star || o.host ? 0.4 * 206264.806 : o.name === 'Sun' ? 3.2 : o.rKm ? o.rKm / AU_KM * (o.name === 'Saturn' ? 14 : 6) : 0.08; // bodies: close enough to see them at true size
   // look at bodies from their sunlit side, a little above the ecliptic
-  const dir = o.name === 'Sun' ? null : target.clone().negate().normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.5).add(new T.Vector3(0, 0, 0.35)).normalize();
+  const dir = o.name === 'Sun' || o.star || o.host || o.model || o.kind === 'galactic centre' ? null : target.clone().negate().normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.5).add(new T.Vector3(0, 0, 0.35)).normalize();
   if (fly) animateTo(target, dist, 1600, dir); card(o); }
 function animateTo(target, dist, ms = 1600, want = null) { const c = S.camera, t = S.controls.target; const fromT = t.clone(), fromP = c.position.clone();
   const dir = want ? want.clone() : fromP.clone().sub(fromT).normalize(); if (!isFinite(dir.x)) dir.set(0.4, -0.8, 0.45).normalize(); const toP = target.clone().add(dir.multiplyScalar(dist));
@@ -213,12 +219,30 @@ function card(o) { const p = o.pos; if (!p) { ui.card.hidden = true; return; } c
   if (o.craft) { src = '<a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a>, updated daily'; const last = o.craft.pts[o.craft.pts.length - 1][0]; extra = `<p class="sc-note">Line: its path over JPL's data window (about six months back and ahead${o.craft.stale ? '; JPL did not answer today, so this is the last good copy' : ''}). JPL's data for it ends ${new Date((last - 2440587.5) * DAY).toISOString().slice(0, 10)}.</p>`; }
   if (o.comet) { const c = o.comet; src = `<a href="https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=${encodeURIComponent(c.pdes)}" target="_blank" rel="noopener">NASA JPL Small-Body Database</a> orbit, positions computed in your browser (two-body, so off by up to a few million km from JPL’s full model)`;
     extra = `<div class="sc-row"><span>Closest to the Sun</span><b>${new Date((c.tp - 2440587.5) * DAY).toISOString().slice(0, 10)} · ${fmtN(c.q, 2)} AU</b></div>`; }
+  if (o.star || o.host || o.kind === 'galactic centre') { const ly = ds / LY_AU; const L = SM ? SM.lightLeft(ly) : null;
+    src = o.host ? '<a href="https://exoplanetarchive.ipac.caltech.edu/" target="_blank" rel="noopener">NASA Exoplanet Archive</a>' : o.kind === 'galactic centre' ? 'distance R\u2080 = 8.15 kpc (Reid et al. 2019)' : '<a href="https://www.cosmos.esa.int/web/hipparcos" target="_blank" rel="noopener">ESA Hipparcos</a> parallax (credit: ESA)';
+    if (L) extra += `<p class="sc-note uni-light"><b>${o.kind === 'galactic centre' ? 'The radio and infrared light reaching us from it (dust hides it from our eyes) left' : 'The light you see from it left'} ${esc(L.yr)}.</b>${L.event ? ` ${L.near ? 'Around then' : 'By then'} on Earth, ${esc(L.event)}${L.eYear > 0 ? ' (' + L.eYear + ')' : ''}.` : ''}</p>`;
+    if (o.desig) extra += `<div class="sc-row"><span>Also known as</span><b>${esc(o.desig)}</b></div>`;
+    if (o.mag != null) extra += `<div class="sc-row"><span>Brightness from Earth</span><b>magnitude ${fmtN(o.mag, 2)}</b></div>`;
+    if (o.host) { const P = o.host.p; extra += `<p class="sc-note"><b>${P.length} confirmed planet${P.length > 1 ? 's' : ''}</b></p><table class="wx-days"><tbody>${P.slice(0, 12).map(x => `<tr><th>${esc(x[0])}</th><td>${esc(x[1] || '')}, ${esc(x[2] || '')}</td><td class="n">${x[3] ? fmtN(x[3], 1) + '\u00d7 Earth wide' : ''}</td><td class="n">${x[5] ? (x[5] < 2 ? fmtN(x[5] * 24, 1) + ' h' : fmtN(x[5], x[5] < 100 ? 1 : 0) + ' d') + ' year' : ''}</td></tr>`).join('')}</tbody></table>`; } }
+  if (o.model) { src = '<a href="https://doi.org/10.3847/1538-4357/ab4a11" target="_blank" rel="noopener">Reid et al. 2019, ApJ 885, 131</a>'; extra = `<p class="sc-note">A model, not a photograph: nobody can see the Milky Way from outside. Radio telescopes measured the distances to ${'star-forming regions'} by parallax; this arm is drawn only along the stretch those measurements cover (about ${fmtN(o.model.w * 3262)} light-years wide).</p>`; }
   ui.card.innerHTML = `<div class="sc-h"><b>${esc(o.name)}</b><button class="sc-x" aria-label="Close">×</button></div><div class="sc-cat"><span class="dot" style="background:${o.colour}"></span>${esc(o.kind)}</div>
-   ${o.name === 'Sun' ? '' : `<div class="sc-row"><span>From the Sun</span><b>${distTxt(ds)}</b></div><div class="sc-row"><span>Sunlight takes</span><b>${lightTime(ds)}</b></div>`}
-   ${o.name === 'Earth' ? '' : `<div class="sc-row"><span>From Earth</span><b>${distTxt(de)}</b></div><div class="sc-row"><span>A radio signal takes</span><b>${lightTime(de)}</b></div>`}
+   ${(o.star || o.host || o.model || o.kind === 'galactic centre') ? `<div class="sc-row"><span>Distance</span><b>${distTxt(de)}</b></div><div class="sc-row"><span>Light takes</span><b>${lightTime(de)}</b></div>` : ''}
+   ${o.name === 'Sun' || (o.star || o.host || o.model || o.kind === 'galactic centre') ? '' : `<div class="sc-row"><span>From the Sun</span><b>${distTxt(ds)}</b></div><div class="sc-row"><span>Sunlight takes</span><b>${lightTime(ds)}</b></div>`}
+   ${o.name === 'Earth' || (o.star || o.host || o.model || o.kind === 'galactic centre') ? '' : `<div class="sc-row"><span>From Earth</span><b>${distTxt(de)}</b></div><div class="sc-row"><span>A radio signal takes</span><b>${lightTime(de)}</b></div>`}
    ${o.rKm ? `<div class="sc-row"><span>Radius</span><b>${fmtN(o.rKm)} km</b></div>` : ''}${extra}
    <p class="sc-note">${o.pushed && S.size === 'vis' ? 'Drawn farther from its planet than it really is, so you can see it (*). ' : ''}Source: ${src}.</p>`;
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; S.focus = null; }; }
+function nearCard() { if (!STARS) return; const el = document.getElementById('uniNeoCard'); const L = STARS.nearest();
+  el.innerHTML = `<div class="sc-h"><b>The nearest stars</b><button class="sc-x" aria-label="Close">\u00d7</button></div>
+   <p class="sc-note">Every star within 6 parsecs (about 20 light-years) that ESA's Hipparcos satellite measured. Faint red dwarfs it could not see are missing. Click one to fly there.</p>
+   <table class="wx-days"><tbody>${L.slice(0, 30).map((s, i) => `<tr><th><button class="more" data-near="${i}">${esc(s.name)}</button></th><td class="n">${fmtN(s.dpc * 3.26156, 2)} ly</td><td class="n">mag ${fmtN(s.mag, 1)}</td></tr>`).join('')}</tbody></table>
+   <p class="sc-note">Credit: ESA Hipparcos (CC BY-NC 3.0 IGO).</p>`;
+  el.hidden = false; el.querySelector('.sc-x').onclick = () => { el.hidden = true; };
+  el.querySelectorAll('[data-near]').forEach(b => b.onclick = () => { const s = L[+b.dataset.near]; let o = S.objs.find(x => x.hip === s.hip); if (!o) { o = { name: s.name, kind: 'star', pos: s.p, prio: 7, colour: '#fff4dc', star: true, hip: s.hip, dpc: s.dpc, mag: s.mag, minCam: 4000 }; S.objs.push(o); } focusOn(o, true); }); }
+function galaxyView() { if (!SM) return; const gc = V().fromArray(SM.galToEcl([8150 * SM.PC, 0, 0])); const up = V().fromArray(SM.galToEcl([0, 0, 1])).normalize();
+  const target = gc.clone().multiplyScalar(0.45); S.focus = null; ui.card.hidden = true; animateTo(target, 1.0e10, 3200, up.clone().add(V().fromArray(SM.galToEcl([-0.35, 0, 0])).normalize().multiplyScalar(0.5)).normalize());
+  const gco = S.byName['Galactic centre (Sagittarius A*)']; if (gco) setTimeout(() => card(gco), 3300); }
 function neoCard() { const el = document.getElementById('uniNeoCard'); const L = (S.solar && S.solar.approaches) || []; const LD = 384400 / AU_KM;
   el.innerHTML = `<div class="sc-h"><b>Asteroids passing Earth, next 60 days</b><button class="sc-x" aria-label="Close">×</button></div>
    <p class="sc-note">Every known asteroid that NASA JPL expects to pass within 0.05 AU (about 19 times the Moon's distance) of Earth. Nearest approaches are listed in JPL's own times (TDB, close to UTC). Too small and close to Earth to draw at this scale.</p>
@@ -233,6 +257,9 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   update();
   if (S.anim) S.anim(now); else if (S.focus && prevFocus) { const p = S.focus.shown || S.focus.pos; if (p) { const d = V().fromArray(p).sub(prevFocus); S.camera.position.add(d); S.controls.target.add(d); } }
   S.controls.minDistance = S.focus && S.focus.dispR ? S.focus.dispR * 1.3 : 1e-6;
+  const camAU = S.camera.position.length();
+  if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
+  const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : 'The Milky Way'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
   S.controls.update(); S.renderer.render(S.scene, S.camera); labels(); scaleBar();
   if (S.focus && !ui.card.hidden && (now - (S._cardT || 0)) > 1000) { S._cardT = now; card(S.focus); }
 }
@@ -242,7 +269,7 @@ async function openUniverse() {
   if (g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none') { // pull back from the globe first
     await new Promise(res => g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-30, 20, 9e7), duration: 1.4, complete: res, cancel: res })); }
   if (!built) { try { await build(); } catch (e) { console.warn('Solar System view could not start', e); return; } }
-  ui.date = document.getElementById('uniDate'); note();
+  ui.date = document.getElementById('uniDate'); ui.title = ui.root.querySelector('.uni-title'); note();
   open = true; ui.root.hidden = false; requestAnimationFrame(() => ui.root.classList.add('on'));
   if (g && g.viewer) g.viewer.useDefaultRenderLoop = false; // pause the globe while the Solar System is open
   simMs = Date.now(); rate = 0; update();

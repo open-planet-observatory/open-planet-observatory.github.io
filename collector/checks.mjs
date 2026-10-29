@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -141,6 +141,17 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     const badC = (solar.comets || []).filter(c => !(c.q > 0 && c.e >= 0 && c.e < 1.2 && c.i >= 0 && c.i <= 180)); ok(!badC.length, 'Space', 'solar-comets', 'Comet orbits are physical (perihelion above 0, eccentricity 0–1.2, inclination 0–180°)', `${(solar.comets || []).length} comets${badC.length ? '; bad: ' + badC.map(c => c.name).join(', ') : ''}`);
     const badA = (solar.approaches || []).filter(a => !(a.dist > 0 && a.dist <= 0.05)); ok(!badA.length, 'Space', 'solar-approaches', 'Every listed asteroid approach is within 0.05 AU of Earth', `${(solar.approaches || []).length} in the next 60 days`);
   }
+
+  if (exo) { const H = exo.hosts || [];
+    ok(exo.planets > 5000 && H.length > 3000, 'Space', 'exo-count', 'NASA lists more than 5,000 confirmed exoplanets around more than 3,000 stars', `${exo.planets} planets, ${H.length} host stars`);
+    const bad = H.filter(h => !(h.d > 1 && h.d < 30000)); ok(!bad.length, 'Space', 'exo-dist', 'Every exoplanet host is between 1 and 30,000 parsecs away', bad.slice(0, 5).map(h => h.h).join(', '));
+    const pc = H.find(h => /Proxima Cen/.test(h.h)); ok(pc && Math.abs(pc.d - 1.30) < 0.02, 'Space', 'exo-proxima', 'Proxima Centauri (nearest host star) is 1.30 pc away', pc ? pc.d + ' pc' : 'not found'); }
+
+  if (!stars) add('Space', 'stars', 'skip', 'Star catalogue built (ESA Gaia + Hipparcos)', 'not built yet: run the "Build star catalogue" workflow');
+  else { ok(stars.gaia > 900000, 'Space', 'stars-gaia', 'About a million Gaia stars are in the star view', `${stars.gaia.toLocaleString('en-US')} Gaia stars, ${stars.bright.toLocaleString('en-US')} Hipparcos stars (built ${stars.built})`);
+    ok(stars.sirius > 2.55 && stars.sirius < 2.7, 'Space', 'stars-sirius', 'Sirius sits 2.6 pc (8.6 light-years) away', stars.sirius + ' pc');
+    ok(stars.proxima > 1.28 && stars.proxima < 1.32, 'Space', 'stars-proxima', 'Proxima Centauri sits 1.30 pc (4.2 light-years) away', stars.proxima + ' pc');
+    ok(stars.vega > 7.5 && stars.vega < 7.9, 'Space', 'stars-vega', 'Vega sits 7.7 pc (25 light-years) away', stars.vega + ' pc'); }
 
   // ----- AI releases -----
   const ai = snap.aiModels; if (ai?.models) { const today = now.toISOString().slice(0, 10);

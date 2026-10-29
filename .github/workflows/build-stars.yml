@@ -1,0 +1,29 @@
+# Builds the star catalogue files for the universe view (src/assets/stars) and commits them.
+# Run by hand from the Actions tab; stars change too slowly to need a schedule.
+# Data: ESA Gaia DR3 and Hipparcos via the ESA Gaia archive (CC BY-NC 3.0 IGO, non-commercial; credit "ESA, Gaia DPAC").
+name: Build star catalogue
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  stars:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build star files
+        run: node collector/build-stars.mjs src/assets/stars
+      - name: Commit
+        run: |
+          git config user.name "observatory-bot"
+          git config user.email "observatory-bot@users.noreply.github.com"
+          git add src/assets/stars
+          git commit -m "Star catalogue rebuilt from ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC)" || echo "no change"
+          git push

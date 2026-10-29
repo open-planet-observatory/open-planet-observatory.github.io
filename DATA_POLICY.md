@@ -69,6 +69,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Planets, the Moon and Jupiter's four large moons are computed in the visitor's browser (Astronomy Engine, MIT). Spacecraft positions are NASA JPL Horizons' own; comet orbits come from the JPL Small-Body Database and are propagated as simple two-body orbits (stated on the page); close approaches are JPL CNEOS's list. Collected once a day by the project; nothing is sent from the visitor except the page's own file requests (and one NASA image request for Earth's surface map).
 - Distances are always real. "Visible sizes" enlarges bodies smaller than a few pixels and moves moons out from enlarged planets, and the page says so; "True scale" shows everything at its real size. No invented stars or scenery: the background stays empty until real star catalogues are added.
 
+## Stars and the Milky Way
+
+- Stars come from ESA's Gaia DR3 (about a million stars) and Hipparcos catalogues, under ESA's CC BY-NC 3.0 IGO licence: free with credit ("ESA, Gaia DPAC") for non-commercial use. The project will not add ads, paid sponsorship or paid tiers while it uses them without ESA's written permission.
+- Each star is drawn as bright as it would look from the camera's position, from its measured distance (1/parallax, stars with parallax measured to better than 20%); no dimming by interstellar dust is modelled.
+- The Milky Way's spiral arms are a published scientific model (Reid et al. 2019), labeled as a model and drawn only where its measurements reach. No artist's impressions or invented stars.
+- "The light you see left when…" pairs a star's light-travel time with a short list of well-dated events written by the site.
+
 ## Forecast where you click
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.
