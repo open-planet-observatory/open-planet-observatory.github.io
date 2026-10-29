@@ -2,8 +2,12 @@
 // Loaded by universe.js. Stars: ESA Gaia DR3 (≈1 million, G 6.5–10.8) and ESA Hipparcos (bright and nearby stars),
 // built once into assets/stars by collector/build-stars.mjs (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO, non-commercial).
 // Each star is drawn as bright as it would look from where the camera is (its magnitude at that distance), so the sky
-// changes as you fly. Exoplanet hosts: NASA Exoplanet Archive. Spiral arms: the model of Reid et al. 2019 (ApJ 885, 131),
-// drawn only along the stretches their radio measurements cover. Constellation figures: d3-celestial (BSD-3-Clause).
+// changes as you fly; bright stars get a soft glow and, the brightest, camera-style spikes (a look, like a photograph).
+// The galaxy glow is a MODEL, labelled as one on the page: spiral arms from Reid et al. 2019 (ApJ 885, 131), extended
+// past their measured stretches with the same pitch angle; a bar about 5 kpc long at ~30° (Wegg, Gerhard & Portail 2015,
+// MNRAS 450, 4050); a disc with a 2.6 kpc scale length (Bland-Hawthorn & Gerhard 2016, ARA&A 54, 529).
+// Exoplanet hosts: NASA Exoplanet Archive. Constellation figures: d3-celestial (BSD-3-Clause).
+// Star stories: assets/stars/wiki.json (Wikidata, CC0) says which Wikipedia article goes with which Hipparcos star.
 export const PC = 206264.806; // AU per parsec
 const LY_PER_PC = 3.26156, D = Math.PI / 180;
 const vecLL = (lon, lat, r) => [r * Math.cos(lat * D) * Math.cos(lon * D), r * Math.cos(lat * D) * Math.sin(lon * D), r * Math.sin(lat * D)];
@@ -15,12 +19,16 @@ const AG = [[-0.0548755604162154, -0.8734370902348850, -0.4838350155487132], [0.
 const EPS = 23.4392911 * D;
 export function galToEcl(g) { const x = AG[0][0] * g[0] + AG[1][0] * g[1] + AG[2][0] * g[2], y = AG[0][1] * g[0] + AG[1][1] * g[1] + AG[2][1] * g[2], z = AG[0][2] * g[0] + AG[1][2] * g[1] + AG[2][2] * g[2];
   return [x, y * Math.cos(EPS) + z * Math.sin(EPS), -y * Math.sin(EPS) + z * Math.cos(EPS)]; }
-// Reid et al. 2019, Table 2 (R0 = 8.15 kpc): [name, β min, β max, β kink, R kink kpc, ψ< deg, ψ> deg, width kpc]
-const ARMS = [['3-kpc arm', 15, 18, 15, 3.52, -4.2, -4.2, 0.18], ['Norma arm', 5, 54, 18, 4.46, -1.0, 19.5, 0.14], ['Scutum–Centaurus arm', 0, 104, 23, 4.91, 14.1, 12.1, 0.23],
-  ['Sagittarius–Carina arm', 2, 97, 24, 6.04, 17.1, 1.0, 0.27], ['Local (Orion) arm', -8, 34, 9, 8.26, 11.4, 11.4, 0.31], ['Perseus arm', -23, 115, 40, 8.87, 10.3, 8.7, 0.35], ['Outer arm', -16, 71, 18, 12.24, 3.0, 9.4, 0.65]];
-const R0 = 8.15; // kpc
+// Reid et al. 2019, Table 2 (R0 = 8.15 kpc): [name, β min, β max, β kink, R kink kpc, ψ< deg, ψ> deg, width kpc, model extension ° each way]
+const ARMS = [['3-kpc arm', 15, 18, 15, 3.52, -4.2, -4.2, 0.18, 35], ['Norma arm', 5, 54, 18, 4.46, -1.0, 19.5, 0.14, 150], ['Scutum–Centaurus arm', 0, 104, 23, 4.91, 14.1, 12.1, 0.23, 160],
+  ['Sagittarius–Carina arm', 2, 97, 24, 6.04, 17.1, 1.0, 0.27, 140], ['Local (Orion) arm', -8, 34, 9, 8.26, 11.4, 11.4, 0.31, 25], ['Perseus arm', -23, 115, 40, 8.87, 10.3, 8.7, 0.35, 140], ['Outer arm', -16, 71, 18, 12.24, 3.0, 9.4, 0.65, 110]];
+const armR = (a, b) => { const [, , , bk, Rk, p1, p2] = a; const psi = (b < bk ? p1 : p2) * D; return Rk * Math.exp(-(b - bk) * D * Math.tan(psi)); };
+export const R0 = 8.15; // kpc
+export const BAR = { half: 5.0, angle: 30 }; // kpc, degrees from the Sun–centre line (Wegg et al. 2015: 5.0 ± 0.2 kpc, 28–33°)
 // galactocentric (X toward l=90°, Y toward the Sun) kpc → heliocentric ecliptic AU
-const gc2ecl = (X, Y, Z = 0) => galToEcl([(R0 - Y) * 1000 * PC, X * 1000 * PC, Z * 1000 * PC]);
+const E0 = galToEcl([1, 0, 0]), E1 = galToEcl([0, 1, 0]), E2 = galToEcl([0, 0, 1]), KPC = 1000 * PC;
+const gc2ecl = (X, Y, Z = 0) => { const a = (R0 - Y) * KPC, b = X * KPC, c = Z * KPC; return [a * E0[0] + b * E1[0] + c * E2[0], a * E0[1] + b * E1[1] + c * E2[1], a * E0[2] + b * E1[2] + c * E2[2]]; };
+export { gc2ecl };
 // what was happening on Earth when the light left (the site's own short list of well-dated moments)
 const EVENTS = [[2021, 'the James Webb Space Telescope was launched'], [2015, 'New Horizons flew past Pluto'], [2012, 'the Curiosity rover landed on Mars'], [2000, 'the first crew moved into the International Space Station'], [1990, 'the Hubble Space Telescope was launched'], [1977, 'the two Voyager probes were launched'], [1969, 'Apollo 11 landed on the Moon'], [1957, 'Sputnik 1 became the first satellite'], [1903, 'the Wright brothers made the first powered flight'],
   [1859, 'Darwin published On the Origin of Species'], [1781, 'William Herschel discovered Uranus'], [1687, 'Newton published his laws of motion and gravity'], [1610, 'Galileo published what he saw through a telescope'],
@@ -33,16 +41,25 @@ export function lightLeft(ly) { const nowY = new Date().getUTCFullYear(); const 
   const yr = y >= 1 ? 'around ' + Math.round(y) : y > -10000 ? 'around ' + Math.round(-y + 1).toLocaleString('en-US') + ' BCE' : 'about ' + Math.round(ly).toLocaleString('en-US') + ' years ago';
   return { yr, event: e ? e[1] : null, eYear: e ? e[0] : null, near: e ? Math.abs(y - e[0]) <= 6 : false }; }
 
+// deterministic random numbers, so the model looks the same for everyone
+function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+
 export async function createStars({ T, S, ui, onProgress }) {
   const group = new T.Group(); S.scene.add(group);
-  const vert = `attribute float aMag; attribute vec3 aCol; uniform float uLim; uniform float uFloor; uniform float uPx; varying vec3 vCol; varying float vA;
+  // ---- star points: magnitude from the camera → size, glow and (brightest) spikes
+  const vert = `attribute float aMag; attribute vec3 aCol; uniform float uLim; uniform float uFloor; uniform float uPx; varying vec3 vCol; varying float vA; varying float vK; varying float vF;
    void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); float dpc = max(length(mv.xyz) / ${PC.toFixed(3)}, 1e-6);
-    float m = aMag + 5.0 * log(dpc / 10.0) / log(10.0); float s = clamp(1.0 + (uLim - m) * 0.6, 0.0, 7.5); float a = clamp((uLim + 1.0 - m) / 2.5, 0.0, 1.0);
-    a = max(a, uFloor); s = max(s, uFloor > 0.0 ? 1.4 : 0.0); vA = a; vCol = aCol; gl_PointSize = s * uPx; gl_Position = projectionMatrix * mv;
+    float m = aMag + 5.0 * log(dpc / 10.0) / log(10.0); float s = clamp(1.0 + (uLim - m) * 0.62, 0.0, 9.0); float a = clamp((uLim + 1.0 - m) / 2.5, 0.0, 1.0);
+    a = max(a, uFloor) * smoothstep(2e-5, 5e-4, dpc); s = max(s, uFloor > 0.0 ? 1.4 : 0.0); float f = clamp((1.6 - m) / 3.2, 0.0, 1.0);
+    float tot = min(s * 2.4 + f * 34.0, 90.0); vK = s / max(tot, 1e-3); vF = f; vA = a; vCol = aCol; gl_PointSize = tot * uPx; gl_Position = projectionMatrix * mv;
     #include <logdepthbuf_vertex>
    }`;
-  const frag = `varying vec3 vCol; varying float vA; void main(){ vec2 q = gl_PointCoord - 0.5; float r = dot(q,q); if (r > 0.25) discard; float f = smoothstep(0.25, 0.0, r);
-    gl_FragColor = vec4(vCol * vA * f, 1.0);
+  const frag = `varying vec3 vCol; varying float vA; varying float vK; varying float vF;
+   void main(){ vec2 q = (gl_PointCoord - 0.5) * 2.0; float r = length(q); if (r > 1.0) discard; float x = r / max(vK, 1e-3);
+    float core = exp(-x * x * 2.2); float halo = exp(-x * 1.35) * 0.32 * (1.0 - r);
+    float sp = vF * (exp(-abs(q.y) * 70.0) * pow(1.0 - abs(q.x), 3.0) + exp(-abs(q.x) * 70.0) * pow(1.0 - abs(q.y), 3.0)) * 0.55;
+    vec3 c = mix(vCol, vec3(1.0), core * 0.55) * (core + halo) + vCol * sp;
+    gl_FragColor = vec4(c * vA, 1.0);
     #include <logdepthbuf_fragment>
    }`;
   const uniforms = { uLim: { value: 6.8 }, uFloor: { value: 0 }, uPx: { value: Math.min(2, devicePixelRatio || 1) } };
@@ -51,26 +68,76 @@ export async function createStars({ T, S, ui, onProgress }) {
 
   // ---- bright and nearby stars (Hipparcos) + the Sun as a star
   const B = await (await fetch('assets/stars/bright.json')).json();
+  let wiki = {}; try { const r = await fetch('assets/stars/wiki.json'); if (r.ok) wiki = (await r.json()).hip || {}; } catch (e) { }
   const st = B.stars; const n = st.length + 1; const pos = new Float32Array(n * 3), mag = new Float32Array(n), col = new Float32Array(n * 3);
   const byHip = new Map(), objs = [];
   st.forEach((s, i) => { const [hip, lon, lat, dpc, hp, bv, name, desig] = s; const p = vecLL(lon, lat, dpc * PC); pos.set(p, i * 3); mag[i] = hp - 5 * Math.log10(dpc / 10); col.set(colourOf(bv == null ? null : bv * 1.2).map(v => v / 255), i * 3); byHip.set(hip, { p, s });
-    if (name || dpc < 6) objs.push({ name: name || desig || 'HIP ' + hip, desig: name ? desig : '', hip, kind: 'star', pos: p, prio: name ? 6 : 7, colour: '#fff4dc', dpc, mag: hp, minCam: 4000, star: true }); });
-  pos.set([0, 0, 0], st.length * 3); mag[st.length] = 4.83; col.set([1, 0.96, 0.9], st.length * 3);
+    const wk = wiki[hip];
+    if (name || dpc < 6 || wk) objs.push({ name: name || desig || (wk ? wk.replace(/_/g, ' ') : 'HIP ' + hip), desig: name ? desig : '', hip, wiki: wk || null, kind: 'star', pos: p, prio: name ? 6 : 7, colour: '#fff4dc', dpc, mag: hp, minCam: 4000, star: true, nolabel: !name && dpc >= 6 }); });
+  pos.set([0, 0, 0], st.length * 3); mag[st.length] = 4.83; col.set([1, 0.96, 0.9], st.length * 3); // the Sun, seen as a star from afar
   const bright = pointsFrom(pos, mag, col); group.add(bright);
   // ---- constellation figures between real 3D positions (they break apart as you fly away)
   const seg = []; for (const s of Object.values(B.lines)) for (const [a, b] of s) { const A = byHip.get(a), Bb = byHip.get(b); if (A && Bb) seg.push(...A.p, ...Bb.p); }
   const cg = new T.BufferGeometry(); cg.setAttribute('position', new T.Float32BufferAttribute(seg, 3));
   const cons = new T.LineSegments(cg, new T.LineBasicMaterial({ color: '#6f8fc8', transparent: true, opacity: 0.28, depthWrite: false })); cons.frustumCulled = false; group.add(cons);
-  // ---- the galaxy model: measured stretches of the spiral arms, the galactic centre
+
+  // ---- the galaxy model, part 1: the measured stretches of the arms (thin lines, off by default)
   const arms = new T.Group(); group.add(arms);
-  for (const [name, b0, b1, bk, Rk, p1, p2, w] of ARMS) { const mid = [], inner = [], outer = []; let lab = null;
-    for (let b = b0; b <= b1 + 1e-9; b += 0.5) { const psi = (b < bk ? p1 : p2) * D; const R = Rk * Math.exp(-(b - bk) * D * Math.tan(psi)); const s = Math.sin(b * D), c = Math.cos(b * D);
+  for (const a of ARMS) { const [name, b0, b1, , , , , w] = a; const mid = [], inner = [], outer = [];
+    for (let b = b0; b <= b1 + 1e-9; b += 0.5) { const R = armR(a, b); const s = Math.sin(b * D), c = Math.cos(b * D);
       mid.push(new T.Vector3(...gc2ecl(R * s, R * c))); inner.push(new T.Vector3(...gc2ecl((R - w / 2) * s, (R - w / 2) * c))); outer.push(new T.Vector3(...gc2ecl((R + w / 2) * s, (R + w / 2) * c))); }
     arms.add(new T.Line(new T.BufferGeometry().setFromPoints(mid), new T.LineBasicMaterial({ color: '#c9a3ff', transparent: true, opacity: 0.7, depthWrite: false })));
     for (const L of [inner, outer]) arms.add(new T.Line(new T.BufferGeometry().setFromPoints(L), new T.LineBasicMaterial({ color: '#c9a3ff', transparent: true, opacity: 0.22, depthWrite: false })));
-    lab = mid[Math.floor(mid.length / 2)]; objs.push({ name, kind: 'spiral arm (model)', pos: lab.toArray(), prio: 4, colour: '#c9a3ff', minCam: 3e8, model: { b0, b1, Rk, w } }); }
+    objs.push({ name, kind: 'spiral arm (model)', pos: mid[Math.floor(mid.length / 2)].toArray(), prio: 4, colour: '#c9a3ff', minCam: 3e8, model: { b0, b1, w }, group: 'galaxy' }); }
   objs.push({ name: 'Galactic centre (Sagittarius A*)', kind: 'galactic centre', pos: gc2ecl(0, 0), prio: 3, colour: '#ffd166', minCam: 3e7, dpc: R0 * 1000 });
   arms.traverse(o => { o.frustumCulled = false; });
+
+  // ---- the galaxy model, part 2: the glow (a model drawn from the measurements above; see the header)
+  const small = innerWidth < 700 || (navigator.deviceMemory && navigator.deviceMemory < 4);
+  const NG = small ? 60000 : 130000, ND = 0; // dust lanes tried and dropped: stacked dark sprites read as solid black arcs
+  const R = rng(20191023); const gauss = () => { let u = 0; while (!u) u = R(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * R()); };
+  const gP = new Float32Array(NG * 3), gC = new Float32Array(NG * 3), gS = new Float32Array(NG), gA = new Float32Array(NG);
+  const dP = new Float32Array(ND * 3), dS = new Float32Array(ND), dA = new Float32Array(ND);
+  const armLen = ARMS.map(a => a[2] - a[1] + 2 * a[8]); const armTot = armLen.reduce((x, y) => x + y, 0);
+  const pickArm = () => { let u = R() * armTot; for (let i = 0; i < ARMS.length; i++) { if ((u -= armLen[i]) <= 0) return ARMS[i]; } return ARMS[ARMS.length - 1]; };
+  const ba = BAR.angle * D, bx = Math.sin(ba), by = Math.cos(ba);
+  const put = (P, i, X, Y, Z) => { const p = gc2ecl(X, Y, Z); P[i * 3] = p[0]; P[i * 3 + 1] = p[1]; P[i * 3 + 2] = p[2]; };
+  const col3 = (i, c, j = 0.06) => { const k = 1 + (R() - 0.5) * 2 * j; gC[i * 3] = c[0] * k; gC[i * 3 + 1] = c[1] * k; gC[i * 3 + 2] = c[2] * k; };
+  const armPoint = (sigmaK, inward) => { for (let t = 0; t < 20; t++) { const a = pickArm(); const b = a[1] - a[8] + R() * (a[2] - a[1] + 2 * a[8]); const Rr = armR(a, b); if (Rr < 3.0 || Rr > 16.5) continue;
+      const measured = b >= a[1] && b <= a[2]; const wv = Math.max(a[7], 0.3); /* glow width at least 0.3 kpc so the arms read as glow */ const off = gauss() * wv * sigmaK - (inward ? wv * 0.5 : 0); const rr = Rr + off; return { X: rr * Math.sin(b * D), Y: rr * Math.cos(b * D), measured, w: a[7] }; } return null; };
+  let i = 0;
+  // bar and bulge: older, yellower stars
+  const nBar = Math.floor(NG * 0.2);
+  for (; i < nBar; i++) { let X, Y, Z; if (R() < 0.62) { const a = Math.max(-BAR.half, Math.min(BAR.half, gauss() * 1.7)), c = gauss() * 0.55; X = a * bx + c * by; Y = a * by - c * bx; Z = gauss() * 0.32; }
+    else { X = gauss() * 0.75; Y = gauss() * 0.75; Z = gauss() * 0.5; }
+    put(gP, i, X, Y, Z); col3(i, [1.0, 0.8, 0.52], 0.1); gS[i] = 0.9; gA[i] = 0.007; }
+  // the disc: exponential, 2.6 kpc scale length
+  const nDisc = nBar + Math.floor(NG * 0.3);
+  for (; i < nDisc; i++) { let r; do r = -2.6 * Math.log(1 - R()); while (r < 0.8 || r > 17); const th = R() * 2 * Math.PI; put(gP, i, r * Math.sin(th), r * Math.cos(th), gauss() * 0.22);
+    col3(i, r < 4 ? [1.0, 0.86, 0.66] : [0.82, 0.84, 0.95], 0.08); gS[i] = 1.2; gA[i] = 0.013; }
+  // the arms: young, bluer stars, with pink star-forming knots
+  for (; i < NG; i++) { const p = armPoint(1.2, false); if (!p) { gA[i] = 0; continue; } const knot = R() < 0.05;
+    put(gP, i, p.X, p.Y, gauss() * (knot ? 0.05 : 0.09));
+    if (knot) { col3(i, [1.0, 0.42, 0.62], 0.1); gS[i] = 0.14 + R() * 0.12; gA[i] = 0.22; } else { col3(i, R() < 0.3 ? [0.92, 0.94, 1.0] : [0.58, 0.72, 1.0], 0.08); gS[i] = 0.6; gA[i] = 0.045; }
+    if (!p.measured) gA[i] *= 0.75; }
+  for (let k = 0; k < ND; k++) { const p = armPoint(0.55, true); if (!p) { dA[k] = 0; continue; } const q = gc2ecl(p.X, p.Y, gauss() * 0.05); dP.set(q, k * 3); dS[k] = 0.45 + R() * 0.25; dA[k] = 0.05; }
+  const gVert = `attribute vec3 aCol; attribute float aSize; attribute float aA; uniform float uK; uniform float uFade; uniform float uNear; varying vec3 vCol; varying float vA;
+   void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); float d = length(mv.xyz); float px = aSize * ${KPC.toFixed(1)} / d * uK;
+    float a = aA * uFade * smoothstep(uNear, uNear * 6.0, d); if (px < 1.5) { a *= px * px / 2.25; px = 1.5; } if (px > 64.0) { a *= 64.0 / px; px = 64.0; }
+    vA = a; vCol = aCol; gl_PointSize = px; gl_Position = projectionMatrix * mv;
+    #include <logdepthbuf_vertex>
+   }`;
+  const gFrag = (dark) => `varying vec3 vCol; varying float vA; void main(){ vec2 q = (gl_PointCoord - 0.5) * 2.0; float r2 = dot(q,q); if (r2 > 1.0) discard; float f = exp(-r2 * 3.5);
+    ${dark ? 'gl_FragColor = vec4(vCol, vA * f);' : 'gl_FragColor = vec4(vCol * vA * f, 1.0);'}
+    #include <logdepthbuf_fragment>
+   }`;
+  const gUni = { uK: { value: 500 }, uFade: { value: 0 }, uNear: { value: 0.35 * KPC } };
+  const gMat = dark => new T.ShaderMaterial({ uniforms: gUni, vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\n' + gVert, fragmentShader: '#include <logdepthbuf_pars_fragment>\n' + gFrag(dark), transparent: true, depthWrite: false, blending: dark ? T.NormalBlending : T.AdditiveBlending });
+  const glowGeo = new T.BufferGeometry(); glowGeo.setAttribute('position', new T.BufferAttribute(gP, 3)); glowGeo.setAttribute('aCol', new T.BufferAttribute(gC, 3)); glowGeo.setAttribute('aSize', new T.BufferAttribute(gS, 1)); glowGeo.setAttribute('aA', new T.BufferAttribute(gA, 1));
+  const dustGeo = new T.BufferGeometry(); const dC = new Float32Array(ND * 3); for (let k = 0; k < ND; k++) dC.set([0.05, 0.035, 0.03], k * 3);
+  dustGeo.setAttribute('position', new T.BufferAttribute(dP, 3)); dustGeo.setAttribute('aCol', new T.BufferAttribute(dC, 3)); dustGeo.setAttribute('aSize', new T.BufferAttribute(dS, 1)); dustGeo.setAttribute('aA', new T.BufferAttribute(dA, 1));
+  const glow = new T.Points(glowGeo, gMat(false)), dust = new T.Points(dustGeo, gMat(true)); glow.frustumCulled = dust.frustumCulled = false; glow.renderOrder = -2; dust.renderOrder = -1;
+  const galaxy = new T.Group(); galaxy.add(glow); group.add(galaxy);
 
   // ---- exoplanet hosts (NASA Exoplanet Archive)
   let exo = null; try { const r = await fetch('data/exoplanets.json?t=' + Math.floor(Date.now() / 864e5)); if (r.ok) exo = await r.json(); } catch (e) { }
@@ -94,9 +161,14 @@ export async function createStars({ T, S, ui, onProgress }) {
     gaia = pointsFrom(P, M, Cc); group.add(gaia); onProgress && onProgress(1); return N; })(); return gaiaLoading; }
 
   function update(camDistAU) { // camDistAU: camera distance from the Sun
-    const pc = camDistAU / PC; uniforms.uFloor.value = pc < 30 ? 0 : Math.min(0.2, 0.05 + 0.06 * Math.log10(pc / 30));
-    cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = pc > 300;
+    const pc = camDistAU / PC; // faint stars keep a dim floor so the catalogue's shape shows from afar, fading again at galaxy scale
+    uniforms.uFloor.value = pc < 30 ? 0 : pc < 1500 ? Math.min(0.045, 0.018 + 0.02 * Math.log10(pc / 30)) : 0.045 * Math.pow(1500 / pc, 0.7);
+    const H = ui.root.clientHeight || innerHeight; gUni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
+    // inside the disc the glow becomes the band of the Milky Way across the sky; from outside, the whole spiral
+    gUni.uFade.value = S.show.galaxy === false ? 0 : pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5);
+    cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
-  return { group, objs, update, loadGaia, nearest, built: B.built, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo };
+  const hipPos = hip => { const h = byHip.get(hip); return h ? h.p : null; };
+  return { group, objs, update, loadGaia, nearest, hipPos, built: B.built, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo, wikiCount: Object.keys(wiki).length };
 }

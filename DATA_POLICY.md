@@ -73,7 +73,10 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 - Stars come from ESA's Gaia DR3 (about a million stars) and Hipparcos catalogues, under ESA's CC BY-NC 3.0 IGO licence: free with credit ("ESA, Gaia DPAC") for non-commercial use. The project will not add ads, paid sponsorship or paid tiers while it uses them without ESA's written permission.
 - Each star is drawn as bright as it would look from the camera's position, from its measured distance (1/parallax, stars with parallax measured to better than 20%); no dimming by interstellar dust is modelled.
-- The Milky Way's spiral arms are a published scientific model (Reid et al. 2019), labeled as a model and drawn only where its measurements reach. No artist's impressions or invented stars.
+- The galaxy's glow is a model drawn by the site from published measurements: spiral arms from Reid et al. 2019 (continued past their measured stretches with the same winding, drawn fainter and described as a guess), a central bar from Wegg, Gerhard & Portail 2015, and a disc from Bland-Hawthorn & Gerhard 2016. Pink knots (star-forming clouds) are scattered at random along the arms. The page labels all of this as a model, not a photograph, whenever the galaxy is in view; it can be turned off. No artist's impressions or invented stars: every star point is a measured star.
+- Bright stars get a glow and the brightest get camera-style spikes. This is a look, like a photograph, not data.
+- Today's Sun is NASA's latest Solar Dynamics Observatory image (AIA 304 Å, public), fetched every collector run. If NASA does not answer, or the image is more than two days old, the page says so and draws the Sun plain instead.
+- Star stories: clicking one of about 3,500 Hipparcos stars shows the opening of its English Wikipedia article, fetched by the visitor's browser from Wikipedia and shown word for word with a link and the CC BY-SA 4.0 licence. Which article goes with which star comes from Wikidata (CC0), matched by Hipparcos number.
 - "The light you see left when…" pairs a star's light-travel time with a short list of well-dated events written by the site.
 
 ## Forecast where you click
