@@ -236,7 +236,7 @@ export async function createStars({ T, S, ui, onProgress }) {
     const nearPlane = Math.min(1, Math.max(0, (zk - 0.3) / 1.5)); /* inside the disc the additive glow saturates to white: hold it back there */
     gUni.uFade.value = S.show.galaxy === false ? 0 : (pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5)) * (pc < 1500 ? 1 : 0.45 + 0.55 * nearPlane);
     // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
-    if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))); }
+    if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))) * Math.min(1, Math.pow(10000 / pc, 1.6)); /* far out, 168,000 points land on a few dozen pixels: keep their sum below white */ }
     if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }

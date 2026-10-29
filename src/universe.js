@@ -215,7 +215,7 @@ function labels() {
   // stars: label only the brightest as seen from the camera (at most 24), like a sky chart
   const cp = S.camera.position, PCA = 206264.806; const stars = [], rest = [];
   for (const o of list) { if (!o.star || o === S.focus) { rest.push(o); continue; } const dc = Math.max(cp.distanceTo(V().fromArray(o.pos)) / PCA, 1e-6); o.mcam = o.mag - 5 * Math.log10(o.dpc / 10) + 5 * Math.log10(dc / 10); if (o.mcam < 2.6) stars.push(o); }
-  stars.sort((a, b) => a.mcam - b.mcam); list = rest.concat(stars.slice(0, 24)).sort((a, b) => (a.name === 'Earth' ? -1 : a.prio) - (b.name === 'Earth' ? -1 : b.prio) || (a.mcam ?? 0) - (b.mcam ?? 0));
+  stars.sort((a, b) => a.mcam - b.mcam); list = rest.concat(stars.slice(0, 24)).sort((a, b) => (a.name === 'Earth' && cd < 3000 ? -1 : a.prio) - (b.name === 'Earth' && cd < 3000 ? -1 : b.prio) || (a.mcam ?? 0) - (b.mcam ?? 0));
   const W = ui.root.clientWidth, Hh = ui.root.clientHeight, right = ui.sliderW || 0, skipped = new Set();
   for (const o of list) { if (o.parent && skipped.has(o.parent)) continue; const s = project(o.shown || o.pos); if (!s) { skipped.add(o.name); continue; } const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
     if (x < 0 || y < 0 || x + w > W - right || y > Hh) { skipped.add(o.name); continue; }
@@ -378,7 +378,9 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   S.renderer.render(S.scene, S.camera); labels(); scaleBar();
   if (S.focus && !ui.card.hidden && !S.focus.star && !S.focus.host && !S.focus.model && S.focus.kind !== 'galactic centre' && (now - (S._cardT || 0)) > 1000) { S._cardT = now; card(S.focus); }
   if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; const el = ui.zoomThumb.closest('.uni-zoom'); if (el) { const vn = Math.round(v * 100); if (el.getAttribute('aria-valuenow') != vn) { el.setAttribute('aria-valuenow', vn); el.setAttribute('aria-valuetext', document.getElementById('uniScale').textContent.split(' · ')[0] + ' across'); } ui.sliderW = el.offsetWidth; } }
-  { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; if (n.dataset.far !== String(far)) { n.dataset.far = String(far); n.hidden = far; } } }
+  { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; const pcC = camAU / 206264.806, dT = S.camera.position.distanceTo(S.controls.target) / 206264.806;
+      const lost = far && pcC > 3000 && dT < 300 && !S.tour && !S.anim; /* zoomed right in, far from every catalogued star */
+      const key = lost ? 'lost' : String(far); if (n.dataset.far !== key) { n.dataset.far = key; n.hidden = far && !lost; if (lost) n.textContent = 'No catalogued stars here: the million measured stars all sit within about 16,000 light-years of the Sun. Zoom out, or press Milky Way.'; else if (!far) note(); } } }
   const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
 async function openUniverse(dest) {

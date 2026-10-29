@@ -316,7 +316,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-list{margin:.3rem 0 .5rem 1.1rem;padding:0;font-size:.8rem;line-height:1.45;color:#c9d2de}
 .uni-list li{margin:.3rem 0}
 @media (max-width:900px){.uz-ticks{display:none}.uni-zoom{width:30px}#uni .uni-card{right:48px}.uni-model{right:48px}.uni-cap{width:calc(100% - 80px)}}
-@media (max-width:640px){.uni-zoom{top:96px;bottom:auto;height:calc(100% - 330px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:104px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
+@media (max-width:640px){.uni-zoom{top:96px;bottom:auto;height:calc(100% - 330px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:96px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:104px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
 /* Safari: a drag on the sky started a text selection, which tints the whole canvas blue and can scroll the overlay */
 #uni{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #uni .uni-card,#uni .uni-card *{-webkit-user-select:text;user-select:text}
