@@ -159,6 +159,8 @@ async function build() {
   root.querySelector('#uniTour').onclick = () => (S.tour ? stopTour() : startTour());
   root.querySelector('#uniModel').onclick = () => { S.focus = null; card(GLOW_MODEL); };
   canvas.addEventListener('pointerdown', () => { if (S.tour) stopTour(); });
+  root.addEventListener('selectstart', e => { const t = e.target.nodeType === 3 ? e.target.parentElement : e.target; if (!t || !t.closest || !t.closest('.uni-card')) e.preventDefault(); }); /* no text selection from dragging the sky */
+  root.addEventListener('scroll', () => { root.scrollTop = 0; root.scrollLeft = 0; });
   zoomSlider();
   new ResizeObserver(resize).observe(root); resize();
   try { SM = await import('./stars.js'); STARS = await SM.createStars({ T, S, ui, onProgress: f => { const n = document.getElementById('uniNote'); if (n && f < 1) n.textContent = 'Loading a million stars from ESA Gaia\u2026 ' + Math.round(f * 100) + '%'; else note(); } });
