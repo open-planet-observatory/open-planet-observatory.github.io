@@ -57,6 +57,7 @@ if (mode === 'hosted') {
   await fs.copyFile(path.join(ROOT, 'node_modules', 'astronomy-engine', 'astronomy.browser.min.js'), path.join(out, 'vendor', 'astronomy.browser.min.js'));
   await fs.cp(path.join(ROOT, 'src', 'brand'), path.join(out, 'brand'), { recursive: true });
   await fs.cp(path.join(ROOT, 'src', 'assets'), path.join(out, 'assets'), { recursive: true });
+  await fs.copyFile(path.join(ROOT, 'src', 'stars.js'), path.join(out, 'stars.js'));
   // CesiumJS (3D globe): the whole build folder, served from the site
   await fs.rm(path.join(out, 'vendor', 'cesium'), { recursive: true, force: true });
   await fs.cp(path.join(ROOT, 'node_modules', 'cesium', 'Build', 'Cesium'), path.join(out, 'vendor', 'cesium'), { recursive: true });
