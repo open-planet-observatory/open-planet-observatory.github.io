@@ -1,4 +1,5 @@
 <title>Open Planet Observatory · The Owlmanac</title>
+<script>window.__wantSolar=/(view|sky)=solar/.test(location.hash)</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -750,8 +751,11 @@ window.LIBRARY=[
 ["Space","ESA Gaia DR3","About 1 million stars with measured distances for the star view (G 6.5–10.8)","Built once","lim","CC BY-NC 3.0 IGO: non-commercial; credit ESA, Gaia DPAC; ask ESA before any paid use","https://www.cosmos.esa.int/web/gaia/dr3","map"],
 ["Space","ESA Hipparcos (new reduction)","Bright and nearby stars with distances, for star names and constellation figures","Built once","lim","CC BY-NC 3.0 IGO: non-commercial; credit ESA","https://www.cosmos.esa.int/web/hipparcos","map"],
 ["Space","NASA Exoplanet Archive","Confirmed planets around other stars, grouped by host star","Weekly","go","NASA/Caltech public service; credit requested","https://exoplanetarchive.ipac.caltech.edu/","map"],
-["Space","Milky Way spiral-arm model (Reid et al. 2019)","Spiral arms traced by radio parallaxes of star-forming regions; drawn only where measured","Static","go","Published paper (ApJ 885, 131); parameters cited","https://doi.org/10.3847/1538-4357/ab4a11","map"],
+["Space","Milky Way spiral-arm model (Reid et al. 2019)","Spiral arms traced by radio parallaxes of star-forming regions; the labeled galaxy model continues them, fainter, past the measured stretches","Static","go","Published paper (ApJ 885, 131); parameters cited","https://doi.org/10.3847/1538-4357/ab4a11","map"],
 ["Space","d3-celestial","Star names and constellation figures","Static","go","BSD-3-Clause","https://github.com/ofrohn/d3-celestial","map"],
+["Space","Milky Way bar (Wegg, Gerhard & Portail 2015) and disc (Bland-Hawthorn & Gerhard 2016)","Bar length and angle, disc scale length, used for the labeled galaxy model","Static","go","Published papers (MNRAS 450, 4050; ARA&A 54, 529); parameters cited","https://doi.org/10.1093/mnras/stv745","map"],
+["Space","NASA Solar Dynamics Observatory (SDO)","Today's Sun in extreme ultraviolet (AIA 304 Å) for the close-up Sun","Every 10 min","go","NASA, public","https://sdo.gsfc.nasa.gov/data/","map"],
+["Space","Wikipedia (star stories) via Wikidata","Opening of a star's Wikipedia article, word for word, when you click it; star-to-article matches from Wikidata","On click","go","Wikipedia text CC BY-SA 4.0; Wikidata CC0","https://www.wikidata.org/","map"],
 ["Space","NASA JPL Horizons","Positions of 15 deep-space spacecraft for the Solar System view","Daily","go","NASA/JPL public service; credit requested","https://ssd.jpl.nasa.gov/horizons/","map"],
 ["Space","NASA JPL Small-Body Database","Orbits of comets passing the Sun within six months of today","Daily","go","NASA/JPL public service; credit requested","https://ssd.jpl.nasa.gov/tools/sbdb_query.html","map"],
 ["Space","NASA JPL CNEOS close approaches","Asteroids passing within 0.05 AU of Earth in the next 60 days","Daily","go","NASA/JPL public service; credit requested","https://cneos.jpl.nasa.gov/ca/","panel"],

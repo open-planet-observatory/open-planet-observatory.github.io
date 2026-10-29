@@ -210,7 +210,8 @@ let solar = { out: null, status: 'not run' };
   log('solar', solar.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
-  const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built }; } catch { }
+  const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
+  try { const W = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'wiki.json'), 'utf8')).hip; stars.wiki = Object.keys(W).length; stars.wikiVega = W['91262']; } catch { } } catch { }
 // Exoplanet host stars for the star view (NASA Exoplanet Archive): data/exoplanets.json, weekly.
 let exo = { out: null, status: 'not run' };
 { let p = {};
@@ -219,8 +220,17 @@ let exo = { out: null, status: 'not run' };
   else { try { exo = { out: await collectExoplanets(), status: 'ok' }; meta.solar.exo = now.toISOString(); } catch (e) { exo = { out: p.hosts ? p : null, status: 'error: ' + e.message.slice(0, 160) }; } }
   if (exo.out) await fs.writeFile(path.join(OUT, 'exoplanets.json'), JSON.stringify(exo.out));
   log('exoplanets', exo.status); }
+// Today's Sun for the star view's close-up (NASA SDO, AIA 304 Å, public). Fetched every run; if NASA does not answer,
+// no image is published and the page says so (an old picture is never passed off as today's).
+let sunImg = { status: 'not run' };
+try { const r = await fetch('https://sdo.gsfc.nasa.gov/assets/img/latest/latest_1024_0304.jpg', { signal: AbortSignal.timeout(30000), headers: { 'User-Agent': 'OpenPlanetObservatory/1.0' } });
+  if (!r.ok) throw new Error('HTTP ' + r.status); const b = Buffer.from(await r.arrayBuffer()); if (b.length < 30000 || b[0] !== 0xff || b[1] !== 0xd8) throw new Error('not a JPEG (' + b.length + ' bytes)');
+  await fs.writeFile(path.join(OUT, 'sun-304.jpg'), b); const lm = r.headers.get('last-modified');
+  sunImg = { ok: true, src: 'NASA SDO / AIA 304 Å', page: 'https://sdo.gsfc.nasa.gov/data/', modified: lm ? new Date(lm).toISOString() : null, fetched: now.toISOString(), bytes: b.length, status: 'ok' }; }
+catch (e) { sunImg = { ok: false, error: e.message.slice(0, 160), fetched: now.toISOString(), status: 'error: ' + e.message.slice(0, 160) }; }
+await fs.writeFile(path.join(OUT, 'sun.json'), JSON.stringify(sunImg)); log('sun image', sunImg.status);
 // Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
-let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
@@ -231,7 +241,7 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
