@@ -156,10 +156,11 @@ async function build() {
   root.querySelectorAll('[data-show]').forEach(b => b.onchange = () => { S.show[b.dataset.show] = b.checked; S.groups.orbits.visible = S.show.orbits; S.groups.craft.visible = S.show.craft; S.groups.comets.visible = S.show.comets; if (!S.show.labels) ui.labels.innerHTML = ''; });
   root.querySelectorAll('[data-goto]').forEach(b => b.onclick = () => { const o = S.byName[b.dataset.goto] || S.objs.find(x => x.name.startsWith(b.dataset.goto)); if (o) focusOn(o, true); });
   root.querySelector('#uniNeo').onclick = () => neoCard();
+  if (!S.solar) { const b = root.querySelector('[data-goto="Voyager 1"]'); if (b) { b.disabled = true; b.title = 'JPL spacecraft data did not arrive, so there is nothing to fly to'; } root.querySelectorAll('[data-show="craft"],[data-show="comets"]').forEach(c => { c.disabled = true; c.closest('label').title = 'JPL data did not arrive today'; }); }
   // click to select
   let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
   canvas.addEventListener('pointerup', e => { if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return; const r = canvas.getBoundingClientRect(); const hit = pick(e.clientX - r.left, e.clientY - r.top); if (hit) focusOn(hit, true); });
-  canvas.addEventListener('wheel', e => { if (e.deltaY < 0 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { closeUniverse(); } }, { passive: true });
+  canvas.addEventListener('wheel', e => { if (e.deltaY < 0) S._zoomIn = performance.now(); if (e.deltaY < 0 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { closeUniverse(); } }, { passive: true });
   root.querySelector('#uniNear').onclick = () => nearCard();
   root.querySelector('#uniGal').onclick = () => galaxyView();
   root.querySelector('#uniTour').onclick = () => (S.tour ? stopTour() : startTour());
@@ -214,10 +215,11 @@ function labels() {
   // stars: label only the brightest as seen from the camera (at most 24), like a sky chart
   const cp = S.camera.position, PCA = 206264.806; const stars = [], rest = [];
   for (const o of list) { if (!o.star || o === S.focus) { rest.push(o); continue; } const dc = Math.max(cp.distanceTo(V().fromArray(o.pos)) / PCA, 1e-6); o.mcam = o.mag - 5 * Math.log10(o.dpc / 10) + 5 * Math.log10(dc / 10); if (o.mcam < 2.6) stars.push(o); }
-  stars.sort((a, b) => a.mcam - b.mcam); list = rest.concat(stars.slice(0, 24)).sort((a, b) => a.prio - b.prio || (a.mcam ?? 0) - (b.mcam ?? 0));
-  for (const o of list) { const s = project(o.shown || o.pos); if (!s) continue; const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
-    if (x < 0 || y < 0 || x > ui.root.clientWidth || y > ui.root.clientHeight) continue;
-    if (placed.some(r => x < r[0] + r[2] && x + w > r[0] && y < r[1] + 14 && y + 14 > r[1])) continue; placed.push([x, y, w]);
+  stars.sort((a, b) => a.mcam - b.mcam); list = rest.concat(stars.slice(0, 24)).sort((a, b) => (a.name === 'Earth' ? -1 : a.prio) - (b.name === 'Earth' ? -1 : b.prio) || (a.mcam ?? 0) - (b.mcam ?? 0));
+  const W = ui.root.clientWidth, Hh = ui.root.clientHeight, right = ui.sliderW || 0, skipped = new Set();
+  for (const o of list) { if (o.parent && skipped.has(o.parent)) continue; const s = project(o.shown || o.pos); if (!s) { skipped.add(o.name); continue; } const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
+    if (x < 0 || y < 0 || x + w > W - right || y > Hh) { skipped.add(o.name); continue; }
+    if (placed.some(r => x < r[0] + r[2] && x + w > r[0] && y < r[1] + 14 && y + 14 > r[1])) { skipped.add(o.name); continue; } placed.push([x, y, w]);
     html.push(`<span class="uni-lbl k-${o.kind.replace(/\W+/g, '-')}" style="transform:translate(${x.toFixed(0)}px,${y.toFixed(0)}px)">${esc(o.name)}${o.pushed && S.size === 'vis' ? '<sup>*</sup>' : ''}</span>`); }
   ui.labels.innerHTML = html.join('');
 }
@@ -254,12 +256,13 @@ function card(o) { if (o.glowModel) return modelCard(); const p = o.pos; if (!p)
     if (o.mag != null) extra += `<div class="sc-row"><span>Brightness from Earth</span><b>magnitude ${fmtN(o.mag, 2)}</b></div>`;
     if (o.host) { const P = o.host.p; extra += `<p class="sc-note"><b>${P.length} confirmed planet${P.length > 1 ? 's' : ''}</b></p><table class="wx-days"><tbody>${P.slice(0, 12).map(x => `<tr><th>${esc(x[0])}</th><td>${esc(x[1] || '')}, ${esc(x[2] || '')}</td><td class="n">${x[3] ? fmtN(x[3], 1) + '\u00d7 Earth wide' : ''}</td><td class="n">${x[5] ? (x[5] < 2 ? fmtN(x[5] * 24, 1) + ' h' : fmtN(x[5], x[5] < 100 ? 1 : 0) + ' d') + ' year' : ''}</td></tr>`).join('')}</tbody></table>`; } }
   if (o.model) { src = '<a href="https://doi.org/10.3847/1538-4357/ab4a11" target="_blank" rel="noopener">Reid et al. 2019, ApJ 885, 131</a>'; extra = `<p class="sc-note">A model, not a photograph: nobody can see the Milky Way from outside. Radio telescopes measured the distances to ${'star-forming regions'} by parallax; this arm is drawn only along the stretch those measurements cover (about ${fmtN(o.model.w * 3262)} light-years wide).</p>`; }
-  ui.card.innerHTML = `<div class="sc-h"><b>${esc(o.name)}</b><button class="sc-x" aria-label="Close">×</button></div><div class="sc-cat"><span class="dot" style="background:${o.colour}"></span>${esc(o.kind)}</div>
+  const html = `<div class="sc-h"><b>${esc(o.name)}</b><button class="sc-x" aria-label="Close">×</button></div><div class="sc-cat"><span class="dot" style="background:${o.colour}"></span>${esc(o.kind)}</div>
    ${(o.star || o.host || o.model || o.kind === 'galactic centre') ? `<div class="sc-row"><span>Distance</span><b>${distTxt(de)}</b></div><div class="sc-row"><span>Light takes</span><b>${lightTime(de)}</b></div>` : ''}
    ${o.name === 'Sun' || (o.star || o.host || o.model || o.kind === 'galactic centre') ? '' : `<div class="sc-row"><span>From the Sun</span><b>${distTxt(ds)}</b></div><div class="sc-row"><span>Sunlight takes</span><b>${lightTime(ds)}</b></div>`}
    ${o.name === 'Earth' || (o.star || o.host || o.model || o.kind === 'galactic centre') ? '' : `<div class="sc-row"><span>From Earth</span><b>${distTxt(de)}</b></div><div class="sc-row"><span>A radio signal takes</span><b>${lightTime(de)}</b></div>`}
    ${o.rKm ? `<div class="sc-row"><span>Radius</span><b>${fmtN(o.rKm)} km</b></div>` : ''}${extra}
    <p class="sc-note">${o.pushed && S.size === 'vis' ? 'Drawn farther from its planet than it really is, so you can see it (*). ' : ''}Source: ${src}.</p>`;
+  if (ui.card.hidden || ui.card.dataset.html !== html) { ui.card.innerHTML = html; ui.card.dataset.html = html; } /* unchanged text is left alone, so the close button and links stay clickable */
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; S.focus = null; }; }
 function nearCard() { if (!STARS) return; const el = document.getElementById('uniNeoCard'); const L = STARS.nearest();
   el.innerHTML = `<div class="sc-h"><b>The nearest stars</b><button class="sc-x" aria-label="Close">\u00d7</button></div>
@@ -279,8 +282,9 @@ function neoCard() { const el = document.getElementById('uniNeoCard'); const L =
   el.hidden = false; el.querySelector('.sc-x').onclick = () => { el.hidden = true; }; }
 
 // ---------- today's Sun (NASA SDO), star stories (Wikipedia), the galaxy model card ----------
-async function loadSunImage(o) {
-  const r = await fetch('data/sun.json?t=' + Math.floor(Date.now() / 6e5)); if (!r.ok) return; const j = await r.json(); S.sunInfo = j; if (!j.ok) return;
+async function loadSunImage(o) { try { await loadSunImage2(o); } catch (e) { S.sunInfo = { ok: false, error: String(e && e.message || e).slice(0, 120), fetched: S.sunInfo && S.sunInfo.fetched }; throw e; } }
+async function loadSunImage2(o) {
+  const r = await fetch('data/sun.json?t=' + Math.floor(Date.now() / 6e5)); if (!r.ok) { S.sunInfo = { ok: false, error: 'sun.json HTTP ' + r.status }; return; } const j = await r.json(); S.sunInfo = j; if (!j.ok) return;
   if (Date.now() - Date.parse(j.modified || j.fetched) > 2 * DAY) { j.stale = true; return; } // never show an old picture as today's
   const img = new Image(); img.src = 'data/sun-304.jpg?t=' + Date.parse(j.fetched); await img.decode();
   const c = document.createElement('canvas'); c.width = c.height = 1024; const g = c.getContext('2d'); g.drawImage(img, 0, 0, 1024, 1024);
@@ -292,7 +296,7 @@ async function loadSunImage(o) {
   o.glow.material.map = new T.CanvasTexture(gc); o.glow.material.needsUpdate = true;
 }
 function sunBlock() { const j = S.sunInfo; if (!j) return '';
-  if (j.ok && !j.stale) return `<p class="sc-note uni-light"><b>Today's Sun in extreme-ultraviolet light (304 Å)</b>, from NASA's Solar Dynamics Observatory, which watches it from orbit around Earth. This light comes from gas at about 50,000 °C above the visible surface; our eyes can't see it, so NASA colours it orange.</p><div class="sc-row"><span>Image updated</span><b>${esc((j.modified || j.fetched).slice(0, 16).replace('T', ' '))} UTC</b></div><p class="sc-note">Image: <a href="https://sdo.gsfc.nasa.gov/data/" target="_blank" rel="noopener">NASA SDO</a> (public).</p>`;
+  if (j.ok && !j.stale && S.byName.Sun.sunSprite) return `<p class="sc-note uni-light"><b>Today's Sun in extreme-ultraviolet light (304 Å)</b>, from NASA's Solar Dynamics Observatory, which watches it from orbit around Earth. This light comes from gas at about 50,000 °C above the visible surface; our eyes can't see it, so NASA colours it orange.</p><div class="sc-row"><span>Image updated</span><b>${esc((j.modified || j.fetched).slice(0, 16).replace('T', ' '))} UTC</b></div><p class="sc-note">Image: <a href="https://sdo.gsfc.nasa.gov/data/" target="_blank" rel="noopener">NASA SDO</a> (public).</p>`;
   return `<p class="sc-note">NASA's latest Solar Dynamics Observatory image could not be fetched${j.fetched ? ' at ' + esc(j.fetched.slice(0, 16).replace('T', ' ')) + ' UTC' : ''}, so the Sun is drawn plain. <a href="https://sdo.gsfc.nasa.gov/data/" target="_blank" rel="noopener">See it at NASA</a>.</p>`; }
 const WK = {};
 function wikiBlock(o) { if (!o.wiki) return ''; const k = o.wiki; let w = WK[k];
@@ -318,13 +322,13 @@ function modelCard() {
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; }; }
 
 // ---------- the zoom slider: from the Sun's surface out to the whole galaxy ----------
-const ZMIN = Math.log10(3e-4), ZMAX = Math.log10(1.5e10);
+const ZMIN = Math.log10(0.012), ZMAX = Math.log10(1.5e10);
 const TICKS = [['The Sun', 0.03], ['Planets', 60], ['Nearest stars', 3.5e5], ['100 light-years', 6.3e6], ['Gaia stars', 2.5e8], ['Milky Way', 1.5e10]];
 function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.querySelector('.uz-track'), tk = document.getElementById('uniTicks');
   const toV = d => Math.max(0, Math.min(1, (Math.log10(Math.max(d, 1e-9)) - ZMIN) / (ZMAX - ZMIN)));
   tk.innerHTML = TICKS.map(([n, d]) => `<button style="top:${(toV(d) * 100).toFixed(1)}%" data-zd="${d}">${n}</button>`).join('');
   tk.querySelectorAll('[data-zd]').forEach(b => b.onclick = () => { stopTour(); const d = +b.dataset.zd; ui.card.hidden = true; if (d >= 1.5e10) return galaxyView(3200, true); S.focus = null; animateTo(new T.Vector3(0, 0, 0), d, 2200); });
-  const setDist = d => { const t = S.controls.target; d = Math.min(1.5e10, Math.max(3e-4, d));
+  const setDist = d => { const t = S.controls.target; d = Math.min(1.5e10, Math.max(0.012, d));
     if (!(S.focus && S.focus.rKm && d < 200)) { S.focus = null; const base = S._zBase || t.clone(); const bl = base.length(); t.copy(base).multiplyScalar(bl > 0 ? Math.min(1, d / (2 * bl)) : 0); } // keeps your pan when zooming out; glides back to the Sun as you zoom in
     const dir = S.camera.position.clone().sub(t).normalize(); if (!isFinite(dir.x)) dir.set(0.4, -0.8, 0.45).normalize(); S.camera.position.copy(t).add(dir.multiplyScalar(d)); S.anim = null; };
   const fromY = y => { const r = tr.getBoundingClientRect(); const v = Math.max(0, Math.min(1, (y - r.top) / r.height)); setDist(Math.pow(10, ZMIN + v * (ZMAX - ZMIN))); };
@@ -336,7 +340,7 @@ function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.q
   ui.zoomThumb = document.getElementById('uniThumb'); ui.zoomV = toV; }
 
 // ---------- the guided tour ----------
-function tourSteps() { const sunOk = S.sunInfo && S.sunInfo.ok && !S.sunInfo.stale; return [
+function tourSteps() { const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.stale && S.byName.Sun.sunSprite); return [
   { dist: 0.025, ms: 3000, hold: 4500, cap: sunOk ? "This is our Sun, as NASA's Solar Dynamics Observatory saw it today in ultraviolet light." : 'This is our Sun, an ordinary star.' },
   { dist: 45, ms: 5000, hold: 4500, cap: 'Eight planets circle it. Sunlight reaches Earth in about 8 minutes, and Neptune in about 4 hours.' },
   { dist: 3.5e5, ms: 5500, hold: 5000, cap: 'The nearest stars are more than 4 light-years away. From here, the whole Solar System is smaller than a pixel.' },
@@ -365,12 +369,16 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
   const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : 'The Milky Way'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
   S.controls.update();
+  // Zooming in from galaxy scale drifts the pivot toward the Sun, where the real stars are, so a wheel-zoom from the
+  // Milky Way lands among stars instead of in empty space beside the model (the slider does the same).
+  if (!S.focus && !S.anim && S._zoomIn && now - S._zoomIn < 250 && camAU > 2.5e8) { const t = S.controls.target, tl = t.length(), d = S.camera.position.distanceTo(t); if (tl > 0 && d < 3 * tl) { const k = Math.max(0.9, Math.min(1, d / (3 * tl))); const dv = t.clone().multiplyScalar(k - 1); t.add(dv); S.camera.position.add(dv); } }
   { const c = S.camera.position, t = S.controls.target; const okv = v => isFinite(v.x) && isFinite(v.y) && isFinite(v.z);
     if (okv(c) && okv(t) && c.distanceTo(t) > 1e-9) { (S._good || (S._good = { c: V(), t: V() })).c.copy(c); S._good.t.copy(t); }
     else if (S._good) { c.copy(S._good.c); t.copy(S._good.t); S.anim = null; console.warn('camera reset after a bad value'); } }
   S.renderer.render(S.scene, S.camera); labels(); scaleBar();
   if (S.focus && !ui.card.hidden && !S.focus.star && !S.focus.host && !S.focus.model && S.focus.kind !== 'galactic centre' && (now - (S._cardT || 0)) > 1000) { S._cardT = now; card(S.focus); }
-  if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; }
+  if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; const el = ui.zoomThumb.closest('.uni-zoom'); if (el) { const vn = Math.round(v * 100); if (el.getAttribute('aria-valuenow') != vn) { el.setAttribute('aria-valuenow', vn); el.setAttribute('aria-valuetext', document.getElementById('uniScale').textContent.split(' · ')[0] + ' across'); } ui.sliderW = el.offsetWidth; } }
+  { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; if (n.dataset.far !== String(far)) { n.dataset.far = String(far); n.hidden = far; } } }
   const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
 async function openUniverse(dest) {

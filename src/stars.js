@@ -122,7 +122,7 @@ export async function createStars({ T, S, ui, onProgress }) {
   for (let k = 0; k < ND; k++) { const p = armPoint(0.55, true); if (!p) { dA[k] = 0; continue; } const q = gc2ecl(p.X, p.Y, gauss() * 0.05); dP.set(q, k * 3); dS[k] = 0.45 + R() * 0.25; dA[k] = 0.05; }
   const gVert = `attribute vec3 aCol; attribute float aSize; attribute float aA; uniform float uK; uniform float uFade; uniform float uNear; varying vec3 vCol; varying float vA;
    void main(){ vec4 mv = modelViewMatrix * vec4(position,1.0); float d = length(mv.xyz); float px = aSize * ${KPC.toFixed(1)} / d * uK;
-    float a = aA * uFade * smoothstep(uNear, uNear * 6.0, d); if (px < 1.5) { a *= px * px / 2.25; px = 1.5; } if (px > 64.0) { a *= 64.0 / px; px = 64.0; }
+    float a = aA * uFade * smoothstep(uNear, uNear * 6.0, d); if (px < 1.5) { a *= px * px / 2.25; px = 1.5; } if (px > 64.0) { a *= max(64.0 / px, 0.3); px = 64.0; }
     vA = a; vCol = aCol; gl_PointSize = px; gl_Position = projectionMatrix * mv;
     #include <logdepthbuf_vertex>
    }`;
@@ -232,10 +232,11 @@ export async function createStars({ T, S, ui, onProgress }) {
     const H = ui.root.clientHeight || innerHeight; gUni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
     // inside the disc the glow becomes the band of the Milky Way across the sky; from outside, the whole spiral
     const zk = Math.abs(S.camera.position.dot(new T.Vector3(...E2))) / KPC; // height above the disc, kpc
-    dUni.uOp.value = S.show.galaxy === false ? 0 : Math.min(1, Math.max(0, (Math.log10(pc) - 3.2) / 0.8)) * Math.min(1, Math.max(0, (zk - 0.4) / 2));
-    gUni.uFade.value = S.show.galaxy === false ? 0 : pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5);
+    dUni.uOp.value = S.show.galaxy === false ? 0 : Math.min(1, Math.max(0, (Math.log10(pc) - 3.2) / 0.8)) * Math.min(1, Math.max(0.35, (zk - 0.4) / 2));
+    const nearPlane = Math.min(1, Math.max(0, (zk - 0.3) / 1.5)); /* inside the disc the additive glow saturates to white: hold it back there */
+    gUni.uFade.value = S.show.galaxy === false ? 0 : (pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5)) * (pc < 1500 ? 1 : 0.45 + 0.55 * nearPlane);
     // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
-    if (gaia) gaia.visible = pc < 4000; if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.5, 0.12 + 0.12 * Math.log10(Math.max(1, pc / 2500))); }
+    if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))); }
     if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
