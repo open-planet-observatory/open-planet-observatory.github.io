@@ -283,6 +283,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 #qtip[hidden]{display:none}
 .zoomctl .zuni{width:auto!important;padding:0 10px;display:flex;align-items:center;gap:6px;font-size:.82rem;font-weight:700;white-space:nowrap;border-color:var(--owl-yellow,#f2c43c)!important}
 .zoomctl .zuni .zi{font-size:1.15rem;line-height:1}
+.zoomctl .zgal{border-color:#c9a3ff!important}
 @media (max-width:860px){.zoomctl .zuni .zt{display:none}.zoomctl .zuni{padding:0;justify-content:center;width:32px!important}}
 .hint-bubble{position:fixed;z-index:2500;background:#f2c43c;color:#14161b;border-radius:10px;padding:8px 30px 8px 12px;font-size:.82rem;box-shadow:0 8px 24px rgba(0,0,0,.35);max-width:260px}
 .hint-bubble::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#f2c43c}

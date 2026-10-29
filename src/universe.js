@@ -27,8 +27,10 @@ const ui = {};
 function addButtons() {
   const zc = document.querySelector('#ops-map .zoomctl') || document.querySelector('.zoomctl');
   if (zc && !document.getElementById('zuni')) { const b = document.createElement('button'); b.id = 'zuni'; b.setAttribute('aria-label', 'Zoom out to the Solar System'); b.title = 'Fly out from Earth to the Solar System: planets, moons, spacecraft and comets, live'; b.className = 'zuni'; b.innerHTML = '<span class="zi">☉</span><span class="zt">Solar System</span>'; b.onclick = () => openUniverse(); zc.appendChild(b); }
+  if (zc && !document.getElementById('zgal')) { const b = document.createElement('button'); b.id = 'zgal'; b.setAttribute('aria-label', 'Fly out to the Milky Way'); b.title = 'Fly from Earth past the stars to the whole Milky Way: a million real stars, and a labeled model of the galaxy'; b.className = 'zuni zgal'; b.innerHTML = '<span class="zi">✺</span><span class="zt">Milky Way</span>'; b.onclick = () => openUniverse('galaxy'); zc.appendChild(b); }
   const after = document.getElementById('moonViewBtn');
-  if (after && !document.getElementById('uniBtn')) { const b = document.createElement('button'); b.id = 'uniBtn'; b.className = after.className; b.textContent = 'Solar System view'; b.title = 'Zoom out from Earth to the planets, spacecraft and comets, live'; b.onclick = () => openUniverse(); after.after(b); }
+  if (after && !document.getElementById('uniBtn')) { const b = document.createElement('button'); b.id = 'uniBtn'; b.className = after.className; b.textContent = 'Solar System view'; b.title = 'Zoom out from Earth to the planets, spacecraft and comets, live'; b.onclick = () => openUniverse(); after.after(b);
+    const g2 = document.createElement('button'); g2.id = 'galBtn'; g2.className = after.className; g2.textContent = 'Milky Way view'; g2.title = 'Fly from Earth out to the whole Milky Way'; g2.onclick = () => openUniverse('galaxy'); b.after(g2); }
 }
 addButtons(); setTimeout(addButtons, 3000); setTimeout(addButtons, 9000);
 // zooming out past the globe's limit opens the Solar System
@@ -356,8 +358,8 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; }
   const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
-async function openUniverse() {
-  if (open) return; if (!A) { console.warn('Astronomy Engine missing'); return; }
+async function openUniverse(dest) {
+  if (open) { if (dest === 'galaxy') galaxyView(4000, true); return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
   const g = window.__obs3d;
   if (g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none') { // pull back from the globe first
     await new Promise(res => { setTimeout(res, 2200); try { g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-30, 20, 9e7), duration: 1.4, complete: res, cancel: res }); } catch (e) { res(); } }); }
@@ -369,13 +371,15 @@ async function openUniverse() {
   const e = S.byName.Earth; const ep = V().fromArray(e.pos); const sunDir = ep.clone().negate().normalize();
   S.controls.target.copy(ep); S.camera.position.copy(ep).add(sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).multiplyScalar(6.6e-4)); // start on Earth's sunlit side
   S.focus = null; lastFrame = 0; requestAnimationFrame(frame);
-  setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
-  try { history.replaceState(null, '', '#sky=solar'); } catch (x) { }
+  if (dest === 'galaxy') setTimeout(() => { if (open) galaxyView(7000, true); }, 500); /* one long zoom: Earth, planets, stars, galaxy */
+  else setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
+  try { history.replaceState(null, '', dest === 'galaxy' ? '#sky=galaxy' : '#sky=solar'); } catch (x) { }
 }
 function closeUniverse() { if (!open) return; stopTour(); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
   setTimeout(() => { open = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
     const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }
     try { history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
 O && (O.openUniverse = openUniverse, O.uniState = () => S);
-if (window.__wantSolar || /(view|sky)=solar/.test(location.hash)) setTimeout(openUniverse, 2500);
+if (window.__wantGalaxy || /sky=galaxy/.test(location.hash)) setTimeout(() => openUniverse('galaxy'), 2500);
+else if (window.__wantSolar || /(view|sky)=solar/.test(location.hash)) setTimeout(openUniverse, 2500);
 addEventListener('keydown', e => { if (open && e.key === 'Escape') closeUniverse(); });
