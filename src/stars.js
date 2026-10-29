@@ -107,18 +107,17 @@ export async function createStars({ T, S, ui, onProgress }) {
       const measured = b >= a[1] && b <= a[2]; const wv = Math.max(a[7], 0.3); /* glow width at least 0.3 kpc so the arms read as glow */ const off = gauss() * wv * sigmaK - (inward ? wv * 0.5 : 0); const rr = Rr + off; return { X: rr * Math.sin(b * D), Y: rr * Math.cos(b * D), measured, w: a[7] }; } return null; };
   let i = 0;
   // bar and bulge: older, yellower stars
-  const nBar = Math.floor(NG * 0.2);
-  for (; i < nBar; i++) { let X, Y, Z; if (R() < 0.62) { const a = Math.max(-BAR.half, Math.min(BAR.half, gauss() * 1.7)), c = gauss() * 0.55; X = a * bx + c * by; Y = a * by - c * bx; Z = gauss() * 0.32; }
-    else { X = gauss() * 0.75; Y = gauss() * 0.75; Z = gauss() * 0.5; }
-    put(gP, i, X, Y, Z); col3(i, [1.0, 0.8, 0.52], 0.1); gS[i] = 0.9; gA[i] = 0.007; }
+  const nBar = Math.floor(NG * 0.06);
+  for (; i < nBar; i++) { let X, Y, Z; { const a = (R() * 2 - 1) * BAR.half, c = gauss() * 0.6; X = a * bx + c * by; Y = a * by - c * bx; Z = gauss() * 0.3; } /* spread evenly along the bar: a dense central ball saturates into a hard dot; the painted disc carries the bulge */
+    put(gP, i, X, Y, Z); col3(i, [1.0, 0.8, 0.52], 0.1); gS[i] = 0.9; gA[i] = 0.0025; }
   // the disc: exponential, 2.6 kpc scale length
   const nDisc = nBar + Math.floor(NG * 0.3);
-  for (; i < nDisc; i++) { let r; do r = -2.6 * Math.log(1 - R()); while (r < 0.8 || r > 17); const th = R() * 2 * Math.PI; put(gP, i, r * Math.sin(th), r * Math.cos(th), gauss() * 0.22);
-    col3(i, r < 4 ? [1.0, 0.86, 0.66] : [0.82, 0.84, 0.95], 0.08); gS[i] = 1.2; gA[i] = 0.013; }
+  for (; i < nDisc; i++) { let r; do r = -2.6 * Math.log((1 - R()) * (1 - R())); while (r > 17); /* exponential surface density: no hole, no spike at the centre */ const th = R() * 2 * Math.PI; put(gP, i, r * Math.sin(th), r * Math.cos(th), gauss() * 0.22);
+    col3(i, r < 4 ? [1.0, 0.86, 0.66] : [0.82, 0.84, 0.95], 0.08); gS[i] = 1.2; gA[i] = 0.008; }
   // the arms: young, bluer stars, with pink star-forming knots
   for (; i < NG; i++) { const p = armPoint(1.2, false); if (!p) { gA[i] = 0; continue; } const knot = R() < 0.05;
     put(gP, i, p.X, p.Y, gauss() * (knot ? 0.05 : 0.09));
-    if (knot) { col3(i, [1.0, 0.42, 0.62], 0.1); gS[i] = 0.14 + R() * 0.12; gA[i] = 0.22; } else { col3(i, R() < 0.3 ? [0.92, 0.94, 1.0] : [0.58, 0.72, 1.0], 0.08); gS[i] = 0.6; gA[i] = 0.045; }
+    if (knot) { col3(i, [1.0, 0.42, 0.62], 0.1); gS[i] = 0.14 + R() * 0.12; gA[i] = 0.22; } else { col3(i, R() < 0.3 ? [0.92, 0.94, 1.0] : [0.58, 0.72, 1.0], 0.08); gS[i] = 0.6; gA[i] = 0.028; }
     if (!p.measured) gA[i] *= 0.75; }
   for (let k = 0; k < ND; k++) { const p = armPoint(0.55, true); if (!p) { dA[k] = 0; continue; } const q = gc2ecl(p.X, p.Y, gauss() * 0.05); dP.set(q, k * 3); dS[k] = 0.45 + R() * 0.25; dA[k] = 0.05; }
   const gVert = `attribute vec3 aCol; attribute float aSize; attribute float aA; uniform float uK; uniform float uFade; uniform float uNear; varying vec3 vCol; varying float vA;
@@ -137,7 +136,50 @@ export async function createStars({ T, S, ui, onProgress }) {
   const dustGeo = new T.BufferGeometry(); const dC = new Float32Array(ND * 3); for (let k = 0; k < ND; k++) dC.set([0.05, 0.035, 0.03], k * 3);
   dustGeo.setAttribute('position', new T.BufferAttribute(dP, 3)); dustGeo.setAttribute('aCol', new T.BufferAttribute(dC, 3)); dustGeo.setAttribute('aSize', new T.BufferAttribute(dS, 1)); dustGeo.setAttribute('aA', new T.BufferAttribute(dA, 1));
   const glow = new T.Points(glowGeo, gMat(false)), dust = new T.Points(dustGeo, gMat(true)); glow.frustumCulled = dust.frustumCulled = false; glow.renderOrder = -2; dust.renderOrder = -1;
-  const galaxy = new T.Group(); galaxy.add(glow); group.add(galaxy);
+
+  // ---- the galaxy model, part 3: a smooth painted disc under the sparkles (the 100,000 Stars look), drawn from the same model
+  const HALF = 18; // kpc, half-width of the painted square
+  function paintDisc(S2) {
+    const c = document.createElement('canvas'); c.width = c.height = S2; const x = c.getContext('2d'); const K = S2 / (2 * HALF);
+    const px = (X, Y) => [(X + HALF) * K, (HALF - Y) * K];
+    const blob = (r, g, b) => { const b2 = document.createElement('canvas'); b2.width = b2.height = 64; const q = b2.getContext('2d'); const gr = q.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gr.addColorStop(0, `rgba(${r},${g},${b},1)`); gr.addColorStop(0.4, `rgba(${r},${g},${b},.45)`); gr.addColorStop(1, `rgba(${r},${g},${b},0)`); q.fillStyle = gr; q.fillRect(0, 0, 64, 64); return b2; };
+    const R2 = rng(77);
+    const stamp = (img, X, Y, rad, a) => { const [u, v] = px(X, Y); const d = rad * K * 2; x.globalAlpha = a; x.drawImage(img, u - d / 2, v - d / 2, d, d); };
+    x.globalCompositeOperation = 'lighter';
+    // disc: exponential, 2.6 kpc scale length
+    const [cu, cv] = px(0, 0); const disc = x.createRadialGradient(cu, cv, 0, cu, cv, 16 * K);
+    for (let r = 0; r <= 16; r += 1) disc.addColorStop(r / 16, `rgba(${r < 4 ? '255,214,160' : '170,185,220'},${(0.22 * Math.exp(-r / 2.6)).toFixed(4)})`);
+    x.fillStyle = disc; x.fillRect(0, 0, S2, S2);
+    // arms: blue-white young stars along the measured spirals, continued fainter past the measured stretches
+    const armBlob = blob(150, 180, 255), whiteBlob = blob(235, 238, 255);
+    for (const a of ARMS) { for (let b = a[1] - a[8]; b <= a[2] + a[8]; b += 0.12) { const Rr = armR(a, b); if (Rr < 3 || Rr > 16.5) continue; const meas = b >= a[1] && b <= a[2];
+        const wv = Math.max(a[7], 0.3) * 2.4; const s1 = Math.sin(b * D), c1 = Math.cos(b * D); const fall = Math.exp(-Rr / 9);
+        stamp(armBlob, Rr * s1, Rr * c1, wv, (meas ? 0.022 : 0.015) * fall * 3);
+        if (R2() < 0.25) { const o = (R2() - 0.5) * wv; stamp(whiteBlob, (Rr + o) * s1, (Rr + o) * c1, wv * 0.3, 0.025 * fall * 3); } } }
+    // bar and bulge: older, yellow stars
+    const ba = BAR.angle * D; x.save(); x.translate(cu, cv); x.rotate(-ba); x.scale(1, 0.34); const bar = x.createRadialGradient(0, 0, 0, 0, 0, BAR.half * K);
+    bar.addColorStop(0, 'rgba(255,232,185,0.8)'); bar.addColorStop(0.25, 'rgba(255,205,135,0.42)'); bar.addColorStop(1, 'rgba(255,190,120,0)'); x.fillStyle = bar; x.fillRect(-BAR.half * K, -BAR.half * K, 2 * BAR.half * K, 2 * BAR.half * K); x.restore();
+    const bul = x.createRadialGradient(cu, cv, 0, cu, cv, 1.6 * K); bul.addColorStop(0, 'rgba(255,246,222,1)'); bul.addColorStop(0.3, 'rgba(255,222,160,0.6)'); bul.addColorStop(1, 'rgba(255,200,140,0)'); x.fillStyle = bul; x.fillRect(0, 0, S2, S2);
+    // dust lanes: dust collects on the inner (concave) edges of the arms; drawn darkening
+    x.globalCompositeOperation = 'source-over'; const dust = blob(18, 10, 6);
+    for (const a of ARMS) { if (a[0] === '3-kpc arm') continue; for (let b = a[1] - a[8] * 0.7; b <= a[2] + a[8] * 0.7; b += 0.18) { const Rr = armR(a, b) - Math.max(a[7], 0.3) * 0.75; if (Rr < 3.2 || Rr > 15) continue;
+        const s1 = Math.sin(b * D), c1 = Math.cos(b * D); const o = (R2() - 0.5) * 0.25; stamp(dust, (Rr + o) * s1, (Rr + o) * c1, 0.45 + R2() * 0.3, 0.09); } }
+    // star-forming knots, pink, scattered at random along the arms (not real positions)
+    x.globalCompositeOperation = 'lighter'; const pink = blob(255, 120, 170);
+    for (let k = 0; k < 900; k++) { const a = ARMS[1 + Math.floor(R2() * (ARMS.length - 1))]; const b = a[1] - a[8] + R2() * (a[2] - a[1] + 2 * a[8]); const Rr = armR(a, b) + (R2() - 0.5) * Math.max(a[7], 0.3); if (Rr < 3.5 || Rr > 15) continue;
+      stamp(pink, Rr * Math.sin(b * D), Rr * Math.cos(b * D), 0.08 + R2() * 0.12, 0.35); }
+    x.globalAlpha = 1; return c; }
+  const discTex = new T.CanvasTexture(paintDisc(small ? 1024 : 2048)); discTex.colorSpace = T.SRGBColorSpace; discTex.anisotropy = 4;
+  const dG = new T.BufferGeometry(); const corners = [[-HALF, -HALF], [HALF, -HALF], [HALF, HALF], [-HALF, HALF]];
+  dG.setAttribute('position', new T.Float32BufferAttribute(corners.flatMap(([X, Y]) => gc2ecl(X, Y)), 3)); dG.setAttribute('uv', new T.Float32BufferAttribute([0, 0, 1, 0, 1, 1, 0, 1], 2)); dG.setIndex([0, 1, 2, 0, 2, 3]);
+  const nrm = new T.Vector3(...E2).normalize();
+  const dUni = { map: { value: discTex }, uOp: { value: 0 }, uN: { value: nrm } };
+  const dMat = new T.ShaderMaterial({ uniforms: dUni, transparent: true, depthWrite: false, side: T.DoubleSide, blending: T.AdditiveBlending,
+    vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nvarying vec2 vUv; varying float vF; uniform vec3 uN; void main(){ vUv = uv; vec4 wp = modelMatrix * vec4(position,1.0); vec3 v = normalize(cameraPosition - wp.xyz); vF = smoothstep(0.05, 0.45, abs(dot(v, uN))); gl_Position = projectionMatrix * viewMatrix * wp;\n#include <logdepthbuf_vertex>\n}',
+    fragmentShader: '#include <logdepthbuf_pars_fragment>\nuniform sampler2D map; uniform float uOp; varying vec2 vUv; varying float vF; void main(){ vec4 c = texture2D(map, vUv); gl_FragColor = vec4(c.rgb * c.a * uOp * vF, 1.0);\n#include <logdepthbuf_fragment>\n}' });
+  const discMesh = new T.Mesh(dG, dMat); discMesh.frustumCulled = false; discMesh.renderOrder = -3;
+  const galaxy = new T.Group(); galaxy.add(discMesh, glow); group.add(galaxy);
 
   // ---- exoplanet hosts (NASA Exoplanet Archive)
   let exo = null; try { const r = await fetch('data/exoplanets.json?t=' + Math.floor(Date.now() / 864e5)); if (r.ok) exo = await r.json(); } catch (e) { }
@@ -165,6 +207,8 @@ export async function createStars({ T, S, ui, onProgress }) {
     uniforms.uFloor.value = pc < 30 ? 0 : pc < 1500 ? Math.min(0.045, 0.018 + 0.02 * Math.log10(pc / 30)) : 0.045 * Math.pow(1500 / pc, 0.7);
     const H = ui.root.clientHeight || innerHeight; gUni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
     // inside the disc the glow becomes the band of the Milky Way across the sky; from outside, the whole spiral
+    const zk = Math.abs(S.camera.position.dot(new T.Vector3(...E2))) / KPC; // height above the disc, kpc
+    dUni.uOp.value = S.show.galaxy === false ? 0 : Math.min(1, Math.max(0, (Math.log10(pc) - 3.2) / 0.8)) * Math.min(1, Math.max(0, (zk - 0.4) / 2));
     gUni.uFade.value = S.show.galaxy === false ? 0 : pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5);
     if (gaia) gaia.visible = pc < 5000; /* from farther out the million stars pile onto a few pixels: a blur that costs the GPU dearly (7 fps on an M-series Mac) */
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
