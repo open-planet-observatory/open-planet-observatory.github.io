@@ -16,16 +16,17 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
       - name: Download and convert (4000×2000 PNG → JPEG)
         run: |
           set -e
           curl -fsSL -o /tmp/gaia-sky.png 'https://sci.esa.int/documents/33580/35361/1567215018536-ESA_Gaia_DR2_AllSky_Brightness_Colour_Cartesian_4000x2000.png/1cc58917-c0b0-1aca-ec41-be321c5c36d0?version=1.0&t=1567215037140&download=true'
           ls -la /tmp/gaia-sky.png
-          file /tmp/gaia-sky.png | grep -i png
-          mkdir -p src/assets/stars
-          convert /tmp/gaia-sky.png -strip -quality 82 src/assets/stars/gaia-sky.jpg
-          identify src/assets/stars/gaia-sky.jpg
-          ls -la src/assets/stars/gaia-sky.jpg
+          mkdir -p src/assets/stars /tmp/sk && cd /tmp/sk && npm init -y >/dev/null && npm install --no-audit --no-fund sharp@0.34.3 >/dev/null
+          node -e "const s=require('sharp');s('/tmp/gaia-sky.png').metadata().then(m=>{console.log(m.width,m.height,m.format);if(m.width<3000)throw new Error('not the 4000x2000 image');return s('/tmp/gaia-sky.png').jpeg({quality:82,mozjpeg:true}).toFile(process.env.GITHUB_WORKSPACE+'/src/assets/stars/gaia-sky.jpg')}).then(i=>console.log('wrote',i.size,'bytes'))"
+          cd "$GITHUB_WORKSPACE" && ls -la src/assets/stars/gaia-sky.jpg
           echo '{"about":"ESA Gaia DR2 all-sky brightness and colour map, equirectangular, galactic coordinates (centre in the middle, longitude increasing to the left). Credit: ESA/Gaia/DPAC, CC BY-SA 3.0 IGO. Source: https://sci.esa.int/web/gaia/-/60196-gaia-s-sky-in-colour-equirectangular-projection","built":"'"$(date -u +%F)"'"}' > src/assets/stars/gaia-sky.json
       - name: Commit
         run: |
