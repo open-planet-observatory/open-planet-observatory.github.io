@@ -166,6 +166,7 @@ export async function createStars({ T, S, ui, onProgress }) {
     const H = ui.root.clientHeight || innerHeight; gUni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
     // inside the disc the glow becomes the band of the Milky Way across the sky; from outside, the whole spiral
     gUni.uFade.value = S.show.galaxy === false ? 0 : pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5);
+    if (gaia) gaia.visible = pc < 5000; /* from farther out the million stars pile onto a few pixels: a blur that costs the GPU dearly (7 fps on an M-series Mac) */
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
