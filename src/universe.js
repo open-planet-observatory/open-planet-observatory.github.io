@@ -77,6 +77,7 @@ async function build() {
      <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label><input type="checkbox" data-show="galaxy" checked> Galaxy glow (model)</label><label><input type="checkbox" data-show="arms"> Measured arm stretches</label><label><input type="checkbox" data-show="constellations"> Constellations</label><label><input type="checkbox" data-show="exo"> Stars with planets</label></div>
      <div class="uni-goto"><button class="more" id="uniNear">Nearest stars</button><button class="more" id="uniNeo">Asteroids passing Earth</button></div>
     </details>
+    <p class="uni-help">Drag to turn · Right-drag, Shift-drag or two fingers to move · Scroll or pinch to zoom toward the pointer · Arrow keys move too</p>
     <p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Constellation figures: d3-celestial</p>
    </div>
    <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div>
@@ -92,7 +93,7 @@ async function build() {
   renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
   const scene = new T.Scene(); scene.background = new T.Color('#03050b');
   const camera = new T.PerspectiveCamera(45, 1, 1e-8, 1e13); camera.up.set(0, 0, 1);
-  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 2e10; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6;
+  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 2e10; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6; controls.zoomToCursor = true; controls.screenSpacePanning = true; controls.keyPanSpeed = 14; controls.listenToKeyEvents(window); /* pan: right-drag, Shift-drag, two fingers, or arrow keys */
   scene.add(new T.AmbientLight(0xffffff, 0.08)); const sunLight = new T.PointLight(0xffffff, 3.2, 0, 0); scene.add(sunLight);
   S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true, constellations: false, exo: false, arms: false, galaxy: true }, focus: null, anim: null, solar: null };
   for (const k of ['orbits', 'craft', 'comets', 'bodies']) { S.groups[k] = new T.Group(); scene.add(S.groups[k]); }
@@ -263,7 +264,7 @@ function nearCard() { if (!STARS) return; const el = document.getElementById('un
   el.hidden = false; el.querySelector('.sc-x').onclick = () => { el.hidden = true; };
   el.querySelectorAll('[data-near]').forEach(b => b.onclick = () => { const s = L[+b.dataset.near]; let o = S.objs.find(x => x.hip === s.hip); if (!o) { o = { name: s.name, kind: 'star', pos: s.p, prio: 7, colour: '#fff4dc', star: true, hip: s.hip, dpc: s.dpc, mag: s.mag, minCam: 4000 }; S.objs.push(o); } focusOn(o, true); }); }
 function galaxyView(ms = 3200, quiet = false) { if (!SM) return; const gc = V().fromArray(SM.galToEcl([8150 * SM.PC, 0, 0])); const up = V().fromArray(SM.galToEcl([0, 0, 1])).normalize();
-  const target = gc.clone().multiplyScalar(0.45); S.focus = null; ui.card.hidden = true; animateTo(target, 1.0e10, ms, up.clone().add(V().fromArray(SM.galToEcl([-0.35, 0, 0])).normalize().multiplyScalar(0.5)).normalize());
+  const target = gc.clone(); S.focus = null; /* pivot on the galactic centre, so the galaxy turns about its own middle */ ui.card.hidden = true; animateTo(target, 1.0e10, ms, up.clone().add(V().fromArray(SM.galToEcl([-0.35, 0, 0])).normalize().multiplyScalar(0.5)).normalize());
   const gco = S.byName['Galactic centre (Sagittarius A*)']; if (gco && !quiet) setTimeout(() => card(gco), ms + 100); }
 function neoCard() { const el = document.getElementById('uniNeoCard'); const L = (S.solar && S.solar.approaches) || []; const LD = 384400 / AU_KM;
   el.innerHTML = `<div class="sc-h"><b>Asteroids passing Earth, next 60 days</b><button class="sc-x" aria-label="Close">×</button></div>
@@ -305,7 +306,8 @@ function modelCard() {
    <ul class="uni-list"><li><b>Spiral arms</b>: distances measured by radio parallax to star-forming regions (<a href="https://doi.org/10.3847/1538-4357/ab4a11" target="_blank" rel="noopener">Reid et al. 2019</a>). Past the measured stretches, the arms are continued with the same winding. That part is a guess and is drawn fainter.</li>
    <li><b>Central bar</b>: about 5,000 parsecs (16,000 light-years) from the centre to each tip, angled about 30° from our line of sight to the centre (<a href="https://doi.org/10.1093/mnras/stv745" target="_blank" rel="noopener">Wegg, Gerhard &amp; Portail 2015</a>).</li>
    <li><b>Disc</b>: thins out with a scale length of about 2.6 kiloparsecs, about 8,500 light-years (<a href="https://doi.org/10.1146/annurev-astro-081915-023441" target="_blank" rel="noopener">Bland-Hawthorn &amp; Gerhard 2016</a>).</li>
-   <li><b>Pink knots</b> (star-forming clouds) are scattered at random along the arms to show what arms contain, not where any real cloud is.</li></ul>
+   <li><b>Dark dust lanes</b> are drawn along the inner edges of the arms, where dust collects in real spiral galaxies; <b>pink knots</b> (star-forming clouds) are scattered at random along the arms. Both show what arms contain, not where any real cloud is.</li>
+   <li>From far away, a smooth glow painted from this same model sits under the sparkles, the way a galaxy looks in a photograph.</li></ul>
    <p class="sc-note">The stars themselves are real: each one's distance was measured by ESA's Gaia or Hipparcos satellite. Turn the glow off under “More layers and tools”.</p>`;
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; }; }
 
@@ -317,14 +319,14 @@ function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.q
   tk.innerHTML = TICKS.map(([n, d]) => `<button style="top:${(toV(d) * 100).toFixed(1)}%" data-zd="${d}">${n}</button>`).join('');
   tk.querySelectorAll('[data-zd]').forEach(b => b.onclick = () => { stopTour(); const d = +b.dataset.zd; ui.card.hidden = true; if (d >= 1.5e10) return galaxyView(3200, true); S.focus = null; animateTo(new T.Vector3(0, 0, 0), d, 2200); });
   const setDist = d => { const t = S.controls.target; d = Math.min(1.5e10, Math.max(3e-4, d));
-    if (!(S.focus && S.focus.rKm && d < 200)) { S.focus = null; t.set(0, 0, 0); } // past the planets, zoom around the Sun
+    if (!(S.focus && S.focus.rKm && d < 200)) { S.focus = null; const base = S._zBase || t.clone(); const bl = base.length(); t.copy(base).multiplyScalar(bl > 0 ? Math.min(1, d / (2 * bl)) : 0); } // keeps your pan when zooming out; glides back to the Sun as you zoom in
     const dir = S.camera.position.clone().sub(t).normalize(); if (!isFinite(dir.x)) dir.set(0.4, -0.8, 0.45).normalize(); S.camera.position.copy(t).add(dir.multiplyScalar(d)); S.anim = null; };
   const fromY = y => { const r = tr.getBoundingClientRect(); const v = Math.max(0, Math.min(1, (y - r.top) / r.height)); setDist(Math.pow(10, ZMIN + v * (ZMAX - ZMIN))); };
   let drag = false;
-  tr.addEventListener('pointerdown', e => { drag = true; tr.setPointerCapture(e.pointerId); stopTour(); fromY(e.clientY); });
+  tr.addEventListener('pointerdown', e => { drag = true; S._zBase = S.focus && S.focus.rKm ? null : S.controls.target.clone(); tr.setPointerCapture(e.pointerId); stopTour(); fromY(e.clientY); });
   tr.addEventListener('pointermove', e => { if (drag) fromY(e.clientY); });
   tr.addEventListener('pointerup', () => { drag = false; }); tr.addEventListener('pointercancel', () => { drag = false; });
-  el.addEventListener('keydown', e => { const k = { ArrowUp: -1, ArrowDown: 1, PageUp: -4, PageDown: 4 }[e.key]; if (!k) return; e.preventDefault(); stopTour(); setDist(S.camera.position.distanceTo(S.controls.target) * Math.pow(10, k * 0.25)); });
+  el.addEventListener('keydown', e => { const k = { ArrowUp: -1, ArrowDown: 1, PageUp: -4, PageDown: 4 }[e.key]; if (!k) return; e.preventDefault(); e.stopPropagation(); stopTour(); S._zBase = null; setDist(S.camera.position.distanceTo(S.controls.target) * Math.pow(10, k * 0.25)); });
   ui.zoomThumb = document.getElementById('uniThumb'); ui.zoomV = toV; }
 
 // ---------- the guided tour ----------
@@ -353,6 +355,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   if (S.anim) S.anim(now); else if (S.focus && prevFocus) { const p = S.focus.shown || S.focus.pos; if (p) { const d = V().fromArray(p).sub(prevFocus); S.camera.position.add(d); S.controls.target.add(d); } }
   S.controls.minDistance = S.focus && S.focus.dispR ? S.focus.dispR * 1.3 : 1e-6;
   const camAU = S.camera.position.length();
+  const near = camAU < 2e5; S.groups.bodies.visible = near; S.groups.orbits.visible = near && S.show.orbits; S.groups.craft.visible = near && S.show.craft; S.groups.comets.visible = near && S.show.comets; /* light-years out, the planets are a speck: the Sun's star point stands in */
   if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
   const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : 'The Milky Way'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
   S.controls.update(); S.renderer.render(S.scene, S.camera); labels(); scaleBar();
@@ -367,7 +370,7 @@ async function openUniverse(dest) {
     await new Promise(res => { setTimeout(res, 2200); try { g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-30, 20, 9e7), duration: 1.4, complete: res, cancel: res }); } catch (e) { res(); } }); }
   if (!built) { try { await build(); } catch (e) { console.warn('Solar System view could not start', e); return; } }
   ui.date = document.getElementById('uniDate'); ui.title = ui.root.querySelector('.uni-title'); ui.model = document.getElementById('uniModel'); note();
-  open = true; ui.root.hidden = false; requestAnimationFrame(() => ui.root.classList.add('on'));
+  open = true; S.controls.enabled = true; ui.root.hidden = false; requestAnimationFrame(() => ui.root.classList.add('on'));
   if (g && g.viewer) g.viewer.useDefaultRenderLoop = false; // pause the globe while the Solar System is open
   simMs = Date.now(); rate = 0; update();
   const e = S.byName.Earth; const ep = V().fromArray(e.pos); const sunDir = ep.clone().negate().normalize();
@@ -378,7 +381,7 @@ async function openUniverse(dest) {
   try { history.replaceState(null, '', dest === 'galaxy' ? '#sky=galaxy' : '#sky=solar'); } catch (x) { }
 }
 function closeUniverse() { if (!open) return; stopTour(); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
-  setTimeout(() => { open = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
+  setTimeout(() => { open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
     const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }
     try { history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
 O && (O.openUniverse = openUniverse, O.uniState = () => S);

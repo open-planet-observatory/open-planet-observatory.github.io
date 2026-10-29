@@ -320,3 +320,6 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 /* Safari: a drag on the sky started a text selection, which tints the whole canvas blue and can scroll the overlay */
 #uni{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #uni .uni-card,#uni .uni-card *{-webkit-user-select:text;user-select:text}
+
+.uni-help{margin:0;font-size:.72rem;color:#aab4c3}
+@media (max-width:640px){.uni-help{display:none}}
