@@ -16,7 +16,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const EPS = 23.4392911 * Math.PI / 180, D = Math.PI / 180;
 
 async function tapAsync(query) {
-  const r = await fetch(TAP + '/async', { method: 'POST', redirect: 'manual', headers: UA, body: new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', PHASE: 'RUN', QUERY: query }) });
+  const r = await fetch(TAP + '/async', { method: 'POST', redirect: 'manual', headers: UA, body: new URLSearchParams({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'csv', PHASE: 'RUN', MAXREC: '2000000', QUERY: query }) });
   const job = r.headers.get('location'); if (!job) throw new Error('Gaia TAP: no job location (HTTP ' + r.status + ')');
   for (let i = 0; i < 360; i++) { await sleep(5000); const ph = (await (await fetch(job + '/phase', { headers: UA })).text()).trim(); if (i % 6 === 0) log('job', ph);
     if (ph === 'COMPLETED') break; if (ph === 'ERROR' || ph === 'ABORTED') throw new Error('Gaia TAP job ' + ph + ': ' + (await (await fetch(job + '/error', { headers: UA })).text()).slice(0, 300)); }
@@ -32,7 +32,14 @@ function toEcl(ra, dec) { const x = Math.cos(dec * D) * Math.cos(ra * D), y = Ma
 await fs.mkdir(OUT, { recursive: true });
 // ---- Gaia: 8 bytes per star: uint16 ecliptic lon, uint16 lat, uint16 log10(distance pc), uint8 G mag ×20, uint8 BP−RP
 log('Gaia query…');
-const g = rows(await tapAsync('SELECT ra, dec, parallax, phot_g_mean_mag AS g, bp_rp FROM gaiadr3.gaia_source WHERE phot_g_mean_mag < 10.8 AND phot_g_mean_mag >= 6.5 AND parallax_over_error > 5'));
+// split into magnitude bands so each job stays far below the archive's per-job row limits (default MAXREC is 50,000)
+const BANDS = [6.5, 9, 9.8, 10.3, 10.8], g = [];
+for (let i = 0; i < BANDS.length - 1; i++) {
+  const part = rows(await tapAsync(`SELECT ra, dec, parallax, phot_g_mean_mag AS g, bp_rp FROM gaiadr3.gaia_source WHERE phot_g_mean_mag >= ${BANDS[i]} AND phot_g_mean_mag < ${BANDS[i + 1]} AND parallax_over_error > 5`));
+  log('Gaia band', BANDS[i], '–', BANDS[i + 1], part.length, 'rows');
+  if (part.length === 50000 || part.length === 2000000) throw new Error('Gaia band ' + BANDS[i] + ' hit a row limit (' + part.length + ')');
+  for (const r of part) g.push(r);
+}
 log('Gaia rows', g.length);
 if (g.length < 500000) throw new Error('Gaia returned only ' + g.length + ' rows');
 const buf = Buffer.alloc(g.length * 8); let n = 0, dmax = 0;
