@@ -74,11 +74,11 @@ async function build() {
     <div class="seg" role="group" aria-label="Time"><button data-rate="-30" title="Back 30 days per second">◀◀</button><button data-rate="0" aria-pressed="true" title="Live: now">Now</button><button data-rate="1" title="Forward 1 day per second">▶</button><button data-rate="30" title="Forward 30 days per second">▶▶</button></div>
     <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniGal">Milky Way</button></div>
     <details class="uni-more"><summary>More layers and tools</summary>
-     <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label><input type="checkbox" data-show="galaxy" checked> Galaxy glow (model)</label><label><input type="checkbox" data-show="arms"> Measured arm stretches</label><label><input type="checkbox" data-show="constellations"> Constellations</label><label><input type="checkbox" data-show="exo"> Stars with planets</label></div>
+     <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label><input type="checkbox" data-show="sky" checked> Real sky (ESA Gaia)</label><label><input type="checkbox" data-show="galaxy" checked> Galaxy glow (model)</label><label><input type="checkbox" data-show="arms"> Measured arm stretches</label><label><input type="checkbox" data-show="constellations"> Constellations</label><label><input type="checkbox" data-show="exo"> Stars with planets</label></div>
      <div class="uni-goto"><button class="more" id="uniNear">Nearest stars</button><button class="more" id="uniNeo">Asteroids passing Earth</button></div>
     </details>
     <p class="uni-help">Drag to turn · Right-drag, Shift-drag or two fingers to move · Scroll or pinch to zoom toward the pointer · Arrow keys move too</p>
-    <p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Constellation figures: d3-celestial</p>
+    <p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Constellation figures: d3-celestial</p>
    </div>
    <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div>
    <div class="sat-card uni-card" id="uniCard" hidden></div>
@@ -94,8 +94,13 @@ async function build() {
   const scene = new T.Scene(); scene.background = new T.Color('#03050b');
   const camera = new T.PerspectiveCamera(45, 1, 1e-8, 1e13); camera.up.set(0, 0, 1);
   const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 2e10; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6; controls.zoomToCursor = true; controls.screenSpacePanning = true; controls.keyPanSpeed = 14; controls.listenToKeyEvents(window); /* pan: right-drag, Shift-drag, two fingers, or arrow keys */
+  // Zoom toward the pointer without OrbitControls' far-plane unprojection: with near 1e-8 and far 1e13 that arithmetic
+  // cancels to 0/0 and the camera became NaN (a black screen on wheel or pinch). The ray direction is built in camera space instead.
+  controls._updateZoomParameters = function (x, y) { if (!this.zoomToCursor) return; this._performCursorZoom = true; const r = this.domElement.getBoundingClientRect(); if (!(r.width > 0 && r.height > 0)) { this._performCursorZoom = false; return; }
+    this._mouse.x = (x - r.left) / r.width * 2 - 1; this._mouse.y = -((y - r.top) / r.height) * 2 + 1; const t = Math.tan(this.object.fov * Math.PI / 360);
+    this._dollyDirection.set(this._mouse.x * t * this.object.aspect, this._mouse.y * t, -1).normalize().transformDirection(this.object.matrixWorld); };
   scene.add(new T.AmbientLight(0xffffff, 0.08)); const sunLight = new T.PointLight(0xffffff, 3.2, 0, 0); scene.add(sunLight);
-  S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true, constellations: false, exo: false, arms: false, galaxy: true }, focus: null, anim: null, solar: null };
+  S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true, constellations: false, exo: false, arms: false, galaxy: true, sky: true }, focus: null, anim: null, solar: null };
   for (const k of ['orbits', 'craft', 'comets', 'bodies']) { S.groups[k] = new T.Group(); scene.add(S.groups[k]); }
   const sphere = new T.SphereGeometry(1, 48, 32);
   const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,244,214,1)'); r.addColorStop(.25, 'rgba(255,214,140,.55)'); r.addColorStop(1, 'rgba(255,190,90,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
@@ -168,7 +173,7 @@ async function build() {
     S.objs.push(...STARS.objs); for (const o of STARS.objs) if (!S.byName[o.name]) S.byName[o.name] = o; } catch (e) { console.warn('stars unavailable', e); }
   built = true;
 }
-function resize() { if (!S) return; const w = ui.root.clientWidth || innerWidth, h = ui.root.clientHeight || innerHeight; S.renderer.setSize(w, h, false); S.camera.aspect = w / h; S.camera.updateProjectionMatrix(); }
+function resize() { if (!S) return; const w = ui.root.clientWidth || innerWidth, h = ui.root.clientHeight || innerHeight; if (!(w > 0 && h > 0)) return; S.renderer.setSize(w, h, false); S.camera.aspect = w / h; S.camera.updateProjectionMatrix(); }
 function note() { const n = document.getElementById('uniNote'); if (!n) return; n.textContent = S.size === 'vis' ? 'Distances are real. Bodies smaller than a few pixels are drawn larger so you can see them, and moons are pushed out from enlarged planets. Switch to True scale to see the real emptiness.' : 'Everything at its real size: most planets are far smaller than a pixel from here. The labels show where they are.'; }
 
 // ---------- positions, sizes, labels ----------
@@ -230,7 +235,7 @@ function focusOn(o, fly) { S.focus = o; const p = o.shown || o.pos; if (!p) retu
   // look at bodies from their sunlit side, a little above the ecliptic
   const dir = o.name === 'Sun' || o.star || o.host || o.model || o.kind === 'galactic centre' ? null : target.clone().negate().normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.5).add(new T.Vector3(0, 0, 0.35)).normalize();
   if (fly) animateTo(target, dist, 1600, dir); card(o); }
-function animateTo(target, dist, ms = 1600, want = null) { const c = S.camera, t = S.controls.target; const fromT = t.clone(), fromP = c.position.clone();
+function animateTo(target, dist, ms = 1600, want = null) { const c = S.camera, t = S.controls.target; const fromT = t.clone(), fromP = c.position.clone(); if (![fromP.x, fromP.y, fromP.z, fromT.x, fromT.y, fromT.z].every(isFinite)) { fromT.set(0, 0, 0); fromP.set(0.4, -0.8, 0.45).normalize().multiplyScalar(4); }
   const dir = want ? want.clone() : fromP.clone().sub(fromT).normalize(); if (!isFinite(dir.x) || dir.lengthSq() < 0.5) dir.set(0.4, -0.8, 0.45).normalize(); if (fromP.distanceTo(fromT) < 1e-9) fromP.copy(fromT).add(dir.clone().multiplyScalar(dist)); const toP = target.clone().add(dir.multiplyScalar(dist));
   const t0 = performance.now(); S.anim = now => { const k = Math.min(1, (now - t0) / ms), e = k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
     const dF = fromP.distanceTo(fromT), dT = dist, dd = Math.exp(Math.log(dF) + (Math.log(dT) - Math.log(dF)) * e); // log-distance easing reads as a smooth zoom
@@ -307,7 +312,8 @@ function modelCard() {
    <li><b>Central bar</b>: about 5,000 parsecs (16,000 light-years) from the centre to each tip, angled about 30° from our line of sight to the centre (<a href="https://doi.org/10.1093/mnras/stv745" target="_blank" rel="noopener">Wegg, Gerhard &amp; Portail 2015</a>).</li>
    <li><b>Disc</b>: thins out with a scale length of about 2.6 kiloparsecs, about 8,500 light-years (<a href="https://doi.org/10.1146/annurev-astro-081915-023441" target="_blank" rel="noopener">Bland-Hawthorn &amp; Gerhard 2016</a>).</li>
    <li><b>Dark dust lanes</b> are drawn along the inner edges of the arms, where dust collects in real spiral galaxies; <b>pink knots</b> (star-forming clouds) are scattered at random along the arms. Both show what arms contain, not where any real cloud is.</li>
-   <li>From far away, a smooth glow painted from this same model sits under the sparkles, the way a galaxy looks in a photograph.</li></ul>
+   <li>From far away, a smooth glow painted from this same model sits under the sparkles, the way a galaxy looks in a photograph.</li>
+   <li><b>Near the Sun the sky is real</b>: ESA Gaia's all-sky map of 1.7 billion stars, the Milky Way exactly as it surrounds us (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO). It fades as you leave, because that picture is only right from here.</li></ul>
    <p class="sc-note">The stars themselves are real: each one's distance was measured by ESA's Gaia or Hipparcos satellite. Turn the glow off under “More layers and tools”.</p>`;
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; }; }
 
@@ -358,7 +364,11 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   const near = camAU < 2e5; S.groups.bodies.visible = near; S.groups.orbits.visible = near && S.show.orbits; S.groups.craft.visible = near && S.show.craft; S.groups.comets.visible = near && S.show.comets; /* light-years out, the planets are a speck: the Sun's star point stands in */
   if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
   const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : 'The Milky Way'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
-  S.controls.update(); S.renderer.render(S.scene, S.camera); labels(); scaleBar();
+  S.controls.update();
+  { const c = S.camera.position, t = S.controls.target; const okv = v => isFinite(v.x) && isFinite(v.y) && isFinite(v.z);
+    if (okv(c) && okv(t) && c.distanceTo(t) > 1e-9) { (S._good || (S._good = { c: V(), t: V() })).c.copy(c); S._good.t.copy(t); }
+    else if (S._good) { c.copy(S._good.c); t.copy(S._good.t); S.anim = null; console.warn('camera reset after a bad value'); } }
+  S.renderer.render(S.scene, S.camera); labels(); scaleBar();
   if (S.focus && !ui.card.hidden && !S.focus.star && !S.focus.host && !S.focus.model && S.focus.kind !== 'galactic centre' && (now - (S._cardT || 0)) > 1000) { S._cardT = now; card(S.focus); }
   if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; }
   const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
@@ -378,12 +388,12 @@ async function openUniverse(dest) {
   S.focus = null; lastFrame = 0; requestAnimationFrame(frame);
   if (dest === 'galaxy') setTimeout(() => { if (open) galaxyView(7000, true); }, 500); /* one long zoom: Earth, planets, stars, galaxy */
   else setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
-  try { history.replaceState(null, '', dest === 'galaxy' ? '#sky=galaxy' : '#sky=solar'); } catch (x) { }
+  /* the address bar is left alone: a reload always returns to Earth; #sky=solar / #sky=galaxy still open these views when someone arrives with them */
 }
 function closeUniverse() { if (!open) return; stopTour(); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
   setTimeout(() => { open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
     const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }
-    try { history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
+    try { if (/sky=|view=solar/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
 O && (O.openUniverse = openUniverse, O.uniState = () => S);
 if (window.__wantGalaxy || /sky=galaxy/.test(location.hash)) setTimeout(() => openUniverse('galaxy'), 2500);
 else if (window.__wantSolar || /(view|sky)=solar/.test(location.hash)) setTimeout(openUniverse, 2500);

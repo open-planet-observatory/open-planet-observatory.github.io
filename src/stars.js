@@ -179,6 +179,25 @@ export async function createStars({ T, S, ui, onProgress }) {
     vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\nvarying vec2 vUv; varying float vF; uniform vec3 uN; void main(){ vUv = uv; vec4 wp = modelMatrix * vec4(position,1.0); vec3 v = normalize(cameraPosition - wp.xyz); vF = smoothstep(0.05, 0.45, abs(dot(v, uN))); gl_Position = projectionMatrix * viewMatrix * wp;\n#include <logdepthbuf_vertex>\n}',
     fragmentShader: '#include <logdepthbuf_pars_fragment>\nuniform sampler2D map; uniform float uOp; varying vec2 vUv; varying float vF; void main(){ vec4 c = texture2D(map, vUv); gl_FragColor = vec4(c.rgb * c.a * uOp * vF, 1.0);\n#include <logdepthbuf_fragment>\n}' });
   const discMesh = new T.Mesh(dG, dMat); discMesh.frustumCulled = false; discMesh.renderOrder = -3;
+
+  // ---- the real sky: ESA Gaia's all-sky map (what the Milky Way looks like from the Sun), wrapped around the viewer
+  // Loaded when it exists (assets/stars/gaia-sky.jpg, built by the "Build sky image" workflow); fades out as you leave the
+  // Sun's neighbourhood, because the picture is only right from here. Credit: ESA/Gaia/DPAC, CC BY-SA 3.0 IGO.
+  let sky = null, skyInfo = null;
+  (async () => { try { const r = await fetch('assets/stars/gaia-sky.json'); if (!r.ok) return; skyInfo = await r.json();
+    const tx = await new T.TextureLoader().loadAsync('assets/stars/gaia-sky.jpg'); tx.colorSpace = T.SRGBColorSpace; tx.minFilter = T.LinearMipmapLinearFilter; tx.anisotropy = 8;
+    const M = [AG[0][0], AG[0][1], AG[0][2], AG[1][0], AG[1][1], AG[1][2], AG[2][0], AG[2][1], AG[2][2]]; // ecliptic → galactic goes through ICRS: the transposes of the matrices in galToEcl
+    const sUni = { map: { value: tx }, uOp: { value: 0 }, uEps: { value: EPS } , uAG: { value: new T.Matrix3().set(...M) } }; // set() is row-major; fromArray would transpose it
+    const sMat = new T.ShaderMaterial({ uniforms: sUni, side: T.BackSide, depthWrite: false, depthTest: false, transparent: true, blending: T.AdditiveBlending,
+      vertexShader: 'varying vec3 vDir; void main(){ vec4 wp = modelMatrix * vec4(position,1.0); vDir = wp.xyz - cameraPosition; gl_Position = projectionMatrix * viewMatrix * wp; gl_Position.z = gl_Position.w * 0.999999; }',
+      fragmentShader: `uniform sampler2D map; uniform float uOp; uniform float uEps; uniform mat3 uAG; varying vec3 vDir; const float PI = 3.14159265;
+        void main(){ vec3 e = normalize(vDir); // ecliptic J2000 → equatorial (ICRS) → galactic
+          vec3 q = vec3(e.x, e.y * cos(uEps) - e.z * sin(uEps), e.y * sin(uEps) + e.z * cos(uEps));
+          vec3 g = uAG * q; float l = atan(g.y, g.x); float b = asin(clamp(g.z, -1.0, 1.0));
+          vec2 uv = vec2(0.5 - l / (2.0 * PI), 0.5 + b / PI); vec4 c = texture2D(map, uv);
+          gl_FragColor = vec4(c.rgb * uOp, 1.0); }` });
+    sky = new T.Mesh(new T.SphereGeometry(1, 48, 24), sMat); sky.frustumCulled = false; sky.renderOrder = -10; sky.scale.setScalar(3e9); group.add(sky); sky.userData.uni = sUni;
+  } catch (e) { console.warn('Gaia sky', e); } })();
   const galaxy = new T.Group(); galaxy.add(discMesh, glow); group.add(galaxy);
 
   // ---- exoplanet hosts (NASA Exoplanet Archive)
@@ -190,7 +209,7 @@ export async function createStars({ T, S, ui, onProgress }) {
     const pm = new T.Points(g, new T.PointsMaterial({ size: 11, sizeAttenuation: false, map: ring, transparent: true, depthWrite: false })); pm.frustumCulled = false; exoGroup.add(pm); }
 
   // ---- Gaia: a million stars, loaded on demand
-  let gaia = null, gaiaLoading = null;
+  let gaia = null, gaiaFar = null, gaiaLoading = null;
   async function loadGaia() { if (gaia || gaiaLoading) return gaiaLoading; gaiaLoading = (async () => {
     const r = await fetch('assets/stars/gaia.bin'); if (!r.ok) throw new Error('gaia.bin HTTP ' + r.status); const total = +r.headers.get('content-length') || B.gaia.count * 8;
     const reader = r.body.getReader(); const buf = new Uint8Array(total); let got = 0;
@@ -200,7 +219,12 @@ export async function createStars({ T, S, ui, onProgress }) {
       const d = Math.pow(10, ld), g = buf[o + 6] / 20, c = buf[o + 7]; const cl = Math.cos(lat * D), r = d * PC;
       P[i * 3] = r * cl * Math.cos(lon * D); P[i * 3 + 1] = r * cl * Math.sin(lon * D); P[i * 3 + 2] = r * Math.sin(lat * D); M[i] = g - 5 * (ld - 1);
       const cc = colourOf(c === 255 ? null : c / 50 - 0.5); Cc[i * 3] = cc[0] / 255; Cc[i * 3 + 1] = cc[1] / 255; Cc[i * 3 + 2] = cc[2] / 255; }
-    gaia = pointsFrom(P, M, Cc); group.add(gaia); onProgress && onProgress(1); return N; })(); return gaiaLoading; }
+    gaia = pointsFrom(P, M, Cc); group.add(gaia);
+    // a one-in-six subset carries the catalogue's shape when the camera is far out, where a million overlapping points cost too much
+    const K = 6, n2 = Math.floor(N / K); const P2 = new Float32Array(n2 * 3), M2 = new Float32Array(n2), C2 = new Float32Array(n2 * 3);
+    for (let i = 0; i < n2; i++) { const j = i * K; P2.set(P.subarray(j * 3, j * 3 + 3), i * 3); M2[i] = M[j]; C2.set(Cc.subarray(j * 3, j * 3 + 3), i * 3); }
+    gaiaFar = pointsFrom(P2, M2, C2); gaiaFar.material = gaiaFar.material.clone(); gaiaFar.material.uniforms = { uLim: uniforms.uLim, uFloor: { value: 0 }, uPx: uniforms.uPx }; group.add(gaiaFar);
+    onProgress && onProgress(1); return N; })(); return gaiaLoading; }
 
   function update(camDistAU) { // camDistAU: camera distance from the Sun
     const pc = camDistAU / PC; // faint stars keep a dim floor so the catalogue's shape shows from afar, fading again at galaxy scale
@@ -210,10 +234,12 @@ export async function createStars({ T, S, ui, onProgress }) {
     const zk = Math.abs(S.camera.position.dot(new T.Vector3(...E2))) / KPC; // height above the disc, kpc
     dUni.uOp.value = S.show.galaxy === false ? 0 : Math.min(1, Math.max(0, (Math.log10(pc) - 3.2) / 0.8)) * Math.min(1, Math.max(0, (zk - 0.4) / 2));
     gUni.uFade.value = S.show.galaxy === false ? 0 : pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5);
-    if (gaia) gaia.visible = pc < 5000; /* from farther out the million stars pile onto a few pixels: a blur that costs the GPU dearly (7 fps on an M-series Mac) */
+    // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
+    if (gaia) gaia.visible = pc < 4000; if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.5, 0.12 + 0.12 * Math.log10(Math.max(1, pc / 2500))); }
+    if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
   const hipPos = hip => { const h = byHip.get(hip); return h ? h.p : null; };
-  return { group, objs, update, loadGaia, nearest, hipPos, built: B.built, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo, wikiCount: Object.keys(wiki).length };
+  return { group, objs, update, loadGaia, nearest, hipPos, built: B.built, skyInfo: () => skyInfo, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo, wikiCount: Object.keys(wiki).length };
 }
