@@ -147,7 +147,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     const bad = H.filter(h => !(h.d > 1 && h.d < 30000)); ok(!bad.length, 'Space', 'exo-dist', 'Every exoplanet host is between 1 and 30,000 parsecs away', bad.slice(0, 5).map(h => h.h).join(', '));
     const pc = H.find(h => /Proxima Cen/.test(h.h)); ok(pc && Math.abs(pc.d - 1.30) < 0.02, 'Space', 'exo-proxima', 'Proxima Centauri (nearest host star) is 1.30 pc away', pc ? pc.d + ' pc' : 'not found');
     if (exo.sec) { const S2 = exo.sec; ok(S2.newest.length >= 10 && S2.nearest.length >= 10 && S2.small.length >= 5, 'Space', 'worlds-lists', 'The Other worlds section has its newest, nearest and small-temperate lists', `${S2.newest.length} newest, ${S2.nearest.length} nearest, ${S2.small.length} small and temperate`);
-      const age = S2.latestRelease ? (now - new Date(S2.latestRelease)) / 864e5 : 9e9; ok(age < 400, 'Space', 'worlds-fresh', "NASA's latest planet release is less than 400 days old", S2.latestRelease || 'none', 'warn');
+      const age = S2.latestRelease ? (now - new Date(S2.latestRelease)) / 864e5 : 9e9; ok(age < 400, 'Space', 'worlds-fresh', "The newest discovery paper in NASA's list is less than 400 days old", S2.latestRelease || 'none', 'warn');
       const pb = S2.nearest.find(p => /Proxima Cen b/.test(p.pl)); ok(!!pb && pb.d < 1.31, 'Space', 'worlds-nearest', 'Proxima Centauri b heads the nearest-worlds list', pb ? pb.pl + ' at ' + pb.d + ' pc' : 'not found'); } }
 
   if (!stars) add('Space', 'stars', 'skip', 'Star catalogue built (ESA Gaia + Hipparcos)', 'not built yet: run the "Build star catalogue" workflow');

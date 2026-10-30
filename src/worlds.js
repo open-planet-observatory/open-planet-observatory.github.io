@@ -31,10 +31,10 @@
       <div class="stat"><b>${fmt(d.planets)}</b><span>confirmed planets</span></div>
       <div class="stat"><b>${fmt(d.hosts)}</b><span>stars with planets</span></div>
       <div class="stat"><b>${fmt(d.multi)}</b><span>systems with more than one</span></div>
-      <div class="stat"><b>${esc(d.latestRelease || '—')}</b><span>latest NASA release</span></div>
+      <div class="stat"><b>${esc(d.latestRelease || '—')}</b><span>newest discovery paper (NASA’s publication month)</span></div>
      </div>
      <h3>Newest confirmations</h3>
-     <p class="small muted">The 25 most recent additions to NASA’s confirmed list, by NASA’s release date. Sizes are in Earth radii; the "year" is a planet’s orbit.</p>
+     <p class="small muted">The 25 most recently announced planets on NASA’s confirmed list, ordered by the publication month of the paper that announced each one (NASA’s discovery-publication field). Sizes are in Earth radii; the "year" is a planet’s orbit.</p>
      <div class="tbl-wrap"><table class="wx-days worlds"><thead><tr><th>Planet</th><th>Distance</th><th>Size</th><th>Year</th><th>Found by</th><th></th></tr></thead><tbody>${d.newest.map(p => planetRow(p, `<td>${esc(p.m)}${p.fac ? '<br><span class="muted small">' + esc(p.fac) + '</span>' : ''}</td>`)).join('')}</tbody></table></div>
      <h3>The nearest worlds</h3>
      <p class="small muted">The 25 closest known planets to the Sun. Proxima Centauri b, the nearest of all, is about 4.2 light-years away: light from it left before the James Webb telescope launched.</p>

@@ -64,7 +64,7 @@ export async function collectSolar({ prev = {}, now = new Date() }) {
 // Confirmed exoplanets grouped by host star (NASA Exoplanet Archive, Planetary Systems Composite table; public).
 // Host positions as ecliptic J2000 lon/lat (deg) and distance (pc) as the archive gives them.
 export async function collectExoplanets() {
-  const q = 'select pl_name,hostname,ra,dec,sy_dist,discoverymethod,disc_year,disc_facility,pl_rade,pl_bmasse,pl_orbper,pl_orbsmax,pl_eqt,pl_insol,st_teff,st_spectype,releasedate from pscomppars where sy_dist is not null';
+  const q = 'select pl_name,hostname,ra,dec,sy_dist,discoverymethod,disc_year,disc_facility,pl_rade,pl_bmasse,pl_orbper,pl_orbsmax,pl_eqt,pl_insol,st_teff,st_spectype,disc_pubdate from pscomppars where sy_dist is not null';
   const r = await fetch('https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=' + encodeURIComponent(q) + '&format=json', { headers: UA, signal: AbortSignal.timeout(120000) });
   if (!r.ok) throw new Error('Exoplanet Archive HTTP ' + r.status);
   const rows = await r.json(); if (rows.length < 3000) throw new Error('only ' + rows.length + ' planets');
@@ -74,12 +74,12 @@ export async function collectExoplanets() {
     if (!h) { const x = Math.cos(p.dec * Dg) * Math.cos(p.ra * Dg), y = Math.cos(p.dec * Dg) * Math.sin(p.ra * Dg), z = Math.sin(p.dec * Dg);
       const ye = y * Math.cos(E) + z * Math.sin(E), ze = -y * Math.sin(E) + z * Math.cos(E);
       h = { h: p.hostname, lon: +(((Math.atan2(ye, x) / Dg) + 360) % 360).toFixed(4), lat: +(Math.asin(ze) / Dg).toFixed(4), d: +(+p.sy_dist).toFixed(3), p: [], sp: p.st_spectype || null, teff: n(p.st_teff) }; by.set(p.hostname, h); }
-    h.p.push([p.pl_name, p.discoverymethod, p.disc_year, n(p.pl_rade), n(p.pl_bmasse), n(p.pl_orbper), n(p.pl_eqt), n(p.pl_orbsmax), p.releasedate || null, p.disc_facility || null]); }
+    h.p.push([p.pl_name, p.discoverymethod, p.disc_year, n(p.pl_rade), n(p.pl_bmasse), n(p.pl_orbper), n(p.pl_eqt), n(p.pl_orbsmax), p.disc_pubdate || null, p.disc_facility || null]); }
   const hosts = [...by.values()];
   // ---- the "Other worlds" section: counts, newest, nearest, small and temperate (NASA's own fields; no score of ours)
   const methods = {}, byYear = {}; for (const p of rows) { methods[p.discoverymethod] = (methods[p.discoverymethod] || 0) + 1; if (p.disc_year) { const y = byYear[p.disc_year] || (byYear[p.disc_year] = {}); y[p.discoverymethod] = (y[p.discoverymethod] || 0) + 1; } }
-  const row = p => ({ pl: p.pl_name, host: p.hostname, d: +(+p.sy_dist).toFixed(2), m: p.discoverymethod, y: p.disc_year, r: n(p.pl_rade), mass: n(p.pl_bmasse), per: n(p.pl_orbper), teq: n(p.pl_eqt), a: n(p.pl_orbsmax), rel: p.releasedate || null, fac: p.disc_facility || null, teff: n(p.st_teff), sp: p.st_spectype || null });
-  const newest = rows.filter(p => p.releasedate).sort((a, b) => b.releasedate.localeCompare(a.releasedate) || b.disc_year - a.disc_year).slice(0, 25).map(row);
+  const row = p => ({ pl: p.pl_name, host: p.hostname, d: +(+p.sy_dist).toFixed(2), m: p.discoverymethod, y: p.disc_year, r: n(p.pl_rade), mass: n(p.pl_bmasse), per: n(p.pl_orbper), teq: n(p.pl_eqt), a: n(p.pl_orbsmax), rel: p.disc_pubdate || null, fac: p.disc_facility || null, teff: n(p.st_teff), sp: p.st_spectype || null });
+  const newest = rows.filter(p => p.disc_pubdate).sort((a, b) => b.disc_pubdate.localeCompare(a.disc_pubdate) || b.disc_year - a.disc_year).slice(0, 25).map(row);
   const nearest = rows.slice().sort((a, b) => a.sy_dist - b.sy_dist).slice(0, 25).map(row);
   const small = rows.filter(p => p.pl_rade != null && +p.pl_rade <= 1.75 && p.pl_eqt != null && +p.pl_eqt >= 180 && +p.pl_eqt <= 320).sort((a, b) => a.sy_dist - b.sy_dist).slice(0, 40).map(row);
   const sec = { asOf: new Date().toISOString().slice(0, 16) + 'Z', planets: rows.length, hosts: hosts.length, multi: hosts.filter(h => h.p.length > 1).length, methods, byYear, newest, nearest, small, latestRelease: newest[0] ? newest[0].rel : null,

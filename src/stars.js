@@ -255,12 +255,14 @@ export async function createStars({ T, S, ui, onProgress }) {
     const zk = Math.abs(S.camera.position.dot(new T.Vector3(...E2))) / KPC; // height above the disc, kpc
     dUni.uOp.value = S.show.galaxy === false ? 0 : Math.min(1, Math.max(0, (Math.log10(pc) - 3.2) / 0.8)) * Math.min(1, Math.max(0.35, (zk - 0.4) / 2));
     const nearPlane = Math.min(1, Math.max(0, (zk - 0.3) / 1.5)); /* inside the disc the additive glow saturates to white: hold it back there */
-    gUni.uFade.value = S.show.galaxy === false ? 0 : (pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5)) * (pc < 1500 ? 1 : 0.45 + 0.55 * nearPlane);
+    /* beyond ~100 kpc the model hands over to its sprite in the galaxies layer: 60,000 glow points stacked on a few pixels cost 17 fps on a Mac */
+    const far = 1 - Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 5) / 0.6)); dUni.uOp.value *= far;
+    gUni.uFade.value = S.show.galaxy === false ? 0 : (pc < 200 ? 0.55 : Math.min(1, 0.55 + 0.45 * Math.log10(pc / 200) / 1.5)) * (pc < 1500 ? 1 : 0.45 + 0.55 * nearPlane) * far;
     // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
-    if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))) * Math.min(1, Math.pow(10000 / pc, 1.6)); /* far out, 168,000 points land on a few dozen pixels: keep their sum below white */ }
+    if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500 && pc < 1.5e5; /* past 150 kpc its floor alpha is under 0.003: drawing 148,000 invisible points onto one spot cost 14 fps */ gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))) * Math.min(1, Math.pow(10000 / pc, 1.6)); /* far out, 168,000 points land on a few dozen pixels: keep their sum below white */ }
     if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
     gxGroup.visible = S.show.galaxies !== false && pc > 3e4; { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 4.5) / 0.8)); gxGroup.children.forEach(o => { if (o.material) o.material.opacity = (o.userData.base || 0.8) * f; }); }
-    cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
+    cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false && far > 0;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
   const hipPos = hip => { const h = byHip.get(hip); return h ? h.p : null; };
