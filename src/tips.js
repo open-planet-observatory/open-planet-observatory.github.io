@@ -3,7 +3,7 @@
 // native tooltip. Controls that had no explanation get one here. Also a one-time pointer to the Solar System view.
 (function(){
 const TIPS={zspin:'Start or stop the globe turning',zin:'Zoom in (you can also pinch or scroll)',zout:'Zoom out. Keep going past the globe to reach the Solar System',zreset:'Back to the starting view',
- 'zuni':'Fly out from Earth to the Solar System: planets, moons, spacecraft and comets, live','zgal':'Fly from Earth past the stars to the whole Milky Way'};
+ 'zuni':'Fly out from Earth to the Solar System: planets, moons, spacecraft and comets, live','zgal':'Fly from Earth past the stars to the whole Milky Way','zweb':'Fly out past our galaxy to the cosmic web: 43,000 real galaxies in clusters and filaments, out to about a billion light-years'};
 const MODE={'3d':'3D globe: satellites, weather, gravity and every live layer',globe:'Lighter 2D globe for slower computers',flat:'Flat world map'};
 function label(){Object.entries(TIPS).forEach(([id,t])=>{const e=document.getElementById(id);if(e&&!e.dataset.tip&&!e.title)e.title=t});
  document.querySelectorAll('#viewseg button').forEach(b=>{if(!b.title&&!b.dataset.tip&&MODE[b.dataset.mode])b.title=MODE[b.dataset.mode]})}

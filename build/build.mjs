@@ -18,6 +18,7 @@ const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', un
 const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = await read('src/globe3d.js'), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = await read('src/owlmanac.js'), chk = await read('src/checks.js'), clim = await read('src/climate.js'), haz = await read('src/hazards.js'), grav = await read('src/gravity.js'), uni = await read('src/universe.js'), tips = await read('src/tips.js'), worlds = await read('src/worlds.js');
 // version stamp for the star module, so a new release isn't hidden behind the browser's cached copy
 const STARS_VER = (await import('node:crypto')).createHash('md5').update(await read('src/stars.js')).digest('hex').slice(0, 10);
+const COSMOS_VER = (await import('node:crypto')).createHash('md5').update(await read('src/cosmos.js')).digest('hex').slice(0, 10);
 const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.png'))).toString('base64');
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');
 const CESIUM_VERSION = JSON.parse(await read('node_modules/cesium/package.json')).version;
@@ -27,7 +28,7 @@ s = s.replace('/*HOOKS_JS*/', () => (await_hooks));
 
 if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script src="data/${n}.js"></script>`);
-  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>\n<script>${tips}</script>\n<script>${worlds}</script>\n<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>\n<script type="module">${uni.replace("import('./stars.js')", () => `import('./stars.js?v=${STARS_VER}')`)}</script>`);
+  s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>\n<script>${tips}</script>\n<script>${worlds}</script>\n<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>\n<script type="module">${uni.replace("import('./stars.js')", () => `import('./stars.js?v=${STARS_VER}')`).replace("import('./cosmos.js')", () => `import('./cosmos.js?v=${COSMOS_VER}')`)}</script>`);
   s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style>`);
   const head = `<!doctype html>
 <html lang="en"><head>
@@ -60,6 +61,7 @@ if (mode === 'hosted') {
   await fs.cp(path.join(ROOT, 'src', 'brand'), path.join(out, 'brand'), { recursive: true });
   await fs.cp(path.join(ROOT, 'src', 'assets'), path.join(out, 'assets'), { recursive: true });
   await fs.copyFile(path.join(ROOT, 'src', 'stars.js'), path.join(out, 'stars.js'));
+  await fs.copyFile(path.join(ROOT, 'src', 'cosmos.js'), path.join(out, 'cosmos.js'));
   // CesiumJS (3D globe): the whole build folder, served from the site
   await fs.rm(path.join(out, 'vendor', 'cesium'), { recursive: true, force: true });
   await fs.cp(path.join(ROOT, 'node_modules', 'cesium', 'Build', 'Cesium'), path.join(out, 'vendor', 'cesium'), { recursive: true });

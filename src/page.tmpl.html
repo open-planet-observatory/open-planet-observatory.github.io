@@ -1,5 +1,5 @@
 <title>Open Planet Observatory · The Owlmanac</title>
-<script>window.__wantSolar=/(view|sky)=solar/.test(location.hash);window.__wantGalaxy=/sky=galaxy/.test(location.hash)</script>
+<script>window.__wantSolar=/(view|sky)=solar/.test(location.hash);window.__wantGalaxy=/sky=galaxy/.test(location.hash);window.__wantWeb=/sky=web/.test(location.hash)</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -764,6 +764,7 @@ window.LIBRARY=[
 ["Space","d3-celestial","Star names and constellation figures","Static","go","BSD-3-Clause","https://github.com/ofrohn/d3-celestial","map"],
 ["Space","Milky Way bar (Wegg, Gerhard & Portail 2015) and disc (Bland-Hawthorn & Gerhard 2016)","Bar length and angle, disc scale length, used for the labeled galaxy model","Static","go","Published papers (MNRAS 450, 4050; ARA&A 54, 529); parameters cited","https://doi.org/10.1093/mnras/stv745","map"],
 ["Space","NASA/IPAC Extragalactic Database: NED-D and name lookup","Measured distances (median of published values) and positions of galaxies within 12 megaparsecs, for the neighbourhood view","Built once","go","NASA, public; acknowledgement requested","https://ned.ipac.caltech.edu/Library/Distances/","map"],
+["Space","2MASS Redshift Survey (Huchra et al. 2012), via NASA HEASARC","Positions and redshifts of 43,000 galaxies over the whole sky, for the cosmic-web view; distances from redshift with the Hubble constant stated","Built once","go","NASA HEASARC, public; cite Huchra et al. 2012","https://heasarc.gsfc.nasa.gov/W3Browse/all/twomassrsc.html","map"],
 ["Space","ESA Gaia all-sky map (DR2)","The real Milky Way around the Sun, from 1.7 billion stars, as the sky in the star view","Built once","go","CC BY-SA 3.0 IGO; credit ESA/Gaia/DPAC","https://sci.esa.int/web/gaia/-/60196-gaia-s-sky-in-colour-equirectangular-projection","map"],
 ["Space","NASA Solar Dynamics Observatory (SDO)","Today's Sun in extreme ultraviolet (AIA 304 Å) for the close-up Sun","Every 10 min","go","NASA, public","https://sdo.gsfc.nasa.gov/data/","map"],
 ["Space","Wikipedia (star stories) via Wikidata","Opening of a star's Wikipedia article, word for word, when you click it; star-to-article matches from Wikidata","On click","go","Wikipedia text CC BY-SA 4.0; Wikidata CC0","https://www.wikidata.org/","map"],

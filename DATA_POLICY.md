@@ -86,6 +86,14 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - A galaxy is drawn as a soft disc only when Wikidata records a diameter for it, face-on because no tilt is recorded; otherwise it is a marker. Names and Wikipedia articles are matched by title; their text is Wikipedia's, word for word, on click.
 - Distances farther out (clusters, walls) will state the assumed expansion rate (Hubble constant) on every card when they are added.
 
+## The cosmic web
+
+- 43,107 galaxies from the 2MASS Redshift Survey (Huchra et al. 2012, ApJS 199, 26; every galaxy brighter than Ks = 11.75 over the whole sky), read from NASA HEASARC's copy. Each dot is one catalogued galaxy; nothing is placed by the site.
+- Distance = recession velocity ÷ the Hubble constant, which the page always shows (70 km/s per megaparsec by default; 67 and 73, the two main measurements, can be switched). These distances are approximate. Galaxies moving slower than 1,000 km/s are left out, because their own motions swamp the expansion; the Neighbours layer, with measured distances, covers them.
+- Blind spots, stated on the page: our galaxy hides the band within about 7° of its plane (the zone of avoidance, drawn as a faint red wedge); far away only the brightest galaxies are bright enough to be in the survey, so the web looks thinner at the edge; and galaxies' own motions stretch clusters along our line of sight.
+- Brightness follows how many other survey galaxies lie within 5 megaparsecs, compared with the average for galaxies at the same distance (the survey sees fewer galaxies far away, so a raw count would only make the middle glow). Clusters and filaments glow and voids stay dark. It is a way of drawing, not a score, and no number from it is shown.
+- Cluster labels: positions and redshifts from NASA/IPAC NED; their text on click is Wikipedia's, word for word.
+
 ## Other worlds (exoplanets)
 
 - Every figure is the NASA Exoplanet Archive's own (Planetary Systems Composite Parameters), refreshed weekly. The site writes only the explanations of discovery methods.
