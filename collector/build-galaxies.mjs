@@ -28,6 +28,7 @@ const NEDD = 'https://ned.ipac.caltech.edu/Archive/Distances/NED30.5.1-D-17.1.2-
 log('NED-D download…'); const r0 = await fetch(NEDD, { headers: UA }); if (!r0.ok) throw new Error('NED-D HTTP ' + r0.status); const csv = await r0.text(); log('NED-D bytes', csv.length);
 const per = new Map(); let header = null, nRows = 0; const excl = {}, all = [];
 for (const row of csvRows(csv)) { if (!header) { if (row.some(c => /Galaxy ID/i.test(c))) header = row.map(c => c.trim()); continue; } nRows++;
+  if (nRows === 1 && header[0] === 'FRN' && row.length === header.length - 1) { header.shift(); log('header had an extra leading FRN column; dropped'); }
   const g = {}; header.forEach((h, i) => g[h] = row[i]); const x = (g['Exclusion Code'] || '').trim(); excl[x] = (excl[x] || 0) + 1;
   const d = +String(g['D (Mpc)'] || '').trim(); if (!(d > 0)) continue; const name = (g['Galaxy ID'] || '').trim(); if (!name) continue; all.push({ name, d, m: (g['Method'] || '').trim(), x }); }
 log('exclusion codes', JSON.stringify(excl), 'sample', JSON.stringify(all.slice(0, 2)));
