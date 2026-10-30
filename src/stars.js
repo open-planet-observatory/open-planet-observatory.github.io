@@ -88,8 +88,8 @@ export async function createStars({ T, S, ui, onProgress }) {
       mid.push(new T.Vector3(...gc2ecl(R * s, R * c))); inner.push(new T.Vector3(...gc2ecl((R - w / 2) * s, (R - w / 2) * c))); outer.push(new T.Vector3(...gc2ecl((R + w / 2) * s, (R + w / 2) * c))); }
     arms.add(new T.Line(new T.BufferGeometry().setFromPoints(mid), new T.LineBasicMaterial({ color: '#c9a3ff', transparent: true, opacity: 0.7, depthWrite: false })));
     for (const L of [inner, outer]) arms.add(new T.Line(new T.BufferGeometry().setFromPoints(L), new T.LineBasicMaterial({ color: '#c9a3ff', transparent: true, opacity: 0.22, depthWrite: false })));
-    objs.push({ name, kind: 'spiral arm (model)', pos: mid[Math.floor(mid.length / 2)].toArray(), prio: 4, colour: '#c9a3ff', minCam: 3e8, model: { b0, b1, w }, group: 'galaxy' }); }
-  objs.push({ name: 'Galactic centre (Sagittarius A*)', kind: 'galactic centre', pos: gc2ecl(0, 0), prio: 3, colour: '#ffd166', minCam: 3e7, dpc: R0 * 1000 });
+    objs.push({ name, kind: 'spiral arm (model)', pos: mid[Math.floor(mid.length / 2)].toArray(), prio: 4, colour: '#c9a3ff', minCam: 3e8, maxCam: 6e10, model: { b0, b1, w }, group: 'galaxy' }); }
+  objs.push({ name: 'Galactic centre (Sagittarius A*)', kind: 'galactic centre', pos: gc2ecl(0, 0), prio: 3, colour: '#ffd166', minCam: 3e7, maxCam: 6e10, dpc: R0 * 1000 });
   arms.traverse(o => { o.frustumCulled = false; });
 
   // ---- the galaxy model, part 2: the glow (a model drawn from the measurements above; see the header)
@@ -226,6 +226,25 @@ export async function createStars({ T, S, ui, onProgress }) {
     gaiaFar = pointsFrom(P2, M2, C2); gaiaFar.material = gaiaFar.material.clone(); gaiaFar.material.uniforms = { uLim: uniforms.uLim, uFloor: { value: 0 }, uPx: uniforms.uPx }; group.add(gaiaFar);
     onProgress && onProgress(1); return N; })(); return gaiaLoading; }
 
+
+  // ---- our galactic neighbourhood: galaxies with measured distances (NASA NED-D medians; assets/stars/galaxies.json,
+  // built by the "Build galaxy catalogue" workflow). Each is drawn as a soft disc at its catalogued diameter when one is
+  // recorded (face-on, since the catalogue gives no tilt) and as a small marker otherwise; the Milky Way is the painted model.
+  const MPC = 1000 * KPC; const gxGroup = new T.Group(); group.add(gxGroup); let gx = null;
+  const gxTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(0.18, 'rgba(255,255,255,.55)'); r.addColorStop(0.5, 'rgba(255,255,255,.14)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
+  const gxCol = t => !t ? [0.86, 0.88, 0.95] : /^E|^S0|lenticular|elliptical/i.test(t) ? [1.0, 0.87, 0.66] : /^S|spiral/i.test(t) ? [0.75, 0.82, 1.0] : /Irr|irregular|dwarf/i.test(t) ? [0.8, 0.9, 1.0] : [0.86, 0.88, 0.95];
+  try { const r = await fetch('assets/stars/galaxies.json'); if (r.ok) { gx = await r.json();
+    const N = gx.galaxies.length; const mk = new Float32Array(N * 3); let nm = 0;
+    gx.galaxies.forEach((g, i) => { const [name, lon, lat, dMpc, n, method, common, wiki, diam, mtype, z] = g; const p = vecLL(lon, lat, dMpc * MPC);
+      const obj = { name: common || name, ned: name, kind: 'galaxy', pos: p, prio: diam ? 2 : 5, colour: '#c9d2ff', galaxy: { dMpc, n, method, diam, mtype, z, wiki }, wiki: wiki || null, minCam: 3e10, group: 'galaxies', nolabel: !(common || diam) };
+      objs.push(obj);
+      if (diam) { const col = gxCol(mtype); const sp = new T.Sprite(new T.SpriteMaterial({ map: gxTex, color: new T.Color(col[0], col[1], col[2]), transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0.9 })); sp.position.fromArray(p); sp.scale.setScalar(diam * KPC * 1.6); sp.userData.base = 0.9; gxGroup.add(sp); }
+      else { mk.set(p, nm * 3); nm++; } });
+    const g2 = new T.BufferGeometry(); g2.setAttribute('position', new T.BufferAttribute(mk.subarray(0, nm * 3), 3));
+    const pts = new T.Points(g2, new T.PointsMaterial({ size: 5, sizeAttenuation: false, color: '#c9d2ff', transparent: true, opacity: 0.8, depthWrite: false })); pts.frustumCulled = false; gxGroup.add(pts);
+    objs.push({ name: 'Milky Way (our galaxy)', kind: 'galaxy', pos: gc2ecl(0, 0), prio: 1, colour: '#ffd166', minCam: 6e10, group: 'galaxies', galaxy: { dMpc: 0, n: 0, method: 'home', diam: 32, mtype: 'barred spiral (model)', wiki: 'Milky_Way' }, wiki: 'Milky_Way', home: true });
+  } } catch (e) { console.warn('galaxies', e); }
+
   function update(camDistAU) { // camDistAU: camera distance from the Sun
     const pc = camDistAU / PC; // faint stars keep a dim floor so the catalogue's shape shows from afar, fading again at galaxy scale
     uniforms.uFloor.value = pc < 30 ? 0 : pc < 1500 ? Math.min(0.045, 0.018 + 0.02 * Math.log10(pc / 30)) : 0.045 * Math.pow(1500 / pc, 0.7);
@@ -238,9 +257,10 @@ export async function createStars({ T, S, ui, onProgress }) {
     // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
     if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500; gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))) * Math.min(1, Math.pow(10000 / pc, 1.6)); /* far out, 168,000 points land on a few dozen pixels: keep their sum below white */ }
     if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
+    gxGroup.visible = S.show.galaxies !== false && pc > 3e4; { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 4.5) / 0.8)); gxGroup.children.forEach(o => { if (o.material) o.material.opacity = (o.userData.base || 0.8) * f; }); }
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
   const hipPos = hip => { const h = byHip.get(hip); return h ? h.p : null; };
-  return { group, objs, update, loadGaia, nearest, hipPos, built: B.built, skyInfo: () => skyInfo, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo, wikiCount: Object.keys(wiki).length };
+  return { group, objs, update, loadGaia, nearest, hipPos, built: B.built, skyInfo: () => skyInfo, galaxiesInfo: () => gx && { built: gx.built, count: gx.galaxies.length, maxMpc: gx.maxMpc }, count: () => (gaia ? gaia.geometry.attributes.position.count : 0) + st.length, exo, wikiCount: Object.keys(wiki).length };
 }
