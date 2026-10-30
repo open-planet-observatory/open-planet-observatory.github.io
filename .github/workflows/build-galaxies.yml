@@ -1,14 +1,13 @@
 # Builds the nearby-galaxy file for the universe view (src/assets/stars/galaxies.json) and commits it.
-# Run by hand from the Actions tab. Source: Updated Nearby Galaxy Catalog (Karachentsev+ 2013) via CDS VizieR.
+# Run by hand from the Actions tab. Sources: NASA NED-D distances + NED positions, Wikipedia titles, Wikidata sizes.
 name: Build galaxy catalogue
 
 on:
   workflow_dispatch:
     inputs:
-      probe:
-        description: "Only print the catalogue's columns (no build)"
-        type: boolean
-        default: false
+      max_mpc:
+        description: "Keep galaxies within this many megaparsecs"
+        default: "12"
 
 permissions:
   contents: write
@@ -16,23 +15,18 @@ permissions:
 jobs:
   galaxies:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Probe columns
-        if: ${{ inputs.probe }}
-        run: node collector/build-galaxies.mjs src/assets/stars --probe
       - name: Build galaxy file
-        if: ${{ !inputs.probe }}
-        run: node collector/build-galaxies.mjs src/assets/stars
+        run: node collector/build-galaxies.mjs src/assets/stars --max-mpc "${{ inputs.max_mpc || '12' }}"
       - name: Commit
-        if: ${{ !inputs.probe }}
         run: |
           git config user.name "observatory-bot"
           git config user.email "observatory-bot@users.noreply.github.com"
           git add src/assets/stars/galaxies.json
-          git commit -m "Galaxy catalogue: Updated Nearby Galaxy Catalog (Karachentsev+ 2013) via CDS VizieR" || echo "no change"
+          git commit -m "Galaxy catalogue: NASA NED-D distances and NED positions, Wikipedia/Wikidata names and sizes" || echo "no change"
           git push
