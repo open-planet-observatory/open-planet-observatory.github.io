@@ -230,18 +230,20 @@ export async function createStars({ T, S, ui, onProgress }) {
   // ---- our galactic neighbourhood: galaxies with measured distances (NASA NED-D medians; assets/stars/galaxies.json,
   // built by the "Build galaxy catalogue" workflow). Each is drawn as a soft disc at its catalogued diameter when one is
   // recorded (face-on, since the catalogue gives no tilt) and as a small marker otherwise; the Milky Way is the painted model.
-  const MPC = 1000 * KPC; const gxGroup = new T.Group(); group.add(gxGroup); let gx = null;
+  const MPC = 1000 * KPC; const gxGroup = new T.Group(); group.add(gxGroup); let gx = null; const gxObjs = [];
   const gxTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(0.18, 'rgba(255,255,255,.55)'); r.addColorStop(0.5, 'rgba(255,255,255,.14)'); r.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
   const gxCol = t => !t ? [0.86, 0.88, 0.95] : /^E|^S0|lenticular|elliptical/i.test(t) ? [1.0, 0.87, 0.66] : /^S|spiral/i.test(t) ? [0.75, 0.82, 1.0] : /Irr|irregular|dwarf/i.test(t) ? [0.8, 0.9, 1.0] : [0.86, 0.88, 0.95];
   try { const r = await fetch('assets/stars/galaxies.json'); if (r.ok) { gx = await r.json();
     const N = gx.galaxies.length; const mk = new Float32Array(N * 3); let nm = 0;
     gx.galaxies.forEach((g, i) => { const [name, lon, lat, dMpc, n, method, common, wiki, diam, mtype, z] = g; const p = vecLL(lon, lat, dMpc * MPC);
-      const obj = { name: common || name, ned: name, kind: 'galaxy', pos: p, prio: diam ? 2 : 5, colour: '#c9d2ff', galaxy: { dMpc, n, method, diam, mtype, z, wiki }, wiki: wiki || null, minCam: 3e10, group: 'galaxies', nolabel: !(common || diam) };
-      objs.push(obj);
+      const obj = { name: common || name, ned: name, kind: 'galaxy', pos: p, prio: diam ? 2 : 5, colour: '#c9d2ff', galaxy: { dMpc, n, method, diam, mtype, z, wiki }, wiki: wiki || null, minCam: 3e10, group: 'galaxies', nolabel: true, rank: (diam || 0) * 1000 + n };
+      objs.push(obj); gxObjs.push(obj);
       if (diam) { const col = gxCol(mtype); const sp = new T.Sprite(new T.SpriteMaterial({ map: gxTex, color: new T.Color(col[0], col[1], col[2]), transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0.9 })); sp.position.fromArray(p); sp.scale.setScalar(diam * KPC * 1.6); sp.userData.base = 0.9; gxGroup.add(sp); }
       else { mk.set(p, nm * 3); nm++; } });
     const g2 = new T.BufferGeometry(); g2.setAttribute('position', new T.BufferAttribute(mk.subarray(0, nm * 3), 3));
-    const pts = new T.Points(g2, new T.PointsMaterial({ size: 5, sizeAttenuation: false, color: '#c9d2ff', transparent: true, opacity: 0.8, depthWrite: false })); pts.frustumCulled = false; gxGroup.add(pts);
+    const pts = new T.Points(g2, new T.PointsMaterial({ size: 7, sizeAttenuation: false, map: gxTex, color: '#c9d2ff', transparent: true, opacity: 0.8, depthWrite: false })); pts.frustumCulled = false; gxGroup.add(pts);
+    gxObjs.sort((a, b) => b.rank - a.rank).slice(0, 22).forEach(o => { o.nolabel = false; }); /* labels for the best-known two dozen; the rest show their name when clicked */
+    const home = new T.Sprite(new T.SpriteMaterial({ map: gxTex, color: new T.Color(1.0, 0.85, 0.62), transparent: true, depthWrite: false, blending: T.AdditiveBlending, opacity: 0.9 })); home.position.fromArray(gc2ecl(0, 0)); home.scale.setScalar(32 * KPC * 1.6); home.userData.base = 0.9; gxGroup.add(home);
     objs.push({ name: 'Milky Way (our galaxy)', kind: 'galaxy', pos: gc2ecl(0, 0), prio: 1, colour: '#ffd166', minCam: 6e10, group: 'galaxies', galaxy: { dMpc: 0, n: 0, method: 'home', diam: 32, mtype: 'barred spiral (model)', wiki: 'Milky_Way' }, wiki: 'Milky_Way', home: true });
   } } catch (e) { console.warn('galaxies', e); }
 

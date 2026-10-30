@@ -218,7 +218,7 @@ function labels() {
   for (const o of list) { if (!o.star || o === S.focus) { rest.push(o); continue; } const dc = Math.max(cp.distanceTo(V().fromArray(o.pos)) / PCA, 1e-6); o.mcam = o.mag - 5 * Math.log10(o.dpc / 10) + 5 * Math.log10(dc / 10); if (o.mcam < 2.6) stars.push(o); }
   stars.sort((a, b) => a.mcam - b.mcam); list = rest.concat(stars.slice(0, 24)).sort((a, b) => (a.name === 'Earth' && cd < 3000 ? -1 : a.prio) - (b.name === 'Earth' && cd < 3000 ? -1 : b.prio) || (a.mcam ?? 0) - (b.mcam ?? 0));
   const W = ui.root.clientWidth, Hh = ui.root.clientHeight, right = ui.sliderW || 0, skipped = new Set();
-  for (const o of list) { if (o.parent && skipped.has(o.parent)) continue; const s = project(o.shown || o.pos); if (!s) { skipped.add(o.name); continue; } const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
+  for (const o of list) { if (o.parent && skipped.has(o.parent)) continue; if (o.mesh && (!o.mesh.visible || !S.groups.bodies.visible) && !o.isSun) { skipped.add(o.name); continue; } if (o.isSun && cd > 6e10) continue; const s = project(o.shown || o.pos); if (!s) { skipped.add(o.name); continue; } const w = Math.min(180, o.name.length * 6.6 + 8), x = s[0] + 8, y = s[1] - 8;
     if (x < 0 || y < 0 || x + w > W - right || y > Hh) { skipped.add(o.name); continue; }
     if (placed.some(r => x < r[0] + r[2] && x + w > r[0] && y < r[1] + 14 && y + 14 > r[1])) { skipped.add(o.name); continue; } placed.push([x, y, w]);
     html.push(`<span class="uni-lbl k-${o.kind.replace(/\W+/g, '-')}" style="transform:translate(${x.toFixed(0)}px,${y.toFixed(0)}px)">${esc(o.name)}${o.pushed && S.size === 'vis' ? '<sup>*</sup>' : ''}</span>`); }
@@ -283,7 +283,7 @@ function nearCard() { if (!STARS) return; const el = document.getElementById('un
 function galaxyView(ms = 3200, quiet = false) { if (!SM) return; const gc = V().fromArray(SM.galToEcl([8150 * SM.PC, 0, 0])); const up = V().fromArray(SM.galToEcl([0, 0, 1])).normalize();
   const target = gc.clone(); S.focus = null; /* pivot on the galactic centre, so the galaxy turns about its own middle */ ui.card.hidden = true; animateTo(target, 1.0e10, ms, up.clone().add(V().fromArray(SM.galToEcl([-0.35, 0, 0])).normalize().multiplyScalar(0.5)).normalize());
   const gco = S.byName['Galactic centre (Sagittarius A*)']; if (gco && !quiet) setTimeout(() => card(gco), ms + 100); }
-function neighboursView(ms = 4000) { if (!SM) return; S.focus = null; ui.card.hidden = true; stopTour(); const up = V().fromArray(SM.galToEcl([0, 0, 1])).normalize();
+function neighboursView(ms = 4000) { if (!SM) return; S.focus = null; ui.card.hidden = true; if (!S.tour) stopTour(); const up = V().fromArray(SM.galToEcl([0, 0, 1])).normalize();
   const and = S.objs.find(o => o.galaxy && /Andromeda/i.test(o.name)); const target = and ? V().fromArray(and.pos).multiplyScalar(0.5) : V();
   animateTo(target, 3.2e12, ms, up.clone().add(V().fromArray(SM.galToEcl([-0.4, 0.3, 0])).normalize().multiplyScalar(0.6)).normalize()); }
 function neoCard() { const el = document.getElementById('uniNeoCard'); const L = (S.solar && S.solar.approaches) || []; const LD = 384400 / AU_KM;
@@ -359,14 +359,15 @@ function tourSteps() { const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.
   { dist: 7e6, ms: 5500, hold: 5500, cap: 'Within about 100 light-years are thousands of stars, including many of the brightest in our night sky: Sirius, Vega, Arcturus.' },
   { dist: 2.5e8, ms: 6000, hold: 6000, cap: "These are about a million stars whose distances ESA's Gaia spacecraft measured. Even they fill only a small corner of the galaxy." },
   { galaxy: true, ms: 6500, hold: 6500, cap: 'The Milky Way is about 100,000 light-years across, with 100 to 400 billion stars. No one has seen it from outside: this shape is a model built from measurements.' },
-  { galaxy: true, ms: 10, hold: 8000, cap: 'We are about 26,600 light-years from the centre, in a small arm called the Local or Orion arm.' }]; }
+  { galaxy: true, ms: 10, hold: 8000, cap: 'We are about 26,600 light-years from the centre, in a small arm called the Local or Orion arm.' },
+  { neighbours: true, ms: 7000, hold: 9000, cap: 'Beyond our galaxy: hundreds of galaxies whose distances have been measured, with Andromeda 2.5 million light-years away. The light you see from it left before our species existed.' }]; }
 function caption(t) { const c = document.getElementById('uniCap'); if (!c) return; c.classList.remove('on'); clearTimeout(caption.t); caption.t = setTimeout(() => { c.textContent = t; if (t) c.classList.add('on'); }, t ? 380 : 0); }
 function startTour() { stopTour(); S.tour = { i: -1 }; ui.root.classList.add('touring'); document.getElementById('uniTour').textContent = '■ Stop the tour';
   rate = 0; simMs = Date.now(); ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x.dataset.rate === '0'));
   S.focus = null; ui.card.hidden = true; document.getElementById('uniNeoCard').hidden = true; nextStep(); }
 function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Take the tour'; caption(''); }
 function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { stopTour(); return; } const st = steps[tr.i]; caption(st.cap);
-  if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
+  if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
 // ---------- loop, open, close ----------
