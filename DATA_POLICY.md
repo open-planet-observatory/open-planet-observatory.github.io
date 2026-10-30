@@ -80,6 +80,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Star stories: clicking one of about 3,500 Hipparcos stars shows the opening of its English Wikipedia article, fetched by the visitor's browser from Wikipedia and shown word for word with a link and the CC BY-SA 4.0 licence. Which article goes with which star comes from Wikidata (CC0), matched by Hipparcos number.
 - "The light you see left when…" pairs a star's light-travel time with a short list of well-dated events written by the site.
 
+## Our galactic neighbourhood (nearby galaxies)
+
+- Galaxies within 12 megaparsecs (about 39 million light-years) come from NASA/IPAC's NED-D compilation of redshift-independent distances (Steer et al. 2017, version 17.1.2, 2020): the site shows the median of each galaxy's published measurements and says how many there were. Positions come from NED. No redshift-based distances are used in this step.
+- A galaxy is drawn as a soft disc only when Wikidata records a diameter for it, face-on because no tilt is recorded; otherwise it is a marker. Names and Wikipedia articles are matched by title; their text is Wikipedia's, word for word, on click.
+- Distances farther out (clusters, walls) will state the assumed expansion rate (Hubble constant) on every card when they are added.
+
 ## Other worlds (exoplanets)
 
 - Every figure is the NASA Exoplanet Archive's own (Planetary Systems Composite Parameters), refreshed weekly. The site writes only the explanations of discovery methods.

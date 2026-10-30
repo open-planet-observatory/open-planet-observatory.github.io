@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -156,6 +156,8 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     ok(stars.proxima > 1.28 && stars.proxima < 1.32, 'Space', 'stars-proxima', 'Proxima Centauri sits 1.30 pc (4.2 light-years) away', stars.proxima + ' pc');
     ok(stars.vega > 7.5 && stars.vega < 7.9, 'Space', 'stars-vega', 'Vega sits 7.7 pc (25 light-years) away', stars.vega + ' pc');
     if (stars.wiki != null) ok(stars.wiki > 2500 && stars.wikiVega === 'Vega', 'Space', 'stars-wiki', 'About 3,500 stars are matched to a Wikipedia article (Vega to "Vega")', `${stars.wiki} matched; Vega → ${stars.wikiVega}`, 'warn'); }
+  if (galaxies) { ok(galaxies.count >= 300, 'Space', 'galaxies-count', 'At least 300 nearby galaxies with measured distances', `${galaxies.count} galaxies, ${galaxies.named} named, ${galaxies.sized} with a diameter (built ${galaxies.built})`);
+    ok(galaxies.andromeda != null && galaxies.andromeda > 0.7 && galaxies.andromeda < 0.85, 'Space', 'galaxies-andromeda', 'Andromeda sits about 0.78 Mpc (2.5 million light-years) away', galaxies.andromeda + ' Mpc'); }
   if (sun) ok(sun.ok && Date.now() - Date.parse(sun.modified || sun.fetched) < 2 * 864e5, 'Space', 'sun-image', "Today's Sun image from NASA SDO is less than two days old", sun.ok ? 'updated ' + (sun.modified || sun.fetched) : 'not fetched: ' + sun.error, 'warn');
 
   // ----- AI releases -----
