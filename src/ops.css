@@ -326,3 +326,18 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 
 @media (max-height:720px){.uni-help,.uni-credit{display:none}.uni-note{display:none}}
 #uni .more:disabled,#uni input:disabled{opacity:.45;cursor:not-allowed}
+
+/* Other worlds */
+#worlds .stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0 18px}
+#worlds .stat{background:var(--glass,rgba(255,255,255,.04));border:1px solid var(--glass-line,rgba(255,255,255,.12));border-radius:12px;padding:12px 14px}
+#worlds .stat b{display:block;font-size:1.4rem;line-height:1.1}
+#worlds .stat span{font-size:.78rem;color:var(--ink-2)}
+#worlds h3{font-size:1rem;margin:20px 0 6px}
+#worlds .tbl-wrap{overflow:auto;max-height:420px;border:1px solid var(--glass-line,rgba(255,255,255,.12));border-radius:10px}
+#worlds .worlds{width:100%;border-collapse:collapse;font-size:.8rem}
+#worlds .worlds th{text-align:left;font-weight:700;padding:6px 8px;white-space:nowrap}
+#worlds .worlds thead th{position:sticky;top:0;background:var(--panel,#0e1420);font-size:.72rem;color:var(--ink-2);text-transform:uppercase;letter-spacing:.04em}
+#worlds .worlds td{padding:6px 8px;border-top:1px solid var(--glass-line,rgba(255,255,255,.12));color:var(--ink-2);vertical-align:top}
+#worlds .worlds td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
+#worlds .fly{white-space:nowrap}
+#worlds .legend-i{display:inline-flex;gap:6px;align-items:center}#worlds .legend-i i{width:12px;height:12px;border-radius:3px;display:inline-block}

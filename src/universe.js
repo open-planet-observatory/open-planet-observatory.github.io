@@ -384,7 +384,8 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
 async function openUniverse(dest) {
-  if (open) { if (dest === 'galaxy') galaxyView(4000, true); return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
+  const hostName = typeof dest === 'string' && dest.startsWith('host:') ? dest.slice(5) : null;
+  if (open) { if (dest === 'galaxy') galaxyView(4000, true); else if (hostName) flyToHost(hostName); return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
   const g = window.__obs3d;
   if (g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none') { // pull back from the globe first
     await new Promise(res => { setTimeout(res, 2200); try { g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-30, 20, 9e7), duration: 1.4, complete: res, cancel: res }); } catch (e) { res(); } }); }
@@ -397,9 +398,12 @@ async function openUniverse(dest) {
   S.controls.target.copy(ep); S.camera.position.copy(ep).add(sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).multiplyScalar(6.6e-4)); // start on Earth's sunlit side
   S.focus = null; lastFrame = 0; requestAnimationFrame(frame);
   if (dest === 'galaxy') setTimeout(() => { if (open) galaxyView(7000, true); }, 500); /* one long zoom: Earth, planets, stars, galaxy */
+  else if (hostName) setTimeout(() => { if (open) flyToHost(hostName); }, 500);
   else setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
   /* the address bar is left alone: a reload always returns to Earth; #sky=solar / #sky=galaxy still open these views when someone arrives with them */
 }
+function flyToHost(name) { const norm = t => String(t).toLowerCase().replace(/centauri/g, 'cen').replace(/[^a-z0-9]/g, ''); const k = norm(name); const o = S.objs.find(x => x.host && x.name === name) || S.objs.find(x => x.host && norm(x.name) === k) || S.objs.find(x => x.star && x.name && (norm(x.name) === k || k.startsWith(norm(x.name)) || (x.desig && norm(x.desig) === k))); if (!o) { const n = document.getElementById('uniNote'); if (n) { n.hidden = false; n.textContent = name + ' is not in the star view (its distance may be missing from NASA\u2019s list).'; } return; }
+  S.show.exo = true; const cb = ui.root.querySelector('[data-show="exo"]'); if (cb) cb.checked = true; focusOn(o, true); }
 function closeUniverse() { if (!open) return; stopTour(); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
   setTimeout(() => { open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
     const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }

@@ -53,6 +53,7 @@ const PANELS=[
  ['signals','Signals',['#readings','#signals']],
  ['climate','Climate',['#climate']],
  ['relief','Relief',['#relief']],
+ ['worlds','Other worlds',['#worlds']],
  ['watch','Watch',['#watch']],
  ['unexplained','Unexplained',['#unexplained']],
  ['economy','Economy',['#economy']],
