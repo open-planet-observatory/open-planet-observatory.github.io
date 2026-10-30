@@ -216,8 +216,8 @@ let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '
 let exo = { out: null, status: 'not run' };
 { let p = {};
   if (PREV) { try { const r = await fetch(`${PREV}/data/exoplanets.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
-  if (p.hosts && !due(meta.solar, 'exo', 10080)) exo = { out: p, status: 'kept' };
-  else { try { exo = { out: await collectExoplanets(), status: 'ok' }; meta.solar.exo = now.toISOString(); } catch (e) { exo = { out: p.hosts ? p : null, status: 'error: ' + e.message.slice(0, 160) }; } }
+  if (p.hosts && !due(meta.solar, 'exo2', 10080)) exo = { out: p, status: 'kept' };
+  else { try { exo = { out: await collectExoplanets(), status: 'ok' }; meta.solar.exo2 = now.toISOString(); } catch (e) { exo = { out: p.hosts ? p : null, status: 'error: ' + e.message.slice(0, 160) }; } }
   if (exo.out) { const { sec, ...full } = exo.out; await fs.writeFile(path.join(OUT, 'exoplanets.json'), JSON.stringify(full)); if (sec) await fs.writeFile(path.join(OUT, 'worlds.json'), JSON.stringify(sec)); else { try { const r = await fetch(`${PREV}/data/worlds.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) await fs.writeFile(path.join(OUT, 'worlds.json'), await r.text()); } catch { } } }
   log('exoplanets', exo.status); }
 // Today's Sun for the star view's close-up (NASA SDO, AIA 304 Å, public). Fetched every run; if NASA does not answer,
