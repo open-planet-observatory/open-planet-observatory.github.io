@@ -212,6 +212,7 @@ let solar = { out: null, status: 'not run' };
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
   const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
   try { const W = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'wiki.json'), 'utf8')).hip; stars.wiki = Object.keys(W).length; stars.wikiVega = W['91262']; } catch { } } catch { }
+let cosmicweb = null; try { const M = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'universe', 'cosmicweb.json'), 'utf8')); const st = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'universe', 'cosmicweb.bin')); const coma = (M.clusters || []).find(c => c.name === 'Coma Cluster'); cosmicweb = { count: M.count, built: M.built, bytesOk: st.size === 15 * M.count, clusters: (M.clusters || []).length, comaCz: coma ? coma.cz : null }; } catch { }
 let galaxies = null; try { const G = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'galaxies.json'), 'utf8')); const and = (G.galaxies.find(g => g[0] === 'MESSIER 031') || G.galaxies.find(g => /^Andromeda Galaxy$/i.test(g[6] || ''))); galaxies = { count: G.galaxies.length, built: G.built, andromeda: and ? and[3] : null, named: G.galaxies.filter(g => g[6]).length, sized: G.galaxies.filter(g => g[8]).length }; } catch { }
 // Exoplanet host stars for the star view (NASA Exoplanet Archive): data/exoplanets.json, weekly.
 let exo = { out: null, status: 'not run' };
@@ -231,7 +232,7 @@ try { const r = await fetch('https://sdo.gsfc.nasa.gov/assets/img/latest/latest_
 catch (e) { sunImg = { ok: false, error: e.message.slice(0, 160), fetched: now.toISOString(), status: 'error: ' + e.message.slice(0, 160) }; }
 await fs.writeFile(path.join(OUT, 'sun.json'), JSON.stringify(sunImg)); log('sun image', sunImg.status);
 // Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
-let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, cosmicweb, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);

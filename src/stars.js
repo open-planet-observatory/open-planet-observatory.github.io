@@ -36,9 +36,10 @@ const EVENTS = [[2021, 'the James Webb Space Telescope was launched'], [2015, 'N
   [1054, 'astronomers in China recorded the supernova that made the Crab Nebula'], [800, 'Charlemagne was crowned emperor'], [79, 'Vesuvius buried Pompeii'], [-44, 'Julius Caesar was assassinated'],
   [-221, 'the Qin dynasty unified China'], [-776, 'the first recorded Olympic Games were held (by tradition)'], [-2560, 'the Great Pyramid of Giza was being finished (about 2560 BCE)'], [-3200, 'writing was emerging in Mesopotamia (about 3200 BCE)'],
   [-9600, 'the last ice age was ending and farming was beginning (about 11,600 years ago)'], [-34000, 'people were painting the walls of Chauvet Cave (about 36,000 years ago)'], [-298000, 'the earliest known Homo sapiens lived (about 300,000 years ago)'],
-  [-3.3e6, 'the oldest known stone tools were being made (about 3.3 million years ago)'], [-66e6, 'an asteroid impact ended the age of the dinosaurs (66 million years ago)']];
+  [-3.3e6, 'the oldest known stone tools were being made (about 3.3 million years ago)'], [-66e6, 'an asteroid impact ended the age of the dinosaurs (66 million years ago)'],
+  [-230e6, 'the first dinosaurs had appeared (about 230 million years ago)'], [-375e6, 'fish were starting to crawl onto land (about 375 million years ago)'], [-538e6, 'the Cambrian explosion of animal life was beginning (about 538 million years ago)'], [-2.4e9, 'oxygen was building up in the air for the first time (about 2.4 billion years ago)']];
 export function lightLeft(ly) { const nowY = new Date().getUTCFullYear(); const y = nowY - ly; const e = EVENTS.find(x => x[0] <= y + 0.5);
-  const yr = y >= 1 ? 'around ' + Math.round(y) : y > -10000 ? 'around ' + Math.round(-y + 1).toLocaleString('en-US') + ' BCE' : 'about ' + Math.round(ly).toLocaleString('en-US') + ' years ago';
+  const yr = y >= 1 ? 'around ' + Math.round(y) : y > -10000 ? 'around ' + Math.round(-y + 1).toLocaleString('en-US') + ' BCE' : ly >= 1e9 ? 'about ' + (ly / 1e9).toFixed(1).replace(/\.0$/, '') + ' billion years ago' : ly >= 1e7 ? 'about ' + Math.round(ly / 1e6).toLocaleString('en-US') + ' million years ago' : 'about ' + Math.round(ly).toLocaleString('en-US') + ' years ago';
   return { yr, event: e ? e[1] : null, eYear: e ? e[0] : null, near: e ? Math.abs(y - e[0]) <= 6 : false }; }
 
 // deterministic random numbers, so the model looks the same for everyone
@@ -73,7 +74,7 @@ export async function createStars({ T, S, ui, onProgress }) {
   const byHip = new Map(), objs = [];
   st.forEach((s, i) => { const [hip, lon, lat, dpc, hp, bv, name, desig] = s; const p = vecLL(lon, lat, dpc * PC); pos.set(p, i * 3); mag[i] = hp - 5 * Math.log10(dpc / 10); col.set(colourOf(bv == null ? null : bv * 1.2).map(v => v / 255), i * 3); byHip.set(hip, { p, s });
     const wk = wiki[hip];
-    if (name || dpc < 6 || wk) objs.push({ name: name || desig || (wk ? wk.replace(/_/g, ' ') : 'HIP ' + hip), desig: name ? desig : '', hip, wiki: wk || null, kind: 'star', pos: p, prio: name ? 6 : 7, colour: '#fff4dc', dpc, mag: hp, minCam: 4000, star: true, nolabel: !name && dpc >= 6 }); });
+    if (name || dpc < 6 || wk) objs.push({ name: name || desig || (wk ? wk.replace(/_/g, ' ') : 'HIP ' + hip), desig: name ? desig : '', hip, wiki: wk || null, kind: 'star', pos: p, prio: name ? 6 : 7, colour: '#fff4dc', dpc, mag: hp, minCam: 4000, star: true, nolabel: !name && dpc >= 6, perr: s[8] }); });
   pos.set([0, 0, 0], st.length * 3); mag[st.length] = 4.83; col.set([1, 0.96, 0.9], st.length * 3); // the Sun, seen as a star from afar
   const bright = pointsFrom(pos, mag, col); group.add(bright);
   // ---- constellation figures between real 3D positions (they break apart as you fly away)
@@ -261,7 +262,7 @@ export async function createStars({ T, S, ui, onProgress }) {
     // near: every star; far: the one-in-six subset so individual stars still sparkle inside the painted haze (the full set cost 7 fps at galaxy scale)
     if (gaia) gaia.visible = pc < 4000 || (zk < 0.5 && pc < 7000); if (gaiaFar) { gaiaFar.visible = pc >= 2500 && pc < 1.5e5; /* past 150 kpc its floor alpha is under 0.003: drawing 148,000 invisible points onto one spot cost 14 fps */ gaiaFar.material.uniforms.uFloor.value = Math.min(0.22, 0.07 + 0.08 * Math.log10(Math.max(1, pc / 2500))) * Math.min(1, Math.pow(10000 / pc, 1.6)); /* far out, 168,000 points land on a few dozen pixels: keep their sum below white */ }
     if (sky) { const u = sky.userData.uni; u.uOp.value = S.show.sky === false ? 0 : pc < 8 ? 0.85 : Math.max(0, 0.85 * (1 - Math.log10(pc / 8) / Math.log10(60 / 8))); sky.visible = u.uOp.value > 0.002; sky.position.set(0, 0, 0); }
-    gxGroup.visible = S.show.galaxies !== false && pc > 3e4; { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 4.5) / 0.8)); gxGroup.children.forEach(o => { if (o.material) o.material.opacity = (o.userData.base || 0.8) * f; }); }
+    { const fo = 1 - Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 7.2) / 0.5)); /* hands over to the cosmic web past ~16 Mpc */ gxGroup.visible = S.show.galaxies !== false && pc > 3e4 && fo > 0; } { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 4.5) / 0.8)) * (1 - Math.min(1, Math.max(0, (Math.log10(Math.max(pc, 1)) - 7.2) / 0.5))); gxGroup.children.forEach(o => { if (o.material) o.material.opacity = (o.userData.base || 0.8) * f; }); }
     cons.visible = S.show.constellations !== false; exoGroup.visible = S.show.exo !== false; arms.visible = S.show.arms === true && pc > 300; galaxy.visible = S.show.galaxy !== false && far > 0;
     cons.material.opacity = pc < 60 ? 0.3 : Math.max(0, 0.3 - (pc - 60) / 400); }
   const nearest = () => st.filter(s => s[3] < 6).sort((a, b) => a[3] - b[3]).map(s => ({ hip: s[0], name: s[6] || s[7] || 'HIP ' + s[0], dpc: s[3], mag: s[4], p: byHip.get(s[0]).p }));
