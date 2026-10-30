@@ -26,12 +26,14 @@ function* csvRows(text) { let row = [], field = '', q = false; for (let i = 0; i
 // ---- A. NED-D: distances per galaxy
 const NEDD = 'https://ned.ipac.caltech.edu/Archive/Distances/NED30.5.1-D-17.1.2-20200415.csv';
 log('NED-D download…'); const r0 = await fetch(NEDD, { headers: UA }); if (!r0.ok) throw new Error('NED-D HTTP ' + r0.status); const csv = await r0.text(); log('NED-D bytes', csv.length);
-const per = new Map(); let header = null, nRows = 0;
+const per = new Map(); let header = null, nRows = 0; const excl = {}, all = [];
 for (const row of csvRows(csv)) { if (!header) { if (row.some(c => /Galaxy ID/i.test(c))) header = row.map(c => c.trim()); continue; } nRows++;
-  const g = {}; header.forEach((h, i) => g[h] = row[i]); if ((g['Exclusion Code'] || '').trim()) continue; // keep peer-reviewed distances incorporated in NED
-  const d = +g['D (Mpc)']; if (!(d > 0)) continue; const name = (g['Galaxy ID'] || '').trim(); if (!name) continue;
-  const e = per.get(name) || { d: [], methods: {} }; e.d.push(d); const m = (g['Method'] || '').trim(); e.methods[m] = (e.methods[m] || 0) + 1; per.set(name, e); }
-log('NED-D rows', nRows, 'galaxies with distances', per.size, 'columns', header.join('|'));
+  const g = {}; header.forEach((h, i) => g[h] = row[i]); const x = (g['Exclusion Code'] || '').trim(); excl[x] = (excl[x] || 0) + 1;
+  const d = +String(g['D (Mpc)'] || '').trim(); if (!(d > 0)) continue; const name = (g['Galaxy ID'] || '').trim(); if (!name) continue; all.push({ name, d, m: (g['Method'] || '').trim(), x }); }
+log('exclusion codes', JSON.stringify(excl), 'sample', JSON.stringify(all.slice(0, 2)));
+const blank = all.filter(r => r.x === ''); const use = blank.length > all.length / 10 ? blank : all; // blank = incorporated in NED (peer-reviewed); fall back to all if the column is coded differently
+for (const r of use) { const e = per.get(r.name) || { d: [], methods: {} }; e.d.push(r.d); e.methods[r.m] = (e.methods[r.m] || 0) + 1; per.set(r.name, e); }
+log('NED-D rows', nRows, 'used', use.length, 'galaxies with distances', per.size, 'columns', header.join('|'));
 const near = [...per.entries()].map(([name, e]) => ({ name, d: median(e.d), n: e.d.length, method: Object.entries(e.methods).sort((a, b) => b[1] - a[1])[0][0] })).filter(g => g.d <= MAX_MPC);
 log('within', MAX_MPC, 'Mpc:', near.length);
 if (near.length < 300) throw new Error('too few nearby galaxies: ' + near.length);
