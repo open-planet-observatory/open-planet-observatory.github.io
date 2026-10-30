@@ -394,7 +394,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; const pcC = camAU / 206264.806, dT = S.camera.position.distanceTo(S.controls.target) / 206264.806;
       const lost = far && pcC > 3000 && dT < 300 && !S.tour && !S.anim; /* zoomed right in, far from every catalogued star */
       const key = lost ? 'lost' : String(far); if (n.dataset.far !== key) { n.dataset.far = key; n.hidden = far && !lost; if (lost) n.textContent = 'No catalogued stars here: the million measured stars all sit within about 16,000 light-years of the Sun. Zoom out, or press Milky Way.'; else if (!far) note(); } } }
-  const showModel = camAU > 1e8 && S.show.galaxy !== false; if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
+  const showModel = camAU > 1e8 && camAU < 8e10 && S.show.galaxy !== false; /* past 400 kpc the model is gone; the Milky Way is a dot whose card says "model" */ if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
 async function openUniverse(dest) {
   const hostName = typeof dest === 'string' && dest.startsWith('host:') ? dest.slice(5) : null;
