@@ -1,0 +1,29 @@
+# Builds the cosmic-web layer for the universe view (src/assets/universe/cosmicweb.bin + .json) and commits it.
+# Run by hand from the Actions tab. Sources: 2MASS Redshift Survey via NASA HEASARC; cluster positions from NASA/IPAC NED.
+name: Build cosmic web
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cosmicweb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build cosmic-web files
+        run: node collector/build-cosmicweb.mjs src/assets/universe
+      - name: Commit
+        run: |
+          git config user.name "observatory-bot"
+          git config user.email "observatory-bot@users.noreply.github.com"
+          git add src/assets/universe/cosmicweb.bin src/assets/universe/cosmicweb.json
+          git commit -m "Cosmic web: 2MASS Redshift Survey (NASA HEASARC) and NED cluster positions" || echo "no change"
+          git pull --rebase
+          git push
