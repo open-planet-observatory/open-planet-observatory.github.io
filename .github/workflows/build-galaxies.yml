@@ -1,0 +1,38 @@
+# Builds the nearby-galaxy file for the universe view (src/assets/stars/galaxies.json) and commits it.
+# Run by hand from the Actions tab. Source: Updated Nearby Galaxy Catalog (Karachentsev+ 2013) via CDS VizieR.
+name: Build galaxy catalogue
+
+on:
+  workflow_dispatch:
+    inputs:
+      probe:
+        description: "Only print the catalogue's columns (no build)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+jobs:
+  galaxies:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Probe columns
+        if: ${{ inputs.probe }}
+        run: node collector/build-galaxies.mjs src/assets/stars --probe
+      - name: Build galaxy file
+        if: ${{ !inputs.probe }}
+        run: node collector/build-galaxies.mjs src/assets/stars
+      - name: Commit
+        if: ${{ !inputs.probe }}
+        run: |
+          git config user.name "observatory-bot"
+          git config user.email "observatory-bot@users.noreply.github.com"
+          git add src/assets/stars/galaxies.json
+          git commit -m "Galaxy catalogue: Updated Nearby Galaxy Catalog (Karachentsev+ 2013) via CDS VizieR" || echo "no change"
+          git push
