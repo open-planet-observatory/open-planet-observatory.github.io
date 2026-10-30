@@ -80,6 +80,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Star stories: clicking one of about 3,500 Hipparcos stars shows the opening of its English Wikipedia article, fetched by the visitor's browser from Wikipedia and shown word for word with a link and the CC BY-SA 4.0 licence. Which article goes with which star comes from Wikidata (CC0), matched by Hipparcos number.
 - "The light you see left when…" pairs a star's light-travel time with a short list of well-dated events written by the site.
 
+## Other worlds (exoplanets)
+
+- Every figure is the NASA Exoplanet Archive's own (Planetary Systems Composite Parameters), refreshed weekly. The site writes only the explanations of discovery methods.
+- "Small and temperate" is a plain filter on NASA's radius (at most 1.75 Earths) and equilibrium-temperature (180–320 K) fields, printed beside the table. It is not a habitability score; the site makes none.
+- Each planet links to its NASA page. "Fly there" opens the star view at the host star's measured position.
+
 ## Forecast where you click
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.
