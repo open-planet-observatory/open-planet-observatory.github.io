@@ -104,7 +104,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 - Passages come from two public-domain editions scanned by the Internet Archive: the 1846 Farmer's Almanack (Robert B. Thomas) and the 1923 Old Farmer's Almanac. Each passage is the scan's OCR text word for word; the only change is rejoining hyphens left by line breaks in the scan. OCR slips are left as scanned.
 - collector/build-almanac.mjs checks every passage against the scan's text and fails the build if one does not match. Each card links to the scan opened at that passage.
-- The one-line "then and now" note under each passage is the site's own, and says where the same thing is live on the page.
+- The one-line "Then and now" note under each passage is the site's own: it says what the passage is, and, where the page has a live counterpart, links to it.
 
 ## Voyager 1 countdown
 

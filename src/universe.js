@@ -162,7 +162,7 @@ async function build() {
   root.querySelector('#uniHide').onclick = () => setClean(!root.classList.contains('clean')); root.querySelector('#uniShow').onclick = () => setClean(false);
   const setFold = on => { root.classList.toggle('folded', on); const b = root.querySelector('#uniFold'); b.setAttribute('aria-expanded', String(!on)); b.textContent = on ? '▴' : '▾'; b.title = on ? 'Open the controls' : 'Fold the controls down to one row'; try { localStorage.setItem('uniFold', on ? '1' : '0'); } catch (e) { } };
   root.querySelector('#uniFold').onclick = () => setFold(!root.classList.contains('folded'));
-  try { if (localStorage.getItem('uniFold') === '1') setFold(true); } catch (e) { }
+  try { if (localStorage.getItem('uniFold') === '1') setFold(true); if (localStorage.getItem('uniClean') === '1') setClean(true); } catch (e) { }
   ui.setClean = setClean;
   root.querySelectorAll('[data-size]').forEach(b => b.onclick = () => { S.size = b.dataset.size; root.querySelectorAll('[data-size]').forEach(x => x.setAttribute('aria-pressed', x === b)); note(); });
   root.querySelectorAll('[data-rate]').forEach(b => b.onclick = () => { rate = +b.dataset.rate; if (rate === 0) simMs = Date.now(); root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
@@ -479,14 +479,16 @@ async function openUniverse(dest) {
   const hostName = typeof dest === 'string' && dest.startsWith('host:') ? dest.slice(5) : null;
   if (open) { if (dest === 'galaxy') galaxyView(4000, true); else if (dest === 'web') webView(6000); else if (hostName) flyToHost(hostName); else { S.focus = null; animateTo(new T.Vector3(0, 0, 0), 4.2, 3000); } return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
   const g = window.__obs3d;
-  if (openUniverse.busy) return; openUniverse.busy = true; setTimeout(() => { openUniverse.busy = false; }, 4000); /* a double press opens once */
+  if (openUniverse.busy) return; openUniverse.busy = true; /* a double press opens once */
   const bp = built ? null : (openUniverse.bp || (openUniverse.bp = build().then(() => true, e => { console.warn('Solar System view could not start', e); openUniverse.bp = null; return false; }))); /* load while the globe pulls back, not after */
   const fromGlobe = !!(g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none'); let gcam = null;
   if (fromGlobe) { /* pull back from the globe while the 3D view loads; the hand-over happens mid-flight, from the same place */
     try { const c = g.viewer.camera.positionCartographic; const lon = c.longitude * 180 / Math.PI, lat = c.latitude * 180 / Math.PI; const h = Math.max(c.height, 4e7);
       gcam = { lon, lat, h }; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(lon, lat, h), duration: Math.min(1.6, 0.6 + c.height / 4e7), easingFunction: window.Cesium.EasingFunction.QUADRATIC_IN_OUT }); } catch (e) { gcam = null; }
-    await new Promise(res => setTimeout(res, bp ? 900 : 600)); }
-  if (bp && !(await bp)) return;
+    await new Promise(res => setTimeout(res, bp ? 900 : 600));
+    try { const c = g.viewer.camera.positionCartographic; gcam = { lon: c.longitude * 180 / Math.PI, lat: c.latitude * 180 / Math.PI, h: c.height }; } catch (e) { } /* where the globe camera is now, mid-flight: the 3D view starts exactly there */ }
+  if (bp) { const n0 = document.getElementById('uniNote'); const cue = document.createElement('div'); cue.id = 'uniLoading'; cue.className = 'glass'; cue.textContent = 'Loading the Solar System…'; document.body.appendChild(cue); const okb = await bp; cue.remove(); if (!okb) { openUniverse.busy = false; return; } }
+  openUniverse.busy = false;
   ui.date = document.getElementById('uniDate'); ui.title = ui.root.querySelector('.uni-title'); ui.model = document.getElementById('uniModel'); note();
   open = true; S.controls.enabled = true; ui.root.hidden = false; requestAnimationFrame(() => ui.root.classList.add('on'));
   if (g && g.viewer) g.viewer.useDefaultRenderLoop = false; // pause the globe while the Solar System is open

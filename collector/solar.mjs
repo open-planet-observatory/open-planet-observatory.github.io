@@ -101,12 +101,16 @@ async function range(id, start, stop, step) {
 export async function collectVoyagerLightDay({ now = new Date() }) {
   const ymdh = d => d.toISOString().slice(0, 16).replace('T', ' ');
   const coarse = await range('-31', ymdh(new Date(+now - 864e5)), ymdh(new Date(+now + 400 * 864e5)), '6h');
-  const i = coarse.rows.findIndex(x => x.au >= LIGHT_DAY_AU); const last = coarse.rows[0];
+  const i = coarse.rows.findIndex(x => x.au >= LIGHT_DAY_AU); const last = coarse.rows.filter(x => +x.t <= +now).pop() || coarse.rows[0]; /* the latest grid value not in the future */
   const out = { computedAt: now.toISOString().slice(0, 16) + 'Z', lightDayAU: +LIGHT_DAY_AU.toFixed(6), source: 'NASA JPL Horizons, Voyager 1 (-31), geocentric range' + (coarse.src ? ', ' + coarse.src : ''), now: { t: last.t.toISOString(), au: last.au, kms: last.kms } };
   if (i < 0) { out.crossed = coarse.rows[0].au >= LIGHT_DAY_AU; out.crossUTC = null; return out; }
   if (i === 0) { out.crossed = true; // already past: find it in the last year instead
     const back = await range('-31', ymdh(new Date(+now - 400 * 864e5)), ymdh(now), '6h'); const k = back.rows.findIndex(x => x.au >= LIGHT_DAY_AU);
     if (k > 0) { const fine = await range('-31', ymdh(back.rows[k - 1].t), ymdh(back.rows[k].t), '1m'); const f = fine.rows.find(x => x.au >= LIGHT_DAY_AU); out.crossUTC = (f || back.rows[k]).t.toISOString(); } return out; }
   const fine = await range('-31', ymdh(coarse.rows[i - 1].t), ymdh(coarse.rows[i].t), '1m'); const f = fine.rows.find(x => x.au >= LIGHT_DAY_AU);
-  out.crossed = false; out.crossUTC = (f || coarse.rows[i]).t.toISOString(); out.rateThenKmS = (f || coarse.rows[i]).kms; return out;
+  out.crossed = false; out.crossUTC = (f || coarse.rows[i]).t.toISOString(); out.rateThenKmS = (f || coarse.rows[i]).kms;
+  /* sanity: the range-rate (which swings with Earth's orbit) must carry the current range to the line within a few days of the moment found */
+  const predDays = (LIGHT_DAY_AU - last.au) * 149597870.7 / Math.max(1, last.kms) / 86400, gridDays = (Date.parse(out.crossUTC) - +last.t) / 864e5;
+  if (Math.abs(predDays - gridDays) > Math.max(4, 0.3 * gridDays)) throw new Error(`Voyager crossing inconsistent: rate says ${predDays.toFixed(1)} d, grid says ${gridDays.toFixed(1)} d`);
+  return out;
 }
