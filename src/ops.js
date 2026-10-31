@@ -4,8 +4,11 @@
 const O=window.__obs;if(!O)return;
 const $=s=>document.querySelector(s);const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const html=document.documentElement;
-// theme: dark by default, remembered per browser
-let theme='dark';try{theme=localStorage.getItem('obs-theme')||'dark'}catch(e){}
+// theme: "owl" (warm near-black, cream ink, ochre accent: the Owlmanac art) by default, remembered per browser.
+// "light" and the older blue "dark" stay available. Browsers that stored "dark" before the owl theme existed move to owl once.
+const THEMES=['owl','light','dark'];
+let theme='owl';try{theme=localStorage.getItem('obs-theme')||'owl';if(!localStorage.getItem('obs-theme-v2')){if(theme==='dark')theme='owl';localStorage.setItem('obs-theme-v2','1');localStorage.setItem('obs-theme',theme)}}catch(e){}
+if(!THEMES.includes(theme))theme='owl';
 html.dataset.theme=theme;
 html.classList.add('ops');
 
@@ -28,7 +31,7 @@ top.innerHTML=`<div class="brand"><img class="brand-logo" src="${window.OBS_LOGO
 <div class="tabs" id="panelTabs" role="tablist"></div>`;
 const qf=$('#qform');if(qf){const qb=document.createElement('div');qb.className='qslot';qb.appendChild(qf);top.insertBefore(qb,$('#panelTabs'));qf.addEventListener('submit',()=>openPanel('search'));$('#q').addEventListener('input',()=>{if($('#q').value.trim())openPanel('search')})}
 const stamp=$('header.top .stamp');if(stamp){$('#stampSlot').append(...stamp.querySelectorAll('.pill'))}
-const tb=$('#themeBtn');const tlabel=()=>tb.textContent=theme==='dark'?'Light mode':'Dark mode';tlabel();tb.onclick=()=>{theme=theme==='dark'?'light':'dark';html.dataset.theme=theme;tlabel();try{localStorage.setItem('obs-theme',theme)}catch(e){}};
+const tb=$('#themeBtn');const TLABEL={owl:'Light mode',light:'Night mode',dark:'Owl mode'};const tlabel=()=>{tb.textContent=TLABEL[theme];tb.title='Theme: '+({owl:'Owl (warm dark)',light:'Light',dark:'Night (blue dark)'})[theme]+'. Click to switch.'};tlabel();tb.onclick=()=>{theme=THEMES[(THEMES.indexOf(theme)+1)%THEMES.length];html.dataset.theme=theme;tlabel();try{localStorage.setItem('obs-theme',theme)}catch(e){}};
 
 // rail: view presets + map mode + layer groups
 const rail=$('#ops-rail');

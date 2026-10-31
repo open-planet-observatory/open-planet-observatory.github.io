@@ -23,6 +23,10 @@ const logoB64 = (await fs.readFile(path.join(ROOT, 'src', 'brand', 'owlmanac-96.
 const astro = (await read('node_modules/astronomy-engine/astronomy.browser.min.js')).replace(/<\/script/g, '<\\/script');
 const CESIUM_VERSION = JSON.parse(await read('node_modules/cesium/package.json')).version;
 const ionToken = process.env.CESIUM_ION_TOKEN || '';
+// Intro splash (hosted only): painted before any script runs, so the first thing a visitor sees is the Owlmanac art. owlmanac.js dismisses it.
+// Skipped when the page is opened straight into a sky view, when the visitor already saw it this session, or when ?nosplash is set.
+const SPLASH = `<script>(function(){try{if(/nosplash/.test(location.search)||/(sky|view)=/.test(location.hash)||sessionStorage.getItem('owl-splash'))return;document.documentElement.classList.add('owl-splash-on');document.write('<div id="owlSplash" role="dialog" aria-label="Welcome to The Owlmanac"><picture><source media="(max-width:640px)" srcset="brand/owl-phone-1080.jpg"><source media="(max-width:1400px)" srcset="brand/owl-banner-1280.jpg"><img src="brand/owl-banner-2048.jpg" alt="Engraved owls fly out of a star-shaped polyhedron into deep space" fetchpriority="high" decoding="async"></picture><div class="shade"></div><img class="mark" src="brand/owl-poly-256.png" alt=""><div class="lock"><div class="k">The Owlmanac</div><h1>Open Planet Observatory</h1><p>Free public data on one globe: quakes, storms, satellites, the Moon, the stars behind them. Every number sourced, blind spots shown, nobody tracked.</p><button class="go" type="button">Enter the observatory →</button><span class="hint">or press any key</span></div><div class="load" aria-hidden="true"><i></i></div></div>')}catch(e){}})()</script>`;
+
 const widgetsCss = (await read('node_modules/cesium/Build/Cesium/Widgets/widgets.css')).replace(/url\((['"]?)(?!https?:|data:)/g, (m, q) => `url(${q}https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/Widgets/`);
 s = s.replace('/*HOOKS_JS*/', () => (await_hooks));
 
@@ -37,12 +41,24 @@ if (mode === 'hosted') {
 <meta name="description" content="Free, open-source live map of earthquakes, fires, storms, satellites, disruptions and the planet's vital signs, from public sources. Built to inform, not to surveil.">
 <meta property="og:title" content="The Owlmanac · Open Planet Observatory">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/owlmanac-32.png">
-<link rel="apple-touch-icon" href="brand/owlmanac-192.png">
-<meta property="og:image" content="https://open-planet-observatory.github.io/brand/owlmanac-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="brand/owl-touch-180.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://theowlmanac.com/">
+<meta property="og:image" content="https://theowlmanac.com/brand/owl-og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Engraved owls fly out of a star-shaped polyhedron into deep space: the Owlmanac banner.">
+<meta property="og:image" content="https://theowlmanac.com/brand/owl-square-1024.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://theowlmanac.com/brand/owl-og-1200x630.jpg">
 <meta property="og:description" content="Free public data on one map. Every number sourced, blind spots shown, no tracking.">
-<style>body{margin:0}</style>
+<meta name="theme-color" content="#0B0906">
+<link rel="preload" as="image" href="brand/owl-banner-1280.jpg" media="(min-width:641px)" fetchpriority="high">
+<link rel="preload" as="image" href="brand/owl-phone-1080.jpg" media="(max-width:640px)" fetchpriority="high">
+<style>body{margin:0;background:#0B0906}</style>
 <script>window.OBS_HOSTED=true</script>
 </head><body>
+${SPLASH}
 `;
   // Serve the libraries from the site itself, so visitors' browsers make no third-party CDN requests.
   const VENDOR = VENDORS; const _unused = [

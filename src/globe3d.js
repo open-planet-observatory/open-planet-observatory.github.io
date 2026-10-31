@@ -42,6 +42,7 @@ try{
  viewer=new C.Viewer(el,{baseLayer:false,baseLayerPicker:false,geocoder:false,homeButton:false,sceneModePicker:false,navigationHelpButton:false,animation:false,timeline:false,fullscreenButton:false,infoBox:false,selectionIndicator:false,creditContainer:credits,requestRenderMode:false,skyAtmosphere:new C.SkyAtmosphere(),contextOptions:{webgl:{preserveDrawingBuffer:true}}});
 }catch(e){el.remove();return}
 const scene=viewer.scene,globe=scene.globe;
+let firstTiles=false;globe.tileLoadProgressEvent.addEventListener(n=>{if(!firstTiles&&n===0){firstTiles=true;try{document.dispatchEvent(new CustomEvent('obs:globe-ready'))}catch(e){}}});
 globe.enableLighting=true;globe.showGroundAtmosphere=true;globe.baseColor=C.Color.fromCssColorString('#0b1c2c');
 scene.highDynamicRange=false;scene.fog.enabled=false;
 viewer.clock.shouldAnimate=true;viewer.clock.multiplier=1;viewer.clock.currentTime=C.JulianDate.now();
