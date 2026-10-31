@@ -98,7 +98,7 @@ async function build() {
   renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
   const scene = new T.Scene(); scene.background = new T.Color('#03050b');
   const camera = new T.PerspectiveCamera(45, 1, 1e-8, 5e15); camera.up.set(0, 0, 1);
-  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 4e14; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6; controls.zoomToCursor = true; controls.screenSpacePanning = true; controls.keyPanSpeed = 14; controls.listenToKeyEvents(window); /* pan: right-drag, Shift-drag, two fingers, or arrow keys */
+  const controls = new ctl(camera, canvas); controls.enableDamping = true; controls.dampingFactor = 0.08; controls.minDistance = 2e-5; controls.maxDistance = 2.6e14; controls.zoomSpeed = 1.2; controls.rotateSpeed = 0.6; controls.zoomToCursor = true; controls.screenSpacePanning = true; controls.keyPanSpeed = 14; controls.listenToKeyEvents(window); /* pan: right-drag, Shift-drag, two fingers, or arrow keys */
   // Zoom toward the pointer without OrbitControls' far-plane unprojection: with near 1e-8 and far 1e13 that arithmetic
   // cancels to 0/0 and the camera became NaN (a black screen on wheel or pinch). The ray direction is built in camera space instead.
   controls._updateZoomParameters = function (x, y) { if (!this.zoomToCursor) return; this._performCursorZoom = true; const r = this.domElement.getBoundingClientRect(); if (!(r.width > 0 && r.height > 0)) { this._performCursorZoom = false; return; }
@@ -260,7 +260,7 @@ function scaleBar() { const t = S.controls.target, dist = S.camera.position.dist
 // ---------- focus, info card, close approaches ----------
 function focusOn(o, fly) { if (o.ring || o.kind === 'blind spot' || (o.web && o.web.home)) { card(o); return; } /* a ring or a band: read about it where you are */
   S.focus = o; const p = o.shown || o.pos; if (!p) return; const target = V().fromArray(p);
-  const dist = o.web ? 6.2e12 : o.galaxy ? Math.max(1.5e9, (o.galaxy.diam || 20) * 1000 * 206264.806 * 4) : o.kind === 'galactic centre' ? 9e8 : o.model ? 7e8 : o.star || o.host ? 0.4 * 206264.806 : o.name === 'Sun' ? 3.2 : o.rKm ? o.rKm / AU_KM * (o.name === 'Saturn' ? 14 : 6) : 0.08; // bodies: close enough to see them at true size
+  const dist = o.web ? (Math.hypot(...p) < 1.3e13 ? 1.3e13 + Math.hypot(...p) : 6.2e12) : /* near clusters: stand far enough out that the web is drawn */ o.galaxy ? Math.max(1.5e9, (o.galaxy.diam || 20) * 1000 * 206264.806 * 4) : o.kind === 'galactic centre' ? 9e8 : o.model ? 7e8 : o.star || o.host ? 0.4 * 206264.806 : o.name === 'Sun' ? 3.2 : o.rKm ? o.rKm / AU_KM * (o.name === 'Saturn' ? 14 : 6) : 0.08; // bodies: close enough to see them at true size
   // look at bodies from their sunlit side, a little above the ecliptic
   const dir = o.name === 'Sun' || o.star || o.host || o.model || o.galaxy || o.web || o.kind === 'galactic centre' ? null : target.clone().negate().normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.5).add(new T.Vector3(0, 0, 0.35)).normalize();
   if (fly && o.web && (ui.root.clientWidth || 0) >= 700) { /* desktop: the card sits on the right, so keep the cluster left of centre */
@@ -384,13 +384,13 @@ function modelCard() {
   ui.card.hidden = false; ui.card.querySelector('.sc-x').onclick = () => { ui.card.hidden = true; }; }
 
 // ---------- the zoom slider: from the Sun's surface out to the whole galaxy ----------
-const ZMIN = Math.log10(0.012), ZMAX = Math.log10(4e14);
+const ZMIN = Math.log10(0.012), ZMAX = Math.log10(2.6e14);
 const TICKS = [['The Sun', 0.03], ['Planets', 60], ['Nearest stars', 3.5e5], ['100 light-years', 6.3e6], ['Gaia stars', 2.5e8], ['Milky Way', 1.5e10], ['Neighbours', 3.2e12], ['Cosmic web', 1.5e14]];
 function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.querySelector('.uz-track'), tk = document.getElementById('uniTicks');
   const toV = d => Math.max(0, Math.min(1, (Math.log10(Math.max(d, 1e-9)) - ZMIN) / (ZMAX - ZMIN)));
   tk.innerHTML = TICKS.map(([n, d]) => `<button style="top:${(toV(d) * 100).toFixed(1)}%" data-zd="${d}">${n}</button>`).join('');
   tk.querySelectorAll('[data-zd]').forEach(b => b.onclick = () => { stopTour(); const d = +b.dataset.zd; ui.card.hidden = true; if (d >= 1.5e10 && d < 1e12) return galaxyView(3200, true); if (d >= 1e13) return webView(); if (d >= 1e12) return neighboursView(); S.focus = null; animateTo(new T.Vector3(0, 0, 0), d, 2200); });
-  const setDist = d => { const t = S.controls.target; d = Math.min(4e14, Math.max(0.012, d)); S.zoom = null;
+  const setDist = d => { const t = S.controls.target; d = Math.min(2.6e14, Math.max(0.012, d)); S.zoom = null;
     if (!(S.focus && S.focus.rKm && d < 200)) { S.focus = null; const base = S._zBase || t.clone(); const bl = base.length(); t.copy(base).multiplyScalar(bl > 0 ? Math.min(1, d / (2 * bl)) : 0); } // keeps your pan when zooming out; glides back to the Sun as you zoom in
     const dir = S.camera.position.clone().sub(t).normalize(); if (!isFinite(dir.x)) dir.set(0.4, -0.8, 0.45).normalize(); S.camera.position.copy(t).add(dir.multiplyScalar(d)); S.anim = null; };
   const fromY = y => { const r = tr.getBoundingClientRect(); const v = Math.max(0, Math.min(1, (y - r.top) / r.height)); setDist(Math.pow(10, ZMIN + v * (ZMAX - ZMIN))); };
@@ -440,7 +440,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   S.controls.autoRotate = camAU > 2e13 && !S.anim && !S.focus && !S.tour && !S._jr && !RM() && now - Math.max(S._lastInput || 0, S._rotHold || 0) > 6000; S.controls.autoRotateSpeed = 0.22;
   const near = camAU < 2e5; S.groups.bodies.visible = near; S.groups.orbits.visible = near && S.show.orbits; S.groups.craft.visible = near && S.show.craft; S.groups.comets.visible = near && S.show.comets; /* light-years out, the planets are a speck: the Sun's star point stands in */
   if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
-  const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : camAU < 6e10 ? 'The Milky Way' : camAU < 1.6e13 ? 'Our galactic neighbourhood' : 'The cosmic web'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
+  const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : camAU < 6e10 ? 'The Milky Way' : camAU < 1.1e13 ? 'Our galactic neighbourhood' : 'The cosmic web'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt;
   S.controls.update();
   // Zooming in from galaxy scale drifts the pivot toward the Sun, where the real stars are, so a wheel-zoom from the
   // Milky Way lands among stars instead of in empty space beside the model (the slider does the same).
@@ -454,7 +454,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; const pcC = camAU / 206264.806, dT = S.camera.position.distanceTo(S.controls.target) / 206264.806;
       const lost = far && pcC > 3000 && dT < 300 && !S.tour && !S.anim; /* zoomed right in, far from every catalogued star */
       const cosErr = S.cosErr && camAU > 1e13; const key = cosErr ? 'coserr' : lost ? 'lost' : String(far); if (n.dataset.far !== key) { n.dataset.far = key; n.hidden = far && !lost && !cosErr; if (cosErr) n.textContent = 'The cosmic web could not be loaded (' + S.cosErr + '). Nothing is drawn rather than an old or invented copy.'; else if (lost) n.textContent = 'No catalogued stars here: the million measured stars all sit within about 16,000 light-years of the Sun. Zoom out, or press Milky Way.'; else if (!far) note(); } } }
-  { const wi = document.getElementById('uniWebInfo'); const sw = !!COS && camAU > 1.6e13 && S.show.web !== false; if (wi && wi.hidden === sw) wi.hidden = !sw; }
+  { const wi = document.getElementById('uniWebInfo'); const sw = !!COS && camAU > 1.1e13 && S.show.web !== false; if (wi && wi.hidden === sw) wi.hidden = !sw; }
   const showModel = camAU > 1e8 && camAU < 8e10 && S.show.galaxy !== false; /* past 400 kpc the model is gone; the Milky Way is a dot whose card says "model" */ if (ui.model && ui.model.hidden === showModel) ui.model.hidden = !showModel;
 }
 async function openUniverse(dest) {

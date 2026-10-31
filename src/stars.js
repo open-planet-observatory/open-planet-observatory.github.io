@@ -40,7 +40,7 @@ const EVENTS = [[2021, 'the James Webb Space Telescope was launched'], [2015, 'N
   [-230e6, 'the first dinosaurs had appeared (about 230 million years ago)'], [-375e6, 'fish were starting to crawl onto land (about 375 million years ago)'], [-538e6, 'the Cambrian explosion of animal life was beginning (about 538 million years ago)'], [-2.4e9, 'oxygen was building up in the air for the first time (about 2.4 billion years ago)']];
 export function lightLeft(ly) { const nowY = new Date().getUTCFullYear(); const y = nowY - ly; const e = EVENTS.find(x => x[0] <= y + 0.5);
   const yr = y >= 1 ? 'around ' + Math.round(y) : y > -10000 ? 'around ' + Math.round(-y + 1).toLocaleString('en-US') + ' BCE' : ly >= 1e9 ? 'about ' + (ly / 1e9).toFixed(1).replace(/\.0$/, '') + ' billion years ago' : ly >= 1e7 ? 'about ' + Math.round(ly / 1e6).toLocaleString('en-US') + ' million years ago' : 'about ' + Math.round(ly).toLocaleString('en-US') + ' years ago';
-  return { yr, event: e ? e[1] : null, eYear: e ? e[0] : null, near: e ? Math.abs(y - e[0]) <= 6 : false }; }
+  return { yr, event: e ? e[1] : null, eYear: e ? e[0] : null, near: e ? Math.abs(y - e[0]) <= (y < -1e6 ? -y * 0.2 : 6) : false }; }
 
 // deterministic random numbers, so the model looks the same for everyone
 function rng(seed) { let a = seed >>> 0; return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
