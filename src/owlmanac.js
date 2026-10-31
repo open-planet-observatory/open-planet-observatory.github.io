@@ -35,7 +35,7 @@ if(right&&!document.getElementById('owlYt')){const b=document.createElement('a')
 // episode shelf, above NASA's stories
 const sg=document.getElementById('storyGrid');
 if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling;
- const sec=document.createElement('div');sec.innerHTML=`<div class="sec-head" style="margin-top:6px"><h3>From The Owlmanac</h3><p class="small muted">Strange, true, seriously. Short videos from the channel behind this site. Where an episode connects to something on the map, the button turns that layer on. <a href="${CH}" target="_blank" rel="noopener">All episodes on YouTube ↗</a></p></div><div class="cam-grid" id="owlGrid"></div>`;
+ const sec=document.createElement('div');sec.innerHTML=`<div class="owl-shelf-head"><img src="brand/owl-poly-256.png" alt="" loading="lazy"><div class="sec-head"><h3>From The Owlmanac</h3><p class="small muted">Strange, true, seriously. Short videos from the channel behind this site. Where an episode connects to something on the map, the button turns that layer on. <a href="${CH}" target="_blank" rel="noopener">All episodes on YouTube ↗</a></p></div></div><div class="cam-grid" id="owlGrid"></div>`;
  (head&&head.classList.contains('sec-head')?head:sg).before(...sec.childNodes);
  document.getElementById('owlGrid').innerHTML=EPISODES.map((e,i)=>`<article class="cam owl-ep"><span class="kind owl-kind" style="align-self:flex-start">The Owlmanac · ${esc(e[2])}</span><h3>${esc(e[0])}</h3>${e[5]?`<p class="small">${esc(e[5])}</p>`:''}<div class="owl-act"><a class="go" href="${esc(e[1])}" target="_blank" rel="noopener">${yt} Watch on YouTube ↗</a>${e[3]?`<button class="linkbtn" data-ep="${i}">Show on the map</button>`:''}</div></article>`).join('');
  document.querySelectorAll('#owlGrid [data-ep]').forEach(b=>b.onclick=()=>{const e=EPISODES[+b.dataset.ep];const c=document.getElementById('chip-'+e[3]);if(c&&c.getAttribute('aria-pressed')!=='true')c.click();
@@ -44,4 +44,13 @@ if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling
 function moonLinks(){const c=document.getElementById('moonCard');if(!c||c.querySelector('.owl-moon'))return;const foot=c.querySelector('.sg-foot');const d=document.createElement('p');d.className='small owl-moon';
  d.innerHTML=`<b>From The Owlmanac:</b> ${EPISODES.filter(e=>e[3]==='moon').map(e=>`<a href="${esc(e[1])}" target="_blank" rel="noopener">${esc(e[0])} ↗</a>`).join(' · ')}`;if(foot)foot.before(d);else c.appendChild(d)}
 moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObserver(moonLinks).observe(mh,{childList:true});
+// Intro splash (markup is written by the build before any script): hide it when the globe has drawn its first tiles, never before 1.6 s and never later than 7 s; any click or key skips it.
+const sp=document.getElementById('owlSplash');
+if(sp){const t0=performance.now();let ready=false,gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>sp.remove(),rm?0:800);document.removeEventListener('keydown',go)};
+ const minWait=rm?800:1600;const maybe=()=>{if(!ready)return;const left=minWait-(performance.now()-t0);if(left>0)setTimeout(go,left);else go()};
+ document.addEventListener('obs:globe-ready',()=>{ready=true;maybe()},{once:true});
+ sp.addEventListener('click',go);document.addEventListener('keydown',go);sp.querySelector('.go')?.focus({preventScroll:true});
+ setTimeout(()=>{if(!document.getElementById('cesium'))go()},2500);
+ setTimeout(go,7000)}
 })();

@@ -162,7 +162,7 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .owl-moon a{color:var(--ink-2)}
 @media (max-width:640px){.owl-yt span{display:none}}
 [data-theme="light"] #ops-top .owl-kicker{color:#a07800}
-@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) #ops-top .owl-kicker{color:#a07800}}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]):not([data-theme="owl"]) #ops-top .owl-kicker{color:#a07800}}
 /* data checks */
 .pill.checks{cursor:pointer;font:inherit;border:1px solid var(--glass-line)}
 .pill.checks i{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
@@ -403,3 +403,64 @@ html[data-theme="light"] .alm-top,html[data-theme="light"] .alm-src,html[data-th
 .alm-now{display:inline-block;font:700 .66rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#9ad1ff;margin-right:6px;vertical-align:1px}
 .vy-mini{margin:0 0 12px;padding:8px 12px;border:1px solid rgba(242,196,60,.35);border-radius:999px;font-size:.82rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vy-mini b{color:var(--owl-yellow,#f2c43c);font-variant-numeric:tabular-nums}.vy-mini a{color:#9ad1ff}
 #uniLoading{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2001;padding:10px 18px;border-radius:999px;font-weight:600}
+
+/* ---- Owl theme: the Owlmanac banner art as the site's default dark look (warm near-black paper, cream ink, ochre accent) ---- */
+:root[data-theme="owl"]{
+  --bg:#0B0906; --panel:#161108; --panel-2:#1F1810; --ink:#EFE4CC; --ink-2:#C9B995; --ink-3:#9A8B6D; --line:#332A1E;
+  --ocean:#120F0B; --land:#2A2419; --land-line:#3E3526; --night:rgb(0 0 0 / .42); --grat:rgb(239 228 204 / .06);
+  --accent:#D9A441; --accent-soft:#2E2312; --space:#060402; --glint:#E8CF98; --limb:#000000;
+  --l-quake:#e66767; --l-fire:#e0652c; --l-event:#d55181; --l-alert:#a394ee; --l-air:#4f9be6; --l-sat:#2fae7d; --l-flood:#4f9be6;
+  --warn:#E5C25B; --warn-soft:#3A2F14; --sev-red:#F2897E; --sev-red-soft:#3C1E1B; --l-war:#F2897E; --l-gdacs:#F2897E; --l-volc:#eda100; --l-econ:#6ea0d8; --l-odd:#a98adb; --l-gps:#a394ee; --ok:#8DCB95; --ok-soft:#183324; color-scheme:dark;
+  --n-bird:#3fc1d1; --n-bfly:#f2b53a; --n-whale:#8b85f5; --n-mammal:#c48a5e; --n-amph:#8fcf6e; --n-plant:#f06aa6; --n-threat:#F2897E; --n-mig:#ff9b4d;
+  --glass:rgb(18 14 9 / .84); --glass-2:rgb(18 14 9 / .62); --glass-line:rgb(239 228 204 / .13);
+  --owl-yellow:#D9A441; --owl-cream:#EFE4CC;
+}
+:root[data-theme="owl"] body{background:var(--bg) url('brand/owl-tile.jpg') center/720px repeat}
+:root[data-theme="owl"] #ops-top .brand-logo{box-shadow:0 0 0 1.5px rgb(217 164 65 / .6)}
+:root[data-theme="owl"] #ops-top .tabs button[aria-pressed="true"]{background:var(--accent);color:#1a1206}
+:root[data-theme="owl"] .btn.primary{background:var(--accent);color:#1a1206;border-color:var(--accent)}
+
+/* Header backdrop: a strip of the banner (the big owl at the right) behind the glass bar. Dark themes only. */
+html[data-theme="owl"] #ops-top,html[data-theme="dark"] #ops-top{overflow:hidden}
+html[data-theme="owl"] #ops-top::before,html[data-theme="dark"] #ops-top::before{content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(180deg,rgb(11 9 6 / 0) 0,rgb(11 9 6 / 0) 34%,rgb(11 9 6 / .55) 62%,rgb(11 9 6 / .9) 100%),url('brand/owl-strip-2048.jpg') right 30%/auto 165% no-repeat;opacity:.42;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0,rgb(0 0 0 / .25) 35%,#000 62%,#000 100%);mask-image:linear-gradient(90deg,transparent 0,rgb(0 0 0 / .25) 35%,#000 62%,#000 100%)}
+@media (max-width:860px){html[data-theme="owl"] #ops-top::before,html[data-theme="dark"] #ops-top::before{background-position:right 22%;background-size:auto 140%;opacity:.34;-webkit-mask-image:linear-gradient(90deg,transparent 0,rgb(0 0 0 / .2) 25%,#000 55%);mask-image:linear-gradient(90deg,transparent 0,rgb(0 0 0 / .2) 25%,#000 55%)}}
+
+/* Section backdrops: the banner, deeply faded, behind the quiet reading sections. Dark themes only. */
+html[data-theme="owl"] .panel[data-k="classroom"],html[data-theme="owl"] .panel[data-k="library"],html[data-theme="owl"] .panel[data-k="free"],html[data-theme="owl"] .panel[data-k="about"],
+html[data-theme="dark"] .panel[data-k="classroom"],html[data-theme="dark"] .panel[data-k="library"],html[data-theme="dark"] .panel[data-k="free"],html[data-theme="dark"] .panel[data-k="about"]{
+  position:relative;border-radius:14px;padding:16px 14px;margin:-4px -4px 0;
+  background:linear-gradient(180deg,rgb(11 9 6 / .55) 0,rgb(11 9 6 / .9) 34%,rgb(11 9 6 / .97) 100%),url('brand/owl-banner-1280.jpg') center 30%/cover no-repeat}
+html[data-theme="owl"] .owl-shelf-head,html[data-theme="dark"] .owl-shelf-head{position:relative;border-radius:14px;padding:18px 16px 14px;overflow:hidden;
+  background:linear-gradient(90deg,rgb(11 9 6 / .96) 0,rgb(11 9 6 / .82) 45%,rgb(11 9 6 / .55) 100%),url('brand/owl-banner-1280.jpg') right 40%/cover no-repeat;border:1px solid var(--glass-line)}
+.owl-shelf-head{display:flex;gap:14px;align-items:center;margin-top:6px}
+.owl-shelf-head img{width:72px;height:72px;object-fit:contain;flex:none;filter:drop-shadow(0 4px 10px rgb(0 0 0 / .5))}
+.owl-shelf-head .sec-head{margin:0}
+html[data-theme="light"] .owl-shelf-head{background:var(--panel-2);border:1px solid var(--line)}
+.owl-empty{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:12px 0;color:var(--ink-3)}
+.owl-empty img{width:min(260px,70%);opacity:.9;filter:drop-shadow(0 6px 14px rgb(0 0 0 / .45))}
+
+/* Intro splash: the banner full-bleed while the globe boots. Dismisses when the first tiles are in (never before 1.6 s), on click, on Esc, or by itself after 7 s. */
+#owlSplash{position:fixed;inset:0;z-index:60;background:#0B0906;display:flex;align-items:flex-end;overflow:hidden;cursor:pointer;animation:owlSplashIn .5s ease both;-webkit-tap-highlight-color:transparent}
+#owlSplash picture,#owlSplash img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block}
+#owlSplash .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgb(11 9 6 / .15) 0,rgb(11 9 6 / 0) 30%,rgb(11 9 6 / .25) 65%,rgb(11 9 6 / .88) 100%)}
+#owlSplash .lock{position:relative;padding:0 max(28px,env(safe-area-inset-left,0px)) max(30px,env(safe-area-inset-bottom,0px)) max(28px,env(safe-area-inset-left,0px));max-width:760px;color:#EFE4CC;animation:owlSplashUp .8s .25s ease both}
+#owlSplash .k{font-family:var(--mono,ui-monospace,monospace);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D9A441}
+#owlSplash h1{font-family:var(--display);font-stretch:125%;font-weight:800;font-size:clamp(1.9rem,5.2vw,3.6rem);letter-spacing:-.01em;margin:6px 0 8px;color:#EFE4CC;text-shadow:0 2px 18px rgb(0 0 0 / .6)}
+#owlSplash p{margin:0 0 16px;font-size:clamp(.92rem,1.6vw,1.08rem);color:#C9B995;max-width:52ch}
+#owlSplash .go{display:inline-flex;align-items:center;gap:8px;font:inherit;font-weight:700;font-size:.95rem;padding:10px 18px;border-radius:999px;border:1px solid rgb(217 164 65 / .7);background:rgb(217 164 65 / .14);color:#EFE4CC;cursor:pointer;backdrop-filter:blur(6px)}
+#owlSplash .go:hover,#owlSplash .go:focus-visible{background:rgb(217 164 65 / .3);outline:2px solid #D9A441;outline-offset:2px}
+#owlSplash .hint{margin-left:12px;font-size:.8rem;color:#9A8B6D}
+#owlSplash .mark{position:absolute;top:max(18px,env(safe-area-inset-top,0px));right:max(18px,env(safe-area-inset-right,0px));width:54px;height:54px;object-fit:contain;animation:owlSpin 14s linear infinite;opacity:.95;filter:drop-shadow(0 2px 10px rgb(0 0 0 / .6))}
+#owlSplash .load{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgb(217 164 65 / .18)}
+#owlSplash .load i{display:block;height:100%;width:30%;background:#D9A441;animation:owlLoad 1.6s ease-in-out infinite}
+#owlSplash.out{animation:owlSplashOut .7s ease forwards;pointer-events:none}
+html.owl-splash-on{overflow:hidden}
+@keyframes owlSplashIn{from{opacity:0}to{opacity:1}}
+@keyframes owlSplashOut{to{opacity:0;transform:scale(1.03)}}
+@keyframes owlSplashUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes owlSpin{to{transform:rotate(360deg)}}
+@keyframes owlLoad{0%{transform:translateX(-100%)}100%{transform:translateX(340%)}}
+@media (max-width:640px){#owlSplash picture,#owlSplash img{object-position:50% 50%}#owlSplash .lock{padding-bottom:max(26px,env(safe-area-inset-bottom,0px))}#owlSplash .hint{display:none}}
+@media (prefers-reduced-motion:reduce){#owlSplash,#owlSplash .lock,#owlSplash.out{animation:none}#owlSplash .mark{animation:none}#owlSplash.out{display:none}}
