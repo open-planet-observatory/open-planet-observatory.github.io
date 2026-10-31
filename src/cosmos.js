@@ -38,7 +38,7 @@ export async function createCosmos({ T, S, SM, ui }) {
     float real = 0.03 / dMpc * uK; float base = 1.0 + 2.4 * aDen + 0.9 * aLum; float px = max(base, min(real * 1.6, 72.0));
     vec3 cool = vec3(0.42, 0.58, 1.0), mid = vec3(0.86, 0.9, 1.0), hot = vec3(1.0, 0.78, 0.55);
     vec3 c = aDen < 0.62 ? mix(cool, mid, aDen / 0.62) : mix(mid, hot, (aDen - 0.62) / 0.38); if (aType < 0.5) c = mix(c, vec3(1.0, 0.82, 0.6), 0.35);
-    vCol = c; vA = uOp * (0.07 + 0.5 * aDen * aDen) * (0.6 + 0.4 * aLum) * clamp(base / px * 2.0, 0.35, 1.0); vH = clamp(real / 18.0, 0.0, 1.0);
+    vCol = c; vA = uOp * (0.07 + 0.5 * aDen * aDen) * (0.6 + 0.4 * aLum) * clamp(base / px * 2.0, 0.35, 1.0) * min(1.0, 650.0 / dMpc); vH = clamp(real / 18.0, 0.0, 1.0);
     gl_PointSize = px * uPx; gl_Position = projectionMatrix * mv;
     #include <logdepthbuf_vertex>
    }`;
@@ -77,9 +77,20 @@ export async function createCosmos({ T, S, SM, ui }) {
   function cardCluster(o, h) { const mpc = o.web.cz / state.h0, mly = mpc * LY_PER_MPC / 1e6; const L = SM.lightLeft(mly * 1e6);
     return `<div class="sc-row"><span>Distance</span><b>about ${h.fmtN(mly)} million light-years</b></div>
      <div class="sc-row"><span>Moving away at</span><b>${h.fmtN(o.web.cz)} km/s (from its redshift)</b></div>
-     <p class="sc-note uni-light"><b>The light you see from it left ${h.esc(L.yr)}.</b>${L.event ? ` By then on Earth, ${h.esc(L.event)}.` : ''}</p>
+     <p class="sc-note uni-light"><b>The light you see from it left ${h.esc(L.yr)}.</b>${L.event ? ` ${L.near ? 'Around then' : 'By then'} on Earth, ${h.esc(L.event)}.` : ''}</p>
+     ${o.web.cz < 2500 ? '<p class="sc-note">This close, the galaxies’ own motions are a large share of their speed, so this redshift distance is rough; distances measured other ways can differ by a fifth or more.</p>' : ''}
      ${h.wikiBlock(o)}
      <p class="sc-note">Distance = speed ÷ Hubble constant (${state.h0} km/s per megaparsec): ${h.fmtN(o.web.cz)} ÷ ${state.h0} ≈ ${h.fmtN(mpc)} megaparsecs. Source: <a href="https://ned.ipac.caltech.edu/byname?objname=${encodeURIComponent(o.ned)}" target="_blank" rel="noopener">NASA/IPAC Extragalactic Database</a> (${h.esc(o.ned)}).</p>`; }
+  function cardAbout(o, h) { return `<p class="sc-note"><b>Each dot is one real galaxy</b>: ${h.fmtN(N)} of them from the 2MASS Redshift Survey, which mapped every galaxy brighter than a set limit across the whole sky. Our own galaxy sits at the centre.</p>
+     <p class="sc-note"><b>Brighter and warmer</b> dots have more neighbours within 5 megaparsecs (about 16 million light-years) than is usual at their distance; <b>blue</b> ones have fewer. That is why clusters and the filaments between them glow and the voids stay dark. It is a way of drawing a count, not a score.</p>
+     <p class="sc-note"><b>Distances come from redshift</b>: how fast a galaxy is moving away, divided by the Hubble constant.</p>${h0Block(h)}
+     <p class="sc-note"><b>What this map can't show you</b></p><ul class="uni-list">
+     <li><b>The streaks pointing at us are not real shapes.</b> Galaxies inside a cluster swarm at up to about 1,000 km/s, and redshift reads that motion as extra distance, so every cluster looks stretched along our line of sight (astronomers call these "fingers of God").</li>
+     <li><b>The edge is the survey's limit, not the end of galaxies.</b> Far away only the brightest galaxies were bright enough to be included, so the web thins out with distance.</li>
+     <li><b>A band is hidden by our own galaxy.</b> Its dust and stars block the view within about 7° of its plane (the zone of avoidance, the faint red wedge).</li>
+     <li><b>The nearest galaxies are left out here.</b> Below 1,000 km/s, a galaxy's own motion swamps the expansion, so redshift can't give its distance. The Neighbours view shows those with measured distances instead.</li></ul>
+     <p class="sc-note">Source: <a href="https://heasarc.gsfc.nasa.gov/W3Browse/all/twomassrsc.html" target="_blank" rel="noopener">2MASS Redshift Survey</a> (Huchra et al. 2012) via NASA HEASARC; cluster positions from NASA/IPAC NED.</p>`; }
+  const about = { name: 'The cosmic web: what you are seeing', kind: 'about this view', colour: '#8fd3ff', custom: cardAbout, pos: [0, 0, 0], nolabel: true };
   function cardHome(o, h) { return `<p class="sc-note">Our galaxy, drawn here as one bright point among ${h.fmtN(N)} others. At this scale the whole Milky Way, 100,000 light-years across, is far smaller than a pixel.</p>${h0Block(h)}`; }
   function cardZoa(o, h) { return `<p class="sc-note"><b>A blind spot, not an empty space.</b> Our own galaxy's dust and stars block the view along its plane, so surveys like this one miss most galaxies within about 7° of it. The faint red wedge marks that band. Radio and X-ray surveys find galaxies hiding there, including part of the Great Attractor region near the Norma Cluster.</p><p class="sc-note">Source for the band: <a href="https://doi.org/10.1088/0067-0049/199/2/26" target="_blank" rel="noopener">Huchra et al. 2012</a>, the 2MASS Redshift Survey paper.</p>`; }
   function cardRing(o, h) { const mly = o.ring.userData.mly; const ring = RINGS.find(r => r[0] === mly); return `<p class="sc-note">A circle in our galaxy's plane, ${h.esc(o.name)} from us: ${h.esc(ring[1])}. Distances this large come from redshift, so they depend on the Hubble constant (${state.h0} here) and are approximate.</p>${h0Block(h)}`; }
@@ -93,9 +104,15 @@ export async function createCosmos({ T, S, SM, ui }) {
     zoa.scale.setScalar(320 * MPC * 70 / h); zoa.updateMatrix(); }
   setH0(70);
 
-  function update(camAU) { const mpc = camAU / MPC; // fades in past ~60 Mpc, fully by ~250 Mpc; out of the way below
-    const f = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 1.5) / 0.7)); uni.uOp.value = S.show.web === false ? 0 : f; group.visible = uni.uOp.value > 0.002;
+  const lane = (o, radiusAU, plane) => { const W = ui.root.clientWidth || innerWidth, H = ui.root.clientHeight || innerHeight; let best = null, bd = -1;
+    for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; const v = new T.Vector3(Math.cos(a), Math.sin(a), 0).applyMatrix4(ROT).multiplyScalar(radiusAU); const q = v.clone().project(S.camera); if (q.z > 1 || q.z < -1) continue;
+      const x = (q.x + 1) / 2, y = (1 - q.y) / 2; if (x < 0.06 || x > (W < 640 ? 0.55 : 0.72) || y < 0.2 || y > (W < 640 ? 0.62 : 0.66)) continue; const d = Math.hypot(x - 0.45, y - 0.45); if (d > bd) { bd = d; best = v; } }
+    if (best) o.pos = [best.x, best.y, best.z]; return !!best; };
+  let laneT = 0;
+  function update(camAU) {
+    const now = performance.now(); if (camAU > 2e13 && now - laneT > 250) { laneT = now; for (const o of objs) { if (o.ring) o.hideLbl = !lane(o, o.ring.userData.mly * 1e6 / LY_PER_MPC * MPC); else if (o.kind === 'blind spot') o.hideLbl = !lane(o, 200 * MPC * 70 / state.h0); } } const mpc = camAU / MPC; // fades in past ~60 Mpc, fully by ~250 Mpc; out of the way below
+    const f = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 1.2) / 0.5)); /* cross-fades with the Neighbours layer, 16–50 Mpc */ uni.uOp.value = S.show.web === false ? 0 : f; group.visible = uni.uOp.value > 0.002;
     const H = ui.root.clientHeight || innerHeight; uni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
-    const fr = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 2.0) / 0.5)); ringMat.opacity = 0.22 * fr * (S.show.web === false ? 0 : 1); zoaMat.opacity = 0.035 * fr * (S.show.web === false ? 0 : 1); deco.visible = fr > 0.01 && S.show.web !== false; }
-  return { group, deco, objs, update, setH0, h0: () => state.h0, count: N, built: meta.built, source: meta.source };
+    const fr = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 2.0) / 0.5)); ringMat.opacity = 0.22 * fr * (S.show.web === false ? 0 : 1); zoaMat.opacity = 0.022 * fr * (S.show.web === false ? 0 : 1); deco.visible = fr > 0.01 && S.show.web !== false; }
+  return { group, deco, objs, about, update, setH0, h0: () => state.h0, count: N, built: meta.built, source: meta.source };
 }
