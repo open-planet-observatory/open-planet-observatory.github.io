@@ -11,7 +11,7 @@
     for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; } const pick = pool.slice(0, n); pick.forEach(i => seen.add(i)); return pick.map(i => A.entries[i]); }
   function render() { const cards = deal().map(en => { const ed = A.editions[en.ed]; return `<article class="alm-card"><div class="alm-top"><span class="alm-year">${ed.year}</span><span class="alm-topic">${esc(en.topic)}</span></div>
       <blockquote class="alm-q">${esc(en.text)}</blockquote>
-      <p class="alm-then">${esc(en.then)}${en.link ? ` <a href="${esc(en.link)}">${en.link.startsWith('#sky') ? 'Open the star view' : 'See it live'} →</a>` : ''}</p>
+      <p class="alm-then"><span class="alm-now">Then and now</span>${esc(en.then)}${en.link ? ` <a href="${esc(en.link)}">${en.link.startsWith('#sky') ? 'Open the star view' : 'See it live'} →</a>` : ''}</p>
       <p class="alm-src"><a href="${link(en, ed)}" target="_blank" rel="noopener">${esc(ed.title)}</a> · scan at the Internet Archive</p></article>`; }).join('');
     host.innerHTML = `<div class="alm-grid">${cards}</div><div class="alm-foot"><button class="more" id="almMore">Deal six more</button><span class="small muted">${A.entries.length} passages from ${Object.keys(A.editions).length} editions · public domain · word for word from the scans (line-break hyphens rejoined, nothing else changed)</span></div>`;
     host.querySelector('#almMore').onclick = render; }

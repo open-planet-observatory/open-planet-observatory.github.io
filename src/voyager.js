@@ -15,15 +15,16 @@
   function render() {
     const now = Date.now(), T = Date.parse(V.crossUTC); const after = now >= T;
     if (after && now - T > 7 * 864e5) { host.hidden = true; clearInterval(timer); return; }
-    const t0 = Date.parse(V.now.t); const auNow = V.now.au + V.now.kms * ((now - t0) / 1000) / AU_KM; const kmNow = auNow * AU_KM;
+    const t0 = Date.parse(V.now.t); const auNow = Math.min(V.now.au + V.now.kms * ((now - t0) / 1000) / AU_KM, after ? Infinity : V.lightDayAU - 1e-4); const kmNow = auNow * AU_KM; /* counted forward from Horizons' last hourly value; never past the line before the moment */
     const p = parts(T - now);
     const links = `${VIDEOS.short ? `<a class="vy-btn" href="${esc(VIDEOS.short)}" target="_blank" rel="noopener">▶ Watch the short</a>` : ''}${VIDEOS.long ? `<a class="vy-btn vy-long" href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">${after ? '▶ Watch the full film' : '▶ Full film · goes live when the clock reaches zero'}</a>` : ''}`;
-    const head = after ? `<b>Voyager 1 is now more than one light-day from Earth.</b> It passed the mark on ${esc(local(V.crossUTC))}.` : `<b>Voyager 1 reaches one light-day from Earth in</b>`;
+    const head = after ? `<b>Voyager 1 is now more than one light-day from Earth.</b> It passed the mark on ${esc(local(V.crossUTC))} (${esc(V.crossUTC.slice(0, 16).replace('T', ' '))} UTC).` : `<b>Voyager 1 reaches one light-day from Earth in</b>`;
     host.innerHTML = `<div class="vy-in"><div class="vy-text">${head}${after ? '' : `<div class="vy-clock" aria-live="off"><span>${p.d}<i>days</i></span><span>${pad(p.h)}<i>hrs</i></span><span>${pad(p.m)}<i>min</i></span><span>${pad(p.s)}<i>sec</i></span></div>`}
-      <p class="vy-note">${after ? 'From now on, a' : 'On ' + esc(local(V.crossUTC)) + ', a'} radio message from Earth will take a full day to reach it, and its answer a day to come back. Right now it is <b>${fmt(kmNow / 1e9, 3)} billion km</b> away (${fmt(auNow, 3)} AU), leaving us at ${fmt(V.now.kms, 1)} km/s. Launched 5 September 1977.</p>
-      <p class="vy-src">Moment and distance: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a> (Voyager 1, geocentric range), computed ${esc(V.computedAt.slice(0, 10))}${V.stale ? ' · Horizons did not answer today, so this is yesterday’s figure' : ''}. One light-day = ${fmt(V.lightDayAU, 4)} AU.</p></div>
+      <p class="vy-note">${after ? 'From now on, a' : 'On ' + esc(local(V.crossUTC)) + ' (' + esc(V.crossUTC.slice(0, 16).replace('T', ' ')) + ' UTC), a'} radio message from Earth will take a full day to reach it, and its answer a day to come back. Right now it is <b>${fmt(kmNow / 1e9, 3)} billion km</b> away (${fmt(auNow, 3)} AU), leaving us at ${fmt(V.now.kms, 1)} km/s. Launched 5 September 1977.</p>
+      <p class="vy-src">Moment and distance: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a> (Voyager 1, geocentric range), computed ${esc(V.computedAt.slice(0, 10))}; the distance shown is counted forward from Horizons' ${esc(V.now.t.slice(11, 16))} UTC value at its stated speed${V.stale ? ' · Horizons did not answer today, so this is yesterday’s figure' : ''}. One light-day = ${fmt(V.lightDayAU, 4)} AU.</p></div>
       ${links ? `<div class="vy-links">${links}</div>` : ''}<button class="vy-x" aria-label="Hide this banner" title="Hide until tomorrow">×</button></div>`;
-    host.querySelector('.vy-x').onclick = () => { host.hidden = true; try { localStorage.setItem('vyHide', String(now)); } catch (e) { } };
+    host.querySelector('.vy-x').onclick = () => { host.hidden = true; host.dataset.closed = '1'; const m = document.getElementById('voyagerMini'); if (m) m.hidden = true; try { localStorage.setItem('vyHide', String(now)); } catch (e) { } };
+    const mini = document.getElementById('voyagerMini'); if (mini) { const mh = after ? `<span>Voyager 1 is now more than <b>one light-day</b> from Earth.</span>${VIDEOS.long ? ` <a href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">Watch the film</a>` : ''}` : `<span>Voyager 1 reaches one light-day from Earth in <b>${p.d} d ${pad(p.h)} h ${pad(p.m)} min</b></span>${VIDEOS.long ? ` <a href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">Film goes live then</a>` : ''}`; if (mini.innerHTML !== mh) mini.innerHTML = mh; if (host._sync) host._sync(); }
     /* the ticker carries a one-line version; rebuilt once a minute */
     const tick = after ? ['Voyager 1', 'now more than one light-day from Earth', VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'] : ['Voyager 1', `one light-day from Earth in ${p.d} d ${pad(p.h)} h ${pad(p.m)} min`, VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'];
     if (!window.VOYAGER_TICK || window.VOYAGER_TICK[1] !== tick[1]) { window.VOYAGER_TICK = tick; const O = window.__obs; if (O && O.buildTicker && (now - (render.tickT || 0) > 55000 || !render.tickT)) { render.tickT = now; O.buildTicker(); } }
@@ -31,8 +32,11 @@
   async function load() {
     try { const hid = +localStorage.getItem('vyHide') || 0; if (Date.now() - hid < 864e5) return; } catch (e) { }
     try { const r = await fetch('data/voyager.json?t=' + Math.floor(Date.now() / 36e5)); if (!r.ok) return; V = await r.json(); if (!V.crossUTC || !V.now) return;
-      const drawer = document.getElementById('drawerBody'); if (drawer && host.parentElement !== drawer) drawer.insertBefore(host, drawer.firstChild); /* in the app layout the sections live in the drawer: the banner sits above whichever panel is open */
-      host.hidden = false; render(); timer = setInterval(render, 1000); }
+      const drawer = document.getElementById('drawerBody'); if (drawer && host.parentElement !== drawer) { drawer.insertBefore(host, drawer.firstChild); /* in the app layout the sections live in the drawer: the full banner tops Situations, a one-line strip the other panels */
+        const mini = document.createElement('div'); mini.id = 'voyagerMini'; mini.className = 'vy-mini'; mini.hidden = true; host.after(mini); host.dataset.full = '1';
+        const sync = () => { const on = drawer.querySelector('.panel[data-on="true"]'); const k = on && on.dataset.k; const full = !k || k === 'situations' || k === 'signals'; host.hidden = !full || !!host.dataset.closed; mini.hidden = full || !!host.dataset.closed; };
+        new MutationObserver(sync).observe(drawer, { attributes: true, subtree: true, attributeFilter: ['data-on'] }); host._sync = sync; }
+      host.hidden = false; render(); if (host._sync) host._sync(); timer = setInterval(render, 1000); }
     catch (e) { /* no banner rather than a wrong one */ }
   }
   load();

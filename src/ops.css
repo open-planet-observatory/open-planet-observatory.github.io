@@ -298,7 +298,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .hint-bubble::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#f2c43c}
 .hint-bubble button{position:absolute;right:6px;top:4px;border:0;background:none;font-size:1rem;cursor:pointer;color:#14161b}
 .uni-credit{margin:0;font-size:.66rem;color:#8d97a6;line-height:1.35}
-@media (max-width:640px){.uni-credit{display:none}}
+
 /* universe view: zoom slider, tour captions, model badge, star stories (100,000 Stars-style look) */
 .uni-zoom{position:absolute;right:12px;top:108px;bottom:64px;width:120px;pointer-events:none}
 .uni-zoom:focus-visible{outline:2px solid #9ad1ff;outline-offset:2px}
@@ -327,7 +327,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-list{margin:.3rem 0 .5rem 1.1rem;padding:0;font-size:.8rem;line-height:1.45;color:#c9d2de}
 .uni-list li{margin:.3rem 0}
 @media (max-width:900px){.uz-ticks{display:none}.uni-zoom{width:30px}#uni .uni-card{right:48px}.uni-model{right:48px}.uni-cap{width:calc(100% - 80px)}}
-@media (max-width:640px){.uni-zoom{top:96px;bottom:auto;height:calc(100% - 330px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:96px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:126px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
+@media (max-width:640px){.uni-zoom{top:140px;bottom:auto;height:calc(100% - 370px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:140px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:168px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
 /* Safari: a drag on the sky started a text selection, which tints the whole canvas blue and can scroll the overlay */
 #uni{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #uni .uni-card,#uni .uni-card *{-webkit-user-select:text;user-select:text}
@@ -335,7 +335,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-help{margin:0;font-size:.72rem;color:#aab4c3}
 @media (max-width:640px){.uni-help{display:none}}
 
-@media (max-height:720px){.uni-help,.uni-credit{display:none}.uni-note{display:none}}
+@media (max-height:720px){.uni-help{display:none}.uni-note{display:none}}
 #uni .more:disabled,#uni input:disabled{opacity:.45;cursor:not-allowed}
 
 /* Other worlds */
@@ -356,7 +356,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 @media (max-width:640px){#uni:has(#uniCard:not([hidden])) .uni-cap{display:none}}
 /* collapsible universe UI: fold (one row) and clean view (nothing but the sky) */
 .uni-ctl{padding-right:34px}
-.uni-fold{position:absolute;right:8px;top:8px;width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#c9d2de;font-size:.8rem;line-height:1;cursor:pointer;padding:0}
+.uni-fold{position:absolute;right:6px;top:6px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#c9d2de;font-size:.8rem;line-height:1;cursor:pointer;padding:0}
 .uni-fold:hover{background:rgba(255,255,255,.14)}
 #uni.folded .uni-ctl>.seg,#uni.folded .uni-ctl>.uni-more{display:none}
 #uni.folded .uni-ctl{padding:8px 34px 8px 12px}
@@ -398,3 +398,8 @@ html[data-theme="light"] .vy-banner,body.light .vy-banner{background:linear-grad
 .alm-src{margin:auto 0 0;font-size:.7rem;color:#8d97a6}.alm-src a{color:inherit}
 .alm-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px}
 html[data-theme="light"] .alm-card,body.light .alm-card{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.12)}
+html[data-theme="light"] .alm-year,body.light .alm-year{color:#8a6a00}
+html[data-theme="light"] .alm-top,html[data-theme="light"] .alm-src,html[data-theme="light"] .alm-q::before,html[data-theme="light"] .alm-q::after,body.light .alm-top,body.light .alm-src,body.light .alm-q::before,body.light .alm-q::after{color:#55606e}
+.alm-now{display:inline-block;font:700 .66rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#9ad1ff;margin-right:6px;vertical-align:1px}
+.vy-mini{margin:0 0 12px;padding:8px 12px;border:1px solid rgba(242,196,60,.35);border-radius:999px;font-size:.82rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vy-mini b{color:var(--owl-yellow,#f2c43c);font-variant-numeric:tabular-nums}.vy-mini a{color:#9ad1ff}
+#uniLoading{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2001;padding:10px 18px;border-radius:999px;font-weight:600}
