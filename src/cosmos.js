@@ -35,7 +35,7 @@ export async function createCosmos({ T, S, SM, ui }) {
   const vert = `attribute float aDen; attribute float aLum; attribute float aType; uniform float uPx; uniform float uOp; uniform float uK; uniform float uAUperUnit; varying vec3 vCol; varying float vA; varying float vH;
    void main(){ vec4 mv = modelViewMatrix * vec4(position, 1.0); float dMpc = max(length(mv.xyz) / ${MPC.toFixed(1)}, 1e-4);
     /* a galaxy is roughly 0.03 Mpc across: close up it grows to its real angular size, far away it is a point */
-    float real = 0.03 / dMpc * uK; float base = 1.0 + 2.4 * aDen + 0.9 * aLum; float px = max(base, min(real * 1.6, 72.0));
+    float real = 0.03 / dMpc * uK; float base = 1.0 + 2.4 * aDen + 0.9 * aLum; float px = max(base * clamp(700.0 / dMpc, 0.55, 1.0), min(real * 1.6, 72.0));
     vec3 cool = vec3(0.42, 0.58, 1.0), mid = vec3(0.86, 0.9, 1.0), hot = vec3(1.0, 0.78, 0.55);
     vec3 c = aDen < 0.62 ? mix(cool, mid, aDen / 0.62) : mix(mid, hot, (aDen - 0.62) / 0.38); if (aType < 0.5) c = mix(c, vec3(1.0, 0.82, 0.6), 0.35);
     vCol = c; vA = uOp * (0.07 + 0.5 * aDen * aDen) * (0.6 + 0.4 * aLum) * clamp(base / px * 2.0, 0.35, 1.0) * min(1.0, 650.0 / dMpc); vH = clamp(real / 18.0, 0.0, 1.0);
@@ -106,7 +106,7 @@ export async function createCosmos({ T, S, SM, ui }) {
 
   const lane = (o, radiusAU, plane) => { const W = ui.root.clientWidth || innerWidth, H = ui.root.clientHeight || innerHeight; let best = null, bd = -1;
     for (let k = 0; k < 12; k++) { const a = k / 12 * Math.PI * 2; const v = new T.Vector3(Math.cos(a), Math.sin(a), 0).applyMatrix4(ROT).multiplyScalar(radiusAU); const q = v.clone().project(S.camera); if (q.z > 1 || q.z < -1) continue;
-      const x = (q.x + 1) / 2, y = (1 - q.y) / 2; if (x < 0.06 || x > (W < 640 ? 0.55 : 0.72) || y < 0.2 || y > (W < 640 ? 0.62 : 0.66)) continue; const d = Math.hypot(x - 0.45, y - 0.45); if (d > bd) { bd = d; best = v; } }
+      const x = (q.x + 1) / 2, y = (1 - q.y) / 2; if (x < 0.06 || x > (W < 640 ? 0.68 : 0.72) || y < (W < 640 ? 0.16 : 0.2) || y > (W < 640 ? 0.7 : 0.66)) continue; const d = Math.hypot(x - 0.45, y - 0.45); if (d > bd) { bd = d; best = v; } }
     if (best) o.pos = [best.x, best.y, best.z]; return !!best; };
   let laneT = 0;
   function update(camAU) {

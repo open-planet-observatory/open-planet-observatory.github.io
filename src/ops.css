@@ -310,8 +310,9 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uz-ticks button:hover,.uz-ticks button:focus-visible{color:#fff}
 .uz-ticks button::after{content:'';display:inline-block;width:7px;height:1px;background:currentColor;margin-left:6px;vertical-align:middle}
 #uni .uni-card{right:140px}
-.uni-cap{position:absolute;left:50%;bottom:24%;transform:translateX(-50%);width:min(680px,calc(100% - 180px));text-align:center;font:italic 400 clamp(1.05rem,2.2vw,1.45rem)/1.45 Georgia,"Times New Roman",serif;color:#eef3ff;text-shadow:0 0 12px #000,0 0 3px #000;opacity:0;transition:opacity .4s ease;pointer-events:none;margin:0}
+.uni-cap{position:absolute;left:50%;bottom:max(24%,210px);background:rgba(3,5,11,.55);padding:8px 14px;border-radius:12px;transform:translateX(-50%);width:min(680px,calc(100% - 180px));text-align:center;font:italic 400 clamp(1.05rem,2.2vw,1.45rem)/1.45 Georgia,"Times New Roman",serif;color:#eef3ff;text-shadow:0 0 12px #000,0 0 3px #000;opacity:0;transition:opacity .4s ease;pointer-events:none;margin:0}
 .uni-cap.on{opacity:1}
+.uni-cap:empty{padding:0;background:none}
 #uni .uni-ctl,#uni .uni-note{transition:opacity .4s ease}
 #uni.touring .uni-ctl,#uni.touring .uni-note{opacity:.12}
 #uni.touring .uni-ctl:hover,#uni.touring .uni-ctl:focus-within{opacity:1}
@@ -326,7 +327,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-list{margin:.3rem 0 .5rem 1.1rem;padding:0;font-size:.8rem;line-height:1.45;color:#c9d2de}
 .uni-list li{margin:.3rem 0}
 @media (max-width:900px){.uz-ticks{display:none}.uni-zoom{width:30px}#uni .uni-card{right:48px}.uni-model{right:48px}.uni-cap{width:calc(100% - 80px)}}
-@media (max-width:640px){.uni-zoom{top:96px;bottom:auto;height:calc(100% - 330px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:96px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:104px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
+@media (max-width:640px){.uni-zoom{top:96px;bottom:auto;height:calc(100% - 330px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:96px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:126px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
 /* Safari: a drag on the sky started a text selection, which tints the whole canvas blue and can scroll the overlay */
 #uni{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #uni .uni-card,#uni .uni-card *{-webkit-user-select:text;user-select:text}
@@ -351,3 +352,5 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 #worlds .worlds td.n{white-space:nowrap;font-variant-numeric:tabular-nums}
 #worlds .fly{white-space:nowrap}
 #worlds .legend-i{display:inline-flex;gap:6px;align-items:center}#worlds .legend-i i{width:12px;height:12px;border-radius:3px;display:inline-block}
+
+@media (max-width:640px){#uni:has(#uniCard:not([hidden])) .uni-cap{display:none}}
