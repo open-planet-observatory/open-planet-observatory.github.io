@@ -412,6 +412,8 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
 </header>
 
 <main>
+<div class="vy-banner" id="voyagerBanner" hidden role="region" aria-label="Voyager 1 countdown"></div>
+<script>window.VOYAGER_VIDEOS={short:"",long:""}</script>
 <div class="notice" role="note"><div><b>For research and education only.</b> Everything here comes from public sources and is shown as published. Don't use it to track, target or harass anyone, or for emergency or tactical decisions. <a href="#use">Acceptable use</a></div></div>
 <section class="search" aria-label="Search everything on this page" id="search">
   <form class="search-row" id="qform" role="search"><input id="q" type="search" placeholder="Search everything here: a country, a company, a drug, a CVE, a storm…" autocomplete="off" aria-label="Search"><button type="submit">Search</button></form>
@@ -650,6 +652,12 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
     <p class="muted">Sample lesson plans that use the layers above. Each one works with whatever the data shows on the day you teach it. Full packs with worksheets and answer guides are planned; see <a href="#free">Keep it free</a>.</p>
   </div>
   <div class="lessons" id="lessons"></div>
+  <div class="sec-head alm-head">
+    <div class="eyebrow">From the old almanacs</div>
+    <h3 id="h-alm">What the almanac said, in 1846 and 1923</h3>
+    <p class="muted">The Farmer's Almanack has been printed every year since 1792. These passages are from two editions old enough to be public domain, word for word from the scans, with a note on where the same thing is live on this page today.</p>
+  </div>
+  <div id="almanacHost"><p class="small muted">Loading the almanac…</p></div>
 </section>
 
 <section aria-labelledby="h-free" id="free">
@@ -765,6 +773,7 @@ window.LIBRARY=[
 ["Space","Milky Way bar (Wegg, Gerhard & Portail 2015) and disc (Bland-Hawthorn & Gerhard 2016)","Bar length and angle, disc scale length, used for the labeled galaxy model","Static","go","Published papers (MNRAS 450, 4050; ARA&A 54, 529); parameters cited","https://doi.org/10.1093/mnras/stv745","map"],
 ["Space","NASA/IPAC Extragalactic Database: NED-D and name lookup","Measured distances (median of published values) and positions of galaxies within 12 megaparsecs, for the neighbourhood view","Built once","go","NASA, public; acknowledgement requested","https://ned.ipac.caltech.edu/Library/Distances/","map"],
 ["Space","2MASS Redshift Survey (Huchra et al. 2012), via NASA HEASARC","Positions and redshifts of 43,000 galaxies over the whole sky, for the cosmic-web view; distances from redshift with the Hubble constant stated","Built once","go","NASA HEASARC, public; cite Huchra et al. 2012","https://heasarc.gsfc.nasa.gov/W3Browse/all/twomassrsc.html","map"],
+["Classroom","Old almanacs (Internet Archive scans)","Passages from the 1846 Farmer's Almanack and the 1923 Old Farmer's Almanac, word for word from the OCR text, each linked to its scan","Built once","go","Public domain (published before 1929)","https://archive.org/details/farmersalmanacc00thom","book"],
 ["Space","ESA Gaia all-sky map (DR2)","The real Milky Way around the Sun, from 1.7 billion stars, as the sky in the star view","Built once","go","CC BY-SA 3.0 IGO; credit ESA/Gaia/DPAC","https://sci.esa.int/web/gaia/-/60196-gaia-s-sky-in-colour-equirectangular-projection","map"],
 ["Space","NASA Solar Dynamics Observatory (SDO)","Today's Sun in extreme ultraviolet (AIA 304 Å) for the close-up Sun","Every 10 min","go","NASA, public","https://sdo.gsfc.nasa.gov/data/","map"],
 ["Space","Wikipedia (star stories) via Wikidata","Opening of a star's Wikipedia article, word for word, when you click it; star-to-article matches from Wikidata","On click","go","Wikipedia text CC BY-SA 4.0; Wikidata CC0","https://www.wikidata.org/","map"],

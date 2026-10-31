@@ -100,6 +100,17 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - "Small and temperate" is a plain filter on NASA's radius (at most 1.75 Earths) and equilibrium-temperature (180–320 K) fields, printed beside the table. It is not a habitability score; the site makes none.
 - Each planet links to its NASA page. "Fly there" opens the star view at the host star's measured position.
 
+## From the old almanacs
+
+- Passages come from two public-domain editions scanned by the Internet Archive: the 1846 Farmer's Almanack (Robert B. Thomas) and the 1923 Old Farmer's Almanac. Each passage is the scan's OCR text word for word; the only change is rejoining hyphens left by line breaks in the scan. OCR slips are left as scanned.
+- collector/build-almanac.mjs checks every passage against the scan's text and fails the build if one does not match. Each card links to the scan opened at that passage.
+- The one-line "then and now" note under each passage is the site's own, and says where the same thing is live on the page.
+
+## Voyager 1 countdown
+
+- The moment Voyager 1 first reaches one light-day from Earth (173.1446 AU) is computed by the collector from NASA JPL Horizons' geocentric range for Voyager 1 (6-hour grid, refined to the minute), and recomputed daily. The distance on the banner counts up from Horizons' latest hourly value at its stated range-rate. If Horizons does not answer, the banner says the figure is yesterday's. The banner retires itself a week after the moment.
+- Video links on the banner are The Owlmanac's own.
+
 ## Forecast where you click
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.

@@ -248,7 +248,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .grav-diag .gd-pull{stroke:#ff6b6b;stroke-width:2}
 .grav-diag .gd-arrow{fill:#ff6b6b}
 /* universe view (Solar System) */
-#uni{position:fixed;inset:0;z-index:2000;background:#03050b;opacity:0;transition:opacity .45s ease;color:#e9eef5}
+#uni{position:fixed;inset:0;z-index:2000;background:#03050b;opacity:0;transition:opacity .7s ease;color:#e9eef5}
 #uni.on{opacity:1}
 #uni[hidden]{display:none}
 #uniCanvas{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none}
@@ -354,3 +354,47 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 #worlds .legend-i{display:inline-flex;gap:6px;align-items:center}#worlds .legend-i i{width:12px;height:12px;border-radius:3px;display:inline-block}
 
 @media (max-width:640px){#uni:has(#uniCard:not([hidden])) .uni-cap{display:none}}
+/* collapsible universe UI: fold (one row) and clean view (nothing but the sky) */
+.uni-ctl{padding-right:34px}
+.uni-fold{position:absolute;right:8px;top:8px;width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#c9d2de;font-size:.8rem;line-height:1;cursor:pointer;padding:0}
+.uni-fold:hover{background:rgba(255,255,255,.14)}
+#uni.folded .uni-ctl>.seg,#uni.folded .uni-ctl>.uni-more{display:none}
+#uni.folded .uni-ctl{padding:8px 34px 8px 12px}
+.uni-credits summary{cursor:pointer;font-size:.72rem;color:#8d97a6;padding:2px 0}
+.uni-credits[open] summary{margin-bottom:4px}
+.uni-hide{margin-left:auto}
+#uni.clean .uni-ctl,#uni.clean .uni-top>:not(#uniBack),#uni.clean .uni-model,#uni.clean .uz-ticks,#uni.clean .uni-note{display:none!important}
+#uni.clean .uni-zoom{opacity:.35}#uni.clean .uni-zoom:hover,#uni.clean .uni-zoom:focus-within{opacity:1}
+#uni.clean .uni-scale{opacity:.55}
+.uni-show{position:absolute;left:14px;bottom:14px;z-index:3}
+.uni-show[hidden]{display:none}
+#uni .chip{transition:opacity .25s ease}
+@media (max-width:640px){.uni-hide{margin-left:0;padding:4px 8px;font-size:.72rem}.uni-show{bottom:10px;left:10px}}
+
+/* Voyager 1 one-light-day countdown (temporary banner) */
+.vy-banner{margin:0 0 14px;border:1px solid rgba(242,196,60,.45);border-radius:16px;background:linear-gradient(135deg,rgba(242,196,60,.12),rgba(10,14,22,.6));padding:14px 16px;position:relative}
+.vy-banner[hidden]{display:none}
+.vy-in{display:flex;gap:18px;align-items:center;flex-wrap:wrap;padding-right:28px}
+.vy-text{flex:1 1 420px;min-width:0}
+.vy-clock{display:flex;gap:14px;margin:8px 0 6px;font-variant-numeric:tabular-nums}
+.vy-clock span{font:700 clamp(1.6rem,4vw,2.4rem)/1 "Public Sans",system-ui,sans-serif;color:var(--owl-yellow,#f2c43c);display:flex;flex-direction:column;align-items:center;min-width:2.2em}
+.vy-clock span i{font:500 .68rem/1.2 "Public Sans",system-ui,sans-serif;color:#aab4c3;font-style:normal;margin-top:4px;letter-spacing:.04em;text-transform:uppercase}
+.vy-note{margin:4px 0;font-size:.9rem}.vy-src{margin:4px 0 0;font-size:.72rem;color:#8d97a6}.vy-src a{color:inherit}
+.vy-links{display:flex;flex-direction:column;gap:8px;flex:0 0 auto}
+.vy-btn{display:inline-block;padding:9px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.25);color:#e9eef5;text-decoration:none;font-weight:600;font-size:.85rem;text-align:center}
+.vy-btn.vy-long{background:var(--owl-yellow,#f2c43c);color:#1b1500;border-color:transparent}
+.vy-x{position:absolute;right:10px;top:8px;background:none;border:0;color:#aab4c3;font-size:1.2rem;cursor:pointer;line-height:1}
+html[data-theme="light"] .vy-banner,body.light .vy-banner{background:linear-gradient(135deg,rgba(242,196,60,.18),rgba(255,255,255,.6))}
+
+/* old almanac passages */
+.alm-head{margin-top:26px}
+.alm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.alm-card{border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:14px 16px;background:rgba(255,255,255,.03);display:flex;flex-direction:column;gap:8px}
+.alm-top{display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:#aab4c3}
+.alm-year{color:var(--owl-yellow,#f2c43c);font-weight:700}
+.alm-q{margin:0;font:italic 400 1.02rem/1.5 Georgia,"Times New Roman",serif;quotes:"\201C" "\201D"}
+.alm-q::before{content:open-quote;color:#aab4c3}.alm-q::after{content:close-quote;color:#aab4c3}
+.alm-then{margin:0;font-size:.85rem}.alm-then a{color:#9ad1ff;white-space:nowrap}
+.alm-src{margin:auto 0 0;font-size:.7rem;color:#8d97a6}.alm-src a{color:inherit}
+.alm-foot{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:12px}
+html[data-theme="light"] .alm-card,body.light .alm-card{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.12)}

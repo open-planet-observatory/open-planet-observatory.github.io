@@ -86,3 +86,27 @@ export async function collectExoplanets() {
     rule: { small: 'radius at most 1.75 Earths and equilibrium temperature 180–320 K, both as NASA lists them; equilibrium temperature assumes no atmosphere, so it is not a surface temperature' } };
   return { asOf: sec.asOf, planets: rows.length, hosts, sec };
 }
+
+// Voyager 1's one-light-day moment: the first time its distance from Earth (JPL Horizons, geocentric range) reaches
+// one light-day, 173.1446 AU. Found on a 6-hour grid over the coming months, then refined to the minute. Also returns
+// the range and range-rate at the latest whole hour, for the live counter. Everything here is Horizons' own.
+const LIGHT_DAY_AU = 299792.458 * 86400 / 149597870.7;
+async function range(id, start, stop, step) {
+  const q = new URLSearchParams({ format: 'json', COMMAND: `'${id}'`, EPHEM_TYPE: 'OBSERVER', CENTER: "'500@399'", START_TIME: `'${start}'`, STOP_TIME: `'${stop}'`, STEP_SIZE: `'${step}'`, QUANTITIES: "'20'", OBJ_DATA: 'NO', CSV_FORMAT: 'YES' });
+  const j = await J('https://ssd.jpl.nasa.gov/api/horizons.api?' + q); const r = j.result || ''; const body = (r.split('$$SOE')[1] || '').split('$$EOE')[0];
+  if (!body.trim()) throw new Error((j.error || r.match(/No ephemeris[^\n]*/)?.[0] || 'no ephemeris').slice(0, 120));
+  const src = (r.match(/\{source:\s*([^}]+)\}/) || [])[1] || null;
+  return { src, rows: body.trim().split('\n').map(l => l.split(',').map(s => s.trim())).map(c => ({ t: new Date(c[0].replace(/^(\d{4})-([A-Za-z]{3})-(\d{2}) (\d{2}:\d{2})(?::\d{2})?/, '$3 $2 $1 $4 UTC')), au: +c[3], kms: +c[4] })).filter(x => Number.isFinite(x.au) && !isNaN(+x.t)) };
+}
+export async function collectVoyagerLightDay({ now = new Date() }) {
+  const ymdh = d => d.toISOString().slice(0, 16).replace('T', ' ');
+  const coarse = await range('-31', ymdh(new Date(+now - 864e5)), ymdh(new Date(+now + 400 * 864e5)), '6h');
+  const i = coarse.rows.findIndex(x => x.au >= LIGHT_DAY_AU); const last = coarse.rows[0];
+  const out = { computedAt: now.toISOString().slice(0, 16) + 'Z', lightDayAU: +LIGHT_DAY_AU.toFixed(6), source: 'NASA JPL Horizons, Voyager 1 (-31), geocentric range' + (coarse.src ? ', ' + coarse.src : ''), now: { t: last.t.toISOString(), au: last.au, kms: last.kms } };
+  if (i < 0) { out.crossed = coarse.rows[0].au >= LIGHT_DAY_AU; out.crossUTC = null; return out; }
+  if (i === 0) { out.crossed = true; // already past: find it in the last year instead
+    const back = await range('-31', ymdh(new Date(+now - 400 * 864e5)), ymdh(now), '6h'); const k = back.rows.findIndex(x => x.au >= LIGHT_DAY_AU);
+    if (k > 0) { const fine = await range('-31', ymdh(back.rows[k - 1].t), ymdh(back.rows[k].t), '1m'); const f = fine.rows.find(x => x.au >= LIGHT_DAY_AU); out.crossUTC = (f || back.rows[k]).t.toISOString(); } return out; }
+  const fine = await range('-31', ymdh(coarse.rows[i - 1].t), ymdh(coarse.rows[i].t), '1m'); const f = fine.rows.find(x => x.au >= LIGHT_DAY_AU);
+  out.crossed = false; out.crossUTC = (f || coarse.rows[i]).t.toISOString(); out.rateThenKmS = (f || coarse.rows[i]).kms; return out;
+}

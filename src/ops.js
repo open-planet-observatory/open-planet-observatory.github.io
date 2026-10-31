@@ -103,6 +103,7 @@ function buildTicker(){const items=[];
  (D.faa?.groundStops||[]).slice(0,3).forEach(g=>items.push(['Ground stop',g[0]+': '+g[1],'https://nasstatus.faa.gov/','FAA']));
  (D.services||[]).filter(s=>s[1]!=='none').slice(0,4).forEach(s=>items.push(['Status',s[0]+': '+s[2],s[5],s[0]+' status page']));
  (S.elections||[]).slice(0,3).forEach(e=>items.push(['Election '+e[0],e[1],e[2],'Wikipedia']));
+ if(window.VOYAGER_TICK)items.unshift(window.VOYAGER_TICK);
  if(!items.length)items.push(['Quiet','No situations or disruptions collected yet','#','']);
  const one=items.map(([k,t,u,s])=>`<span><span class="k">${esc(k)}</span>${u&&u!=='#'?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`:`<span class="t">${esc(t)}</span>`}<span class="src">${esc(s)}</span></span>`).join('');
  const tr=$('#track');tr.innerHTML=one+one;tr.style.setProperty('--tick-s',Math.max(40,items.length*9)+'s')}
