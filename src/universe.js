@@ -72,17 +72,18 @@ async function build() {
   const host = document.body; // above every panel: the view is full screen
   const root = document.createElement('div'); root.id = 'uni'; root.hidden = true; root.innerHTML = `
    <canvas id="uniCanvas" aria-label="The Solar System, live"></canvas><div id="uniLabels" aria-hidden="true"></div>
-   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from the Sun out to the cosmic web">▶ Take the tour</button></div>
-   <div class="uni-ctl" role="group" aria-label="Solar System controls">
+   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from the Sun out to the cosmic web">▶ Take the tour</button><button class="chip uni-hide" id="uniHide" title="Hide every panel and label frame for a clean view (H). Press again, or H, to bring them back" aria-pressed="false">Clean view</button></div>
+   <button class="chip uni-show" id="uniShow" hidden title="Show the controls (H)">⌃ Controls</button>
+   <div class="uni-ctl" role="group" aria-label="Solar System controls"><button class="uni-fold" id="uniFold" title="Fold the controls down to one row" aria-expanded="true" aria-label="Fold the controls">▾</button>
     <div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div>
     <div class="seg" role="group" aria-label="Time"><button data-rate="-30" title="Back 30 days per second">◀◀</button><button data-rate="0" aria-pressed="true" title="Live: now">Now</button><button data-rate="1" title="Forward 1 day per second">▶</button><button data-rate="30" title="Forward 30 days per second">▶▶</button></div>
     <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniGal">Milky Way</button><button class="more" id="uniNeigh">Neighbours</button><button class="more" id="uniWeb">Cosmic web</button></div>
     <details class="uni-more"><summary>More layers and tools</summary>
      <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label><input type="checkbox" data-show="sky" checked> Real sky (ESA Gaia)</label><label><input type="checkbox" data-show="galaxy" checked> Galaxy glow (model)</label><label><input type="checkbox" data-show="arms"> Measured arm stretches</label><label><input type="checkbox" data-show="galaxies" checked> Nearby galaxies</label><label><input type="checkbox" data-show="web" checked> Cosmic web (2MRS)</label><label><input type="checkbox" data-show="constellations"> Constellations</label><label><input type="checkbox" data-show="exo"> Stars with planets</label></div>
      <div class="uni-goto"><button class="more" id="uniNear">Nearest stars</button><button class="more" id="uniNeo">Asteroids passing Earth</button></div>
+     <p class="uni-help">Drag to turn · Right-drag, Shift-drag or two fingers to move · Scroll or pinch to zoom toward the pointer · Arrow keys move too · H hides everything</p>
+     <details class="uni-credits"><summary>Sources and credits</summary><p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Nearby galaxies: NASA/IPAC NED-D distances and NED positions; names, sizes: Wikipedia/Wikidata · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Cosmic web: 2MASS Redshift Survey (Huchra et al. 2012) via NASA HEASARC; clusters: NASA/IPAC NED · Constellation figures: d3-celestial</p></details>
     </details>
-    <p class="uni-help">Drag to turn · Right-drag, Shift-drag or two fingers to move · Scroll or pinch to zoom toward the pointer · Arrow keys move too</p>
-    <p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Nearby galaxies: NASA/IPAC NED-D distances and NED positions; names, sizes: Wikipedia/Wikidata · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Cosmic web: 2MASS Redshift Survey (Huchra et al. 2012) via NASA HEASARC; clusters: NASA/IPAC NED · Constellation figures: d3-celestial</p>
    </div>
    <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div>
    <div class="sat-card uni-card" id="uniCard" hidden></div>
@@ -156,6 +157,13 @@ async function build() {
   }
   // controls
   root.querySelector('#uniBack').onclick = () => closeUniverse();
+  /* clean view: one key hides every panel; the fold keeps just the Go-to row */
+  const setClean = on => { root.classList.toggle('clean', on); root.querySelector('#uniHide').setAttribute('aria-pressed', String(on)); root.querySelector('#uniShow').hidden = !on; try { localStorage.setItem('uniClean', on ? '1' : '0'); } catch (e) { } };
+  root.querySelector('#uniHide').onclick = () => setClean(!root.classList.contains('clean')); root.querySelector('#uniShow').onclick = () => setClean(false);
+  const setFold = on => { root.classList.toggle('folded', on); const b = root.querySelector('#uniFold'); b.setAttribute('aria-expanded', String(!on)); b.textContent = on ? '▴' : '▾'; b.title = on ? 'Open the controls' : 'Fold the controls down to one row'; try { localStorage.setItem('uniFold', on ? '1' : '0'); } catch (e) { } };
+  root.querySelector('#uniFold').onclick = () => setFold(!root.classList.contains('folded'));
+  try { if (localStorage.getItem('uniFold') === '1') setFold(true); } catch (e) { }
+  ui.setClean = setClean;
   root.querySelectorAll('[data-size]').forEach(b => b.onclick = () => { S.size = b.dataset.size; root.querySelectorAll('[data-size]').forEach(x => x.setAttribute('aria-pressed', x === b)); note(); });
   root.querySelectorAll('[data-rate]').forEach(b => b.onclick = () => { rate = +b.dataset.rate; if (rate === 0) simMs = Date.now(); root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x === b)); });
   root.querySelectorAll('[data-show]').forEach(b => b.onchange = () => { S.show[b.dataset.show] = b.checked; S.groups.orbits.visible = S.show.orbits; S.groups.craft.visible = S.show.craft; S.groups.comets.visible = S.show.comets; if (!S.show.labels) (ui.lblPool || []).forEach(el => { el.hidden = true; }); });
@@ -218,6 +226,16 @@ function update() {
     if (o.point) { o.point.visible = !!p; if (p) o.point.geometry.attributes.position.array.set(p), o.point.geometry.attributes.position.needsUpdate = true; } }
   ui.date && (ui.date.textContent = d.toISOString().slice(0, 16).replace('T', ' ') + ' UTC' + (rate ? '' : ' · live'));
 }
+/* the Earth seen from a globe camera (lon, lat, height) → the same view in the 3D scene, so the two can cross-fade without a jump */
+function globeToScene(lonDeg, latDeg, hM, d) { const th = A.SiderealTime(d) * 15 * Math.PI / 180, eps = 23.4392911 * Math.PI / 180;
+  const eq2ecl = (x, y, z) => new T.Vector3(x, y * Math.cos(eps) + z * Math.sin(eps), -y * Math.sin(eps) + z * Math.cos(eps));
+  const lon0 = eq2ecl(Math.cos(th), Math.sin(th), 0), lon90 = eq2ecl(-Math.sin(th), Math.cos(th), 0), pole = eq2ecl(0, 0, 1);
+  const la = latDeg * Math.PI / 180, lo = lonDeg * Math.PI / 180; const dir = lon0.clone().multiplyScalar(Math.cos(la) * Math.cos(lo)).add(lon90.clone().multiplyScalar(Math.cos(la) * Math.sin(lo))).add(pole.clone().multiplyScalar(Math.sin(la)));
+  return { dir, dist: (6371 + hM / 1000) / AU_KM, pole }; }
+function sceneToGlobe(d) { const e = S.byName.Earth; const rel = S.camera.position.clone().sub(V().fromArray(e.pos)); const th = A.SiderealTime(d) * 15 * Math.PI / 180, eps = 23.4392911 * Math.PI / 180;
+  const eq2ecl = (x, y, z) => new T.Vector3(x, y * Math.cos(eps) + z * Math.sin(eps), -y * Math.sin(eps) + z * Math.cos(eps));
+  const lon0 = eq2ecl(Math.cos(th), Math.sin(th), 0), lon90 = eq2ecl(-Math.sin(th), Math.cos(th), 0), pole = eq2ecl(0, 0, 1); const r = rel.length(), u = rel.clone().normalize();
+  const x = u.dot(lon0), y = u.dot(lon90), z = u.dot(pole); return { lon: Math.atan2(y, x) * 180 / Math.PI, lat: Math.asin(Math.max(-1, Math.min(1, z))) * 180 / Math.PI, h: Math.max(1e6, (r * AU_KM - 6371) * 1000) }; }
 function earthSpin(o, d) { // texture: prime meridian at Greenwich apparent sidereal time, north pole tilted by the obliquity
   const th = A.SiderealTime(d) * 15 * Math.PI / 180, eps = 23.4392911 * Math.PI / 180;
   const eq2ecl = (x, y, z) => new T.Vector3(x, y * Math.cos(eps) + z * Math.sin(eps), -y * Math.sin(eps) + z * Math.cos(eps));
@@ -463,32 +481,38 @@ async function openUniverse(dest) {
   const g = window.__obs3d;
   if (openUniverse.busy) return; openUniverse.busy = true; setTimeout(() => { openUniverse.busy = false; }, 4000); /* a double press opens once */
   const bp = built ? null : (openUniverse.bp || (openUniverse.bp = build().then(() => true, e => { console.warn('Solar System view could not start', e); openUniverse.bp = null; return false; }))); /* load while the globe pulls back, not after */
-  if (g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none') { // pull back from the globe first
-    await new Promise(res => { setTimeout(res, 2200); try { g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-30, 20, 9e7), duration: 1.4, complete: res, cancel: res }); } catch (e) { res(); } }); }
+  const fromGlobe = !!(g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none'); let gcam = null;
+  if (fromGlobe) { /* pull back from the globe while the 3D view loads; the hand-over happens mid-flight, from the same place */
+    try { const c = g.viewer.camera.positionCartographic; const lon = c.longitude * 180 / Math.PI, lat = c.latitude * 180 / Math.PI; const h = Math.max(c.height, 4e7);
+      gcam = { lon, lat, h }; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(lon, lat, h), duration: Math.min(1.6, 0.6 + c.height / 4e7), easingFunction: window.Cesium.EasingFunction.QUADRATIC_IN_OUT }); } catch (e) { gcam = null; }
+    await new Promise(res => setTimeout(res, bp ? 900 : 600)); }
   if (bp && !(await bp)) return;
   ui.date = document.getElementById('uniDate'); ui.title = ui.root.querySelector('.uni-title'); ui.model = document.getElementById('uniModel'); note();
   open = true; S.controls.enabled = true; ui.root.hidden = false; requestAnimationFrame(() => ui.root.classList.add('on'));
   if (g && g.viewer) g.viewer.useDefaultRenderLoop = false; // pause the globe while the Solar System is open
   simMs = Date.now(); rate = 0; update();
   const e = S.byName.Earth; const ep = V().fromArray(e.pos); const sunDir = ep.clone().negate().normalize();
-  S.controls.target.copy(ep); S.camera.position.copy(ep).add(sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).multiplyScalar(6.6e-4)); // start on Earth's sunlit side
+  S.controls.target.copy(ep);
+  if (gcam) { const m = globeToScene(gcam.lon, gcam.lat, gcam.h, new Date(simMs)); S.camera.position.copy(ep).add(m.dir.multiplyScalar(m.dist)); } /* same Earth, same angle as the globe */
+  else S.camera.position.copy(ep).add(sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).multiplyScalar(6.6e-4)); // start on Earth's sunlit side
   S.focus = null; lastFrame = 0; requestAnimationFrame(frame);
-  if (dest === 'galaxy') setTimeout(() => { if (open) galaxyView(7000, true); }, 500); /* one long zoom: Earth, planets, stars, galaxy */
-  else if (dest === 'web') { ensureCosmos(); setTimeout(() => { if (open) journeyToWeb(); }, 500); } /* one flight out through every scale, pausing at each */
-  else if (hostName) setTimeout(() => { if (open) flyToHost(hostName); }, 500);
-  else setTimeout(() => { if (open) animateTo(new T.Vector3(0, 0, 0), 4.2, 3800); }, 500);
+  const go = () => { if (!open) return; if (dest === 'galaxy') galaxyView(7000, true); /* one long zoom: Earth, planets, stars, galaxy */
+    else if (dest === 'web') { ensureCosmos(); journeyToWeb(); } /* one flight out through every scale, pausing at each */
+    else if (hostName) flyToHost(hostName); else animateTo(new T.Vector3(0, 0, 0), 4.2, 4200); };
+  setTimeout(go, gcam ? 250 : 500);
   /* the address bar is left alone: a reload always returns to Earth; #sky=solar / #sky=galaxy still open these views when someone arrives with them */
 }
 function flyToHost(name) { const norm = t => String(t).toLowerCase().replace(/centauri/g, 'cen').replace(/[^a-z0-9]/g, ''); const k = norm(name); const o = S.objs.find(x => x.host && x.name === name) || S.objs.find(x => x.host && norm(x.name) === k) || S.objs.find(x => x.star && x.name && (norm(x.name) === k || k.startsWith(norm(x.name)) || (x.desig && norm(x.desig) === k))); if (!o) { const n = document.getElementById('uniNote'); if (n) { n.hidden = false; n.textContent = name + ' is not in the star view (its distance may be missing from NASA\u2019s list).'; } return; }
   S.show.exo = true; const cb = ui.root.querySelector('[data-show="exo"]'); if (cb) cb.checked = true; focusOn(o, true); }
-function closeUniverse() { if (!open) return; stopTour(); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
-  setTimeout(() => { open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 400);
-    const g = window.__obs3d; if (g && g.viewer) { g.viewer.useDefaultRenderLoop = true; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(-75, 25, 2.3e7), duration: 1.4 }); }
+function closeUniverse() { if (!open) return; stopTour(); if (ui.setClean) ui.setClean(false); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
+  setTimeout(() => { const g = window.__obs3d; let gl = null; try { if (g && g.viewer) { gl = sceneToGlobe(new Date(simMs)); g.viewer.camera.setView({ destination: window.Cesium.Cartesian3.fromDegrees(gl.lon, gl.lat, gl.h) }); g.viewer.useDefaultRenderLoop = true; } } catch (x) { gl = null; } /* the globe takes over from the same place */
+    open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 500);
+    if (g && g.viewer) g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(gl ? gl.lon : -75, gl ? gl.lat : 25, 2.3e7), duration: 1.6, easingFunction: window.Cesium.EasingFunction.QUADRATIC_OUT });
     try { if (/sky=|view=solar/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
 O && (O.openUniverse = openUniverse, O.uniState = () => S);
 if (/sky=web/.test(location.hash) || window.__wantWeb) setTimeout(() => openUniverse('web'), 2500);
 else if (window.__wantGalaxy || /sky=galaxy/.test(location.hash)) setTimeout(() => openUniverse('galaxy'), 2500);
 else if (window.__wantSolar || /(view|sky)=solar/.test(location.hash)) setTimeout(openUniverse, 2500);
-addEventListener('keydown', e => { if (open && e.key === 'Escape') closeUniverse(); });
+addEventListener('keydown', e => { if (!open) return; if (e.key === 'Escape') { if (ui.root.classList.contains('clean')) ui.setClean(false); else closeUniverse(); } else if ((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea|select/i.test(e.target.tagName)) ui.setClean(!ui.root.classList.contains('clean')); });
 /* fetch the 3D library while the visitor reads the page, so the first press of ☉, ✺ or ❖ starts sooner */
 setTimeout(() => { const go = () => { import('three').catch(() => { }); }; if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 5000 }); else go(); }, 8000);

@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, voyager = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -160,6 +160,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     ok(galaxies.andromeda != null && galaxies.andromeda > 0.7 && galaxies.andromeda < 0.85, 'Space', 'galaxies-andromeda', 'Andromeda sits about 0.78 Mpc (2.5 million light-years) away', galaxies.andromeda + ' Mpc'); }
   if (cosmicweb) { ok(cosmicweb.count > 40000 && cosmicweb.bytesOk, 'Space', 'cosmicweb-count', 'The cosmic web holds over 40,000 2MRS galaxies and its data file has the right size', `${cosmicweb.count} galaxies, ${cosmicweb.clusters} cluster labels (built ${cosmicweb.built})${cosmicweb.bytesOk ? '' : '; file size wrong'}`);
     ok(cosmicweb.comaCz != null && cosmicweb.comaCz > 6500 && cosmicweb.comaCz < 7500, 'Space', 'cosmicweb-coma', 'The Coma Cluster recedes at about 7,000 km/s (NED)', cosmicweb.comaCz + ' km/s'); }
+  if (voyager) { const T = voyager.crossUTC ? Date.parse(voyager.crossUTC) : NaN; ok(Number.isFinite(T) && T > Date.parse('2026-10-01') && T < Date.parse('2027-06-01') && voyager.now && voyager.now.au > 170 && voyager.now.au < 180, 'Space', 'voyager-lightday', "Voyager 1's one-light-day moment is a real Horizons date in the expected window and its range is near 173 AU", (voyager.crossUTC || 'none') + ' · now ' + (voyager.now ? voyager.now.au + ' AU' : '?'), 'warn'); }
   if (sun) ok(sun.ok && Date.now() - Date.parse(sun.modified || sun.fetched) < 2 * 864e5, 'Space', 'sun-image', "Today's Sun image from NASA SDO is less than two days old", sun.ok ? 'updated ' + (sun.modified || sun.fetched) : 'not fetched: ' + sun.error, 'warn');
 
   // ----- AI releases -----
