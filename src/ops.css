@@ -433,7 +433,7 @@ html[data-theme="dark"] .panel[data-k="classroom"],html[data-theme="dark"] .pane
   position:relative;border-radius:14px;padding:16px 14px;margin:-4px -4px 0;
   background:linear-gradient(180deg,rgb(11 9 6 / .55) 0,rgb(11 9 6 / .9) 34%,rgb(11 9 6 / .97) 100%),url('brand/owl-banner-1280.jpg') center 30%/cover no-repeat}
 html[data-theme="owl"] .owl-shelf-head,html[data-theme="dark"] .owl-shelf-head{position:relative;border-radius:14px;padding:18px 16px 14px;overflow:hidden;
-  background:linear-gradient(90deg,rgb(11 9 6 / .96) 0,rgb(11 9 6 / .82) 45%,rgb(11 9 6 / .55) 100%),url('brand/owl-banner-1280.jpg') right 40%/cover no-repeat;border:1px solid var(--glass-line)}
+  background:linear-gradient(90deg,rgb(11 9 6 / .96) 0,rgb(11 9 6 / .86) 45%,rgb(11 9 6 / .76) 100%),url('brand/owl-banner-1280.jpg') right 40%/cover no-repeat;border:1px solid var(--glass-line)}
 .owl-shelf-head{display:flex;gap:14px;align-items:center;margin-top:6px}
 .owl-shelf-head img{width:72px;height:72px;object-fit:contain;flex:none;filter:drop-shadow(0 4px 10px rgb(0 0 0 / .5))}
 .owl-shelf-head .sec-head{margin:0}
