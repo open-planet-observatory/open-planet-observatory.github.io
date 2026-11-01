@@ -38,7 +38,7 @@ export async function createCosmos({ T, S, SM, ui }) {
     float real = 0.03 / dMpc * uK; float base = 1.0 + 2.4 * aDen + 0.9 * aLum; float px = max(base * clamp(700.0 / dMpc, 0.55, 1.0), min(real * 1.6, 72.0));
     vec3 cool = vec3(0.42, 0.58, 1.0), mid = vec3(0.86, 0.9, 1.0), hot = vec3(1.0, 0.78, 0.55);
     vec3 c = aDen < 0.62 ? mix(cool, mid, aDen / 0.62) : mix(mid, hot, (aDen - 0.62) / 0.38); if (aType < 0.5) c = mix(c, vec3(1.0, 0.82, 0.6), 0.35);
-    vCol = c; vA = uOp * (0.07 + 0.5 * aDen * aDen) * (0.6 + 0.4 * aLum) * clamp(base / px * 2.0, 0.35, 1.0) * min(1.0, 650.0 / dMpc); vH = clamp(real / 18.0, 0.0, 1.0);
+    vCol = c; vA = uOp * (0.07 + 0.5 * aDen * aDen) * (0.6 + 0.4 * aLum) * clamp(base / px * 2.0, 0.35, 1.0) * clamp(650.0 / dMpc, 0.12, 1.0); /* from the edge of the observable universe the whole survey is one glowing speck */ vH = clamp(real / 18.0, 0.0, 1.0);
     gl_PointSize = px * uPx; gl_Position = projectionMatrix * mv;
     #include <logdepthbuf_vertex>
    }`;
@@ -109,10 +109,37 @@ export async function createCosmos({ T, S, SM, ui }) {
       const x = (q.x + 1) / 2, y = (1 - q.y) / 2; if (x < 0.06 || x > (W < 640 ? 0.68 : 0.72) || y < (W < 640 ? 0.16 : 0.2) || y > (W < 640 ? 0.7 : 0.66)) continue; const d = Math.hypot(x - 0.45, y - 0.45); if (d > bd) { bd = d; best = v; } }
     if (best) o.pos = [best.x, best.y, best.z]; return !!best; };
   let laneT = 0;
-  function update(camAU) {
+  let update = function (camAU) {
     const now = performance.now(); if (camAU > 2e13 && now - laneT > 250) { laneT = now; for (const o of objs) { if (o.ring) o.hideLbl = !lane(o, o.ring.userData.mly * 1e6 / LY_PER_MPC * MPC); else if (o.kind === 'blind spot') o.hideLbl = !lane(o, 200 * MPC * 70 / state.h0); } } const mpc = camAU / MPC; // fades in past ~60 Mpc, fully by ~250 Mpc; out of the way below
     const f = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 1.2) / 0.5)); /* cross-fades with the Neighbours layer, 16–50 Mpc */ uni.uOp.value = S.show.web === false ? 0 : f; group.visible = uni.uOp.value > 0.002;
     const H = ui.root.clientHeight || innerHeight; uni.uK.value = H / 2 / Math.tan(S.camera.fov * Math.PI / 360);
     const fr = Math.min(1, Math.max(0, (Math.log10(Math.max(mpc, 1e-6)) - 2.0) / 0.5)); ringMat.opacity = 0.22 * fr * (S.show.web === false ? 0 : 1); zoaMat.opacity = 0.022 * fr * (S.show.web === false ? 0 : 1); deco.visible = fr > 0.01 && S.show.web !== false; }
-  return { group, deco, objs, about, update, setH0, h0: () => state.h0, count: N, built: meta.built, source: meta.source };
+  // ---- the edge of the observable universe: the oldest light (the cosmic microwave background, ESA Planck) on a sphere
+  // about 46 billion light-years out, the present-day distance of the matter that sent it. Loaded only when you head out there.
+  const EDGE_AU = 46.5e9 * 63241.077; /* about 46.5 billion light-years (Planck 2018 cosmology), in AU */
+  const edge = new T.Group(); S.scene.add(edge); edge.visible = false; let edgeInfo = null, edgeLoading = null; const eUni = { map: { value: null }, uOp: { value: 0 }, uEG: { value: new T.Matrix3() } };
+  { const m = new T.Matrix3().setFromMatrix4(ROT).transpose(); eUni.uEG.value.copy(m); } /* ecliptic → galactic */
+  const eVert = 'varying vec3 vDir; varying vec3 vN; varying vec3 vV; void main(){ vec4 wp = modelMatrix * vec4(position,1.0); vDir = wp.xyz; vN = normalize(mat3(modelMatrix) * normal); vV = normalize(cameraPosition - wp.xyz); gl_Position = projectionMatrix * viewMatrix * wp;\n#include <logdepthbuf_vertex>\n}';
+  const eFrag = (rim) => `uniform sampler2D map; uniform float uOp; uniform mat3 uEG; varying vec3 vDir; varying vec3 vN; varying vec3 vV; const float PI = 3.14159265;
+    void main(){ vec3 g = uEG * normalize(vDir); float l = atan(g.y, g.x); float b = asin(clamp(g.z, -1.0, 1.0)); vec4 c = texture2D(map, vec2(0.5 - l / (2.0 * PI), 0.5 + b / PI));
+      ${rim ? 'float f = pow(1.0 - abs(dot(normalize(vN), vV)), 3.0); gl_FragColor = vec4(c.rgb * f * 0.9 * uOp, f * uOp);' : 'gl_FragColor = vec4(c.rgb * uOp, uOp);'}
+      #include <logdepthbuf_fragment>
+    }`;
+  function loadEdge() { if (edgeLoading) return edgeLoading; edgeLoading = (async () => { const r = await fetch('assets/universe/cmb.json'); if (!r.ok) throw new Error('cmb.json HTTP ' + r.status); edgeInfo = await r.json();
+      const tx = await new T.TextureLoader().loadAsync('assets/universe/cmb.jpg'); tx.colorSpace = T.SRGBColorSpace; tx.anisotropy = 8; eUni.map.value = tx;
+      const geo = new T.SphereGeometry(EDGE_AU, 96, 48);
+      const inner = new T.Mesh(geo, new T.ShaderMaterial({ uniforms: eUni, side: T.BackSide, transparent: true, depthWrite: false, vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\n' + eVert, fragmentShader: '#include <logdepthbuf_pars_fragment>\n' + eFrag(false) }));
+      const rim = new T.Mesh(geo, new T.ShaderMaterial({ uniforms: eUni, side: T.FrontSide, transparent: true, depthWrite: false, blending: T.AdditiveBlending, vertexShader: '#include <common>\n#include <logdepthbuf_pars_vertex>\n' + eVert, fragmentShader: '#include <logdepthbuf_pars_fragment>\n' + eFrag(true) }));
+      inner.frustumCulled = rim.frustumCulled = false; inner.renderOrder = -5; edge.add(inner, rim); return edgeInfo; })().catch(e => { edgeLoading = null; S.edgeErr = String(e.message || e).slice(0, 120); throw e; }); return edgeLoading; }
+  const edgeObj = { name: 'Edge of the observable universe', kind: 'the oldest light', pos: [0, 0, EDGE_AU], prio: 1, colour: '#ffb86b', minCam: 1.2e15, group: 'web', edge: true, custom: cardEdge };
+  objs.push(edgeObj);
+  function cardEdge(o, h) { const I = edgeInfo || {}; return `<p class="sc-note"><b>This is as far as anyone can see.</b> The pattern is the oldest light there is, the cosmic microwave background, mapped by ESA's Planck satellite. It left when the universe was about 380,000 years old, and has travelled for about 13.8 billion years to reach us.</p>
+     <p class="sc-note">The matter that sent it is now about <b>46 billion light-years</b> away, farther than 13.8 billion because space has been expanding the whole time. That distance comes from the standard cosmological model fitted to Planck's data, with a Hubble constant of about 67; the 67/70/73 setting in the cosmic web does not change it.</p>
+     <p class="sc-note">Everything you flew through on the way, all 43,000 galaxies of the cosmic web, is the small glow at the centre.</p>
+     <p class="sc-note"><b>How to read it.</b> The real thing surrounds us in every direction: this is a map of the sky wrapped onto a sphere, so each spot shows what we see looking that way. The colours are tiny temperature differences, about 1 part in 100,000, made visible. The real light is microwaves, invisible to the eye. Our own galaxy's glow has been removed from the map.</p>
+     <p class="sc-note">Image: <a href="https://www.esa.int/ESA_Multimedia/Images/2018/07/Planck_s_view_of_the_cosmic_microwave_background" target="_blank" rel="noopener">ESA and the Planck Collaboration</a> (ESA Standard Licence: education and information only), reprojected for the sphere by this site${I.built ? ' on ' + h.esc(I.built) : ''}. Age: <a href="https://doi.org/10.1051/0004-6361/201833910" target="_blank" rel="noopener">Planck 2018 results VI</a>.</p>`; }
+  function updateEdge(camAU) { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(camAU, 1)) - 14.6) / 0.6)); if (f > 0 && !edgeLoading) loadEdge().catch(e => console.warn('edge', e));
+    eUni.uOp.value = S.show.web === false ? 0 : f; edge.visible = f > 0.002 && !!eUni.map.value; }
+  const upd0 = update; update = function (camAU) { upd0(camAU); updateEdge(camAU); };
+  return { group, deco, objs, about, update, setH0, loadEdge, edgeAU: EDGE_AU, edgeInfo: () => edgeInfo, h0: () => state.h0, count: N, built: meta.built, source: meta.source };
 }
