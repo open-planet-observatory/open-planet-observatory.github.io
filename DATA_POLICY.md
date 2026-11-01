@@ -94,6 +94,16 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Brightness follows how many other survey galaxies lie within 5 megaparsecs, compared with the average for galaxies at the same distance (the survey sees fewer galaxies far away, so a raw count would only make the middle glow). Clusters and filaments glow and voids stay dark. It is a way of drawing, not a score, and no number from it is shown.
 - Cluster labels: positions and redshifts from NASA/IPAC NED; their text on click is Wikipedia's, word for word.
 
+## The edge of the observable universe
+
+- The sphere at the edge carries ESA's Planck map of the cosmic microwave background (Planck Legacy release, 2018), credited "ESA and the Planck Collaboration" under the ESA Standard Licence, which allows education, editorial and information use and no commercial use. The site has no advertising or paid features, and will not add any while it uses this map without ESA's written permission.
+- collector/build-cmb.mjs reprojects ESA's published Mollweide image to a rectangular map in galactic coordinates; nothing in the pattern is changed. The colours are ESA's.
+- The radius, about 46 billion light-years, is today's distance to where that light left, from the Planck 2018 cosmology. It is not linked to the Hubble-constant switch of the cosmic web, and the card says so. The gap between the cosmic web (about a billion light-years) and the edge is shown empty because no survey maps galaxies across it in this view; it is not empty in reality.
+
+## Music
+
+- The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It is off until a visitor turns it on (♪) or starts the tour, and the choice is remembered on that device only. It changes with the camera's distance from Earth; it does not encode any data.
+
 ## Other worlds (exoplanets)
 
 - Every figure is the NASA Exoplanet Archive's own (Planetary Systems Composite Parameters), refreshed weekly. The site writes only the explanations of discovery methods.

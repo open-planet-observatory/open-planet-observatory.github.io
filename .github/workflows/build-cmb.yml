@@ -1,0 +1,32 @@
+# Builds the edge-of-the-observable-universe texture (src/assets/universe/cmb.jpg + cmb.json) and commits it.
+# Run by hand from the Actions tab. Source: ESA/Planck map of the cosmic microwave background (2018), ESA Standard Licence
+# (education and information use; credit "ESA and the Planck Collaboration").
+name: Build CMB edge
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  cmb:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install sharp (not saved to the repo)
+        run: npm install --no-save --no-package-lock --no-audit --no-fund sharp@0.34.3
+      - name: Build the CMB texture
+        run: node collector/build-cmb.mjs src/assets/universe
+      - name: Commit
+        run: |
+          git config user.name "observatory-bot"
+          git config user.email "observatory-bot@users.noreply.github.com"
+          git add src/assets/universe/cmb.jpg src/assets/universe/cmb.json
+          git commit -m "Edge: ESA/Planck CMB map, reprojected to plate carrée" || echo "no change"
+          git pull --rebase
+          git push
