@@ -28,6 +28,7 @@ const ui = {};
 // ---------- entry points ----------
 function addButtons() {
   const zc = document.querySelector('#ops-map .zoomctl') || document.querySelector('.zoomctl');
+  if (zc && !document.getElementById('zearth')) { const b = document.createElement('button'); b.id = 'zearth'; b.setAttribute('aria-label', 'Earth: the whole globe'); b.title = 'Earth: back to the whole globe, live'; b.className = 'zuni zearth'; b.innerHTML = '<span class="zi">⊕</span><span class="zt">Earth</span>'; b.onclick = () => goEarth(); zc.appendChild(b); }
   if (zc && !document.getElementById('zuni')) { const b = document.createElement('button'); b.id = 'zuni'; b.setAttribute('aria-label', 'Zoom out to the Solar System'); b.title = 'Fly out from Earth to the Solar System: planets, moons, spacecraft and comets, live'; b.className = 'zuni'; b.innerHTML = '<span class="zi">☉</span><span class="zt">Solar System</span>'; b.onclick = () => openUniverse(); zc.appendChild(b); }
   if (zc && !document.getElementById('zgal')) { const b = document.createElement('button'); b.id = 'zgal'; b.setAttribute('aria-label', 'Fly out to the Milky Way'); b.title = 'Fly from Earth past the stars to the whole Milky Way: a million real stars, and a labeled model of the galaxy'; b.className = 'zuni zgal'; b.innerHTML = '<span class="zi">✺</span><span class="zt">Milky Way</span>'; b.onclick = () => openUniverse('galaxy'); zc.appendChild(b); }
   if (zc && !document.getElementById('zweb')) { const b = document.createElement('button'); b.id = 'zweb'; b.setAttribute('aria-label', 'Fly out to the cosmic web'); b.title = 'Fly past the Milky Way and our neighbour galaxies out to the cosmic web: 43,000 real galaxies in clusters and filaments, out to about a billion light-years'; b.className = 'zuni zweb'; b.innerHTML = '<span class="zi">❖</span><span class="zt">Cosmic web</span>'; b.onclick = () => openUniverse('web'); zc.appendChild(b); }
@@ -36,12 +37,14 @@ function addButtons() {
     const g2 = document.createElement('button'); g2.id = 'galBtn'; g2.className = after.className; g2.textContent = 'Milky Way view'; g2.title = 'Fly from Earth out to the whole Milky Way'; g2.onclick = () => openUniverse('galaxy'); b.after(g2);
     const g3 = document.createElement('button'); g3.id = 'webBtn'; g3.className = after.className; g3.textContent = 'Cosmic web view'; g3.title = 'Fly out to the clusters and filaments of galaxies around us'; g3.onclick = () => openUniverse('web'); g2.after(g3); }
 }
+/* ⊕ Earth: from the 3D views, fly home; on the globe, pull back to the whole planet above where you are looking */
+function goEarth() { if (open) { closeUniverse(); return; } const g = window.__obs3d; try { if (g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none') { const c = g.viewer.camera.positionCartographic; g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(c.longitude * 180 / Math.PI, Math.max(-60, Math.min(60, c.latitude * 180 / Math.PI)), 2.3e7), duration: 1.4 }); return; } } catch (e) { } const r = document.getElementById('zreset'); if (r) r.click(); }
 addButtons(); setTimeout(addButtons, 3000); setTimeout(addButtons, 9000);
 // zooming out past the globe's limit opens the Solar System
 (function hookWheel() {
   const g = window.__obs3d; if (!g) { setTimeout(hookWheel, 1000); return; }
   let pushes = 0, t0 = 0; const sscc = g.viewer.scene.screenSpaceCameraController;
-  g.viewer.canvas.addEventListener('wheel', e => { if (open || e.deltaY <= 0 || document.documentElement.classList.contains('game-on')) return; /* no fly-out during the daily game */ const h = g.viewer.camera.positionCartographic.height;
+  g.viewer.canvas.addEventListener('wheel', e => { if (open || e.deltaY <= 0) return; const h = g.viewer.camera.positionCartographic.height;
     if (h < sscc.maximumZoomDistance * 0.9 || sscc.maximumZoomDistance > 1e8) { pushes = 0; return; }
     const n = Date.now(); if (n - t0 > 1200) pushes = 0; t0 = n; if (++pushes >= 6) { pushes = 0; openUniverse(); } }, { passive: true });
 })();
@@ -72,7 +75,7 @@ async function build() {
   const host = document.body; // above every panel: the view is full screen
   const root = document.createElement('div'); root.id = 'uni'; root.hidden = true; root.innerHTML = `
    <canvas id="uniCanvas" aria-label="The Solar System, live"></canvas><div id="uniLabels" aria-hidden="true"></div>
-   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from Earth out to the edge of the observable universe">▶ Take the tour</button><button class="chip uni-music" id="uniMusic" aria-pressed="false" title="Music: an ambient score that darkens as you fly out. Press to stop or start it">♪</button><button class="chip uni-hide" id="uniHide" title="Hide every panel and label frame for a clean view (H). Press again, or H, to bring them back" aria-pressed="false">Clean view</button></div>
+   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from Earth out to the edge of the observable universe">▶ Tour universe</button><button class="chip uni-music" id="uniMusic" aria-pressed="false" title="Music: an ambient score that darkens as you fly out. Press to stop or start it">♪</button><button class="chip uni-hide" id="uniHide" title="Hide every panel and label frame for a clean view (H). Press again, or H, to bring them back" aria-pressed="false">Clean view</button></div>
    <button class="chip uni-show" id="uniShow" hidden title="Show the controls (H)">⌃ Controls</button>
    <div class="uni-ctl" role="group" aria-label="Solar System controls"><button class="uni-fold" id="uniFold" title="Fold the controls down to one row" aria-expanded="true" aria-label="Fold the controls">▾</button>
     <div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div>
@@ -449,7 +452,7 @@ function caption(t) { const c = document.getElementById('uniCap'); if (!c) retur
 function startTour() { stopTour(); S.tour = { i: -1 }; ui.root.classList.add('touring'); document.getElementById('uniTour').textContent = '■ Stop the tour';
   rate = 0; simMs = Date.now(); ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x.dataset.rate === '0'));
   S.focus = null; ui.card.hidden = true; document.getElementById('uniNeoCard').hidden = true; nextStep(); }
-function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Take the tour'; caption(''); }
+function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Tour universe'; caption(''); }
 function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { stopTour(); caption('That is the end of the tour. Drag to look around, click the edge to read about it, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } const st = steps[tr.i]; caption(st.cap);
   if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
@@ -529,7 +532,7 @@ function closeUniverse() { if (!open) return; stopTour(); if (window.OwlMusic) O
     open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 500);
     if (g && g.viewer) g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(gl ? gl.lon : -75, gl ? gl.lat : 25, 2.3e7), duration: 1.6, easingFunction: window.Cesium.EasingFunction.QUADRATIC_OUT });
     try { if (/sky=|view=solar/.test(location.hash)) history.replaceState(null, '', location.pathname + location.search); } catch (x) { } }, 1250); }
-O && (O.openUniverse = openUniverse, O.uniState = () => S);
+O && (O.openUniverse = openUniverse, O.uniState = () => S, O.closeUniverse = () => closeUniverse(), O.goEarth = goEarth);
 if (/sky=edge/.test(location.hash)) setTimeout(() => openUniverse('edge'), 2500);
 else if (/sky=tour/.test(location.hash)) setTimeout(() => openUniverse('tour'), 2500);
 else if (/sky=web/.test(location.hash) || window.__wantWeb) setTimeout(() => openUniverse('web'), 2500);
