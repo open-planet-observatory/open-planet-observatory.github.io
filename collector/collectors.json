@@ -46,9 +46,9 @@
    "target": "signals"
   },
   {
-   "name": "volcano coordinates (fills lon/lat into volcano.items from the previous step; names are matched without accents)",
+   "name": "volcano coordinates (fills lon/lat into volcano.items from the previous step; names are matched without accents, and 'Chillan, Nevados de' also as 'Nevados de Chillan')",
    "origin": "https://webservices.volcano.si.edu/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetCapabilities",
-   "script": "const out={};const prev=(window.__merged&&window.__merged.volcano)||null;const names=prev?prev.items.map(i=>i[0]):[];const strip=s=>s.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'');const q='/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=json&CQL_FILTER='+encodeURIComponent('Volcano_Name IN ('+names.map(n=>\"'\"+n.replace(/'/g,\"''\")+\"'\").join(',')+')');const d=await (await fetch(q)).json();out.volcanoCoords=Object.fromEntries(d.features.map(f=>[strip(f.properties.Volcano_Name),[+(+f.properties.Longitude).toFixed(2),+(+f.properties.Latitude).toFixed(2)]]));out.volcanoCoords._note='Before running this step, set window.__merged={volcano:<the volcano object from the previous step>} in the tab. After it, fill each volcano item: item[5],item[6]=volcanoCoords[strip(item[0])]'",
+   "script": "const out={};const strip=s=>String(s).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/\\s+/g,' ').trim();const r=await fetch('/geoserver/GVP-VOTW/ows?service=WFS&version=2.0.0&request=GetFeature&typeName=GVP-VOTW:Smithsonian_VOTW_Holocene_Volcanoes&outputFormat=json&propertyName=Volcano_Name,Longitude,Latitude');const t=await r.text();if(!r.ok||t.trim()[0]!=='{')throw new Error('volcano list HTTP '+r.status+': '+t.replace(/\\s+/g,' ').slice(0,120));const d=JSON.parse(t);out.volcanoCoords={};for(const f of d.features){const p=f.properties,c=[+(+p.Longitude).toFixed(2),+(+p.Latitude).toFixed(2)];if(!isFinite(c[0])||!isFinite(c[1]))continue;const n=strip(p.Volcano_Name);out.volcanoCoords[n]=c;const m=n.match(/^(.*?), (.*)$/);if(m)out.volcanoCoords[m[2]+' '+m[1]]=c;}out.volcanoCoords._note='The whole Holocene list (about 1,200 volcanoes, names and positions only), matched to the weekly report by name without accents or case.'",
    "target": "signals"
   },
   {

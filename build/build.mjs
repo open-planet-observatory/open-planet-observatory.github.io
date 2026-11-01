@@ -44,13 +44,12 @@ if (mode === 'hosted') {
 <link rel="apple-touch-icon" sizes="180x180" href="brand/owl-touch-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theowlmanac.com/">
-<meta property="og:image" content="https://theowlmanac.com/brand/owl-og-1200x630.jpg">
+<meta property="og:image" content="https://theowlmanac.com/brand/owl-share-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Engraved owls fly out of a star-shaped polyhedron into deep space: the Owlmanac banner.">
-<meta property="og:image" content="https://theowlmanac.com/brand/owl-square-1024.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://theowlmanac.com/brand/owl-og-1200x630.jpg">
+<meta name="twitter:image" content="https://theowlmanac.com/brand/owl-share-1200x630.jpg">
 <meta property="og:description" content="Free public data on one map. Every number sourced, blind spots shown, no tracking.">
 <meta name="theme-color" content="#0B0906">
 <link rel="preload" as="image" href="brand/owl-banner-1280.jpg" media="(min-width:641px) and (max-width:1400px)" fetchpriority="high">
