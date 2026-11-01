@@ -20,7 +20,7 @@
     <div class="gn-m glass" role="menu" hidden>${items.map(it => Array.isArray(it) ? `<button role="menuitem" data-u="${it[0].slice(1)}"><b><span class="gn-i">${it[2]}</span>${esc(it[1])}</b><small>${esc(it[3])}</small></button>`
       : tabs.querySelector(`button[data-k="${it}"]`) ? `<button role="menuitem" data-k="${it}"><b>${esc(label(it))}</b><small>${esc(NOTE[it] || '')}</small></button>` : '').join('')}</div></div>`).join('')
     + `</div><div class="gn-act"><button class="gn-tour" id="gnTour" title="A guided flight from Earth to the edge of the observable universe">▶<span class="gn-tw"> <span class="gn-tl">Take the </span>tour</span></button>`
-    + `<button class="gn-ic" id="gnSearch" aria-label="Search" title="Search everything (/)">⌕</button><button class="gn-ic" id="gnMusic" aria-pressed="false" aria-label="Music" title="Music: an ambient score that grows as you fly out. Off until you turn it on">♪</button><button class="gn-ic" id="gnExpand" aria-label="Show everything" title="Show the full header and side panels (Esc)">⤢</button></div>`;
+    + `<button class="gn-ic" id="gnSearch" aria-label="Search" title="Search everything (/)">⌕</button><button class="gn-ic" id="gnMusic" aria-pressed="false" aria-label="Music" title="Music: an ambient score that grows as you fly out. Plays from your first click; press to stop">♪</button><button class="gn-ic" id="gnExpand" aria-label="Show everything" title="Show the full header and side panels (Esc)">⤢</button></div>`;
   tabs.after(nav); tabs.classList.add('gn-hidden');
   /* the header is a glass panel (backdrop-filter, overflow hidden), which would clip a dropdown: menus live on <body> and are placed under their button */
   nav.querySelectorAll('.gn-g').forEach(d => { const m = d.querySelector('.gn-m'); m.dataset.g = d.dataset.g; document.body.appendChild(m); d._m = m; m._d = d; });
@@ -58,6 +58,6 @@
   document.getElementById('gnSearch').onclick = () => { if (html.classList.contains('search-open')) html.classList.remove('search-open'); else openSearch(); };
   document.getElementById('gnTour').onclick = () => { if (window.OwlMusic && window.OwlMusic.autoOn) window.OwlMusic.autoOn(); O.openUniverse && O.openUniverse('tour'); };
   const mb = document.getElementById('gnMusic'); const syncM = () => { const on = !!(window.OwlMusic && window.OwlMusic.on); mb.setAttribute('aria-pressed', String(on)); mb.classList.toggle('on', on); };
-  mb.onclick = () => { if (window.OwlMusic) { window.OwlMusic.toggle(); syncM(); } }; addEventListener('owlmusic', syncM);
+  mb.onclick = () => { if (window.OwlMusic) { window.OwlMusic.toggle(); syncM(); } }; addEventListener('owlmusic', syncM); syncM();
   O.setSlim = setSlim;
 })();

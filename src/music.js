@@ -1,6 +1,6 @@
 // ---------- The score: generative ambient music that grows with distance ----------
-// Built live in the browser with the Web Audio API: no recordings, no licence, nothing downloaded. Off until the visitor
-// turns it on (♪). setScale(s) takes 0 at Earth and 1 at the edge of the observable universe; each layer fades in with
+// Built live in the browser with the Web Audio API: no recordings, no licence, nothing downloaded. On by default: browsers only allow sound after the visitor's first click, tap or key, so it starts
+// then, unless the visitor has stopped it before (♪, remembered on this device). setScale(s) takes 0 at Earth and 1 at the edge of the observable universe; each layer fades in with
 // distance: a warm drone at home, a soft chord among the planets, a slow pulse and high bells among the stars, a dark
 // low cluster and a rising tremolo in the cosmic web, and a wide swell at the edge. The key darkens from D major to D minor.
 (function () {
@@ -45,13 +45,21 @@
     ramp(L.edge.g.gain, 0.9 * band(s, 0.9, 1), 3); ramp(L.edge.f.frequency, 500 + 2500 * band(s, 0.92, 1), 4); }
   let lastMix = 0;
   const api = {
-    get on() { return on; },
-    toggle() { if (on) this.stop(); else this.start(); },
+    get on() { return on || !!this.armed; }, /* armed (waiting for the first click) counts as on, so ♪ shows it will play */
+    toggle() { if (on || this.armed) { if (this._disarm) this._disarm(); this.stop(); } else this.start(); },
     start() { try { if (!ctx) build(); ctx.resume(); on = true; ramp(master.gain, 0.55, 1.5); mix(); clearTimeout(bellT); clearTimeout(pulseT); bell(); pulse(); try { localStorage.setItem('owl-music', 'on'); } catch (e) { } } catch (e) { console.warn('music', e); } dispatchEvent(new Event('owlmusic')); },
     stop() { on = false; if (ctx) { ramp(master.gain, 0, 0.6); setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 2500); } clearTimeout(bellT); clearTimeout(pulseT); try { localStorage.setItem('owl-music', 'off'); } catch (e) { } dispatchEvent(new Event('owlmusic')); },
     autoOn() { let pref = null; try { pref = localStorage.getItem('owl-music'); } catch (e) { } if (!on && pref !== 'off') this.start(); }, /* the tour starts the music unless the visitor has turned it off before */
     setScale(s, force) { target = Math.max(0, Math.min(1, s)); scale = target; const now = performance.now(); if (on && (force || now - lastMix > 400)) { lastMix = now; mix(); } } /* the audio ramps do the smoothing */
   };
   window.OwlMusic = api;
+  /* on by default: start at the first click, tap or key (browsers block sound before one), unless the visitor stopped it before.
+     A press on a ♪ button is left to that button, so stopping the music never plays a note first. */
+  { let pref = null; try { pref = localStorage.getItem('owl-music'); } catch (e) { } api.armed = pref !== 'off';
+    const first = e => { const t = e.target; if (t && t.closest && t.closest('#gnMusic,#uniMusic')) return; /* the button's own toggle sees it armed and stops it */ disarm(); if (!on) api.start(); };
+    const evs = ['pointerdown', 'keydown', 'touchend'];
+    const disarm = () => { api.armed = false; evs.forEach(k => removeEventListener(k, first, true)); };
+    if (api.armed) evs.forEach(k => addEventListener(k, first, true));
+    api._disarm = disarm; }
   document.addEventListener('visibilitychange', () => { if (!ctx || !on) return; if (document.hidden) ctx.suspend(); else ctx.resume(); });
 })();
