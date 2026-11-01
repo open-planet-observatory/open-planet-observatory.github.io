@@ -44,7 +44,7 @@ addButtons(); setTimeout(addButtons, 3000); setTimeout(addButtons, 9000);
 (function hookWheel() {
   const g = window.__obs3d; if (!g) { setTimeout(hookWheel, 1000); return; }
   let pushes = 0, t0 = 0; const sscc = g.viewer.scene.screenSpaceCameraController;
-  g.viewer.canvas.addEventListener('wheel', e => { if (open || e.deltaY <= 0) return; const h = g.viewer.camera.positionCartographic.height;
+  g.viewer.canvas.addEventListener('wheel', e => { if (open || e.deltaY <= 0 || document.documentElement.classList.contains('game-on')) return; /* no fly-out during the daily game */ const h = g.viewer.camera.positionCartographic.height;
     if (h < sscc.maximumZoomDistance * 0.9 || sscc.maximumZoomDistance > 1e8) { pushes = 0; return; }
     const n = Date.now(); if (n - t0 > 1200) pushes = 0; t0 = n; if (++pushes >= 6) { pushes = 0; openUniverse(); } }, { passive: true });
 })();
