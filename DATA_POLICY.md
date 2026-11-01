@@ -102,7 +102,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Music
 
-- The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It plays by default from the visitor's first click, tap or key (browsers allow no sound before one); ♪ stops it, and that choice is remembered on that device only. It changes with the camera's distance from Earth; it does not encode any data.
+- The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It plays by default from the visitor's first click, tap or key (browsers allow no sound before one); ♪ stops it, and that choice is remembered on that device only. It changes with the camera's distance from Earth: a high, bright melody in D major near Earth that sinks about two octaves and turns minor, then dissonant, as you fly out, and comes back as you return. It does not encode any data.
 
 ## Other worlds (exoplanets)
 
