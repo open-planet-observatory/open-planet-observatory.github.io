@@ -1,7 +1,7 @@
-// ---------- Tour site: a one-minute walk through the page ----------
+// ---------- Tour Site: a one-minute walk through the page ----------
 // Eight stops, each one lighting up a real part of the page with a short note written by the site. Next / Back / arrow keys
 // move; Esc or "Skip" ends it. First-time visitors are offered it once (a small card, never shown again after either
-// answer); after that it lives behind the "Tour site" button in the header.
+// answer); after that it lives behind the "Tour Site" button in the header.
 (function () {
   const html = document.documentElement, O = window.__obs || {}; if (!html.classList.contains('ops')) return;
   const $ = s => document.querySelector(s);
@@ -28,7 +28,7 @@
     { title: 'Sources and blind spots', el: () => $('.gn-g[data-g="learn"] .gn-b'), prep: () => { unslim(); if (phone()) { html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); } const b = $('.gn-g[data-g="learn"] .gn-b'), sc = $('.gnav .gn-scroll'); if (b && sc) sc.scrollLeft = Math.max(0, b.offsetLeft + b.offsetWidth - sc.clientWidth + 8); },
       body: 'Under Learn, “Sources” lists every feed with its licence and how often it updates, and “Layers & readings” explains each layer and what it can’t show. When a feed fails, the page says so instead of showing old numbers.' },
     { title: 'Leave Earth', el: () => $('#ops-map .zoomctl') || $('.zoomctl'), prep: () => { unslim(); if (phone()) html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); }, /* the panel would hide half the row */
-      body: 'Fly out from here: the Solar System as it is right now, a million real stars, the Milky Way, 43,000 galaxies in the cosmic web, and the oldest light in the universe. ⊕ Earth brings you home. “Tour universe” flies the whole way with a guide.' },
+      body: 'Fly out from here: the Solar System as it is right now, a million real stars, the Milky Way, 43,000 galaxies in the cosmic web, and the oldest light in the universe. ⊕ Earth brings you home. “Tour Universe” flies the whole way with a guide.' },
     { title: 'Music, Voyager and search', el: () => $('.gn-act'), prep: unslim,
       body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. ⌕, or the / key, searches everything. That’s the tour: enjoy exploring.' }
   ];
@@ -47,7 +47,7 @@
       else { x = Math.min(Math.max(12, r.left), W - cw - 12); y = Math.max(12, r.top - ch - 16); } }
     card.style.left = Math.round(x) + 'px'; card.style.top = Math.round(y) + 'px'; }
   function show() { const st = STEPS[i]; if (st.prep) try { st.prep(); } catch (e) { }
-    card.innerHTML = `<div class="st-n">Tour site · ${i + 1} of ${STEPS.length}</div><h3 id="stTitle">${st.title}</h3><p>${st.body}</p>
+    card.innerHTML = `<div class="st-n">Tour Site · ${i + 1} of ${STEPS.length}</div><h3 id="stTitle">${st.title}</h3><p>${st.body}</p>
       <div class="st-row"><div class="st-dots" aria-hidden="true">${STEPS.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div><span class="st-sp"></span>
       ${i ? '<button class="st-back">Back</button>' : '<button class="st-skip">Skip</button>'}<button class="st-next">${i === STEPS.length - 1 ? 'Done' : 'Next'}</button></div>`;
     const b = card.querySelector('.st-back'), s = card.querySelector('.st-skip'); if (b) b.onclick = () => go(-1); if (s) s.onclick = end; card.querySelector('.st-next').onclick = () => go(1);
@@ -70,8 +70,8 @@
   function offer() { let seen = false; try { seen = localStorage.getItem('site-tour-offer') === '1'; } catch (e) { } if (seen || /sky=/.test(location.hash) || document.querySelector('#uni.on,.st-card')) return;
     let noticeUp = false; try { noticeUp = localStorage.getItem('obs-notice') !== '1'; } catch (e) { }
     if (html.classList.contains('owl-splash-on') || noticeUp) { setTimeout(offer, 1500); return; } /* wait for the intro and the research-only notice to be gone */
-    const c = document.createElement('div'); c.className = 'st-offer st-card'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-label', 'Tour site');
-    c.innerHTML = '<h3>New here?</h3><p>Take the one-minute tour of the site: what it is, what each part does, and how to read it.</p><div class="st-row"><span class="st-sp"></span><button class="st-skip">No thanks</button><button class="st-next">Tour site</button></div>';
+    const c = document.createElement('div'); c.className = 'st-offer st-card'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-label', 'Tour Site');
+    c.innerHTML = '<h3>New here?</h3><p>Take the one-minute tour of the site: what it is, what each part does, and how to read it.</p><div class="st-row"><span class="st-sp"></span><button class="st-skip">No thanks</button><button class="st-next">Tour Site</button></div>';
     document.body.appendChild(c); const done = () => { try { localStorage.setItem('site-tour-offer', '1'); } catch (e) { } c.remove(); };
     c.querySelector('.st-skip').onclick = done; c.querySelector('.st-next').onclick = () => { done(); start(); }; }
   setTimeout(offer, 5000);

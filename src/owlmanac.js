@@ -43,13 +43,11 @@ if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling
 function moonLinks(){const c=document.getElementById('moonCard');if(!c||c.querySelector('.owl-moon'))return;const foot=c.querySelector('.sg-foot');const d=document.createElement('p');d.className='small owl-moon';
  d.innerHTML=`<b>From The Owlmanac:</b> ${EPISODES.filter(e=>e[3]==='moon').map(e=>`<a href="${esc(e[1])}" target="_blank" rel="noopener">${esc(e[0])} ↗</a>`).join(' · ')}`;if(foot)foot.before(d);else c.appendChild(d)}
 moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObserver(moonLinks).observe(mh,{childList:true});
-// Intro splash (markup is written by the build before any script): hide it when the globe has drawn its first tiles, never before 1.6 s and never later than 7 s; any click or key skips it.
+// Intro splash (markup is written by the build before any script): the artwork stays until the visitor clicks or presses a key, or for 12 s at most (Derik, 2026-11-01: give people time to see it). When the globe is ready behind it, the loading bar finishes.
 const sp=document.getElementById('owlSplash');
 if(sp){const t0=performance.now();let ready=false,gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
  const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>sp.remove(),rm?0:800);document.removeEventListener('keydown',go)};
- const minWait=rm?800:1600;const maybe=()=>{if(!ready)return;const left=minWait-(performance.now()-t0);if(left>0)setTimeout(go,left);else go()};
- document.addEventListener('obs:globe-ready',()=>{ready=true;maybe()},{once:true});
+ document.addEventListener('obs:globe-ready',()=>{ready=true;sp.classList.add('ready')},{once:true});
  sp.addEventListener('click',go);document.addEventListener('keydown',go);sp.querySelector('.go')?.focus({preventScroll:true});
- setTimeout(()=>{if(!document.getElementById('cesium'))go()},2500);
- setTimeout(go,7000)}
+ setTimeout(go,12000)}
 })();

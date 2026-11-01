@@ -100,6 +100,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - collector/build-cmb.mjs reprojects ESA's published Mollweide image to a rectangular map in galactic coordinates; nothing in the pattern is changed. The colours are ESA's.
 - The radius, about 46 billion light-years, is today's distance to where that light left, from the Planck 2018 cosmology. It is not linked to the Hubble-constant switch of the cosmic web, and the card says so. The gap between the cosmic web (about a billion light-years) and the edge is shown empty because no survey maps galaxies across it in this view; it is not empty in reality.
 
+## This date in history
+
+- Stories come from Wikipedia's "On this day" events for the date (Wikimedia feed API), word for word, under CC BY-SA 4.0, each linked to its article. The site keeps only stories that belong to topics it covers (space, earthquakes and volcanoes, weather and climate, science and health, exploration, technology, nature, money) and leaves out stories about war, violence and crime. The site writes no story text: it only filters, sorts and labels the topic.
+- Earthquakes are USGS's own records: the largest of magnitude 7 or more since 1900 that happened on this month and day (UTC), with USGS's place text and a link to each event.
+- The file covers yesterday, today and tomorrow (UTC) so each visitor sees their own date. Each date is fetched once a day; if a source fails, the page says so and shows nothing older in its place.
+- Blind spots, stated on the page: Wikipedia's list is chosen by its editors and leans toward Europe and North America; the earthquake catalogue is thin before the 1960s.
+
 ## Music
 
 - The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It plays by default from the visitor's first click, tap or key (browsers allow no sound before one); ♪ stops it, and that choice is remembered on that device only. It changes with the camera's distance from Earth: a high, bright melody in D major near Earth that sinks about two octaves and turns minor, then dissonant, as you fly out, and comes back as you return. It does not encode any data.

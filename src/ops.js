@@ -57,6 +57,7 @@ const PANELS=[
  ['climate','Climate',['#climate']],
  ['relief','Relief',['#relief']],
  ['worlds','Other worlds',['#worlds']],
+ ['history','This date in history',['#history']],
  ['watch','Watch',['#watch']],
  ['unexplained','Unexplained',['#unexplained']],
  ['economy','Economy',['#economy']],
