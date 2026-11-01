@@ -1,6 +1,6 @@
 # Data policy
 
-Open Planet Observatory is built to inform, not to surveil. These rules are part of the project, not suggestions. A change that breaks one of them will not be merged.
+The Owlmanac Observatory (formerly Open Planet Observatory) is built to inform, not to surveil. These rules are part of the project, not suggestions. A change that breaks one of them will not be merged.
 
 ## What the page shows
 

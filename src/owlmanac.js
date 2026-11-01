@@ -26,8 +26,7 @@ const EPISODES=[
 const yt='<svg class="yt" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1c.4-1.6.5-4.8.5-4.8s0-3.2-.5-4.8ZM9.7 15.1V8.9l5.8 3.1-5.8 3.1Z"/></svg>';
 // header: lockup + channel button
 const brand=document.querySelector('#ops-top .brand');
-if(brand&&!brand.querySelector('.owl-kicker')){const h1=brand.querySelector('h1');
- if(h1){const w=document.createElement('div');w.className='lockup';h1.parentNode.insertBefore(w,h1);w.innerHTML=`<a class="owl-kicker" href="${CH}" target="_blank" rel="noopener">The Owlmanac</a>`;w.appendChild(h1)}
+if(brand&&!brand.querySelector('.owl-kicker')){
  const logo=brand.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const a=document.createElement('a');a.href=CH;a.target='_blank';a.rel='noopener';a.title='The Owlmanac on YouTube';logo.parentNode.insertBefore(a,logo);a.appendChild(logo)}}
 const right=document.querySelector('#ops-top .top-right')||document.querySelector('#ops-top .themebtn')?.parentElement||document.querySelector('#ops-top');
 if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>Watch The Owlmanac</span>`;b.title='The Owlmanac on YouTube: strange, true, seriously';
