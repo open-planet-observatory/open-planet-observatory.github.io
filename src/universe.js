@@ -145,14 +145,14 @@ async function build() {
       const pts = c.pts.map(p => new T.Vector3(p[1], p[2], p[3]));
       const line = new T.Line(new T.BufferGeometry().setFromPoints(pts), new T.LineBasicMaterial({ color: '#7ee787', transparent: true, opacity: 0.45 })); S.groups.craft.add(line);
       const p = new T.Points(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute([0, 0, 0], 3)), dot('#7ee787', 7)); S.groups.craft.add(p);
-      add({ name: c.name, kind: 'spacecraft', craft: c, point: p, prio: 2, colour: '#7ee787', pos: [0, 0, 0], group: 'craft' });
+      add({ name: c.name, kind: 'spacecraft', craft: c, point: p, prio: 2, colour: '#7ee787', pos: [0, 0, 0], group: 'craft', maxCam: 2e5 });
     }
     for (const c of S.solar.comets || []) {
       const span = c.e < 0.9 ? Math.min(2 * Math.PI / (K_GAUSS / Math.pow(c.q / (1 - c.e), 1.5)), 4000) : 900, pts = [];
       for (let k = 0; k <= 240; k++) pts.push(new T.Vector3(...kepler(c, c.tp - span / 2 + k / 240 * span)));
       const line = new T.Line(new T.BufferGeometry().setFromPoints(pts), new T.LineBasicMaterial({ color: '#8fd3ff', transparent: true, opacity: 0.35 })); S.groups.comets.add(line);
       const p = new T.Points(new T.BufferGeometry().setAttribute('position', new T.Float32BufferAttribute([0, 0, 0], 3)), dot('#8fd3ff', 6)); S.groups.comets.add(p);
-      add({ name: c.name, kind: 'comet', comet: c, point: p, prio: 5, colour: '#8fd3ff', pos: [0, 0, 0], group: 'comets' });
+      add({ name: c.name, kind: 'comet', comet: c, point: p, prio: 5, colour: '#8fd3ff', pos: [0, 0, 0], group: 'comets', maxCam: 2e5 });
     }
   }
   // controls
