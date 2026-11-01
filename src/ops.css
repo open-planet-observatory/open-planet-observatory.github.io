@@ -648,3 +648,36 @@ html.game-msg #woe{left:50%;top:50%;transform:translate(-50%,-50%)}
 /* mid-size screens: keep all five menus visible by shortening the header's right-hand buttons */
 @media (min-width:861px) and (max-width:1279px){.gn-vy .gv-l,.gn-vy .gv-m{display:none}.gn-vy .gv-s{display:inline}}
 @media (min-width:861px) and (max-width:1000px){.gn-act .gn-tour .gn-tw{display:none}.gn-act .gn-tour{padding:6px 10px}}
+/* ---- featured cards in the banner: today's game and This date in history (src/history.js) ---- */
+#ops-top .feat{display:flex;gap:8px;flex:1 1 360px;min-width:0;max-width:640px}
+.feat-c{display:flex;align-items:center;gap:9px;min-width:0;flex:1 1 0;padding:6px 12px 6px 9px;border-radius:12px;border:1px solid var(--glass-line);background:var(--glass-2);color:var(--ink);cursor:pointer;text-align:left;transition:border-color .2s,background .2s}
+.feat-c:hover{border-color:var(--accent,#D9A441)}
+.feat-c:focus-visible{outline:2px solid var(--accent,#D9A441);outline-offset:2px}
+.feat-game{flex:0 1 auto;border-color:rgb(217 164 65 / .55);background:linear-gradient(135deg,rgb(217 164 65 / .18),rgb(217 164 65 / .05))}
+.feat-c .fg-i,.feat-c .fh-i{font-size:1.25rem;line-height:1;color:var(--accent,#D9A441);flex:none}
+.feat-c .fc-b{display:flex;flex-direction:column;min-width:0}
+.feat-c b{font-size:.84rem;white-space:nowrap}
+.feat-c small{font-size:.74rem;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .25s}
+.feat-hist .fh-y{color:var(--accent,#D9A441);font-weight:700;margin-left:2px}
+.feat-hist.swap small,.feat-hist.swap .fh-y{opacity:0}
+html.ops.slim #ops-top .feat{display:none}
+.gn-act .gn-play{display:none}
+html.ops.slim .gn-act .gn-play{display:inline-flex}
+@media (max-width:860px){#ops-top .feat{flex:1 1 100%;max-width:none}.feat-c{padding:5px 9px 5px 8px}.feat-c b{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){.feat-c small,.feat-hist .fh-y{transition:none}}
+/* ---- This date in history panel ---- */
+.hist-date{margin:4px 0 10px;font-size:1.05rem}
+.hist-f{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 12px}
+.hist-f button{border:1px solid var(--glass-line);background:none;color:var(--ink-2);border-radius:999px;padding:4px 10px;font-size:.78rem;cursor:pointer}
+.hist-f button[aria-pressed="true"]{background:var(--accent,#D9A441);color:#1a1206;border-color:transparent;font-weight:700}
+.hist-list{list-style:none;margin:0;padding:0}
+.hist-list li{display:grid;grid-template-columns:52px 1fr;gap:10px;padding:10px 0;border-bottom:1px solid var(--glass-line)}
+.hist-y{font:700 .95rem/1.4 var(--mono,ui-monospace,monospace);color:var(--accent,#D9A441)}
+.hist-list p{margin:0}
+.hist-l{margin-top:4px!important;font-size:.78rem;color:var(--ink-3)}
+.hist-c{text-transform:uppercase;letter-spacing:.06em;font-size:.7rem}
+.hist-sub{margin:18px 0 6px;font-size:.95rem}
+/* splash: the bar finishes once the globe is ready behind the artwork */
+#owlSplash.ready .load i{animation:none;width:100%;transition:width .6s ease-out}
+/* phones, full header: the five menus get their own row, the buttons sit on the row below; the slim bar stays one row */
+@media (max-width:860px){html.ops:not(.slim) .gnav{flex-wrap:wrap;row-gap:6px}html.ops:not(.slim) .gnav .gn-scroll{flex:1 1 100%}html.ops:not(.slim) .gnav .gn-act{margin-left:auto}}
