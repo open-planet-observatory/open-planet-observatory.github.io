@@ -80,7 +80,7 @@ function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t
 
 // ----- layers: one data source per chip id, synced with the chip's pressed state -----
 const DS={};
-function ds(id){if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);const chip=document.getElementById('chip-'+id);d.show=!chip||chip.getAttribute('aria-pressed')==='true';DS[id]=d}return DS[id]}
+function ds(id){if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);const chip=document.getElementById('chip-'+id);d.show=(!chip||chip.getAttribute('aria-pressed')==='true')&&!document.documentElement.classList.contains('game-on');DS[id]=d}return DS[id]}
 // Switches live in the rail (moved there by ops.js), so listen page-wide, not just in the old layer bar.
 new MutationObserver(ms=>ms.forEach(m=>{if(!/^chip-/.test(m.target.id||''))return;const id=m.target.id.replace(/^chip-/,'');if(DS[id])DS[id].show=m.target.getAttribute('aria-pressed')==='true';if(/^(sat|sat-.+|deb-.+)$/.test(id)&&typeof syncSatVis==='function')syncSatVis()})).observe(document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
 const BANDS={};let nearNow=null;const NEAR=2.5e6;
@@ -332,7 +332,7 @@ handler.setInputAction(m=>{const p=scene.pick(m.endPosition);const ent=p&&p.id;l
  if(d&&tip){tip.innerHTML=d;tip.hidden=false;const r=el.getBoundingClientRect();tip.style.left=Math.min(m.endPosition.x+14,r.width-270)+'px';tip.style.top=(m.endPosition.y+14)+'px';tip.style.position='absolute';if(tip.parentElement!==host)host.appendChild(tip)}
  else if(tip&&!tip.hidden&&tip.parentElement===host)tip.hidden=true;
  scene.canvas.style.cursor=p&&p.id&&(p.id.properties?.country||p.id.sat!=null)?'pointer':'default'},C.ScreenSpaceEventType.MOUSE_MOVE);
-handler.setInputAction(m=>{const picked=scene.drillPick(m.position,6);const sp=picked.find(p=>p.id&&p.id.sat!=null);if(sp){selectSat(sp.id.sat);return}if(SAT.sel>=0&&!picked.some(p=>p.id&&p.id.properties)){selectSat(-1)}const c=picked.find(p=>p.id&&p.id.properties&&p.id.properties.country);if(c){const name=c.id.properties.country.getValue();const f=O.countries.find(x=>x.properties.name===name);if(f&&O.openCountry)O.openCountry(f)}},C.ScreenSpaceEventType.LEFT_CLICK);
+handler.setInputAction(m=>{if(document.documentElement.classList.contains('game-on'))return;const picked=scene.drillPick(m.position,6);const sp=picked.find(p=>p.id&&p.id.sat!=null);if(sp){selectSat(sp.id.sat);return}if(SAT.sel>=0&&!picked.some(p=>p.id&&p.id.properties)){selectSat(-1)}const c=picked.find(p=>p.id&&p.id.properties&&p.id.properties.country);if(c){const name=c.id.properties.country.getValue();const f=O.countries.find(x=>x.properties.name===name);if(f&&O.openCountry)O.openCountry(f)}},C.ScreenSpaceEventType.LEFT_CLICK);
 
 // ----- spin, fly-to, mode switch -----
 let spin=!matchMedia('(prefers-reduced-motion: reduce)').matches,idle=true;

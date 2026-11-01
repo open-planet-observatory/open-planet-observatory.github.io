@@ -1,5 +1,5 @@
 <title>Open Planet Observatory · The Owlmanac</title>
-<script>window.__wantSolar=/(view|sky)=solar/.test(location.hash);window.__wantGalaxy=/sky=galaxy/.test(location.hash);window.__wantWeb=/sky=web/.test(location.hash)</script>
+<script>window.__wantSolar=/(view|sky)=solar/.test(location.hash);window.__wantGalaxy=/sky=galaxy/.test(location.hash);window.__wantWeb=/sky=web/.test(location.hash);window.__wantPlay=/^#play$/.test(location.hash)</script>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -643,6 +643,18 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
   </div>
   <div class="lib-tools"><input id="libQ" type="search" placeholder="Search sources" aria-label="Search sources"><select id="libCat" aria-label="Category"></select><select id="libLic" aria-label="License"><option value="">Any license</option><option value="go">Open or public domain</option><option value="lim">Limited or non-commercial</option><option value="ask">Check terms</option></select><span class="note-line" id="libCount"></span></div>
   <div class="lib-wrap"><table class="lib"><thead><tr><th>Source</th><th>What it covers</th><th>Updates</th><th>License</th><th>Here</th></tr></thead><tbody id="libBody"></tbody></table></div>
+  <div class="bounty" id="bounty">
+    <h3>Source Bounty <span class="bounty-tag">community</span></h3>
+    <p>Know a free, live, public data feed this page doesn't use? Send it in. Good finds join this library, with a link to the publisher and its terms.</p>
+    <p><a class="bounty-go" href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues/new?template=source-bounty.yml" target="_blank" rel="noopener">Suggest a feed ↗</a> <span class="muted">Opens a short form on GitHub (a free account is needed). Submissions are public; links only, please.</span></p>
+    <details><summary>The five tests every source must pass</summary><ol>
+      <li>Its licence or terms allow open public use, in the publisher's own words.</li>
+      <li>It is machine-readable (JSON, CSV, GeoJSON, RSS, map tiles), not a web page that would need scraping.</li>
+      <li>It doesn't locate or identify anyone: no cameras, licence plates, aircraft tied to owners, phone data or named people.</li>
+      <li>It isn't a proprietary aggregator or a copy of one.</li>
+      <li>It shows something this site doesn't, or shows it better.</li></ol></details>
+    <p class="bounty-want"><b>Wanted right now:</b> volcano positions that a server can fetch (the Smithsonian endpoint we use fails from GitHub's machines) · bird sightings without an API key · ocean buoy readings · soil moisture · official airport delay status · river levels outside the United States.</p>
+  </div>
 </section>
 
 <section aria-labelledby="h-class" id="classroom">

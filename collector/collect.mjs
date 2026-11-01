@@ -18,6 +18,7 @@ import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
 import { runChecks } from './checks.mjs';
 import { collectGrace } from './grace.mjs';
 import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar.mjs';
+import { collectGame } from './game.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -214,6 +215,15 @@ let solar = { out: null, status: 'not run' };
   meta.voyager = meta.voyager || {}; let st = 'kept';
   if (!v || !v.crossUTC || due(meta.voyager, 'all', 1440)) { try { v = await collectVoyagerLightDay({ now }); meta.voyager.all = now.toISOString(); st = 'ok ' + v.crossUTC; } catch (e) { st = 'error: ' + e.message.slice(0, 120); if (v) v.stale = true; } }
   if (v) await fs.writeFile(path.join(OUT, 'voyager.json'), JSON.stringify(v)); log('voyager', st); var voyager = v; }
+// "Where on Earth?" daily puzzle (collector/game.mjs): data/game.json, built once per UTC day, then kept unchanged.
+let game = { out: null, status: 'not run' };
+{ let p = null;
+  // The day's puzzle must not change once published: if the live copy can't be read (anything but a 404), stop without publishing, as for the other files.
+  if (PREV) { let r; try { r = await fetch(`${PREV}/data/game.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); } catch (e) { console.error('Could not read last published game.json: ' + e.message + '. Stopping without publishing.'); process.exit(1); }
+    if (r.ok) p = await r.json(); else if (r.status !== 404) { console.error('Last published game.json returned HTTP ' + r.status + '. Stopping without publishing.'); process.exit(1); } }
+  try { game = await collectGame({ prev: p, now }); } catch (e) { game = { out: { v: 1, date: now.toISOString().slice(0, 10), failed: true, rounds: [], errors: [e.message.slice(0, 160)] }, status: 'error: ' + e.message.slice(0, 160) }; }
+  // a failed day is published as failed (the page says so); yesterday's puzzle is never passed off as today's
+  if (game.out) await fs.writeFile(path.join(OUT, 'game.json'), JSON.stringify(game.out)); log('game', game.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
   const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
@@ -238,7 +248,7 @@ try { const r = await fetch('https://sdo.gsfc.nasa.gov/assets/img/latest/latest_
 catch (e) { sunImg = { ok: false, error: e.message.slice(0, 160), fetched: now.toISOString(), status: 'error: ' + e.message.slice(0, 160) }; }
 await fs.writeFile(path.join(OUT, 'sun.json'), JSON.stringify(sunImg)); log('sun image', sunImg.status);
 // Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
-let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, cosmicweb, voyager, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, cosmicweb, voyager, game: game.out, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
@@ -249,7 +259,7 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;

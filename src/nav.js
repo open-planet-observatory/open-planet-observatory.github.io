@@ -13,13 +13,13 @@
     classroom: 'Lessons, and the old almanacs', layers: 'What each map layer and reading means', library: 'Every source, its licence and cadence', free: 'How the site stays free', about: 'What this is, and its rules' };
   const GROUPS = [['world', 'World now', ['situations', 'disruptions', 'relief', 'watchlist']], ['planet', 'Planet', ['climate', 'signals', 'nature', 'cams']],
     ['space', 'Space', [['@solar', 'Solar System', '☉', 'Planets, moons and spacecraft, live'], ['@galaxy', 'Milky Way', '✺', 'A million real stars and our galaxy'], ['@web', 'Cosmic web', '❖', '43,000 galaxies in clusters and filaments'], ['@edge', 'Edge of the observable universe', '◯', 'The oldest light, from 13.8 billion years ago'], 'worlds', 'unexplained']],
-    ['money', 'Money & tech', ['economy', 'watch']], ['learn', 'Learn', ['classroom', 'layers', 'library', 'free', 'about']]];
+    ['money', 'Money & tech', ['economy', 'watch']], ['learn', 'Learn', [['!play', 'Where on Earth?', '◎', "Today's guessing game, made from real data"], 'classroom', 'layers', 'library', 'free', 'about']]];
   const label = k => { const b = tabs.querySelector(`button[data-k="${k}"]`); return b ? b.textContent : k; };
   const nav = document.createElement('nav'); nav.className = 'gnav'; nav.setAttribute('aria-label', 'Sections');
   nav.innerHTML = '<div class="gn-scroll">' + GROUPS.map(([g, name, items]) => `<div class="gn-g" data-g="${g}"><button class="gn-b" aria-haspopup="true" aria-expanded="false">${esc(name)}<span class="gn-c" aria-hidden="true">▾</span></button>
-    <div class="gn-m glass" role="menu" hidden>${items.map(it => Array.isArray(it) ? `<button role="menuitem" data-u="${it[0].slice(1)}"><b><span class="gn-i">${it[2]}</span>${esc(it[1])}</b><small>${esc(it[3])}</small></button>`
+    <div class="gn-m glass" role="menu" hidden>${items.map(it => Array.isArray(it) ? `<button role="menuitem" ${it[0][0] === '!' ? 'data-a' : 'data-u'}="${it[0].slice(1)}"><b><span class="gn-i">${it[2]}</span>${esc(it[1])}</b><small>${esc(it[3])}</small></button>`
       : tabs.querySelector(`button[data-k="${it}"]`) ? `<button role="menuitem" data-k="${it}"><b>${esc(label(it))}</b><small>${esc(NOTE[it] || '')}</small></button>` : '').join('')}</div></div>`).join('')
-    + `</div><div class="gn-act"><button class="gn-vy" id="gnVoyager" hidden title="Voyager 1's countdown to one light-day from Earth: open the full banner"></button><button class="gn-tour" id="gnTour" title="A guided flight from Earth to the edge of the observable universe">▶<span class="gn-tw"> <span class="gn-tl">Take the </span>tour</span></button>`
+    + `</div><div class="gn-act"><button class="gn-vy" id="gnVoyager" hidden title="Voyager 1's countdown to one light-day from Earth: open the full banner"></button><button class="gn-tour gn-play" id="gnPlay" title="Where on Earth? Today's five-round guessing game, made from real data">◎<span class="gn-tw"> Play</span></button><button class="gn-tour" id="gnTour" title="A guided flight from Earth to the edge of the observable universe">▶<span class="gn-tw"> <span class="gn-tl">Take the </span>tour</span></button>`
     + `<button class="gn-ic" id="gnSearch" aria-label="Search" title="Search everything (/)">⌕</button><button class="gn-ic" id="gnMusic" aria-pressed="false" aria-label="Music" title="Music: an ambient score that grows as you fly out. Plays from your first click; press to stop">♪</button><button class="gn-ic" id="gnExpand" aria-label="Show everything" title="Show the full header and side panels (Esc)">⤢</button></div>`;
   tabs.after(nav); tabs.classList.add('gn-hidden');
   /* the header is a glass panel (backdrop-filter, overflow hidden), which would clip a dropdown: menus live on <body> and are placed under their button */
@@ -42,7 +42,7 @@
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); const gs = [...nav.querySelectorAll('.gn-g')]; const j = (gs.indexOf(d) + (e.key === 'ArrowRight' ? 1 : -1) + gs.length) % gs.length; close(); const nb = gs[j].querySelector('.gn-b'); nb.click(); const f = gs[j]._m.querySelector('button'); if (f) f.focus(); return; }
       if (e.key === 'Home' || e.key === 'End') { e.preventDefault(); (e.key === 'Home' ? it[0] : it[it.length - 1]).focus(); return; }
       if (e.key === 'ArrowDown') { e.preventDefault(); (it[i + 1] || it[0]).focus(); } else if (e.key === 'ArrowUp') { e.preventDefault(); (it[i - 1] || it[it.length - 1]).focus(); } else if (e.key === 'Escape') { close(); b.focus(); } });
-    m.querySelectorAll('button').forEach(it => it.onclick = () => { close(); if (it.dataset.k) { O.openPanel(it.dataset.k); } else if (it.dataset.u) { const u = it.dataset.u; O.openUniverse && O.openUniverse(u === 'solar' ? undefined : u); } }); });
+    m.querySelectorAll('button').forEach(it => it.onclick = () => { close(); if (it.dataset.k) { O.openPanel(it.dataset.k); } else if (it.dataset.a === 'play') { dispatchEvent(new Event('obs:play')); } else if (it.dataset.u) { const u = it.dataset.u; O.openUniverse && O.openUniverse(u === 'solar' ? undefined : u); } }); });
   document.addEventListener('click', e => { if (!e.target.closest('.gnav') && !e.target.closest('.gn-m')) close(); }); addEventListener('resize', close);
   // which group holds the open panel
   const mark = () => { const on = tabs.querySelector('button[aria-pressed="true"]'); const k = on && on.dataset.k; nav.querySelectorAll('.gn-g').forEach(d => { const g = GROUPS.find(x => x[0] === d.dataset.g); d.classList.toggle('on', !!k && g[2].includes(k)); }); };
@@ -67,5 +67,6 @@
   document.getElementById('gnTour').onclick = () => { if (window.OwlMusic && window.OwlMusic.autoOn) window.OwlMusic.autoOn(); O.openUniverse && O.openUniverse('tour'); };
   const mb = document.getElementById('gnMusic'); const syncM = () => { const on = !!(window.OwlMusic && window.OwlMusic.on); mb.setAttribute('aria-pressed', String(on)); mb.classList.toggle('on', on); };
   mb.onclick = () => { if (window.OwlMusic) { window.OwlMusic.toggle(); syncM(); } }; addEventListener('owlmusic', syncM); syncM();
+  document.getElementById('gnPlay').onclick = () => dispatchEvent(new Event('obs:play'));
   O.setSlim = setSlim;
 })();
