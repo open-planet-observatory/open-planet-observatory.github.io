@@ -35,7 +35,7 @@ const turnOn=id=>{const c=document.getElementById('chip-'+id);if(c&&c.getAttribu
 
 // ----- 3D drawing (CesiumJS globe) -----
 let G3=null;
-function ds(id){const C=window.Cesium,{viewer,DS}=G3;if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);DS[id]=d}DS[id].show=chipOn(id);DS[id].entities.removeAll();return DS[id].entities}
+function ds(id){const C=window.Cesium,{viewer,DS}=G3;if(!DS[id]){const d=new C.CustomDataSource(id);viewer.dataSources.add(d);DS[id]=d}DS[id].show=chipOn(id)&&!document.documentElement.classList.contains('game-on');/* the daily game hides every layer; it restores them itself */DS[id].entities.removeAll();return DS[id].entities}
 function drawStorms(){if(!G3)return;const C=window.Cesium,E=ds('storm');const st=S().storms;const items=(st&&st.items)||[];
  const col=(h,a=1)=>C.Color.fromCssColorString(h).withAlpha(a);
  const up=pts=>C.Cartesian3.fromDegreesArrayHeights(pts.flatMap(([x,y])=>[x,y,2500]));
@@ -94,7 +94,7 @@ function hook3d(){const g=window.__obs3d;if(!g||!window.Cesium)return false;G3=g
  const host=document.getElementById('satCard')?.parentElement||viewer.container;wxCard=document.createElement('div');wxCard.id='wxCard';wxCard.className='sat-card wx-card';wxCard.hidden=true;host.appendChild(wxCard);
  viewer.camera.changed.addEventListener(()=>{try{cullFar()}catch(e){}});
  const h=new C.ScreenSpaceEventHandler(viewer.scene.canvas);
- h.setInputAction(m=>{if(!chipOn('wx-fc'))return;const picked=viewer.scene.drillPick(m.position,4);if(picked.some(p=>p.id&&p.id.sat!=null))return;
+ h.setInputAction(m=>{if(!chipOn('wx-fc')||document.documentElement.classList.contains('game-on'))return;const picked=viewer.scene.drillPick(m.position,4);if(picked.some(p=>p.id&&p.id.sat!=null))return;
   const cart=viewer.camera.pickEllipsoid(m.position,viewer.scene.globe.ellipsoid);if(!cart)return;const cg=C.Cartographic.fromCartesian(cart);
   forecast(C.Math.toDegrees(cg.longitude),C.Math.toDegrees(cg.latitude))},C.ScreenSpaceEventType.LEFT_CLICK);
  new MutationObserver(ms=>{if(ms.some(m=>m.target.id==='chip-wx-fc')&&!chipOn('wx-fc')&&wxCard)wxCard.hidden=true}).observe(document.body,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});

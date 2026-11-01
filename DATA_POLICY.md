@@ -125,6 +125,18 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 - Clicking the 3D globe asks Open-Meteo (CC BY 4.0) for a 7-day forecast. The visitor's browser sends only the clicked point, rounded to 0.01°, directly to Open-Meteo; the project never sees it. Turn off "Forecast where I click" to stop these requests. Open-Meteo's free service is for non-commercial use; see the cost ledger before any monetization.
 
+## Where on Earth? (the daily game)
+
+- Five rounds a day, the same for everyone, built once at the first data update after 00:00 UTC by `collector/game.mjs` and kept unchanged until the next UTC day. Each round is a real reading with its place hidden: a NASA GIBS true-colour satellite image of a 4° patch from the last complete day (public domain), Open-Meteo's hourly model values for one grid point over that day (CC BY 4.0; free for non-commercial use), or a cluster of USGS earthquakes from the past 7 days, read from USGS's live feed and used only if the feed was generated in the last 3 hours (public domain). The whole build has a 3-minute budget so it can't hold up the site's data run. Patches with more than about a third cloud or with gaps in the satellite pass are skipped.
+- If a source fails, its rounds are skipped and the other sources fill in; with fewer than three rounds the day is published as failed and the page says so. An older puzzle is never shown as today's; it can only be played as labelled practice.
+- The reveal shows USGS's own place text, unedited, for the three largest quakes, and coordinates, the source's link, licence and cadence, and its blind spot. The scoring rule is the site's own: 5,000 points within 50 km (or anywhere inside the satellite patch), halving every 500 km (satellite), 750 km (earthquakes) or 1,000 km (weather). It is a game score, not a measurement.
+- Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
+- No prizes, paid entries or sponsors are attached to the game.
+
+## Source Bounty
+
+- Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. Contributors are not named on the site unless that is decided separately.
+
 ## Visitors
 
 - No account, no ad networks, no tracking scripts, no visitor logs kept by the project.

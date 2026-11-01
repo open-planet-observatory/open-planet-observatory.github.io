@@ -1,0 +1,72 @@
+name: Source Bounty — suggest a free public data feed
+description: Found an open, live data feed The Owlmanac doesn't show yet? Send it here. Accepted finds are added to the site's Source library.
+title: "[Source Bounty] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for scouting. Links only, please: don't paste data, screenshots of people, or anything copied from behind a login.
+        Every accepted source must pass all five tests below. A declined find gets a one-line reason naming the test it failed. We aim to review within two weeks.
+  - type: input
+    id: name
+    attributes:
+      label: Feed name and publisher
+      placeholder: "e.g. River gauge readings — Environment Agency (England)"
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link to the feed or its API documentation
+      placeholder: https://
+    validations:
+      required: true
+  - type: textarea
+    id: licence
+    attributes:
+      label: Licence or terms of use, quoted word for word from the publisher's page
+      description: Paste the exact sentence(s) and the page they come from. "Seems open" isn't enough; we need the publisher's own words.
+    validations:
+      required: true
+  - type: input
+    id: cadence
+    attributes:
+      label: How often it updates
+      placeholder: "every 15 minutes / daily / weekly"
+    validations:
+      required: true
+  - type: dropdown
+    id: format
+    attributes:
+      label: Format
+      options: [JSON, GeoJSON, CSV, RSS / Atom, WMS / WMTS map tiles, Other machine-readable, "Not sure"]
+    validations:
+      required: true
+  - type: textarea
+    id: adds
+    attributes:
+      label: What would it add to the site?
+      description: One or two sentences. What can a visitor learn from it that the site doesn't show now?
+    validations:
+      required: true
+  - type: checkboxes
+    id: tests
+    attributes:
+      label: The five tests
+      description: All five must be true for a source to be accepted.
+      options:
+        - label: The licence or terms allow public, open use (quoted above).
+          required: true
+        - label: It is machine-readable and doesn't need scraping a web page meant for people.
+          required: true
+        - label: It doesn't locate or identify any individual (no cameras, licence plates, aircraft tied to owners, phone data or named people).
+          required: true
+        - label: It isn't a proprietary aggregator or a copy of one (for example Downdetector, Reddit, Google results, Gun Violence Archive).
+          required: true
+        - label: It shows something the site doesn't already show, or shows it better.
+          required: true
+  - type: input
+    id: bounty
+    attributes:
+      label: Is it on the "Wanted" list? (optional)
+      description: The list is in the Source library on the site.
