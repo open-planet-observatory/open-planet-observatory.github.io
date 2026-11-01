@@ -19,16 +19,22 @@
   nav.innerHTML = '<div class="gn-scroll">' + GROUPS.map(([g, name, items]) => `<div class="gn-g" data-g="${g}"><button class="gn-b" aria-haspopup="true" aria-expanded="false">${esc(name)}<span class="gn-c" aria-hidden="true">▾</span></button>
     <div class="gn-m glass" role="menu" hidden>${items.map(it => Array.isArray(it) ? `<button role="menuitem" data-u="${it[0].slice(1)}"><b><span class="gn-i">${it[2]}</span>${esc(it[1])}</b><small>${esc(it[3])}</small></button>`
       : tabs.querySelector(`button[data-k="${it}"]`) ? `<button role="menuitem" data-k="${it}"><b>${esc(label(it))}</b><small>${esc(NOTE[it] || '')}</small></button>` : '').join('')}</div></div>`).join('')
-    + `</div><div class="gn-act"><button class="gn-tour" id="gnTour" title="A guided flight from Earth to the edge of the observable universe">▶<span class="gn-tw"> <span class="gn-tl">Take the </span>tour</span></button>`
+    + `</div><div class="gn-act"><button class="gn-vy" id="gnVoyager" hidden title="Voyager 1's countdown to one light-day from Earth: open the full banner"></button><button class="gn-tour" id="gnTour" title="A guided flight from Earth to the edge of the observable universe">▶<span class="gn-tw"> <span class="gn-tl">Take the </span>tour</span></button>`
     + `<button class="gn-ic" id="gnSearch" aria-label="Search" title="Search everything (/)">⌕</button><button class="gn-ic" id="gnMusic" aria-pressed="false" aria-label="Music" title="Music: an ambient score that grows as you fly out. Plays from your first click; press to stop">♪</button><button class="gn-ic" id="gnExpand" aria-label="Show everything" title="Show the full header and side panels (Esc)">⤢</button></div>`;
   tabs.after(nav); tabs.classList.add('gn-hidden');
   /* the header is a glass panel (backdrop-filter, overflow hidden), which would clip a dropdown: menus live on <body> and are placed under their button */
   nav.querySelectorAll('.gn-g').forEach(d => { const m = d.querySelector('.gn-m'); m.dataset.g = d.dataset.g; document.body.appendChild(m); d._m = m; m._d = d; });
   // the panel tabs that do not appear in any group (country brief, search) stay reachable through links, as before
+  const HOVER = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const close = () => nav.querySelectorAll('.gn-g').forEach(d => { d._m.hidden = true; d.querySelector('.gn-b').setAttribute('aria-expanded', 'false'); });
   const place = (b, m) => { if (innerWidth <= 860) { m.style.left = m.style.top = ''; return; } const r = b.getBoundingClientRect(); m.style.left = Math.max(8, Math.min(r.left, innerWidth - m.offsetWidth - 8)) + 'px'; m.style.top = (r.bottom + 6) + 'px'; };
   nav.querySelectorAll('.gn-g').forEach(d => { const b = d.querySelector('.gn-b'), m = d._m;
-    b.onclick = e => { e.stopPropagation(); const open = m.hidden; close(); if (open) { m.hidden = false; place(b, m); b.setAttribute('aria-expanded', 'true'); const f = m.querySelector('button'); if (f && e.detail === 0) f.focus(); } };
+    /* with a mouse, menus open on hover and close a moment after the pointer leaves both the name and the menu */
+    if (HOVER) { let t = null; const show = () => { clearTimeout(t); if (!m.hidden) return; clearTimeout(nav._t); close(); m.hidden = false; m._hov = performance.now(); place(b, m); b.setAttribute('aria-expanded', 'true'); };
+      const hide = () => { clearTimeout(t); t = setTimeout(() => { m.hidden = true; b.setAttribute('aria-expanded', 'false'); }, 260); };
+      b.addEventListener('mouseenter', () => { clearTimeout(nav._t); nav._t = setTimeout(show, nav.querySelector('.gn-b[aria-expanded="true"]') ? 0 : 90); }); b.addEventListener('mouseleave', () => { clearTimeout(nav._t); hide(); });
+      m.addEventListener('mouseenter', () => clearTimeout(t)); m.addEventListener('mouseleave', hide); }
+    b.onclick = e => { e.stopPropagation(); if (HOVER && e.detail > 0 && !m.hidden) return; /* with a mouse the menu is already open from the hover: a click on its name keeps it open */ const open = m.hidden; close(); if (open) { m.hidden = false; place(b, m); b.setAttribute('aria-expanded', 'true'); const f = m.querySelector('button'); if (f && e.detail === 0) f.focus(); } };
     b.addEventListener('keydown', e => { if ((e.key === 'ArrowDown' || e.key === 'ArrowUp') && m.hidden) { e.preventDefault(); b.click(); const it = m.querySelectorAll('button'); (e.key === 'ArrowUp' ? it[it.length - 1] : it[0]).focus(); } });
     m.addEventListener('focusout', e => { if (!m.hidden && e.relatedTarget && !m.contains(e.relatedTarget) && e.relatedTarget !== b) { m.hidden = true; b.setAttribute('aria-expanded', 'false'); } });
     m.addEventListener('keydown', e => { const it = [...m.querySelectorAll('button')]; const i = it.indexOf(document.activeElement);
@@ -51,6 +57,8 @@
       if (!seen) { const h = document.createElement('div'); h.className = 'gn-hint glass'; h.textContent = 'Panels tucked away so the globe fills the screen. Tap ⤢ (top right) or press Esc to bring them back.'; document.body.appendChild(h); setTimeout(() => h.classList.add('out'), 4200); setTimeout(() => h.remove(), 5000); } } };
   if (map) { map.addEventListener('pointerdown', tuck, true); map.addEventListener('wheel', tuck, { capture: true, passive: true }); }
   document.getElementById('gnExpand').onclick = () => { setSlim(false); O.openPanel && O.openPanel('situations'); };
+  /* in the slim bar, a click on any empty part of it brings everything back (buttons, menus and search keep their own jobs) */
+  top.addEventListener('click', e => { if (!html.classList.contains('slim') || html.classList.contains('search-open')) return; if (e.target.closest('button,a,input,select,label,form,.gn-m')) return; setSlim(false); O.openPanel && O.openPanel('situations'); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && html.classList.contains('slim') && !document.querySelector('#uni.on') && !document.querySelector('.gn-m:not([hidden])')) setSlim(false);
     if (e.key === '/' && !/input|textarea|select/i.test(e.target.tagName) && !document.querySelector('#uni.on')) { e.preventDefault(); openSearch(); } });
   // a menu pick in slim mode opens the drawer but keeps the bar slim

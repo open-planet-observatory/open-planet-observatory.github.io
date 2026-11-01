@@ -117,8 +117,9 @@ async function runSteps(meta) {
     try {
       const out = await runStep(step, T);
       if (out.volcanoCoords) { // fill volcano item coordinates (see the step's note)
-        const strip = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-        (T.volcano?.items || []).forEach(it => { const c = out.volcanoCoords[strip(it[0])]; if (c) { it[5] = c[0]; it[6] = c[1]; } });
+        const strip = s => String(s).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/\s+/g, ' ').trim();
+        let miss = []; (T.volcano?.items || []).forEach(it => { const c = out.volcanoCoords[strip(it[0])]; if (c) { it[5] = c[0]; it[6] = c[1]; } else miss.push(it[0]); });
+        if (miss.length) log('step', 'volcano coords', 'not in the Holocene list: ' + miss.join(', '));
         rememberVolcanoCoords(T);
       } else {
         // Steps catch their own per-source errors and return empty lists for them.
