@@ -645,3 +645,6 @@ html.game-msg #woe{left:50%;top:50%;transform:translate(-50%,-50%)}
 @media (prefers-reduced-motion:reduce){.st-shade,.st-card{transition:none}}
 
 #voyagerBanner[hidden],.vy-mini[hidden]{display:none!important} /* their own display rules would otherwise override [hidden] */
+/* mid-size screens: keep all five menus visible by shortening the header's right-hand buttons */
+@media (min-width:861px) and (max-width:1279px){.gn-vy .gv-l,.gn-vy .gv-m{display:none}.gn-vy .gv-s{display:inline}}
+@media (min-width:861px) and (max-width:1000px){.gn-act .gn-tour .gn-tw{display:none}.gn-act .gn-tour{padding:6px 10px}}
