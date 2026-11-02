@@ -6,6 +6,7 @@
 (function () {
   const html = document.documentElement, O = window.__obs; const tabs = document.getElementById('panelTabs'), top = document.getElementById('ops-top');
   if (!tabs || !top || !html.classList.contains('ops') || !O) return;
+  html.classList.add('no-search'); /* search is hidden until it is rebuilt (Derik, 2026-11-02); remove this line to bring it back */
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const NOTE = { situations: 'Serious situations around the world', disruptions: "What's broken right now", relief: 'Who is responding, and how to help', watchlist: 'Countries you follow',
     climate: "What's unusual, El Niño, weather layers", signals: "The planet's vital signs", nature: 'What people are seeing in the wild', cams: 'Watch the planet, not the people',
@@ -63,7 +64,7 @@
   /* in the slim bar, a click on any empty part of it brings everything back (buttons, menus and search keep their own jobs) */
   top.addEventListener('click', e => { if (!html.classList.contains('slim') || html.classList.contains('search-open')) return; if (e.target.closest('button,a,input,select,label,form,.gn-m')) return; setSlim(false); O.openPanel && O.openPanel('situations'); });
   addEventListener('keydown', e => { if (e.key === 'Escape' && html.classList.contains('slim') && !document.querySelector('#uni.on') && !document.querySelector('.gn-m:not([hidden])')) setSlim(false);
-    if (e.key === '/' && !/input|textarea|select/i.test(e.target.tagName) && !document.querySelector('#uni.on')) { e.preventDefault(); openSearch(); } });
+    if (e.key === '/' && !html.classList.contains('no-search') && !/input|textarea|select/i.test(e.target.tagName) && !document.querySelector('#uni.on')) { e.preventDefault(); openSearch(); } });
   // a menu pick in slim mode opens the drawer but keeps the bar slim
   const openSearch = () => { html.classList.add('search-open'); const q = document.getElementById('q'); if (q) { q.focus(); if (document.activeElement !== q) setTimeout(() => q.focus(), 30); } };
   document.getElementById('gnSearch').onclick = () => { if (html.classList.contains('search-open')) html.classList.remove('search-open'); else openSearch(); };

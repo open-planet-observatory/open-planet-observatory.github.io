@@ -283,11 +283,32 @@ function buildMoon(){if(!O.moonNow)return;const m=O.moonNow();const e=clear('moo
   label:LABEL('Moon overhead · '+Math.round(m.frac*100)+'% lit'),description:`<b>The Moon is straight overhead here</b>${m.name}, ${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km up<br><span style="opacity:.75">Astronomy Engine, computed in your browser</span>`})}
 scene.moon=new C.Moon({onlySunLighting:true});
 let moonView=false;const homeMax=sscc.maximumZoomDistance;
-function setMoonView(v){moonView=v;const b=document.getElementById('moonViewBtn');if(b)b.setAttribute('aria-pressed',v);
+// The Moon in the Earth and Moon view: a sphere wearing NASA's LRO WAC mosaic (Moon Trek tiles, level 1), near side
+// toward Earth, lit by the real Sun. At true size it is only a few pixels across from here, so it is drawn 4x larger by
+// default and labelled so; "Moon at true size" shows it as it is.
+const TREK='https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/';
+let moonTex=null,moonBig=true,moonEnt=null;
+function moonTexture(){if(moonTex)return moonTex;moonTex=new Promise(res=>{const cv=document.createElement('canvas');cv.width=1024;cv.height=512;const g=cv.getContext('2d');g.fillStyle='#8a8984';g.fillRect(0,0,1024,512);let n=0,ok=0;
+ for(let r=0;r<2;r++)for(let c=0;c<4;c++){const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{g.drawImage(im,c*256,r*256);ok++;if(++n===8)res(ok?cv:null)};im.onerror=()=>{if(++n===8)res(ok?cv:null)};im.src=TREK+'1/'+r+'/'+c+'.jpg'}});return moonTex}
+function moonBody(on){if(moonEnt){viewer.entities.remove(moonEnt);moonEnt=null}scene.moon.show=!on;const sb=document.getElementById('moonSizeBtn');if(sb){sb.hidden=!on;sb.setAttribute('aria-pressed',!moonBig)}if(!on||!O.moonNow)return;
+ const m=O.moonNow(),mp=C.Cartesian3.fromDegrees(m.lon,m.lat,m.dist*1000-6371000);
+ const x=C.Cartesian3.normalize(C.Cartesian3.negate(mp,new C.Cartesian3()),new C.Cartesian3()),y=C.Cartesian3.normalize(C.Cartesian3.cross(C.Cartesian3.UNIT_Z,x,new C.Cartesian3()),new C.Cartesian3()),z=C.Cartesian3.cross(x,y,new C.Cartesian3());
+ const q=C.Quaternion.fromRotationMatrix(new C.Matrix3(x.x,y.x,z.x,x.y,y.y,z.y,x.z,y.z,z.z));const R=1737400*(moonBig?4:1);
+ moonEnt=viewer.entities.add({position:mp,orientation:q,ellipsoid:{radii:new C.Cartesian3(R,R,R),material:C.Color.fromCssColorString('#8a8984')},
+  label:{...LABEL(moonBig?'Moon (drawn 4× larger)':'Moon (true size)'),pixelOffset:new C.Cartesian2(0,moonBig?-46:-16),horizontalOrigin:C.HorizontalOrigin.CENTER},
+  description:`<b>The Moon</b>${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km from Earth's centre<br><span style="opacity:.75">Position: Astronomy Engine, in your browser · Surface: NASA LRO WAC mosaic (Moon Trek)</span>`});
+ moonTexture().then(cv=>{if(cv&&moonEnt)moonEnt.ellipsoid.material=new C.ImageMaterialProperty({image:cv})})}
+let moonHid=null;/* the Earth and Moon view shows the two worlds alone: map layers and satellites step aside and come back after */
+function moonDeclutter(on){if(on&&!moonHid){moonHid=[];for(let i=0;i<viewer.dataSources.length;i++){const d=viewer.dataSources.get(i);moonHid.push([d,d.show]);d.show=false}moonHid.push(['sat',satPts.show]);satPts.show=satLbl.show=false}
+ else if(!on&&moonHid){moonHid.forEach(([d,v])=>{if(d==='sat')satPts.show=satLbl.show=v;else d.show=v});moonHid=null}}
+function setMoonView(v){moonView=v;const b=document.getElementById('moonViewBtn');if(b)b.setAttribute('aria-pressed',v);moonBody(v);moonDeclutter(v);
  if(!v){sscc.maximumZoomDistance=homeMax;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.6});return}
  if(!O.moonNow)return;const m=O.moonNow();sscc.maximumZoomDistance=1.5e9;spin=false;try{if(O.setSlim)O.setSlim(true)}catch(e){}/* panels away, so both worlds are in view */
  const mp=C.Cartesian3.fromDegrees(m.lon,m.lat,m.dist*1000-6371000),mid=C.Cartesian3.multiplyByScalar(mp,.5,new C.Cartesian3());
  const side=C.Cartesian3.normalize(C.Cartesian3.cross(mp,C.Cartesian3.UNIT_Z,new C.Cartesian3()),new C.Cartesian3());
+ /* look from the sunlit side, so both worlds show their day sides rather than two thin crescents */
+ try{const t=viewer.clock.currentTime,M=C.Transforms.computeIcrfToFixedMatrix(t)||C.Transforms.computeTemeToPseudoFixedMatrix(t),sun=C.Matrix3.multiplyByVector(M,C.Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(t),new C.Cartesian3());
+  if(C.Cartesian3.dot(side,sun)<0)C.Cartesian3.negate(side,side)}catch(e){}
  const dest=C.Cartesian3.add(mid,C.Cartesian3.multiplyByScalar(side,C.Cartesian3.magnitude(mp)*1.25,new C.Cartesian3()),new C.Cartesian3());
  const dir=C.Cartesian3.normalize(C.Cartesian3.subtract(mid,dest,new C.Cartesian3()),new C.Cartesian3());
  /* Earth on the left, the Moon on the right, level across the middle of the screen */
@@ -377,10 +398,10 @@ if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textConte
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}
 // imagery + see-through controls in the rail
 const rail=document.getElementById('ops-rail');
-if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><button class="chip" id="measuredBtn" aria-pressed="false" hidden style="width:100%;margin-top:6px" title="GEBCO's layer of the sea-floor cells based on measured data (mostly ship soundings); everything else is dimmed"><span>Measured only</span></button><p class="theme-note" id="imgNote"></p><span class="gl" style="padding-top:8px">Lighting</span><div class="seg" id="lightSeg" role="group" aria-label="Lighting"><button data-l="sun" aria-pressed="true" title="Sunlight where the Sun is shining right now; city lights on the night side">Real sun</button><button data-l="day" aria-pressed="false" title="The whole planet lit evenly, no night side">Whole globe lit</button></div><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
+if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><button class="chip" id="measuredBtn" aria-pressed="false" hidden style="width:100%;margin-top:6px" title="GEBCO's layer of the sea-floor cells based on measured data (mostly ship soundings); everything else is dimmed"><span>Measured only</span></button><p class="theme-note" id="imgNote"></p><span class="gl" style="padding-top:8px">Lighting</span><div class="seg" id="lightSeg" role="group" aria-label="Lighting"><button data-l="sun" aria-pressed="true" title="Sunlight where the Sun is shining right now; city lights on the night side">Real sun</button><button data-l="day" aria-pressed="false" title="The whole planet lit evenly, no night side">Whole globe lit</button></div><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="moonSizeBtn" aria-pressed="false" hidden style="width:100%" title="At true size the Moon is a few pixels across from here; by default it is drawn 4 times larger"><span>Moon at true size</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
  const mapGroup=[...rail.querySelectorAll('.rail-group')].find(g=>g.querySelector('.gl')?.textContent==='Map');rail.insertBefore(d,mapGroup?mapGroup.nextSibling:rail.children[1]);
  d.querySelectorAll('#imgSeg button').forEach(b=>b.onclick=()=>setImagery(b.dataset.k));document.getElementById('measuredBtn').onclick=()=>{measuredOn=!measuredOn;syncMeasured()};syncMeasured();document.getElementById('xrayBtn').onclick=()=>setXray(!xray);
- document.getElementById('moonViewBtn').onclick=()=>setMoonView(!moonView);
+ document.getElementById('moonViewBtn').onclick=()=>setMoonView(!moonView);document.getElementById('moonSizeBtn').onclick=()=>{moonBig=!moonBig;moonBody(moonView)};
  const setLight=v=>{globe.enableLighting=v;if(nightLayer)nightLayer.show=v;O.lightingOn=v;document.querySelectorAll('#lightSeg button').forEach(x=>x.setAttribute('aria-pressed',(x.dataset.l==='sun')===v));try{localStorage.setItem('obs-light',v?'1':'0')}catch(x){}};
  document.querySelectorAll('#lightSeg button').forEach(x=>x.onclick=()=>setLight(x.dataset.l==='sun'));
  try{if(localStorage.getItem('obs-light')==='0')setLight(false)}catch(x){}
