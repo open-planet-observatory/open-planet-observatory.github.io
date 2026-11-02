@@ -1,4 +1,4 @@
-# The OwlManac Observatory
+# The Owlmanac Observatory
 
 A free, open-source live map of the planet from public data: earthquakes, fires, storms, aircraft density, satellites, disaster alerts, armed conflicts, disruptions, and the planet's vital signs, plus official nature and space cams. Built for research and education. Built to inform, not to surveil. See [DATA_POLICY.md](DATA_POLICY.md).
 
