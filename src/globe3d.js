@@ -327,10 +327,18 @@ function setXray(v){xray=v;globe.translucency.enabled=v;globe.translucency.front
 
 // ----- tooltips, clicks -----
 const tip=document.getElementById('tip');const handler=new C.ScreenSpaceEventHandler(scene.canvas);
+/* the tooltip follows the thing it describes while the globe turns, and goes away when that thing turns out of view */
+let tipEnt=null,tipCam=null;const W2W=C.SceneTransforms.worldToWindowCoordinates||C.SceneTransforms.wgs84ToWindowCoordinates;
+const tipPos=e=>{try{if(e.sat!=null)return SAT.pts&&SAT.pts[e.sat]&&SAT.pts[e.sat].position;return e.position&&e.position.getValue?e.position.getValue(viewer.clock.currentTime):null}catch(x){return null}};
+scene.postRender.addEventListener(()=>{if(!tip||tip.hidden||tip.parentElement!==host||!tipEnt)return;const pos=tipPos(tipEnt);
+ if(!pos){if(tipCam&&C.Cartesian3.distance(tipCam,scene.camera.positionWC)>1e3){tip.hidden=true;tipEnt=null}return}
+ const w=W2W(scene,pos),occ=new C.EllipsoidalOccluder(C.Ellipsoid.WGS84,scene.camera.positionWC);
+ if(!w||!occ.isPointVisible(pos)){tip.hidden=true;tipEnt=null;return}
+ const r=el.getBoundingClientRect();tip.style.left=Math.min(w.x+14,r.width-270)+'px';tip.style.top=(w.y+14)+'px'});
 handler.setInputAction(m=>{const p=scene.pick(m.endPosition);const ent=p&&p.id;let d=ent&&ent.description&&(ent.description.getValue?ent.description.getValue(viewer.clock.currentTime):ent.description);
  if(ent&&ent.sat!=null){const s=SAT.list[ent.sat];const f=s&&satFacts(s);if(s)d=`<b>${esc(s.name)}</b>${esc(SAT_CATS[s.cat].name)}${f?' · '+fmtN(Math.round(f.alt))+' km up':''}<br><span style="opacity:.75">Click for its orbit · CelesTrak</span>`}
- if(d&&tip){tip.innerHTML=d;tip.hidden=false;const r=el.getBoundingClientRect();tip.style.left=Math.min(m.endPosition.x+14,r.width-270)+'px';tip.style.top=(m.endPosition.y+14)+'px';tip.style.position='absolute';if(tip.parentElement!==host)host.appendChild(tip)}
- else if(tip&&!tip.hidden&&tip.parentElement===host)tip.hidden=true;
+ if(d&&tip){tip.innerHTML=d;tip.hidden=false;const r=el.getBoundingClientRect();tip.style.left=Math.min(m.endPosition.x+14,r.width-270)+'px';tip.style.top=(m.endPosition.y+14)+'px';tip.style.position='absolute';if(tip.parentElement!==host)host.appendChild(tip);tipEnt=ent&&typeof ent==='object'?ent:null;tipCam=C.Cartesian3.clone(scene.camera.positionWC)}
+ else if(tip&&!tip.hidden&&tip.parentElement===host){tip.hidden=true;tipEnt=null}
  scene.canvas.style.cursor=p&&p.id&&(p.id.properties?.country||p.id.sat!=null)?'pointer':'default'},C.ScreenSpaceEventType.MOUSE_MOVE);
 handler.setInputAction(m=>{if(document.documentElement.classList.contains('game-on'))return;const picked=scene.drillPick(m.position,6);const sp=picked.find(p=>p.id&&p.id.sat!=null);if(sp){selectSat(sp.id.sat);return}if(SAT.sel>=0&&!picked.some(p=>p.id&&p.id.properties)){selectSat(-1)}const c=picked.find(p=>p.id&&p.id.properties&&p.id.properties.country);if(c){const name=c.id.properties.country.getValue();const f=O.countries.find(x=>x.properties.name===name);if(f&&O.openCountry)O.openCountry(f)}},C.ScreenSpaceEventType.LEFT_CLICK);
 
