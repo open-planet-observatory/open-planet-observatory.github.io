@@ -107,6 +107,15 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - The file covers yesterday, today and tomorrow (UTC) so each visitor sees their own date. Each date is fetched once a day; if a source fails, the page says so and shows nothing older in its place.
 - Blind spots, stated on the page: Wikipedia's list is chosen by its editors and leans toward Europe and North America; the earthquake catalogue is thin before the 1960s.
 
+## Records
+
+- Records (Learn menu) are rebuilt weekly by collector/records.mjs. Every figure is its source's own, in the source's units: measured values of places, objects and structures from Wikidata (CC0), and agency lists from USGS (largest earthquakes since 1900), the Smithsonian Global Volcanism Program (VEI 7 eruptions), NASA JPL CNEOS (largest fireballs), NOAA NCEI (warmest years), NSIDC (lowest September Arctic sea ice) and the NASA Exoplanet Archive. Voyager 1's distance is counted on from NASA JPL Horizons, as on the countdown.
+- From Wikidata the value marked preferred is shown first; the item's other published values follow, with Wikidata's own notes on what was measured and how (for example "snow height", "equator", "architectural height") and the year where given. Deprecated values are left out. Bracketed unit conversions are the site's arithmetic.
+- Where a record depends on the definition (highest mountain, longest river, nearest galaxy, strongest storm), every rival is shown side by side. The site writes only the record titles and the notes saying what each definition measures; it ranks nothing itself. "Read" shows the Wikipedia summary of the item, word for word (CC BY-SA 4.0).
+- Official weather and climate extremes are the World Meteorological Organization's; the page links to the WMO archive and copies nothing from it.
+- Records held by a named person are not listed. Human feats are shown by vessel or mission.
+- If a source does not answer, that record says so and is retried within the hour; nothing older is shown in its place.
+
 ## Music
 
 - The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It plays by default from the visitor's first click, tap or key (browsers allow no sound before one); ♪ stops it, and that choice is remembered on that device only. It changes with the camera's distance from Earth: a high, bright melody in D major near Earth that sinks about two octaves and turns minor, then dissonant, as you fly out, and comes back as you return. It does not encode any data.

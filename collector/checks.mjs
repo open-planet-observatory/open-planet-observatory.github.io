@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, voyager = null, game = null, history = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, voyager = null, game = null, history = null, records = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -160,6 +160,9 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     ok(galaxies.andromeda != null && galaxies.andromeda > 0.7 && galaxies.andromeda < 0.85, 'Space', 'galaxies-andromeda', 'Andromeda sits about 0.78 Mpc (2.5 million light-years) away', galaxies.andromeda + ' Mpc'); }
   if (cosmicweb) { ok(cosmicweb.count > 40000 && cosmicweb.bytesOk, 'Space', 'cosmicweb-count', 'The cosmic web holds over 40,000 2MRS galaxies and its data file has the right size', `${cosmicweb.count} galaxies, ${cosmicweb.clusters} cluster labels (built ${cosmicweb.built})${cosmicweb.bytesOk ? '' : '; file size wrong'}`);
     ok(cosmicweb.comaCz != null && cosmicweb.comaCz > 6500 && cosmicweb.comaCz < 7500, 'Space', 'cosmicweb-coma', 'The Coma Cluster recedes at about 7,000 km/s (NED)', cosmicweb.comaCz + ' km/s'); }
+  if (records) { const R = records.records || [], bad = R.filter(r => r.failed), noSrc = R.filter(r => !r.link && !r.voyager && !(r.src && /^https:\/\//.test(r.src.url)));
+    const rowsOk = R.filter(r => r.rows).every(r => r.rows.every(x => /^https:\/\/www\.wikidata\.org\/wiki\/Q\d+$/.test(x.wd) && x.m.every(m => m.v.every(v => isFinite(v.v) && v.f))));
+    ok(R.length >= 25 && !bad.length && !noSrc.length && rowsOk, 'Records', 'records-built', 'Every record has its figures from its source, each linked (Wikidata items, agency pages), and none failed', `${R.length} records, built ${records.built}${bad.length ? ' · failed: ' + bad.map(r => r.id).join(', ') : ''}${(records.errors || []).length ? ' · ' + records.errors.join('; ').slice(0, 140) : ''}`, 'warn'); }
   if (history) { const k = now.toISOString().slice(5, 10); const D = (history.days || {})[k]; const E = (D && D.events) || [], Q = (D && D.quakes) || [];
     ok(!!D && !D.failed && E.length >= 3 && E.every(e => e.text && e.link && /^https:\/\/en\.wikipedia\.org\/wiki\//.test(e.link) && e.year) && Q.every(q => q.mag >= 7 && /^https:\/\/earthquake\.usgs\.gov\//.test(q.url)), 'History', 'history-today', "Today's 'This date in history' has at least 3 linked Wikipedia stories, and any earthquakes are USGS M7+ with links", D ? `${E.length} stories, ${Q.length} quakes${(D.errors || []).length ? ' · ' + D.errors.join('; ').slice(0, 120) : ''}` : 'no entry for ' + k, 'warn'); }
   if (game) { const today = now.toISOString().slice(0, 10); const R = game.rounds || []; ok(game.date === today && !game.failed && R.length === 5 && R.every(r => isFinite(r.lat) && isFinite(r.lon) && Math.abs(r.lat) <= 90 && r.src && r.src.url), 'Game', 'game-today', "Today's Where on Earth? puzzle has five rounds, each with a real position and a linked source", (game.date || 'none') + ' · ' + R.map(r => r.type).join(',') + (game.errors && game.errors.length ? ' · skipped: ' + game.errors.join('; ').slice(0, 120) : ''), 'warn'); }
