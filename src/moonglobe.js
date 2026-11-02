@@ -10,8 +10,8 @@
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const TREK = 'https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg';
   const EARTH_TEX = 'https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=BlueMarble_ShadedRelief_Bathymetry&STYLES=&CRS=EPSG:4326&BBOX=-90,-180,90,180&WIDTH=1024&HEIGHT=512&FORMAT=image/jpeg';
-  const KIND = { sea: ['Sea', '#9fc3ff'], crater: ['Crater', '#f2e6c9'], mountain: ['Mountains', '#f0c27a'], other: ['Other feature', '#d8d0c0'], landing: ['Landing site', '#7fe0a0'] };
-  let V = null, host = null, ui = null, feats = null, featsInfo = null, open = false, lit = true, showNames = true, earthEnt = null, pick = null, lastAx = null, lastT = 0;
+  const KIND = { sea: ['Sea', '#9fc3ff'], crater: ['Crater', '#f2e6c9'], mountain: ['Mountains', '#f0c27a'], other: ['Other feature', '#d8d0c0'], landing: ['Landing & impact sites', '#7fe0a0'] };
+  let V = null, host = null, ui = null, feats = null, featsInfo = null, open = false, lit = true, showNames = true, allOn = false, allPick = null, allState = '', earthEnt = null, pick = null, lastAx = null, lastT = 0;
   const A = () => window.Astronomy, C = () => window.Cesium;
   // A textured sphere lit only from one side by the Sun, so it shows a true phase (Cesium's own entity shading always adds
   // light from the viewer, which would hide the night side). The sunlight direction is given in the sphere's own frame.
@@ -53,12 +53,19 @@
       creditContainer: credits, skyAtmosphere: false, contextOptions: { webgl: { preserveDrawingBuffer: true } } });
     const sc = V.scene; sc.globe.showGroundAtmosphere = false; sc.globe.lightingFadeOutDistance = 1; sc.globe.lightingFadeInDistance = 2; /* Cesium's defaults switch shading off within 10,000 km (tuned for Earth); the Moon keeps its real day and night at every distance */ sc.globe.baseColor = Cc.Color.fromCssColorString('#3a3936'); if (sc.sun) sc.sun.show = false; if (sc.moon) sc.moon.show = false; /* Earth-centred, and absent on another ellipsoid */ sc.fog.enabled = false; sc.highDynamicRange = false;
     if (sc.skyAtmosphere) sc.skyAtmosphere.show = false;
-    sc.screenSpaceCameraController.minimumZoomDistance = 200; sc.screenSpaceCameraController.maximumZoomDistance = 2.5e7;
+    const ssc = sc.screenSpaceCameraController; ssc.minimumZoomDistance = 200; ssc.maximumZoomDistance = 2.5e7;
+    /* zoom like the Earth globe: wheel, pinch, right-drag, and trackpad pinch (Chrome sends ctrl+wheel, Safari gesture events) */
+    ssc.zoomEventTypes = [Cc.CameraEventType.WHEEL, Cc.CameraEventType.PINCH, Cc.CameraEventType.RIGHT_DRAG, { eventType: Cc.CameraEventType.WHEEL, modifier: Cc.KeyboardEventModifier.CTRL }];
+    el.addEventListener('wheel', e => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+    let gS = 1; el.addEventListener('gesturestart', e => { e.preventDefault(); gS = 1; }, { passive: false });
+    el.addEventListener('gesturechange', e => { e.preventDefault(); const f = e.scale / gS; gS = e.scale; if (!isFinite(f) || f <= 0) return; f > 1 ? zoom(1 - 1 / f) : zoom(-(1 / f - 1)); }, { passive: false });
+    el.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
     V.clock.shouldAnimate = true;
     // the panel: what this is, the two buttons, and where the data come from
     ui = document.createElement('div'); ui.className = 'mg-ui glass'; ui.innerHTML = `<div class="mg-h"><b>The Moon</b><button class="mg-x" aria-label="Back to Earth" title="Back to Earth">×</button></div>
       <p class="mg-s" id="mgState"></p>
       <div class="mg-row"><button class="chip" id="mgEarth" aria-pressed="false"><span>Earth from the Moon</span></button></div>
+      <div class="mg-row"><button class="chip" id="mgAll" aria-pressed="false" title="Advanced: every name the IAU has adopted on the Moon, about 9,000, including the lettered craters around the big ones. They appear as you zoom in."><span>All names (advanced)</span></button></div>
       <div class="mg-row"><button class="chip" id="mgLit" aria-pressed="false" title="Light the whole Moon evenly, far side and night side included"><span>Whole Moon lit</span></button><button class="chip" id="mgNames" aria-pressed="true"><span>Names</span></button></div>
       <p class="mg-k">${Object.entries(KIND).map(([k, [t, c]]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</p>
       <div class="mg-card" id="mgCard" hidden></div>
@@ -66,7 +73,8 @@
     host.appendChild(ui); host.appendChild(credits);
     ui.querySelector('.mg-x').onclick = () => closeMoon();
     ui.querySelector('#mgLit').onclick = e => { lit = !lit; e.currentTarget.setAttribute('aria-pressed', !lit); setLight(); };
-    ui.querySelector('#mgNames').onclick = e => { showNames = !showNames; e.currentTarget.setAttribute('aria-pressed', showNames); if (pick) pick.show = showNames; };
+    ui.querySelector('#mgNames').onclick = e => { showNames = !showNames; e.currentTarget.setAttribute('aria-pressed', showNames); if (pick) pick.show = showNames; if (allPick) allPick.show = showNames && allOn; };
+    ui.querySelector('#mgAll').onclick = e => { allOn = !allOn; e.currentTarget.setAttribute('aria-pressed', allOn); loadAll(); };
     ui.querySelector('#mgEarth').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); on ? earthView() : homeView(); };
     // Earth in the Moon's sky: NASA Blue Marble on a sphere at its real distance, size, phase and rotation
     const earthSphere = window.OwlLitSphere(sc, { radii: new Cc.Cartesian3(6378137, 6378137, 6356752), image: EARTH_TEX, night: 0.05 });
@@ -82,12 +90,14 @@
     el.textContent = `Seen from Earth the Moon is ${Math.round(s.frac * 100)}% lit · Earth is ${Math.round(s.distKm).toLocaleString('en-US')} km away. Drag to turn, scroll or pinch to zoom.`; }
   function card(f) { const el = ui.querySelector('#mgCard'); if (!f) { el.hidden = true; return; }
     const [n, k, t, d, lat, lon, id, mission] = f; const ll = `${Math.abs(lat).toFixed(2)}° ${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(2)}° ${lon >= 0 ? 'E' : 'W'}`;
-    el.innerHTML = `<b>${esc(mission ? mission + ' landing site' : n)}</b>${mission ? `<span>IAU name: ${esc(n)}</span>` : ''}<span>${esc(t)}${d >= 1 ? ` · ${Math.round(d).toLocaleString('en-US')} km across` : ''} · ${ll}</span>${id ? `<a href="https://planetarynames.wr.usgs.gov/Feature/${id}" target="_blank" rel="noopener">IAU gazetteer entry</a>` : ''}`;
+    const wd = typeof id === 'string' && /^Q\d+$/.test(id), desc = f[8];
+    el.innerHTML = wd ? `<b>${esc(n)}</b>${desc ? `<span>“${esc(desc)}” (Wikidata)</span>` : ''}<span>${esc(t)} · ${ll}</span><a href="https://www.wikidata.org/wiki/${id}" target="_blank" rel="noopener">Wikidata item</a>`
+      : `<b>${esc(mission ? mission + ' landing site' : n)}</b>${mission ? `<span>IAU name: ${esc(n)}</span>` : ''}<span>${esc(t)}${d >= 1 ? ` · ${Math.round(d).toLocaleString('en-US')} km across` : ''} · ${ll}</span>${id ? `<a href="https://planetarynames.wr.usgs.gov/Feature/${id}" target="_blank" rel="noopener">IAU gazetteer entry</a>` : ''}`;
     el.hidden = false; }
   async function loadNames() {
     try { const r = await fetch('data/moon-features.json?t=' + Math.floor(Date.now() / 864e5)); if (!r.ok) throw new Error('HTTP ' + r.status); featsInfo = await r.json(); feats = featsInfo.features || []; }
     catch (e) { feats = []; const s = ui.querySelector('#mgFeat'); if (s) s.textContent = 'which did not load (' + e.message + '); no names are shown. '; return; }
-    const s = ui.querySelector('#mgFeat'); if (s) s.textContent = `${feats.length.toLocaleString('en-US')} names, checked ${String(featsInfo.built || '').slice(0, 10)}.`;
+    const s = ui.querySelector('#mgFeat'); if (s) s.innerHTML = `${(feats.length - (featsInfo.sites || 0)).toLocaleString('en-US')} names, checked ${esc(String(featsInfo.built || '').slice(0, 10))}${featsInfo.sites ? `; ${featsInfo.sites} more landing and impact sites from <a href="https://www.wikidata.org/" target="_blank" rel="noopener">Wikidata</a> (CC0)` : ''}.`;
     const Cc = C(), E = Cc.Ellipsoid.MOON; pick = V.scene.primitives.add(new Cc.LabelCollection()); const dots = V.scene.primitives.add(new Cc.PointPrimitiveCollection());
     for (const f of feats) { const [n, k, , d, lat, lon, , mission] = f; const pos = Cc.Cartesian3.fromDegrees(lon, lat, 0, E);
       /* how far out a name shows: about 8 km of camera distance per km across (so the whole-Moon view shows only the
@@ -115,6 +125,17 @@
     lastAx = null; setLight(); status(); ui.querySelector('#mgEarth').setAttribute('aria-pressed', 'false'); card(null); homeView();
     const b = document.getElementById('zmoon'); if (b) b.setAttribute('aria-pressed', 'true'); try { if (O.setSlim) O.setSlim(true); } catch (e) { }
   }
+  function zoom(frac) { if (!V) return; const Cc = C(), h = Cc.Cartesian3.distance(V.camera.positionWC, Cc.Cartesian3.ZERO) - 1737400; frac > 0 ? V.camera.zoomIn(Math.max(0, h * frac)) : V.camera.zoomOut(h * -frac); }
+  /* "All names (advanced)": every adopted name (data/moon-features-all.json, about 9,000), loaded the first time it is switched on */
+  async function loadAll() { if (allPick) { allPick.show = allOn && showNames; return; } if (!allOn || allState === 'loading') return; allState = 'loading';
+    const b = ui.querySelector('#mgAll span'); if (b) b.textContent = 'All names (loading…)';
+    try { const r = await fetch('data/moon-features-all.json?t=' + Math.floor(Date.now() / 864e5)); if (!r.ok) throw new Error('HTTP ' + r.status); const J = await r.json(); const Cc = C(), E = Cc.Ellipsoid.MOON;
+      const have = new Set((feats || []).map(f => f[0])); allPick = V.scene.primitives.add(new Cc.LabelCollection()); let n = 0;
+      for (const f of J.features || []) { if (have.has(f[0])) continue; const [nm, k, , d, lat, lon] = f; n++;
+        allPick.add({ position: Cc.Cartesian3.fromDegrees(lon, lat, 0, E), text: nm, font: '500 10px Public Sans, sans-serif', fillColor: Cc.Color.fromCssColorString(KIND[k] ? KIND[k][1] : '#ddd').withAlpha(.9), outlineColor: Cc.Color.BLACK.withAlpha(.85), outlineWidth: 3, style: Cc.LabelStyle.FILL_AND_OUTLINE,
+          horizontalOrigin: Cc.HorizontalOrigin.CENTER, verticalOrigin: Cc.VerticalOrigin.CENTER, distanceDisplayCondition: new Cc.DistanceDisplayCondition(0, Math.max(6e4, d * 6000)), id: { mf: f } }); }
+      allPick.show = allOn && showNames; allState = 'done'; if (b) b.textContent = `All names (+${n.toLocaleString('en-US')})`; }
+    catch (e) { allState = ''; if (b) b.textContent = 'All names (did not load)'; } }
   function closeMoon() { if (!open) return; open = false; host.hidden = true; html.classList.remove('moon-on'); if (V) V.useDefaultRenderLoop = false; const g = window.__obs3d; if (g) { g.viewer.useDefaultRenderLoop = true; g.viewer.resize(); }
     const b = document.getElementById('zmoon'); if (b) b.setAttribute('aria-pressed', 'false'); }
   O.openMoon = openMoon; O.closeMoon = closeMoon; O.moonOpen = () => open; window.__moonGlobe = { open: openMoon, close: closeMoon, viewer: () => V, state, names: () => feats };
@@ -122,7 +143,14 @@
   function pill() { const z = document.getElementById('zearth'); if (!z) return false; if (document.getElementById('zmoon')) return true;
     const b = document.createElement('button'); b.id = 'zmoon'; b.className = 'zuni zmoon'; b.setAttribute('aria-pressed', 'false'); b.title = 'The Moon: its own globe with seas, craters and landing sites, and Earth seen from it';
     b.innerHTML = '<span class="zi">☾︎</span><span class="zt">Moon</span>'; b.onclick = () => open ? closeMoon() : openMoon(); z.after(b);
-    z.addEventListener('click', () => closeMoon(), true); return true; }
+    z.addEventListener('click', () => closeMoon(), true);
+    /* + and − (and ⟲) drive the Moon's camera while it is open */
+    [['zin', () => zoom(.4)], ['zout', () => zoom(-.6)], ['zreset', () => homeView()]].forEach(([id, fn]) => { const bt = document.getElementById(id); if (bt) bt.addEventListener('click', e => { if (!open) return; e.stopImmediatePropagation(); fn(); }, true); });
+    /* "Moon view" in the side rail, after "Earth and Moon view" */
+    return true; }
+  function railBtn() { const uni = document.getElementById('uniBtn'); if (!uni) return false; if (document.getElementById('moonGlobeBtn')) return true;
+    const rb = document.createElement('button'); rb.id = 'moonGlobeBtn'; rb.className = uni.className; rb.textContent = 'Moon view'; rb.title = 'The Moon as its own globe: seas, craters, landing sites, and Earth seen from it'; rb.onclick = () => openMoon(); uni.before(rb); return true; }
+  if (!railBtn()) { let n = 0; const t = setInterval(() => { if (railBtn() || ++n > 120) clearInterval(t); }, 500); }
   if (!pill()) { let n = 0; const t = setInterval(() => { if (pill() || ++n > 60) clearInterval(t); }, 500); }
   addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMoon(); });
 })();

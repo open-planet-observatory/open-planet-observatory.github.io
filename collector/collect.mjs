@@ -236,7 +236,10 @@ let history = { out: null, status: 'not run' };
 let moonf = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/moon-features.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   try { moonf = await collectMoonFeatures({ prev: p, now }); } catch (e) { moonf = { out: p, status: 'error: ' + e.message.slice(0, 160) + (p ? ' (kept last week\'s names)' : '') }; }
-  if (moonf.out) await fs.writeFile(path.join(OUT, 'moon-features.json'), JSON.stringify(moonf.out)); log('moon features', moonf.status); }
+  if (moonf.out) await fs.writeFile(path.join(OUT, 'moon-features.json'), JSON.stringify(moonf.out));
+  if (moonf.outAll) await fs.writeFile(path.join(OUT, 'moon-features-all.json'), JSON.stringify(moonf.outAll));
+  else if (moonf.status === 'kept' && PREV) { try { const r = await fetch(`${PREV}/data/moon-features-all.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) await fs.writeFile(path.join(OUT, 'moon-features-all.json'), await r.text()); } catch { } }
+  log('moon features', moonf.status); }
 // Records (collector/records.mjs): data/records.json, rebuilt weekly from Wikidata and the agencies; a failed record is retried within the hour.
 let records = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/records.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
