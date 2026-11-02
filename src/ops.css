@@ -711,4 +711,3 @@ html.ops.slim .gn-act .gn-play{display:inline-flex}
 @media (min-width:861px) and (max-width:1439px){html.ops.slim .gn-tour .gn-tw{display:none}html.ops.slim .gn-tour{padding:6px 10px}}
 @media (min-width:861px) and (max-width:1279px){html.ops.slim .gn-b{padding-left:8px;padding-right:8px}html.ops.slim .gn-act{gap:4px}}
 @media (min-width:861px) and (max-width:1199px){html.ops.slim .gn-vy{display:none}}
-@media (min-width:861px) and (max-width:959px){html.ops.slim #ops-top h1{display:none}}
