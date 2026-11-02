@@ -52,6 +52,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 ## Imagery
 
 - NASA GIBS (public domain) for the planet and yesterday's view; EOX Sentinel-2 cloudless 2016 (CC BY 4.0, Contains modified Copernicus Sentinel data 2016 & 2017) for close-up detail. Attribution is shown on the page. No paid or per-visitor imagery is used.
+- Sea floor: GEBCO's Web Map Service shows the GEBCO 2026 Grid (15 arc-second ocean depths and land heights), acknowledged on the page in the wording GEBCO requests. GEBCO says its imagery is not for navigation or safety at sea, and the page repeats that. "Measured only" overlays GEBCO's own layer of cells based on measured data (largely ship tracks) and dims the rest, which GEBCO fills by interpolation and satellite-derived estimates.
 
 ## Storms, ground radiation and relief
 
