@@ -12,10 +12,11 @@ const tip=document.createElement('div');tip.id='qtip';tip.setAttribute('role','t
 let timer=null,cur=null;
 function show(el){const t=el.dataset.tip;if(!t)return;tip.textContent=t;tip.hidden=false;const r=el.getBoundingClientRect(),w=Math.min(280,innerWidth-16);tip.style.maxWidth=w+'px';
  const tw=tip.offsetWidth,th=tip.offsetHeight;let x=r.left+r.width/2-tw/2;x=Math.max(8,Math.min(innerWidth-tw-8,x));let y=r.top-th-8;if(y<8)y=r.bottom+8;tip.style.left=x+'px';tip.style.top=y+'px'}
-document.addEventListener('pointerover',e=>{if(e.pointerType==='touch')return;const el=e.target.closest&&e.target.closest('[title],[data-tip]');if(!el||el===cur)return;
+const quiet=el=>{if(!el.closest('#ops-rail'))return false;if(el.title){if(!el.getAttribute('aria-label')&&!el.textContent.trim())el.setAttribute('aria-label',el.title);el.dataset.tipOff=el.title;el.removeAttribute('title')}return true};/* no hover pop-ups in the left rail */
+document.addEventListener('pointerover',e=>{if(e.pointerType==='touch')return;const el=e.target.closest&&e.target.closest('[title],[data-tip]');if(!el||el===cur)return;if(quiet(el))return;
  if(el.title){el.dataset.tip=el.title;el.removeAttribute('title')}cur=el;clearTimeout(timer);timer=setTimeout(()=>show(el),280)},true);
 document.addEventListener('pointerout',e=>{if(!cur)return;if(e.relatedTarget&&cur.contains(e.relatedTarget))return;clearTimeout(timer);tip.hidden=true;cur=null},true);
-document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('[title],[data-tip]');if(!el)return;if(el.title){el.dataset.tip=el.title;el.removeAttribute('title')}cur=el;show(el)});
+document.addEventListener('focusin',e=>{const el=e.target.closest&&e.target.closest('[title],[data-tip]');if(!el||quiet(el))return;if(el.title){el.dataset.tip=el.title;el.removeAttribute('title')}cur=el;show(el)});
 document.addEventListener('focusout',()=>{tip.hidden=true;cur=null});
 addEventListener('scroll',()=>{tip.hidden=true},true);
 // one-time pointer to the Solar System view

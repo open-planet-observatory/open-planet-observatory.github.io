@@ -742,3 +742,12 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 @media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:62px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}
 /* Cesium's credit box is absolutely placed by default; in the rail footer it must flow with the rail, or it floats over the buttons */
 #cesiumCredits .cesium-widget-credits{position:static!important;display:block}
+/* sea floor depth legend (Haxby scale, 8,000 m deep to sea level) */
+.sea-legend{display:grid;grid-template-columns:1fr 1fr;gap:2px 0;margin-top:8px;font-size:.68rem;color:var(--ink-3)}
+.sea-legend[hidden],#seaStyleBtn[hidden]{display:none!important}
+.sea-legend i{grid-column:1/3;height:8px;border-radius:4px;background:linear-gradient(90deg,rgb(37 57 175),rgb(40 127 251),rgb(50 190 255),rgb(106 235 255),rgb(138 236 174),rgb(205 255 162),rgb(240 236 121),rgb(255 189 87),rgb(255 161 68),rgb(255 186 133),#fff)}
+.sea-legend span:last-child{text-align:right}
+/* the header art fades in from its own left edge, wherever that falls (--artL is set by nav.js from the header size) */
+html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px));mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px))}
+/* Earth and Moon view parked (Derik, 2026-11-02); the code stays */
+#moonViewBtn,#moonSizeBtn{display:none!important}

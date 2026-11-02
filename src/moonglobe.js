@@ -56,7 +56,7 @@
     const ssc = sc.screenSpaceCameraController; ssc.minimumZoomDistance = 200; ssc.maximumZoomDistance = 2.5e7;
     /* zoom like the Earth globe: wheel, pinch, right-drag, and trackpad pinch (Chrome sends ctrl+wheel, Safari gesture events) */
     ssc.zoomEventTypes = [Cc.CameraEventType.WHEEL, Cc.CameraEventType.PINCH, Cc.CameraEventType.RIGHT_DRAG, { eventType: Cc.CameraEventType.WHEEL, modifier: Cc.KeyboardEventModifier.CTRL }];
-    el.addEventListener('wheel', e => { if (e.ctrlKey) e.preventDefault(); }, { passive: false });
+    el.addEventListener('wheel', e => { if (e.ctrlKey || earthMode) e.preventDefault(); if (earthMode) lens(Math.exp(e.deltaY * (e.ctrlKey ? .01 : .0015))); }, { passive: false });
     let gS = 1; el.addEventListener('gesturestart', e => { e.preventDefault(); gS = 1; }, { passive: false });
     el.addEventListener('gesturechange', e => { e.preventDefault(); const f = e.scale / gS; gS = e.scale; if (!isFinite(f) || f <= 0) return; f > 1 ? zoom(1 - 1 / f) : zoom(-(1 / f - 1)); }, { passive: false });
     el.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
@@ -110,14 +110,33 @@
       if (k === 'landing') dots.add({ position: pos, pixelSize: 7, color: col, outlineColor: Cc.Color.BLACK, outlineWidth: 1.5, id: { mf: f } }); }
   }
   // ----- views -----
+  // ----- camera modes: the whole Moon, or Earthrise from lunar orbit -----
+  let earthMode = false;
+  function setControls(lens) { const ssc = V.scene.screenSpaceCameraController, Cc = C(); earthMode = lens;
+    ssc.enableZoom = !lens; ssc.enableRotate = !lens; ssc.enableTranslate = !lens; ssc.enableTilt = !lens; ssc.enableLook = true;
+    ssc.lookEventTypes = lens ? [Cc.CameraEventType.LEFT_DRAG] : { eventType: Cc.CameraEventType.LEFT_DRAG, modifier: Cc.KeyboardEventModifier.SHIFT };
+    if (pick) pick.show = !lens && showNames; if (allPick) allPick.show = !lens && showNames && allOn; }
   function homeView() { const Cc = C(), s = state(), lon = Math.atan2(s.earthDir[1], s.earthDir[0]) * 180 / Math.PI, lat = Math.asin(s.earthDir[2]) * 180 / Math.PI;
-    V.camera.frustum.fov = Cc.Math.toRadians(60); V.camera.flyTo({ destination: Cc.Cartesian3.fromDegrees(lon, lat, 4.6e6, Cc.Ellipsoid.MOON), duration: 1.4 }); }
-  function earthView() { const Cc = C(); const st = feats && feats.find(f => f[7] === 'Apollo 11'); const lon = st ? st[5] : 23.4732, lat = st ? st[4] : 0.6741;
-    const cam = Cc.Cartesian3.fromDegrees(lon, lat, 2000, Cc.Ellipsoid.MOON), ep = earthPos();
-    const dir = Cc.Cartesian3.normalize(Cc.Cartesian3.subtract(ep, cam, new Cc.Cartesian3()), new Cc.Cartesian3()), up0 = Cc.Cartesian3.normalize(cam, new Cc.Cartesian3());
-    const right = Cc.Cartesian3.normalize(Cc.Cartesian3.cross(dir, up0, new Cc.Cartesian3()), new Cc.Cartesian3()), up = Cc.Cartesian3.cross(right, dir, new Cc.Cartesian3());
-    V.camera.flyTo({ destination: cam, orientation: { direction: dir, up }, duration: 2.2, complete: () => { V.camera.frustum.fov = Cc.Math.toRadians(25); } });
-    const el = ui.querySelector('#mgState'); if (el) el.textContent = 'Seen from 2 km above Tranquility Base, where Apollo 11 landed: Earth at its true size, phase and rotation right now, in a 25° field of view. Drag to look around.'; }
+    setControls(false); V.camera.frustum.fov = Cc.Math.toRadians(60); V.camera.flyTo({ destination: Cc.Cartesian3.fromDegrees(lon, lat, 4.6e6, Cc.Ellipsoid.MOON), duration: 1.4 }); }
+  /* Earthrise: 110 km above the Moon (a typical lunar-orbit height), at a point 105° around from the spot under Earth, so
+     Earth sits a few degrees above the lunar horizon with the cratered ground below it, as in the photographs taken from
+     lunar orbit. Of the points that qualify, the one with the most sunlight on the ground is chosen. The lens zooms (scroll,
+     pinch or +/−) without moving the camera; drag to look around. */
+  function earthView() { const Cc = C(), s = state(), E = s.earthDir, S = s.sunDir;
+    const u = nrm(Math.abs(E[2]) < .9 ? cr(E, [0, 0, 1]) : cr(E, [1, 0, 0])), v = cr(E, u), th = 105 * Math.PI / 180; let best = null, bs = -9;
+    for (let k = 0; k < 72; k++) { const ph = k * 5 * Math.PI / 180, P = [0, 1, 2].map(i => Math.cos(th) * E[i] + Math.sin(th) * (Math.cos(ph) * u[i] + Math.sin(ph) * v[i]));
+      /* sunlight on the ground between the camera and the horizon toward Earth */
+      const G = nrm([0, 1, 2].map(i => P[i] * .8 + E[i] * .6)); const sc = dot(G, S); if (sc > bs) { bs = sc; best = P; } }
+    const R = 1737400 + 110000, cam = new Cc.Cartesian3(best[0] * R, best[1] * R, best[2] * R), ep = earthPos();
+    let dir = Cc.Cartesian3.normalize(Cc.Cartesian3.subtract(ep, cam, new Cc.Cartesian3()), new Cc.Cartesian3());
+    const up0 = new Cc.Cartesian3(best[0], best[1], best[2]), right = Cc.Cartesian3.normalize(Cc.Cartesian3.cross(dir, up0, new Cc.Cartesian3()), new Cc.Cartesian3());
+    /* tilt down a few degrees so Earth sits in the upper part of the frame and the lunar surface fills the lower part */
+    const q = Cc.Quaternion.fromAxisAngle(right, Cc.Math.toRadians(-4)); dir = Cc.Matrix3.multiplyByVector(Cc.Matrix3.fromQuaternion(q), dir, new Cc.Cartesian3());
+    const up = Cc.Cartesian3.normalize(Cc.Cartesian3.cross(right, dir, new Cc.Cartesian3()), new Cc.Cartesian3());
+    setControls(true); V.camera.flyTo({ destination: cam, orientation: { direction: dir, up }, duration: 2.4, complete: () => { V.camera.frustum.fov = Cc.Math.toRadians(30); } });
+    const lon = Math.atan2(best[1], best[0]) * 180 / Math.PI, lat = Math.asin(best[2]) * 180 / Math.PI;
+    const el = ui.querySelector('#mgState'); if (el) el.textContent = `Earthrise: Earth above the lunar horizon at its true size, phase and rotation right now, seen from 110 km above the Moon (over ${Math.abs(lat).toFixed(0)}° ${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(0)}° ${lon >= 0 ? 'E' : 'W'}), as from a lunar orbiter. Scroll, pinch or +/− to zoom the lens; drag to look around.`; }
+  function lens(f) { const Cc = C(), fov = V.camera.frustum.fov * 180 / Math.PI; V.camera.frustum.fov = Cc.Math.toRadians(Math.max(1.5, Math.min(70, fov * f))); }
   function openMoon() {
     if (!window.Cesium || !window.Astronomy) return; if (O.closeUniverse && document.querySelector('#uni.on')) { try { O.closeUniverse(); } catch (e) { } }
     if (!V) build(); const g = window.__obs3d; if (g && g.setMoonView) { try { g.setMoonView(false); } catch (e) { } }
@@ -125,7 +144,7 @@
     lastAx = null; setLight(); status(); ui.querySelector('#mgEarth').setAttribute('aria-pressed', 'false'); card(null); homeView();
     const b = document.getElementById('zmoon'); if (b) b.setAttribute('aria-pressed', 'true'); try { if (O.setSlim) O.setSlim(true); } catch (e) { }
   }
-  function zoom(frac) { if (!V) return; const Cc = C(), h = Cc.Cartesian3.distance(V.camera.positionWC, Cc.Cartesian3.ZERO) - 1737400; frac > 0 ? V.camera.zoomIn(Math.max(0, h * frac)) : V.camera.zoomOut(h * -frac); }
+  function zoom(frac) { if (!V) return; if (earthMode) { lens(frac > 0 ? 1 - frac * .8 : 1 - frac * .8); return; } const Cc = C(), h = Cc.Cartesian3.distance(V.camera.positionWC, Cc.Cartesian3.ZERO) - 1737400; frac > 0 ? V.camera.zoomIn(Math.max(0, h * frac)) : V.camera.zoomOut(h * -frac); }
   /* "All names (advanced)": every adopted name (data/moon-features-all.json, about 9,000), loaded the first time it is switched on */
   async function loadAll() { if (allPick) { allPick.show = allOn && showNames; return; } if (!allOn || allState === 'loading') return; allState = 'loading';
     const b = ui.querySelector('#mgAll span'); if (b) b.textContent = 'All names (loading…)';
@@ -136,7 +155,7 @@
           horizontalOrigin: Cc.HorizontalOrigin.CENTER, verticalOrigin: Cc.VerticalOrigin.CENTER, distanceDisplayCondition: new Cc.DistanceDisplayCondition(0, Math.max(6e4, d * 6000)), id: { mf: f } }); }
       allPick.show = allOn && showNames; allState = 'done'; if (b) b.textContent = `All names (+${n.toLocaleString('en-US')})`; }
     catch (e) { allState = ''; if (b) b.textContent = 'All names (did not load)'; } }
-  function closeMoon() { if (!open) return; open = false; host.hidden = true; html.classList.remove('moon-on'); if (V) V.useDefaultRenderLoop = false; const g = window.__obs3d; if (g) { g.viewer.useDefaultRenderLoop = true; g.viewer.resize(); }
+  function closeMoon() { if (!open) return; open = false; if (earthMode) { try { setControls(false); V.camera.frustum.fov = C().Math.toRadians(60); } catch (e) { } } host.hidden = true; html.classList.remove('moon-on'); if (V) V.useDefaultRenderLoop = false; const g = window.__obs3d; if (g) { g.viewer.useDefaultRenderLoop = true; g.viewer.resize(); }
     const b = document.getElementById('zmoon'); if (b) b.setAttribute('aria-pressed', 'false'); }
   O.openMoon = openMoon; O.closeMoon = closeMoon; O.moonOpen = () => open; window.__moonGlobe = { open: openMoon, close: closeMoon, viewer: () => V, state, names: () => feats };
   // the ☾ Moon pill beside ⊕ Earth; ⊕ Earth (and Esc) bring you back
@@ -150,6 +169,10 @@
     return true; }
   function railBtn() { const uni = document.getElementById('uniBtn'); if (!uni) return false; if (document.getElementById('moonGlobeBtn')) return true;
     const rb = document.createElement('button'); rb.id = 'moonGlobeBtn'; rb.className = uni.className; rb.textContent = 'Moon view'; rb.title = 'The Moon as its own globe: seas, craters, landing sites, and Earth seen from it'; rb.onclick = () => openMoon(); uni.before(rb); return true; }
+  /* anything else in the side rail, the view pills or the Space menu acts on Earth (or another view): leave the Moon first */
+  document.addEventListener('click', e => { if (!open) return; const t = e.target.closest && e.target.closest('button,a,label,input');
+    if (!t || t.closest('#moonGlobe') || t.id === 'moonGlobeBtn' || t.id === 'zmoon' || /^(zin|zout|zreset)$/.test(t.id) || t.dataset.u === 'moon') return;
+    if (t.closest('#ops-rail') || t.closest('.zoomctl') || (t.closest('.gn-m') && t.dataset.u)) closeMoon(); }, true);
   if (!railBtn()) { let n = 0; const t = setInterval(() => { if (railBtn() || ++n > 120) clearInterval(t); }, 500); }
   if (!pill()) { let n = 0; const t = setInterval(() => { if (pill() || ++n > 60) clearInterval(t); }, 500); }
   addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMoon(); });

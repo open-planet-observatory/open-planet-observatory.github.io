@@ -6,7 +6,10 @@
 (function () {
   const html = document.documentElement, O = window.__obs; const tabs = document.getElementById('panelTabs'), top = document.getElementById('ops-top');
   if (!tabs || !top || !html.classList.contains('ops') || !O) return;
-  html.classList.add('no-search'); /* search is hidden until it is rebuilt (Derik, 2026-11-02); remove this line to bring it back */
+  html.classList.add('no-search');
+  /* where the header art's left edge falls (background: right, height 165% (140% on phones), image 1600x568), so it can fade in from there */
+  const artFit = () => { const H = top.clientHeight, W = top.clientWidth, sc = innerWidth <= 860 ? 1.4 : 1.65; top.style.setProperty('--artL', Math.round(W - H * sc * 1600 / 568) + 'px'); };
+  try { new ResizeObserver(artFit).observe(top); } catch (e) { addEventListener('resize', artFit); } artFit(); /* search is hidden until it is rebuilt (Derik, 2026-11-02); remove this line to bring it back */
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const NOTE = { situations: 'Serious situations around the world', disruptions: "What's broken right now", relief: 'Who is responding, and how to help', watchlist: 'Countries you follow',
     climate: "What's unusual, El Niño, weather layers", signals: "The planet's vital signs", nature: 'What people are seeing in the wild', cams: 'Watch the planet, not the people',
