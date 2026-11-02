@@ -10,13 +10,13 @@
   const NOTE = { situations: 'Serious situations around the world', disruptions: "What's broken right now", relief: 'Who is responding, and how to help', watchlist: 'Countries you follow',
     climate: "What's unusual, El Niño, weather layers", signals: "The planet's vital signs", nature: 'What people are seeing in the wild', cams: 'Watch the planet, not the people',
     worlds: 'Planets around other stars', unexplained: "What the record-keepers couldn't classify", economy: 'Prices, jobs, debt, and the money', watch: 'Breaches, breakthroughs, the worst days',
-    history: 'Space, quakes, storms and science on this date in past years', classroom: 'Lessons, and the old almanacs', layers: 'What each map layer and reading means', library: 'Every source, its licence and cadence', free: 'How the site stays free', about: 'What this is, and its rules' };
+    history: 'Space, quakes, storms and science on this date in past years', records: 'Highest, deepest, largest, farthest, every definition', classroom: 'Lessons, and the old almanacs', layers: 'What each map layer and reading means', library: 'Every source, its licence and cadence', free: 'How the site stays free', about: 'What this is, and its rules' };
   /* one plain symbol per section, drawn as text (the \uFE0E marks stop phones turning them into colour emoji) */
   const ICON = { situations: '◈', disruptions: '↯', relief: '✚', watchlist: '★\uFE0E', climate: '☁\uFE0E', signals: '∿', nature: '❦', cams: '▣', worlds: '⊚', unexplained: '⁇',
-    economy: '$', watch: '⚑\uFE0E', history: '⧗', classroom: '✎', layers: '▤', library: '§', free: '♡\uFE0E', about: 'ⓘ' };
+    economy: '$', watch: '⚑\uFE0E', history: '⧗', records: '▲', classroom: '✎', layers: '▤', library: '§', free: '♡\uFE0E', about: 'ⓘ' };
   const GROUPS = [['world', 'People', ['situations', 'disruptions', 'relief', 'watchlist']], ['planet', 'Planet', ['climate', 'signals', 'nature', 'cams']],
     ['space', 'Space', [['@solar', 'Solar System', '☉', 'Planets, moons and spacecraft, live'], ['@galaxy', 'Milky Way', '✺', 'A million real stars and our galaxy'], ['@web', 'Cosmic web', '❖', '43,000 galaxies in clusters and filaments'], ['@edge', 'Edge of the observable universe', '◯', 'The oldest light, from 13.8 billion years ago'], 'worlds', 'unexplained']],
-    ['money', 'Tech & Industry', ['economy', 'watch']], ['learn', 'Learn', ['history', 'classroom', 'layers', 'library', 'free', 'about']]];
+    ['money', 'Tech & Industry', ['economy', 'watch']], ['learn', 'Learn', ['history', 'records', 'classroom', 'layers', 'library', 'free', 'about']]];
   const label = k => { const b = tabs.querySelector(`button[data-k="${k}"]`); return b ? b.textContent : k; };
   const nav = document.createElement('nav'); nav.className = 'gnav'; nav.setAttribute('aria-label', 'Sections');
   nav.innerHTML = '<div class="gn-scroll">' + GROUPS.map(([g, name, items]) => `<div class="gn-g" data-g="${g}"><button class="gn-b" aria-haspopup="true" aria-expanded="false">${esc(name)}<span class="gn-c" aria-hidden="true">▾</span></button>

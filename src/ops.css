@@ -681,3 +681,23 @@ html.ops.slim .gn-act .gn-play{display:inline-flex}
 #owlSplash.ready .load i{animation:none;width:100%;transition:width .6s ease-out}
 /* phones, full header: the five menus get their own row, the buttons sit on the row below; the slim bar stays one row */
 @media (max-width:860px){html.ops:not(.slim) .gnav{flex-wrap:wrap;row-gap:6px}html.ops:not(.slim) .gnav .gn-scroll{flex:1 1 100%}html.ops:not(.slim) .gnav .gn-act{margin-left:auto}}
+/* Records */
+.rc-g{margin:20px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
+.rc{border:1px solid var(--glass-line);border-radius:12px;padding:12px 14px;margin:0 0 12px;background:rgba(255,255,255,.02)}
+.rc h3{margin:0 0 4px;font-size:1.02rem}
+.rc-def{margin:0 0 10px;color:var(--ink-2);font-size:.86rem}
+.rc-rows.rival{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.rc-row{border-left:2px solid var(--accent,#D9A441);padding:2px 0 2px 10px;min-width:0}
+.rc-row h4{margin:0 0 4px;font-size:.92rem}
+.rc-m{margin:2px 0 4px;font-size:.86rem}
+.rc-l{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-3)}
+.rc-v{font:700 1.02rem/1.35 var(--mono,ui-monospace,monospace);color:var(--ink-1,#fff)}
+.rc-x{font-size:.72rem;color:var(--ink-3);white-space:normal}
+.rc-more{color:var(--ink-3);margin-top:2px}
+.rc-w{margin:2px 0;color:var(--ink-2)}
+.rc-links{margin:4px 0 0}
+.rc-read{margin:6px 0 2px;padding:8px 10px;border-left:2px solid var(--glass-line);font-size:.84rem;color:var(--ink-2)}
+.rc-read[hidden]{display:none!important}
+.rc-read p{margin:0 0 4px}
+.rc-src{margin:8px 0 0}
+.rc-t th,.rc-t td.n{white-space:nowrap}
