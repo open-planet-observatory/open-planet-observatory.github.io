@@ -714,3 +714,4 @@ html.ops.slim .gn-act .gn-play{display:inline-flex}
 /* four imagery choices: two per row in the side rail */
 #ops-rail #imgSeg{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:16px}
 #ops-rail #imgSeg button{white-space:nowrap;justify-content:center;text-align:center}
+#measuredBtn[hidden]{display:none!important}
