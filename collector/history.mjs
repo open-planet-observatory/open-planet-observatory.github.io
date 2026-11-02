@@ -8,7 +8,7 @@
 // Each date is fetched once and then kept; a date whose fetch fails is marked failed so the page can say so.
 const UA = { 'User-Agent': 'OpenPlanetObservatory/1.0 (https://theowlmanac.com; open-planet-observatory on GitHub)', 'Api-User-Agent': 'OpenPlanetObservatory/1.0 (https://theowlmanac.com)' };
 const pad = n => String(n).padStart(2, '0');
-const RULES = 2; /* bump when the filter changes, so kept days are rebuilt */
+const RULES = 3; /* bump when the filter changes, so kept days are rebuilt */
 // Topic tests run on the event's own text plus the short descriptions Wikipedia gives its linked articles.
 const TOPICS = [
   ['space', 'Space', /\b(spacecraft|space ?(station|shuttle|probe|flight|walk)|satellite|astronaut|cosmonaut|taikonaut|orbit(s|ed|al)?|launch(es|ed)? .*(rocket|probe|mission)|rocket|lunar|the moon|mars\b|venus\b|jupiter|saturn|mercury\b.*planet|comet|asteroid|meteor|telescope|galaxy|nebula|supernova|planet|nasa|esa\b|roscosmos|apollo|sputnik|voyager|hubble|eclipse)\b/i],
@@ -31,11 +31,12 @@ function pick(raw) {
     const pages = (e.pages || []).filter(p => p && p.content_urls && p.content_urls.desktop);
     const hay = text + ' ' + pages.slice(0, 3).map(p => p.description || '').join(' ');
     if (AVOID.test(text) && !NATURAL.test(text)) continue;
-    if (/\b(dies|died|is crowned|abdicates)\b/i.test(text) && !NATURAL.test(text)) continue; /* rulers' deaths and coronations are not this site's topics */
+    if (/\b(dies|died|is crowned|abdicates)\b/i.test(text) && !NATURAL.test(text)) continue;
+    if (/\b(world series|super bowl|championship|cup final|world cup|olympic|baseball|football|soccer|cricket|tennis|golf|game show|quiz show|beauty pageant)\b/i.test(hay)) continue; /* sport and entertainment are not this site's topics */ /* rulers' deaths and coronations are not this site's topics */
     if (/\b(war|military|army|battle)\b/i.test(pages.slice(0, 2).map(p => p.description || '').join(' '))) continue;
     const t = TOPICS.find(([, , re]) => re.test(hay)); if (!t) continue;
     const main = pages.find(p => t[2].test(String(p.normalizedtitle || p.title || '').replace(/_/g, ' ') + ' ' + (p.description || ''))) || pages[0]; /* the article about the event itself, not the city it happened in */
-    const dk = e.year + '|' + (main ? main.content_urls.desktop.page : text.slice(0, 40)); if (seen.has(dk)) continue; seen.add(dk); /* Wikipedia often lists one event twice in two wordings */
+    const keys = pages.map(p => e.year + '|' + p.content_urls.desktop.page); if (keys.some(k => seen.has(k))) continue; keys.forEach(k => seen.add(k)); /* Wikipedia often lists one event twice in two wordings, linked to overlapping articles */
     out.push({ year: e.year, text, cat: t[0], link: main ? main.content_urls.desktop.page : null, title: main ? (main.normalizedtitle || main.title || '').replace(/_/g, ' ') : null,
       more: pages.filter(p => p !== main).slice(0, 3).map(p => ({ t: (p.normalizedtitle || p.title || '').replace(/_/g, ' '), u: p.content_urls.desktop.page })) });
   }
