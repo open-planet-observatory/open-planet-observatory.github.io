@@ -76,7 +76,7 @@ async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
   let bad=0,good=0;p.errorEvent.addEventListener(()=>{bad++;if(k!=='basic'&&!layer.__failed&&bad>=25&&good===0){layer.__failed=true;note(def.label+' imagery did not load; showing the offline map for now. Choose it again to retry.');setImagery('basic',true)}});
   const origReq=p.requestImage.bind(p);p.requestImage=function(){const r=origReq.apply(p,arguments);if(r&&r.then)r.then(x=>{if(x)good++},()=>{});return r};
   if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);setDetail(!!def.detail);addNightLights();if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer);
-  imageryChoice=k;syncMeasured();if(!auto){note(def.seafloor?'Most of the sea floor has never been sounded by a ship; GEBCO fills those areas with depths estimated from satellite measurements of the sea surface. “Measured only” shows which is which. Not for navigation.':'');try{localStorage.setItem('obs-imagery2',k)}catch(e){}}
+  imageryChoice=k;syncMeasured();try{satPts.show=satLbl.show=!def.seafloor}catch(e){}/* the sea floor is seen best without the satellite cloud in front of it */if(!auto){note(def.seafloor?'Most of the sea floor has never been sounded by a ship; GEBCO fills those areas with depths estimated from satellite measurements of the sea surface. “Measured only” shows which is which. Satellites are hidden while the sea floor is shown. Not for navigation.':'');try{localStorage.setItem('obs-imagery2',k)}catch(e){}}
   document.querySelectorAll('#imgSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  }catch(e){if(k!=='basic')setImagery('basic',true)}}
 /* "Measured only": GEBCO's own layer of the cells built from real soundings, over a dimmed sea floor, so the estimated areas show as dark */
@@ -285,12 +285,14 @@ scene.moon=new C.Moon({onlySunLighting:true});
 let moonView=false;const homeMax=sscc.maximumZoomDistance;
 function setMoonView(v){moonView=v;const b=document.getElementById('moonViewBtn');if(b)b.setAttribute('aria-pressed',v);
  if(!v){sscc.maximumZoomDistance=homeMax;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.6});return}
- if(!O.moonNow)return;const m=O.moonNow();sscc.maximumZoomDistance=1.5e9;spin=false;
+ if(!O.moonNow)return;const m=O.moonNow();sscc.maximumZoomDistance=1.5e9;spin=false;try{if(O.setSlim)O.setSlim(true)}catch(e){}/* panels away, so both worlds are in view */
  const mp=C.Cartesian3.fromDegrees(m.lon,m.lat,m.dist*1000-6371000),mid=C.Cartesian3.multiplyByScalar(mp,.5,new C.Cartesian3());
  const side=C.Cartesian3.normalize(C.Cartesian3.cross(mp,C.Cartesian3.UNIT_Z,new C.Cartesian3()),new C.Cartesian3());
- const dest=C.Cartesian3.add(mid,C.Cartesian3.multiplyByScalar(side,C.Cartesian3.magnitude(mp)*.95,new C.Cartesian3()),new C.Cartesian3());
+ const dest=C.Cartesian3.add(mid,C.Cartesian3.multiplyByScalar(side,C.Cartesian3.magnitude(mp)*1.25,new C.Cartesian3()),new C.Cartesian3());
  const dir=C.Cartesian3.normalize(C.Cartesian3.subtract(mid,dest,new C.Cartesian3()),new C.Cartesian3());
- viewer.camera.flyTo({destination:dest,orientation:{direction:dir,up:C.Cartesian3.UNIT_Z},duration:2.5})}
+ /* Earth on the left, the Moon on the right, level across the middle of the screen */
+ const em=C.Cartesian3.normalize(mp,new C.Cartesian3());let up=C.Cartesian3.normalize(C.Cartesian3.cross(em,dir,new C.Cartesian3()),new C.Cartesian3());
+ viewer.camera.flyTo({destination:dest,orientation:{direction:dir,up},duration:2.5})}
 // ----- AI model releases by country -----
 function buildAi(){const e=clear('ai');if(!O.aiByCountry)return;O.aiByCountry().filter(d=>d.lon!=null).forEach(d=>e.add({position:deg(d.lon,d.lat,0),
  point:{pixelSize:9+5*Math.sqrt(d.n),color:col('--l-ai',.85),outlineColor:col('--panel'),outlineWidth:1.5,disableDepthTestDistance:Number.POSITIVE_INFINITY},
