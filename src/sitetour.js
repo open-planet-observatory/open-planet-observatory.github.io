@@ -29,8 +29,8 @@
       body: 'Under Learn, “Sources” lists every feed with its licence and how often it updates, and “Layers & readings” explains each layer and what it can’t show. When a feed fails, the page says so instead of showing old numbers.' },
     { title: 'Leave Earth', el: () => $('#ops-map .zoomctl') || $('.zoomctl'), prep: () => { unslim(); if (phone()) html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); }, /* the panel would hide half the row */
       body: 'Fly out from here: the Solar System as it is right now, a million real stars, the Milky Way, 43,000 galaxies in the cosmic web, and the oldest light in the universe. ⊕ Earth brings you home. “Tour Universe” flies the whole way with a guide.' },
-    { title: 'Music, Voyager and search', el: () => $('.gn-act'), prep: unslim,
-      body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. ⌕, or the / key, searches everything. That’s the tour: enjoy exploring.' }
+    { title: 'Music and Voyager', el: () => $('.gn-act'), prep: unslim,
+      body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. That’s the tour: enjoy exploring.' }
   ];
   let i = 0, shade = null, card = null, catcher = null, keyH = null, resH = null, prevFocus = null;
   function place() { const st = STEPS[i]; let el = st.el ? st.el() : null; if (el && !vis(el)) el = null;
