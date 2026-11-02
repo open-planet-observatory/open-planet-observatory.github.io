@@ -48,10 +48,10 @@
     const tiling = new Cc.GeographicTilingScheme({ ellipsoid: Cc.Ellipsoid.MOON });
     const prov = new Cc.WebMapTileServiceImageryProvider({ url: TREK, layer: 'LRO_WAC_Mosaic_Global_303ppd_v02', style: 'default', tileMatrixSetID: 'default028mm', format: 'image/jpeg', tilingScheme: tiling, maximumLevel: 8,
       credit: new Cc.Credit('Moon surface: NASA LRO Wide Angle Camera global mosaic, via <a href="https://trek.nasa.gov/moon/" target="_blank" rel="noopener">NASA Moon Trek</a>', false) });
-    V = new Cc.Viewer(el, { ellipsoid: Cc.Ellipsoid.MOON, globe: new Cc.Globe(Cc.Ellipsoid.MOON), mapProjection: new Cc.GeographicProjection(Cc.Ellipsoid.MOON), baseLayer: new Cc.ImageryLayer(prov),
+    V = new Cc.Viewer(el, { ellipsoid: Cc.Ellipsoid.MOON, globe: new Cc.Globe(Cc.Ellipsoid.MOON), mapProjection: new Cc.GeographicProjection(Cc.Ellipsoid.MOON), baseLayer: new Cc.ImageryLayer(prov, { nightAlpha: 0.1 }), /* the night side goes dark, as it is */
       baseLayerPicker: false, geocoder: false, homeButton: false, sceneModePicker: false, navigationHelpButton: false, animation: false, timeline: false, fullscreenButton: false, infoBox: false, selectionIndicator: false,
       creditContainer: credits, skyAtmosphere: false, contextOptions: { webgl: { preserveDrawingBuffer: true } } });
-    const sc = V.scene; sc.globe.showGroundAtmosphere = false; sc.globe.baseColor = Cc.Color.fromCssColorString('#3a3936'); if (sc.sun) sc.sun.show = false; if (sc.moon) sc.moon.show = false; /* Earth-centred, and absent on another ellipsoid */ sc.fog.enabled = false; sc.highDynamicRange = false;
+    const sc = V.scene; sc.globe.showGroundAtmosphere = false; sc.globe.lightingFadeOutDistance = 1; sc.globe.lightingFadeInDistance = 2; /* Cesium's defaults switch shading off within 10,000 km (tuned for Earth); the Moon keeps its real day and night at every distance */ sc.globe.baseColor = Cc.Color.fromCssColorString('#3a3936'); if (sc.sun) sc.sun.show = false; if (sc.moon) sc.moon.show = false; /* Earth-centred, and absent on another ellipsoid */ sc.fog.enabled = false; sc.highDynamicRange = false;
     if (sc.skyAtmosphere) sc.skyAtmosphere.show = false;
     sc.screenSpaceCameraController.minimumZoomDistance = 200; sc.screenSpaceCameraController.maximumZoomDistance = 2.5e7;
     V.clock.shouldAnimate = true;
@@ -72,7 +72,7 @@
     const earthSphere = window.OwlLitSphere(sc, { radii: new Cc.Cartesian3(6378137, 6378137, 6356752), image: EARTH_TEX, night: 0.05 });
     sc.preRender.addEventListener(() => { if (open) earthSphere.set(earthPos(), earthRot(), earthSunLocal()); });
     earthEnt = V.entities.add({ position: new Cc.CallbackProperty(() => earthPos(), false),
-      label: { text: 'Earth', font: '600 13px Public Sans, sans-serif', fillColor: Cc.Color.WHITE, outlineColor: Cc.Color.BLACK, outlineWidth: 3, style: Cc.LabelStyle.FILL_AND_OUTLINE, pixelOffset: new Cc.Cartesian2(0, -34), distanceDisplayCondition: new Cc.DistanceDisplayCondition(3e8, 1e10) } });
+      label: { text: 'Earth', font: '600 13px Public Sans, sans-serif', fillColor: Cc.Color.WHITE, outlineColor: Cc.Color.BLACK, outlineWidth: 3, style: Cc.LabelStyle.FILL_AND_OUTLINE, pixelOffset: new Cc.Cartesian2(0, -48), distanceDisplayCondition: new Cc.DistanceDisplayCondition(3e8, 1e10) } });
     // clicks on names open their card
     new Cc.ScreenSpaceEventHandler(sc.canvas).setInputAction(m => { const p = sc.pick(m.position); const f = p && p.id && p.id.mf; card(f || null); }, Cc.ScreenSpaceEventType.LEFT_CLICK);
     setInterval(() => { if (open) { lastAx = null; setLight(); status(); } }, 30000);
@@ -90,8 +90,9 @@
     const s = ui.querySelector('#mgFeat'); if (s) s.textContent = `${feats.length.toLocaleString('en-US')} names, checked ${String(featsInfo.built || '').slice(0, 10)}.`;
     const Cc = C(), E = Cc.Ellipsoid.MOON; pick = V.scene.primitives.add(new Cc.LabelCollection()); const dots = V.scene.primitives.add(new Cc.PointPrimitiveCollection());
     for (const f of feats) { const [n, k, , d, lat, lon, , mission] = f; const pos = Cc.Cartesian3.fromDegrees(lon, lat, 0, E);
-      /* how far out a name stays readable: seas from anywhere; a crater about 25 km of camera height per km across */
-      const far = k === 'sea' ? 4e7 : k === 'landing' ? 9e6 : Math.min(6e6, Math.max(2.5e5, d * 25000));
+      /* how far out a name shows: about 8 km of camera distance per km across (so the whole-Moon view shows only the
+         largest seas and the landing sites), 5 km per km for rilles, ridges and the like; landing sites always */
+      const far = k === 'landing' ? 3e7 : Math.max(1.2e5, d * (k === 'other' ? 5000 : 8000));
       const col = Cc.Color.fromCssColorString(KIND[k] ? KIND[k][1] : '#ddd');
       pick.add({ position: pos, text: mission ? mission : n, font: k === 'sea' ? 'italic 600 14px Public Sans, sans-serif' : k === 'landing' ? '700 12px Public Sans, sans-serif' : '600 11px Public Sans, sans-serif',
         fillColor: col, outlineColor: Cc.Color.BLACK.withAlpha(.85), outlineWidth: 3, style: Cc.LabelStyle.FILL_AND_OUTLINE, horizontalOrigin: Cc.HorizontalOrigin.CENTER, verticalOrigin: Cc.VerticalOrigin.CENTER,
