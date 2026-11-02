@@ -1,4 +1,4 @@
-// ---------- The Owlmanac: the channel behind the Observatory ----------
+// ---------- The OwlManac: the channel behind the Observatory ----------
 // Header lockup + YouTube button, an episode shelf where each episode is paired with the map layer it explains,
 // and links from the Moon card. Episode titles are the channel's own; links open YouTube (nothing embedded or re-hosted).
 (function(){
@@ -27,21 +27,21 @@ const yt='<svg class="yt" viewBox="0 0 24 24" aria-hidden="true"><path fill="cur
 // header: lockup + channel button
 const brand=document.querySelector('#ops-top .brand');
 if(brand&&!brand.querySelector('.owl-kicker')){
- const logo=brand.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const a=document.createElement('a');a.href=CH;a.target='_blank';a.rel='noopener';a.title='The Owlmanac on YouTube';logo.parentNode.insertBefore(a,logo);a.appendChild(logo)}}
+ const logo=brand.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const a=document.createElement('a');a.href=CH;a.target='_blank';a.rel='noopener';a.title='The OwlManac on YouTube';logo.parentNode.insertBefore(a,logo);a.appendChild(logo)}}
 const right=document.querySelector('#ops-top .top-right')||document.querySelector('#ops-top .themebtn')?.parentElement||document.querySelector('#ops-top');
-if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>Watch The Owlmanac</span>`;b.title='The Owlmanac on YouTube: strange, true, seriously';
+if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>Watch The OwlManac</span>`;b.title='The OwlManac on YouTube: strange, true, seriously';
  const theme=[...right.querySelectorAll('button')].find(x=>/mode/i.test(x.textContent));if(theme)theme.parentNode.insertBefore(b,theme);else right.appendChild(b)}
 // episode shelf, above NASA's stories
 const sg=document.getElementById('storyGrid');
 if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling;
- const sec=document.createElement('div');sec.innerHTML=`<div class="owl-shelf-head"><img src="brand/owl-poly-256.png" alt="" loading="lazy"><div class="sec-head"><h3>From The Owlmanac</h3><p class="small muted">Strange, true, seriously. Short videos from the channel behind this site. Where an episode connects to something on the map, the button turns that layer on. <a href="${CH}" target="_blank" rel="noopener">All episodes on YouTube ↗</a></p></div></div><div class="cam-grid" id="owlGrid"></div>`;
+ const sec=document.createElement('div');sec.innerHTML=`<div class="owl-shelf-head"><img src="brand/owl-poly-256.png" alt="" loading="lazy"><div class="sec-head"><h3>From The OwlManac</h3><p class="small muted">Strange, true, seriously. Short videos from the channel behind this site. Where an episode connects to something on the map, the button turns that layer on. <a href="${CH}" target="_blank" rel="noopener">All episodes on YouTube ↗</a></p></div></div><div class="cam-grid" id="owlGrid"></div>`;
  (head&&head.classList.contains('sec-head')?head:sg).before(...sec.childNodes);
- document.getElementById('owlGrid').innerHTML=EPISODES.map((e,i)=>`<article class="cam owl-ep"><span class="kind owl-kind" style="align-self:flex-start">The Owlmanac · ${esc(e[2])}</span><h3>${esc(e[0])}</h3>${e[5]?`<p class="small">${esc(e[5])}</p>`:''}<div class="owl-act"><a class="go" href="${esc(e[1])}" target="_blank" rel="noopener">${yt} Watch on YouTube ↗</a>${e[3]?`<button class="linkbtn" data-ep="${i}">Show on the map</button>`:''}</div></article>`).join('');
+ document.getElementById('owlGrid').innerHTML=EPISODES.map((e,i)=>`<article class="cam owl-ep"><span class="kind owl-kind" style="align-self:flex-start">The OwlManac · ${esc(e[2])}</span><h3>${esc(e[0])}</h3>${e[5]?`<p class="small">${esc(e[5])}</p>`:''}<div class="owl-act"><a class="go" href="${esc(e[1])}" target="_blank" rel="noopener">${yt} Watch on YouTube ↗</a>${e[3]?`<button class="linkbtn" data-ep="${i}">Show on the map</button>`:''}</div></article>`).join('');
  document.querySelectorAll('#owlGrid [data-ep]').forEach(b=>b.onclick=()=>{const e=EPISODES[+b.dataset.ep];const c=document.getElementById('chip-'+e[3]);if(c&&c.getAttribute('aria-pressed')!=='true')c.click();
   let ll=e[4];if(!ll&&e[3]==='moon'&&O&&O.moonNow){const m=O.moonNow();ll=[m.lon,m.lat]}if(ll&&O&&O.flyTo)O.flyTo(ll[0],ll[1]);if(innerWidth<=860&&window.__opsCloseDrawer)window.__opsCloseDrawer()})}
 // Moon card: the two Moon episodes
 function moonLinks(){const c=document.getElementById('moonCard');if(!c||c.querySelector('.owl-moon'))return;const foot=c.querySelector('.sg-foot');const d=document.createElement('p');d.className='small owl-moon';
- d.innerHTML=`<b>From The Owlmanac:</b> ${EPISODES.filter(e=>e[3]==='moon').map(e=>`<a href="${esc(e[1])}" target="_blank" rel="noopener">${esc(e[0])} ↗</a>`).join(' · ')}`;if(foot)foot.before(d);else c.appendChild(d)}
+ d.innerHTML=`<b>From The OwlManac:</b> ${EPISODES.filter(e=>e[3]==='moon').map(e=>`<a href="${esc(e[1])}" target="_blank" rel="noopener">${esc(e[0])} ↗</a>`).join(' · ')}`;if(foot)foot.before(d);else c.appendChild(d)}
 moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObserver(moonLinks).observe(mh,{childList:true});
 // Intro splash (markup is written by the build before any script): the artwork stays until the visitor clicks or presses a key, or for 12 s at most (Derik, 2026-11-01: give people time to see it). When the globe is ready behind it, the loading bar finishes.
 const sp=document.getElementById('owlSplash');

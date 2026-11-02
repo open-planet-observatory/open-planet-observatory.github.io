@@ -149,7 +149,7 @@ html.ops.drawer-closed #ops-drawer{display:none}
 .ai-b{display:inline-block;font-size:.66rem;font-weight:700;border-radius:999px;padding:1px 6px;margin-left:5px;vertical-align:1px;border:1px solid var(--glass-line);color:var(--ink-2)}
 .ai-b.fr{border-color:var(--l-ai);color:var(--l-ai)}
 #aiCard .tbl td{vertical-align:top}
-/* The Owlmanac brand */
+/* The OwlManac brand */
 :root{--owl-yellow:#f2c43c;--owl-navy:#1f2d4a;--owl-rust:#b5532a}
 #ops-top .lockup{display:flex;flex-direction:column;line-height:1.05;min-width:0}
 #ops-top .owl-kicker{font-family:var(--mono,ui-monospace,monospace);font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--owl-yellow);text-decoration:none}
@@ -409,7 +409,7 @@ html[data-theme="light"] .alm-top,html[data-theme="light"] .alm-src,html[data-th
 .vy-mini{margin:0 0 12px;padding:8px 12px;border:1px solid rgba(242,196,60,.35);border-radius:999px;font-size:.82rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vy-mini b{color:var(--owl-yellow,#f2c43c);font-variant-numeric:tabular-nums}.vy-mini a{color:#9ad1ff}
 #uniLoading{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2001;padding:10px 18px;border-radius:999px;font-weight:600}
 
-/* ---- Owl theme: the Owlmanac banner art as the site's default dark look (warm near-black paper, cream ink, ochre accent) ---- */
+/* ---- Owl theme: the OwlManac banner art as the site's default dark look (warm near-black paper, cream ink, ochre accent) ---- */
 :root[data-theme="owl"]{
   --bg:#0B0906; --panel:#161108; --panel-2:#1F1810; --ink:#EFE4CC; --ink-2:#C9B995; --ink-3:#9A8B6D; --line:#332A1E;
   --ocean:#120F0B; --land:#2A2419; --land-line:#3E3526; --night:rgb(0 0 0 / .42); --grat:rgb(239 228 204 / .06);
