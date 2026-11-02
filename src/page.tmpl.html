@@ -510,6 +510,14 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
   </div>
   <div id="historyHost"><p class="small muted">Loading…</p></div>
 </section>
+<section aria-labelledby="h-sky" id="sky">
+  <div class="sec-head">
+    <div class="eyebrow">Sky tonight</div>
+    <h2 id="h-sky">What's up in your sky</h2>
+    <p class="muted">The Moon, the planets, the space stations and the stars above where you are, worked out in your browser from orbits and star catalogues, with the next meteor showers and eclipses you can see.</p>
+  </div>
+  <div id="skyHost"><p class="small muted">Open this panel to work out your sky.</p></div>
+</section>
 <section aria-labelledby="h-records" id="records">
   <div class="sec-head">
     <div class="eyebrow">Records</div>
@@ -826,8 +834,10 @@ window.LIBRARY=[
 ["Space","NASA JPL Horizons","Positions of 15 deep-space spacecraft for the Solar System view","Daily","go","NASA/JPL public service; credit requested","https://ssd.jpl.nasa.gov/horizons/","map"],
 ["Space","NASA JPL Small-Body Database","Orbits of comets passing the Sun within six months of today","Daily","go","NASA/JPL public service; credit requested","https://ssd.jpl.nasa.gov/tools/sbdb_query.html","map"],
 ["Space","NASA JPL CNEOS close approaches","Asteroids passing within 0.05 AU of Earth in the next 60 days","Daily","go","NASA/JPL public service; credit requested","https://cneos.jpl.nasa.gov/ca/","panel"],
-["Space","Astronomy Engine","Moon phase, distance, overhead point, quarters and eclipses, computed in your browser","Live","go","MIT licence","https://github.com/cosinekitty/astronomy","map"],
+["Space","Astronomy Engine","Moon phase, distance, overhead point, quarters and eclipses; Sky tonight's rise and set times, planet positions and eclipses from your location, computed in your browser","Live","go","MIT licence","https://github.com/cosinekitty/astronomy","map"],
 ["Space","EOX Sentinel-2 cloudless 2016","10 m cloud-free imagery the 3D globe sharpens to when you zoom in (Contains modified Copernicus Sentinel data 2016 & 2017)","Fixed mosaic","go","CC BY 4.0","https://s2maps.eu/","map"],
+["Space","IMO Meteor Shower Calendar","Peak nights and activity dates of the main meteor showers, for Sky tonight","Yearly","lim","Names and dates only, credited and linked; IMO states no licence","https://www.imo.net/calendar/","link"],
+["Space","Open-Meteo place search","Turns a typed town name into a position for Sky tonight (only the typed name is sent)","On request","go","CC BY 4.0","https://open-meteo.com/en/docs/geocoding-api","link"],
 ["Space","CelesTrak","Orbital elements for every tracked satellite","Every few hours","go","Free","https://celestrak.org/","map"],
 ["Space","NOAA Space Weather Prediction Center","K-index, solar flares, aurora forecast","Every few minutes","go","Public domain","https://www.swpc.noaa.gov/","chart"],
 ["Space","NASA Near-Earth Object API","Asteroid close approaches","Daily","go","Free","https://api.nasa.gov/","link"],

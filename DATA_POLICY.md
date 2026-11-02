@@ -160,6 +160,19 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
 - No prizes, paid entries or sponsors are attached to the game.
 
+## Sky tonight
+
+- Everything is computed in the visitor's browser; the project's servers are not involved. The Moon's phase, rise and set, planet positions, brightness and rise and set, twilight times and eclipses use Astronomy Engine (MIT). Space-station passes (ISS, catalogue 25544; Tiangong, 48274) use satellite.js (MIT) with the CelesTrak orbital elements the globe already loads; a pass counts as visible when the station is at least 10° up, in sunlight, and the Sun is at least 6° below the visitor's horizon. The page states how old the elements are.
+- The all-sky chart uses the site's star file (ESA Hipparcos new reduction, CC BY-NC 3.0 IGO; stars to magnitude 5) and d3-celestial's constellation figures (BSD-3-Clause), drawn as a stereographic view of the whole sky for the visitor's place and time.
+- Meteor showers: the names, peak nights and activity dates are the International Meteor Organization's 2026/2027 Meteor Shower Calendar, as published, with a link to IMO for each shower's own description, which is not copied. IMO states no licence; only the names and dates are used, credited and linked. The Moon's brightness on each peak night is the site's own computation. When the calendar runs out (after August 2027) the page says so until the next calendar is added; old dates are never shown as current.
+- Location: the browser is asked once. The position is rounded to 0.1° (about 10 km) and kept only in this browser (localStorage); it is never sent to the project or anyone else. Visitors who decline can click a spot on the globe or type a place name; a typed name (and nothing else) goes from the visitor's browser to Open-Meteo's place search (CC BY 4.0), which returns candidate places and their time zones.
+- Blind spot: these are positions computed from orbits and star catalogues, not observations. Clouds, haze, light pollution and the visitor's local horizon decide what can really be seen; satellite predictions drift as orbits change.
+
+## Find it in the sky (the daily star game)
+
+- Five targets a day for the visitor's own sky: named stars brighter than magnitude 2.1 and at least 15° up, plus planets and the Moon at least 10° up, picked with a seed made from the date and the rounded position, so the same place gets the same targets all day. The player taps the Sky tonight chart with the names hidden; the score is the site's own rule (1,000 points within 3°, halving every 8° beyond). It is a game score, not a measurement.
+- Scores, streaks and progress stay in the visitor's browser (localStorage). The copied result contains the date, the score and coloured squares, never the location. No prizes, paid entries or sponsors.
+
 ## Source Bounty
 
 - Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. Contributors are not named on the site unless that is decided separately.

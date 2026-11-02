@@ -752,3 +752,25 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px));mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px))}
 /* Earth and Moon view parked (Derik, 2026-11-02); the code stays */
 #moonViewBtn,#moonSizeBtn{display:none!important}
+/* Sky tonight */
+.sky-loc{border:1px solid var(--glass-line);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+.sky-loc-b{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 4px;align-items:center}
+.sky-q{display:flex;gap:6px;flex:1 1 220px}.sky-q input{flex:1;min-width:0;padding:6px 8px;border-radius:8px;border:1px solid var(--glass-line);background:rgba(255,255,255,.05);color:inherit;font:inherit}
+.sky-res{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0}.sky-note{margin:4px 0 0}
+.sky-chart{position:relative;max-width:440px;margin:4px auto}.sky-chart canvas{display:block;width:100%;aspect-ratio:1;touch-action:manipulation;cursor:crosshair}
+.sky-tip{position:absolute;z-index:2;pointer-events:none;background:rgba(8,14,28,.92);border:1px solid var(--glass-line);border-radius:8px;padding:5px 8px;font-size:.78rem;line-height:1.35;max-width:150px}
+.sky-tip[hidden]{display:none}
+.sky-ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;margin:6px 0}.sky-ctl input[type=range]{vertical-align:middle;width:140px}
+.sky-pl th,.sky-iss th{white-space:nowrap}.sky-pl td{font-size:.84rem}.sky-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.sky-on{font-size:.68rem;padding:1px 6px;border-radius:9px;background:rgba(124,204,255,.18);color:#9fdcff;white-space:nowrap}
+.sky-h{margin:12px 0 6px;font-size:.92rem}.sky-ec{margin:4px 0;padding-left:18px;font-size:.86rem}.sky-ec li{margin:3px 0}
+.sky-s{scroll-margin-top:10px}
+.sky-big{position:fixed;inset:0;z-index:9000;background:rgba(2,6,16,.72);display:flex;align-items:center;justify-content:center;padding:12px}
+.sky-big[hidden]{display:none}
+.sky-big-in{width:min(94vw,calc(100vh - 200px),760px);min-width:min(94vw,360px);max-height:96vh;overflow:auto;padding:12px 14px;border-radius:16px}
+.sky-big-in .sky-chart{max-width:none}
+.sky-big-h{display:flex;align-items:flex-start;gap:8px;justify-content:space-between}.sky-big-t{flex:1}
+.sky-pick{display:flex;gap:10px;align-items:center}
+@media (min-width:861px) and (max-width:1279px){html.ops .gn-b{padding-left:9px;padding-right:9px}}
+.sf-q{font-size:1.15rem;margin-right:6px}.sf-rows{margin:6px 0;padding-left:0;list-style:none;font-size:.88rem}.sf-rows li{margin:2px 0}
+#skyBigF{margin-top:6px;line-height:1.5}#skyBigF .btn{margin-left:4px}
