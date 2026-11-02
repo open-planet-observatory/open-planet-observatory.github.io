@@ -108,6 +108,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - The file covers yesterday, today and tomorrow (UTC) so each visitor sees their own date. Each date is fetched once a day; if a source fails, the page says so and shows nothing older in its place.
 - Blind spots, stated on the page: Wikipedia's list is chosen by its editors and leans toward Europe and North America; the earthquake catalogue is thin before the 1960s.
 
+## The Moon
+
+- The Moon globe uses NASA's Lunar Reconnaissance Orbiter Wide Angle Camera global mosaic, served as map tiles by NASA Moon Trek and loaded directly by the visitor's browser. The same mosaic covers the Moon in the Earth and Moon view.
+- Names come from the IAU Gazetteer of Planetary Nomenclature (USGS Astrogeology, public domain), rebuilt weekly from its nightly shapefile: seas, craters 20 km across or larger, mountains, valleys, scarps and similar features, and the gazetteer's landing-site names ("Statio"). Lettered satellite craters and the gazetteer's astronaut-named features are left out, because the site names no individuals; landing sites are labelled by mission (Apollo 11, Chang'e 4…), taken from the gazetteer's own description. The gazetteer has station names for six landings so far; other landing sites are not shown yet.
+- The Sun's direction on the Moon, Earth's position in the Moon's sky and Earth's rotation are computed in the browser with Astronomy Engine (the IAU rotation models); the Moon-fixed frame agrees with the libration Astronomy Engine reports to about 0.03°. Earth seen from the Moon wears NASA Blue Marble (GIBS) at its true size, phase and rotation.
+- In the Earth and Moon view the Moon is drawn 4 times larger by default, and labelled so; "Moon at true size" shows it as it is.
+
 ## Records
 
 - Records (Learn menu) are rebuilt weekly by collector/records.mjs. Every figure is its source's own, in the source's units: measured values of places, objects and structures from Wikidata (CC0), and agency lists from USGS (largest earthquakes since 1900), the Smithsonian Global Volcanism Program (VEI 7 eruptions), NASA JPL CNEOS (largest fireballs), NOAA NCEI (warmest years), NSIDC (lowest September Arctic sea ice) and the NASA Exoplanet Archive. Voyager 1's distance is counted on from NASA JPL Horizons, as on the countdown.

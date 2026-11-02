@@ -21,6 +21,7 @@ import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar
 import { collectGame } from './game.mjs';
 import { collectHistory } from './history.mjs';
 import { collectRecords } from './records.mjs';
+import { collectMoonFeatures } from './moon-features.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -231,6 +232,11 @@ let history = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/history.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   try { history = await collectHistory({ prev: p, now }); } catch (e) { history = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (history.out) await fs.writeFile(path.join(OUT, 'history.json'), JSON.stringify(history.out)); log('history', history.status); }
+// Moon feature names (collector/moon-features.mjs): data/moon-features.json, weekly, from the IAU gazetteer's nightly shapefile.
+let moonf = { out: null, status: 'not run' };
+{ let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/moon-features.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  try { moonf = await collectMoonFeatures({ prev: p, now }); } catch (e) { moonf = { out: p, status: 'error: ' + e.message.slice(0, 160) + (p ? ' (kept last week\'s names)' : '') }; }
+  if (moonf.out) await fs.writeFile(path.join(OUT, 'moon-features.json'), JSON.stringify(moonf.out)); log('moon features', moonf.status); }
 // Records (collector/records.mjs): data/records.json, rebuilt weekly from Wikidata and the agencies; a failed record is retried within the hour.
 let records = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/records.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
@@ -260,7 +266,7 @@ try { const r = await fetch('https://sdo.gsfc.nasa.gov/assets/img/latest/latest_
 catch (e) { sunImg = { ok: false, error: e.message.slice(0, 160), fetched: now.toISOString(), status: 'error: ' + e.message.slice(0, 160) }; }
 await fs.writeFile(path.join(OUT, 'sun.json'), JSON.stringify(sunImg)); log('sun image', sunImg.status);
 // Automatic data checks (collector/checks.mjs): may withhold items that fail, so they run before files are written.
-let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, cosmicweb, voyager, game: game.out, history: history.out, records: records.out, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
+let checks; try { checks = runChecks({ snap: snap.out, nature: nature.out, orbits: orb.out, grace: grace.json, solar: solar.out, exo: exo.out, stars, sun: sunImg, galaxies, cosmicweb, voyager, game: game.out, history: history.out, records: records.out, moonf: moonf.out, meta: { ...meta, lastRun: { nature: nature.status } }, now }); }
 catch (e) { checks = { asOf: stamp, passed: 0, failed: 1, warnings: 0, skipped: 0, results: [{ area: 'Checks', id: 'run', status: 'fail', rule: 'The checks themselves run', detail: e.message.slice(0, 200) }] }; }
 await fs.writeFile(path.join(OUT, 'checks.json'), JSON.stringify(checks));
 log('checks', `${checks.passed} passed, ${checks.failed} failed, ${checks.warnings} warnings`);
@@ -271,7 +277,7 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;

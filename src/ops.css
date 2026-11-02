@@ -715,3 +715,28 @@ html.ops.slim .gn-act .gn-play{display:inline-flex}
 #ops-rail #imgSeg{display:grid;grid-template-columns:1fr 1fr;gap:2px;border-radius:16px}
 #ops-rail #imgSeg button{white-space:nowrap;justify-content:center;text-align:center}
 #measuredBtn[hidden]{display:none!important}
+/* search hidden until rebuilt */
+html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
+#moonSizeBtn[hidden]{display:none!important}
+/* The Moon globe (src/moonglobe.js) */
+#moonGlobe{position:absolute;inset:0;z-index:3;background:#000}
+#moonGlobe[hidden]{display:none!important}
+#moonGlobe .mg-canvas{position:absolute;inset:0}
+#moonGlobe .mg-credits{position:absolute;left:12px;bottom:64px;font-size:.62rem;color:var(--ink-3);max-width:50%;pointer-events:auto}
+#moonGlobe .mg-credits a{color:inherit}
+.mg-ui{position:absolute;right:12px;top:72px;width:min(320px,calc(100% - 24px));padding:12px 14px;border-radius:14px;z-index:2;max-height:calc(100% - 160px);overflow:auto}
+.mg-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.mg-h b{font-size:1rem}
+.mg-x{border:1px solid var(--glass-line);background:none;color:var(--ink);border-radius:999px;width:28px;height:28px;cursor:pointer;font-size:1rem}
+.mg-s{margin:4px 0 8px;font-size:.8rem;color:var(--ink-2)}
+.mg-row{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0}
+.mg-k{display:flex;flex-wrap:wrap;gap:4px 10px;margin:8px 0;font-size:.72rem;color:var(--ink-3)}
+.mg-k i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;vertical-align:middle}
+.mg-card{border-top:1px solid var(--glass-line);padding-top:8px;margin-top:6px;font-size:.82rem;display:flex;flex-direction:column;gap:3px}
+.mg-card[hidden]{display:none!important}
+.mg-card span{color:var(--ink-2)}
+.mg-card a{color:var(--accent,#D9A441)}
+.mg-src{font-size:.68rem;color:var(--ink-3);margin:8px 0 0}
+.mg-src a{color:inherit}
+.zmoon[aria-pressed="true"]{border-color:var(--accent,#D9A441)!important}
+@media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:8px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}

@@ -289,15 +289,18 @@ let moonView=false;const homeMax=sscc.maximumZoomDistance;
 const TREK='https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/';
 let moonTex=null,moonBig=true,moonEnt=null;
 function moonTexture(){if(moonTex)return moonTex;moonTex=new Promise(res=>{const cv=document.createElement('canvas');cv.width=1024;cv.height=512;const g=cv.getContext('2d');g.fillStyle='#8a8984';g.fillRect(0,0,1024,512);let n=0,ok=0;
- for(let r=0;r<2;r++)for(let c=0;c<4;c++){const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{g.drawImage(im,c*256,r*256);ok++;if(++n===8)res(ok?cv:null)};im.onerror=()=>{if(++n===8)res(ok?cv:null)};im.src=TREK+'1/'+r+'/'+c+'.jpg'}});return moonTex}
-function moonBody(on){if(moonEnt){viewer.entities.remove(moonEnt);moonEnt=null}scene.moon.show=!on;const sb=document.getElementById('moonSizeBtn');if(sb){sb.hidden=!on;sb.setAttribute('aria-pressed',!moonBig)}if(!on||!O.moonNow)return;
+ for(let r=0;r<2;r++)for(let c=0;c<4;c++){const im=new Image();im.crossOrigin='anonymous';im.onload=()=>{g.drawImage(im,c*256,r*256);ok++;if(++n===8)res(cv)};im.onerror=()=>{if(++n===8)res(cv)};/* a plain grey Moon if NASA's tiles do not load */im.src=TREK+'1/'+r+'/'+c+'.jpg'}});return moonTex}
+let moonSphere=null;function moonBody(on){if(moonEnt){viewer.entities.remove(moonEnt);moonEnt=null}if(moonSphere){moonSphere.remove();moonSphere=null}scene.moon.show=!on;const sb=document.getElementById('moonSizeBtn');if(sb){sb.hidden=!on;sb.setAttribute('aria-pressed',!moonBig)}if(!on||!O.moonNow)return;
  const m=O.moonNow(),mp=C.Cartesian3.fromDegrees(m.lon,m.lat,m.dist*1000-6371000);
  const x=C.Cartesian3.normalize(C.Cartesian3.negate(mp,new C.Cartesian3()),new C.Cartesian3()),y=C.Cartesian3.normalize(C.Cartesian3.cross(C.Cartesian3.UNIT_Z,x,new C.Cartesian3()),new C.Cartesian3()),z=C.Cartesian3.cross(x,y,new C.Cartesian3());
- const q=C.Quaternion.fromRotationMatrix(new C.Matrix3(x.x,y.x,z.x,x.y,y.y,z.y,x.z,y.z,z.z));const R=1737400*(moonBig?4:1);
- moonEnt=viewer.entities.add({position:mp,orientation:q,ellipsoid:{radii:new C.Cartesian3(R,R,R),material:C.Color.fromCssColorString('#8a8984')},
+ const rot=new C.Matrix3(x.x,y.x,z.x,x.y,y.y,z.y,x.z,y.z,z.z);const R=1737400*(moonBig?4:1);
+ /* lit only by the Sun (src/moonglobe.js), so its phase is real; the sunlight direction goes into the sphere's own frame */
+ let sunLocal=new C.Cartesian3(1,0,0);try{const t=viewer.clock.currentTime,M=C.Transforms.computeIcrfToFixedMatrix(t)||C.Transforms.computeTemeToPseudoFixedMatrix(t),sun=C.Cartesian3.normalize(C.Matrix3.multiplyByVector(M,C.Simon1994PlanetaryPositions.computeSunPositionInEarthInertialFrame(t),new C.Cartesian3()),new C.Cartesian3());sunLocal=new C.Cartesian3(C.Cartesian3.dot(sun,x),C.Cartesian3.dot(sun,y),C.Cartesian3.dot(sun,z))}catch(e){}
+ if(window.OwlLitSphere){moonTexture().then(cv=>{if(!moonView||!moonEnt)return;if(moonSphere)moonSphere.remove();moonSphere=window.OwlLitSphere(scene,{radii:new C.Cartesian3(R,R,R),image:cv});moonSphere.set(mp,rot,sunLocal)})}
+ moonEnt=viewer.entities.add({position:mp,
   label:{...LABEL(moonBig?'Moon (drawn 4× larger)':'Moon (true size)'),pixelOffset:new C.Cartesian2(0,moonBig?-46:-16),horizontalOrigin:C.HorizontalOrigin.CENTER},
   description:`<b>The Moon</b>${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km from Earth's centre<br><span style="opacity:.75">Position: Astronomy Engine, in your browser · Surface: NASA LRO WAC mosaic (Moon Trek)</span>`});
- moonTexture().then(cv=>{if(cv&&moonEnt)moonEnt.ellipsoid.material=new C.ImageMaterialProperty({image:cv})})}
+}
 let moonHid=null;/* the Earth and Moon view shows the two worlds alone: map layers and satellites step aside and come back after */
 function moonDeclutter(on){if(on&&!moonHid){moonHid=[];for(let i=0;i<viewer.dataSources.length;i++){const d=viewer.dataSources.get(i);moonHid.push([d,d.show]);d.show=false}moonHid.push(['sat',satPts.show]);satPts.show=satLbl.show=false}
  else if(!on&&moonHid){moonHid.forEach(([d,v])=>{if(d==='sat')satPts.show=satLbl.show=v;else d.show=v});moonHid=null}}
