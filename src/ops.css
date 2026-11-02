@@ -21,7 +21,11 @@ html.ops.rail-closed #ops-map .zoomctl{left:14px}
 #ops-top{position:relative;z-index:3;margin:10px 10px 0;padding:8px 12px;min-width:0;display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap}
 #ops-top .brand{display:flex;align-items:center;gap:10px;min-width:0}
 #ops-top .brand-logo{width:40px;height:40px;flex:none;border-radius:50%;box-shadow:0 0 0 1.5px rgb(240 196 64 / .55)}
-@media (max-width:640px){#ops-top .brand-logo{width:32px;height:32px}}
+#ops-top .brand-wm{margin:0;line-height:0;font-size:0;color:var(--ink);border-radius:6px}
+#ops-top .brand-wm:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+#ops-top .wm{display:block;height:44px;width:auto}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media (max-width:640px){#ops-top .brand-logo{width:32px;height:32px}#ops-top .wm{height:36px}}
 #ops-top h1{font-size:1.15rem;letter-spacing:0;white-space:nowrap}
 #ops-top .eyebrow{font-size:.62rem}
 #ops-top .tabs{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
@@ -494,6 +498,7 @@ html.owl-splash-on{overflow:hidden}
 html.ops.slim #ops-top{padding:5px 10px;flex-wrap:nowrap;gap:10px}
 html.ops.slim #ops-top .eyebrow,html.ops.slim #ops-top #stampSlot,html.ops.slim #ops-top .right{display:none}
 html.ops.slim #ops-top .brand-logo{width:30px;height:30px}
+html.ops.slim #ops-top .wm{height:30px}
 html.ops.slim #ops-top h1{font-size:.98rem}
 html.ops.slim #ops-top .qslot{display:none}
 html.ops.slim.search-open #ops-top .qslot{display:block;flex:1 1 auto;max-width:none}
