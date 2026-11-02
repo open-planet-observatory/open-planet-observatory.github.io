@@ -56,7 +56,7 @@
     const ssc = sc.screenSpaceCameraController; ssc.minimumZoomDistance = 200; ssc.maximumZoomDistance = 2.5e7;
     /* zoom like the Earth globe: wheel, pinch, right-drag, and trackpad pinch (Chrome sends ctrl+wheel, Safari gesture events) */
     ssc.zoomEventTypes = [Cc.CameraEventType.WHEEL, Cc.CameraEventType.PINCH, Cc.CameraEventType.RIGHT_DRAG, { eventType: Cc.CameraEventType.WHEEL, modifier: Cc.KeyboardEventModifier.CTRL }];
-    el.addEventListener('wheel', e => { if (e.ctrlKey || earthMode) e.preventDefault(); if (earthMode) lens(Math.exp(e.deltaY * (e.ctrlKey ? .01 : .0015))); }, { passive: false });
+    el.addEventListener('wheel', e => { if (e.ctrlKey || earthMode) e.preventDefault(); if (earthMode) lens(Math.exp(e.deltaY * (e.ctrlKey ? .006 : .0015))); }, { passive: false });
     let gS = 1; el.addEventListener('gesturestart', e => { e.preventDefault(); gS = 1; }, { passive: false });
     el.addEventListener('gesturechange', e => { e.preventDefault(); const f = e.scale / gS; gS = e.scale; if (!isFinite(f) || f <= 0) return; f > 1 ? zoom(1 - 1 / f) : zoom(-(1 / f - 1)); }, { passive: false });
     el.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
@@ -136,7 +136,12 @@
     setControls(true); V.camera.flyTo({ destination: cam, orientation: { direction: dir, up }, duration: 2.4, complete: () => { V.camera.frustum.fov = Cc.Math.toRadians(30); } });
     const lon = Math.atan2(best[1], best[0]) * 180 / Math.PI, lat = Math.asin(best[2]) * 180 / Math.PI;
     const el = ui.querySelector('#mgState'); if (el) el.textContent = `Earthrise: Earth above the lunar horizon at its true size, phase and rotation right now, seen from 110 km above the Moon (over ${Math.abs(lat).toFixed(0)}° ${lat >= 0 ? 'N' : 'S'}, ${Math.abs(lon).toFixed(0)}° ${lon >= 0 ? 'E' : 'W'}), as from a lunar orbiter. Scroll, pinch or +/− to zoom the lens; drag to look around.`; }
-  function lens(f) { const Cc = C(), fov = V.camera.frustum.fov * 180 / Math.PI; V.camera.frustum.fov = Cc.Math.toRadians(Math.max(1.5, Math.min(70, fov * f))); }
+  /* the lens zooms on Earth: the view re-aims so Earth stays in the upper part of the frame (tilt shrinks with the field) */
+  function lens(f) { const Cc = C(), cam = V.camera, fov = Math.max(1.5, Math.min(70, cam.frustum.fov * 180 / Math.PI * Math.max(.8, Math.min(1.25, f)))); cam.frustum.fov = Cc.Math.toRadians(fov);
+    const ep = earthPos(), up0 = Cc.Cartesian3.normalize(cam.positionWC, new Cc.Cartesian3()); let dir = Cc.Cartesian3.normalize(Cc.Cartesian3.subtract(ep, cam.positionWC, new Cc.Cartesian3()), new Cc.Cartesian3());
+    const right = Cc.Cartesian3.normalize(Cc.Cartesian3.cross(dir, up0, new Cc.Cartesian3()), new Cc.Cartesian3());
+    dir = Cc.Matrix3.multiplyByVector(Cc.Matrix3.fromQuaternion(Cc.Quaternion.fromAxisAngle(right, Cc.Math.toRadians(-Math.min(4, fov * .13)))), dir, new Cc.Cartesian3());
+    cam.setView({ orientation: { direction: dir, up: Cc.Cartesian3.normalize(Cc.Cartesian3.cross(right, dir, new Cc.Cartesian3()), new Cc.Cartesian3()) } }); }
   function openMoon() {
     if (!window.Cesium || !window.Astronomy) return; if (O.closeUniverse && document.querySelector('#uni.on')) { try { O.closeUniverse(); } catch (e) { } }
     if (!V) build(); const g = window.__obs3d; if (g && g.setMoonView) { try { g.setMoonView(false); } catch (e) { } }
