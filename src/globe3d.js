@@ -337,10 +337,15 @@ handler.setInputAction(m=>{if(document.documentElement.classList.contains('game-
 // ----- spin, fly-to, mode switch -----
 let spin=!matchMedia('(prefers-reduced-motion: reduce)').matches,idle=true;
 viewer.clock.onTick.addEventListener(()=>{if(spin&&idle&&active)viewer.scene.camera.rotate(C.Cartesian3.UNIT_Z,-0.0006)});
-['pointerdown','wheel','touchstart'].forEach(ev=>el.addEventListener(ev,()=>{spin=false;O.setSpin&&O.setSpin(false)},{passive:true}));
+/* the press that tucks the panels away (src/nav.js) leaves the globe turning; a later press, a drag or a zoom stops it */
+let tuckPd=null;const justTucked=()=>performance.now()-(window.__obsTuckT||0)<120;const stopSpin=()=>{spin=false;O.setSpin&&O.setSpin(false)};
+el.addEventListener('pointerdown',e=>{if(justTucked()){tuckPd=[e.clientX,e.clientY];return}tuckPd=null;stopSpin()},{passive:true});
+el.addEventListener('pointermove',e=>{if(tuckPd&&e.buttons&&Math.hypot(e.clientX-tuckPd[0],e.clientY-tuckPd[1])>6){tuckPd=null;stopSpin()}},{passive:true});
+el.addEventListener('pointerup',()=>{tuckPd=null},{passive:true});
+['wheel','touchstart'].forEach(ev=>el.addEventListener(ev,()=>{if(!justTucked()&&!tuckPd)stopSpin()},{passive:true}));
 const origFly=O.flyTo,origSpin=O.setSpin;
 O.flyTo=(lon,lat)=>{if(active){spin=false;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(lon,lat,1.6e7),duration:1.6})}else origFly(lon,lat)};
-O.setSpin=v=>{spin=v;origSpin(v)};
+O.setSpin=v=>{spin=v;origSpin(v)};O.spinning=()=>spin;
 // zoom buttons drive the 3D camera while it is active
 const zc=document.getElementById('zoomctl')||document.querySelector('.zoomctl');if(zc){host.appendChild(zc);zc.style.zIndex=4;
  const Z={zin:()=>viewer.camera.zoomIn(viewer.camera.positionCartographic.height*.4),zout:()=>viewer.camera.zoomOut(viewer.camera.positionCartographic.height*.6),zreset:()=>{if(moonView){setMoonView(false);return}spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
