@@ -4,7 +4,7 @@
 const O=window.__obs;if(!O)return;
 const $=s=>document.querySelector(s);const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const html=document.documentElement;
-// theme: "owl" (warm near-black, cream ink, ochre accent: the OwlManac art) by default, remembered per browser.
+// theme: "owl" (warm near-black, cream ink, ochre accent: the Owlmanac art) by default, remembered per browser.
 // "light" and the older blue "dark" stay available. Browsers that stored "dark" before the owl theme existed move to owl once.
 const THEMES=['owl','light','dark'];
 let theme='owl';try{theme=localStorage.getItem('obs-theme')||'owl';if(!localStorage.getItem('obs-theme-v2')){if(theme==='dark')theme='owl';localStorage.setItem('obs-theme-v2','1');localStorage.setItem('obs-theme',theme)}}catch(e){}
@@ -26,8 +26,8 @@ const tip=$('#tip');if(tip)document.body.appendChild(tip);
 
 // top bar
 const top=$('#ops-top');
-const WORDMARK=`<svg class="wm" viewBox="0 0 400 100" role="img" aria-label="The OwlManac Observatory" focusable="false"><g transform="translate(0,6)"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="9"/><path d="M11 14 L7 -2 L21 9 Z" fill="currentColor"/><path d="M49 14 L53 -2 L39 9 Z" fill="currentColor"/><circle cx="21" cy="27" r="6.2" fill="currentColor"/><circle cx="39" cy="27" r="6.2" fill="currentColor"/><circle cx="21" cy="27" r="2.6" fill="#F2C43C"/><circle cx="39" cy="27" r="2.6" fill="#F2C43C"/><path d="M30 33 L27 38 L33 38 Z" fill="#C9602C"/></g><text x="62" y="56" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="46" letter-spacing="1" fill="currentColor">wlManac</text><text x="62" y="92" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="600" font-size="24" letter-spacing="2.5" fill="currentColor" opacity=".8">Observatory</text></svg>`;
-top.innerHTML=`<div class="brand"><h1 class="brand-wm">${WORDMARK}<span class="sr-only">The OwlManac Observatory</span></h1><span class="eyebrow">Free public data · research &amp; education only</span></div>
+const WORDMARK=`<svg class="wm" viewBox="0 0 400 100" role="img" aria-label="The Owlmanac Observatory" focusable="false"><g transform="translate(0,6)"><circle cx="30" cy="30" r="24" fill="none" stroke="currentColor" stroke-width="9"/><path d="M11 14 L7 -2 L21 9 Z" fill="currentColor"/><path d="M49 14 L53 -2 L39 9 Z" fill="currentColor"/><circle cx="21" cy="27" r="6.2" fill="currentColor"/><circle cx="39" cy="27" r="6.2" fill="currentColor"/><circle cx="21" cy="27" r="2.6" fill="#F2C43C"/><circle cx="39" cy="27" r="2.6" fill="#F2C43C"/><path d="M30 33 L27 38 L33 38 Z" fill="#C9602C"/></g><text x="62" y="56" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="800" font-size="46" letter-spacing="1" fill="currentColor">wlmanac</text><text x="62" y="92" font-family="Archivo,'Helvetica Neue',Arial,sans-serif" font-weight="600" font-size="24" letter-spacing="2.5" fill="currentColor" opacity=".8">Observatory</text></svg>`;
+top.innerHTML=`<div class="brand"><h1 class="brand-wm">${WORDMARK}<span class="sr-only">The Owlmanac Observatory</span></h1><span class="eyebrow">Free public data · research &amp; education only</span></div>
 <div class="right"><div class="stamp" id="stampSlot"></div><button class="tbtn" id="themeBtn" title="Switch light / dark"></button></div>
 <div class="tabs" id="panelTabs" role="tablist"></div>`;
 const qf=$('#qform');if(qf){const qb=document.createElement('div');qb.className='qslot';qb.appendChild(qf);top.insertBefore(qb,$('#panelTabs'));qf.addEventListener('submit',()=>openPanel('search'));$('#q').addEventListener('input',()=>{if($('#q').value.trim())openPanel('search')})}

@@ -15,7 +15,7 @@
     return { getBoundingClientRect: () => ({ left: x0, top: y0, right: x1, bottom: y1, width: x1 - x0, height: y1 - y0 }) }; };
   const unslim = () => { if (O.setSlim && html.classList.contains('slim')) O.setSlim(false); };
   const STEPS = [
-    { title: 'Welcome to The OwlManac Observatory', el: null,
+    { title: 'Welcome to The Owlmanac Observatory', el: null,
       body: 'Free public data about the planet, gathered on one page for research and learning. Every number comes from a named source and links back to it. Nothing here tracks a person. This tour takes about a minute.' },
     { title: 'The globe', el: () => globeArea(),
       body: 'Drag to turn it, scroll or pinch to zoom. Each dot is something happening now: earthquakes, storms, fires, alerts, satellites. Click one to see what the source says and when. Touch the globe and the panels tuck away so it fills the screen; click the thin bar at the top to bring them back.' },
@@ -29,8 +29,8 @@
       body: 'Under Learn, “Sources” lists every feed with its licence and how often it updates, and “Layers & readings” explains each layer and what it can’t show. When a feed fails, the page says so instead of showing old numbers.' },
     { title: 'Leave Earth', el: () => $('#ops-map .zoomctl') || $('.zoomctl'), prep: () => { unslim(); if (phone()) html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); }, /* the panel would hide half the row */
       body: 'Fly out from here: the Solar System as it is right now, a million real stars, the Milky Way, 43,000 galaxies in the cosmic web, and the oldest light in the universe. ⊕ Earth brings you home. “Tour Universe” flies the whole way with a guide.' },
-    { title: 'Music and Voyager', el: () => $('.gn-act'), prep: unslim,
-      body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. That’s the tour: enjoy exploring.' }
+    { title: 'Music, Voyager and search', el: () => $('.gn-act'), prep: unslim,
+      body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. ⌕, or the / key, searches everything. That’s the tour: enjoy exploring.' }
   ];
   let i = 0, shade = null, card = null, catcher = null, keyH = null, resH = null, prevFocus = null;
   function place() { const st = STEPS[i]; let el = st.el ? st.el() : null; if (el && !vis(el)) el = null;

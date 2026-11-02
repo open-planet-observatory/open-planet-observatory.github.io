@@ -1,6 +1,6 @@
 # Data policy
 
-The OwlManac Observatory (formerly Open Planet Observatory) is built to inform, not to surveil. These rules are part of the project, not suggestions. A change that breaks one of them will not be merged.
+The Owlmanac Observatory (formerly Open Planet Observatory) is built to inform, not to surveil. These rules are part of the project, not suggestions. A change that breaks one of them will not be merged.
 
 ## What the page shows
 
@@ -136,7 +136,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 ## Voyager 1 countdown
 
 - The moment Voyager 1 first reaches one light-day from Earth (173.1446 AU) is computed by the collector from NASA JPL Horizons' geocentric range for Voyager 1 (6-hour grid, refined to the minute), and recomputed daily. The distance on the banner counts up from Horizons' latest hourly value at its stated range-rate. If Horizons does not answer, the banner says the figure is yesterday's. The banner retires itself a week after the moment.
-- Video links on the banner are The OwlManac's own.
+- Video links on the banner are The Owlmanac's own.
 
 ## Forecast where you click
 
