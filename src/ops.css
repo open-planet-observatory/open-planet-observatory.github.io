@@ -774,3 +774,16 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 @media (min-width:861px) and (max-width:1279px){html.ops .gn-b{padding-left:9px;padding-right:9px}}
 .sf-q{font-size:1.15rem;margin-right:6px}.sf-rows{margin:6px 0;padding-left:0;list-style:none;font-size:.88rem}.sf-rows li{margin:2px 0}
 #skyBigF{margin-top:6px;line-height:1.5}#skyBigF .btn{margin-left:4px}
+/* Inside the Earth */
+.in-m{flex-wrap:wrap}.in-fig{max-width:440px;margin:6px auto 0}
+.in-cut,.in-lad,.in-prof{display:block;width:100%;height:auto;color:var(--ink-2,#ccc);margin:4px auto}
+.in-lad,.in-prof{max-width:440px}
+.in-chk{display:block;margin:2px 0 6px}
+.in-zone{border:1px solid var(--glass-line);border-radius:10px;padding:8px 10px;margin:4px 0 8px;font-size:.86rem}.in-zone table{margin-top:6px}
+.in-key{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:2px 0 8px}.in-k{display:inline-flex;align-items:center;gap:5px}.in-k i{display:inline-block;width:14px;height:3px;border-radius:2px}
+.in-t th .small{font-weight:400}
+.in-q h4{margin:4px 0;font-size:.95rem}.in-tag{display:inline-block;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:9px;font-weight:700}
+.in-tag.con{background:rgba(124,220,150,.16);color:#8fe3a8}.in-tag.deb{background:rgba(255,170,90,.16);color:#ffbe82}
+:root[data-theme="light"] .in-tag.con{color:#1d6b35}:root[data-theme="light"] .in-tag.deb{color:#8a4a0c}
+.in-papers{margin:6px 0 0;padding-left:16px}.in-papers li{margin:4px 0}
+.in-m button[aria-pressed="true"] .muted{color:inherit;opacity:.75}
