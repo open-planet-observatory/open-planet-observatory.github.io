@@ -23,10 +23,14 @@ const gibs=(layer,level,ext,time)=>new C.UrlTemplateImageryProvider({url:GIBS+la
 // Cloud-free 10 m detail for close zoom: EOX Sentinel-2 cloudless 2016 (CC BY 4.0, free with this attribution).
 const EOX_CREDIT='<a href="https://s2maps.eu" target="_blank" rel="noopener">Sentinel-2 cloudless</a> by <a href="https://eox.at" target="_blank" rel="noopener">EOX IT Services GmbH</a> (Contains modified Copernicus Sentinel data 2016 &amp; 2017), CC BY 4.0';
 const eox=()=>new C.UrlTemplateImageryProvider({url:'https://tiles.maps.eox.at/wmts/1.0.0/s2cloudless_3857/default/g/{z}/{y}/{x}.jpg',tilingScheme:new C.WebMercatorTilingScheme(),maximumLevel:14,credit:new C.Credit(EOX_CREDIT,false)});
+// Sea floor: GEBCO's Web Map Service (BODC for GEBCO), acknowledged in the wording GEBCO asks for. Not for navigation.
+const GEBCO_CREDIT='Imagery reproduced from the GEBCO_2026 Grid, GEBCO Compilation Group (2026) GEBCO 2026 Grid (<a href="https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa" target="_blank" rel="noopener">doi:10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa</a>)';
+const gebco=(layer,png)=>new C.WebMapServiceImageryProvider({url:'https://wms.gebco.net/mapserv',layers:layer,parameters:{format:png?'image/png':'image/jpeg',transparent:!!png},maximumLevel:9,credit:new C.Credit(GEBCO_CREDIT,false)});
 const IMAGERY={
  bluemarble:{name:'Clear sky: NASA Blue Marble, sharpening to Sentinel-2 (10 m) as you zoom in',label:'Clear',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),detail:true},
  daily:{name:'Yesterday’s satellite view (NASA VIIRS, 250 m, with that day’s clouds)',label:'Yesterday',make:()=>gibs('VIIRS_SNPP_CorrectedReflectance_TrueColor',9,'jpg',yesterday())},
  bing:{name:'Bing aerial (Cesium ion)',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
+ seafloor:{name:'Sea floor: the GEBCO 2026 grid of ocean depths and land heights, coloured by elevation (not for navigation)',label:'Sea floor',make:()=>gebco('GEBCO_LATEST_2'),seafloor:true},
  basic:{name:'Basic (offline)',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
 };
 let imageryChoice='bluemarble';try{imageryChoice=localStorage.getItem('obs-imagery2')||imageryChoice}catch(e){}
@@ -72,9 +76,15 @@ async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
   let bad=0,good=0;p.errorEvent.addEventListener(()=>{bad++;if(k!=='basic'&&!layer.__failed&&bad>=25&&good===0){layer.__failed=true;note(def.label+' imagery did not load; showing the offline map for now. Choose it again to retry.');setImagery('basic',true)}});
   const origReq=p.requestImage.bind(p);p.requestImage=function(){const r=origReq.apply(p,arguments);if(r&&r.then)r.then(x=>{if(x)good++},()=>{});return r};
   if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);setDetail(!!def.detail);addNightLights();if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer);
-  imageryChoice=k;if(!auto){note('');try{localStorage.setItem('obs-imagery2',k)}catch(e){}}
+  imageryChoice=k;syncMeasured();if(!auto){note(def.seafloor?'Most of the sea floor has never been sounded by a ship; GEBCO fills those areas with depths estimated from satellite measurements of the sea surface. “Measured only” shows which is which. Not for navigation.':'');try{localStorage.setItem('obs-imagery2',k)}catch(e){}}
   document.querySelectorAll('#imgSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  }catch(e){if(k!=='basic')setImagery('basic',true)}}
+/* "Measured only": GEBCO's own layer of the cells built from real soundings, over a dimmed sea floor, so the estimated areas show as dark */
+let measuredLayer=null,measuredOn=false;
+function syncMeasured(){const on=measuredOn&&IMAGERY[imageryChoice]?.seafloor;const btn=document.getElementById('measuredBtn');if(btn){btn.hidden=!IMAGERY[imageryChoice]?.seafloor;btn.setAttribute('aria-pressed',on)}
+ if(on&&!measuredLayer){try{measuredLayer=new C.ImageryLayer(gebco('GEBCO_LATEST_3',true),{nightAlpha:1});viewer.imageryLayers.add(measuredLayer,1)}catch(e){}}
+ if(!on&&measuredLayer){viewer.imageryLayers.remove(measuredLayer,true);measuredLayer=null}
+ if(baseLayer)baseLayer.brightness=on?.32:1}
 setImagery(imageryChoice);
 function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t}
 
@@ -365,9 +375,9 @@ if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textConte
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}
 // imagery + see-through controls in the rail
 const rail=document.getElementById('ops-rail');
-if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><p class="theme-note" id="imgNote"></p><span class="gl" style="padding-top:8px">Lighting</span><div class="seg" id="lightSeg" role="group" aria-label="Lighting"><button data-l="sun" aria-pressed="true" title="Sunlight where the Sun is shining right now; city lights on the night side">Real sun</button><button data-l="day" aria-pressed="false" title="The whole planet lit evenly, no night side">Whole globe lit</button></div><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
+if(rail){const d=document.createElement('div');d.className='rail-group';d.innerHTML=`<span class="gl">Imagery</span><div class="seg" id="imgSeg" role="group" aria-label="Imagery">${Object.entries(IMAGERY).filter(([k,v])=>!v.needsToken||window.OBS_ION_TOKEN).map(([k,v])=>`<button data-k="${k}" aria-pressed="${k===imageryChoice}" title="${esc(v.name)}">${v.label||(k==='bing'?'Bing':'Basic')}</button>`).join('')}</div><button class="chip" id="measuredBtn" aria-pressed="false" hidden style="width:100%;margin-top:6px" title="GEBCO's layer of the sea-floor cells based on measured data (mostly ship soundings); everything else is dimmed"><span>Measured only</span></button><p class="theme-note" id="imgNote"></p><span class="gl" style="padding-top:8px">Lighting</span><div class="seg" id="lightSeg" role="group" aria-label="Lighting"><button data-l="sun" aria-pressed="true" title="Sunlight where the Sun is shining right now; city lights on the night side">Real sun</button><button data-l="day" aria-pressed="false" title="The whole planet lit evenly, no night side">Whole globe lit</button></div><button class="chip" id="moonViewBtn" aria-pressed="false" style="width:100%"><span>Earth and Moon view</span></button><button class="chip" id="xrayBtn" aria-pressed="false" style="width:100%"><span>See-through Earth: quake depths ×${DEPTH_X}</span></button>`;
  const mapGroup=[...rail.querySelectorAll('.rail-group')].find(g=>g.querySelector('.gl')?.textContent==='Map');rail.insertBefore(d,mapGroup?mapGroup.nextSibling:rail.children[1]);
- d.querySelectorAll('#imgSeg button').forEach(b=>b.onclick=()=>setImagery(b.dataset.k));document.getElementById('xrayBtn').onclick=()=>setXray(!xray);
+ d.querySelectorAll('#imgSeg button').forEach(b=>b.onclick=()=>setImagery(b.dataset.k));document.getElementById('measuredBtn').onclick=()=>{measuredOn=!measuredOn;syncMeasured()};syncMeasured();document.getElementById('xrayBtn').onclick=()=>setXray(!xray);
  document.getElementById('moonViewBtn').onclick=()=>setMoonView(!moonView);
  const setLight=v=>{globe.enableLighting=v;if(nightLayer)nightLayer.show=v;O.lightingOn=v;document.querySelectorAll('#lightSeg button').forEach(x=>x.setAttribute('aria-pressed',(x.dataset.l==='sun')===v));try{localStorage.setItem('obs-light',v?'1':'0')}catch(x){}};
  document.querySelectorAll('#lightSeg button').forEach(x=>x.onclick=()=>setLight(x.dataset.l==='sun'));
