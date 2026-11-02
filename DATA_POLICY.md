@@ -160,6 +160,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
 - No prizes, paid entries or sponsors are attached to the game.
 
+## Inside the Earth
+
+- The cutaway, the boundary table and the wave-speed and density profiles come from three published seismic reference models: PREM (Physics of the Earth and Planetary Interiors, 1981; isotropic form), IASP91 (Geophysical Journal International, 1991) and ak135 (Geophysical Journal International, 1995). The values are read from the model files distributed with ObsPy's TauP module and stored unchanged in `src/assets/earth/models.json` (depth, P-wave speed, S-wave speed, density). IASP91 defines no density, so none is shown for it (the file's density column copies ak135's). Layer boundaries are the depths where each model's values jump; the cutaway is drawn to true scale.
+- "Settled" and "debated" items are limited to peer-reviewed work. Each paper is cited by its title as published, journal, year and DOI; every citation was checked against Crossref. Abstracts are quoted word for word only where the paper is open access under CC BY 4.0 (two papers); for the others only the title and link appear. Author names are not shown on the page (the site names no individuals without Derik's approval); they are one click away at each DOI. The explanations of what each question is are the site's own words. No fringe ideas (hollow Earth or the like) appear, not even as history.
+- The proposed innermost inner core is drawn dashed at the two sizes the cited papers state (about 300 km and about 650 km) only when the visitor switches it on. The deep-mantle "blobs" (LLSVPs) are described but not drawn, because their shapes differ between imaging models.
+- Blind spot: these are one-dimensional, spherically averaged models; the real Earth varies sideways.
+
 ## Sky tonight
 
 - Everything is computed in the visitor's browser; the project's servers are not involved. The Moon's phase, rise and set, planet positions, brightness and rise and set, twilight times and eclipses use Astronomy Engine (MIT). Space-station passes (ISS, catalogue 25544; Tiangong, 48274) use satellite.js (MIT) with the CelesTrak orbital elements the globe already loads; a pass counts as visible when the station is at least 10° up, in sunlight, and the Sun is at least 6° below the visitor's horizon. The page states how old the elements are.
