@@ -1,5 +1,5 @@
 // ---------- Grouped navigation and the slim header ----------
-// The 17 section tabs become five menus (World now, Planet, Space, Money & tech, Learn). The original tab buttons stay in
+// The 17 section tabs become five menus (People, Planet, Space, Tech & Industry, Learn). The original tab buttons stay in
 // the page, hidden, so ops.js keeps marking the open panel on them; the menus read that state.
 // Touching the globe tucks everything away: the header shrinks to one slim bar and the side panels close, so the map
 // fills the screen. The menus, search, the tour and music stay one click away in that bar. ⤢ or Esc brings it all back.
@@ -11,9 +11,9 @@
     climate: "What's unusual, El Niño, weather layers", signals: "The planet's vital signs", nature: 'What people are seeing in the wild', cams: 'Watch the planet, not the people',
     worlds: 'Planets around other stars', unexplained: "What the record-keepers couldn't classify", economy: 'Prices, jobs, debt, and the money', watch: 'Breaches, breakthroughs, the worst days',
     history: 'Space, quakes, storms and science on this date in past years', classroom: 'Lessons, and the old almanacs', layers: 'What each map layer and reading means', library: 'Every source, its licence and cadence', free: 'How the site stays free', about: 'What this is, and its rules' };
-  const GROUPS = [['world', 'World now', ['situations', 'disruptions', 'relief', 'watchlist']], ['planet', 'Planet', ['climate', 'signals', 'nature', 'cams']],
+  const GROUPS = [['world', 'People', ['situations', 'disruptions', 'relief', 'watchlist']], ['planet', 'Planet', ['climate', 'signals', 'nature', 'cams']],
     ['space', 'Space', [['@solar', 'Solar System', '☉', 'Planets, moons and spacecraft, live'], ['@galaxy', 'Milky Way', '✺', 'A million real stars and our galaxy'], ['@web', 'Cosmic web', '❖', '43,000 galaxies in clusters and filaments'], ['@edge', 'Edge of the observable universe', '◯', 'The oldest light, from 13.8 billion years ago'], 'worlds', 'unexplained']],
-    ['money', 'Money & tech', ['economy', 'watch']], ['learn', 'Learn', ['history', 'classroom', 'layers', 'library', 'free', 'about']]];
+    ['money', 'Tech & Industry', ['economy', 'watch']], ['learn', 'Learn', ['history', 'classroom', 'layers', 'library', 'free', 'about']]];
   const label = k => { const b = tabs.querySelector(`button[data-k="${k}"]`); return b ? b.textContent : k; };
   const nav = document.createElement('nav'); nav.className = 'gnav'; nav.setAttribute('aria-label', 'Sections');
   nav.innerHTML = '<div class="gn-scroll">' + GROUPS.map(([g, name, items]) => `<div class="gn-g" data-g="${g}"><button class="gn-b" aria-haspopup="true" aria-expanded="false">${esc(name)}<span class="gn-c" aria-hidden="true">▾</span></button>
@@ -52,7 +52,7 @@
   const setSlim = on => { html.classList.toggle('slim', on); if (on) { html.classList.add('rail-closed'); html.classList.add('drawer-closed'); tabs.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', 'false')); }
     else { html.classList.remove('search-open'); if (innerWidth > 860) html.classList.remove('rail-closed'); } };
   const map = document.getElementById('ops-map');
-  const tuck = e => { if (html.classList.contains('slim')) return; if (e.target.closest && e.target.closest('.zoomctl,.wx-card,.sat-card,#tip,button,a,input,select')) return; setSlim(true);
+  const tuck = e => { if (html.classList.contains('slim')) return; if (e.target.closest && e.target.closest('.zoomctl,.wx-card,.sat-card,#tip,button,a,input,select')) return; window.__obsTuckT = performance.now(); setSlim(true); /* the globe keeps turning on this press (src/globe3d.js) */
     if (!tuck.hinted) { tuck.hinted = true; let seen = false; try { seen = localStorage.getItem('slim-hint') === '1'; localStorage.setItem('slim-hint', '1'); } catch (x) { }
       if (!seen) { const h = document.createElement('div'); h.className = 'gn-hint glass'; h.textContent = 'Panels tucked away so the globe fills the screen. Tap ⤢ (top right) or press Esc to bring them back.'; document.body.appendChild(h); setTimeout(() => h.classList.add('out'), 4200); setTimeout(() => h.remove(), 5000); } } };
   if (map) { map.addEventListener('pointerdown', tuck, true); map.addEventListener('wheel', tuck, { capture: true, passive: true }); }
