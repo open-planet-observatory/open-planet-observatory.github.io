@@ -739,4 +739,4 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 .mg-src{font-size:.68rem;color:var(--ink-3);margin:8px 0 0}
 .mg-src a{color:inherit}
 .zmoon[aria-pressed="true"]{border-color:var(--accent,#D9A441)!important}
-@media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:8px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}
+@media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:62px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}
