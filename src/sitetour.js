@@ -15,7 +15,7 @@
     return { getBoundingClientRect: () => ({ left: x0, top: y0, right: x1, bottom: y1, width: x1 - x0, height: y1 - y0 }) }; };
   const unslim = () => { if (O.setSlim && html.classList.contains('slim')) O.setSlim(false); };
   const STEPS = [
-    { title: 'Welcome to The Owlmanac Observatory', el: null,
+    { title: 'Welcome to The OwlManac Observatory', el: null,
       body: 'Free public data about the planet, gathered on one page for research and learning. Every number comes from a named source and links back to it. Nothing here tracks a person. This tour takes about a minute.' },
     { title: 'The globe', el: () => globeArea(),
       body: 'Drag to turn it, scroll or pinch to zoom. Each dot is something happening now: earthquakes, storms, fires, alerts, satellites. Click one to see what the source says and when. Touch the globe and the panels tuck away so it fills the screen; click the thin bar at the top to bring them back.' },
