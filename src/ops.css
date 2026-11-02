@@ -740,3 +740,5 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 .mg-src a{color:inherit}
 .zmoon[aria-pressed="true"]{border-color:var(--accent,#D9A441)!important}
 @media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:62px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}
+/* Cesium's credit box is absolutely placed by default; in the rail footer it must flow with the rail, or it floats over the buttons */
+#cesiumCredits .cesium-widget-credits{position:static!important;display:block}

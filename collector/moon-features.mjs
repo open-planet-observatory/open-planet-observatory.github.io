@@ -5,7 +5,7 @@
 // the IAU's own name, feature type and diameter; it writes nothing about the features.
 const UA = { 'User-Agent': 'OpenPlanetObservatory/1.0 (https://theowlmanac.com; open-planet-observatory on GitHub)' };
 export const SRC = 'https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip';
-export const RULES = 1;
+export const RULES = 2; /* 2: all names file + Wikidata landing and impact sites */
 
 // --- minimal ZIP reader: finds one entry by name and inflates it (DecompressionStream works in Node 18+ and browsers)
 async function inflateRaw(u8) { const ds = new DecompressionStream('deflate-raw'); const out = new Blob([u8]).stream().pipeThrough(ds); return new Uint8Array(await new Response(out).arrayBuffer()); }
@@ -41,15 +41,15 @@ const KEEP = /^(Mare|Oceanus|Lacus|Sinus|Palus|Crater|Mons|Vallis|Rupes|Rima|Dor
 const SEA = /^(Mare|Oceanus|Lacus|Sinus|Palus)$/i;
 const MISSION = /\b(Apollo \d+|Luna \d+|Chang['’]e[ -]?\d+|Chandrayaan[ -]?\d+)/i;
 const pick = (r, ...ks) => { for (const k of ks) if (r[k] != null && r[k] !== '') return r[k]; return null; };
-export function selectFeatures(rows) {
+export function selectFeatures(rows, all = false) {
   const out = [];
   for (const r of rows) {
     const name = pick(r, 'clean_name', 'name'), type = String(pick(r, 'type') || '').split(',')[0].trim(), appr = String(pick(r, 'approval', 'approvalst', 'approval_s') || '');
-    if (!name || !KEEP.test(type)) continue; if (appr && !/adopted/i.test(appr)) continue;
+    if (!name || (all ? /astronaut/i.test(type) : !KEEP.test(type))) continue; if (appr && !/adopted/i.test(appr)) continue; /* "all": every adopted name except the astronaut-named features */
     const d = +pick(r, 'diameter') || 0, lat = +pick(r, 'center_lat', 'lat'), lon0 = +pick(r, 'center_lon', 'lon');
     if (!isFinite(lat) || !isFinite(lon0)) continue; const lon = lon0 > 180 ? lon0 - 360 : lon0;
     const k = SEA.test(type) ? 'sea' : /^statio$/i.test(type) ? 'landing' : /crater/i.test(type) ? 'crater' : /mon/i.test(type) ? 'mountain' : 'other';
-    if (k === 'crater' && d < 20) continue; if (k === 'other' && d < 50) continue;
+    if (!all && k === 'crater' && d < 20) continue; if (!all && k === 'other' && d < 50) continue;
     const f = { n: name, t: type, k, d: Math.round(d * 10) / 10, lat: Math.round(lat * 1e4) / 1e4, lon: Math.round(lon * 1e4) / 1e4 };
     if (k === 'landing') { const m = String(pick(r, 'origin') || '').match(MISSION); if (m) f.mission = m[1].replace(/’/g, "'").replace(/Chang'e[ -]?(\d+)/i, "Chang'e $1").replace(/Chandrayaan[ -]?(\d+)/i, 'Chandrayaan-$1'); }
     const id = String(pick(r, 'link') || '').match(/Feature\/(\d+)/); if (id) f.id = +id[1]; /* the gazetteer page is planetarynames.wr.usgs.gov/Feature/<id> */
@@ -57,7 +57,25 @@ export function selectFeatures(rows) {
   }
   return out.sort((a, b) => b.d - a.d);
 }
-export async function buildFromZip(buf) { const dbf = await unzipEntry(buf, /\.dbf$/i); const { fields, rows } = readDbf(dbf); return { fields, total: rows.length, features: selectFeatures(rows) }; }
+export async function buildFromZip(buf) { const dbf = await unzipEntry(buf, /\.dbf$/i); const { fields, rows } = readDbf(dbf); return { fields, total: rows.length, features: selectFeatures(rows), all: selectFeatures(rows, true) }; }
+
+// Landing and impact sites the gazetteer has no station name for, from Wikidata (CC0): spacecraft and missions with a
+// position on the Moon. Missions the gazetteer already places are skipped (Wikidata gives Chang'e 3 the wrong sign of
+// longitude, for one), and so is anything without a position. Labels are the mission (Apollo 12) when Wikidata says the
+// craft is part of one; Wikidata's own description goes on the card, word for word.
+const WD_Q = `SELECT DISTINCT ?item ?itemLabel ?itemDescription ?lat ?lon ?partLabel WHERE { ?item p:P625 ?st . ?st psv:P625 ?v . ?v wikibase:geoGlobe wd:Q405 ; wikibase:geoLatitude ?lat ; wikibase:geoLongitude ?lon . ?item wdt:P31/wdt:P279* ?c . VALUES ?c { wd:Q2133344 wd:Q40218 wd:Q60747 } OPTIONAL { ?item wdt:P361 ?part } SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } }`;
+export function pickSites(bindings, iauMissions) {
+  const seen = new Set(), out = [], norm = m => String(m || '').replace(/’/g, "'");
+  for (const b of bindings) { const q = b.item.value.split('/').pop(); if (seen.has(q)) continue;
+    const label = norm(b.itemLabel && b.itemLabel.value), part = norm(b.partLabel && b.partLabel.value), lat = +b.lat.value; let lon = +b.lon.value; if (!isFinite(lat) || !isFinite(lon) || !label || /^Q\d+$/.test(label)) continue;
+    if (lon > 180) lon -= 360; const mission = MISSION.test(part) ? part.match(MISSION)[1] : MISSION.test(label) ? label.match(MISSION)[1] : null;
+    if ((mission && iauMissions.has(mission)) || iauMissions.has(label)) continue; seen.add(q);
+    const show = mission && mission !== label ? `${mission} (${label})` : label;
+    out.push([show, 'landing', 'Landing or impact site', 0, Math.round(lat * 1e4) / 1e4, Math.round(lon * 1e4) / 1e4, q, show, String((b.itemDescription && b.itemDescription.value) || '')]); }
+  return out;
+}
+async function wikidataSites(iauMissions) { const r = await fetch('https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(WD_Q), { headers: { ...UA, Accept: 'application/sparql-results+json' }, signal: AbortSignal.timeout(60000) });
+  if (!r.ok) throw new Error('Wikidata HTTP ' + r.status); const j = await r.json(); return pickSites(j.results.bindings, iauMissions); }
 
 export async function collectMoonFeatures({ prev = null, now = new Date() } = {}) {
   if (prev && prev.rules === RULES && prev.built && now - Date.parse(prev.built) < 7 * 864e5 - 12e4 && prev.features && prev.features.length) return { out: prev, status: 'kept' };
@@ -67,5 +85,10 @@ export async function collectMoonFeatures({ prev = null, now = new Date() } = {}
   /* compact rows: [name, kind, IAU type, diameter km, lat, east lon (-180..180), gazetteer id, mission] */
   const out = { v: 1, rules: RULES, built: now.toISOString().slice(0, 16) + 'Z', source: SRC, total: b.total, cols: ['name', 'kind', 'type', 'diameter_km', 'lat', 'lon', 'id', 'mission'],
     features: b.features.map(f => f.mission ? [f.n, f.k, f.t, f.d, f.lat, f.lon, f.id || 0, f.mission] : [f.n, f.k, f.t, f.d, f.lat, f.lon, f.id || 0]) };
-  return { out, status: `${b.features.length} of ${b.total} names kept` };
+  const iau = new Set(b.features.filter(f => f.mission).map(f => f.mission)); let sites = [], siteErr = '';
+  try { sites = await wikidataSites(iau); out.features.push(...sites); out.cols.push('description'); } catch (e) { siteErr = ' (Wikidata sites failed: ' + e.message.slice(0, 80) + ')'; }
+  out.sites = sites.length;
+  /* every adopted name, for the "All names" switch: [name, kind, type, diameter, lat, lon, id] */
+  const outAll = { v: 1, rules: RULES, built: out.built, source: SRC, total: b.total, features: b.all.map(f => [f.n, f.k, f.t, f.d, f.lat, f.lon, f.id || 0]) };
+  return { out, outAll, status: `${b.features.length} of ${b.total} names kept, ${b.all.length} in the all-names file, ${sites.length} Wikidata sites${siteErr}` };
 }
