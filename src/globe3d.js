@@ -52,7 +52,7 @@ let seaStyle='depth';try{seaStyle=localStorage.getItem('obs-sea-style')||'depth'
 const IMAGERY={
  bluemarble:{name:'Clear sky: NASA Blue Marble, sharpening to Sentinel-2 (10 m) as you zoom in',label:'Clear',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),detail:true},
  daily:{name:'Yesterday’s satellite view (NASA VIIRS, 250 m, with that day’s clouds)',label:'Yesterday',make:()=>gibs('VIIRS_SNPP_CorrectedReflectance_TrueColor',9,'jpg',yesterday())},
- bing:{name:'Bing aerial (Cesium ion)',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
+ bing:{name:'Close-up aerial photos from Bing Maps (Microsoft, via Cesium ion): sharp enough to see buildings and fields, but a mosaic of photos taken over past years, not today’s view',label:'Close-up',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
  seafloor:{name:'Sea floor: ocean depths coloured from deep (purple) to shallow (yellow) and shaded by slope, from NOAA ETOPO1; or GEBCO 2026 relief (not for navigation)',label:'Sea floor',make:()=>seaStyle==='gebco'?gebco('GEBCO_LATEST'):depthProvider(),seafloor:true},
  basic:{name:'Basic (offline)',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
 };
