@@ -49,8 +49,10 @@ export async function collectRecordWatch({ prev = null, now = new Date() } = {})
   const keep = new Map(), status = {}, cutoff = new Date(now - 400 * 864e5).toISOString().slice(0, 10);
   for (const it of (prev && prev.items) || []) if ((it.date || '') >= cutoff.slice(0, it.date.length)) keep.set(it.src + '|' + it.t, it);
   for (const [k, S] of Object.entries(SOURCES)) { try { const L = await S.run(now); for (const it of L) keep.set(k + '|' + it.t, { src: k, ...it, seen: (keep.get(k + '|' + it.t) || {}).seen || now.toISOString().slice(0, 10) }); status[k] = `ok ${L.length}`; } catch (e) { status[k] = 'error: ' + e.message.slice(0, 80); } }
-  const items = [...keep.values()].filter(i => (i.date || i.seen) >= cutoff.slice(0, (i.date || i.seen).length)).sort((a, b) => (b.date || '').localeCompare(a.date || '') || a.src.localeCompare(b.src)).slice(0, 60);
+  const items = [...keep.values()].filter(i => (i.date || i.seen) >= cutoff.slice(0, (i.date || i.seen).length)).sort((a, b) => (b.date || '').localeCompare(a.date || '') || a.src.localeCompare(b.src));
+  /* at most 25 sentences per report, so the monthly reports never crowd the news headlines out */
+  const per = {}; const capped = items.filter(i => (per[i.src + i.url] = (per[i.src + i.url] || 0) + 1) <= 25).slice(0, 160);
   const failed = Object.entries(status).filter(([, v]) => v.startsWith('error')).map(([k]) => k);
-  return { out: { v: 1, rules: RULES, built: now.toISOString().slice(0, 16) + 'Z', sources: Object.fromEntries(Object.entries(SOURCES).map(([k, s]) => [k, { name: s.name, home: s.home, lic: s.lic }])), status, failed, items },
+  return { out: { v: 1, rules: RULES, built: now.toISOString().slice(0, 16) + 'Z', sources: Object.fromEntries(Object.entries(SOURCES).map(([k, s]) => [k, { name: s.name, home: s.home, lic: s.lic }])), status, failed, items: capped },
     status: Object.entries(status).map(([k, v]) => k + ' ' + v).join(', ') };
 }
