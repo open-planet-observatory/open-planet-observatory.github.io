@@ -11,6 +11,7 @@
   const TREK = 'https://trek.nasa.gov/tiles/Moon/EQ/LRO_WAC_Mosaic_Global_303ppd_v02/1.0.0/default/default028mm/{TileMatrix}/{TileRow}/{TileCol}.jpg';
   const EARTH_TEX = 'https://gibs.earthdata.nasa.gov/wms/epsg4326/best/wms.cgi?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=BlueMarble_ShadedRelief_Bathymetry&STYLES=&CRS=EPSG:4326&BBOX=-90,-180,90,180&WIDTH=1024&HEIGHT=512&FORMAT=image/jpeg';
   const KIND = { sea: ['Sea', '#9fc3ff'], crater: ['Crater', '#f2e6c9'], mountain: ['Mountains', '#f0c27a'], other: ['Other feature', '#d8d0c0'], landing: ['Landing & impact sites', '#7fe0a0'] };
+  let relief = null, reliefShader = null;
   let V = null, host = null, ui = null, feats = null, featsInfo = null, open = false, lit = true, showNames = true, allOn = false, allPick = null, allState = '', earthEnt = null, pick = null, lastAx = null, lastT = 0;
   const A = () => window.Astronomy, C = () => window.Cesium;
   // A textured sphere lit only from one side by the Sun, so it shows a true phase (Cesium's own entity shading always adds
@@ -37,7 +38,8 @@
   function earthPos() { const s = state(), d = s.distKm * 1000; return new (C().Cartesian3)(s.earthDir[0] * d, s.earthDir[1] * d, s.earthDir[2] * d); }
   function earthRot() { const s = state(), [x, y, z] = s.earthAxes, Cc = C(); return new Cc.Matrix3(x[0], y[0], z[0], x[1], y[1], z[1], x[2], y[2], z[2]); }
   function earthSunLocal() { const s = state(), [x, y, z] = s.earthAxes; return new (C().Cartesian3)(dot(s.sunDir, x), dot(s.sunDir, y), dot(s.sunDir, z)); }
-  function setLight() { if (!V) return; const Cc = C(), s = state(); V.scene.light = new Cc.DirectionalLight({ direction: new Cc.Cartesian3(-s.sunDir[0], -s.sunDir[1], -s.sunDir[2]) }); V.scene.globe.enableLighting = lit; }
+  function setLight() { if (!V) return; const Cc = C(), s = state(); V.scene.light = new Cc.DirectionalLight({ direction: new Cc.Cartesian3(-s.sunDir[0], -s.sunDir[1], -s.sunDir[2]) }); V.scene.globe.enableLighting = lit;
+    if (reliefShader) { reliefShader.setUniform('u_sun', new Cc.Cartesian3(s.sunDir[0], s.sunDir[1], s.sunDir[2])); reliefShader.setUniform('u_even', lit ? 0 : 1); } }
 
   // ----- the viewer, made on first open -----
   function build() {
@@ -62,7 +64,6 @@
     el.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
     V.clock.shouldAnimate = true;
     // the panel: what this is, the two buttons, and where the data come from
-    let relief = null;
     ui = document.createElement('div'); ui.className = 'mg-ui glass'; ui.innerHTML = `<div class="mg-h"><b>The Moon</b><button class="mg-x" aria-label="Back to Earth" title="Back to Earth">×</button></div>
       <p class="mg-s" id="mgState"></p>
       <div class="mg-row"><button class="chip" id="mgEarth" aria-pressed="false"><span>Earth from the Moon</span></button></div>
@@ -78,7 +79,11 @@
     ui.querySelector('#mgNames').onclick = e => { showNames = !showNames; e.currentTarget.setAttribute('aria-pressed', showNames); if (pick) pick.show = showNames; if (allPick) allPick.show = showNames && allOn; };
     ui.querySelector('#mgRelief').onclick = async e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on);
       /* Cesium Moon (ion asset 2684829) is a textured 3D Tiles model of the whole Moon from NASA data; while it shows, the flat globe steps aside */
-      try { if (on) { if (!relief) { relief = await Cc.Cesium3DTileset.fromIonAssetId(2684829); V.scene.primitives.add(relief); } relief.show = true; V.scene.globe.show = false; }
+      try { if (on) { if (!relief) { relief = await Cc.Cesium3DTileset.fromIonAssetId(2684829);
+          /* the model's texture carries no shading of its own: light it from the real Sun here, so the day/night line shows as on the flat globe */
+          reliefShader = new Cc.CustomShader({ lightingModel: Cc.LightingModel.UNLIT, uniforms: { u_sun: { type: Cc.UniformType.VEC3, value: new Cc.Cartesian3(1, 0, 0) }, u_even: { type: Cc.UniformType.FLOAT, value: 0 } },
+            fragmentShaderText: 'void fragmentMain(FragmentInput fsInput, inout czm_modelMaterial material) { vec3 n = normalize(fsInput.attributes.positionWC); float l = clamp(dot(n, normalize(u_sun)) * 1.3 + 0.04, 0.0, 1.0); material.diffuse *= mix(max(l, 0.06), 1.0, u_even); }' });
+          relief.customShader = reliefShader; V.scene.primitives.add(relief); setLight(); } relief.show = true; V.scene.globe.show = false; }
         else { if (relief) relief.show = false; V.scene.globe.show = true; } }
       catch (x) { b.setAttribute('aria-pressed', false); V.scene.globe.show = true; const s = ui.querySelector('#mgState'); if (s) s.textContent = 'The 3D relief did not load from Cesium ion.'; } };
     ui.querySelector('#mgAll').onclick = e => { allOn = !allOn; e.currentTarget.setAttribute('aria-pressed', allOn); loadAll(); };

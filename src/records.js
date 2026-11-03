@@ -50,8 +50,21 @@
   async function load() {
     try { const r = await fetch('data/records.json?t=' + Math.floor(Date.now() / 36e5)); if (!r.ok) throw new Error('HTTP ' + r.status); R = await r.json(); } catch (e) { R = {}; }
     try { const r = await fetch('data/voyager.json?t=' + Math.floor(Date.now() / 36e5)); if (r.ok) vy = await r.json(); } catch (e) { }
-    draw(); window.OwlRecords = { data: () => R };
+    draw(); window.OwlRecords = { data: () => R }; featCard();
     setInterval(() => { const el = document.getElementById('rcVy'), v = voyagerNow(); if (el && v) el.textContent = Math.round(v.km).toLocaleString('en-US') + ' km'; }, 1000);
   }
+  // ---------- Record of the day: one record a day in the banner, the same for everyone on that date ----------
+  function pickToday() { if (!R || !R.records) return null; const ok = R.records.filter(r => !r.failed && !r.link && (r.voyager ? vy && vy.now : r.rows ? r.rows.some(x => x.m && x.m.length && x.m[0].v && x.m[0].v.length) : r.list && r.list.length));
+    if (!ok.length) return null; const d = new Date(), day = Math.floor((Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()) - Date.UTC(d.getFullYear(), 0, 0)) / 864e5); return ok[(day * 7 + d.getFullYear()) % ok.length]; }
+  function lineOf(r) { if (r.voyager) { const v = voyagerNow(); return v ? `Voyager 1 · ${v.au.toFixed(1)} AU` : 'Voyager 1'; }
+    if (r.list) { const x = r.list[0]; return `${x.t} · ${x.k}${x.y ? ' (' + x.y + ')' : ''}`; }
+    const x = r.rows.find(x => x.m && x.m.length && x.m[0].v && x.m[0].v.length), v = x.m[0].v[0]; return `${short(x.name)} · ${v.f}${r.rows.length > 1 ? ` · +${r.rows.length - 1} rival${r.rows.length > 2 ? 's' : ''}` : ''}`; }
+  function featCard() { const row = document.getElementById('featRow'); if (!row) { setTimeout(featCard, 800); return; } const r = pickToday(); let b = document.getElementById('featRec');
+    if (!r) { if (b) b.remove(); return; }
+    if (!b) { b = document.createElement('button'); b.className = 'feat-c feat-rec'; b.id = 'featRec'; row.appendChild(b); }
+    b.title = 'Record of the day: ' + r.title + '. Open it in Records, with every rival definition and its source';
+    b.innerHTML = `<span class="fh-i" aria-hidden="true">▲</span><span class="fc-b"><b>Record of the day</b><small>${esc(r.title)}: ${esc(lineOf(r))}</small></span>`;
+    b.onclick = () => { if (O.setSlim) O.setSlim(false); if (O.openPanel) O.openPanel('records'); filter = 'all'; draw();
+      setTimeout(() => { const el = document.getElementById('rec-' + r.id); if (el) { el.scrollIntoView({ block: 'start', behavior: 'smooth' }); el.classList.add('rc-hi'); setTimeout(() => el.classList.remove('rc-hi'), 2400); } }, 120); }; }
   load();
 })();
