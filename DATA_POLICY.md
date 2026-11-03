@@ -160,6 +160,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
 - No prizes, paid entries or sponsors are attached to the game.
 
+## The Forecast Desk (the daily numbers game)
+
+- `collector/forecastdesk.mjs` builds three questions once per UTC day, each about a number a public source publishes for tomorrow (UTC): the count of magnitude-5+ earthquakes USGS lists for the day (FDSN event count), NOAA SWPC's observed daily sunspot number, and the highest of NOAA SWPC's eight 3-hourly planetary K-index values. Each question carries a "typical spread": the standard deviation of the source's own last ~30 daily values (7 days for the K-index), with a floor. The questions are the site's own wording; nothing is a forecast by the site.
+- The morning after the day ends, the collector reads each source's value for that day and stores it; a source that has not published yet leaves the day open, and no answer is estimated. Values are taken as first published.
+- Players' guesses and scores stay in their own browser (localStorage `owl-fd-v1`, last 30 days); nothing a player types is sent anywhere. Scoring is the games spec's rule: up to 3,000 for the point guess, halving for every typical spread it is off; 2,000 if the answer lands in the player's range, less 500 for every 10% the range is wider than 2.56 typical spreads. There is no leaderboard or crowd median yet (those need the planned Cloudflare backend). No prizes, paid entries or sponsors.
+
 ## Record watch
 
 - `collector/recordwatch.mjs` checks every 6 hours: NOAA NCEI's monthly Global Climate Report (the text the report page loads from its content endpoint) and Copernicus C3S's monthly surface-air-temperature and sea-ice bulletins for the last three months, NSIDC's Sea Ice Today feed, NASA's news-release feed and USGS's news-release list (Derik's choice of sources, 2 Nov 2026).
