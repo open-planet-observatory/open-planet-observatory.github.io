@@ -15,7 +15,7 @@ html.ops .wrap{display:none}
 #cesiumCredits .cesium-credit-logoContainer{display:none!important}
 #cesiumCredits a{color:var(--ink-3)}
 #cesium .cesium-performanceDisplay-defaultContainer{display:none}
-#ops-map .zoomctl{right:auto;left:calc(var(--rail-w) + 14px);top:auto;bottom:92px;flex-direction:row}
+#ops-map .zoomctl{right:auto;left:calc(var(--rail-w) + 14px);top:auto;bottom:calc(var(--botH,66px) + 8px);flex-direction:row}
 html.ops.rail-closed #ops-map .zoomctl{left:14px}
 .glass{background:var(--glass);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:1px solid var(--glass-line);border-radius:12px;box-shadow:0 10px 30px rgb(0 0 0 / .18)}
 #ops-top{position:relative;z-index:3;margin:10px 10px 0;padding:8px 12px;min-width:0;display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap}
@@ -109,7 +109,7 @@ html.ops.drawer-closed #ops-drawer{display:none}
  #ops-rail,#ops-drawer{grid-column:1;grid-row:1;max-height:62vh;align-self:end}
  html.ops:not(.rail-closed) #ops-drawer{display:none}
  #ops-center{grid-column:1;grid-row:1}
- #ops-map .zoomctl{left:auto;right:10px;top:auto;bottom:62px;flex-direction:column}
+ #ops-map .zoomctl{left:auto;right:10px;top:auto;bottom:calc(var(--botH,52px) + 8px);flex-direction:column}
  #ops-top{margin:8px 8px 0;padding:6px 10px}
  #ops-top .tabs{margin-left:0;width:100%;overflow:auto;flex-wrap:nowrap;scrollbar-width:none}
  #ops-top .stamp{display:none}
@@ -787,3 +787,4 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 :root[data-theme="light"] .in-tag.con{color:#1d6b35}:root[data-theme="light"] .in-tag.deb{color:#8a4a0c}
 .in-papers{margin:6px 0 0;padding-left:16px}.in-papers li{margin:4px 0}
 .in-m button[aria-pressed="true"] .muted{color:inherit;opacity:.75}
+#reliefBtn[hidden],.mg-row[hidden]{display:none!important}

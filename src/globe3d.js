@@ -396,10 +396,20 @@ const tip=document.getElementById('tip');const handler=new C.ScreenSpaceEventHan
 /* the tooltip follows the thing it describes while the globe turns, and goes away when that thing turns out of view */
 let tipEnt=null,tipCam=null;const W2W=C.SceneTransforms.worldToWindowCoordinates||C.SceneTransforms.wgs84ToWindowCoordinates;
 const tipPos=e=>{try{if(e.sat!=null)return SAT.pts&&SAT.pts[e.sat]&&SAT.pts[e.sat].position;return e.position&&e.position.getValue?e.position.getValue(viewer.clock.currentTime):null}catch(x){return null}};
+/* a mark on the near side of the planet faces the camera: the camera sits above the ground's tangent plane there. (Cesium's
+   EllipsoidalOccluder flips between visible and hidden for points exactly on the surface, which hid tooltips at random.) */
+const NRM=new C.Cartesian3(),DIF=new C.Cartesian3();const facing=(pos,cam)=>{C.Ellipsoid.WGS84.geodeticSurfaceNormal(pos,NRM);return C.Cartesian3.dot(NRM,C.Cartesian3.subtract(cam,pos,DIF))>0};
+/* markers are drawn on top of the globe so they never sink into it; hide the ones on the far side ourselves, or they show
+   through the planet and seem to drift the wrong way as it turns. Satellites, storms (hazards.js) and the see-through view are left alone. */
+const NOCULL=new Set(['satpath','moon','cty','storm','grad','relief','nino34']);let cullT=0;
+function cullFar(force){const cam=scene.camera.positionWC,now=performance.now();if(!force&&now-cullT<150)return;cullT=now;const t=viewer.clock.currentTime;
+ for(let i=0;i<viewer.dataSources.length;i++){const d=viewer.dataSources.get(i);if(!d.show||NOCULL.has(d.name))continue;for(const e of d.entities.values){if(!e.point&&!e.label&&!e.billboard)continue;let p=e._owlP;if(p===undefined){try{p=e.position?e.position.getValue(t):null}catch(x){p=null}e._owlP=p||null}if(!p)continue;
+  const v=xray||facing(p,cam);if(e._owlV===v)continue;e._owlV=v;if(e.point)e.point.show=v;if(e.label)e.label.show=v;if(e.billboard)e.billboard.show=v}}}
+scene.postRender.addEventListener(()=>{try{cullFar()}catch(x){}});
 scene.postRender.addEventListener(()=>{if(!tip||tip.hidden||tip.parentElement!==host||!tipEnt)return;const pos=tipPos(tipEnt);
  if(!pos){if(tipCam&&C.Cartesian3.distance(tipCam,scene.camera.positionWC)>1e3){tip.hidden=true;tipEnt=null}return}
  const w=W2W(scene,pos),occ=new C.EllipsoidalOccluder(C.Ellipsoid.WGS84,scene.camera.positionWC);
- if(!w||!occ.isPointVisible(pos)){tip.hidden=true;tipEnt=null;return}
+ if(!w||!(occ.isPointVisible(pos)||facing(pos,scene.camera.positionWC))){tip.hidden=true;tipEnt=null;return}
  const r=el.getBoundingClientRect();tip.style.left=Math.min(w.x+14,r.width-270)+'px';tip.style.top=(w.y+14)+'px'});
 handler.setInputAction(m=>{const p=scene.pick(m.endPosition);const ent=p&&p.id;let d=ent&&ent.description&&(ent.description.getValue?ent.description.getValue(viewer.clock.currentTime):ent.description);
  if(ent&&ent.sat!=null){const s=SAT.list[ent.sat];const f=s&&satFacts(s);if(s)d=`<b>${esc(s.name)}</b>${esc(SAT_CATS[s.cat].name)}${f?' · '+fmtN(Math.round(f.alt))+' km up':''}<br><span style="opacity:.75">Click for its orbit · CelesTrak</span>`}

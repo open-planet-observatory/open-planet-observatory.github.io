@@ -84,6 +84,9 @@
     const r = document.getElementById('zreset'); setTimeout(() => { if (r) r.click(); }, document.querySelector('#uni.on') ? 1400 : 0); };
   const brand = top.querySelector('.brand');
   if (brand) { brand.querySelectorAll('.brand-logo,h1').forEach(el => { el.style.cursor = 'pointer'; el.setAttribute('role', 'link'); el.tabIndex = 0; el.title = 'Back to the start'; el.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); home(); }); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); home(); } }); }); }
+  /* the zoom pills sit just above the bottom bar, however tall the bar wraps: --botH is how far the bar reaches up into the map */
+  const fitPills = () => { const m = document.getElementById('ops-map'), b = document.getElementById('ops-bottom'); if (!m || !b) return; html.style.setProperty('--botH', Math.max(0, Math.round(m.getBoundingClientRect().bottom - b.getBoundingClientRect().top)) + 'px'); };
+  fitPills(); addEventListener('resize', fitPills); try { const bb = document.getElementById('ops-bottom'); if (bb) new ResizeObserver(fitPills).observe(bb); } catch (e) { } setTimeout(fitPills, 1500);
   O.home = home;
   O.setSlim = setSlim;
 })();
