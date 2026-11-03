@@ -64,6 +64,7 @@ const PANELS=[
  ['watch','Watch',['#watch']],
  ['unexplained','Unexplained',['#unexplained']],
  ['economy','Economy',['#economy']],
+ ['predictions','Predictions',['#predictions']],
  ['nature','Nature',['#nature']],
  ['inside','Inside the Earth',['#inside']],
  ['watchlist','Watchlist',['#watchlist']],

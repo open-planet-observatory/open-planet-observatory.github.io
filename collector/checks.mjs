@@ -22,7 +22,7 @@ const SEASONS = {
                   [[12, 1, 2], lat => lat < -30, 'In December–February they are in the Southern Ocean (south of 30°S)']],
 };
 
-export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, voyager = null, game = null, history = null, records = null, moonf = null, meta = {}, now = new Date() }) {
+export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, solar = null, exo = null, stars = null, sun = null, galaxies = null, cosmicweb = null, voyager = null, game = null, history = null, records = null, preds = null, moonf = null, meta = {}, now = new Date() }) {
   const R = []; const add = (area, id, status, rule, detail = '') => R.push({ area, id, status, rule, detail });
   const ok = (cond, area, id, rule, detail, failStatus = 'fail') => add(area, id, cond ? 'pass' : failStatus, rule, detail);
 
@@ -162,6 +162,7 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     ok(cosmicweb.comaCz != null && cosmicweb.comaCz > 6500 && cosmicweb.comaCz < 7500, 'Space', 'cosmicweb-coma', 'The Coma Cluster recedes at about 7,000 km/s (NED)', cosmicweb.comaCz + ' km/s'); }
   if (moonf) { const F = moonf.features || [], has = n => F.some(f => f[0] === n);
     ok(F.length >= 1000 && has('Mare Tranquillitatis') && has('Tycho') && F.some(f => f[7] === 'Apollo 11') && F.every(f => f[0] && isFinite(f[4]) && Math.abs(f[4]) <= 90 && isFinite(f[5]) && Math.abs(f[5]) <= 180), 'Moon', 'moon-features', 'Moon names from the IAU gazetteer: at least 1,000, including Mare Tranquillitatis, Tycho and the Apollo 11 landing site, all with valid positions', `${F.length} names, built ${moonf.built}`, 'warn'); }
+  if (preds) { const E = preds.events || []; ok(!preds.failed && E.length >= 10 && E.every(e => /^https:\/\/polymarket\.com\/event\//.test(e.url) && e.title && e.markets.length && e.markets.every(m => m.outcomes.every(([o, p]) => o && p >= 0 && p <= 1))), 'Predictions', 'predictions', 'At least 10 in-scope Polymarket events, each linked, with prices between 0 and 1', `${E.length} events, built ${preds.built}${preds.failed ? ' · failed: ' + preds.error : ''}`, 'warn'); }
   if (records) { const R = records.records || [], bad = R.filter(r => r.failed), noSrc = R.filter(r => !r.link && !r.voyager && !(r.src && /^https:\/\//.test(r.src.url)));
     const rowsOk = R.filter(r => r.rows).every(r => r.rows.every(x => /^https:\/\/www\.wikidata\.org\/wiki\/Q\d+$/.test(x.wd) && x.m.every(m => m.v.every(v => isFinite(v.v) && v.f))));
     ok(R.length >= 25 && !bad.length && !noSrc.length && rowsOk, 'Records', 'records-built', 'Every record has its figures from its source, each linked (Wikidata items, agency pages), and none failed', `${R.length} records, built ${records.built}${bad.length ? ' · failed: ' + bad.map(r => r.id).join(', ') : ''}${(records.errors || []).length ? ' · ' + records.errors.join('; ').slice(0, 140) : ''}`, 'warn'); }
