@@ -788,3 +788,8 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 .in-papers{margin:6px 0 0;padding-left:16px}.in-papers li{margin:4px 0}
 .in-m button[aria-pressed="true"] .muted{color:inherit;opacity:.75}
 #reliefBtn[hidden],.mg-row[hidden]{display:none!important}
+/* Record of the day */
+.feat-rec .fh-i{color:var(--accent,#D9A441)}
+#ops-top .feat{max-width:900px}
+.rc.rc-hi{box-shadow:0 0 0 2px var(--accent,#D9A441);transition:box-shadow .4s}
+@media (max-width:1399px){#featRec{display:none}}
