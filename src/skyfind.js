@@ -6,11 +6,13 @@
   const html = document.documentElement; if (!html.classList.contains('ops')) return;
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const KEY = 'owl-skyfind-v1', R = Math.PI / 180;
-  const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } };
+  const load = () => { try { const st = JSON.parse(localStorage.getItem(KEY)) || {}; return st.scale === 5 ? st : rescale(st); } catch (e) { return {}; } };
+  /* 2026-11-03: rounds score up to 5,000 like the site's other games (was 1,000); days saved before then are multiplied by 5 once */
+  function rescale(st) { Object.values(st.days || {}).forEach(d => { if (d.total != null) d.total *= 5; if (d.max) d.max *= 5; (d.rows || []).forEach(r => { if (r.p != null) r.p *= 5; }); }); if (st.best) st.best *= 5; st.scale = 5; try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) { } return st; }
   const save = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { } };
   const today = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
-  const points = d => { if (d <= 3) return 1000; const p = Math.round(1000 * Math.pow(0.5, (d - 3) / 8)); return p < 10 ? 0 : p; }; /* full marks within 3°, halving every 8° beyond */
-  const sq = p => p >= 800 ? '🟩' : p >= 400 ? '🟨' : p >= 100 ? '🟧' : '🟥';
+  const points = d => { if (d <= 3) return 5000; const p = Math.round(5000 * Math.pow(0.5, (d - 3) / 8)); return p < 50 ? 0 : p; }; /* full marks within 3°, halving every 8° beyond */
+  const sq = p => p >= 4000 ? '🟩' : p >= 2000 ? '🟨' : p >= 500 ? '🟧' : '🟥';
   const DIR = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
   const dir = az => DIR[Math.round((((az % 360) + 360) % 360) / 22.5) % 16];
   function rng(seed) { let h = 2166136261; for (const c of seed) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return () => { h ^= h << 13; h ^= h >>> 17; h ^= h << 5; return ((h >>> 0) % 1e6) / 1e6; }; }
@@ -53,7 +55,7 @@
     foot(`<b>${d < 1 ? 'Spot on' : Math.round(d) + '° away'}</b> · ${p.toLocaleString('en-US')} points. ${esc(t.n)} is ${Math.round(o.alt)}° up toward the ${dir(o.az)}${o.mag != null ? `, magnitude ${o.mag.toFixed(1)}` : ''}. <span class="muted">A fist at arm's length covers about 10°.</span> <button class="btn" id="sfNext">${G.i + 1 < G.targets.length ? 'Next' : 'See your score'}</button>`);
     document.getElementById('sfNext').onclick = next; }
   function next() { G.i++; if (G.i < G.targets.length) { round(); return; }
-    const st = load(), d = today(), total = G.results.reduce((a, r) => a + r.p, 0), res = { total, max: G.targets.length * 1000, rows: G.results };
+    const st = load(), d = today(), total = G.results.reduce((a, r) => a + r.p, 0), res = { total, max: G.targets.length * 5000, rows: G.results };
     if (!G.practice && !(st.days && st.days[d])) { st.days = st.days || {}; st.days[d] = res; const y = new Date(); y.setDate(y.getDate() - 1); const yk = `${y.getFullYear()}-${String(y.getMonth() + 1).padStart(2, '0')}-${String(y.getDate()).padStart(2, '0')}`;
       st.streak = st.last === yk ? (st.streak || 0) + 1 : 1; st.last = d; st.best = Math.max(st.best || 0, total); const keys = Object.keys(st.days).sort(); while (keys.length > 60) delete st.days[keys.shift()]; save(st); }
     summary(res, load(), G.practice); }
