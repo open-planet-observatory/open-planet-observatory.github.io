@@ -32,6 +32,7 @@ top.innerHTML=`<div class="brand"><h1 class="brand-wm">${WORDMARK}<span class="s
 <div class="tabs" id="panelTabs" role="tablist"></div>`;
 const qf=$('#qform');if(qf){const qb=document.createElement('div');qb.className='qslot';qb.appendChild(qf);top.insertBefore(qb,$('#panelTabs'));qf.addEventListener('submit',()=>openPanel('search'));$('#q').addEventListener('input',()=>{if($('#q').value.trim())openPanel('search')})}
 const stamp=$('header.top .stamp');if(stamp){$('#stampSlot').append(...stamp.querySelectorAll('.pill'))}
+{const lp=$('#stampSlot .pill.live:not(.snap)');if(lp&&/Live in your browser/.test(lp.textContent)){lp.title=lp.textContent.trim();lp.innerHTML='<i></i>Satellites live'}}
 const tb=$('#themeBtn');const TLABEL={owl:'Light mode',light:'Night mode',dark:'Owl mode'};const tlabel=()=>{tb.textContent=TLABEL[theme];tb.title='Theme: '+({owl:'Owl (warm dark)',light:'Light',dark:'Night (blue dark)'})[theme]+'. Click to switch.'};tlabel();tb.onclick=()=>{theme=THEMES[(THEMES.indexOf(theme)+1)%THEMES.length];html.dataset.theme=theme;tlabel();try{localStorage.setItem('obs-theme',theme)}catch(e){}};
 
 // rail: view presets + map mode + layer groups

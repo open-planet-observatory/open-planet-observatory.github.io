@@ -790,9 +790,14 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 #reliefBtn[hidden],.mg-row[hidden]{display:none!important}
 /* Record of the day */
 .feat-rec .fh-i{color:var(--accent,#D9A441)}
-#ops-top .feat{max-width:900px}
 .rc.rc-hi{box-shadow:0 0 0 2px var(--accent,#D9A441);transition:box-shadow .4s}
-@media (max-width:1399px){#featRec{display:none}}
+/* header (3 Nov): brand + status on row 1, the featured cards on their own full-width row, menus on row 3.
+   The cards share the row equally; the Record card leaves when the row is too narrow for three, so no title is ever cut. */
+#ops-top #featRow{flex:1 1 100%;max-width:none;container-type:inline-size}
+#ops-top #featRow .feat-c{flex:1 1 0}
+.feat-c .fc-b{flex:1 1 auto;overflow:hidden}.feat-c b{overflow:hidden;text-overflow:ellipsis}
+@container (max-width:640px){#featRec{display:none!important}}
+@media (min-width:861px) and (max-width:1299px){#ops-top .eyebrow{display:none}}
 /* Predictions */
 .pm-what{margin:0 0 8px}
 .pm h4{margin:0 0 6px;font-size:.95rem}.pm h4 a{color:inherit}
