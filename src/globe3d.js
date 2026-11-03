@@ -104,7 +104,7 @@ async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
  }catch(e){if(k!=='basic')setImagery('basic',true)}}
 /* the sea floor is read best lit evenly: lighting goes off while it is shown and comes back as it was */
 let seaPrevLight=null,seaPrevCty=true;let reliefOn=false;function setRelief(on){const C=Cesium,sc=viewer.scene,b=document.getElementById('reliefBtn');if(on&&!window.OBS_ION_TOKEN)on=false;reliefOn=on;if(b)b.setAttribute('aria-pressed',on);
- try{if(on){sc.setTerrain(new C.Terrain(C.createWorldBathymetryAsync({requestVertexNormals:true})));sc.verticalExaggeration=10}else{viewer.terrainProvider=new C.EllipsoidTerrainProvider();sc.verticalExaggeration=1}}catch(e){reliefOn=false;if(b)b.setAttribute('aria-pressed',false)}}
+ try{if(on){const tr=new C.Terrain(C.createWorldBathymetryAsync({requestVertexNormals:true}));tr.errorEvent.addEventListener(()=>{setRelief(false);const n=document.getElementById('imgNote');if(n)n.textContent='The 3D relief did not load from Cesium ion, so the flat sea floor is shown.'});sc.setTerrain(tr);sc.verticalExaggeration=10}else{viewer.terrainProvider=new C.EllipsoidTerrainProvider();sc.verticalExaggeration=1}}catch(e){reliefOn=false;if(b)b.setAttribute('aria-pressed',false)}}
 function seaLight(on){const leg=document.getElementById('seaLegend'),sb=document.getElementById('seaStyleBtn');{const rb=document.getElementById('reliefBtn');if(rb)rb.hidden=!on||!window.OBS_ION_TOKEN;if(!on&&reliefOn)setRelief(false)}if(leg)leg.hidden=!on||seaStyle!=='depth';if(sb){sb.hidden=!on;sb.setAttribute('aria-pressed',seaStyle==='gebco')}
  /* country fills wash out the colours: set aside with the lighting, and put back as they were */
  if(on&&seaPrevLight===null){try{seaPrevCty=ds('cty').show;ds('cty').show=false}catch(e){}seaPrevLight=globe.enableLighting;globe.enableLighting=false;if(nightLayer)nightLayer.show=false}
@@ -461,7 +461,10 @@ let gaveUp=false;
 function giveUp(why){if(gaveUp)return;gaveUp=true;setActive(false);const b=seg&&seg.querySelector('button[data-mode="3d"]');if(b){b.disabled=true;b.title=why}note(why);console.warn('3D globe disabled: '+why)}
 window.addEventListener('securitypolicyviolation',e=>{if(/cesium|gibs|jsdelivr/i.test(e.blockedURI||'')&&/worker|img|connect/.test(e.violatedDirective||''))giveUp('The 3D globe can\u2019t load here (this preview blocks map tiles and background workers). It works on the public site.')});
 const probe=setInterval(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(n>0){clearInterval(probe);return}}catch(e){}},1000);
-setTimeout(()=>{try{const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(!n)giveUp('The 3D globe could not start here (no map tiles arrived). It works on the public site; showing the 2D globe instead.')}catch(e){}},12000);
+/* give up on 3D only after the globe has really been drawing for a while with no tiles: a tab opened in the background (or a
+   covered window) draws no frames, and must not be switched to the 2D globe for that */
+let startFrames=0;const countF=()=>{startFrames++;if(startFrames>400)scene.postRender.removeEventListener(countF)};scene.postRender.addEventListener(countF);
+const startCheck=()=>{try{if(document.hidden||startFrames<240){setTimeout(startCheck,4000);return}const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(!n)giveUp('The 3D globe could not start here (no map tiles arrived). It works on the public site; showing the 2D globe instead.')}catch(e){}};setTimeout(startCheck,12000);
 new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon();buildOdd();buildMoon();buildAi()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
 window.__obs3d={viewer,setImagery,setXray,DS,SAT,selectSat,setMoonView};
 })();

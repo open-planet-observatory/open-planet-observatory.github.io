@@ -62,12 +62,13 @@
     el.addEventListener('gestureend', e => e.preventDefault(), { passive: false });
     V.clock.shouldAnimate = true;
     // the panel: what this is, the two buttons, and where the data come from
+    let relief = null;
     ui = document.createElement('div'); ui.className = 'mg-ui glass'; ui.innerHTML = `<div class="mg-h"><b>The Moon</b><button class="mg-x" aria-label="Back to Earth" title="Back to Earth">×</button></div>
       <p class="mg-s" id="mgState"></p>
       <div class="mg-row"><button class="chip" id="mgEarth" aria-pressed="false"><span>Earth from the Moon</span></button></div>
       <div class="mg-row"><button class="chip" id="mgAll" aria-pressed="false" title="Advanced: every name the IAU has adopted on the Moon, about 9,000, including the lettered craters around the big ones. They appear as you zoom in."><span>All names (advanced)</span></button></div>
       <div class="mg-row"><button class="chip" id="mgLit" aria-pressed="false" title="Light the whole Moon evenly, far side and night side included"><span>Whole Moon lit</span></button><button class="chip" id="mgNames" aria-pressed="true"><span>Names</span></button></div>
-      <div class="mg-row"${window.OBS_ION_TOKEN ? '' : ' hidden'}><button class="chip" id="mgRelief" aria-pressed="false" title="Mountains and craters in 3D from Cesium Moon Terrain (NASA LOLA and Kaguya elevations), at true height"><span>3D relief</span></button></div>
+      <div class="mg-row"${window.OBS_ION_TOKEN ? '' : ' hidden'}><button class="chip" id="mgRelief" aria-pressed="false" title="Mountains and craters in 3D from Cesium Moon, a 3D model of the whole Moon built from NASA data, at true height"><span>3D relief</span></button></div>
       <p class="mg-k">${Object.entries(KIND).map(([k, [t, c]]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</p>
       <div class="mg-card" id="mgCard" hidden></div>
       <p class="mg-src">Surface: NASA LRO WAC mosaic (<a href="https://trek.nasa.gov/moon/" target="_blank" rel="noopener">Moon Trek</a>). Names: <a href="https://planetarynames.wr.usgs.gov/" target="_blank" rel="noopener">IAU Gazetteer of Planetary Nomenclature</a> (USGS), <span id="mgFeat">loading…</span> Sun and Earth positions: Astronomy Engine, in your browser.</p>`;
@@ -76,7 +77,10 @@
     ui.querySelector('#mgLit').onclick = e => { lit = !lit; e.currentTarget.setAttribute('aria-pressed', !lit); setLight(); };
     ui.querySelector('#mgNames').onclick = e => { showNames = !showNames; e.currentTarget.setAttribute('aria-pressed', showNames); if (pick) pick.show = showNames; if (allPick) allPick.show = showNames && allOn; };
     ui.querySelector('#mgRelief').onclick = async e => { const b = e.currentTarget, on = b.getAttribute('aria-pressed') !== 'true'; b.setAttribute('aria-pressed', on);
-      try { V.terrainProvider = on ? await Cc.CesiumTerrainProvider.fromIonAssetId(2684829) : new Cc.EllipsoidTerrainProvider({ ellipsoid: Cc.Ellipsoid.MOON }); } catch (x) { b.setAttribute('aria-pressed', false); const s = ui.querySelector('#mgState'); if (s) s.textContent = 'The 3D relief did not load.'; } };
+      /* Cesium Moon (ion asset 2684829) is a textured 3D Tiles model of the whole Moon from NASA data; while it shows, the flat globe steps aside */
+      try { if (on) { if (!relief) { relief = await Cc.Cesium3DTileset.fromIonAssetId(2684829); V.scene.primitives.add(relief); } relief.show = true; V.scene.globe.show = false; }
+        else { if (relief) relief.show = false; V.scene.globe.show = true; } }
+      catch (x) { b.setAttribute('aria-pressed', false); V.scene.globe.show = true; const s = ui.querySelector('#mgState'); if (s) s.textContent = 'The 3D relief did not load from Cesium ion.'; } };
     ui.querySelector('#mgAll').onclick = e => { allOn = !allOn; e.currentTarget.setAttribute('aria-pressed', allOn); loadAll(); };
     ui.querySelector('#mgEarth').onclick = e => { const on = e.currentTarget.getAttribute('aria-pressed') !== 'true'; e.currentTarget.setAttribute('aria-pressed', on); on ? earthView() : homeView(); };
     // Earth in the Moon's sky: NASA Blue Marble on a sphere at its real distance, size, phase and rotation
