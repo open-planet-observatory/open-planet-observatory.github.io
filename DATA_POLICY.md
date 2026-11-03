@@ -162,7 +162,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## 3D relief (needs a Cesium ion token)
 
-- When the repository secret `CESIUM_ION_TOKEN` is set, the build puts the token in the page (as Cesium requires for browser streaming) and two switches appear: "3D relief (heights ×10)" under Sea floor on Earth (Cesium World Bathymetry, GEBCO-based, heights stretched 10 times and labelled so) and "3D relief" on the Moon (Cesium Moon Terrain, true heights). Without the token neither switch shows. The token should be restricted in Cesium ion to the site's own address; Cesium ion's free Community plan is for non-commercial use and has a monthly streaming allowance, which fits the site's no-ads rule; if the allowance runs out the relief stops loading and the flat maps stay.
+- When the repository secret `CESIUM_ION_TOKEN` is set, the build puts the token in the page (as Cesium requires for browser streaming) and two switches appear: "3D relief (heights ×10)" under Sea floor on Earth (Cesium World Bathymetry, GEBCO-based, heights stretched 10 times and labelled so) and "3D relief" on the Moon (Cesium Moon, true heights). Without the token neither switch shows. The token should be restricted in Cesium ion to the site's own address; Cesium ion's free Community plan is for non-commercial use and has a monthly streaming allowance, which fits the site's no-ads rule; if the allowance runs out the relief stops loading and the flat maps stay.
 
 ## Inside the Earth
 
