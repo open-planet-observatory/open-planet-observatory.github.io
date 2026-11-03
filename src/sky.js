@@ -4,7 +4,7 @@
 // site's Hipparcos star file and d3-celestial's constellation figures, and eclipses with Astronomy Engine's own searches.
 // Meteor-shower dates are the International Meteor Organization's calendar, as published; only the names and dates are
 // shown, with a link to IMO for everything else.
-// Location: asked of the browser once, rounded to 0.1° (about 10 km) and kept only in this browser (localStorage). A typed
+// Location: asked of the browser only when the visitor presses "Use my location" (never automatically; Derik, 3 Nov), rounded to 0.1° (about 10 km) and kept only in this browser (localStorage). A typed
 // place name is the only thing sent anywhere (Open-Meteo's place search). Nothing about the visitor is stored elsewhere.
 (function () {
   const html = document.documentElement; if (!html.classList.contains('ops')) return;
@@ -267,7 +267,7 @@
   S.ensureStars = ensureStars;
   async function onOpen(part) { if (!open) { open = true; host.innerHTML = '<p class="small muted">Loading the stars…</p>';
       const ok = await ensureStars(); if (!ok) { host.innerHTML = '<p class="small muted">The star file did not load. Nothing is shown in its place.</p>'; return; }
-      if (!loc && !get(ASKED)) askBrowser(null); render(); }
+      render(); }
     if (part) setTimeout(() => { const el = document.getElementById('sky-' + part); if (el) el.scrollIntoView({ block: 'start', behavior: 'smooth' }); }, 60); }
   addEventListener('obs:sky', e => { O.openPanel && O.openPanel('sky'); onOpen(e.detail); });
   const p = panel(); if (p) new MutationObserver(() => { if (visible()) onOpen(); }).observe(p, { attributes: true, attributeFilter: ['data-on'] });

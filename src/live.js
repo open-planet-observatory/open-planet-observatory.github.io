@@ -7,7 +7,7 @@ const O=window.__obs;
 const pill=document.querySelector('.pill.snap');
 let updated=null,isSeed=false;
 const ago=t=>{const m=Math.round((Date.now()-t)/6e4);return m<1?'just now':m<60?m+' min ago':Math.round(m/60)+' h ago'};
-function setPill(){if(!pill||!updated||isSeed)return;pill.className='pill live';pill.innerHTML='<i></i>Updated '+ago(updated)+' · refreshes every 10 min'}
+function setPill(){if(!pill||!updated||isSeed)return;pill.className='pill live';pill.innerHTML='<i></i>Updated '+ago(updated);pill.title='Data refresh every 10 minutes'}
 
 // USGS: M2.5+ in the past week, same compact format the collector writes.
 async function quakes(){try{
