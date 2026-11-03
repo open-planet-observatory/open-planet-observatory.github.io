@@ -160,6 +160,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
 - No prizes, paid entries or sponsors are attached to the game.
 
+## Record watch
+
+- `collector/recordwatch.mjs` checks every 6 hours: NOAA NCEI's monthly Global Climate Report (the text the report page loads from its content endpoint) and Copernicus C3S's monthly surface-air-temperature and sea-ice bulletins for the last three months, NSIDC's Sea Ice Today feed, NASA's news-release feed and USGS's news-release list (Derik's choice of sources, 2 Nov 2026).
+- From the two climate reports, a sentence is kept only when it declares a record set, broken, tied or surpassed (for example "surpassing the previous 2024 record", "set a new record-high", "reached record highs"); rankings below first ("second-warmest on record"), negatives ("no land or ocean areas experienced a record-cold September") and near-misses ("shy of the record", "trailed") are left out. From the news feeds, a headline is kept only when it says "record" and names no person. Every item is shown word for word, grouped by its report or release, with its link and the source's licence. Nothing is added or reworded.
+- Items stay listed for about 400 days from their date; a source that fails is named on the page and its earlier items stay with their own dates. The detector errs toward leaving a borderline sentence out.
+
 ## Predictions (Polymarket)
 
 - `collector/predictions.mjs` reads Polymarket's public Gamma API hourly into `data/predictions.json`: open events tagged space, SpaceX, NASA, climate, weather, global temperature, hurricanes, earthquakes, volcanoes, AI, tech or science (Derik's scope, 2 Nov 2026). Left out: anything also tagged politics, elections, sports, crypto, finance, business, pop culture, war or similar; daily city-temperature and daily-quake bets; disease, health and drug-approval markets; mergers, listings and company-value markets; and any market whose title or question names a person (a list of surnames plus a check for two capitalised words in a row that are not a known place, body, programme or product). Events with under $1,000 traded are skipped; at most 12 per topic.

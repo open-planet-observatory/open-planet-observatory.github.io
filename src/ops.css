@@ -806,3 +806,6 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 .pm-d{font-size:.7rem;white-space:nowrap}.pm-d.up{color:#8fe3a8}.pm-d.dn{color:#ff9a8a}
 :root[data-theme="light"] .pm-d.up{color:#1d6b35}:root[data-theme="light"] .pm-d.dn{color:#a03020}
 .pm-f{margin:6px 0 0}
+/* Record watch */
+.rw-what{margin:0 0 8px}.rw-g h4{margin:0 0 6px;font-size:.92rem}.rw-g h4 a{color:inherit}
+.rw-l{margin:0 0 4px;padding-left:16px;font-size:.86rem}.rw-l li{margin:3px 0}

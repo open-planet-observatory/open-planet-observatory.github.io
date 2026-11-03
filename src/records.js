@@ -8,7 +8,7 @@
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const A = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
   const short = n => String(n).replace(/ \((moon|bathyscaphe)\)$/, '');
-  let R = null, filter = 'all', vy = null;
+  let R = null, filter = 'all', vy = null, W = null, wOpen = {};
   const AU = 149597870.7;
   function voyagerNow() { if (!vy || !vy.now) return null; const n = vy.now, dt = (Date.now() - Date.parse(n.t)) / 1000; const km = n.au * AU + (n.kms || 0) * dt; return { km, au: km / AU, lh: km / 299792.458 / 3600, t: n.t }; }
   function valueHTML(m) { const [v0, ...more] = m.v;
@@ -38,18 +38,31 @@
     if (!R.records) { host.innerHTML = '<p class="small muted">The records file did not load. Nothing older is shown in its place.</p>'; return; }
     const G = R.groups || [];
     const list = R.records.filter(r => filter === 'all' || r.g === filter);
-    host.innerHTML = `<div class="hist-f" role="group" aria-label="Kinds of record"><button data-f="all" aria-pressed="${filter === 'all'}">All</button>${G.map(([k, t]) => `<button data-f="${esc(k)}" aria-pressed="${filter === k}">${esc(t)}</button>`).join('')}</div>
+    host.innerHTML = watchHTML() + `<div class="hist-f" role="group" aria-label="Kinds of record"><button data-f="all" aria-pressed="${filter === 'all'}">All</button>${G.map(([k, t]) => `<button data-f="${esc(k)}" aria-pressed="${filter === k}">${esc(t)}</button>`).join('')}</div>
       ${G.filter(([k]) => filter === 'all' || filter === k).map(([k, t]) => { const L = list.filter(r => r.g === k); return L.length ? `<h3 class="rc-g">${esc(t)}</h3>${L.map(card).join('')}` : ''; }).join('')}
       <p class="small muted">Figures are each source’s own, in its own units; a bracketed conversion is the site’s arithmetic. The first figure is the one the source marks as preferred where it marks one; “Also published” lists its other values, with what was measured and how where the source says. Wikidata values are CC0; summaries are Wikipedia’s own words (CC BY-SA 4.0). Checked weekly; built ${esc((R.built || '').replace('T', ' '))} UTC.</p>
       <p class="small muted">Blind spot: Wikidata is edited by volunteers and can lag a new measurement or carry an old one; a record held by a person (the longest spaceflight, for instance) is not listed yet. For official weather extremes, the WMO archive is the authority.</p>`;
     host.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { filter = b.dataset.f; draw(); });
+    host.querySelectorAll('[data-rw]').forEach(b => b.onclick = () => { wOpen[b.dataset.rw] = !wOpen[b.dataset.rw]; draw(); });
     host.querySelectorAll('[data-read]').forEach(b => b.onclick = () => { const q = b.closest('.rc-row').querySelector('.rc-read'); q.hidden = !q.hidden; b.setAttribute('aria-expanded', String(!q.hidden)); b.textContent = q.hidden ? 'Read' : 'Close'; });
     host.querySelectorAll('[data-geo]').forEach(b => b.onclick = () => { const [id, i] = b.dataset.geo.split(':'); const x = R.records.find(r => r.id === id).list[+i]; const g = window.__obs3d;
       try { if (O.setSlim) O.setSlim(true); g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(x.lon, x.lat, 2.5e6), duration: 2 }); } catch (e) { } });
   }
+  // ---------- Record watch: records the agencies themselves declare, word for word ----------
+  function watchHTML() { if (!W) return ''; const S = W.sources || {}, failed = (W.failed || []).map(k => (S[k] || {}).name || k);
+    if (!W.items || !W.items.length) return `<section class="rw"><h3 class="rc-g">Record watch</h3><p class="small muted">No new record declared by the agencies we watch in the last year${failed.length ? ` (not checked this time: ${esc(failed.join(', '))})` : ''}.</p></section>`;
+    const groups = []; const by = new Map(); for (const it of W.items) { const k = it.src + '|' + (it.period ? it.url : it.url); if (!by.has(k)) { const g = { k, src: it.src, url: it.url, date: it.date, period: it.period, items: [] }; by.set(k, g); groups.push(g); } by.get(k).items.push(it); }
+    const fmt = d => { if (!d) return ''; const x = new Date(d.length === 7 ? d + '-15T12:00:00Z' : d + 'T12:00:00Z'); return x.toLocaleDateString(undefined, d.length === 7 ? { month: 'long', year: 'numeric' } : { day: 'numeric', month: 'short', year: 'numeric' }); };
+    return `<section class="rw"><h3 class="rc-g">Record watch</h3><p class="small muted rw-what">New records as the agencies themselves announce them, in their own words: NOAA's and Copernicus's monthly climate reports, NSIDC's sea-ice analyses, and NASA and USGS news releases.</p>
+      ${groups.slice(0, 8).map(g => { const src = S[g.src] || {}, many = g.items.length > 3 && !wOpen[g.k], L = many ? g.items.slice(0, 3) : g.items;
+        return `<article class="rc rw-g"><h4><a ${A(g.url)}>${esc(src.name || g.src)}</a>${g.period ? ` · ${esc(g.period)}` : g.date ? ` · ${esc(fmt(g.date))}` : ''}</h4>
+          <ul class="rw-l">${L.map(i => `<li>${esc(i.t)}</li>`).join('')}</ul>${g.items.length > 3 ? `<button class="more" data-rw="${esc(g.k)}">${wOpen[g.k] ? 'Show fewer' : `Show all ${g.items.length}`}</button>` : ''}
+          <p class="small muted rc-src">${esc(src.lic || '')} · <a ${A(src.home || g.url)}>source</a></p></article>`; }).join('')}
+      <p class="small muted">Each line is the agency's own sentence or headline, unedited; the site picks only those that say a record was set, broken, tied or surpassed, and leaves out rankings below first. Checked every 6 hours; built ${esc((W.built || '').replace('T', ' '))} UTC.${failed.length ? ` Not checked this time: ${esc(failed.join(', '))}.` : ''}</p></section>`; }
   async function load() {
     try { const r = await fetch('data/records.json?t=' + Math.floor(Date.now() / 36e5)); if (!r.ok) throw new Error('HTTP ' + r.status); R = await r.json(); } catch (e) { R = {}; }
     try { const r = await fetch('data/voyager.json?t=' + Math.floor(Date.now() / 36e5)); if (r.ok) vy = await r.json(); } catch (e) { }
+    try { const r = await fetch('data/recordwatch.json?t=' + Math.floor(Date.now() / 36e5)); if (r.ok) W = await r.json(); } catch (e) { }
     draw(); window.OwlRecords = { data: () => R }; featCard();
     setInterval(() => { const el = document.getElementById('rcVy'), v = voyagerNow(); if (el && v) el.textContent = Math.round(v.km).toLocaleString('en-US') + ' km'; }, 1000);
   }
