@@ -118,6 +118,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - The Sun's direction on the Moon, Earth's position in the Moon's sky and Earth's rotation are computed in the browser with Astronomy Engine (the IAU rotation models); the Moon-fixed frame agrees with the libration Astronomy Engine reports to about 0.03°. Earth seen from the Moon wears NASA Blue Marble (GIBS) at its true size, phase and rotation.
 - In the Earth and Moon view the Moon is drawn 4 times larger by default, and labelled so; "Moon at true size" shows it as it is.
 
+## Cost of living around the world
+
+- Price level vs the U.S.: the World Bank's PPP conversion factor for household consumption (PA.NUS.PRVT.PP) divided by its official exchange rate (PA.NUS.FCRF) for the same year, × 100. This is how the World Bank itself defines the price level ratio (U.S. = 100); the division is the site's arithmetic on the World Bank's two numbers (CC BY 4.0). Countries whose ratio comes out below 5 or above 300 are left out and named, because that points to mismatched units or an official rate far from the market rate.
+- Pay vs prices: the ILO's average monthly earnings of employees (ILOSTAT EAR_EMTA_SEX_NB, both sexes, local currency; CC BY 4.0) for the two latest years of one source series, as a % change, next to the World Bank's consumer-price inflation for the same year. Years the ILO marks as a break in the series are skipped. Pay minus prices is the site's subtraction.
+- City cost-of-living rankings (Numbeo, Mercer, EIU) are proprietary: linked, not shown.
+- Blind spots: national averages say nothing about cities, regions or who gained; survey methods change; some countries' latest year is old (the year is always shown).
+
 ## Records
 
 - Records (Learn menu) are rebuilt weekly by collector/records.mjs. Every figure is its source's own, in the source's units: measured values of places, objects and structures from Wikidata (CC0), and agency lists from USGS (largest earthquakes since 1900), the Smithsonian Global Volcanism Program (VEI 7 eruptions), NASA JPL CNEOS (largest fireballs), NOAA NCEI (warmest years), NSIDC (lowest September Arctic sea ice) and the NASA Exoplanet Archive. Voyager 1's distance is counted on from NASA JPL Horizons, as on the countdown.
