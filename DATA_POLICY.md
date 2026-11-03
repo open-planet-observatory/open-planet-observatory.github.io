@@ -202,6 +202,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Five targets a day for the visitor's own sky: named stars brighter than magnitude 2.1 and at least 15° up, plus planets and the Moon at least 10° up, picked with a seed made from the date and the rounded position, so the same place gets the same targets all day. The player taps the Sky tonight chart with the names hidden; the score is the site's own rule (1,000 points within 3°, halving every 8° beyond). It is a game score, not a measurement.
 - Scores, streaks and progress stay in the visitor's browser (localStorage). The copied result contains the date, the score and coloured squares, never the location. No prizes, paid entries or sponsors.
 
+## One Light-Day (the Voyager-week scavenger hunt) and the Play page
+
+- Five stops, open until 22 November 2026 (UTC). Each clue is the site's own wording; each answer is checked, at the moment the player answers, against the same data the site shows: the Voyager 1 countdown (NASA JPL Horizons, data/voyager.json), Proxima Centauri's distance (ESA Hipparcos), Andromeda's count of published distance measurements (NASA/IPAC NED-D), and the edge card's 380,000 years (ESA Planck). If a data file does not load, nothing is counted and the card says so. The hunt's points are a game rule, not a measurement.
+- Two "look up" bonus stops (Jupiter, Saturn) are on the honour system. Their best viewing times are computed in the visitor's browser (Astronomy Engine) for a city the player picks from a list, or for the place they already set in Sky tonight. The hunt never asks for or uses the player's location.
+- The Play page and its field journal only read what each game already keeps in this browser. Progress, scores and stamps are never sent anywhere; if the browser refuses storage, progress lasts only for that visit and the page says so.
+
 ## Source Bounty
 
 - Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. Contributors are not named on the site unless that is decided separately.
