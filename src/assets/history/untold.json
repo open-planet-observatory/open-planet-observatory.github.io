@@ -2173,6 +2173,763 @@
      "https://www.cityoftulsa.org/1921graves"
     ]
    ]
+  },
+  {
+   "id": "jerusalem1099",
+   "title": "The fall of Jerusalem to the First Crusade",
+   "region": "Middle East",
+   "where": "Old City of Jerusalem (approximate)",
+   "lat": 31.7767,
+   "lon": 35.2345,
+   "from": 1099,
+   "to": 1099,
+   "themes": [
+    "War",
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "In 1095, at the Council of Clermont, Pope Urban II urged Christians to undertake an armed pilgrimage to Jerusalem, which had been under Muslim rule since the 7th century.",
+     "https://en.wikipedia.org/wiki/First_Crusade"
+    ],
+    [
+     "The Fatimids of Egypt had taken Jerusalem in August 1098; on 7 June 1099 the Crusader army, reduced to perhaps 1,200–1,500 cavalry and 12,000 foot soldiers, encamped before it.",
+     "https://www.britannica.com/event/Crusades/The-siege-of-Jerusalem"
+    ],
+    [
+     "On 15 July Godfrey's men took a sector of the walls; the Muslim governor surrendered to Raymond in the Tower of David and was escorted out with his bodyguard, but Tancred's promise of protection in the Aqsa Mosque was disobeyed, and Muslim and Jewish men, women and children died in the general slaughter that followed.",
+     "https://www.britannica.com/event/Crusades/The-siege-of-Jerusalem"
+    ],
+    [
+     "According to the Damascus chronicler Ibn al-Qalanisi, Jews who had taken refuge in their synagogue died when the Crusaders burned it; some Muslims and Jews survived by escaping or being taken prisoner for ransom, and a letter of the Karaite elders of Ascalon tells of efforts to ransom Jewish captives and send them to Alexandria.",
+     "https://en.wikipedia.org/wiki/First_Crusade"
+    ],
+    [
+     "The governor had expelled the city's Eastern Christians before the siege, so they escaped the massacre.",
+     "https://en.wikipedia.org/wiki/First_Crusade"
+    ],
+    [
+     "Godfrey was elected to govern with the title Defender of the Holy Sepulchre, and most Crusaders, having fulfilled their pilgrimage vows, went home.",
+     "https://www.britannica.com/event/Crusades/The-siege-of-Jerusalem"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Les personnes qui avaient quitté la Syrie, arrivèrent à Bagdad, au mois de ramadan (fin de juillet ou commencement d'août). Elles se présentèrent au divan (conseil d'administration), et y firent un récit qui arracha des larmes de tous les yeux. La douleur était dans tous les cœurs. Ces personnes, le vendredi qui suivit leur arrivée, restèrent dans la grande mosquée, invoquant la miséricorde divine. Elles pleuraient, et le peuple entier pleurait avec elles; elles racontèrent les malheurs qui avaient frappé les Musulmans de nobles et vastes contrées, le massacre des hommes, l'enlèvement des femmes et des enfants, et le pillage des propriétés.",
+     "who": "Refugees from Syria in Baghdad, as recorded by Ibn al-Athir. In plain English: 'The people who had fled Syria reached Baghdad in Ramadan and came before the council, where their story brought tears to every eye. On the Friday after they arrived they stayed in the great mosque calling on God's mercy, weeping, and the whole people wept with them; they told of the calamities that had struck the Muslims of noble and wide lands: the men massacred, the women and children carried off, the property plundered.'",
+     "date": "late July or early August 1099",
+     "doc": "Ibn al-Athir, al-Kamil fi'l-tarikh, tr. Reinaud, Recueil des historiens des croisades, Historiens orientaux, vol. 1 (1872), p. 199",
+     "url": "https://archive.org/stream/recueildeshistor01acad/recueildeshistor01acad_djvu.txt",
+     "lic": "Public domain (published 1872)"
+    },
+    {
+     "text": "Vos frères, dans la Syrie, n'ont pour se reposer que le dos de leurs chameaux ou les entrailles des vautours. Les Romains les couvrent d'opprobre ; et vous, vous laissez traîner votre robe dans la mollesse, comme quelqu'un qui n'aurait rien à craindre ! Que de sang a été répandu! que de femmes à qui on n'a laissé, pour protéger leur pudeur, que la paume de leurs mains !",
+     "who": "The poet al-Muzaffar al-Abiwardi, a contemporary, in verses on the fall of Jerusalem quoted by Ibn al-Athir ('Romains' renders the Arabic Rum, here the Christian invaders); al-Abiwardi wrote in Iraq and was not himself a refugee. In plain English: 'Your brothers in Syria have nowhere to rest but the backs of their camels or the bellies of vultures. The Rum heap shame on them, while you trail your robes in idle ease as if you had nothing to fear. How much blood has been shed! How many women have been left nothing but the palms of their hands to cover their modesty!'",
+     "date": "1099",
+     "doc": "Ibn al-Athir, al-Kamil fi'l-tarikh, tr. Reinaud, Recueil des historiens des croisades, Historiens orientaux, vol. 1 (1872), p. 200",
+     "url": "https://archive.org/stream/recueildeshistor01acad/recueildeshistor01acad_djvu.txt",
+     "lic": "Public domain (published 1872)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "La ville sainte fut prise du côté du nord, dans la matinée du vendredi 22 du mois de schaban (15 juillet). Aussitôt la foule prit la fuite. Les Francs restèrent une semaine dans la ville, occupés à massacrer les Musulmans. Une troupe de Musulmans s'était retirée dans le Mihrab de David, et s'y était fortifiée. Elle se défendit pendant trois jours. Les Francs ayant offert de les recevoir à capitulation, ils se rendirent et eurent la vie sauve; on leur permit de sortir pendant la nuit, et ils se retirèrent à Ascalon.",
+     "who": "Ibn al-Athir (1160–1233), historian of Mosul, writing about 120 years later. In plain English: 'The holy city was taken from the north on the morning of Friday 22 Sha'ban (15 July). At once the crowd fled. The Franks stayed a week in the city, busy massacring the Muslims. A band of Muslims had shut themselves in the Mihrab of David and held out for three days. When the Franks offered them terms they surrendered and were spared; they were let out by night and went to Ascalon.'",
+     "date": "15 July 1099; written early 13th century",
+     "url": "https://archive.org/stream/recueildeshistor01acad/recueildeshistor01acad_djvu.txt"
+    },
+    {
+     "text": "Les Francs massacrèrent plus de soixante et dix mille Musulmans dans la mosquée Alacsa: parmi eux on remarquait un grand nombre d'imams, d'oulamas (savants), et de personnes d'une vie pieuse et mortifiée, qui avaient quitté leur patrie pour venir prier dans ce noble lieu.",
+     "who": "Ibn al-Athir. In plain English: 'The Franks massacred more than seventy thousand Muslims in the Aqsa mosque; among them were many imams, scholars, and people of pious and ascetic life who had left their homelands to pray in that noble place.'",
+     "date": "July 1099; written early 13th century",
+     "url": "https://archive.org/stream/recueildeshistor01acad/recueildeshistor01acad_djvu.txt"
+    },
+    {
+     "text": "Godefroy ayant pris en main le glaive de Vespasien, se précipita de toute sa force contre les infidèles. Il en immola 65,000 dans le temple, sans compter ceux qui périrent dans les autres parties de la ville. C'est ainsi que fut prise Jérusalem, et le tombeau du Christ, notre Dieu, délivré de la servitude des musulmans. C'est pour la troisième fois que l'épée de Vespasien sévissait contre Jérusalem depuis que le Seigneur avait été crucifié.",
+     "who": "Matthew of Edessa, Armenian Christian chronicler of the early 12th century, writing in Edessa, later under Frankish rule, and not uncritical of the Franks (tr. Édouard Dulaurier, 1858). In plain English: 'Godfrey, taking up the sword of Vespasian, threw himself with all his strength on the infidels. He slaughtered 65,000 of them in the temple, not counting those who died in the rest of the city. So Jerusalem was taken, and the tomb of Christ our God delivered from the bondage of the Muslims. It was the third time since the Lord was crucified that the sword of Vespasian had raged against Jerusalem.'",
+     "date": "1099; written in the 12th century",
+     "url": "https://archive.org/stream/bub_gb_YlkuAAAAQAAJ/bub_gb_YlkuAAAAQAAJ_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "On the roof of the Temple a great number of pagans of both sexes had assembled, and these were taken under the protection of Tancred and Gaston of Beert. Afterward, the army scattered throughout the city and took possession of the gold and silver, the horses and mules, and the houses filled with goods of all kinds. Later, all of our people went to the Sepulchre of our Lord, rejoicing and weeping for joy, and they rendered up the offering that they owed. In the morning, some of our men cautiously ascended to the roof of the Temple and attacked the Saracens, both men and women, beheading them with naked swords; the remainder sought death by jumping down into the temple.",
+     "who": "The Gesta Francorum, written by an anonymous knight in the Crusader army (tr. August C. Krey, 1921)",
+     "date": "15–16 July 1099",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "But these were small matters compared to what happened at the Temple of Solomon, a place where religious services are ordinarily chanted. What happened there? If I tell the truth, it will exceed your powers of belief. So let it suffice to say this much, at least, that in the Temple and porch of Solomon, men rode in blood up to their knees and bridle reins. Indeed, it was a just and splendid judgment of God that this place should be filled with the blood of the unbelievers, since it had suffered so long from their blasphemies.",
+     "who": "Raymond of Aguilers, chaplain to Count Raymond of Toulouse, an eyewitness in the Crusader army (tr. August C. Krey, 1921)",
+     "date": "15 July 1099",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "A new day, new joy, new and perpetual gladness, the consummation of our labor and devotion, drew forth from all new words and new songs. This day, I say, will be famous in all future ages, for it turned our labors and sorrows into joy and exultation; this day, I say, marks the justification of all Christianity, the humiliation of paganism, and the renewal of our faith.",
+     "who": "Raymond of Aguilers on the pilgrims' devotion at the Holy Sepulchre after the capture (tr. August C. Krey, 1921)",
+     "date": "15 July 1099",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "Accordingly, the Lord, pleased at this humility, granted the city with His enemies to us on the eighth day after our humiliation, on this day, to wit, when the primitive Church was expelled from Jerusalem, the day when the festival of the Dispersion of the Apostles is celebrated by many of the faithful. And, if you desire to know what was done about the enemy whom we found there, know that in the portico of Solomon and in his Temple, our men rode in the blood of the Saracens up to the knees of the horses.",
+     "who": "Letter of Archbishop Daimbert of Pisa, Duke Godfrey, Count Raymond of St Gilles and 'all the army of God' to the Pope (Paschal II), printed by Krey as the 'Official summary of the Crusade'",
+     "date": "1099, after the battle of Ascalon (12 August), from Laodicea",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    }
+   ],
+   "note": "Research in progress: the Jewish testimony of 1099, Cairo Geniza letters such as that of the Karaite elders of Ascalon, is available only in modern copyrighted translations, so none is quoted here.",
+   "warn": "Ibn al-Athir wrote in Mosul over a century after the events; his account and al-Abiwardi's verses are quoted in J.-T. Reinaud's French translation, and Matthew of Edessa in Édouard Dulaurier's French, each with a plain-English gloss. The Crusader texts are August C. Krey's 1921 English. The sources of the time call Muslims 'Saracens', 'pagans' or 'infidels'.",
+   "disputed": [
+    [
+     "The death toll. Ibn al-Athir counts more than 70,000 killed in the Aqsa mosque and Matthew of Edessa 65,000 in the temple. Modern historians call such figures unrealistic for a city of perhaps 30,000 and estimate 3,000 to 10,000 dead; Britannica writes of hundreds of men, women and children killed.",
+     [
+      "https://archive.org/stream/recueildeshistor01acad/recueildeshistor01acad_djvu.txt",
+      "https://archive.org/stream/bub_gb_YlkuAAAAQAAJ/bub_gb_YlkuAAAAQAAJ_djvu.txt",
+      "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(1099)",
+      "https://www.britannica.com/event/Crusades/The-siege-of-Jerusalem"
+     ]
+    ],
+    [
+     "Was the massacre exceptional? Benjamin Kedar, working mainly from the Latin sources, concluded it was considerably more extensive than in other towns. Konrad Hirschler argues that the early Arabic sources show a massacre no greater than at Antioch, Caesarea or Ma'arrat al-Nu'man, and that it came to be remembered as a full-scale massacre only decades later.",
+     [
+      "https://www.medievalists.net/2013/05/the-jerusalem-conquest-of-4921099-in-the-medieval-arabic-historiography-of-the-crusades-from-regional-plurality-to-islamic-narrative/"
+     ]
+    ],
+    [
+     "Blood 'up to the knees'. The Crusaders' own texts disagree on the depth: the Gesta Francorum says ankles, Raymond of Aguilers knees and bridle reins, the leaders' letter the horses' knees. The historian Thomas Madden calls these descriptions fantastical and impossible, while stressing that the massacre and its bloodshed were real.",
+     [
+      "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt",
+      "https://www.medievalists.net/2013/10/rivers-of-blood-an-analysis-of-one-aspect-of-the-crusader-conquest-of-jerusalem-in-1099/"
+     ]
+    ],
+    [
+     "The synagogue. The Damascus chronicler Ibn al-Qalanisi says the Jews gathered in their synagogue and the Franks burned it over their heads; a Jewish letter written about two weeks later confirms the burning but does not mention people inside.",
+     [
+      "https://en.wikipedia.org/wiki/Massacre_of_Jerusalem_(1099)"
+     ]
+    ]
+   ],
+   "blind": "Almost none of the people killed or driven out left their own account. The Muslim histories were written decades or a century later, far away in Damascus, Baghdad or Mosul; the Jewish letters from the Cairo Geniza survive only in modern translations; and the most detailed accounts of the slaughter are by clergy and knights of the victorious army, who celebrated it.",
+   "reading": [
+    [
+     "August C. Krey, The First Crusade: The Accounts of Eye-Witnesses and Participants (1921), full text",
+     "https://archive.org/details/firstcrusadeacco00kreyuoft"
+    ],
+    [
+     "Recueil des historiens des croisades, Historiens orientaux, vol. 1 (1872)",
+     "https://archive.org/details/recueildeshistor01acad"
+    ],
+    [
+     "Crusades: the siege of Jerusalem (Britannica)",
+     "https://www.britannica.com/event/Crusades/The-siege-of-Jerusalem"
+    ]
+   ]
+  },
+  {
+   "id": "peasants1381",
+   "title": "The Peasants' Revolt",
+   "region": "Europe",
+   "where": "Smithfield, London, England (approximate)",
+   "lat": 51.5186,
+   "lon": -0.1007,
+   "from": 1381,
+   "to": 1381,
+   "themes": [
+    "Uprising",
+    "Protest and dissent",
+    "Forced labour"
+   ],
+   "facts": [
+    [
+     "The rising's immediate cause was the unpopular poll tax of 1380, which brought to a head discontent that had grown since the Black Death, including anger at the Statute of Labourers (1351), which tried to fix maximum wages during the labour shortage.",
+     "https://www.britannica.com/event/Peasants-Revolt"
+    ],
+    [
+     "That third poll tax was a flat 12 pence on every person over 15; many in the south-east evaded it by refusing to register, and when the royal official John Bampton tried to collect unpaid tax at Brentwood, Essex, on 30 May 1381, the confrontation turned violent and spread across the south-east.",
+     "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+    ],
+    [
+     "On 13 June the Kentish rebels under Wat Tyler entered London, massacred some Flemish merchants and razed John of Gaunt's Savoy Palace; on 14 June, while Richard II met the Essex men at Mile End and promised the abolition of serfdom, rebels in the Tower beheaded the chancellor, Archbishop Simon Sudbury, and the treasurer, Sir Robert Hales.",
+     "https://www.britannica.com/event/Peasants-Revolt"
+    ],
+    [
+     "The hunt for Flemings went on into 14 June: in one city ward the bodies of 40 Flemings were piled in the street, and 35 were killed at the church of St Martin Vintry.",
+     "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+    ],
+    [
+     "At Smithfield on 15 June Tyler was cut down in the king's presence by the mayor, William Walworth, and later beheaded; the priest John Ball was tried at St Albans and hanged, drawn and quartered on 15 July.",
+     "https://www.britannica.com/event/Peasants-Revolt"
+    ],
+    [
+     "On 2 July the charters granted under duress were formally revoked, and by November at least 1,500 people had been executed or killed in battle.",
+     "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Ah, ye good people, the matters goeth not well to pass in England, nor shall not do till everything be common, and that there be no villains nor gentlemen, but that we may be all united together, and that the lords be no greater masters than we be. What have we deserved, or why should we be kept thus in servage? We be all come from one father and one mother, Adam and Eve: whereby can they say or shew that they be greater lords than we be, saving by that they cause us to win and labour for that they dispend?",
+     "who": "John Ball, as recorded by Jean Froissart (Froissart says Ball preached this to villagers coming out of church on Sundays in Kent)",
+     "date": "before June 1381",
+     "doc": "The Chronicles of Froissart, tr. Lord Berners, ed. G. C. Macaulay, 'How the Commons of England Rebelled against the Noblemen' (Harvard Classics vol. 35, 1910)",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html",
+     "lic": "Public domain (Berners translation 1523–25; Macaulay edition 1895; Project Gutenberg ebook 13674)"
+    },
+    {
+     "text": "They are clothed in velvet and camlet furred with grise, and we be vestured with poor cloth: they have their wines, spices and good bread, and we have the drawing out of the chaff and drink water; they dwell in fair houses, and we have the pain and travail, rain and wind in the fields; and by that that cometh of our labours they keep and maintain their estates: we be called their bondmen, and without we do readily them service, we be beaten; and we have no sovereign to whom we may complain, nor that will hear us nor do us right.",
+     "who": "John Ball, as recorded by Jean Froissart",
+     "date": "before June 1381",
+     "doc": "The Chronicles of Froissart, tr. Lord Berners, ed. G. C. Macaulay (Harvard Classics vol. 35, 1910)",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html",
+     "lic": "Public domain (Berners translation 1523–25; Project Gutenberg ebook 13674)"
+    },
+    {
+     "text": "We will that ye make us free for ever, ourselves, our heirs and our lands, and that we be called no more bond nor so reputed.",
+     "who": "The rebels at Mile End answering Richard II's question 'what lack ye?', as recorded by Jean Froissart",
+     "date": "14 June 1381",
+     "doc": "The Chronicles of Froissart, tr. Lord Berners, ed. G. C. Macaulay, 'How the Nobles of England were in Great Peril' (Harvard Classics vol. 35, 1910)",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html",
+     "lic": "Public domain (Berners translation 1523–25; Project Gutenberg ebook 13674)"
+    },
+    {
+     "text": "John Schepe, some time St. Mary's priest of York, and now of Colchester, greeteth well John Nameless, and John the Miller, and John the Carter, and biddeth them that they beware of guile in borough, and stand together in God's name, and biddeth Piers Plowman go to his work, and chastise well Hobbe the Robber [i.e. Robert Hales the treasurer], and take with you John Trueman and all his fellows, and no mo, and look that ye shape you to one head and no mo.",
+     "who": "John Ball, writing as 'John Schepe', in a coded letter to the Essex rebels; the chronicler Thomas Walsingham says it was found in the sleeve of a man about to be hanged and that Ball confessed to writing it. Modern English by Charles Oman; the bracketed gloss is Oman's",
+     "date": "June 1381",
+     "doc": "Charles Oman, The Great Revolt of 1381 (Oxford, 1906), pp. 43–44 (Middle English original in Walsingham, Historia Anglicana, vol. 2, pp. 33–34)",
+     "url": "https://archive.org/stream/greatrevoltof13800omanuoft/greatrevoltof13800omanuoft_djvu.txt",
+     "lic": "Public domain (published 1906; author died 1946)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Then they went from street to street and slew all the Flemings that they could find in church or in any other place, there was none respited from death.",
+     "who": "Jean Froissart, chronicler from Hainaut writing from informants and hostile to the rebels (tr. Lord Berners)",
+     "date": "13 June 1381",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html"
+    },
+    {
+     "text": "then Wat Tyler, Jack Straw and John Ball and more than four hundred entered into the Tower and brake up chamber after chamber, and at last found the archbishop of Canterbury, called Simon, a valiant man and a wise, and chief chancellor of England, and a little before he had said mass before the king. These gluttons took him and strake off his head, and also they beheaded the lord of Saint John's and a friar minor, master in medicine, pertaining to the duke of Lancaster",
+     "who": "Jean Froissart on the killing of Archbishop Sudbury and the treasurer Robert Hales, 'the lord of Saint John's' (tr. Lord Berners)",
+     "date": "14 June 1381",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html"
+    }
+   ],
+   "official": [
+    {
+     "text": "I am well agreed thereto. Withdraw you home into your own houses and into such villages as ye came from, and leave behind you of every village two or three, and I shall cause writings to be made and seal them with my seal, the which they shall have with them, containing everything that ye demand; and to the intent that ye shall be the better assured, I shall cause my banners to be delivered into every bailiwick, shire and countries.",
+     "who": "Richard II's promise to the rebels at Mile End, as recorded by Jean Froissart (tr. Lord Berners)",
+     "date": "14 June 1381",
+     "url": "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html"
+    },
+    {
+     "text": "miseri, et odibiles terrae marique, nec vivere quidem digni, petitis dominis comparari. [...] Rustici quidem fuistis et estis; in bondagio permanebitis, non ut hactenus, sed incomparabiliter viliori. Nam ad hoc dum vivimus, et regno, Deo dante, praefuerimus, sensu, viribus, et catallis nostris, elaborabimus vos suppeditare",
+     "who": "Richard II to envoys of the Essex rebels at Waltham who asked him to confirm the Mile End promises, as reported in Latin by Thomas Walsingham, monk of St Albans. In plain English: 'Wretches, hateful on land and sea, not even worthy to live, you ask to be made equal to your lords. [...] Peasants you were and peasants you are; you will remain in bondage, not as before but incomparably viler. For as long as we live and by God's grace rule this realm, we will labour with mind, strength and wealth to hold you down.'",
+     "date": "June 1381 (about 23 June)",
+     "url": "https://archive.org/stream/thomaewalsingham02wals/thomaewalsingham02wals_djvu.txt"
+    },
+    {
+     "text": "Prelates, lords temporal, citizens, knights and burgesses responded with one voice that the repealing of the Charters had been wisely done. And they added that such a manumission of serfs could not have been made without the consent of those who had the main interest in the matter. And, for their own parts, they would never consent of their own free will, nor otherwise, nor ever would do it, even if they all had to live and die in one day.",
+     "who": "Parliament's answer when the king's ministers asked whether the serfs might be freed, from the Rolls of Parliament as rendered by Charles Oman (1906)",
+     "date": "November 1381",
+     "url": "https://archive.org/stream/greatrevoltof13800omanuoft/greatrevoltof13800omanuoft_djvu.txt"
+    }
+   ],
+   "warn": "Froissart's English is Lord Berners' Tudor translation; John Ball's sermon and the words at Mile End are Froissart's reconstruction from informants, not transcripts, and Froissart calls the rebels 'gluttons' and 'unhappy people'. Ball's letter is in Charles Oman's modernised English. Richard II's reply survives only in the Latin of Thomas Walsingham, a chronicler hostile to the rebels, with a plain-language gloss.",
+   "disputed": [
+    [
+     "How many rose. The chroniclers give round numbers: Froissart has 60,000 marching on London and more than threescore thousand on Blackheath, while Walsingham puts 200,000 at Blackheath. Court records studied by modern historians show a broader rising than the chroniclers' picture of rural serfs, including artisans and village officials, but no reliable total.",
+     [
+      "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html",
+      "https://archive.org/stream/thomaewalsingham02wals/thomaewalsingham02wals_djvu.txt",
+      "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+     ]
+    ],
+    [
+     "Did the revolt achieve anything? Britannica says it failed completely as a social revolution and the king's promises were promptly forgotten, but that it stopped the poll tax, which did not return until 1641. It was once seen as the cause of serfdom's end; modern historians are less certain and say serfdom declined after 1381 mainly for economic reasons, vanishing in the 15th century, though peasants invoked the memory of the revolt when bargaining over rents.",
+     [
+      "https://www.britannica.com/event/Peasants-Revolt",
+      "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+     ]
+    ],
+    [
+     "Who killed the Flemings. Froissart blames the rebel bands; the historian Rodney Hilton argues the London attacks may have been coordinated by the city's weavers' guilds, commercial rivals of the Flemish weavers.",
+     [
+      "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html",
+      "https://archive.org/stream/greatrevoltof13800omanuoft/greatrevoltof13800omanuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/Peasants%27_Revolt"
+     ]
+    ]
+   ],
+   "blind": "No account sympathetic to the rebels survives: their words come to us through chroniclers who despised them, through indictments, and through John Ball's letters, kept because they were used against him. Women who took part, such as Johanna Ferrour, appear only in court records, and the Flemish victims are counted, not named.",
+   "reading": [
+    [
+     "Charles Oman, The Great Revolt of 1381 (1906), full text",
+     "https://archive.org/details/greatrevoltof13800omanuoft"
+    ],
+    [
+     "Froissart, Wat Tyler's Rebellion, tr. Lord Berners (Project Gutenberg)",
+     "https://www.gutenberg.org/cache/epub/13674/pg13674-images.html"
+    ],
+    [
+     "Peasants' Revolt (Britannica)",
+     "https://www.britannica.com/event/Peasants-Revolt"
+    ]
+   ]
+  },
+  {
+   "id": "kongo1526",
+   "title": "King Afonso of Kongo protests the Portuguese slave trade",
+   "region": "Africa",
+   "where": "Mbanza Kongo, Zaire Province, Angola (capital of the Kongo kingdom)",
+   "lat": -6.26778,
+   "lon": 14.24806,
+   "from": 1512,
+   "to": 1532,
+   "themes": [
+    "Slavery",
+    "Colonial rule",
+    "Protest and dissent"
+   ],
+   "facts": [
+    [
+     "Afonso I (Mvemba a Nzinga, c. 1460–1542) was baptised with his father by Portuguese priests in 1491 and became king of Kongo sometime between 1506 and 1509, after defeating his half brother Mpanzu a Kitima at the capital, Mbanza Kongo.",
+     "https://www.britannica.com/biography/Afonso-I-king-of-Kongo-kingdom"
+    ],
+    [
+     "Under the Regimento of 1512 agreed with Manuel I of Portugal, Kongo accepted Portuguese institutions, granted Portuguese subjects extraterritorial rights and supplied slaves to Portuguese traders.",
+     "https://www.britannica.com/biography/Afonso-I-king-of-Kongo-kingdom"
+    ],
+    [
+     "Afonso took part in the trade himself: after a campaign against the Kingdom of Ndongo in 1512 he told King Manuel he had sent him 410 slaves captured in the war, and he sent slaves to Portugal to pay for the education of Kongolese notables and to buy goods.",
+     "https://en.wikipedia.org/wiki/Afonso_I_of_Kongo"
+    ],
+    [
+     "In 1526, on discovering that Portuguese merchants were buying and exporting people who had been enslaved illegally, Afonso set up an administrative system to oversee the slave trade, which reached considerable proportions during his reign.",
+     "https://www.britannica.com/biography/Afonso-I-king-of-Kongo-kingdom"
+    ],
+    [
+     "A US Library of Congress country study says the Portuguese crown came to view Kongo primarily as a source of slaves, and that Afonso's complaints about the trade's effects in his lands were largely ignored.",
+     "https://countrystudies.us/angola/5.htm"
+    ],
+    [
+     "The remains of Mbanza Kongo, in northern Angola, were inscribed as a UNESCO World Heritage Site in 2017 as the 'Vestiges of the Capital of the former Kingdom of Kongo'.",
+     "https://en.wikipedia.org/wiki/M%27banza-Kongo"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "E nam avemos este dano por tamanho como he que os ditos mercadores leuam cada dia nossos naturaes filhos da terra e filhos de nossos fidallgos e vassallos e nossos parentes por que hos ladrões e homens de maa concyencya os furtam com desejo daver asy as cousas e mercadoryas desse Reyno que sam desejossos, os furtam e lhos trazem a vender em tanta maneira Senhor he esta coruçam e devasydade que nosa terra se despouoa toda o que vossa alteza nam deue aver por bem nem seu seruiço.",
+     "who": "Afonso I (Mvemba a Nzinga), king of Kongo, to King João III of Portugal, written down by his secretary João Teixeira (in short: this harm is not as great as the fact that the merchants carry off our people every day, sons of the land, sons of our nobles and vassals, even our own kin; thieves steal them to get Portuguese goods, and the corruption is so great that our land is being emptied of people)",
+     "date": "Mbanza Kongo, 6 July 1526",
+     "doc": "Letter of 6 July 1526, printed in Paiva Manso, História do Congo (Documentos), Lisbon 1877, doc. XXVII, p. 54 (transcribed from the scan)",
+     "url": "https://archive.org/details/historiadocongo01jordgoog",
+     "lic": "Public domain (16th-century text; edition 1877)"
+    },
+    {
+     "text": "E por Isto Evytarmos nam temos necesydade desses Reynos mães que de padres e algumas poucas pessoas pêra emsynarem nas escollas nem menos de nenhumas mercadoryas somente vynho e farynha pêra o santo sacramento, porque pedymos a vossa alteza nos queira ajudar e fauorecer neste casso Em mandar a seus feytores que nam mande ca mercadores nem mercadorias, porque nossa vontade he que nestes Reynos nam aja trato de esprauos nem sayda pêra elles.",
+     "who": "Afonso I, same letter (in short: to prevent this we need nothing from your kingdoms but priests and a few people to teach in the schools, and no goods except wine and flour for the Mass; we ask you to order your agents to send no merchants or goods here, because it is our will that in these kingdoms there be no trade in slaves nor any outlet for them)",
+     "date": "Mbanza Kongo, 6 July 1526",
+     "doc": "Paiva Manso, História do Congo (Documentos), 1877, doc. XXVII, p. 54 (transcribed from the scan)",
+     "url": "https://archive.org/details/historiadocongo01jordgoog",
+     "lic": "Public domain (16th-century text; edition 1877)"
+    },
+    {
+     "text": "muitos nossos naturaes pollo dessejo muito que tem das mercadorias e coussas desses Reynos que os vossos a estees tragem e a esta coussa e por satysfazerem seu desordenado apetite furtam muitos dos nossos naturaees forros e isemtos e muytas vezes se comteçe furtarem fidallgos e filhos de fidallgos e parentes nossos e os leuam a vender aos homens brancos que em nossos Reynos Estam E lhos trazem esscõdidos e outros de noyte por nam serem conhecidos. E tamto que sam em poder dos ditos homens brancos ssam logo fferados e marcados com fogo",
+     "who": "Afonso I to João III (in short: many of our people, craving the goods your subjects bring, steal free subjects of ours, often even nobles, sons of nobles and our own kin, and sell them to the white men in our kingdoms, bringing them hidden or by night so they are not recognised; and as soon as they are in the white men's hands they are branded with fire)",
+     "date": "Mbanza Kongo, 18 October 1526",
+     "doc": "Letter of 18 October 1526, Paiva Manso, História do Congo (Documentos), 1877, doc. XXIX, p. 57 (transcribed from the scan)",
+     "url": "https://archive.org/details/historiadocongo01jordgoog",
+     "lic": "Public domain (16th-century text; edition 1877)"
+    },
+    {
+     "text": "E por evitarmos tam grande mall possemos por ley que todo homem bramco que Em nossos rreynos Esteuer e conprara peças per qualquer maneyra que seja que primeiro ho faça ssaber a três fidallgos e oficiaes de nossa corte em quem Este casso comfyamos, a saber a dom pedro manipanza E a dom manoell manissaba nosso merinho mor E a gonçalo pires nosso armador mor pêra verem as ditas peças se ssam catiuos se forras",
+     "who": "Afonso I, same letter, describing the law he made (in short: to avoid so great an evil we decreed that any white man in our kingdoms who buys 'pieces' (enslaved people) must first report it to three nobles and officers of our court, Dom Pedro Manipanza, Dom Manuel Manissaba, our chief bailiff, and Gonçalo Pires, our chief outfitter, to see whether they are captives or free). The letter goes on to say that people cleared this way could be shipped",
+     "date": "Mbanza Kongo, 18 October 1526",
+     "doc": "Paiva Manso, História do Congo (Documentos), 1877, doc. XXIX, p. 57 (transcribed from the scan)",
+     "url": "https://archive.org/details/historiadocongo01jordgoog",
+     "lic": "Public domain (16th-century text; edition 1877)"
+    }
+   ],
+   "official": {
+    "text": "Itaque volente Deo tota Guineae régio feliciter peragrata est, in qua Rex de Manicongo cum ingentibus populis ipsi subditis, qui se ad eius autoritatem ac obdientiam contulerat, sacro baptismate suscepto, Christianus effectus est",
+    "who": "King João III of Portugal, letter in Latin to Pope Clement VII on Portugal's discoveries, as printed in Paiva Manso, História do Congo (Documentos), 1877, doc. XXXIII, p. 62 (in short: so, God willing, the whole region of Guinea has been happily explored, in which the King of Kongo, with the great peoples subject to him who had placed themselves under his authority and obedience, received holy baptism and became a Christian). In this passage, six years after Afonso's protests, the crown's account to Rome presents Kongo as a missionary success; the slave trade is not mentioned",
+    "date": "Setúbal, 28 May 1532",
+    "url": "https://archive.org/details/historiadocongo01jordgoog"
+   },
+   "warn": "Afonso's letters are quoted in early 16th-century Portuguese with the irregular spelling of the manuscripts, and João III's letter in Latin, all as printed by Paiva Manso in 1877; the plain-English summaries in 'who' are the site's own, not translations. Afonso's letters were written down by his secretary João Teixeira. 'Peças' (pieces) was the traders' word for enslaved people.",
+   "disputed": [
+    [
+     "How far Afonso opposed slavery. On 6 July 1526 he asked that there be no slave trade in Kongo at all; by 18 October he described a law under which white men could buy and ship people once three court officials had checked they were lawful captives, not free Kongolese. Britannica says he set up a system to oversee the trade, and the historian Linda Heywood argues that Kongo's kings at first protected freeborn Kongolese while selling foreign-born captives; Afonso himself had sent Manuel I 410 war captives in 1512. A US Library of Congress study instead stresses that his complaints against the trade were largely ignored by the Portuguese crown.",
+     [
+      "https://archive.org/details/historiadocongo01jordgoog",
+      "https://www.britannica.com/biography/Afonso-I-king-of-Kongo-kingdom",
+      "https://www.cambridge.org/core/journals/journal-of-african-history/article/abs/slavery-and-its-transformation-in-the-kingdom-of-kongo-14911800/C13C2D3671AA721632D91B2F86B2A325",
+      "https://en.wikipedia.org/wiki/Afonso_I_of_Kongo",
+      "https://countrystudies.us/angola/5.htm"
+     ]
+    ],
+    [
+     "How many people were taken. Afonso wrote in 1526 that his land was being depopulated. The historian Linda Heywood judges that most of the slaves sold at the time came from outside Kongo. None of these sources gives a reliable count of people shipped from Kongo in the 1520s.",
+     [
+      "https://archive.org/details/historiadocongo01jordgoog",
+      "https://www.cambridge.org/core/journals/journal-of-african-history/article/abs/slavery-and-its-transformation-in-the-kingdom-of-kongo-14911800/C13C2D3671AA721632D91B2F86B2A325"
+     ]
+    ]
+   ],
+   "blind": "What survives is the king's side, dictated to Portuguese-trained secretaries and kept in the royal archives in Lisbon, and the Portuguese crown's replies; the people seized, both free Kongolese and the foreign captives sold through Kongo, left no words of their own. Afonso speaks as a king who himself sold war captives.",
+   "reading": [
+    [
+     "Paiva Manso, História do Congo (Documentos), 1877 (scan)",
+     "https://archive.org/details/historiadocongo01jordgoog"
+    ],
+    [
+     "Linda Heywood, 'Slavery and its transformation in the Kingdom of Kongo: 1491–1800', Journal of African History (2009)",
+     "https://www.cambridge.org/core/journals/journal-of-african-history/article/abs/slavery-and-its-transformation-in-the-kingdom-of-kongo-14911800/C13C2D3671AA721632D91B2F86B2A325"
+    ],
+    [
+     "Britannica, Afonso I",
+     "https://www.britannica.com/biography/Afonso-I-king-of-Kongo-kingdom"
+    ]
+   ],
+   "note": "Research in progress: the Portuguese crown's own words on the Kongo slave trade (Manuel I's Regimento of 1512 to Simão da Silva and João III's reply to Afonso of late 1529) are not in Paiva Manso's 1877 edition and are still being sought in a public-domain printing."
+  },
+  {
+   "id": "ludlow",
+   "title": "The Ludlow massacre",
+   "region": "Americas",
+   "where": "Ludlow Tent Colony Site, Las Animas County, Colorado, United States",
+   "lat": 37.33917,
+   "lon": -104.58389,
+   "from": 1913,
+   "to": 1914,
+   "themes": [
+    "Massacre",
+    "Protest and dissent",
+    "Uprising"
+   ],
+   "facts": [
+    [
+     "About 10,000 coal miners led by the United Mine Workers of America struck in southern Colorado from September 1913 over low pay and working conditions; evicted from the company towns, they and their families lived in tent colonies, the largest of them at Ludlow with about 1,200 people.",
+     "https://www.britannica.com/event/Ludlow-Massacre"
+    ],
+    [
+     "The Colorado Fuel and Iron Company, which employed about 7,000 workers, rejected the union's demands, which included enforcement of the eight-hour workday and the right to choose their own housing and doctors.",
+     "https://home.nps.gov/articles/000/war-in-the-coalfields-the-ludlow-massacre-and-its-impact-on-the-eight-hour-workday.htm"
+    ],
+    [
+     "Governor Elias Ammons sent the Colorado National Guard to keep the peace, but the mine owners had already arranged with the state to pay for the deployment, and the Colorado Encyclopedia says the troops caused more trouble.",
+     "https://coloradoencyclopedia.org/article/ludlow-massacre"
+    ],
+    [
+     "On 20 April 1914 a day-long battle broke out between the Guard and the colony; three strike leaders, including Louis Tikas, were captured and killed, and that evening the tents were soaked in kerosene and burned, and 11 children and 2 women were found suffocated and burned in a cellar under one tent.",
+     "https://www.britannica.com/event/Ludlow-Massacre"
+    ],
+    [
+     "In retaliation, armed miners attacked antiunion officials, strikebreakers and mines and held an area about 50 miles long; Britannica says as many as 50 people died before President Woodrow Wilson sent federal troops to restore order.",
+     "https://www.britannica.com/event/Ludlow-Massacre"
+    ],
+    [
+     "Of the 408 strikers arrested, 332 were indicted for murder; of those present at Ludlow only the strike leader John Lawson was convicted, and the Colorado Supreme Court overturned the conviction. Twenty-two National Guardsmen, including 10 officers, were court-martialed.",
+     "https://en.wikipedia.org/wiki/Ludlow_Massacre"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Well, in the evening when the fire started I came out of my tent; it was all on fire, and I came out of my tent, and as I was coming out of my tent under that tank there was a lot of militiamen, and I was running out and hollering with my three children, and they hollered at me to get out of the way and they were shooting at me and I ran into this place.",
+     "who": "Mary Petrucci, a miner's wife born in the coal camp of Hastings, testifying to the US Commission on Industrial Relations; 'this place' is the cellar under tent no. 58 where the women and children died",
+     "date": "20 April 1914; testimony 1915",
+     "doc": "Industrial Relations: Final Report and Testimony, vol. 9 (Senate Doc. 415, 64th Congress, 1916), p. 8193 (transcribed from the scan; one OCR error corrected)",
+     "url": "https://archive.org/details/industrialrelati09unitrich",
+     "lic": "Public domain (US government work, 1916)"
+    },
+    {
+     "text": "I said to Mrs. Costa “They are burning the tent and we had better get out.” She said, “Oh, Mary, you had better stay in, because it is safer in here, and we could not burn,” not realizing about the smoke.",
+     "who": "Mary Petrucci, same testimony, describing the cellar where she and her three children sheltered with other women and children; she was found unconscious the next morning",
+     "date": "20 April 1914; testimony 1915",
+     "doc": "Industrial Relations: Final Report and Testimony, vol. 9 (1916), p. 8194",
+     "url": "https://archive.org/details/industrialrelati09unitrich",
+     "lic": "Public domain (US government work, 1916)"
+    },
+    {
+     "text": "I seen a militiaman come over there and look inside the tent and strike a match and set fire to the tent. I stayed in the tent until it was all burned up. There were 11 children and 2 women suffocated with the smoke where I was. I lost two children in this cave when the tent burned. I don't know where my husband was at this time. I looked up out of the hole and saw the soldier set fire to the tent with a match. I lost everything I had in this fire.",
+     "who": "Alcarita Pedregon, sworn affidavit, as read into the record by Judge Ben B. Lindsey of the Denver juvenile court",
+     "date": "1914; read at the Commission's Denver hearings, December 1914",
+     "doc": "Industrial Relations: Final Report and Testimony, vol. 8 (1916), p. 7099",
+     "url": "https://archive.org/details/industrialrelati08unitrich",
+     "lic": "Public domain (US government work, 1916)"
+    },
+    {
+     "text": "I had six children in the well with me. My husband was killed there; he was coming to see me and take care of me and the children, and he was shot in the back. He was crying all day for me and the children.",
+     "who": "Mrs. Bartoloti, affidavit, as quoted by the Commission's investigator George P. West; she and her children had hidden in the well of the pump house, and West suggests her husband may have been the unnamed striker shot while a prisoner",
+     "date": "20 April 1914; published 1915",
+     "doc": "George P. West, Report on the Colorado Strike (US Commission on Industrial Relations, 1915), p. 130",
+     "url": "https://archive.org/details/reportoncolorado00unitrich",
+     "lic": "Public domain (US government work, 1915)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Accounts vary as to who fired the first shot on the morning of the tragedy, but it is established that the first offensive movement was the occupation of a hill near the tent colony by militiamen in full view of the strikers, the planting of a machine gun there, and the exploding of two dynamite bombs by the militia. These bombs had been made by Linderfelt to be used as signals to call the militia and mine guards from near-by mines and camps, but the strikers did not know their purpose.",
+     "who": "George P. West, investigator for the US Commission on Industrial Relations, Report on the Colorado Strike, p. 127 (West's report is sharply critical of the companies and the Guard)",
+     "date": "1915",
+     "url": "https://archive.org/details/reportoncolorado00unitrich"
+    },
+    {
+     "text": "Inflamed by what they considered the wanton slaughter of their women, children and comrades, the miners attacked mine after mine, driving off or killing the guards and setting fire to the buildings. At the Empire mine of the Southwestern Fuel Company near Aguilar the President of the company, J. W. Siple, with twenty men and eight women and children, took refuge in the mine stope after the shaft house and buildings had been burned and dynamited.",
+     "who": "George P. West, Report on the Colorado Strike, p. 133, on the strikers' armed revolt in the days after Ludlow",
+     "date": "1915",
+     "url": "https://archive.org/details/reportoncolorado00unitrich"
+    }
+   ],
+   "official": [
+    {
+     "text": "When the detail left, the Greeks, over the protest of their leader, ran for their guns and threatened to fight. Major Hamrock brought the detachment from Cedar Hill down to Water Tank Hill, in plain view of the colony, preparatory to searching the colony for its alleged prisoner. Some excitable women, seeing these troops on the hill, and nervous over the actions of the Greeks, rushed into the colony, screaming that the soldiers were about to attack. Thereupon the Greeks filed out of the colony to a railroad cut, and soon afterwards fired the first shots of the battle against the soldiers.",
+     "who": "Special Board of Officers of the Colorado National Guard (Maj. Edward J. Boughton, Capt. William C. Danks, Capt. Philip S. Van Cise), appointed to investigate the battle, findings, p. 24",
+     "date": "2 May 1914",
+     "url": "https://archive.org/details/ludlowbeingrepor00colorich"
+    },
+    {
+     "text": "The origin of the fire in the tent colony was accidental; that is to say, it was due either to an overturned stove, an explosion of some sort, or the concentrated fire directed at one time against some of the tents. The fire began in the corner nearest the Cross-Roads. Afterwards it was deliberately spread by the combatants. During the fire the soldiers, upon learning that women and children were still in the colony, went through the tents, calling upon all the persons in the colony to come forth, and with difficulty rescuing men, women and children to the number of some twenty-five or thirty, including one William Snyder and his family. Then the tents were fired.",
+     "who": "Special Board of Officers of the Colorado National Guard, findings, pp. 24–25",
+     "date": "2 May 1914",
+     "url": "https://archive.org/details/ludlowbeingrepor00colorich"
+    },
+    {
+     "text": "Feeling that this board of officers was not constituted to determine possible guilt or innocence, we recommend that a general court martial be appointed to try all officers and enlisted men participating in the treatment and killing of prisoners, and the burning and looting of the tent colony.",
+     "who": "Special Board of Officers of the Colorado National Guard, recommendation A, p. 27",
+     "date": "2 May 1914",
+     "url": "https://archive.org/details/ludlowbeingrepor00colorich"
+    }
+   ],
+   "today": {
+    "text": "On the morning of April 20, National Guardsmen aligned with the Colorado Fuel & Iron Company attacked the Ludlow Tent Colony to try and break the UMWA strike, killing 21 people (including 11 children) in what became known as the “Ludlow Massacre.” This act of collective violence ignited 10 days of continuous warfare in Colorado, until President Woodrow Wilson ordered Federal troops to disarm both sides and restore order.",
+    "who": "US National Park Service, American Battlefield Protection Program, on a 2024 preservation planning grant for the Ludlow Tent Colony Site",
+    "date": "2024",
+    "url": "https://home.nps.gov/articles/000/war-in-the-coalfields-the-ludlow-massacre-and-its-impact-on-the-eight-hour-workday.htm"
+   },
+   "warn": "The 1914–15 texts keep the witnesses' own speech ('I seen'). The Guard officers' report speaks of 'the Greeks' as a group and elsewhere calls the strikers 'ferocious foreigners'; it is quoted as the official account of its time, not endorsed.",
+   "disputed": [
+    [
+     "Who fired first on 20 April. The Guard's board of officers found that Greek strikers in a railroad cut fired the first shots; the Commission's investigator George P. West wrote that accounts varied but that the first offensive moves (a machine gun on a hill, two dynamite bombs) were the militia's; Britannica says the Guard opened fire after a dispute over a man the miners would not hand over, while the Colorado Encyclopedia says nobody knows who fired the first shot.",
+     [
+      "https://archive.org/details/ludlowbeingrepor00colorich",
+      "https://archive.org/details/reportoncolorado00unitrich",
+      "https://www.britannica.com/event/Ludlow-Massacre",
+      "https://coloradoencyclopedia.org/article/ludlow-massacre"
+     ]
+    ],
+    [
+     "How many died. West counted five strikers, one boy and thirteen women and children, with one militiaman killed; the Colorado Encyclopedia says at least nineteen, including one guardsman; the National Park Service says 21, including 11 children; Britannica says 25, 3 of them Guard troops. For the ten days of fighting that followed, Britannica gives as many as 50 dead, and the Colorado Encyclopedia says the number cannot be determined but was certainly more than at Ludlow itself.",
+     [
+      "https://archive.org/details/reportoncolorado00unitrich",
+      "https://coloradoencyclopedia.org/article/ludlow-massacre",
+      "https://home.nps.gov/articles/000/war-in-the-coalfields-the-ludlow-massacre-and-its-impact-on-the-eight-hour-workday.htm",
+      "https://www.britannica.com/event/Ludlow-Massacre"
+     ]
+    ],
+    [
+     "How the tents caught fire. The board of officers called the fire accidental, then deliberately spread, and said soldiers rescued some 25 or 30 people; West cited testimony that militiamen fired the tents on their officers' orders, and Alcarita Pedregon swore she saw a militiaman set her tent alight with a match; the Colorado Encyclopedia says Guardsmen burned the tents thinking the colony had been abandoned.",
+     [
+      "https://archive.org/details/ludlowbeingrepor00colorich",
+      "https://archive.org/details/reportoncolorado00unitrich",
+      "https://archive.org/details/industrialrelati08unitrich",
+      "https://coloradoencyclopedia.org/article/ludlow-massacre"
+     ]
+    ]
+   ],
+   "blind": "The survivors who speak here are women, several of whom toured and testified with the union's support (one told the Commission the union paid her expenses); the Greek, Italian and Mexican miners who did the fighting, and the mine guards and strikebreakers killed in the ten days afterwards, left almost no first-hand words.",
+   "reading": [
+    [
+     "George P. West, Report on the Colorado Strike (1915, scan)",
+     "https://archive.org/details/reportoncolorado00unitrich"
+    ],
+    [
+     "Ludlow: report of the Special Board of Officers (1914, scan)",
+     "https://archive.org/details/ludlowbeingrepor00colorich"
+    ],
+    [
+     "Commission on Industrial Relations testimony, vol. 9 (Petrucci and others, scan)",
+     "https://archive.org/details/industrialrelati09unitrich"
+    ],
+    [
+     "Colorado Encyclopedia, Ludlow Massacre",
+     "https://coloradoencyclopedia.org/article/ludlow-massacre"
+    ]
+   ]
+  },
+  {
+   "id": "comfortwomen",
+   "title": "The \"comfort women\": Japan's system of military sexual slavery",
+   "region": "Asia",
+   "where": "Seoul, South Korea, where survivors first spoke out (approximate); comfort stations ran wherever Japan's forces were based, from China and Korea to Burma, Indonesia and the Pacific islands",
+   "lat": 37.574,
+   "lon": 126.979,
+   "from": 1932,
+   "to": 1945,
+   "themes": [
+    "Slavery",
+    "War",
+    "Colonial rule",
+    "Detention and torture"
+   ],
+   "facts": [
+    [
+     "\"Comfort women\" is a euphemism for the women who provided sexual services to Japanese Imperial Army troops and generally lived under conditions of sexual slavery; the great majority were from Korea, then ruled by Japan, with others from China, Taiwan and elsewhere in Asia, including Japanese women and Dutch women in Indonesia.",
+     "https://www.britannica.com/topic/comfort-women"
+    ],
+    [
+     "The UN Special Rapporteur dates the first comfort stations to Shanghai in 1932, says the plan was revived after Japanese troops captured Nanking in 1937, and lists stations in China, Taiwan, Borneo, the Philippines, many Pacific islands, Singapore, Malaya, Burma and Indonesia.",
+     "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1"
+    ],
+    [
+     "The same 1996 report identifies three ways women were obtained: women already working as prostitutes, women lured with offers of well-paid work as cooks, cleaners or restaurant staff, and large-scale coercion and abduction in countries under Japanese control.",
+     "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1"
+    ],
+    [
+     "Britannica says the women typically lived in harsh conditions, raped continually and beaten or murdered if they resisted; according to several reports, notably the 1996 UN study, many were executed at the end of the war, and many survivors abroad were simply abandoned.",
+     "https://www.britannica.com/topic/comfort-women"
+    ],
+    [
+     "On 14 August 1991 Kim Hak-sun disclosed in a public broadcast that she had been a 'comfort woman'; she joined a lawsuit against the Japanese government that year and died on 16 December 1997.",
+     "https://www.kyeol.kr/en/boards/bd_en_look_hist/462"
+    ],
+    [
+     "Japan's foreign ministry says the Asian Women's Fund, set up in 1995 by Japan's people and government, paid 'atonement money' to 285 women, and that under the December 2015 Japan–South Korea agreement Japan gave 1 billion yen to a South Korean foundation, which Seoul announced in 2018 it would dissolve.",
+     "https://www.mofa.go.jp/policy/postwar/page22e_000883.html"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "When I was 17 years old, in 1936, the head of our village came to our house and promised me to help me find a job in a factory. [...] I thought it was the factory, but I realized that there was no factory.",
+     "who": "A survivor from Pyongyang, born in 1918, as quoted in the UN report (named there; she escaped in 1943 after seven years)",
+     "date": "testimony given to the UN mission, 1995; report dated 4 January 1996",
+     "doc": "UN Commission on Human Rights, E/CN.4/1996/53/Add.1, Report of the Special Rapporteur Radhika Coomaraswamy, para. 55, p. 14",
+     "url": "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1",
+     "lic": "United Nations document, quoted briefly with credit"
+    },
+    {
+     "text": "One day in June, at the age of 13, I had to prepare lunch for my parents who were working in the field and so I went to the village well to fetch water. A Japanese garrison soldier surprised me there and took me away, so that my parents never knew what had happened to their daughter.",
+     "who": "A survivor from South Hamgyong Province (now North Korea), born in 1920, as quoted in the UN report (named there)",
+     "date": "testimony given to the UN mission, 1995; report dated 4 January 1996",
+     "doc": "UN Commission on Human Rights, E/CN.4/1996/53/Add.1, para. 54, p. 13",
+     "url": "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1",
+     "lic": "United Nations document, quoted briefly with credit"
+    },
+    {
+     "text": "We only received clothes two times per year and not enough food, only rice cakes and water. I was never paid for my 'services'. I worked for five years as a 'comfort woman', but all my life I suffered from it.",
+     "who": "A South Korean survivor, as quoted in the UN report",
+     "date": "testimony given July 1995; report dated 4 January 1996",
+     "doc": "UN Commission on Human Rights, E/CN.4/1996/53/Add.1, para. 56, p. 15",
+     "url": "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1",
+     "lic": "United Nations document, quoted briefly with credit"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Early in May of 1942 Japanese agents arrived in Korea for the purpose of enlisting Korean girls for \"comfort service\" in newly conquered Japanese territories in Southeast Asia. The nature of this \"service\" was not specified but it was assumed to be work connected with visiting the wounded in hospitals, rolling bandages, and generally making the soldiers happy. The inducement used by these agents was plenty of money, an opportunity to pay off the family debts, easy work, and the prospect of a new life in a new land - Singapore. On the basis of these false representations many girls enlisted for overseas duty and were rewarded with an advance of a few hundred yen.",
+     "who": "US Office of War Information, Psychological Warfare Team, Japanese Prisoner of War Interrogation Report No. 49, p. 1, written by T/3 Alex Yorichi after questioning 20 Korean women captured near Myitkyina, Burma (scan of the US National Archives copy, via UCLA's Comfort Women Resource Center)",
+     "date": "1 October 1944",
+     "url": "https://web.archive.org/web/20260930013947/https://international.ucla.edu/media/files/US-11-Japanese-Prisoner-of-War-Interrogation-Report-No.-49-Korean-Comfort-Women-cb-eyn.pdf"
+    },
+    {
+     "text": "The \"house master\" received fifty to sixty per cent of the girls' gross earnings depending on how much of a debt each girl had incurred when she signed her contract. This meant that in an average month a girl would gross about fifteen hundred yen. She turned over seven hundred and fifty to the \"master\". Many \"masters\" made life very difficult for the girls by charging them high prices for food and other articles.",
+     "who": "The same US report, p. 3; UCLA's annotation notes that the women were probably questioned through the couple who ran their brothel, and the author also called the women's life in Burma 'near-luxury' compared with other places",
+     "date": "1 October 1944",
+     "url": "https://web.archive.org/web/20260930013947/https://international.ucla.edu/media/files/US-11-Japanese-Prisoner-of-War-Interrogation-Report-No.-49-Korean-Comfort-Women-cb-eyn.pdf"
+    }
+   ],
+   "official": [
+    {
+     "text": "The then Japanese military was, directly or indirectly, involved in the establishment and management of the comfort stations and the transfer of comfort women. The recruitment of the comfort women was conducted mainly by private recruiters who acted in response to the request of the military. The Government study has revealed that in many cases they were recruited against their own will, through coaxing, coercion, etc., and that, at times, administrative/military personnel directly took part in the recruitments.",
+     "who": "Chief Cabinet Secretary Yohei Kono, statement on the result of the Japanese government's study (the Kono Statement), Ministry of Foreign Affairs of Japan",
+     "date": "4 August 1993",
+     "url": "https://www.mofa.go.jp/a_o/rp/page25e_000343.html"
+    },
+    {
+     "text": "The issue of comfort women, with an involvement of the Japanese military authorities at that time, was a grave affront to the honor and dignity of large numbers of women, and the Government of Japan is painfully aware of responsibilities from this perspective. As Prime Minister of Japan, Prime Minister Abe expresses anew his most sincere apologies and remorse to all the women who underwent immeasurable and painful experiences and suffered incurable physical and psychological wounds as comfort women.",
+     "who": "Foreign Minister Fumio Kishida, joint announcement with South Korea's foreign minister (the 2015 agreement, which also declared the issue 'resolved finally and irreversibly')",
+     "date": "28 December 2015",
+     "url": "https://www.mofa.go.jp/a_o/na/kr/page4e_000364.html"
+    }
+   ],
+   "today": {
+    "text": "Despite such sincere efforts by the Government of Japan, there are claims that can hardly be said to be based on historical facts, such as the allegations of “forceful taking away” of comfort women and “sex slaves” as well as the figures “200,000 persons” or “several hundred thousands” for the total number of comfort women.",
+    "who": "Ministry of Foreign Affairs of Japan, 'Japan's Efforts on the Issue of Comfort Women' (current position page)",
+    "date": "page current as of November 2026",
+    "url": "https://www.mofa.go.jp/policy/postwar/page22e_000883.html"
+   },
+   "warn": "The survivors' testimony was given in Korean and is quoted in the UN report's English. It and the 1944 report describe sexual violence. The 1944 report calls the women 'comfort girls' and in places 'prostitutes', and describes them in demeaning terms.",
+   "disputed": [
+    [
+     "How many women. No document gives a total. The Asian Women's Fund's digital museum, made with Japan's government, lists researchers' estimates from about 20,000 (Ikuhiko Hata, 1999) through 45,000–200,000 (Yoshiaki Yoshimi, 1995) to 360,000–410,000 (Su Zhiliang, 1999), all based on soldier-to-woman ratios; Japan's foreign ministry says the figure of 200,000 lacks concrete evidence; Britannica says estimates typically run up to 200,000 and the true number may be higher.",
+     [
+      "https://www.awf.or.jp/e1/facts-07.html",
+      "https://www.mofa.go.jp/policy/postwar/page22e_000883.html",
+      "https://www.britannica.com/topic/comfort-women"
+     ]
+    ],
+    [
+     "Force or recruitment by brokers. Japan's government says 'forceful taking away' by the military and authorities could not be confirmed in any document it found (a 1997 Cabinet answer), and in 2007 Prime Minister Abe said there was no evidence of coercion, a comment Britannica says he later retracted. The 1993 Kono Statement itself says recruitment was mainly by private recruiters acting at the military's request and that in many cases women were recruited against their will through coaxing and coercion; the UN Special Rapporteur concluded most were taken against their will, and Britannica says some were lured by false promises of work and many others simply abducted.",
+     [
+      "https://www.mofa.go.jp/policy/postwar/page22e_000883.html",
+      "https://www.britannica.com/topic/comfort-women",
+      "https://www.mofa.go.jp/a_o/rp/page25e_000343.html",
+      "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1"
+     ]
+    ],
+    [
+     "A discredited source. The 1996 UN report cites the memoir of Yoshida Seiji, who claimed to have taken part in slave raids in Korea. In 2014 the Asahi Shimbun retracted all its stories quoting him, after the historian Ikuhiko Hata had found no evidence for his account; Abe's government then asked the UN to revise the 1996 report, which UN officials declined. The report also rests on survivors' testimony and on surviving wartime military regulations.",
+     [
+      "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1",
+      "https://www.japantimes.co.jp/news/2014/08/05/national/politics-diplomacy/asahi-shimbun-admits-errors-in-past-comfort-women-stories/",
+      "https://www.britannica.com/topic/comfort-women"
+     ]
+    ],
+    [
+     "The Ramseyer paper. In 2020–21 Harvard law professor J. Mark Ramseyer argued the women willingly entered sex-work contracts; the journal issued an expression of concern, and historians at Harvard and elsewhere said there is no evidence of the contracts he describes and called for withdrawal.",
+     [
+      "https://learningenglish.voanews.com/a/us-professor-faces-criticism-for-comfort-women-claims/5806191.html"
+     ]
+    ],
+    [
+     "'Sex slaves'. Japan's foreign ministry says the expression contradicts the facts and notes it is not used in the 2015 agreement; the UN Special Rapporteur titled her report 'military sexual slavery' and Britannica describes conditions of sexual slavery.",
+     [
+      "https://www.mofa.go.jp/policy/postwar/page22e_000883.html",
+      "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1",
+      "https://www.britannica.com/topic/comfort-women"
+     ]
+    ],
+    [
+     "Who paid. Britannica says the Asian Women's Fund was sustained by private donations, not government money; Japan's foreign ministry says the 'atonement money' came from donations but the government provided 4.8 billion yen in all, including medical and welfare payments to each woman. Many survivors in 1995 asked for the fund to be withdrawn as a way to evade state responsibility.",
+     [
+      "https://www.britannica.com/topic/comfort-women",
+      "https://www.mofa.go.jp/policy/postwar/page22e_000883.html",
+      "https://digitallibrary.un.org/record/228137/files/E_CN.4_1996_53_Add.1-EN.pdf?version=1"
+     ]
+    ]
+   ],
+   "blind": "Almost all knowledge of how women were recruited comes from survivors who spoke out from 1991, nearly fifty years later; many had died, and many others never told even their families. Wartime records are mostly the military's own regulations and Allied reports written through interpreters and brothel owners. Women from China, Southeast Asia and the Pacific, and the Japanese women in the system, are far less heard than Korean survivors.",
+   "reading": [
+    [
+     "UN Special Rapporteur Radhika Coomaraswamy, report on military sexual slavery in wartime, E/CN.4/1996/53/Add.1 (UN Digital Library)",
+     "https://digitallibrary.un.org/record/228137"
+    ],
+    [
+     "Comfort women (Britannica)",
+     "https://www.britannica.com/topic/comfort-women"
+    ],
+    [
+     "The Comfort Women Issue and the Asian Women's Fund, digital museum: number of comfort stations and comfort women",
+     "https://www.awf.or.jp/e1/facts-07.html"
+    ],
+    [
+     "Annotation of OWI Report No. 49 (UCLA Center for Korean Studies, Comfort Women Resource Center, archived copy)",
+     "https://web.archive.org/web/20260724175439/https://www.international.ucla.edu/cks/care/us_allieddocs/250902"
+    ],
+    [
+     "Japan's Efforts on the Issue of Comfort Women (Ministry of Foreign Affairs of Japan)",
+     "https://www.mofa.go.jp/policy/postwar/page22e_000883.html"
+    ]
+   ]
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
