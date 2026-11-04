@@ -85,7 +85,9 @@ ${SPLASH}
   for (const f of ['three.module.min.js', 'three.core.min.js']) await fs.copyFile(path.join(ROOT, 'node_modules', 'three', 'build', f), path.join(out, 'vendor', 'three', f));
   await fs.copyFile(path.join(ROOT, 'node_modules', 'three', 'examples', 'jsm', 'controls', 'OrbitControls.js'), path.join(out, 'vendor', 'three', 'addons', 'controls', 'OrbitControls.js'));
   await fs.mkdir(path.join(out, 'data'), { recursive: true });
-  await fs.writeFile(path.join(out, 'index.html'), head + s + '\n</body></html>\n');
+  // visit counts (GoatCounter, aggregate only; see src/stats.js and DATA_POLICY.md "Visitors"): hosted site only, last script on the page
+  const statsJs = await read('src/stats.js');
+  await fs.writeFile(path.join(out, 'index.html'), head + s + `\n<script>${statsJs}</script>\n</body></html>\n`);
   for (const f of await fs.readdir(dataDir)) await fs.copyFile(path.join(dataDir, f), path.join(out, 'data', f));
   // seed folder holds only .json; make the .js wrappers if missing
   for (const [n, g] of Object.entries(NAMES)) {

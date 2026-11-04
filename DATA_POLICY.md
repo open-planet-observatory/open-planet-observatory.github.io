@@ -231,7 +231,9 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Visitors
 
-- No account, no ad networks, no tracking scripts, no visitor logs kept by the project. The only server the project runs is the games server (above), which stores anonymous game scores and nothing about visits.
+- No account, no ad networks, no cookies, no visitor logs kept by the project. The only server the project runs is the games server (above), which stores anonymous game scores and nothing about visits.
+- **Visit counts.** The site counts visits in aggregate with [GoatCounter](https://www.goatcounter.com) (open source; privacy policy: https://www.goatcounter.com/help/privacy), so the project can see whether anyone finds it useful and which parts they use. The page sends one plain request per page load and one when a visitor opens a panel, a space view, a game, a tour or a YouTube link (the name of that thing, e.g. `panel/records` or `game/where-on-earth`). No third-party script runs on the page and nothing is stored in the browser. GoatCounter keeps totals by page or event, referrer (including `?ref=` campaign tags), browser and system name, screen size and country; it is set to record no regions, no languages and no individual pageviews. It works out unique visits from a short-lived hash it keeps for at most 8 hours, never a cookie or an account. Nothing it receives identifies a person, and the project never combines it with anything else. Code: `src/stats.js`.
+- **Opting out.** Open the site once with `?stats=off` (e.g. https://theowlmanac.com/?stats=off) and that browser is never counted again; `?stats=on` undoes it. Browsers that block trackers usually block the count too, and that is fine.
 - Libraries are served from the site itself rather than third-party CDNs.
 - Sponsors, if any, are clearly labeled, limited to science, education and public-data organizations, never receive visitor data and never influence content.
 
