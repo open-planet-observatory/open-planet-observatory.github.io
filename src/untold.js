@@ -11,7 +11,11 @@
   const A = u => `href="${esc(u)}" target="_blank" rel="noopener"`;
   const dom = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return 'source'; } };
   let D = null, region = 'all', upTo = null, ds = null, loaded = false;
-  const yrs = s => s.from === s.to ? String(s.from) : `${s.from}–${s.to}`;
+  const fy = y => y < 0 ? `${-y} BC` : String(y);
+  const yrs = s => s.from === s.to ? fy(s.from) : s.from < 0 && s.to < 0 ? `${-s.from}–${-s.to} BC` : `${fy(s.from)}–${fy(s.to)}`;
+  /* eras for the full page's filter (by the year a story begins) */
+  const ERAS = [['ancient', 'Ancient (before 500)', -1e5, 499], ['medieval', 'Medieval (500–1449)', 500, 1449], ['early', 'Early modern (1450–1799)', 1450, 1799], ['c19', 'The 1800s', 1800, 1899], ['c20', 'The 1900s and after', 1900, 1e5]];
+  const inEra = (s, e) => { const E = ERAS.find(x => x[0] === e); return !E || (s.from >= E[2] && s.from <= E[3]); };
   function card(s) {
     const cites = [], cite = u => { let i = cites.indexOf(u); if (i < 0) { cites.push(u); i = cites.length - 1; } return `<sup><a ${A(u)} title="${esc(dom(u))}">${i + 1}</a></sup>`; };
     const facts = s.facts.map(([t, u]) => `${esc(t)}${cite(u)}`).join(' ');
@@ -34,14 +38,18 @@
     if (!D) { host.innerHTML = '<p>The stories did not load. Nothing is shown in their place; try again later.</p>'; return; }
     const regions = [...new Set(D.stories.map(s => s.region))], min = Math.min(...D.stories.map(s => s.from)), max = Math.max(...D.stories.map(s => s.to));
     if (upTo == null) upTo = max; const L = list();
+    /* the timeline steps from one story's start year to the next, so 2,400 years with most stories in the last 250 stay usable */
+    const YS = [...new Set(D.stories.map(s => s.from))].sort((a, b) => a - b); let yi = YS.findIndex(y => y > upTo); yi = yi < 0 ? YS.length - 1 : Math.max(0, yi - 1);
     host.innerHTML = `${window.OwlPage ? '<p class="pg-cta"><button class="btn" id="utExpand">⤢ Open the full page: sort, filter and read side by side</button></p>' : ''}<div class="ut-warn" role="note"><b>Viewer discretion advised.</b> These stories include killings, famine and forced removal, told partly in the words of the people it happened to and of those who did it. Every quotation is checked word for word against the copy linked beside it; every fact in the site's own summaries is footnoted.</div>
       <div class="sit-tabs ut-tabs" role="group" aria-label="Region"><button data-r="all" aria-pressed="${region === 'all'}">All <span class="ct">${D.stories.length}</span></button>${regions.map(r => `<button data-r="${esc(r)}" aria-pressed="${region === r}">${esc(r)} <span class="ct">${D.stories.filter(s => s.region === r).length}</span></button>`).join('')}</div>
-      <label class="ut-time small">Timeline: stories beginning by <b id="utYr">${upTo}</b> <input type="range" id="utRange" min="${min}" max="${max}" value="${upTo}" step="1" aria-label="Show stories that began by this year"></label>
+      <label class="ut-time small">Timeline: stories beginning by <b id="utYr">${upTo >= max ? 'today' : fy(YS[yi])}</b> <input type="range" id="utRange" min="0" max="${YS.length}" value="${upTo >= max ? YS.length : yi}" step="1" aria-label="Show stories that began by this year" aria-valuetext="${upTo >= max ? 'All stories' : fy(YS[yi])}"></label>
       <div class="ut-list">${L.length ? L.map(card).join('') : '<p class="small muted">No story begins by then in this region yet.</p>'}</div>
       <p class="small muted">${D.stories.length} stories so far; more are being researched. The site does not rank or score these events. Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p>`;
     host.querySelectorAll('[data-r]').forEach(b => b.onclick = () => { region = b.dataset.r; render(); pins(); });
     const ux = host.querySelector('#utExpand'); if (ux) ux.onclick = () => window.OwlPage.open('untold');
-    const rg = host.querySelector('#utRange'); rg.oninput = () => { host.querySelector('#utYr').textContent = rg.value; }; rg.onchange = () => { upTo = +rg.value; render(); pins(); };
+    const rg = host.querySelector('#utRange'), lab = i => +i >= YS.length ? 'today' : fy(YS[+i]);
+    rg.oninput = () => { host.querySelector('#utYr').textContent = lab(rg.value); rg.setAttribute('aria-valuetext', lab(rg.value)); };
+    rg.onchange = () => { upTo = +rg.value >= YS.length ? max : YS[+rg.value]; render(); pins(); };
     host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => go(b.dataset.utGo)); }
   function go(id) { const s = D.stories.find(x => x.id === id), g = window.__obs3d; if (!s || !g || !window.Cesium) return; pins();
     try { if (O.setSlim) O.setSlim(true); g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(s.lon, s.lat, 2.2e6), duration: 2 }); } catch (e) { } }
@@ -60,11 +68,11 @@
   if (vis()) load();
 
   /* ---- the expanded page: a sortable list on the left, the chosen story in a reading column on the right ---- */
-  let pg = { sort: 'old', region: 'all', themes: new Set(), sel: null };
+  let pg = { sort: 'old', region: 'all', era: 'all', themes: new Set(), sel: null };
   function mini(s) { const d3 = window.d3, C = (O.countries || []); if (!d3 || !C.length) return '';
     const W = 300, H = 160, pr = d3.geoNaturalEarth1().fitExtent([[2, 2], [W - 2, H - 2]], { type: 'Sphere' }), path = d3.geoPath(pr), [x, y] = pr([s.lon, s.lat]);
     return `<figure class="pg-map" aria-label="Where it happened: ${esc(s.where)}"><svg viewBox="0 0 ${W} ${H}" role="img"><path class="pg-sph" d="${path({ type: 'Sphere' })}"/>${C.map(f => `<path class="pg-c" d="${path(f) || ''}"/>`).join('')}<circle class="pg-pin" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5"/></svg><figcaption>${esc(s.where)}</figcaption></figure>`; }
-  function pageList() { const L = D.stories.filter(s => (pg.region === 'all' || s.region === pg.region) && (!pg.themes.size || (s.themes || []).some(t => pg.themes.has(t))));
+  function pageList() { const L = D.stories.filter(s => (pg.region === 'all' || s.region === pg.region) && inEra(s, pg.era) && (!pg.themes.size || (s.themes || []).some(t => pg.themes.has(t))));
     return L.sort((a, b) => pg.sort === 'old' ? a.from - b.from : b.from - a.from); }
   function renderPage(host) {
     if (!D) { host.innerHTML = '<p>The stories did not load. Nothing is shown in their place; try again later.</p>'; return; }
@@ -72,6 +80,7 @@
     const L = pageList(); if (!L.find(s => s.id === pg.sel)) pg.sel = L.length ? L[0].id : null; const S = D.stories.find(s => s.id === pg.sel);
     host.innerHTML = `<div class="pg-tools"><label class="small">Sort <select id="pgSort"><option value="old"${pg.sort === 'old' ? ' selected' : ''}>Oldest first</option><option value="new"${pg.sort === 'new' ? ' selected' : ''}>Newest first</option></select></label>
         <label class="small">Region <select id="pgReg"><option value="all">All regions</option>${regions.map(r => `<option${pg.region === r ? ' selected' : ''}>${esc(r)}</option>`).join('')}</select></label>
+        <label class="small">Era <select id="pgEra"><option value="all">All eras</option>${ERAS.filter(e => D.stories.some(s => inEra(s, e[0]))).map(e => `<option value="${e[0]}"${pg.era === e[0] ? ' selected' : ''}>${esc(e[1])} (${D.stories.filter(s => inEra(s, e[0])).length})</option>`).join('')}</select></label>
         <div class="pg-chips" role="group" aria-label="Themes">${themes.map(t => `<button class="chip" data-t="${esc(t)}" aria-pressed="${pg.themes.has(t)}"><span>${esc(t)}</span></button>`).join('')}</div>
         <span class="small muted pg-n">${L.length} of ${D.stories.length} stories</span></div>
       <div class="ut-warn" role="note"><b>Viewer discretion advised.</b> These stories include killings, famine and forced removal, told partly in the words of the people it happened to and of those who did it. Every quotation is checked word for word against the copy linked beside it; every fact in the site's own summaries is footnoted.</div>
@@ -80,6 +89,7 @@
         <div class="pg-read">${S ? `<button class="more pg-tolist">↑ All stories</button>${mini(S)}${card(S)}` : ''}<p class="small muted">Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p></div></div>`;
     host.querySelector('#pgSort').onchange = e => { pg.sort = e.target.value; renderPage(host); };
     host.querySelector('#pgReg').onchange = e => { pg.region = e.target.value; renderPage(host); };
+    host.querySelector('#pgEra').onchange = e => { pg.era = e.target.value; renderPage(host); };
     host.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const t = b.dataset.t; pg.themes.has(t) ? pg.themes.delete(t) : pg.themes.add(t); renderPage(host); });
     host.querySelectorAll('.pg-row').forEach(b => b.onclick = () => { pg.sel = b.dataset.id; renderPage(host); const r = host.querySelector('.pg-read'); if (r) { r.scrollTop = 0; if (innerWidth <= 860) r.scrollIntoView({ block: 'start' }); } host.querySelector(`.pg-row[data-id="${pg.sel}"]`)?.focus({ preventScroll: true }); });
     const tl = host.querySelector('.pg-tolist'); if (tl) tl.onclick = () => host.querySelector('.pg-list').scrollIntoView({ block: 'start' });

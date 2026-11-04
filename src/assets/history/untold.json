@@ -1343,6 +1343,836 @@
      "https://forms.justice.govt.nz/search/Documents/WT/wt_DOC_68453721/Taranaki%201996.compressed.pdf"
     ]
    ]
+  },
+  {
+   "id": "melos",
+   "title": "The siege and destruction of Melos",
+   "region": "Europe",
+   "where": "Ancient city of Melos, near Plaka, island of Milos, Greece (approximate)",
+   "lat": 36.729,
+   "lon": 24.417,
+   "from": -416,
+   "to": -416,
+   "themes": [
+    "War",
+    "Massacre",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "Melos was a colony of Sparta that would not submit to Athens like the other Aegean islanders; Thucydides says it stayed neutral at first and turned openly hostile after Athens raided its land.",
+     "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+    ],
+    [
+     "In the summer of 416 BC Athens sent 38 ships (30 Athenian, 6 Chian, 2 Lesbian) with about 3,100 heavy infantry, 300 archers and 20 mounted archers against the island; before fighting, its generals sent envoys, whom the Melian leaders received in private rather than before the people.",
+     "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+    ],
+    [
+     "The Melians refused to become a tribute-paying ally, held out under siege and twice broke through part of the Athenian lines, but surrendered that winter after reinforcements came from Athens and some treachery inside the city.",
+     "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+    ],
+    [
+     "Athens put the grown men to death, sold the women and children as slaves and settled 500 of its own colonists on the island.",
+     "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+    ],
+    [
+     "After Athens lost the war, the Spartan commander Lysander restored the island to its Dorian possessors, but Britannica says it never recovered its prosperity.",
+     "https://www.britannica.com/place/Melos"
+    ],
+    [
+     "The phrase \"Melian famine\" entered Greek as a byword for extreme starvation, first known in Aristophanes' Birds (414 BC), which suggests the city surrendered only after terrible hunger.",
+     "https://en.wikipedia.org/wiki/Siege_of_Melos"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "To the fairness of quietly instructing each other as you propose there is nothing to object; but your military preparations are too far advanced to agree with what you say, as we see you are come to be judges in your own cause, and that all we can reasonably expect from this negotiation is war, if we prove to have right on our side and refuse to submit, and in the contrary case, slavery.",
+     "who": "The Melian commissioners, as recorded (and reconstructed) by the Athenian historian Thucydides",
+     "date": "416 BC; written c. 410–400 BC",
+     "doc": "Thucydides, History of the Peloponnesian War, Book 5 (the Melian Dialogue), tr. Richard Crawley (1874)",
+     "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+     "lic": "Public domain (translation 1874; Project Gutenberg ebook 7142)"
+    },
+    {
+     "text": "Well then, if you risk so much to retain your empire, and your subjects to get rid of it, it were surely great baseness and cowardice in us who are still free not to try everything that can be tried, before submitting to your yoke.",
+     "who": "The Melian commissioners, as recorded by Thucydides",
+     "date": "416 BC",
+     "doc": "Thucydides, History of the Peloponnesian War, Book 5, tr. Richard Crawley (1874)",
+     "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+     "lic": "Public domain (translation 1874)"
+    },
+    {
+     "text": "You may be sure that we are as well aware as you of the difficulty of contending against your power and fortune, unless the terms be equal. But we trust that the gods may grant us fortune as good as yours, since we are just men fighting against unjust, and that what we want in power will be made up by the alliance of the Lacedaemonians, who are bound, if only for very shame, to come to the aid of their kindred. Our confidence, therefore, after all is not so utterly irrational.",
+     "who": "The Melian commissioners, as recorded by Thucydides",
+     "date": "416 BC",
+     "doc": "Thucydides, History of the Peloponnesian War, Book 5, tr. Richard Crawley (1874)",
+     "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+     "lic": "Public domain (translation 1874)"
+    },
+    {
+     "text": "Our resolution, Athenians, is the same as it was at first. We will not in a moment deprive of freedom a city that has been inhabited these seven hundred years; but we put our trust in the fortune by which the gods have preserved it until now, and in the help of men, that is, of the Lacedaemonians; and so we will try and save ourselves. Meanwhile we invite you to allow us to be friends to you and foes to neither party, and to retire from our country after making such a treaty as shall seem fit to us both.",
+     "who": "The Melians' final answer to the Athenian envoys, as recorded by Thucydides",
+     "date": "416 BC",
+     "doc": "Thucydides, History of the Peloponnesian War, Book 5, tr. Richard Crawley (1874)",
+     "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+     "lic": "Public domain (translation 1874)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Reinforcements afterwards arriving from Athens in consequence, under the command of Philocrates, son of Demeas, the siege was now pressed vigorously; and some treachery taking place inside, the Melians surrendered at discretion to the Athenians, who put to death all the grown men whom they took, and sold the women and children for slaves, and subsequently sent out five hundred colonists and inhabited the place themselves.",
+     "who": "Thucydides, an Athenian (and former Athenian general, in exile at the time), closing his account of Melos without comment (tr. Richard Crawley, 1874)",
+     "date": "winter 416–415 BC",
+     "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+    },
+    {
+     "text": "There was mourning and sorrow for those that were lost, but the lamentation for the dead was merged in even deeper sorrow for themselves, as they pictured the evils they were about to suffer, the like of which they themselves had inflicted upon the men of Melos, who were colonists of the Lacedaemonians, when they mastered them by siege.",
+     "who": "Xenophon, Hellenica, Book 2, describing Athens on the night news came of its defeat at Aegospotami (tr. H. G. Dakyns)",
+     "date": "405 BC; written early 4th century BC",
+     "url": "https://www.gutenberg.org/files/1174/1174-h/1174-h.htm"
+    }
+   ],
+   "official": {
+    "text": "For ourselves, we shall not trouble you with specious pretences—either of how we have a right to our empire because we overthrew the Mede, or are now attacking you because of wrong that you have done us—and make a long speech which would not be believed; and in return we hope that you, instead of thinking to influence us by saying that you did not join the Lacedaemonians, although their colonists, or that you have done us no wrong, will aim at what is feasible, holding in view the real sentiments of us both; since you know as well as we do that right, as the world goes, is only in question between equals in power, while the strong do what they can and the weak suffer what they must.",
+    "who": "The Athenian envoys to Melos, as recorded by Thucydides (tr. Richard Crawley, 1874)",
+    "date": "416 BC",
+    "url": "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm"
+   },
+   "warn": "The Melian Dialogue is not a transcript. Thucydides, who was in exile and not present, says his speeches give what each occasion demanded of the speakers while keeping as closely as possible to the general sense of what was really said. The English is Richard Crawley's 1874 translation.",
+   "disputed": [
+    [
+     "Were all the men killed? Thucydides says Athens put to death all the grown men it took, and Plutarch writes of the slaughter of all of military age; but Xenophon and Plutarch both say that in 405 BC Lysander restored the Melians to their island, and Wikipedia's summary of scholarship describes him restoring the survivors, so some Melians outlived the massacre, whether as enslaved captives, escapees or people absent at the time.",
+     [
+      "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+      "https://www.gutenberg.org/files/674/674-h/674-h.htm",
+      "https://www.gutenberg.org/files/1174/1174-h/1174-h.htm",
+      "https://en.wikipedia.org/wiki/Siege_of_Melos"
+     ]
+    ],
+    [
+     "Who decided the massacre? Thucydides names no decree. Plutarch says Alcibiades spoke in favour of the decree and was the principal cause of the slaughter, and took a captive Melian woman, by whom he had a son; a speech falsely attributed to the orator Andocides also blames Alcibiades, but gives no date, and its authenticity and reliability are doubted.",
+     [
+      "https://www.gutenberg.org/files/674/674-h/674-h.htm",
+      "https://en.wikipedia.org/wiki/Siege_of_Melos"
+     ]
+    ],
+    [
+     "Was Melos really neutral? Thucydides says it turned to open hostility after Athens raided it in 426 BC, and an inscription records some Melians giving silver to Sparta's war effort; but no ancient writer names a specific offence against Athens, and scholars generally regard Melos as an innocent victim of Athenian imperialism.",
+     [
+      "https://www.gutenberg.org/files/7142/7142-h/7142-h.htm",
+      "https://en.wikipedia.org/wiki/Siege_of_Melos"
+     ]
+    ],
+    [
+     "How Athenians later judged it. Xenophon records Athenians in 405 BC fearing the same treatment they gave Melos; the Athenian orator Isocrates admits Athens was reproached for enslaving the Melians but defends it as no worse than what other powers did.",
+     [
+      "https://www.gutenberg.org/files/1174/1174-h/1174-h.htm",
+      "https://cts.perseids.org/read/greekLit/tlg0010/tlg011/perseus-eng2/100-108",
+      "https://en.wikipedia.org/wiki/Siege_of_Melos"
+     ]
+    ],
+    [
+     "Euripides' Trojan Women (March 415 BC), a play about the women of a conquered city. Britannica says the slaughter at Melos inspired it, and the scholar Neil Croally reads it as a reaction to Melos; the historian Mark Ringer thinks this unlikely, since the play was probably already in preparation before the siege began.",
+     [
+      "https://www.britannica.com/place/Melos",
+      "https://en.wikipedia.org/wiki/The_Trojan_Women"
+     ]
+    ]
+   ],
+   "blind": "Every Melian word here reaches us through an Athenian historian who was not in the room and wrote the speeches himself to fit the occasion. No Melian account survives. The ordinary Melians, who were kept out of the talks, have no recorded words, and the women and children sold into slavery vanish from the record entirely.",
+   "reading": [
+    [
+     "Thucydides, History of the Peloponnesian War, tr. Crawley (Project Gutenberg; the Melian Dialogue is in Book 5)",
+     "https://www.gutenberg.org/ebooks/7142"
+    ],
+    [
+     "Melos (Britannica)",
+     "https://www.britannica.com/place/Melos"
+    ],
+    [
+     "Xenophon, Hellenica, tr. Dakyns (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/1174"
+    ]
+   ]
+  },
+  {
+   "id": "opium",
+   "title": "The First Opium War",
+   "region": "Asia",
+   "where": "Humen (the Bogue), on the Pearl River below Canton (Guangzhou), China (approximate)",
+   "lat": 22.815,
+   "lon": 113.67,
+   "from": 1839,
+   "to": 1842,
+   "themes": [
+    "War",
+    "Colonial rule"
+   ],
+   "facts": [
+    [
+     "Foreign traders, mainly British, had been illegally exporting opium, mostly from India, to China since the 18th century; the trade grew dramatically from about 1820, and widespread addiction caused serious social and economic disruption in China.",
+     "https://www.britannica.com/topic/Opium-Wars"
+    ],
+    [
+     "In spring 1839 the Chinese government confiscated and destroyed more than 20,000 chests of opium, some 1,400 tons, that British merchants had warehoused at Canton.",
+     "https://www.britannica.com/topic/Opium-Wars"
+    ],
+    [
+     "To force the surrender, Lin Zexu confined the foreign merchants to their quarters in Canton, and the British Superintendent of Trade, Charles Elliot, persuaded them to hand over their opium on the promise that the British government would compensate them.",
+     "https://en.wikipedia.org/wiki/First_Opium_War"
+    ],
+    [
+     "In July 1839 drunken British sailors killed a Chinese villager, and the British government, not wishing its subjects to be tried in the Chinese legal system, refused to hand the accused men over to Chinese courts.",
+     "https://www.britannica.com/topic/Opium-Wars"
+    ],
+    [
+     "A British expeditionary force arrived in June 1840, attacked the walled city of Canton in May 1841 and received a ransom of $6 million, and the fighting ended in August 1842 when Nanjing yielded.",
+     "https://www.britannica.com/place/China/The-first-Opium-War-and-its-aftermath"
+    ],
+    [
+     "Under the Treaty of Nanking, signed on 29 August 1842, China ceded the Island of Hong Kong to Britain in perpetuity and agreed to pay 21 million dollars: 6 million for the opium surrendered in 1839, 3 million for debts owed by Chinese merchants and 12 million for Britain's costs of the war.",
+     "https://en.wikisource.org/wiki/Treaty_of_Nanking"
+    ],
+    [
+     "The treaty opened five ports to British trade and residence instead of one, and a supplementary treaty in 1843 gave British subjects the right to be tried by British courts; Britannica dates the era of unequal treaties from these wars.",
+     "https://www.britannica.com/topic/Opium-Wars"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We have heard that in your own country opium is prohibited with the utmost strictness and severity:—this is a strong proof that you know full well how hurtful it is to mankind. Since then you do not permit it to injure your own country, you ought not to have the injurious drug transferred to another country, and above all others, how much less to the Inner Land!",
+     "who": "Lin Zexu, the Qing imperial commissioner sent to Canton to suppress the opium trade, with his colleagues, in a letter to Queen Victoria (writing as an official of the state whose people were affected)",
+     "date": "1839; this English translation printed February 1840",
+     "doc": "Letter to the queen of England, The Chinese Repository, vol. VIII, no. 10 (February 1840), p. 499, translated in the Canton Press (transcribed from the scan)",
+     "url": "https://archive.org/details/chineserepositor8101unse",
+     "lic": "Public domain (1840)"
+    },
+    {
+     "text": "Let us suppose that foreigners came from another country, and brought opium into England, and seduced the people of your country to smoke it, would not you, the sovereign of the said country, look upon such a procedure with anger, and in your just indignation endeavor to get rid of it? Now we have always heard that your highness possesses a most kind and benevolent heart, surely then you are incapable of doing or causing to be done unto another, that which you should not wish another to do unto you!",
+     "who": "Lin Zexu and colleagues, letter to Queen Victoria (writing as an official of the state whose people were affected)",
+     "date": "1839; printed February 1840",
+     "doc": "The Chinese Repository, vol. VIII, no. 10 (February 1840), p. 500 (transcribed from the scan)",
+     "url": "https://archive.org/details/chineserepositor8101unse",
+     "lic": "Public domain (1840)"
+    },
+    {
+     "text": "Pause and reflect for a moment: if you foreigners did not bring the opium hither, where should our Chinese people get it to re-sell? It is you foreigners who involve our simple natives in the pit of death, and are they alone to be permitted to escape alive?",
+     "who": "Lin Zexu and colleagues, letter to Queen Victoria (writing as an official of the state whose people were affected)",
+     "date": "1839; printed February 1840",
+     "doc": "The Chinese Repository, vol. VIII, no. 10 (February 1840), p. 501 (transcribed from the scan; OCR 'per- • fitted' read as 'permitted')",
+     "url": "https://archive.org/details/chineserepositor8101unse",
+     "lic": "Public domain (1840)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "They gave you notice to abandon your contraband trade. When they found that you would not, they had a right to drive you from their coasts on account of your obstinacy in persisting in this infamous and atrocious traffic. You allowed your agent to aid and abet those who were concerned in carrying on that trade, and I do not know how it can be urged as a crime against the Chinese that they refused provisions to those who refused obedience to their laws whilst residing within their territories. I am not competent to judge how long this war may last, or how protracted may be its operations, but this I can say, that a war more unjust in its origin, a war more calculated in its progress to cover this country with permanent disgrace, I do not know, and I have not read of.",
+     "who": "William Ewart Gladstone, opposition MP for Newark, speaking against the government in the House of Commons debate on the war with China (Hansard)",
+     "date": "8 April 1840",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1840/apr/08/war-with-china-adjourned-debate"
+    }
+   ],
+   "official": [
+    {
+     "text": "He would be the last to defend a trade which involved the violation of the municipal laws of the Chinese, and which furnished an enormously large population with the means of demoralization, which tended to the production of habits inconsistent with good order and correct conduct. But he put it to any man opposite, whether he could with a grave face say, that he honestly believed the motive of the Chinese government to have been the promotion of the growth of moral habits? The answer to such a supposition was, why did they not prohibit the growth of the poppy in their own country? The fact was, that this was an exportation of bullion question, an agricultural interest-protection question.",
+     "who": "Viscount Palmerston, Foreign Secretary, defending the government in the House of Commons (Hansard reports his speech in the third person)",
+     "date": "9 April 1840",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1840/apr/09/war-with-china-adjourned-debate"
+    },
+    {
+     "text": "The Emperor of China agrees to pay the sum of Six Millions of Dollars as the value of the opium which was delivered up at Canton in the month of March, 1839, as a Ransom for the lives of Her Britannic Majesty’s Superintendent, and Subjects, who had been imprisoned and threatened with death by the Chinese High Officers.",
+     "who": "Treaty of Nanking, Article 4, the peace terms Britain imposed at the end of the war",
+     "date": "29 August 1842",
+     "url": "https://en.wikisource.org/wiki/Treaty_of_Nanking"
+    }
+   ],
+   "warn": "Lin Zexu was himself a senior Qing official writing for the emperor, not an ordinary Chinese subject. The English is the translation printed in the Canton Press and reprinted in The Chinese Repository in 1840; historians generally agree the letter never reached Queen Victoria.",
+   "disputed": [
+    [
+     "Opium or trade and diplomatic equality? Britannica says the wars arose from China's attempts to suppress the opium trade, and Gladstone told the Commons the British flag was being hoisted to protect an infamous contraband traffic; on the other side, Palmerston argued the Qing were moved by the outflow of silver and their own poppy growers rather than morals, the British government insisted on free trade and equal diplomatic recognition, the historian Glenn Melancon argues the issue was not opium but Britain's honour and commitment to free trade, and John Quincy Adams called opium a mere incident and the kowtow the cause.",
+     [
+      "https://www.britannica.com/topic/Opium-Wars",
+      "https://api.parliament.uk/historic-hansard/commons/1840/apr/08/war-with-china-adjourned-debate",
+      "https://api.parliament.uk/historic-hansard/commons/1840/apr/09/war-with-china-adjourned-debate",
+      "https://en.wikipedia.org/wiki/First_Opium_War"
+     ]
+    ],
+    [
+     "How the anti-opium campaign treated Chinese people. Lin's own letter says any Chinese who sold or merely smoked opium was liable to death, and he arrested about 1,700 Chinese dealers and smugglers on arrival in Canton; the campaign that resisted Britain was also harsh on China's own poor users and sellers.",
+     [
+      "https://archive.org/details/chineserepositor8101unse",
+      "https://en.wikipedia.org/wiki/Letter_to_Queen_Victoria"
+     ]
+    ]
+   ],
+   "blind": "The Chinese side survives here mostly in the words of officials, translated by foreigners for a foreign readership; the opium smokers, the boatmen and villagers along the Pearl River and the soldiers who died defending the forts left almost no records of their own in English. The British record is full, from Hansard to the treaty, and includes its own dissenters.",
+   "reading": [
+    [
+     "Opium Wars (Britannica)",
+     "https://www.britannica.com/topic/Opium-Wars"
+    ],
+    [
+     "The Chinese Repository, vol. VIII, with Lin's letter (Internet Archive)",
+     "https://archive.org/details/chineserepositor8101unse"
+    ],
+    [
+     "House of Commons debate on the war with China, 1840 (Hansard)",
+     "https://api.parliament.uk/historic-hansard/commons/1840/apr/09/war-with-china-adjourned-debate"
+    ],
+    [
+     "Treaty of Nanking (Wikisource)",
+     "https://en.wikisource.org/wiki/Treaty_of_Nanking"
+    ]
+   ],
+   "note": "Research in progress: this card has no ordinary Chinese person's words yet; the voices are the Chinese government's case, made by its commissioner."
+  },
+  {
+   "id": "taino",
+   "title": "The Taíno and the Spanish conquest of the Caribbean",
+   "region": "Americas",
+   "where": "Baracoa, eastern Cuba (approximate)",
+   "lat": 20.3467,
+   "lon": -74.4958,
+   "from": 1492,
+   "to": 1542,
+   "themes": [
+    "Colonial rule",
+    "Forced labour",
+    "Massacre",
+    "Uprising"
+   ],
+   "facts": [
+    [
+     "The Taíno, an Arawakan-speaking people, lived in what are now Cuba, Jamaica, Hispaniola, Puerto Rico and the Virgin Islands when Columbus arrived; estimates of their number at the time of the Spanish conquest run from about one million to more than three million.",
+     "https://www.britannica.com/topic/Taino"
+    ],
+    [
+     "Spanish conquistadors began conquering the Taíno in 1493 and forced on them the encomienda system, under which they had to pay tribute and provide labour to the Spanish.",
+     "https://www.britannica.com/topic/Taino"
+    ],
+    [
+     "Enslavement and starvation under Spanish demands, together with diseases brought from Europe, reduced the Taíno to a few thousand by 1520 and to near extinction by 1550.",
+     "https://www.britannica.com/topic/Taino"
+    ],
+    [
+     "In 1511 Diego Velázquez set out from Hispaniola to conquer eastern Cuba; Hatuey, a cacique from Hispaniola, had gone ahead to warn its people, fought the Spaniards with guerrilla tactics, and was burned alive at Yara on 2 February 1512.",
+     "https://en.wikipedia.org/wiki/Hatuey"
+    ],
+    [
+     "Bartolomé de las Casas went to Hispaniola in 1502, held an encomienda, took part in the conquest of Cuba in 1513, and in 1514 announced that he was giving up his Indian serfs; he wrote his Brevísima relación in 1542.",
+     "https://www.britannica.com/biography/Bartolome-de-Las-Casas"
+    ],
+    [
+     "The crown's attempts to curb the encomienda's abuses, the Laws of Burgos (1512–13) and the New Laws of 1542, failed in the face of colonial opposition; Britannica says the system in practice became a form of enslavement.",
+     "https://www.britannica.com/topic/encomienda"
+    ],
+    [
+     "The Taíno also fought back: La Navidad, the settlement Columbus left on Hispaniola in 1492, was destroyed by Indigenous people by the following year, after its men had seized women and gold.",
+     "https://en.wikipedia.org/wiki/La_Navidad"
+    ],
+    [
+     "The cacique Enriquillo led a rebellion against the Spanish colonists on Hispaniola from 1519 to 1533.",
+     "https://en.wikipedia.org/wiki/Enriquillo"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Then thus, he said, they adore a certain Covetous Deity, whose cravings are not to be satisfied by a few moderate offerings, but they may answer his Adoration and Worship, demand many unreasonable things of us, and use their utmost endeavors to subjugate and afterwards murder us. Then taking up a Cask or Cabinet near at hand, full of Gold and Gems, he proceeded in this manner: This is the Spaniards God, and in honour of him if you think well of it, let us celebrate our Arcytos (which are certain kinds of Dances and caprings used among them); and by this means his Deity being appeas'd, he will impose his Commands on the Spaniards that they shall not for the future molest us",
+     "who": "Hatuey, as recorded by Bartolomé de las Casas (speaking to his people in Cuba before the Spaniards landed; the 1689 translation spells his name Hathney)",
+     "date": "c. 1511; written 1542, published 1552; this English translation 1689",
+     "doc": "A Brief Account of the Destruction of the Indies, 'Of the Isle of Cuba' (London: R. Hewson, 1689), Project Gutenberg eBook #20321",
+     "url": "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html",
+     "lic": "Public domain (1689 translation)"
+    },
+    {
+     "text": "After that Hathney had been silently pensive sometime, he askt the Monk whether the Spaniards also were admitted into Heaven, and he answering that the Gates of Heaven were open to all that were Good and Godly, the Cacic replied without further consideration, that he would rather go to Hell then Heaven, for fear he should cohabit in the same Mansion with so Sanguinary and Bloody a Nation.",
+     "who": "Hatuey, bound to the stake, as recorded (in reported speech) by Bartolomé de las Casas; Las Casas arrived in Cuba after the execution and was not present",
+     "date": "1512; written 1542, published 1552; this English translation 1689",
+     "doc": "A Brief Account of the Destruction of the Indies, 'Of the Isle of Cuba' (1689), Project Gutenberg eBook #20321",
+     "url": "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html",
+     "lic": "Public domain (1689 translation)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "I once saw Four or Five of their most Powerful Lords laid on these Gridirons, and thereon roasted, and not far off, Two or Three more over-spread with the same Commodity, Man's Flesh; but the shril Clamours which were heard there being offensive to the Captain, by hindring his Repose, he commanded them to be strangled with a Halter. The Executioner (whose Name and Parents at Sevil are not unknown to me) prohibited the doing of it; but stopt Gags into their Mouths to prevent the hearing of the noise (he himself making the Fire) till that they dyed, when they had been roasted as long as he thought convenient.",
+     "who": "Bartolomé de las Casas, on Hispaniola; a colonist and encomendero there before he turned against the conquest",
+     "date": "written 1542, published 1552; English translation 1689",
+     "url": "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html"
+    },
+    {
+     "text": "Once it so hapned, that the Citizens of a Famous City, distant Ten Miles from the place where we then resided, came to meet us with a splendid Retinue, to render their Visit more Honourable, bringing with them delicious Viands, and such kind of Dainties, with as great a quantity of Fish as they could possibly procure, and distributing them among us; but behold on a sudden, some wicked Devil possessing the minds of the Spaniards, agitated them with great fury, that I being present, and without the least Pretence or Occasion offered, they cut off in cold Blood above Three Thousand Men, Women and Children promiscuously, such Inhumanities and Barbarisms were committed in my sight, as no Age can parallel.",
+     "who": "Bartolomé de las Casas, who was with the Spanish force in Cuba",
+     "date": "written 1542, published 1552; English translation 1689",
+     "url": "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html"
+    },
+    {
+     "text": "A certain Person here in the same Isle constituted to exercise a kind of Royal Power, hapned to have Three Hundred Indians fall to his share, of which in Three Months, through excessive labour, One Hundred and Sixty were destroy'd, insomuch that in a short space there remained but a tenth part alive, namely Thirty, but when the number was doubled, they all perisht at the same rate, and all that were bestow'd upon him lost their lives, till at length he paid his last Debt to Nature and the Devil.",
+     "who": "Bartolomé de las Casas, on forced labour in Cuba",
+     "date": "written 1542, published 1552; English translation 1689",
+     "url": "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html"
+    }
+   ],
+   "official": [
+    {
+     "text": "If you do so, you will do well, and that which you are obliged to do to their Highnesses, and we in their name shall receive you in all love and charity, and shall leave you your wives, and your children, and your lands, free without servitude, that you may do with them and with yourselves freely that which you like and think best, and they shall not compel you to turn Christians, unless you yourselves, when informed of the truth, should wish to be converted to our Holy Catholic Faith, as almost all the inhabitants of the rest of the islands have done.",
+     "who": "The Requerimiento (Requirement), written by the crown jurist Juan López de Palacios Rubios and read to Indigenous peoples to demand their submission; translated by Arthur Helps, The Spanish Conquest in America, vol. 1 (1855), p. 381; it was drafted after most of the island conquests and was first read on the mainland in 1514",
+     "date": "1513",
+     "url": "https://archive.org/details/spanishconquesti01helpuoft"
+    },
+    {
+     "text": "we shall take you and your wives and your children, and shall make slaves of them, and as such shall sell and dispose of them as their Highnesses may command; and we shall take away your goods, and shall do you all the mischief and damage that we can, as to vassals who do not obey, and refuse to receive their lord, and resist and contradict him; and we protest that the deaths and losses which shall accrue from this are your fault, and not that of their Highnesses, or ours, nor of these cavaliers who come with us.",
+     "who": "The Requerimiento, on what would follow if the people refused or delayed; Helps's translation (1855), p. 382",
+     "date": "1513",
+     "url": "https://archive.org/details/spanishconquesti01helpuoft"
+    }
+   ],
+   "warn": "The Las Casas passages are from a 1689 English version, made by way of other European translations rather than straight from the Spanish and printed under the anti-Catholic title Popery Truly Display'd; spelling is the original's (it gives Hatuey as 'Hathney'). Hatuey's words were written down by Las Casas some thirty years later and are not a transcript.",
+   "disputed": [
+    [
+     "How many Taíno there were. Las Casas wrote that three million people lived on Hispaniola alone, and Britannica gives estimates of one million to more than three million Taíno in all; a 2021 ancient-DNA study in Nature argues that estimates of hundreds of thousands or millions for islands such as Hispaniola are too large, while stating that the devastating impact of colonisation and systematic killing is indisputable.",
+     [
+      "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html",
+      "https://www.britannica.com/topic/Taino",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7864882/"
+     ]
+    ],
+    [
+     "Disease or violence and forced labour. Some historians hold that epidemic disease (smallpox, influenza, measles, typhus) was the overwhelming cause of the collapse; others, such as Andrés Reséndez, argue that disease alone does not explain it, that smallpox is not recorded in the islands until about 1519, and that slavery and forced labour were a major killer. Las Casas's Brief Account, written to move the king, attributes the deaths almost entirely to Spanish cruelty.",
+     [
+      "https://en.wikipedia.org/wiki/Ta%C3%ADno_genocide",
+      "https://en.wikipedia.org/wiki/A_Short_Account_of_the_Destruction_of_the_Indies"
+     ]
+    ],
+    [
+     "Did Las Casas exaggerate? Critics note that he contrasted Spanish cruelty with Indigenous goodness in an exaggerated way to persuade, and that Protestant printers and engravers such as Theodor de Bry used his book to build the anti-Spanish 'Black Legend'; on the other side, he presented himself as an eyewitness of much of what he describes, and modern historians who reject his figures still accept the scale of the destruction.",
+     [
+      "https://www.gutenberg.org/cache/epub/20321/pg20321-images.html",
+      "https://en.wikipedia.org/wiki/A_Short_Account_of_the_Destruction_of_the_Indies",
+      "https://www.britannica.com/topic/Black-Legend",
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC7864882/"
+     ]
+    ]
+   ],
+   "blind": "The Taíno left no writing, so their words survive only as Spanish writers chose to record them, Hatuey's through a friar who campaigned against the conquest and wrote decades later. The women forced into labour, the people shipped away as slaves and the Africans brought in to replace the dead are almost silent in this record.",
+   "reading": [
+    [
+     "Las Casas, A Brief Account of the Destruction of the Indies, 1689 translation (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/20321"
+    ],
+    [
+     "Helps, The Spanish Conquest in America, vol. 1 (1855, scan), with the full Requerimiento",
+     "https://archive.org/details/spanishconquesti01helpuoft"
+    ],
+    [
+     "Fernandes et al., A genetic history of the pre-contact Caribbean (Nature, 2021, open access)",
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC7864882/"
+    ]
+   ]
+  },
+  {
+   "id": "zong",
+   "title": "The Zong massacre",
+   "region": "Africa",
+   "where": "Accra, Gold Coast (Ghana), where the Zong set sail; the killings took place at sea beyond Jamaica",
+   "lat": 5.534,
+   "lon": -0.212,
+   "from": 1781,
+   "to": 1783,
+   "themes": [
+    "Slavery",
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "The Zong was a Dutch slave ship captured by the British off the African coast in 1781 with 244 enslaved Africans in its hold, then sold to a syndicate of Liverpool merchants who renamed and insured it.",
+     "https://www.britannica.com/event/Zong-massacre"
+    ],
+    [
+     "It traded for 198 more enslaved men, women and children along the coast and left Accra on the Gold Coast on 18 August 1781, bound for Black River, Jamaica.",
+     "https://www.britannica.com/event/Zong-massacre"
+    ],
+    [
+     "After a navigational error carried the ship past Jamaica, the captain, Luke Collingwood, proposed and the crew agreed on 29 November to throw enslaved people overboard: 54 women and children that night, 42 men on 1 December, and a third group after that, while 10 others jumped into the sea.",
+     "https://www.britannica.com/event/Zong-massacre"
+    ],
+    [
+     "The owners claimed insurance for 132 people; a jury at Guildhall, London, found for them on 6 March 1783, but at the King's Bench hearing in May Lord Mansfield ordered a new trial after it emerged that rain had fallen before the last group was killed, and no record survives of a new trial being held.",
+     "https://www.britannica.com/event/Zong-massacre"
+    ],
+    [
+     "On 19 March 1783 Olaudah Equiano told the anti-slave-trade campaigner Granville Sharp about the killings; Sharp tried without success to have the crew prosecuted for murder.",
+     "https://en.wikipedia.org/wiki/Zong_massacre"
+    ],
+    [
+     "In 1791 Parliament prohibited insurers from reimbursing ship owners for enslaved Africans killed by being thrown overboard.",
+     "https://en.wikipedia.org/wiki/Zong_massacre"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "The closeness of the place, and the heat of the climate, added to the number in the ship, which was so crowded that each had scarcely room to turn himself, almost suffocated us. This produced copious perspirations, so that the air soon became unfit for respiration, from a variety of loathsome smells, and brought on a sickness among the slaves, of which many died, thus falling victims to the improvident avarice, as I may call it, of their purchasers. This wretched situation was again aggravated by the galling of the chains, now become insupportable; and the filth of the necessary tubs, into which the children often fell, and were almost suffocated. The shrieks of the women, and the groans of the dying, rendered the whole a scene of horror almost inconceivable.",
+     "who": "Olaudah Equiano (Gustavus Vassa), describing his own crossing as a boy, a generation before the Zong; he was not on that ship",
+     "date": "published 1789",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, ch. 2 (Project Gutenberg eBook #15399)",
+     "url": "https://www.gutenberg.org/cache/epub/15399/pg15399-images.html",
+     "lic": "Public domain (1789)"
+    },
+    {
+     "text": "One day, when we had a smooth sea and moderate wind, two of my wearied countrymen who were chained together (I was near them at the time), preferring death to such a life of misery, somehow made through the nettings and jumped into the sea: immediately another quite dejected fellow, who, on account of his illness, was suffered to be out of irons, also followed their example; and I believe many more would very soon have done the same if they had not been prevented by the ship's crew, who were instantly alarmed.",
+     "who": "Olaudah Equiano, on the same crossing",
+     "date": "published 1789",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, ch. 2 (Project Gutenberg eBook #15399)",
+     "url": "https://www.gutenberg.org/cache/epub/15399/pg15399-images.html",
+     "lic": "Public domain (1789)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "March 19.—Gustavus Vasa, a Negro, called on me, with an account of one hundred and thirty Negroes being thrown alive into the sea, from on board an English slave ship.",
+     "who": "Granville Sharp, campaigner against slavery, in his own notes, printed by Prince Hoare, Memoirs of Granville Sharp (1820), p. 236",
+     "date": "19 March 1783",
+     "url": "https://archive.org/details/memoirsofgranvil00hoar"
+    },
+    {
+     "text": "which master, mate, and crew, on pretence of necessity (lest there should be a want of water), wilfully and deliberately destroyed one hundred and twenty-two Negro slaves, by casting them alive (as it is deposed) into the sea, with their hands bound or fettered, to deprive them of all possibility of escaping. Having been earnestly solicited and called upon by a poor Negro for my assistance, to avenge the blood of his murdered countrymen, I thought it my duty to spare neither labour nor expense in collecting all the information concerning this horrible transaction that I could possibly procure, for the sake of national justice",
+     "who": "Granville Sharp, letter to the Lords Commissioners of the Admiralty asking for a murder prosecution, as printed by Hoare (1820), p. 242; the figure 122 is as printed there (Sharp's covering letter on p. 241 says 132)",
+     "date": "2 July 1783",
+     "url": "https://archive.org/details/memoirsofgranvil00hoar"
+    }
+   ],
+   "official": [
+    {
+     "text": "left to the jury, was, whether it was from necessity; for they had no doubt (though it shocks one very much) that the case of slaves was the same as if horses had been thrown overboard. It is a very shocking case.",
+     "who": "Lord Mansfield, Lord Chief Justice, summing up the first trial at the King's Bench hearing on the insurers' appeal (Gregson v Gilbert), from notes taken in court for Granville Sharp, printed by Hoare (1820), p. 241",
+     "date": "May 1783",
+     "url": "https://archive.org/details/memoirsofgranvil00hoar"
+    },
+    {
+     "text": "The question after all is, was it voluntary, or an act of necessity? This is a case of chattels or goods. It is really so: it is the case of throwing over goods; for to this purpose, and the purpose of the insurance, they are goods and property: whether right or wrong, we have nothing to do with it. This property—the human creatures, if you will—have been thrown overboard: whether or not for the preservation of the rest, that is the real question.",
+     "who": "John Lee, Solicitor-General, arguing for the ship's owners at the same hearing, as printed by Hoare (1820), p. 239",
+     "date": "May 1783",
+     "url": "https://archive.org/details/memoirsofgranvil00hoar"
+    }
+   ],
+   "warn": "The words spoken at the 1783 hearing come from notes taken in court for Granville Sharp, who wanted the crew tried for murder, as printed in 1820; they are not an official law report. Period sources use the word 'Negro'.",
+   "disputed": [
+    [
+     "How many were killed. The owners claimed for 132, the figure the National Maritime Museum uses; Britannica counts 143 from the groups recorded, the first mate James Kelsall later gave 'the outside number' as 142, and Sharp's letter to the Admiralty as printed in 1820 says 122. The surviving accounts come largely from Kelsall and the passenger Robert Stubbs, who both had reason to clear themselves.",
+     [
+      "https://www.rmg.co.uk/collections/archive/rmgc-object-500960",
+      "https://www.britannica.com/event/Zong-massacre",
+      "https://en.wikipedia.org/wiki/Zong_massacre",
+      "https://archive.org/details/memoirsofgranvil00hoar"
+     ]
+    ],
+    [
+     "Was there a water shortage? The owners argued that throwing people overboard was a necessity to save the rest; the insurers showed that rain had fallen before the last killings, the ship reached Jamaica with water to spare, and Britannica calls the crew's calculations highly suspect.",
+     [
+      "https://www.britannica.com/event/Zong-massacre",
+      "https://en.wikipedia.org/wiki/Zong_massacre"
+     ]
+    ],
+    [
+     "Where Equiano was born. He wrote that he was born about 1745 in Essaka, in the Igbo country; the scholar Vincent Carretta found a baptism register ('born in Carolina') and a 1773 ship's muster that he argued point to a birth in America, while other scholars, such as Paul Lovejoy, hold that the weight of evidence supports an African birth.",
+     [
+      "https://www.gutenberg.org/cache/epub/15399/pg15399-images.html",
+      "https://www.britannica.com/biography/Olaudah-Equiano",
+      "https://en.wikipedia.org/wiki/Olaudah_Equiano"
+     ]
+    ]
+   ],
+   "blind": "Not one word survives from the people thrown into the sea, or from the 208 who reached Jamaica and were sold; the ship's log went missing, and what happened on board is known from the crew who did it, the lawyers who argued over the money and the campaigner who tried to have them tried. Equiano speaks for the captives of the Middle Passage, but he was not on the Zong.",
+   "reading": [
+    [
+     "Hoare, Memoirs of Granville Sharp (1820, scan), ch. 8 'The Ship Zong'",
+     "https://archive.org/details/memoirsofgranvil00hoar"
+    ],
+    [
+     "Equiano, The Interesting Narrative (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/15399"
+    ],
+    [
+     "Documents relating to the case of the ship Zong, REC/19 (National Maritime Museum, Greenwich)",
+     "https://www.rmg.co.uk/collections/archive/rmgc-object-500960"
+    ]
+   ]
+  },
+  {
+   "id": "hawaii",
+   "title": "The overthrow of the Hawaiian Kingdom",
+   "region": "Oceania",
+   "where": "ʻIolani Palace, Honolulu, Hawaiʻi",
+   "lat": 21.3068,
+   "lon": -157.8588,
+   "from": 1893,
+   "to": 1898,
+   "themes": [
+    "Colonial rule",
+    "Removal and dispossession",
+    "Protest and dissent"
+   ],
+   "facts": [
+    [
+     "Liliʻuokalani came to the throne in January 1891, the first woman to hold it, and tried to restore some of the power the monarchy had lost under her brother Kalākaua.",
+     "https://www.britannica.com/biography/Liliuokalani"
+    ],
+    [
+     "When she moved to bring in a new constitution, a Committee of Safety of non-native businessmen and politicians, with Sanford Dole as head of the government it set up, and supported by the US Minister John Stevens and marines landed from the warship USS Boston, overthrew her on 17 January 1893 and proclaimed a Provisional Government.",
+     "https://www.archives.gov/education/lessons/hawaii-petition"
+    ],
+    [
+     "President Cleveland rejected the annexation treaty and sought to restore the Queen, but Dole refused, saying Cleveland had no authority to interfere.",
+     "https://www.britannica.com/biography/Liliuokalani"
+    ],
+    [
+     "In 1895 an armed rising in the Queen's name, led by the royalist Robert Wilcox, was put down; the Queen was held under arrest and on 24 January 1895 signed an abdication to win pardons for her jailed supporters.",
+     "https://www.britannica.com/biography/Liliuokalani"
+    ],
+    [
+     "In 1897 the Hui Aloha ʻĀina petition against annexation was signed by 21,269 native Hawaiians, more than half of the 39,000 native and part-Hawaiians counted that year, and the annexation treaty failed in the Senate.",
+     "https://www.archives.gov/education/lessons/hawaii-petition"
+    ],
+    [
+     "Hawaii was annexed instead by a joint resolution of Congress, the Newlands Resolution, which needed only a simple majority and was signed by President McKinley on 7 July 1898.",
+     "https://www.archives.gov/education/lessons/hawaii-petition"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "I, Liliuokalani, by the grace of God and under the constitution of the Hawaiian kingdom Queen, do hereby solemnly protest against any and all acts done against myself and the constitutional government of the Hawaiian kingdom by certain persons claiming to have established a Provisional Government of and for this kingdom. That I yield to the superior force of the United States of America, whose Minister Plenipotentiary, His Excellency John L. Stevens, has caused United States troops to be landed at Honolulu, and declared that he would support the said Provisional Government.",
+     "who": "Queen Liliʻuokalani, protest signed at six in the evening on the day of the overthrow",
+     "date": "17 January 1893",
+     "doc": "As printed in Hawaii's Story by Hawaii's Queen (1898), Appendix B, 'Extracts from statement made by the Queen to Minister Blount'",
+     "url": "https://digital.library.upenn.edu/women/liliuokalani/hawaii/hawaii.html",
+     "lic": "Public domain (1898)"
+    },
+    {
+     "text": "To other usurpations of authority on the part of those whose love for the institutions of their native land we could understand and forgive we had submitted. We had allowed them virtually to give us a constitution, and control the offices of state. Not without protest, indeed; for the usurpation was unrighteous, and cost us much humiliation and distress. But we did not resist it by force. It had not entered into our hearts to believe that these friends and allies from the United States, even with all their foreign affinities, would ever go so far as to absolutely overthrow our form of government, seize our nation by the throat, and pass it over to an alien power.",
+     "who": "Queen Liliʻuokalani",
+     "date": "published 1898",
+     "doc": "Hawaii's Story by Hawaii's Queen, chapter LVII, 'Hawaiian Autonomy'",
+     "url": "https://digital.library.upenn.edu/women/liliuokalani/hawaii/hawaii.html",
+     "lic": "Public domain (1898)"
+    },
+    {
+     "text": "I declare such a treaty to be an act of wrong toward the native and part-native people of Hawaii, an invasion of the rights of the ruling chiefs, in violation of international rights both toward my people and toward friendly nations with whom they have made treaties, the perpetuation of the fraud whereby the constitutional government was overthrown and, finally, an act of gross injustice to me.",
+     "who": "Queen Liliʻuokalani, protest against the annexation treaty, delivered to the State Department",
+     "date": "17 June 1897, Washington",
+     "doc": "Hawaii's Story by Hawaii's Queen, chapter LV, 'My Official Protest to the Treaty'",
+     "url": "https://digital.library.upenn.edu/women/liliuokalani/hawaii/hawaii.html",
+     "lic": "Public domain (1898)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "From a careful inquiry I am satisfied that it would be defeated by a vote of at least two to one. If the votes of persons claiming allegiance to foreign countries were excluded, it would be defeated by more than five to one. The undoubted sentiment of the people is for the Queen, against the Provisional Government and against annexation. A majority of the whites, especially Americans, are for annexation.",
+     "who": "US official critical of the overthrow: James H. Blount, special commissioner sent by President Cleveland, report to Secretary of State Gresham (on annexation, if put to a vote)",
+     "date": "17 July 1893",
+     "url": "https://history.state.gov/historicaldocuments/frus1894app2/d265"
+    },
+    {
+     "text": "By an act of war, committed with the participation of a diplomatic representative of the United States and without authority of Congress, the Government of a feeble but friendly and confiding people has been overthrown. A substantial wrong has thus been done which a due regard for our national character as well as the rights of the injured people requires we should endeavor to repair. The provisional government has not assumed a republican or other constitutional form, but has remained a mere executive council or oligarchy, set up without the assent of the people.",
+     "who": "US official critical of the overthrow: President Grover Cleveland, message to Congress",
+     "date": "18 December 1893",
+     "url": "https://history.state.gov/historicaldocuments/frus1894app2/ch7subch1"
+    }
+   ],
+   "official": [
+    {
+     "text": "Not content with her victory Her Majesty proceeded on the last day of the session to arbitrarily arrogate to herself the right to promulgate a new constitution, which proposed, among other things, to disfranchise over one-fourth of the voters and the owners of nine-tenths of the private property of the Kingdom, to abolish the elected upper house of the legislature and to substitute in place thereof an appointive one, to be appointed by the Sovereign.",
+     "who": "Proclamation of the Committee of Safety establishing the Provisional Government, which went on to declare 'The Hawaiian monarchical system of Government is hereby abrogated'",
+     "date": "17 January 1893",
+     "url": "https://history.state.gov/historicaldocuments/frus1894app2/d73"
+    },
+    {
+     "text": "The main part of the opponents of annexation are the lower class of natives, led by unscrupulous foreigners, of little property, mostly from California, Australia, and Canada, who wish to maintain the Hawaiian monarchy and its corruptions for their own unworthy purposes, and who think their opportunities for power and spoliation will be gone if annexation becomes a fact. The Hawaiian pear is now fully ripe, and this is the golden hour for the United States to pluck it.",
+     "who": "John L. Stevens, US Minister in Honolulu, dispatch to Secretary of State Foster",
+     "date": "1 February 1893",
+     "url": "https://history.state.gov/historicaldocuments/frus1894app2/d90"
+    }
+   ],
+   "today": {
+    "text": "apologizes to Native Hawaiians on behalf of the people of the United States for the overthrow of the Kingdom of Hawaii on January 17, 1893 with the participation of agents and citizens of the United States, and the deprivation of the rights of Native Hawaiians to self-determination",
+    "who": "US Congress, Apology Resolution, Public Law 103-150 (which adds that nothing in it is intended to settle any claims against the United States)",
+    "date": "23 November 1993",
+    "url": "https://www.congress.gov/bill/103rd-congress/senate-joint-resolution/19/text/enr"
+   },
+   "warn": "Hawaiian names appear as the 1890s English-language documents spelled them, without the ʻokina and kahakō (Liliuokalani for Liliʻuokalani).",
+   "disputed": [
+    [
+     "What the US minister and the troops did. Blount's 1893 report found that Minister Stevens acted without authority and landed the marines on a false or exaggerated pretext to back the conspirators, and that this was decisive; the Senate's Morgan Report of 1894 contradicted it and cleared everyone involved except the Queen. A later federal Native Hawaiians Study Commission report concluded that the truth lies somewhere between the two.",
+     [
+      "https://en.wikipedia.org/wiki/Morgan_Report",
+      "https://history.state.gov/historicaldocuments/frus1894app2/d265"
+     ]
+    ],
+    [
+     "Whether annexation was lawful. Annexation came by a joint resolution of Congress after a treaty failed to win two-thirds of the Senate, and without any vote of the Hawaiian people; the Hawaiian sovereignty movement still disputes its legality, while US courts (DeLima v. Bidwell, 1901; Arakaki v. Lingle, 2007) have treated it as valid.",
+     [
+      "https://en.wikipedia.org/wiki/Newlands_Resolution",
+      "https://www.archives.gov/education/lessons/hawaii-petition"
+     ]
+    ],
+    [
+     "Restoration and amnesty. When Cleveland's minister Albert Willis offered to restore her if she granted amnesty to everyone responsible, the Queen first replied that Hawaiian law called for property confiscation and death for treason, which lost her the administration's goodwill; she then changed her position on amnesty, but the Provisional Government refused to reinstate her.",
+     [
+      "https://en.wikipedia.org/wiki/Liliuokalani"
+     ]
+    ]
+   ],
+   "blind": "The record that survives in English is mostly the Queen's own and that of American officials on both sides. The 21,269 people who signed the 1897 petitions, and the Hawaiian-language newspapers of the time, speak mainly in Hawaiian, and most of their words have not been published in English.",
+   "reading": [
+    [
+     "Liliʻuokalani, Hawaii's Story by Hawaii's Queen (1898), full text (A Celebration of Women Writers, University of Pennsylvania)",
+     "https://digital.library.upenn.edu/women/liliuokalani/hawaii/hawaii.html"
+    ],
+    [
+     "Foreign Relations of the United States, 1894, Appendix II: Affairs in Hawaii, including the Blount Report (Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1894app2"
+    ],
+    [
+     "The 1897 Petition Against the Annexation of Hawaii (US National Archives)",
+     "https://www.archives.gov/education/lessons/hawaii-petition"
+    ],
+    [
+     "Apology Resolution, Public Law 103-150 (Congress.gov)",
+     "https://www.congress.gov/bill/103rd-congress/senate-joint-resolution/19/text/enr"
+    ]
+   ]
+  },
+  {
+   "id": "tulsa",
+   "title": "The Tulsa race massacre",
+   "region": "Americas",
+   "where": "Greenwood District, Tulsa, Oklahoma, United States",
+   "lat": 36.1597,
+   "lon": -95.9866,
+   "from": 1921,
+   "to": 1921,
+   "themes": [
+    "Massacre",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "By early 1921 most of Tulsa's ten thousand African American residents lived in the Greenwood District, home to two newspapers, several churches, a library branch and scores of Black-owned businesses.",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ],
+    [
+     "On 31 May 1921, after the Tulsa Tribune reported that Dick Rowland, a Black shoe shiner, had attempted to rape a white elevator operator, hundreds of whites gathered at the county courthouse demanding that he be handed over; armed Black men, many of them First World War veterans, went there to help protect him, and a shot fired as they left began the fighting.",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ],
+    [
+     "At daybreak on 1 June thousands of armed whites, some of them deputised by the police that night, poured into Greenwood, looting homes and businesses and setting them on fire; Black Tulsans fought to defend their district but were outgunned and outnumbered.",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ],
+    [
+     "In eighteen hours more than one thousand homes and businesses were destroyed; thousands of Tulsans were held under armed guard and the city was placed under martial law, and thousands spent the following winter living in tents.",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ],
+    [
+     "A state grand jury indicted about 70 men, many of them Black leaders of Greenwood; Police Chief John Gustafson was charged with dereliction of duty and corruption, convicted and removed, but no white person was ever sent to prison for the killing, burning and looting.",
+     "https://www.justice.gov/crt/media/1383756/dl"
+    ],
+    [
+     "Rowland was exonerated; the white establishment tried to force the Black community to relocate, but Greenwood residents began rebuilding within days.",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "After watching the men unload on First Street where we could see them from our windows, we heard such a buzzing noise that on running to the door to get a better view of what was going on, the sights our eyes beheld made our poor hearts stand still for a moment. There was a great shadow in the sky and upon a second look we discerned that this cloud was caused by fast approaching aeroplanes. It then dawned upon us that the enemy had organized in the night and was invading our district the same as the Germans invaded France and Belgium. The firing of guns was renewed in quick succession. People were seen to flee from their burning homes, some with babes in their arms and leading crying and excited children by the hand; others, old and feeble, all fleeing to safety.",
+     "who": "Mary E. Jones Parrish, who taught typing in Greenwood and fled with her young daughter",
+     "date": "morning of 1 June 1921; published 1922",
+     "doc": "Events of the Tulsa Disaster, 'My Experience in Tulsa', pp. 9–10 (transcribed from the scan; OCR errors corrected)",
+     "url": "https://archive.org/details/events-of-the-tulsa-disaster",
+     "lic": "Public domain (US, 1922)"
+    },
+    {
+     "text": "From a 10-room and basement modern brick home, I am now living in what was my coal barn. From a 5-chair white enamel barber shop, 4 baths, electric clippers, electric fan, 2 lavatories and shampoo stands, 4 workmen, double marble shine stand, a porter and an income of over $500 or $600 per month, to a razor, strop and folding chair on the sidewalk. I feel that corrupt politics is the cause of the whole affair, for if the authorities had taken the proper steps in time the whole matter could have been prevented.",
+     "who": "C. L. Netherland, proprietor of a barber shop on Greenwood, statement collected by Mary E. Jones Parrish",
+     "date": "Tulsa, June 1921; published 1922",
+     "doc": "Events of the Tulsa Disaster, p. 42 (transcribed from the scan; OCR errors corrected)",
+     "url": "https://archive.org/details/events-of-the-tulsa-disaster",
+     "lic": "Public domain (US, 1922)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "It is highly doubtful if the exact number of casualties will ever be known. The figures originally given in the press estimate the number at 100. The number buried by local undertakers and given out by city officials is ten white and twenty-one colored. For obvious reasons these officials wish to keep the number published as low as possible, but the figures obtained in Tulsa are far higher. Fifty whites and between 150 and 200 Negroes is much nearer the actual number of deaths.",
+     "who": "Walter F. White, assistant secretary of the NAACP, who went to Tulsa to investigate, 'The Eruption of Tulsa', The Nation, p. 910",
+     "date": "29 June 1921",
+     "url": "https://archive.org/stream/sim_nation_1921-06-29_112_2921/sim_nation_1921-06-29_112_2921_djvu.txt"
+    }
+   ],
+   "official": {
+    "text": "While we find the presence of the armed negroes was the direct cause of the riot, we further find that there existed indirect causes more vital to the public interest than the direct cause. Among these were agitation among the negroes of social equality, and the laxity of law enforcement",
+    "who": "Report of the Tulsa County grand jury, printed in the Tulsa World under the headline 'Grand Jury Blames Negroes for Inciting Race Rioting; Whites Clearly Exonerated' (as quoted by the Library of Congress)",
+    "date": "26 June 1921",
+    "url": "https://blogs.loc.gov/headlinesandheroes/2021/05/tulsa-race-massacre-newspaper-complicity-and-coverage/"
+   },
+   "today": {
+    "text": "On the night of May 31, 1921, a violent attack by as many as 10,000 white Tulsans destroyed the thriving Black community of Greenwood, Oklahoma—a prosperous area often referred to as “Black Wall Street.” The attack, which lasted into the afternoon of June 1, was so systematic and coordinated that it transcended mere mob violence. White men murdered hundreds of Black residents, burned businesses and homes to the ground, and left survivors without resources or recourse. In the aftermath, authorities failed to offer meaningful help, and efforts to seek justice through the courts foundered.",
+    "who": "US Department of Justice, Civil Rights Division, report under the Emmett Till Unsolved Civil Rights Crime Act, executive summary (it also found that no prosecution is now possible)",
+    "date": "January 2025",
+    "url": "https://www.justice.gov/crt/media/1383756/dl"
+   },
+   "warn": "The 1921 texts use the words of their time, including 'Negro' and 'colored'; the grand jury and the press then called the massacre a 'riot'.",
+   "disputed": [
+    [
+     "How many died. In 1921 city officials gave out 10 white and 21 Black dead; Walter White, investigating that June, put it at about 50 whites and 150 to 200 Black people; the Oklahoma Historical Society says credible estimates range from 50 to 300, and the Justice Department (2025) says as many as 300, perhaps more, and that an accurate toll may never be agreed because bodies were dumped in the river and buried in unmarked mass graves.",
+     [
+      "https://archive.org/stream/sim_nation_1921-06-29_112_2921/sim_nation_1921-06-29_112_2921_djvu.txt",
+      "https://www.okhistory.org/publications/enc/entry?entry=TU013",
+      "https://www.justice.gov/crt/media/1383756/dl"
+     ]
+    ],
+    [
+     "The graves. Long-held beliefs that victims were buried in unmarked graves were supported by evidence a team of scientists and historians found after the state commission was set up in 1997; the City of Tulsa's excavations at Oaklawn Cemetery have found previously unknown graves and identified massacre victims by DNA, and the search continues.",
+     [
+      "https://www.okhistory.org/publications/enc/entry?entry=TU013",
+      "https://www.cityoftulsa.org/1921graves"
+     ]
+    ],
+    [
+     "The aeroplanes. Survivors such as Mary Jones Parrish saw planes over Greenwood, and Walter White wrote that some said they were used for bombing; the Oklahoma Historical Society says only that some participants have claimed planes were used in the attack, and the Justice Department could not settle whether planes dropped incendiaries or how often they fired shots, though it notes that several eyewitnesses said they saw incendiary materials dropped.",
+     [
+      "https://www.okhistory.org/publications/enc/entry?entry=TU013",
+      "https://www.justice.gov/crt/media/1383756/dl"
+     ]
+    ],
+    [
+     "The 'To Lynch Negro Tonight' editorial. Eyewitnesses said the Tulsa Tribune printed it on 31 May; the Library of Congress notes that no copy has been found, since parts of that day's surviving paper were torn out, while the front-page story accusing Rowland is confirmed.",
+     [
+      "https://www.okhistory.org/publications/enc/entry?entry=TU013",
+      "https://blogs.loc.gov/headlinesandheroes/2021/05/tulsa-race-massacre-newspaper-complicity-and-coverage/"
+     ]
+    ]
+   ],
+   "blind": "Survivors' own words from 1921 survive mainly because Mary Jones Parrish collected them in a small, self-published book; Tulsa's two Black newspapers were burned and could not report, the official record (grand jury, police, white press) blamed the victims, and for decades the subject was kept quiet in Tulsa, so many of the dead are still unnamed.",
+   "reading": [
+    [
+     "Mary E. Jones Parrish, Events of the Tulsa Disaster (1922), scan (Internet Archive)",
+     "https://archive.org/details/events-of-the-tulsa-disaster"
+    ],
+    [
+     "Tulsa Race Massacre (Encyclopedia of Oklahoma History and Culture, Oklahoma Historical Society)",
+     "https://www.okhistory.org/publications/enc/entry?entry=TU013"
+    ],
+    [
+     "US Department of Justice, Review and Evaluation: Tulsa Race Massacre (2025)",
+     "https://www.justice.gov/crt/media/1383756/dl"
+    ],
+    [
+     "Tulsa Race Massacre: Newspaper Complicity and Coverage (Library of Congress)",
+     "https://blogs.loc.gov/headlinesandheroes/2021/05/tulsa-race-massacre-newspaper-complicity-and-coverage/"
+    ],
+    [
+     "1921 Graves Investigation (City of Tulsa)",
+     "https://www.cityoftulsa.org/1921graves"
+    ]
+   ]
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
