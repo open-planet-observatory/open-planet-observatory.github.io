@@ -1,0 +1,45 @@
+# Removes an offensive nickname from the leaderboards (Actions tab → "Remove a nickname" → Run workflow).
+# "remove-name" takes the nickname off the boards (the player's scores stay, anonymous);
+# "remove-player" deletes that player and every score they sent. Look-alike spellings match (e.g. 0 for o).
+# Uses the ADMIN_KEY repository secret, which nobody needs to see: the workflow sends it to the games server.
+name: Remove a nickname
+
+on:
+  workflow_dispatch:
+    inputs:
+      name:
+        description: Nickname exactly as shown on the board
+        required: true
+        type: string
+      action:
+        description: What to remove
+        required: true
+        default: remove-name
+        type: choice
+        options: [remove-name, remove-player]
+
+permissions:
+  contents: read
+
+jobs:
+  moderate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Ask the games server
+        env:
+          ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+          OWL_API: ${{ vars.OWL_API }}
+          NAME: ${{ inputs.name }}
+          ACTION: ${{ inputs.action }}
+        run: |
+          [ ${#ADMIN_KEY} -ge 24 ] || { echo "::error::The ADMIN_KEY secret is missing or too short"; exit 1; }
+          [ -n "$OWL_API" ] || { echo "::error::The OWL_API repository variable is not set"; exit 1; }
+          body=$(python3 -c 'import json,os; print(json.dumps({"key":os.environ["ADMIN_KEY"],"action":os.environ["ACTION"],"name":os.environ["NAME"]}))')
+          code=$(curl -sS -o out.json -w '%{http_code}' -X POST -H 'content-type: application/json' --data-binary @- "$OWL_API/v1/admin" <<< "$body")
+          echo "Server answered HTTP $code: $(cat out.json)"
+          case "$code" in
+            200) echo "Done: $ACTION for \"$NAME\". Boards refresh within about a minute." ;;
+            404) echo "::error::No player has that nickname (check the spelling on the board)"; exit 1 ;;
+            *) echo "::error::The games server refused (HTTP $code)"; exit 1 ;;
+          esac
