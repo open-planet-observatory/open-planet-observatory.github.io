@@ -38,7 +38,21 @@ function cors(req) { const o = req && req.headers.get('origin'); const env = cor
 const todayUTC = (t = Date.now()) => new Date(t).toISOString().slice(0, 10);
 const addDays = (d, n) => new Date(Date.parse(d + 'T00:00:00Z') + n * 864e5).toISOString().slice(0, 10);
 const isDay = d => typeof d === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(d) && isFinite(Date.parse(d + 'T00:00:00Z')) && new Date(Date.parse(d + 'T00:00:00Z')).toISOString().slice(0, 10) === d;
-const closeOf = (game, day) => game === 'hunt' ? (HUNTS[day] ? HUNTS[day].ends : 0) : Date.parse(addDays(day, 1) + 'T00:00:00Z');
+const closeOf = (game, day) => game === 'hunt' ? (HUNTS[day] ? HUNTS[day].ends : isWeek(day) ? weekEnds(day) : 0) : Date.parse(addDays(day, 1) + 'T00:00:00Z');
+// Weekly hunts: id 'w' + the Monday (UTC) it opens; open Monday 00:00 UTC until the next Monday. Weeks group into seasons
+// (meteorological: Dec–Feb, Mar–May, Jun–Aug, Sep–Nov; the first season also takes the two late-November weeks of 2026).
+const FIRST_WEEK = '2026-11-23';
+// local tests only: `wrangler dev --var ALLOW_LOCALHOST:1 --var TEST_NOW:<ISO time>` moves the clock; ignored everywhere else
+const clock = env => env && env.ALLOW_LOCALHOST === '1' && env.TEST_NOW ? Date.parse(env.TEST_NOW) : Date.now();
+const isWeek = d => typeof d === 'string' && /^w\d{4}-\d{2}-\d{2}$/.test(d) && isDay(d.slice(1)) && new Date(d.slice(1) + 'T00:00:00Z').getUTCDay() === 1 && d.slice(1) >= FIRST_WEEK;
+const weekStart = d => Date.parse(d.slice(1) + 'T00:00:00Z'), weekEnds = d => weekStart(d) + 7 * 864e5;
+const weekOf = (t = Date.now()) => { const x = new Date(t), dow = (x.getUTCDay() + 6) % 7; return 'w' + addDays(x.toISOString().slice(0, 10), -dow); };
+function seasonOf(w) { const d = w.slice(1), y = +d.slice(0, 4), m = +d.slice(5, 7); if (d < '2026-12-01') return 'winter-2026';
+  return m === 12 ? 'winter-' + y : m <= 2 ? 'winter-' + (y - 1) : m <= 5 ? 'spring-' + y : m <= 8 ? 'summer-' + y : 'autumn-' + y; }
+const isSeason = s => typeof s === 'string' && /^season:(winter|spring|summer|autumn)-\d{4}$/.test(s) && +s.slice(-4) >= 2026 && +s.slice(-4) <= 2100;
+// the weeks of a season that have opened so far
+function seasonWeeks(s, now = Date.now()) { const id = s.slice(7), out = []; for (let t = Date.parse(FIRST_WEEK + 'T00:00:00Z'); t <= now; t += 7 * 864e5) { const w = 'w' + todayUTC(t); if (seasonOf(w) === id) out.push(w); } return out; }
+const seasonName = s => { const [k, y] = s.slice(7).split('-'); return k[0].toUpperCase() + k.slice(1) + ' ' + (k === 'winter' ? y + '–' + String(+y + 1).slice(2) : y); };
 const okToken = t => typeof t === 'string' && /^[A-Za-z0-9_-]{32,64}$/.test(t);
 async function sha(t) { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('owl:' + t)); return [...new Uint8Array(b)].slice(0, 16).map(x => x.toString(16).padStart(2, '0')).join(''); }
 // the connecting address is used only as a rate-limit key in Cloudflare's memory; IPv6 users share their /64
@@ -62,13 +76,17 @@ function scoreFd(q, g, t) { if (!g || t == null) return 0; const s = q.spread, p
 
 async function postScore(req, env, b) {
   const p = await who(b.token, env, req); if (!p) return json({ error: 'bad token' }, 400, req); if (p === 'limited') return json({ error: 'slow down' }, 429, req);
-  const game = b.game, now = Date.now(), put = (g, day, score, max, detail) => env.DB.prepare('INSERT OR IGNORE INTO scores (game, day, player, score, max, verified, detail, at) VALUES (?,?,?,?,?,0,?,?)').bind(g, day, p, score, max, JSON.stringify(detail), now).run();
+  const game = b.game, now = clock(env), put = (g, day, score, max, detail) => env.DB.prepare('INSERT OR IGNORE INTO scores (game, day, player, score, max, verified, detail, at) VALUES (?,?,?,?,?,0,?,?)').bind(g, day, p, score, max, JSON.stringify(detail), now).run();
   if (game === 'woe') { const G = await site(env, 'game.json'); if (b.day !== G.date || G.failed) return json({ error: 'not today’s puzzle' }, 409, req);
     if (!Array.isArray(b.guesses) || b.guesses.length !== G.rounds.length) return json({ error: 'need one guess per round' }, 400, req);
     const pts = scoreWoe(G, b.guesses); await put('woe', G.date, pts.reduce((a, x) => a + x, 0), G.rounds.length * 5000, pts); return json({ ok: true, game, day: G.date }, 200, req); }
   if (game === 'sky') { if (!isDay(b.day) || Math.abs(Date.parse(b.day + 'T12:00:00Z') - now) > 1.6 * 864e5) return json({ error: 'not today' }, 409, req);
     const rows = (Array.isArray(b.rows) ? b.rows : []).slice(0, 5).map(x => Math.max(0, Math.min(5000, Math.round(+x || 0)))); await put('sky', b.day, rows.reduce((a, x) => a + x, 0), 25000, rows); return json({ ok: true, game, day: b.day }, 200, req); }
-  if (game === 'hunt') { const H = HUNTS[b.day]; if (!H) return json({ error: 'no such hunt' }, 404, req); if (now > H.ends) return json({ error: 'the hunt has ended' }, 409, req);
+  if (game === 'hunt') { let H = HUNTS[b.day];
+    if (!H && isWeek(b.day)) { if (now < weekStart(b.day)) return json({ error: 'this hunt has not opened yet' }, 409, req); if (now > weekEnds(b.day)) return json({ error: 'the hunt has ended' }, 409, req);
+      const W = await site(env, 'hunt.json'); if (!W || W.preview || W.week !== b.day) return json({ error: 'no such hunt' }, 404, req);
+      H = { ends: weekEnds(b.day), max: Math.max(1000, Math.min(7000, +W.max || 6000)) }; }
+    if (!H) return json({ error: 'no such hunt' }, 404, req); if (now > H.ends) return json({ error: 'the hunt has ended' }, 409, req);
     if ((+b.stops || 0) < 5) return json({ error: 'the board lists finishers only' }, 409, req); const pts = Math.max(0, Math.min(H.max, Math.round(+b.points || 0)));
     await env.DB.prepare('INSERT INTO scores (game, day, player, score, max, verified, detail, at) VALUES (?,?,?,?,?,0,?,?) ON CONFLICT(game, day, player) DO UPDATE SET score = MAX(score, excluded.score), at = excluded.at').bind('hunt', b.day, p, pts, H.max, JSON.stringify({ bonus: Math.max(0, Math.min(2, +b.bonus || 0)) }), now).run();
     return json({ ok: true, game, day: b.day }, 200, req); }
@@ -99,18 +117,35 @@ async function gradeFd(env, d) {
 // public board: the same for everyone, so it is kept for 60 s in this isolate's memory (the Cache API does nothing on
 // *.workers.dev); a player's own place comes from /v1/me
 const MEM = new Map(); const memGet = k => { const v = MEM.get(k); return v && v.t > Date.now() - 6e4 ? v.b : null; }; const memPut = (k, b) => { if (MEM.size > 200) MEM.clear(); MEM.set(k, { t: Date.now(), b }); };
+async function seasonBoard(req, env, day) {
+  const key = 'board/hunt/' + day, hit = memGet(key); if (hit) return json(hit, 200, req); const weeks = seasonWeeks(day, clock(env));
+  const base = { game: 'hunt', kind: 'season', title: 'Hunt season: ' + seasonName(day), day, weeks: weeks.length, graded: true, checked: false };
+  if (!weeks.length) { const b = { ...base, players: 0, top: [] }; memPut(key, b); return json(b, 200, req); }
+  const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MAX(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
+  const tot = await env.DB.prepare(`SELECT COUNT(*) AS n FROM (${S})`).bind(...weeks).first();
+  const top = (await env.DB.prepare(`WITH s AS (${S}), r AS (SELECT *, RANK() OVER (ORDER BY score DESC) AS rk FROM s)
+      SELECT r.rk, p.name, r.score, r.max, r.n FROM r JOIN players p ON p.player = r.player WHERE p.name IS NOT NULL AND p.named_at <= r.at ORDER BY r.rk, r.at LIMIT 20`).bind(...weeks).all()).results || [];
+  const body = { ...base, players: tot.n, top: top.map(r => ({ rank: r.rk, name: r.name, score: r.score, max: r.max, weeks: r.n })) };
+  memPut(key, body); return json(body, 200, req);
+}
 async function board(req, env, ctx, game, day) {
+  if (game === 'hunt' && isSeason(day)) return seasonBoard(req, env, day);
   const key = 'board/' + game + '/' + day, hit = memGet(key); if (hit) return json(hit, 200, req);
   let graded = true; if (game === 'fd') { try { graded = await gradeFd(env, day); } catch (e) { graded = false; } }
   const tot = await env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE game = ? AND day = ?').bind(game, day).first();
   // a name shows only for scores recorded after it was chosen; ranks count everyone, named or not
   const top = (await env.DB.prepare(`WITH r AS (SELECT player, score, max, at, RANK() OVER (ORDER BY score DESC) AS rk FROM scores WHERE game = ? AND day = ?)
       SELECT r.rk, p.name, r.score, r.max FROM r JOIN players p ON p.player = r.player WHERE p.name IS NOT NULL AND p.named_at <= r.at ORDER BY r.rk, r.at LIMIT 20`).bind(game, day).all()).results || [];
-  const body = { game, title: GAMES[game], day, players: tot.n, graded, checked: game === 'fd', top: top.map(r => ({ rank: r.rk, name: r.name, score: r.score, max: r.max })) };
+  const body = { game, kind: isWeek(day) ? 'week' : undefined, title: isWeek(day) ? 'Weekly hunt' : GAMES[game], day, players: tot.n, graded, checked: game === 'fd', top: top.map(r => ({ rank: r.rk, name: r.name, score: r.score, max: r.max })) };
   memPut(key, body); return json(body, 200, req);
 }
 async function me(req, env, game, day) { const t = req.headers.get('x-owl-token'); if (!okToken(t)) return json({ you: null, name: null }, 200, req); const p = await sha(t);
   const pl = await env.DB.prepare('SELECT name, named_at FROM players WHERE player = ?').bind(p).first();
+  if (game === 'hunt' && isSeason(day)) { const weeks = seasonWeeks(day, clock(env)); if (!weeks.length) return json({ you: null, name: pl ? pl.name : null }, 200, req);
+    const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MAX(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
+    const m = await env.DB.prepare(`SELECT * FROM (${S}) WHERE player = ?`).bind(...weeks, p).first(); if (!m) return json({ you: null, name: pl ? pl.name : null }, 200, req);
+    const above = await env.DB.prepare(`SELECT COUNT(*) AS n FROM (${S}) WHERE score > ?`).bind(...weeks, m.score).first();
+    return json({ you: { rank: above.n + 1, score: m.score, max: m.max, weeks: m.n, listed: !!(pl && pl.name && pl.named_at <= m.at) }, name: pl ? pl.name : null }, 200, req); }
   const m = await env.DB.prepare('SELECT score, max, at FROM scores WHERE game = ? AND day = ? AND player = ?').bind(game, day, p).first();
   if (!m) return json({ you: null, name: pl ? pl.name : null }, 200, req);
   const above = await env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE game = ? AND day = ? AND score > ?').bind(game, day, m.score).first();
@@ -119,7 +154,7 @@ async function me(req, env, game, day) { const t = req.headers.get('x-owl-token'
 async function counts(req, env, ctx, d) { const day = isDay(d) ? d : todayUTC(); const key = 'counts/' + day, hit = memGet(key); if (hit) return json(hit, 200, req); const out = {};
   for (const g of ['woe', 'sky']) out[g] = (await env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE game = ? AND day = ?').bind(g, day).first()).n;
   out.fd = (await env.DB.prepare('SELECT COUNT(DISTINCT player) AS n FROM fd_guesses WHERE day = ?').bind(day).first()).n;
-  out.hunt = {}; for (const h of Object.keys(HUNTS)) out.hunt[h] = (await env.DB.prepare("SELECT COUNT(*) AS n FROM scores WHERE game = 'hunt' AND day = ?").bind(h).first()).n;
+  out.hunt = {}; for (const h of [...Object.keys(HUNTS), ...(weekOf(clock(env)) >= 'w' + FIRST_WEEK ? [weekOf(clock(env))] : [])]) out.hunt[h] = (await env.DB.prepare("SELECT COUNT(*) AS n FROM scores WHERE game = 'hunt' AND day = ?").bind(h).first()).n;
   const body = { day, counts: out }; memPut(key, body); return json(body, 200, req); }
 
 async function crowd(req, env, d) { if (!isDay(d)) return json({ error: 'bad day' }, 400, req);
@@ -169,7 +204,7 @@ export default {
         if (u.pathname === '/v1/forget') return await forget(req, env, b);
         if (u.pathname === '/v1/admin') return await admin(req, env, b); }
       if (req.method === 'GET') {
-        const game = u.searchParams.get('game'), day = u.searchParams.get('day'), okGD = GAMES[game] && (game === 'hunt' ? !!HUNTS[day] : isDay(day));
+        const game = u.searchParams.get('game'), day = u.searchParams.get('day'), okGD = GAMES[game] && (game === 'hunt' ? !!HUNTS[day] || isWeek(day) || isSeason(day) : isDay(day));
         if (u.pathname === '/v1/board') return okGD ? await board(req, env, ctx, game, day) : json({ error: 'game and day needed' }, 400, req);
         if (u.pathname === '/v1/me') return okGD ? await me(req, env, game, day) : json({ error: 'game and day needed' }, 400, req);
         if (u.pathname === '/v1/counts') return await counts(req, env, ctx, u.searchParams.get('day'));
@@ -181,4 +216,4 @@ export default {
   // daily: forget Forecast Desk guesses after FD_KEEP_DAYS (their graded scores stay on the boards)
   async scheduled(evt, env) { await env.DB.prepare('DELETE FROM fd_guesses WHERE day < ?').bind(addDays(todayUTC(), -FD_KEEP_DAYS)).run(); }
 };
-export { scoreWoe, scoreFd, woePts, norm, nameProblem, plain, leet };
+export { isWeek, weekOf, seasonOf, seasonWeeks, isSeason, scoreWoe, scoreFd, woePts, norm, nameProblem, plain, leet };
