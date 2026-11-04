@@ -22,7 +22,7 @@
     return `<article class="ut-card" id="ut-${esc(s.id)}" data-id="${esc(s.id)}">
       <header><span class="ut-reg">${esc(s.region)} · ${esc(yrs(s))}</span><h3>${esc(s.title)}</h3><p class="small muted">${esc(s.where)} <button class="more" data-ut-go="${esc(s.id)}">Show on globe</button></p></header>
       ${voices ? `<h4 class="ut-h">In their own words</h4>${voices}` : ''}${wit ? `<h4 class="ut-h">Outside witnesses at the time</h4>${wit}` : ''}
-      ${s.warn ? `<p class="small muted">${esc(s.warn)}</p>` : ''}
+      ${s.warn ? `<p class="small muted">${esc(s.warn)}</p>` : ''}${s.note ? `<p class="small ut-note"><b>Note:</b> ${esc(s.note)}</p>` : ''}
       ${off ? `<h4 class="ut-h">The official account at the time</h4>${off}` : ''}${press ? `<h4 class="ut-h">The colonial press at the time</h4>${press}` : ''}${today ? `<h4 class="ut-h">The state's position today</h4>${today}` : ''}
       <h4 class="ut-h">What the record shows <span class="ut-tag">the site's own summary, every sentence footnoted</span></h4><p class="ut-facts">${facts}</p>
       ${disp ? `<h4 class="ut-h">Still disputed</h4><ul class="ut-disp">${disp}</ul>` : ''}

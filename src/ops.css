@@ -911,3 +911,4 @@ html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,trans
 .ut-q blockquote{margin:0;font-family:Georgia,'Times New Roman',serif;font-size:.92rem;line-height:1.5}.ut-q figcaption{font-size:.74rem;color:var(--ink-2);margin-top:3px}
 .ut-facts{font-size:.87rem;line-height:1.5;margin:0}.ut-facts sup a,.ut-disp sup a{text-decoration:none;font-weight:700;margin:0 1px}
 .ut-disp{margin:0;padding-left:18px;font-size:.86rem}.ut-disp li{margin:3px 0}
+.ut-note{border-left:3px solid var(--ink-2);padding-left:8px;margin:6px 0}

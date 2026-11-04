@@ -760,6 +760,105 @@
      "https://archive.org/details/donaldmcleodsglo00mcle"
     ]
    ]
+  },
+  {
+   "id": "nakba",
+   "title": "The Nakba: the Palestinian exodus of 1947–49",
+   "region": "Middle East",
+   "where": "Lydda (Lod), whose fall in July 1948 the UN mediator named as the point the refugee crisis became acute",
+   "lat": 31.951,
+   "lon": 34.888,
+   "from": 1947,
+   "to": 1949,
+   "facts": [
+    [
+     "On 29 November 1947 the UN General Assembly passed Resolution 181, recommending that Palestine be divided into a Jewish state and an Arab state.",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ],
+    [
+     "The Zionist Organization approved the partition resolution; Arab leaders opposed it.",
+     "https://www.un.org/unispal/history2/origins-and-evolution-of-the-palestine-problem/part-ii-1947-1977/"
+    ],
+    [
+     "A civil war followed the vote; by mid-May 1948 some 250,000–300,000 Palestinian Arabs had left or been expelled from their homes.",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ],
+    [
+     "Israel declared its independence on 14 May 1948; the next day the armies of Egypt, Transjordan, Iraq, Syria and Lebanon invaded, carrying out a decision the Arab League had made weeks before.",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ],
+    [
+     "In July 1948 Israeli forces took Lydda (Lod) and Ramla, towns inside the partition plan's proposed Arab state.",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ],
+    [
+     "The UN study The Origins and Evolution of the Palestine Problem puts the number of refugees at 726,000 by the end of 1949, about half the Arab population of Palestine.",
+     "https://www.un.org/unispal/history2/origins-and-evolution-of-the-palestine-problem/part-ii-1947-1977/"
+    ],
+    [
+     "On 11 December 1948 the General Assembly resolved, in Resolution 194, that refugees wishing to return to their homes and live at peace with their neighbours should be permitted to do so at the earliest practicable date, with compensation paid for the property of those choosing not to return.",
+     "https://www.un.org/unispal/document/auto-insert-177019/"
+    ],
+    [
+     "In December 1949 the General Assembly set up UNRWA, the UN agency for Palestine refugees.",
+     "https://www.un.org/unispal/document/auto-insert-180266/"
+    ],
+    [
+     "Armistice agreements with Egypt, Lebanon, Transjordan and Syria between February and July 1949 ended the war and set de facto borders.",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ]
+   ],
+   "voices": [],
+   "witness": [
+    {
+     "text": "It is, however, undeniable that no settlement can be just and complete if recognition is not accorded to the right of the Arab refugee to return to the home from which he has been dislodged by the hazards and strategy of the armed conflict between Arabs and Jews in Palestine. The majority of these refugees have come from territory which, under the Assembly resolution of 29 November, was to be included in the Jewish State. The exodus of Palestinian Arabs resulted from panic created by fighting in their communities, by rumours concerning real or alleged acts of terrorism, or expulsion. It would be an offence against the principles of elemental justice if these innocent victims of the conflict were denied the right to return to their homes while Jewish immigrants flow into Palestine, and, indeed, at least offer the threat of permanent replacement of the Arab refugees who have been rooted in the land for centuries.",
+     "who": "Count Folke Bernadotte, UN Mediator on Palestine, Progress Report to the General Assembly (A/648), signed at Rhodes",
+     "date": "16 September 1948",
+     "url": "https://www.un.org/unispal/document/auto-insert-198227/"
+    },
+    {
+     "text": "This situation reached an acute stage owing to the fact that just before the second truce (18 July 1948) Ramleh and Lydda, to which many thousands had fled from Jaffa and other localities, also fell. Moreover, while those who had fled in the early days of the conflict had been able to take with them some personal effects and assets, many of the late-comers were deprived of everything except the cloths in which they stood, and apart from their homes (many of which were destroyed) lost all furniture and assets, and even their tools of trade.",
+     "who": "The same report, on the refugees' conditions (\"cloths\" as printed)",
+     "date": "16 September 1948",
+     "url": "https://www.un.org/unispal/document/auto-insert-198227/"
+    }
+   ],
+   "official": {
+    "text": "If the war has brought in its wake a mass exodus, mostly spontaneous and the exodus has resulted in great suffering, the responsibility for it rests on those who fomented and have carried on the war, as well as on those who aided and abetted them.",
+    "who": "Provisional Government of Israel, reply to the UN Mediator (S/949), printed as an annex to his report; it added that Israel could not re-admit the refugees on any substantial scale while a state of war existed",
+    "date": "received 1 August 1948",
+    "url": "https://www.un.org/unispal/document/auto-insert-198227/"
+   },
+   "disputed": [
+    [
+     "Why they left. Israel's government in 1948 called the exodus mostly spontaneous and blamed those who started the war; Britannica notes that in Tiberias, Haifa and Safed Arabs fled despite Jewish authorities urging them to stay. The historian Benny Morris, working from Israeli archives, concludes that war and not design, Jewish or Arab, gave birth to the refugee problem, while writing that displacement was inherent in Zionist thinking. A study for the UN committee set up to promote Palestinian rights stresses terror and expulsion and rejects the charge that Arab leaders incited the flight. Palestinian historians' own accounts are not yet quoted on this card.",
+     [
+      "https://www.un.org/unispal/document/auto-insert-198227/",
+      "https://www.britannica.com/event/1948-Arab-Israeli-War",
+      "https://www.cambridge.org/core/books/birth-of-the-palestinian-refugee-problem-revisited/conclusion/58780D641E46CFE10DEC479BEBB17734",
+      "https://www.un.org/unispal/history2/origins-and-evolution-of-the-palestine-problem/part-ii-1947-1977/"
+     ]
+    ],
+    [
+     "How many. Estimates of the Arabs displaced from December 1947 to January 1949 range from about 520,000 to about 1,000,000; Britannica notes a general consensus that the number was more than 600,000 and likely exceeded 700,000.",
+     [
+      "https://www.britannica.com/event/1948-Arab-Israeli-War",
+      "https://www.un.org/unispal/history2/origins-and-evolution-of-the-palestine-problem/part-ii-1947-1977/"
+     ]
+    ]
+   ],
+   "note": "Research in progress (4 Nov 2026): this card has no refugees' own words yet. The quotations come from UN documents, quoted briefly with credit; the UN's terms cover personal, non-commercial use.",
+   "blind": "The 1948 record quoted here is the voice of the UN and governments; the refugees themselves, and the Jewish communities attacked in the same war, are not yet heard in their own words on this card.",
+   "reading": [
+    [
+     "1948 Arab-Israeli War (Britannica)",
+     "https://www.britannica.com/event/1948-Arab-Israeli-War"
+    ],
+    [
+     "Benny Morris, The Birth of the Palestinian Refugee Problem Revisited (Cambridge), conclusion",
+     "https://www.cambridge.org/core/books/birth-of-the-palestinian-refugee-problem-revisited/conclusion/58780D641E46CFE10DEC479BEBB17734"
+    ]
+   ]
   }
  ]
 }
