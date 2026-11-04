@@ -85,10 +85,10 @@ async function postScore(req, env, b) {
   if (game === 'hunt') { let H = HUNTS[b.day];
     if (!H && isWeek(b.day)) { if (now < weekStart(b.day)) return json({ error: 'this hunt has not opened yet' }, 409, req); if (now > weekEnds(b.day)) return json({ error: 'the hunt has ended' }, 409, req);
       const W = await site(env, 'hunt.json'); if (!W || W.preview || W.week !== b.day) return json({ error: 'no such hunt' }, 404, req);
-      H = { ends: weekEnds(b.day), max: Math.max(1000, Math.min(7000, +W.max || 6000)) }; }
+      H = { ends: weekEnds(b.day), max: Math.max(1000, Math.min(7000, +W.max || 6000)), stops: W.stops.length }; }
     if (!H) return json({ error: 'no such hunt' }, 404, req); if (now > H.ends) return json({ error: 'the hunt has ended' }, 409, req);
-    if ((+b.stops || 0) < 5) return json({ error: 'the board lists finishers only' }, 409, req); const pts = Math.max(0, Math.min(H.max, Math.round(+b.points || 0)));
-    await env.DB.prepare('INSERT INTO scores (game, day, player, score, max, verified, detail, at) VALUES (?,?,?,?,?,0,?,?) ON CONFLICT(game, day, player) DO UPDATE SET score = MAX(score, excluded.score), at = excluded.at').bind('hunt', b.day, p, pts, H.max, JSON.stringify({ bonus: Math.max(0, Math.min(2, +b.bonus || 0)) }), now).run();
+    if ((+b.stops || 0) < (H.stops || 5)) return json({ error: 'the board lists finishers only' }, 409, req); const pts = Math.max(0, Math.min(H.max, Math.round(+b.points || 0)));
+    await env.DB.prepare('INSERT INTO scores (game, day, player, score, max, verified, detail, at) VALUES (?,?,?,?,?,0,?,?) ON CONFLICT(game, day, player) DO UPDATE SET at = CASE WHEN excluded.score > score THEN excluded.at ELSE at END, score = MAX(score, excluded.score)').bind('hunt', b.day, p, pts, H.max, JSON.stringify({ bonus: Math.max(0, Math.min(2, +b.bonus || 0)) }), now).run();
     return json({ ok: true, game, day: b.day }, 200, req); }
   return json({ error: 'unknown game' }, 400, req);
 }
@@ -121,7 +121,7 @@ async function seasonBoard(req, env, day) {
   const key = 'board/hunt/' + day, hit = memGet(key); if (hit) return json(hit, 200, req); const weeks = seasonWeeks(day, clock(env));
   const base = { game: 'hunt', kind: 'season', title: 'Hunt season: ' + seasonName(day), day, weeks: weeks.length, graded: true, checked: false };
   if (!weeks.length) { const b = { ...base, players: 0, top: [] }; memPut(key, b); return json(b, 200, req); }
-  const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MAX(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
+  const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MIN(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
   const tot = await env.DB.prepare(`SELECT COUNT(*) AS n FROM (${S})`).bind(...weeks).first();
   const top = (await env.DB.prepare(`WITH s AS (${S}), r AS (SELECT *, RANK() OVER (ORDER BY score DESC) AS rk FROM s)
       SELECT r.rk, p.name, r.score, r.max, r.n FROM r JOIN players p ON p.player = r.player WHERE p.name IS NOT NULL AND p.named_at <= r.at ORDER BY r.rk, r.at LIMIT 20`).bind(...weeks).all()).results || [];
@@ -142,7 +142,7 @@ async function board(req, env, ctx, game, day) {
 async function me(req, env, game, day) { const t = req.headers.get('x-owl-token'); if (!okToken(t)) return json({ you: null, name: null }, 200, req); const p = await sha(t);
   const pl = await env.DB.prepare('SELECT name, named_at FROM players WHERE player = ?').bind(p).first();
   if (game === 'hunt' && isSeason(day)) { const weeks = seasonWeeks(day, clock(env)); if (!weeks.length) return json({ you: null, name: pl ? pl.name : null }, 200, req);
-    const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MAX(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
+    const q = weeks.map(() => '?').join(','), S = `SELECT player, SUM(score) AS score, SUM(max) AS max, COUNT(*) AS n, MIN(at) AS at FROM scores WHERE game = 'hunt' AND day IN (${q}) GROUP BY player`;
     const m = await env.DB.prepare(`SELECT * FROM (${S}) WHERE player = ?`).bind(...weeks, p).first(); if (!m) return json({ you: null, name: pl ? pl.name : null }, 200, req);
     const above = await env.DB.prepare(`SELECT COUNT(*) AS n FROM (${S}) WHERE score > ?`).bind(...weeks, m.score).first();
     return json({ you: { rank: above.n + 1, score: m.score, max: m.max, weeks: m.n, listed: !!(pl && pl.name && pl.named_at <= m.at) }, name: pl ? pl.name : null }, 200, req); }
@@ -176,7 +176,7 @@ async function setName(req, env, b) { const p = await who(b.token, env, req); if
   const name = String(b.name).trim().replace(/\s+/g, ' '); const bad = nameProblem(name); if (bad) return json({ error: bad }, 400, req);
   const key = norm(name), taken = await env.DB.prepare('SELECT player FROM players WHERE name_key = ?').bind(key).first(); if (taken && taken.player !== p) return json({ error: 'that name (or one that looks like it) is taken' }, 409, req);
   if (cur && cur.name_key === key) await env.DB.prepare('UPDATE players SET name = ? WHERE player = ?').bind(name, p).run();       // same name, new spelling: keeps its date
-  else await env.DB.prepare('UPDATE players SET name = ?, name_key = ?, named_at = ? WHERE player = ?').bind(name, key, Date.now(), p).run();
+  else await env.DB.prepare('UPDATE players SET name = ?, name_key = ?, named_at = ? WHERE player = ?').bind(name, key, clock(env), p).run();
   return json({ ok: true, name }, 200, req); }
 
 async function forget(req, env, b) { if (!okToken(b.token)) return json({ error: 'bad token' }, 400, req); const p = await sha(b.token);

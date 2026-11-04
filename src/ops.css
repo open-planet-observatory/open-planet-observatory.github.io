@@ -945,3 +945,9 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 .pg-cta{margin:0 0 8px}
 @media (max-width:860px){#owlPage{left:6px;right:6px;bottom:6px}.pg-split{display:block;overflow:auto}.pg-list{border-right:0;overflow:visible;margin-bottom:12px}.pg-read{overflow:visible}.pg-map{float:none;width:100%;margin:0 0 8px}.pg-tolist{display:inline-block;margin-bottom:6px}#owlPage .pg-body{overflow:auto}.pg-n{margin-left:0}}
 :root[data-theme="light"] #owlPage .pg-in{background:color-mix(in srgb,#fff 92%,transparent)}
+/* ---- the weekly hunt (src/weekly.js): same card as One Light-Day ---- */
+#weekly{position:fixed;z-index:2100;left:14px;bottom:14px;width:min(360px,calc(100vw - 28px));max-height:min(70vh,620px);max-height:min(70dvh,620px);display:flex;flex-direction:column;color:var(--ink);font:14px/1.45 var(--body);border-radius:14px;overflow:hidden;background:var(--glass,rgb(18 14 9 / .9))}
+#uni.on ~ #weekly,#weekly{color-scheme:dark}
+#weekly.folded .hunt-body{display:none}
+#uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:72px} /* clear of the 3D view's Go-to bar */
+@media (max-width:640px){#weekly{left:8px;right:8px;bottom:8px;width:auto;max-height:55vh;max-height:55dvh}#uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:84px}}
