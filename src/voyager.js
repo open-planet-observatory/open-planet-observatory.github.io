@@ -5,7 +5,10 @@
 // at its stated speed. A week after the moment the banner retires itself. Video links come from VOYAGER_VIDEOS below.
 (function () {
   const host = document.getElementById('voyagerBanner'); if (!host) return;
-  const VIDEOS = window.VOYAGER_VIDEOS || {}; /* { short: url, long: url } — set in the page template */
+  // { short: [{ url, from }], long: { url, from } } in the page template: each link shows only from its release time
+  // (scheduled YouTube videos have their address before they are public, but it doesn't play until then)
+  const SRC = window.VOYAGER_VIDEOS || {}, open = v => !v ? '' : typeof v === 'string' ? v : Date.now() >= Date.parse(v.from) ? v.url : '';
+  const videos = () => ({ short: [].concat(SRC.short || []).map(open).filter(Boolean).pop() || '', long: open(SRC.long) });
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const AU_KM = 149597870.7, pad = n => String(n).padStart(2, '0');
   const fmt = (n, d = 0) => Number(n).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: d });
@@ -13,16 +16,16 @@
   function parts(ms) { const s = Math.max(0, Math.floor(ms / 1000)); return { d: Math.floor(s / 86400), h: Math.floor(s % 86400 / 3600), m: Math.floor(s % 3600 / 60), s: s % 60 }; }
   function local(iso) { try { return new Date(iso).toLocaleString('en-US', { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' }); } catch (e) { return iso; } }
   function render() {
-    const now = Date.now(), T = Date.parse(V.crossUTC); const after = now >= T;
+    const now = Date.now(), T = Date.parse(V.crossUTC); const after = now >= T, VIDEOS = videos();
     const chip = document.getElementById('gnVoyager');
     if (after && now - T > 7 * 864e5) { host.hidden = true; if (chip) chip.hidden = true; clearInterval(timer); return; }
     const t0 = Date.parse(V.now.t); const auNow = Math.min(V.now.au + V.now.kms * ((now - t0) / 1000) / AU_KM, after ? Infinity : V.lightDayAU - 1e-4); const kmNow = auNow * AU_KM; /* counted forward from Horizons' last hourly value; never past the line before the moment */
     const p = parts(T - now);
-    const links = `${VIDEOS.short ? `<a class="vy-btn" href="${esc(VIDEOS.short)}" target="_blank" rel="noopener">▶ Watch the short</a>` : ''}${VIDEOS.long ? `<a class="vy-btn vy-long" href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">${after ? '▶ Watch the full film' : '▶ Full film · goes live when the clock reaches zero'}</a>` : ''}`;
+    const links = `${VIDEOS.short ? `<a class="vy-btn" href="${esc(VIDEOS.short)}" target="_blank" rel="noopener">▶ Watch the short</a>` : ''}${VIDEOS.long ? `<a class="vy-btn vy-long" href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">▶ Watch the full film</a>` : ''}`;
     const head = after ? `<b>Voyager 1 is now more than one light-day from Earth.</b> It passed the mark on ${esc(local(V.crossUTC))} (${esc(V.crossUTC.slice(0, 16).replace('T', ' '))} UTC).` : `<b>Voyager 1 reaches one light-day from Earth in</b>`;
     host.innerHTML = `<div class="vy-in"><div class="vy-text">${head}${after ? '' : `<div class="vy-clock" aria-live="off"><span>${p.d}<i>days</i></span><span>${pad(p.h)}<i>hrs</i></span><span>${pad(p.m)}<i>min</i></span><span>${pad(p.s)}<i>sec</i></span></div>`}
       <p class="vy-note">${after ? 'From now on, a' : 'On ' + esc(local(V.crossUTC)) + ' (' + esc(V.crossUTC.slice(0, 16).replace('T', ' ')) + ' UTC), a'} radio message from Earth will take a full day to reach it, and its answer a day to come back. Right now it is <b>${fmt(kmNow / 1e9, 3)} billion km</b> away (${fmt(auNow, 3)} AU), leaving us at ${fmt(V.now.kms, 1)} km/s. Launched 5 September 1977.</p>
-      <p class="vy-src">Moment and distance: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a> (Voyager 1, geocentric range), computed ${esc(V.computedAt.slice(0, 10))}; the distance shown is counted forward from Horizons' ${esc(V.now.t.slice(11, 16))} UTC value at its stated speed${V.stale ? ' · Horizons did not answer today, so this is yesterday’s figure' : ''}. One light-day = ${fmt(V.lightDayAU, 4)} AU.</p></div>
+      <p class="vy-src">Moment and distance: <a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a> (Voyager 1, distance from Earth at each instant; the moment matches <a href="https://science.nasa.gov/mission/voyager/where-are-voyager-1-and-voyager-2-now/" target="_blank" rel="noopener">NASA’s own countdown</a>), computed ${esc(V.computedAt.slice(0, 10))}; the distance shown is counted forward from Horizons' ${esc(V.now.t.slice(11, 16))} UTC value at its stated speed${V.stale ? ' · Horizons did not answer today, so this is yesterday’s figure' : ''}. One light-day = ${fmt(V.lightDayAU, 4)} AU.</p></div>
       ${links ? `<div class="vy-links">${links}</div>` : ''}<button class="vy-x" aria-label="Hide this banner" title="Hide this banner (the countdown stays in the header)">×</button></div>`;
     host.querySelector('.vy-x').onclick = () => { host.hidden = true; host.dataset.closed = '1'; const m = document.getElementById('voyagerMini'); if (m) m.hidden = true; try { localStorage.setItem('vyHide', String(now)); } catch (e) { } }; /* the header chip stays, and brings it back */
     const mini = document.getElementById('voyagerMini'); if (mini) { const mh = after ? `<span>Voyager 1 is now more than <b>one light-day</b> from Earth.</span>${VIDEOS.long ? ` <a href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">Watch the film</a>` : ''}` : `<span>Voyager 1 reaches one light-day from Earth in <b>${p.d} d ${pad(p.h)} h ${pad(p.m)} min</b></span>${VIDEOS.long ? ` <a href="${esc(VIDEOS.long)}" target="_blank" rel="noopener">Film goes live then</a>` : ''}`; if (mini.innerHTML !== mh) mini.innerHTML = mh; if (host._sync) host._sync(); }

@@ -159,8 +159,8 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Voyager 1 countdown
 
-- The moment Voyager 1 first reaches one light-day from Earth (173.1446 AU) is computed by the collector from NASA JPL Horizons' geocentric range for Voyager 1 (6-hour grid, refined to the minute), and recomputed daily. The distance on the banner counts up from Horizons' latest hourly value at its stated range-rate. If Horizons does not answer, the banner says the figure is yesterday's. The banner retires itself a week after the moment.
-- Video links on the banner are The Owlmanac's own.
+- The moment Voyager 1 first reaches one light-day from Earth (173.1446 AU) is computed by the collector from NASA JPL Horizons' distance between Voyager 1 and Earth's centre at each instant (no light-time correction; 6-hour grid, refined to the second between one-minute values), and recomputed daily. It matches NASA's own countdown (18 November 2026, 10:16:07 UTC). Until 4 November 2026 the site used Horizons' light-time-corrected range, which placed the moment about 16 hours late. The distance on the banner counts up from Horizons' latest hourly value at its stated range-rate. If Horizons does not answer, the banner says the figure is yesterday's. The banner retires itself a week after the moment.
+- Video links on the banner are The Owlmanac's own; each appears from its scheduled release time.
 
 ## Forecast where you click
 
