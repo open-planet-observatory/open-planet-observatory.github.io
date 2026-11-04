@@ -290,6 +290,15 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .zoomctl .zgal{border-color:#c9a3ff!important}
 .zoomctl .zweb{border-color:#8fd3ff!important}
 .zoomctl .zearth{border-color:#6fd39a!important}
+/* each destination pill has its own colour (Derik, 4 Nov 2026: the Moon and Solar System pills looked alike): border, icon and a faint tint */
+.zoomctl .zuni{--zc:#f2c43c}.zoomctl .zearth{--zc:#6fd39a}.zoomctl .zmoon{--zc:#c9d3e6}.zoomctl .zgal{--zc:#c9a3ff}.zoomctl .zweb{--zc:#8fd3ff}
+.zoomctl .zuni{border-color:var(--zc)!important;background:color-mix(in srgb,var(--zc) 16%,var(--glass,rgb(18 29 42 / .84)))!important}
+.zoomctl .zuni .zi{color:var(--zc)}
+.zoomctl .zuni:hover{background:color-mix(in srgb,var(--zc) 30%,var(--glass,rgb(18 29 42 / .84)))!important}
+[data-theme="light"] .zoomctl .zuni{--zc-l:color-mix(in srgb,var(--zc) 55%,#1a1a1a)}
+[data-theme="light"] .zoomctl .zuni .zi{color:var(--zc-l)}
+[data-theme="light"] .zoomctl .zuni{border-color:var(--zc-l)!important}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]):not([data-theme="owl"]) .zoomctl .zuni{--zc-l:color-mix(in srgb,var(--zc) 55%,#1a1a1a);border-color:var(--zc-l)!important}:root:not([data-theme="dark"]):not([data-theme="owl"]) .zoomctl .zuni .zi{color:var(--zc-l)}}
 .uni-lbl.k-galaxy-cluster{color:#ffd9a3}
 .uni-lbl.k-our-galaxy{color:#ffd166}
 .uni-lbl.k-distance-ring{color:#a9b9ff;font-weight:500;font-size:11px;opacity:.85}
@@ -738,7 +747,7 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 .mg-card a{color:var(--accent,#D9A441)}
 .mg-src{font-size:.68rem;color:var(--ink-3);margin:8px 0 0}
 .mg-src a{color:inherit}
-.zmoon[aria-pressed="true"]{border-color:var(--accent,#D9A441)!important}
+.zoomctl .zmoon[aria-pressed="true"]{background:color-mix(in srgb,var(--zc) 38%,var(--glass,rgb(18 29 42 / .84)))!important;box-shadow:0 0 0 1px var(--zc)}
 @media (max-width:860px){.mg-ui{top:auto;bottom:70px;right:8px;left:62px;width:auto;max-height:42vh}#moonGlobe .mg-credits{display:none}}
 /* Cesium's credit box is absolutely placed by default; in the rail footer it must flow with the rail, or it floats over the buttons */
 #cesiumCredits .cesium-widget-credits{position:static!important;display:block}
@@ -951,3 +960,13 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 #weekly.folded .hunt-body{display:none}
 #uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:72px} /* clear of the 3D view's Go-to bar */
 @media (max-width:640px){#weekly{left:8px;right:8px;bottom:8px;width:auto;max-height:55vh;max-height:55dvh}#uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:84px}}
+/* Voyager videos (The Owlmanac): "coming" labels in the banner, and a ▶ beside the header countdown chip */
+.vy-soon{display:inline-block;padding:8px 13px;border-radius:999px;border:1px dashed rgba(255,255,255,.28);color:#c9d1dc;font-size:.82rem;font-weight:600}
+.gn-vyv{border:1px solid var(--glass-line);background:var(--glass-2);color:var(--accent,#D9A441);border-radius:999px;padding:5px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;text-decoration:none;cursor:pointer;margin-left:-2px}
+.gn-vyv:hover{border-color:var(--accent,#D9A441);color:var(--ink)}
+.gn-vyv.soon{color:var(--ink-2);font-weight:600;cursor:default;border-style:dashed}
+.gn-vyv.soon:hover{color:var(--ink-2);border-color:var(--glass-line)}
+.gn-vyv[hidden]{display:none!important}
+@media (max-width:860px){.gn-vyv{padding:5px 7px;font-size:.72rem}html.ops.slim .gn-vyv{display:none}}
+@media (min-width:861px) and (max-width:1199px){html.ops.slim .gn-vyv{display:none}}
+.owl-soon{font-size:.82rem;font-weight:600;color:var(--ink-2);border:1px dashed var(--glass-line);border-radius:999px;padding:6px 12px}
