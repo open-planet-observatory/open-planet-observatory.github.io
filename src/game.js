@@ -11,8 +11,9 @@
   const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { return {}; } };
   const save = v => { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch (e) { } };
   const today = () => new Date().toISOString().slice(0, 10);
-  const HALF = { tile: 500, quake: 750, weather: 1000 }; // km at which a round's points halve (weather is the hardest)
-  const points = (d, t) => { if (d <= 50) return 5000; const p = Math.round(5000 * Math.pow(0.5, (d - 50) / (HALF[t] || 600))); return p < 10 ? 0 : p; };
+  // km at which a round's points halve; satellite rounds were 500 km until the 4 Nov 2026 puzzle, 750 km from 5 Nov (same rule on the games server)
+  const HALF = { tile: 750, quake: 750, weather: 1000 }, halfFor = (t, day) => t === 'tile' && day && day < '2026-11-05' ? 500 : (HALF[t] || 600);
+  const points = (d, t, day) => { if (d <= 50) return 5000; const p = Math.round(5000 * Math.pow(0.5, (d - 50) / halfFor(t, day))); return p < 10 ? 0 : p; };
   const km = (a, b) => { const r = Math.PI / 180, dl = (b[0] - a[0]) * r, dn = (b[1] - a[1]) * r; const h = Math.sin(dl / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dn / 2) ** 2; return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h))); };
   const fmtLL = (la, lo) => `${Math.abs(la).toFixed(1)}° ${la >= 0 ? 'N' : 'S'}, ${Math.abs(lo).toFixed(1)}° ${lo >= 0 ? 'E' : 'W'}`;
   const fmtKm = d => d < 10 ? 'under 10 km' : `${Math.round(d).toLocaleString('en-US')} km (${Math.round(d * 0.621371).toLocaleString('en-US')} mi)`;
@@ -70,11 +71,17 @@
     if (innerWidth <= 640 && h >= 2e7) h *= 1.35; // the whole globe has to fit above the card on a phone
     const dest = C.Cartesian3.fromDegrees(((lon + 540) % 360) - 180, Math.max(-85, Math.min(85, lat)), h);
     const t = new C.Camera(v.scene); t.setView({ destination: dest, orientation: { heading: 0, pitch: -Math.PI / 2, roll: 0 } });
-    if (card && !html.classList.contains('game-msg')) { const r = card.getBoundingClientRect(), f = v.camera.frustum, ty = Math.tan(f.fovy / 2), tx = ty * f.aspectRatio;
+    if (card && !html.classList.contains('game-msg') && card.getBoundingClientRect().height > 0) { const r = card.getBoundingClientRect(), f = v.camera.frustum, ty = Math.tan(f.fovy / 2), tx = ty * f.aspectRatio;
       if (innerWidth > 640) { const off = ((r.right + innerWidth) / 2) / innerWidth - 0.5; t.lookLeft(Math.atan(2 * off * tx)); }
       else { const off = 0.5 - (r.top / 2) / innerHeight; t.lookDown(Math.atan(2 * off * ty)); } }
     v.camera.flyTo({ destination: dest, orientation: { direction: t.direction, up: t.up }, duration: matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : (dur ?? 1.6) });
   }
+  // camera height that fits a guess and the answer `dkm` apart, with a margin, inside the part of the globe the card
+  // leaves free (to its right on desktop, above it on phones), whichever way the line between them runs
+  function revealHeight(dkm) { const v = window.__obs3d && window.__obs3d.viewer, card = ui && ui.querySelector('.woe-card'); if (!v) return dkm * 1000 * 1.9;
+    const f = v.camera.frustum, ty = Math.tan(f.fovy / 2), tx = ty * f.aspectRatio; let fx = 1, fy = 1;
+    const cr = card && card.getBoundingClientRect(); if (cr && cr.height > 0) { const r = cr; if (innerWidth > 640) fx = Math.max(0.3, (innerWidth - r.right) / innerWidth); else fy = Math.max(0.3, r.top / innerHeight); }
+    const half = dkm * 1000 * 0.65; return Math.max(half / (ty * fy), half / (tx * fx)); }
   function setPin(lat, lon) {
     lon = ((lon + 540) % 360) - 180; st.pin = [lat, lon]; if (pin) ds.entities.remove(pin); pin = dot(lat, lon, '#D9A441', 'Your guess');
     const p = ui.querySelector('.woe-pin'); if (p) p.innerHTML = `Your pin: <b>${fmtLL(lat, lon)}</b>. Click or tap again to move it.`;
@@ -181,7 +188,7 @@
     q('.woe-x').onclick = close; q('.woe-min').onclick = () => { ui.classList.toggle('folded'); q('.woe-min').textContent = ui.classList.contains('folded') ? '▴' : '▾'; };
     const img = q('.woe-img'); if (img) { const im = img.querySelector('img'); const done = () => img.classList.add('ok');
       im.onload = done; if (im.complete && im.naturalWidth) done();
-      im.onerror = () => { img.classList.add('bad'); img.querySelector('.woe-ld').innerHTML = "NASA's image server didn't answer. <span class='woe-retry'>Try again</span>, or skip the round."; img.onclick = () => { img.classList.remove('bad'); im.src = G.rounds[st.i].img + '&retry=' + Date.now(); }; showSkip(); };
+      im.onerror = () => { img.classList.add('bad'); img.querySelector('.woe-ld').innerHTML = "NASA's image server didn't answer. <span class='woe-retry'>Try again</span>" + (st.stage === 'guess' ? ', or skip the round.' : '.'); img.onclick = () => { img.classList.remove('bad'); im.src = G.rounds[st.i].img + '&retry=' + Date.now(); }; showSkip(); };
       img.onclick = () => { if (img.classList.contains('ok')) lightbox(im.src); }; }
     const go = q('.woe-go'); if (go) go.onclick = lock;
     const set = q('.woe-set'); if (set) set.onclick = () => { const la = parseFloat(q('.woe-lat').value), lo = parseFloat(q('.woe-lon').value); if (isFinite(la) && isFinite(lo) && Math.abs(la) <= 90 && Math.abs(lo) <= 180) { setPin(la, lo); flyTo(la, lo, 8e6, 1.2); } else { const p = q('.woe-pin'); if (p) p.textContent = 'Latitude must be between −90 and 90, longitude between −180 and 180.'; } };
@@ -191,15 +198,16 @@
       sh.textContent = ok ? 'Copied: paste it anywhere' : 'Select the text below to copy it'; };
     const lv = q('.woe-leave'); if (lv) lv.onclick = close;
   }
-  function showSkip() { const a = ui.querySelector('.woe-act'); if (a && !a.querySelector('.woe-skip')) { const b = document.createElement('button'); b.className = 'woe-skip'; b.textContent = 'Skip this round (0 points)'; b.onclick = () => { st.pin = null; lock(); }; a.appendChild(b); } }
+  function showSkip() { if (!st || st.stage !== 'guess') return; /* a failed image on the reveal's "see the clue again" must not offer to re-lock the round */ const a = ui.querySelector('.woe-act'); if (a && !a.querySelector('.woe-skip')) { const b = document.createElement('button'); b.className = 'woe-skip'; b.textContent = 'Skip this round (0 points)'; b.onclick = () => { if (st.stage !== 'guess') return; st.pin = null; lock(); }; a.appendChild(b); } }
   function lightbox(src) { const d = document.createElement('div'); d.className = 'woe-lb'; d.innerHTML = `<img src="${esc(src)}" alt="The satellite image, enlarged"><button aria-label="Close">✕</button>`; d.onclick = () => d.remove(); document.body.appendChild(d); d.querySelector('button').focus(); }
 
   // ---------- rounds ----------
   function persist() { const S = load(); S.days = S.days || {}; S.days[G.date] = { i: st.i, stage: st.stage, g: st.g, s: st.s, d: st.d, in: st.in || [], done: st.stage === 'done', late: practice }; save(S); }
   function lock() {
+    if (st.stage !== 'guess') return; /* a double click or a late button can't lock a round twice */
     const r = G.rounds[st.i], C = C_(); const g = st.pin; const d = g ? km(g, [r.lat, r.lon]) : 20000;
     const dl = g ? ((g[1] - r.lon + 540) % 360) - 180 : 0; /* longitude difference across the date line */ const inside = g && r.type === 'tile' && g[0] >= r.bbox[1] && g[0] <= r.bbox[3] && Math.abs(dl) <= (r.bbox[2] - r.bbox[0]) / 2;
-    const p = g ? (inside ? 5000 : points(d, r.type)) : 0; st.in = st.in || []; st.in[st.i] = !!inside;
+    const p = g ? (inside ? 5000 : points(d, r.type, G.date)) : 0; st.in = st.in || []; st.in[st.i] = !!inside;
     st.g[st.i] = g; st.d[st.i] = Math.round(d); st.s[st.i] = p; st.stage = 'reveal'; persist();
     // the answer on the globe
     if (r.type === 'tile') ds.entities.add({ rectangle: { coordinates: C.Rectangle.fromDegrees(r.bbox[0], r.bbox[1], r.bbox[2], r.bbox[3]), fill: false, outline: true, outlineColor: col('#8DCB95'), outlineWidth: 2, height: 0 } });
@@ -208,9 +216,9 @@
     if (g) {
       ds.entities.add({ polyline: { positions: C.Cartesian3.fromDegreesArray([g[1], g[0], r.lon, r.lat]), width: 3, arcType: C.ArcType.GEODESIC, material: new C.PolylineDashMaterialProperty({ color: col('#EFE4CC'), dashLength: 14 }) } });
       const geo = new C.EllipsoidGeodesic(C.Cartographic.fromDegrees(g[1], g[0]), C.Cartographic.fromDegrees(r.lon, r.lat)); const m = geo.interpolateUsingFraction(0.5);
-      flyTo(C.Math.toDegrees(m.latitude), C.Math.toDegrees(m.longitude), Math.min(2.4e7, Math.max(1.6e6, d * 1000 * 1.9)));
-    } else flyTo(r.lat, r.lon, 6e6);
-    render();
+      render(); /* the reveal card first: the camera is framed around the card that will be on screen */
+      flyTo(C.Math.toDegrees(m.latitude), C.Math.toDegrees(m.longitude), Math.min(2.4e7, Math.max(1.6e6, revealHeight(d))));
+    } else { render(); flyTo(r.lat, r.lon, 6e6); }
   }
   function next() {
     ds.entities.removeAll(); pin = null; st.pin = null;

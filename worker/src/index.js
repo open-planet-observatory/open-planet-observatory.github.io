@@ -65,12 +65,13 @@ async function who(token, env, req) { if (!okToken(token)) return null; const p 
 async function site(env, path) { const r = await fetch((env.SITE || 'https://theowlmanac.com') + '/data/' + path + '?w=' + Math.floor(Date.now() / 3e5), { cf: { cacheTtl: 120 } }); if (!r.ok) throw new Error('site data ' + path + ' HTTP ' + r.status); return r.json(); }
 
 // ---- scoring rules: identical to src/game.js and src/forecastdesk.js ----
-const HALF = { tile: 500, quake: 750, weather: 1000 };
-const woePts = (d, t) => { if (d <= 50) return 5000; const p = Math.round(5000 * Math.pow(0.5, (d - 50) / (HALF[t] || 600))); return p < 10 ? 0 : p; };
+// same rule as src/game.js: satellite rounds halve every 500 km up to the 4 Nov 2026 puzzle, 750 km from 5 Nov
+const HALF = { tile: 750, quake: 750, weather: 1000 }, halfFor = (t, day) => t === 'tile' && day && day < '2026-11-05' ? 500 : (HALF[t] || 600);
+const woePts = (d, t, day) => { if (d <= 50) return 5000; const p = Math.round(5000 * Math.pow(0.5, (d - 50) / halfFor(t, day))); return p < 10 ? 0 : p; };
 const km = (a, b) => { const r = Math.PI / 180, dl = (b[0] - a[0]) * r, dn = (b[1] - a[1]) * r; const h = Math.sin(dl / 2) ** 2 + Math.cos(a[0] * r) * Math.cos(b[0] * r) * Math.sin(dn / 2) ** 2; return 2 * 6371 * Math.asin(Math.min(1, Math.sqrt(h))); };
 function scoreWoe(game, guesses) { return game.rounds.map((r, i) => { const g = guesses[i]; if (!Array.isArray(g) || g.length !== 2 || !g.every(Number.isFinite) || Math.abs(g[0]) > 90 || Math.abs(g[1]) > 180) return 0;
   if (r.type === 'tile' && r.bbox) { const dl = ((g[1] - r.lon + 540) % 360) - 180; if (g[0] >= r.bbox[1] && g[0] <= r.bbox[3] && Math.abs(dl) <= (r.bbox[2] - r.bbox[0]) / 2) return 5000; }
-  return woePts(km(g, [r.lat, r.lon]), r.type); }); }
+  return woePts(km(g, [r.lat, r.lon]), r.type, game.date); }); }
 function scoreFd(q, g, t) { if (!g || t == null) return 0; const s = q.spread, pt = Math.round(3000 * Math.pow(0.5, Math.abs(g.g - t) / s));
   const W = g.hi - g.lo, ref = 2.56 * s, over = Math.max(0, Math.floor(((W - ref) / ref) / 0.1)); const inside = t >= g.lo && t <= g.hi; return pt + Math.max(0, (inside ? 2000 : 0) - 500 * over); }
 
