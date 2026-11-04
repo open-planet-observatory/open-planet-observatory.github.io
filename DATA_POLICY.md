@@ -218,7 +218,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Source Bounty
 
-- Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. Contributors are not named on the site unless that is decided separately.
+- Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. A finder is credited on the site by GitHub name only if they ticked the credit box on the form (opt-in); otherwise the find is listed without a name. Only the GitHub name is shown, nothing else about the person.
 
 ## Visitors
 
