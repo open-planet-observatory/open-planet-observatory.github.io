@@ -61,6 +61,7 @@ const PANELS=[
  ['worlds','Other worlds',['#worlds']],
  ['history','This date in history',['#history']],
  ['records','Records',['#records']],
+ ['untold','Untold history',['#untold']],
  ['sky','Sky tonight',['#sky']],
  ['watch','Watch',['#watch']],
  ['unexplained','Unexplained',['#unexplained']],

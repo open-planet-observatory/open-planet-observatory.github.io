@@ -1,0 +1,435 @@
+{
+ "v": 1,
+ "built": "2026-11-03",
+ "stories": [
+  {
+   "id": "cherokee",
+   "title": "Cherokee removal and the Trail of Tears",
+   "region": "Americas",
+   "where": "New Echota, Georgia, United States",
+   "lat": 34.5345,
+   "lon": -84.9025,
+   "from": 1830,
+   "to": 1839,
+   "facts": [
+    [
+     "The Indian Removal Act of 28 May 1830 let the President negotiate treaties to move tribes living east of the Mississippi to land in the west.",
+     "https://www.archives.gov/milestone-documents/jacksons-message-to-congress-on-indian-removal"
+    ],
+    [
+     "In December 1835 a small group of Cherokee men, none of them elected officials of the Nation, signed the Treaty of New Echota, giving up all Cherokee land east of the Mississippi for $5 million and land in Indian Territory.",
+     "https://www.nps.gov/articles/000/cherokee-resistance-and-relocation.htm"
+    ],
+    [
+     "Principal Chief John Ross gathered more than 15,000 signatures, nearly the whole Nation, asking the Senate not to ratify it.",
+     "https://www.ncpedia.org/cherokee/trailoftears"
+    ],
+    [
+     "The Senate ratified the treaty in 1836 by a single vote.",
+     "https://www.nps.gov/liri/learn/historyculture/the-trail-of-tears.htm"
+    ],
+    [
+     "In May 1838 federal troops and state militias began rounding up Cherokee families into stockades; the forced journey west ran from October 1838 to March 1839.",
+     "https://www.nps.gov/liri/learn/historyculture/the-trail-of-tears.htm"
+    ],
+    [
+     "More than 16,000 Cherokee people were removed to Indian Territory (now Oklahoma), travelling in 17 detachments along routes of about 2,200 miles.",
+     "https://www.nps.gov/places/trail-of-tears-national-historic-trail.htm"
+    ],
+    [
+     "A few hundred stayed by hiding in the North Carolina mountains; their descendants are the Eastern Band of Cherokee Indians.",
+     "https://www.ncpedia.org/cherokee/trailoftears"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "But we were doubly grieved when we understood, from a letter of the Secretary of War to our Delegation, dated March of the present year, that our father the President had refused us protection, and that he had decided in favor of the extension of the laws of the State over us. This decision induces us to appeal to the immediate representatives of the American people. We love, we dearly love our country, and it is due to your honorable bodies as well as to us, to make known why we think the country is ours, and why we wish to remain in peace where we are.",
+     "who": "The Cherokee Nation, memorial to the U.S. Congress",
+     "date": "December 1829",
+     "doc": "Memorial of the Cherokees",
+     "url": "https://en.wikisource.org/wiki/Memorial_of_the_Cherokees",
+     "lic": "Public domain (1829)"
+    },
+    {
+     "text": "By the stipulations of this instrument, we are despoiled of our private possessions, the indefeasible property of individuals. We are stripped of every attribute of freedom and eligibility for legal self-defence. Our property may be plundered before our eyes; violence may be committed on our persons; even our lives may be taken away, and there is none to regard our complaints. We are denationalized; we are disfranchised. We are deprived of membership in the human family! We have neither land nor home, nor resting place that can be called our own. And this is effected by the provisions of a compact which assumes the venerated, the sacred appellation of treaty.",
+     "who": "Principal Chief John Ross, protest to the Senate and House of Representatives against the Treaty of New Echota",
+     "date": "28 September 1836",
+     "doc": "as printed by the U.S. National Park Service",
+     "url": "https://www.nps.gov/articles/000/protest-treaty-of-new-echota.htm",
+     "lic": "Public domain (1836)"
+    }
+   ],
+   "official": {
+    "text": "It gives me pleasure to announce to Congress that the benevolent policy of the Government, steadily pursued for nearly thirty years, in relation to the removal of the Indians beyond the white settlements is approaching to a happy consummation.",
+    "who": "President Andrew Jackson, message to Congress 'On Indian Removal'",
+    "date": "6 December 1830",
+    "url": "https://www.archives.gov/milestone-documents/jacksons-message-to-congress-on-indian-removal"
+   },
+   "disputed": [
+    [
+     "How many died. About 4,000, nearly a fifth of the Cherokee, is the figure most sources give; it goes back to the missionary doctor Elizur Butler. The National Park Service writes that no one knows how many died throughout the ordeal.",
+     [
+      "https://www.nps.gov/liri/learn/historyculture/the-trail-of-tears.htm",
+      "https://teachinghistory.org/history-content/ask-a-historian/25652"
+     ]
+    ]
+   ],
+   "blind": "Most of what survives is the writing of literate Cherokee leaders, missionaries and army officers. Ordinary Cherokee people, especially women and children and those who spoke only Cherokee, are heard mostly in recollections written down much later.",
+   "reading": [
+    [
+     "Trail of Tears National Historic Trail: bibliography (NPS)",
+     "https://www.nps.gov/trte/learn/historyculture/bibliography.htm"
+    ],
+    [
+     "Petition against the Treaty of New Echota (National Archives, DocsTeach)",
+     "https://docsteach.org/lesson/analyzing-the-petition-against-the-treaty-of-new-echota/"
+    ]
+   ]
+  },
+  {
+   "id": "congo",
+   "title": "Rubber and terror in the Congo Free State",
+   "region": "Africa",
+   "where": "Lake Tumba region, Équateur, today's Democratic Republic of the Congo (representative location)",
+   "lat": -0.833,
+   "lon": 18.0,
+   "from": 1885,
+   "to": 1908,
+   "facts": [
+    [
+     "The Berlin Conference of 1884–85 recognised the Congo Free State, ruled personally by King Leopold II of Belgium.",
+     "https://www.britannica.com/place/Congo-Free-State"
+    ],
+    [
+     "Congolese people were forced to gather wild rubber, palm oil and ivory; families were taken hostage to enforce quotas, and soldiers of the Force Publique cut off hands, including children's.",
+     "https://www.britannica.com/place/Congo-Free-State"
+    ],
+    [
+     "The British consul Roger Casement travelled the Upper Congo in 1903; his report, dated 11 December 1903, was laid before Parliament in February 1904 as Command Paper Cd. 1933.",
+     "https://www.gutenberg.org/cache/epub/50573/pg50573-images.html"
+    ],
+    [
+     "Casement and E. D. Morel founded the Congo Reform Association in 1904.",
+     "https://breac.nd.edu/articles/the-three-lives-of-the-casement-report-its-impact-on-official-reactions-and-popular-opinion-in-belgium/"
+    ],
+    [
+     "The Free State's own Commission of Inquiry, in the Congo from October 1904 to February 1905, confirmed the abuses.",
+     "https://breac.nd.edu/articles/the-three-lives-of-the-casement-report-its-impact-on-official-reactions-and-popular-opinion-in-belgium/"
+    ],
+    [
+     "Under international pressure Belgium took the territory over in 1908 as the Belgian Congo.",
+     "https://breac.nd.edu/articles/the-three-lives-of-the-casement-report-its-impact-on-official-reactions-and-popular-opinion-in-belgium/"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We had to go further and further into the forest to find the rubber vines, to go without food, and our women had to give up cultivating the fields and gardens. Then we starved. Wild beasts—the leopards—killed some of us when we were working away in the forest, and others got lost or died from exposure and starvation, and we begged the white man to leave us alone, saying we could get no more rubber, but the white men and their soldiers said: ‘Go! You are only beasts yourselves, you are nyama (meat).’ We tried, always going further into the forest, and when we failed and our rubber was short, the soldiers came to our towns and killed us. Many were shot, some had their ears cut off; others were tied up with ropes around their necks and bodies and taken away.",
+     "who": "A refugee from the rubber tax (named only as “N N” in the published report), speaking to Roger Casement",
+     "date": "July 1903",
+     "doc": "Correspondence and Report from His Majesty's Consul at Boma (Cd. 1933, 1904), Inclosure 1 in No. 3",
+     "url": "https://www.gutenberg.org/cache/epub/50573/pg50573-images.html",
+     "lic": "Public domain (UK Command Paper, 1904)"
+    },
+    {
+     "text": "We said to the white men, ‘We are not enough people now to do what you want us. Our country has not many people in it and we are dying fast. We are killed by the work you make us do, by the stoppage of our plantations, and the breaking up of our homes.’ The white man looked at us and said: ‘There are lots of people in Mputu’",
+     "who": "Another refugee in the same group (“P P” in the report); Casement notes that Mputu meant Europe",
+     "date": "July 1903",
+     "doc": "Cd. 1933, Inclosure 1 in No. 3",
+     "url": "https://www.gutenberg.org/cache/epub/50573/pg50573-images.html",
+     "lic": "Public domain (UK Command Paper, 1904)"
+    }
+   ],
+   "official": {
+    "text": "They deny, however, that the manner in which the State is administered involves a systematic régime “of cruelty or oppression,”",
+    "who": "The Congo Free State's government: a note to the Powers that signed the Berlin Act, signed by its Secretary-General, Chevalier de Cuvelier, in Brussels (English translation printed in the same Parliamentary paper)",
+    "date": "17 September 1903",
+    "url": "https://www.gutenberg.org/cache/epub/50573/pg50573-images.html"
+   },
+   "disputed": [
+    [
+     "How many died. Adam Hochschild's widely read estimate is about 10 million, from a population he argues was roughly halved between 1880 and 1920. The demographer Jean-Paul Sanderson told the Belgian Parliament's Congo commission in 2022 that the starting population was probably 11.5 to 15 million, and traced the 10-million figure to Mark Twain's writing in 1908. Administrative counts began in the late 1800s, but Sanderson considers them reliable only from about 1935.",
+     [
+      "https://www.wilsoncenter.org/article/author-hochschild-recounts-lost-history-horror-the-belgian-congo",
+      "https://www.lachambre.be/kvvcr/pdf_sections/pri/congo/2022%2005%2015_Sanderson_Truddaiu_MantubaNgoma_TshimangaKashama.pdf"
+     ]
+    ],
+    [
+     "Deaths or decline. Sanderson attributes the fall mainly to higher mortality and lower birth rates, from violence, flight, famine and diseases such as sleeping sickness, and stresses that the gap measures decline, not violent deaths alone; Britannica reports a decline said to be from some 20 million to 8 million.",
+     [
+      "https://www.lachambre.be/kvvcr/pdf_sections/pri/congo/2022%2005%2015_Sanderson_Truddaiu_MantubaNgoma_TshimangaKashama.pdf",
+      "https://www.britannica.com/place/Congo-Free-State"
+     ]
+    ]
+   ],
+   "blind": "Congolese voices survive only as answers given to European questioners, through interpreters, and printed with names removed. The dead, most women, and people who never met a missionary or consul are almost entirely missing.",
+   "reading": [
+    [
+     "The Casement Report (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/50573"
+    ],
+    [
+     "The three lives of the Casement Report (University of Notre Dame, Breac)",
+     "https://breac.nd.edu/articles/the-three-lives-of-the-casement-report-its-impact-on-official-reactions-and-popular-opinion-in-belgium/"
+    ]
+   ]
+  },
+  {
+   "id": "amritsar",
+   "title": "The Jallianwala Bagh massacre",
+   "region": "Asia",
+   "where": "Jallianwala Bagh, Amritsar, Punjab, India",
+   "lat": 31.620521,
+   "lon": 74.880565,
+   "from": 1919,
+   "to": 1920,
+   "facts": [
+    [
+     "On 13 April 1919 troops under General Dyer fired on a large unarmed crowd in the Jallianwala Bagh, a walled garden in Amritsar; Dyer reported that his party fired 1,650 rounds.",
+     "https://api.parliament.uk/historic-hansard/lords/1920/jul/19/punjab-disturbances-the-case-of-general"
+    ],
+    [
+     "In the House of Commons the Secretary for War, Winston Churchill, gave the official toll as 379 killed and at least 1,200 wounded, and called it a monstrous event.",
+     "https://api.parliament.uk/historic-hansard/commons/1920/jul/08/army-council-and-general-dyer"
+    ],
+    [
+     "Martial law followed in the Punjab, enforced with public floggings and other humiliations; Rabindranath Tagore gave up the knighthood he had received in 1915.",
+     "https://www.britannica.com/event/Jallianwala-Bagh-Massacre"
+    ],
+    [
+     "The government's Disorders Inquiry (Hunter) Committee condemned General Dyer's conduct; on 8 July 1920 the Commons rejected, by 230 votes to 129, Sir Edward Carson's motion protesting at his treatment.",
+     "https://api.parliament.uk/historic-hansard/commons/1920/jul/08/army-council-and-general-dyer"
+    ],
+    [
+     "On 20 July 1920 the House of Lords voted 129 to 86 for a motion deploring the handling of General Dyer's case as unjust to him.",
+     "https://api.parliament.uk/historic-hansard/lords/1920/jul/20/punjab-disturbances-the-case-of-general"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "The enormity of the measures taken by the Government in the Punjab for quelling some local disturbances has, with a rude shock, revealed to our minds the helplessness of our position as British subjects in India. The disproportionate severity of the punishments inflicted upon the unfortunate people and the methods of carrying them out, we are convinced, are without parallel in the history of civilised governments, barring some conspicuous exceptions, recent and remote. Considering that such treatment has been meted out to a population, disarmed and resourceless, by a power which has the most terribly efficient organisation for destruction of human lives, we must strongly assert that it can claim no political expediency, far less moral justification.",
+     "who": "Rabindranath Tagore, letter to the Viceroy giving up his knighthood",
+     "date": "30 or 31 May 1919 (sources differ)",
+     "doc": "as reprinted by Mainstream Weekly",
+     "url": "https://mainstreamweekly.net/article8660.html",
+     "lic": "Public domain (author died 1941)"
+    }
+   ],
+   "official": [
+    {
+     "text": "Did the crowd at once start to disperse as soon as you fired? (A.) Immediately. (Q.) Did you continue firing? (A.) Yes. (Q.) If the crowd was going to disperse why did you not stop firing? (A.) I thought it my duty to go on firing until it dispersed. If I fired a little the effect would not be sufficient.",
+     "who": "General R. E. H. Dyer, who gave the order to fire, questioned by the government's Disorders Inquiry (Hunter) Committee (as read out in the House of Lords)",
+     "date": "evidence of 1919; read in the Lords on 19 July 1920",
+     "url": "https://api.parliament.uk/historic-hansard/lords/1920/jul/19/punjab-disturbances-the-case-of-general"
+    },
+    {
+     "text": "In continuing firing as long as he did it is evident that General Dyer had in view not merely the dispersal of the crowd that had assembled contrary to his orders, but the desire to produce a moral effect in the Punjab.",
+     "who": "Majority report of the Hunter Committee, as quoted in the House of Lords (it goes on to call this a misconception of his duty)",
+     "date": "1920",
+     "url": "https://api.parliament.uk/historic-hansard/lords/1920/jul/19/punjab-disturbances-the-case-of-general"
+    }
+   ],
+   "disputed": [
+    [
+     "How many were killed. The official British figure is 379. The Indian National Congress inquiry wrote that 1,000 was no exaggeration; other contemporary estimates ran from about 500 to over 1,000, and the historian Kim Wagner puts it between 500 and 600.",
+     [
+      "https://api.parliament.uk/historic-hansard/commons/1920/jul/08/army-council-and-general-dyer",
+      "https://www.theweek.in/magazine/theweek/cover/2019/04/12/jallianwala-bagh-100-how-many-people-actually-died-a-numbers-tale.html"
+     ]
+    ],
+    [
+     "Whether the crowd was warned. The Hunter Committee held that notice to disperse should have been given; Dyer's defenders in the Lords argued that earlier proclamations were warning enough.",
+     [
+      "https://api.parliament.uk/historic-hansard/lords/1920/jul/19/punjab-disturbances-the-case-of-general"
+     ]
+    ]
+   ],
+   "blind": "Most of the dead and wounded were never named in the record; they appear as numbers, and the story is told mainly through officials, commissions and famous protesters rather than the people in the garden.",
+   "reading": [
+    [
+     "Jallianwala Bagh at 100: how many actually died (The Week)",
+     "https://www.theweek.in/magazine/theweek/cover/2019/04/12/jallianwala-bagh-100-how-many-people-actually-died-a-numbers-tale.html"
+    ],
+    [
+     "House of Commons debate, 8 July 1920 (Hansard)",
+     "https://api.parliament.uk/historic-hansard/commons/1920/jul/08/army-council-and-general-dyer"
+    ]
+   ]
+  },
+  {
+   "id": "peterloo",
+   "title": "Peterloo",
+   "region": "Europe",
+   "where": "St Peter's Field, Manchester, England (approximate)",
+   "lat": 53.47778,
+   "lon": -2.24722,
+   "from": 1819,
+   "to": 1821,
+   "facts": [
+    [
+     "On 16 August 1819 a meeting on St Peter's Field, Manchester, called by the Manchester Patriotic Union to demand votes for all men and fairer representation, was broken up by cavalry.",
+     "https://historyofparliament.com/2013/10/15/peterloo-and-its-aftermath/"
+    ],
+    [
+     "The Manchester and Salford Yeomanry and the 15th Hussars were sent into a crowd of more than 60,000.",
+     "https://historyofparliament.com/2019/08/16/protest-against-the-six-acts/"
+    ],
+    [
+     "The University of Manchester counts 18 people who died of injuries received that afternoon and up to 700 injured; the name Peterloo mocked the Battle of Waterloo four years earlier.",
+     "https://www.digitalcollections.manchester.ac.uk/collections/peterloo"
+    ],
+    [
+     "The speaker, Henry Hunt, was charged with high treason, later reduced to sedition, and jailed for 30 months.",
+     "https://historyofparliament.com/2013/10/15/peterloo-and-its-aftermath/"
+    ],
+    [
+     "By the end of 1819 Parliament had passed the Six Acts, restricting public meetings, arms and the radical press.",
+     "https://historyofparliament.com/2019/08/16/protest-against-the-six-acts/"
+    ],
+    [
+     "John Edward Taylor, who was there and served on the committee for the victims' relief, founded the Manchester Guardian, first published on 5 May 1821.",
+     "https://www.digitalcollections.manchester.ac.uk/view/AR-GDN-00150-00001"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "The cavalry were in confusion: they evidently could not, with all the weight of man and horse, penetrate that compact mass of human beings; and their sabres were plied to hew a way through naked held-up hands and defenceless heads; and then chopped limbs and wound-gaping skulls were seen; and groans and cries were mingled with the din of that horrid confusion.",
+     "who": "Samuel Bamford, a weaver from Middleton who led his town's contingent that day",
+     "date": "written 1839–40, first published 1844",
+     "doc": "Passages in the Life of a Radical, 1893 edition, p. 156 (transcribed from the scan; line-break hyphens joined)",
+     "url": "https://archive.org/details/cu31924088007962",
+     "lic": "Public domain (author died 1872)"
+    },
+    {
+     "text": "Many females appeared as the crowd opened; and striplings or mere youths also were found. Their cries were piteous and heart-rending, and would, one might have supposed, have disarmed any human resentment: but here their appeals were in vain. Women, white-vested maids, and tender youths, were indiscriminately sabred or trampled; and we have reason for believing that few were the instances in which that forbearance was vouchsafed which they so earnestly implored.",
+     "who": "Samuel Bamford",
+     "date": "written 1839–40, first published 1844",
+     "doc": "Passages in the Life of a Radical, 1893 edition, p. 156 (transcribed from the scan)",
+     "url": "https://archive.org/details/cu31924088007962",
+     "lic": "Public domain (author died 1872)"
+    }
+   ],
+   "official": {
+    "text": "the seditious practices so long prevalent in some of the manufacturing districts of the country have been continued with increased activity since you were last assembled in parliament.",
+    "who": "The Prince Regent's speech opening Parliament, which went on to call for measures to suppress them (the Six Acts); it did not mention Peterloo by name",
+    "date": "23 November 1819",
+    "url": "https://api.parliament.uk/historic-hansard/lords/1819/nov/23/the-prince-regents-speech-on-opening-the"
+   },
+   "disputed": [
+    [
+     "How many were killed and hurt. The History of Parliament says at least 11 dead and 400–600 injured; UNESCO UK says at least 15 killed and 700 seriously injured; the University of Manchester says 18 dead and up to 700 injured, and that the magistrates' version seriously downplayed the casualties.",
+     [
+      "https://historyofparliament.com/2013/10/15/peterloo-and-its-aftermath/",
+      "https://unesco.org.uk/our-sites/memory-of-the-world/peterloo-relief-fund-account-book",
+      "https://www.digitalcollections.manchester.ac.uk/collections/peterloo"
+     ]
+    ],
+    [
+     "How big the crowd was: estimates run from about 60,000 to 80,000.",
+     [
+      "https://www.digitalcollections.manchester.ac.uk/collections/peterloo",
+      "https://unesco.org.uk/our-sites/memory-of-the-world/peterloo-relief-fund-account-book"
+     ]
+    ]
+   ],
+   "blind": "Most crowd testimony comes from men speaking in court or writing for reform. The many women at the meeting, and the injured too poor or afraid to claim relief, survive mostly as names and injury notes in the relief fund's records.",
+   "reading": [
+    [
+     "Peterloo collection (University of Manchester Library)",
+     "https://www.digitalcollections.manchester.ac.uk/collections/peterloo"
+    ],
+    [
+     "Peterloo Relief Fund account book (UNESCO UK Memory of the World)",
+     "https://unesco.org.uk/our-sites/memory-of-the-world/peterloo-relief-fund-account-book"
+    ]
+   ]
+  },
+  {
+   "id": "myall",
+   "title": "The Myall Creek massacre",
+   "region": "Oceania",
+   "where": "Myall Creek, near Bingara, New South Wales, Australia (memorial site)",
+   "lat": -29.7792,
+   "lon": 150.7145,
+   "from": 1838,
+   "to": 1838,
+   "facts": [
+    [
+     "On 10 June 1838 a group of armed stockmen rode onto Myall Creek station and killed Wirrayaraay women, children and old men of the Gamilaraay nation.",
+     "https://myallcreek.org/the-massacre-story/"
+    ],
+    [
+     "The remains of at least 28 people were later seen at the site; the full death toll has never been confirmed.",
+     "https://nma.gov.au/defining-moments/resources/myall-creek-massacre"
+    ],
+    [
+     "At the first trial, on 15 November 1838, all 11 accused men were found not guilty.",
+     "https://nma.gov.au/defining-moments/resources/myall-creek-massacre"
+    ],
+    [
+     "At a second trial, begun on 29 November 1838, seven men were found guilty and sentenced to death; they were hanged in Sydney on 18 December 1838.",
+     "https://nma.gov.au/defining-moments/resources/myall-creek-massacre"
+    ],
+    [
+     "The man who led the attack, John Fleming, was never tried.",
+     "https://mhnsw.au/stories/general/myall-creek-massacre/"
+    ],
+    [
+     "On 10 June 2000 Aboriginal and non-Aboriginal Australians opened a memorial at the site; it joined the National Heritage List in 2008.",
+     "https://apps.environment.nsw.gov.au/dpcheritageapp/ViewHeritageItemDetails.aspx?ID=5056626"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "the mothers and children were crying, and the little ones that could not walk; Russel brought out he end of the rope that they were tied with, and gave it to one of the men on horseback; they then started, taking the blacks with them; the man who took the rope from Russel went in front; they were tied; one black was handcuffed; their hands were all tied, with the palms to each other; the rope was a very long one; they took all the blacks away, except two boys that jumped into the creek as the men were coming up",
+     "who": "George Anderson, the station's hut-keeper, giving evidence at the first trial",
+     "date": "15 November 1838 (reported in the Sydney Gazette, 20 November 1838)",
+     "doc": "R. v. Kilmeister (No. 1) [1838] NSWSupC 105, Macquarie Law School (archived copy; the live site was not answering)",
+     "url": "https://web.archive.org/web/20200228070750/http://www.law.mq.edu.au/research/colonial_case_law/nsw/cases/case_index/1838/r_v_kilmeister1/",
+     "lic": "Public domain (1838 newspaper report)"
+    },
+    {
+     "text": "There was here no provocation; no cause for anger. Men, women, children, even babes hanging at their mothers' breasts, not less than 30 altogether of these unfortunate defenceless blacks, who were quietly reposing by their evening fire, believing themselves safe in the friendship of one of you, were suddenly surrounded by a party of horsemen",
+     "who": "Justice William Burton, passing sentence on the seven men",
+     "date": "5 December 1838 (reported in the Sydney Gazette, 6 December 1838)",
+     "doc": "R. v. Kilmeister (No. 2) [1838] NSWSupC 110, Macquarie Law School (archived copy)",
+     "url": "https://web.archive.org/web/20191119053119/http://www.law.mq.edu.au/research/colonial_case_law/nsw/cases/case_index/1838/r_v_kilmeister2/",
+     "lic": "Public domain (1838 newspaper report)"
+    }
+   ],
+   "disputed": [
+    [
+     "How many were killed: at least 28 (National Museum of Australia), “not less than 30” (the judge in 1838), with victims' names still not fully known.",
+     [
+      "https://nma.gov.au/defining-moments/resources/myall-creek-massacre",
+      "https://myallcreek.org/the-massacre-story/"
+     ]
+    ],
+    [
+     "The size of the party and who escaped justice: at least 10 and possibly 12 stockmen (Friends of Myall Creek); ten besides its leader (Museums of History NSW). The leader, John Fleming, was never caught; four of the accused were never retried; the same party is reported to have killed 30 to 40 more people nearby.",
+     [
+      "https://myallcreek.org/the-massacre-story/",
+      "https://mhnsw.au/stories/general/myall-creek-massacre/"
+     ]
+    ]
+   ],
+   "warn": "The 1838 words are kept exactly as printed, including terms that are now offensive.",
+   "blind": "The record is almost entirely what white men said in court and wrote in the press. Aboriginal people could not then give sworn evidence, so the survivors and the victims' families are missing from it, and most of the dead are still unnamed.",
+   "reading": [
+    [
+     "The massacre story (Friends of Myall Creek)",
+     "https://myallcreek.org/the-massacre-story/"
+    ],
+    [
+     "Myall Creek massacre (National Museum of Australia)",
+     "https://digital-classroom.nma.gov.au/defining-moments/myall-creek-massacre"
+    ]
+   ],
+   "press": {
+    "text": "The whole gang of black animals are not worth the money which the Colonists will have to pay for printing the very documents upon which we have already wasted too much time.",
+    "who": "The Sydney Herald, editorial on the colony's new protectors of Aborigines, written while the Myall Creek accused awaited trial (the newspaper, now the Sydney Morning Herald, apologised in 2023)",
+    "date": "5 October 1838",
+    "url": "https://trove.nla.gov.au/newspaper/article/12856847"
+   }
+  }
+ ]
+}
