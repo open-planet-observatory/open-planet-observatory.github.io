@@ -1,0 +1,37 @@
+# The Owlmanac games server. Deployed by .github/workflows/worker.yml (secrets CLOUDFLARE_API_TOKEN, CLOUDFLARE_ACCOUNT_ID).
+name = "owlmanac-games"
+main = "src/index.js"
+compatibility_date = "2025-09-01"
+workers_dev = true
+
+[vars]
+SITE = "https://theowlmanac.com"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "owlmanac-games"
+database_id = "REPLACE_WITH_D1_ID"
+migrations_dir = "migrations"
+
+# Rate limits, counted in Cloudflare's memory per connecting address (IPv6: per /64); the address is never stored
+[[ratelimits]]
+name = "RL"          # writes
+namespace_id = "1001"
+simple = { limit = 30, period = 60 }
+
+[[ratelimits]]
+name = "RL_READ"     # board, counts, crowd
+namespace_id = "1002"
+simple = { limit = 120, period = 60 }
+
+[[ratelimits]]
+name = "RL_NEW"      # new players
+namespace_id = "1003"
+simple = { limit = 5, period = 60 }
+
+# Daily: delete Forecast Desk guesses older than 35 days
+[triggers]
+crons = ["17 4 * * *"]
+
+[observability]
+enabled = false

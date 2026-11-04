@@ -64,10 +64,11 @@
     title(`<span class="rc-l">Find it in the sky${practice ? ' · practice' : ' · today'}</span><b class="sf-q">${res.total.toLocaleString('en-US')} of ${res.max.toLocaleString('en-US')}</b> <span>${res.rows.map(r => sq(r.p)).join('')}</span>`);
     foot(`<ul class="sf-rows">${res.rows.map(r => `<li>${sq(r.p)} ${esc(r.n)}: ${r.d == null ? 'set before you could find it' : r.d + '° off'}, ${r.p.toLocaleString('en-US')}</li>`).join('')}</ul>
       ${practice ? '' : `<p class="small">Streak ${st.streak || 1} day${(st.streak || 1) === 1 ? '' : 's'} · best ${(st.best || res.total).toLocaleString('en-US')}. New targets tomorrow.</p>`}
-      <p><button class="btn" id="sfShare">Copy result</button> <button class="btn" id="sfAgain">Practice round</button></p>
+      <p><button class="btn" id="sfShare">Copy result</button> <button class="btn" id="sfAgain">Practice round</button></p>${practice ? '' : '<div class="ob-host" id="sfBoard"></div>'}
       <p class="small muted">The chart now shows every name. Targets are picked for your sky from the stars and planets up when you start; the score is the angle between your tap and the real position. Kept only in this browser; your location is not in the copied result.</p>`);
     document.getElementById('sfShare').onclick = e => { try { navigator.clipboard.writeText(share); e.target.textContent = 'Copied'; } catch (x) { e.target.textContent = share; } };
-    document.getElementById('sfAgain').onclick = () => start(true); }
+    document.getElementById('sfAgain').onclick = () => start(true);
+    if (!practice && window.OwlBoards) window.OwlBoards.show(document.getElementById('sfBoard'), 'sky', today(), { rows: res.rows.map(r => r.p) }); }
   addEventListener('obs:skyfind', () => start(false));
   window.OwlSkyFind = { start };
 })();

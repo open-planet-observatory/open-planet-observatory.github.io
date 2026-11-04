@@ -108,13 +108,14 @@
         <p class="hunt-msg" aria-live="polite">${msg || ''}</p>
         <div class="hunt-row">${used < cur.hints.length ? `<button class="hunt-hint">Hint (−${HINT} points)</button>` : ''}${used >= 1 ? '<button class="hunt-go">Take me there</button>' : ''}</div>`; }
     el.innerHTML = `<div class="hunt-head"><div><b>One Light-Day</b><span>Voyager-week hunt · ${n}/${STOPS.length} stops · ${N(total(h))} pts</span></div><button class="hunt-min" aria-label="Fold the hunt card" title="Fold">▾</button><button class="hunt-x" aria-label="Close the hunt (progress is kept)" title="Close (progress is kept)">✕</button></div>
-      <div class="hunt-body">${body}${bonusHtml(h)}<p class="hunt-note">${noStore ? 'This browser isn’t letting the site save anything, so your progress lasts only until you close or reload the page.' : 'Explore the site with this card open; it stays put. Progress stays in this browser only.'}</p></div>`;
+      <div class="hunt-body">${body}${bonusHtml(h)}<p class="hunt-note">${noStore ? 'This browser isn’t letting the site save anything, so your progress lasts only until you close or reload the page.' : 'Explore the site with this card open; it stays put. Progress is kept in this browser; finishing puts you on the finishers board (anonymously unless you pick a nickname).'}</p></div>`;
     wire();
   }
   function finale(h) {
     const share = `One Light-Day · the Owlmanac's Voyager-week hunt\n${N(total(h))} points · ${STOPS.map(s => h.done[s.id] ? s.icon : '▫️').join('')}${BONUS.filter(b => h.bonus[b.id]).map(() => '👁️').join('')}\ntheowlmanac.com`;
     return `<div class="hunt-kind">All five stops found</div><p class="hunt-big"><b>${N(total(h))}</b> points</p>
       <p>You followed Voyager 1's signal from Earth to the edge of everything we can see. One stop is left uncharted: <b>a data feed this site doesn't have yet</b>. If you know an open, live, public one, <a href="${BOUNTY}" target="_blank" rel="noopener">send it to the Source Bounty</a>.</p>
+      <div class="ob-host" id="huntBoard"></div>
       <div class="hunt-row"><button class="hunt-share" data-t="${esc(share)}">Copy my result</button></div><pre class="hunt-pre">${esc(share)}</pre>`;
   }
   function bonusHtml(h) {
@@ -141,6 +142,7 @@
     const go = q('.hunt-go'); if (go && cur) go.onclick = () => { el.classList.add('folded'); q('.hunt-min').textContent = '▴'; cur.go(); };
     const sel = q('.hunt-city select'); if (sel) sel.onchange = () => { place = sel.value === '' ? null : sel.value === 'sky' ? 'sky' : +sel.value; try { localStorage.setItem('owl-hunt-city', String(sel.value)); } catch (e) { } render(); const s2 = el.querySelector('.hunt-city select'); if (s2) s2.focus({ preventScroll: true }); };
     el.querySelectorAll('.hunt-saw').forEach(b => b.onclick = () => { if (Date.now() > ENDS) return; const H = load(); H.bonus[b.dataset.b] = Date.now(); save(H); dispatchEvent(new Event('owl-hunt')); render(); focusIn(); });
+    const hbd = q('#huntBoard'); if (hbd && window.OwlBoards) window.OwlBoards.show(hbd, 'hunt', HUNT, { points: total(h), stops: doneCount(h), bonus: BONUS.filter(b => h.bonus[b.id]).length });
     const sh = q('.hunt-share'); if (sh) sh.onclick = async () => { try { await navigator.clipboard.writeText(sh.dataset.t); sh.textContent = 'Copied'; } catch (e) { sh.textContent = 'Select the text below to copy it'; } };
   }
   const focusIn = () => setTimeout(() => { const i = el && (el.querySelector('.hunt-form input') || el.querySelector('.hunt-share') || el.querySelector('.hunt-x')); if (i) i.focus({ preventScroll: true }); }, 30);

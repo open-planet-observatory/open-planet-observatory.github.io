@@ -164,14 +164,14 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Five rounds a day, the same for everyone, built once at the first data update after 00:00 UTC by `collector/game.mjs` and kept unchanged until the next UTC day. Each round is a real reading with its place hidden: a NASA GIBS true-colour satellite image of a 4° patch from the last complete day (public domain), Open-Meteo's hourly model values for one grid point over that day (CC BY 4.0; free for non-commercial use), or a cluster of USGS earthquakes from the past 7 days, read from USGS's live feed and used only if the feed was generated in the last 3 hours (public domain). The whole build has a 3-minute budget so it can't hold up the site's data run. Patches with more than about a third cloud or with gaps in the satellite pass are skipped.
 - If a source fails, its rounds are skipped and the other sources fill in; with fewer than three rounds the day is published as failed and the page says so. An older puzzle is never shown as today's; it can only be played as labelled practice.
 - The reveal shows USGS's own place text, unedited, for the three largest quakes, and coordinates, the source's link, licence and cadence, and its blind spot. The scoring rule is the site's own: 5,000 points within 50 km (or anywhere inside the satellite patch), halving every 500 km (satellite), 750 km (earthquakes) or 1,000 km (weather). It is a game score, not a measurement.
-- Nothing about the player is asked for, sent or kept by the project. The player's own location is never used. Scores, streaks and progress stay in the visitor's browser (localStorage); clearing the browser's site data erases them. The satellite image is loaded by the visitor's browser straight from NASA GIBS, as the globe's imagery already is.
+- The player's own location is never asked for or used. Progress and streaks stay in the visitor's browser (localStorage). A finished game's guesses are sent to the games server, which scores them itself from the published answers (see "Leaderboards"); a player can keep everything on their device instead.
 - No prizes, paid entries or sponsors are attached to the game.
 
 ## The Forecast Desk (the daily numbers game)
 
 - `collector/forecastdesk.mjs` builds three questions once per UTC day, each about a number a public source publishes for tomorrow (UTC): the count of magnitude-5+ earthquakes USGS lists for the day (FDSN event count), NOAA SWPC's observed daily sunspot number, and the highest of NOAA SWPC's eight 3-hourly planetary K-index values. Each question carries a "typical spread": the standard deviation of the source's own last ~30 daily values (7 days for the K-index), with a floor. The questions are the site's own wording; nothing is a forecast by the site.
 - The morning after the day ends, the collector reads each source's value for that day and stores it; a source that has not published yet leaves the day open, and no answer is estimated. Values are taken as first published.
-- Players' guesses and scores stay in their own browser (localStorage `owl-fd-v1`, last 30 days); nothing a player types is sent anywhere. Scoring is the games spec's rule: up to 3,000 for the point guess, halving for every typical spread it is off; 2,000 if the answer lands in the player's range, less 500 for every 10% the range is wider than 2.56 typical spreads. There is no leaderboard or crowd median yet (those need the planned Cloudflare backend). No prizes, paid entries or sponsors.
+- Players' guesses are kept in their own browser (localStorage `owl-fd-v1`, last 30 days) and also sent to the games server unless the player keeps scores on their device (see "Leaderboards"). Scoring is the games spec's rule: up to 3,000 for the point guess, halving for every typical spread it is off; 2,000 if the answer lands in the player's range, less 500 for every 10% the range is wider than 2.56 typical spreads. The leaderboard and the crowd's middle guess come from the games server (see "Leaderboards"). No prizes, paid entries or sponsors.
 
 ## Record watch
 
@@ -208,21 +208,30 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 ## Find it in the sky (the daily star game)
 
 - Five targets a day for the visitor's own sky: named stars brighter than magnitude 2.1 and at least 15° up, plus planets and the Moon at least 10° up, picked with a seed made from the date and the rounded position, so the same place gets the same targets all day. The player taps the Sky tonight chart with the names hidden; the score is the site's own rule (1,000 points within 3°, halving every 8° beyond). It is a game score, not a measurement.
-- Scores, streaks and progress stay in the visitor's browser (localStorage). The copied result contains the date, the score and coloured squares, never the location. No prizes, paid entries or sponsors.
+- Scores, streaks and progress stay in the visitor's browser (localStorage); a finished day's per-target points (never the location or the targets) go to the games server as a self-reported score unless the player keeps scores on their device. The copied result contains the date, the score and coloured squares, never the location. No prizes, paid entries or sponsors.
 
 ## One Light-Day (the Voyager-week scavenger hunt) and the Play page
 
 - Five stops, open until 22 November 2026 (UTC). Each clue is the site's own wording; each answer is checked, at the moment the player answers, against the same data the site shows: the Voyager 1 countdown (NASA JPL Horizons, data/voyager.json), Proxima Centauri's distance (ESA Hipparcos), Andromeda's count of published distance measurements (NASA/IPAC NED-D), and the edge card's 380,000 years (ESA Planck). If a data file does not load, nothing is counted and the card says so. The hunt's points are a game rule, not a measurement.
 - Two "look up" bonus stops (Jupiter, Saturn) are on the honour system. Their best viewing times are computed in the visitor's browser (Astronomy Engine) for a city the player picks from a list, or for the place they already set in Sky tonight. The hunt never asks for or uses the player's location.
-- The Play page and its field journal only read what each game already keeps in this browser. Progress, scores and stamps are never sent anywhere; if the browser refuses storage, progress lasts only for that visit and the page says so.
+- The Play page and its field journal read what each game keeps in this browser, plus anonymous play counts and boards from the games server (see "Leaderboards"). If the browser refuses storage, progress lasts only for that visit and the page says so.
 
 ## Source Bounty
 
 - Anyone can suggest a free public data feed through a GitHub issue form (`.github/ISSUE_TEMPLATE/source-bounty.yml`). Submissions are public on GitHub and hold only what the submitter writes there and their GitHub name. A source is added only if it passes all five tests (open terms quoted from the publisher, machine-readable, locates no one, not a proprietary aggregator, adds something new); accepted finds are added to the Source library. A finder is credited on the site by GitHub name only if they ticked the credit box on the form (opt-in); otherwise the find is listed without a name. Only the GitHub name is shown, nothing else about the person.
 
+## Leaderboards and play counts (the games server)
+
+- The games server is a Cloudflare Worker with a D1 database (code in `worker/`, deployed by `.github/workflows/worker.yml`). For each player it stores a player id (a one-way hash of a random token that the player's own browser makes and keeps; the token itself is never stored), when the id was first seen, and the nickname with the time it was chosen, if any. For each finished game it stores the game, the day, the score, per-round points and the time. For the Forecast Desk it stores each guess (best guess and range) and its time. No IP address, user agent, location, email or account is stored, and the server keeps no request logs.
+- Scores count anonymously. A player appears on a public board only after choosing a nickname (3–20 characters, filtered for abuse and look-alikes of other names), and only for games finished after the name was chosen. "Remove my name" takes it off; "Erase my scores" deletes everything the server holds for that browser; "Keep my scores on this device" stops every request to the server. Derik can remove any nickname, or a player and all their scores, with a key only he holds.
+- Checking: only the Forecast Desk is checked, because guesses are locked in before the sources publish and the server grades them from the published numbers. Where on Earth?'s answers travel with the puzzle, and Find it in the sky and the hunt can't be checked without data the server never receives (the player's place or progress), so those three boards are labelled "honour system". The hunt board lists finishers only.
+- Forecast Desk guesses can be changed until midnight UTC; the crowd's middle guess shows only after guessing has closed and is players' guesses, not a forecast by the site. Guesses are deleted after 35 days. Scores stay as the boards' history until the player erases them.
+- Play counts on the Play page are totals of these records ("312 played today"); nothing else is measured. Boards and counts are cached for a minute.
+- Cloudflare runs the server; its free plan's limits apply. Requests are rate-limited per connecting address (IPv6: per /64) in Cloudflare's memory; the address is not stored.
+
 ## Visitors
 
-- No account, no ad networks, no tracking scripts, no visitor logs kept by the project.
+- No account, no ad networks, no tracking scripts, no visitor logs kept by the project. The only server the project runs is the games server (above), which stores anonymous game scores and nothing about visits.
 - Libraries are served from the site itself rather than third-party CDNs.
 - Sponsors, if any, are clearly labeled, limited to science, education and public-data organizations, never receive visitor data and never influence content.
 

@@ -167,12 +167,14 @@
     const total = st.s.reduce((a, b) => a + b, 0), S = stats();
     ui.querySelector('.woe-card').innerHTML = head() + `<div class="woe-body"><div class="woe-big"><b>${N(total)}</b> of ${N(G.rounds.length * 5000)} points</div>
       <ol class="woe-rows">${G.rounds.map((r, i) => `<li><span>${ICON[r.type]} ${NAME[r.type]}</span><span>${st.g[i] ? fmtKm(st.d[i]).replace(/ \(.*\)/, '') : 'skipped'}</span><b>${sq(st.s[i])} ${N(st.s[i])}</b></li>`).join('')}</ol>
+      ${practice ? '' : '<div class="ob-host" id="woeBoard"></div>'}
       <div class="woe-act"><button class="woe-share">Copy my result</button></div><pre class="woe-pre" aria-label="Your result, ready to paste">${esc(shareText())}</pre>
       ${practice ? '<p class="woe-note">Practice rounds don\'t count toward your streak.</p>' : `<p class="woe-stats"><span><b>${S.streak}</b> day streak</span><span><b>${S.played}</b> played</span><span><b>${N(S.best)}</b> best</span><span><b>${N(S.avg)}</b> average</span></p>`}
       <p class="woe-note woe-next-in">${nextIn()}</p>
-      <p class="woe-note">Your scores stay in this browser only; nothing is sent anywhere. Know a free public data feed this site is missing? <a href="${BOUNTY}" target="_blank" rel="noopener">Send it to the Source Bounty</a>.</p>
+      <p class="woe-note">Your scores are kept in this browser; the board above explains what is shared. Know a free public data feed this site is missing? <a href="${BOUNTY}" target="_blank" rel="noopener">Send it to the Source Bounty</a>.</p>
       <div class="woe-act"><button class="woe-leave">Back to the map</button></div></div>`;
     wire();
+    if (!practice && window.OwlBoards) window.OwlBoards.show(ui.querySelector('#woeBoard'), 'woe', G.date, { guesses: G.rounds.map((r, i) => st.g[i] || null) });
   }
   function wire() {
     const q = s => ui.querySelector(s);
