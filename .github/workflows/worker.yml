@@ -1,6 +1,8 @@
 # Deploys the games server (worker/: Cloudflare Worker + D1) when its code changes, or by hand from the Actions tab.
 # Needs repository secrets CLOUDFLARE_API_TOKEN (Workers Scripts: Edit + D1: Edit on Derik's account only) and
-# CLOUDFLARE_ACCOUNT_ID. Database migrations in worker/migrations are applied first.
+# CLOUDFLARE_ACCOUNT_ID; optional ADMIN_KEY (24+ characters) enables name removal. The D1 database "owlmanac-games" is
+# created on the first run if it doesn't exist, and its id is filled into wrangler.toml at deploy time.
+# Database migrations in worker/migrations are applied before each deploy.
 name: Deploy games server
 
 on:
@@ -27,11 +29,23 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ] || grep -q REPLACE_WITH_D1_ID worker/wrangler.toml; then echo "Cloudflare not set up yet: skipping"; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then echo "Cloudflare not set up yet: skipping"; echo "skip=1" >> "$GITHUB_OUTPUT"; fi
       - uses: actions/setup-node@v4
         if: steps.chk.outputs.skip != '1'
         with:
           node-version: 22
+      - name: Find or create the database
+        if: steps.chk.outputs.skip != '1'
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          W="npx --yes wrangler@4.157.0"
+          dbid() { $W d1 list --json | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{const r=JSON.parse(s.slice(s.indexOf("["))).find(d=>d.name==="owlmanac-games");process.stdout.write(r?r.uuid:"")})'; }
+          ID=$(dbid); if [ -z "$ID" ]; then $W d1 create owlmanac-games; ID=$(dbid); fi
+          [ -n "$ID" ] || { echo "could not find or create the database"; exit 1; }
+          sed -i "s/REPLACE_WITH_D1_ID/$ID/" wrangler.toml; grep -q "$ID" wrangler.toml
       - name: Apply database migrations
         if: steps.chk.outputs.skip != '1'
         working-directory: worker
@@ -46,3 +60,12 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx --yes wrangler@4.157.0 deploy
+      - name: Set the admin key
+        if: steps.chk.outputs.skip != '1'
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
+        run: |
+          if [ ${#ADMIN_KEY} -ge 24 ]; then printf '%s' "$ADMIN_KEY" | npx --yes wrangler@4.157.0 secret put ADMIN_KEY; else echo "no ADMIN_KEY secret: name removal stays off"; fi
