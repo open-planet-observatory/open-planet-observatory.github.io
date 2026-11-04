@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-03",
+ "built": "2026-11-04",
  "stories": [
   {
    "id": "cherokee",
@@ -430,6 +430,336 @@
     "date": "5 October 1838",
     "url": "https://trove.nla.gov.au/newspaper/article/12856847"
    }
+  },
+  {
+   "id": "armenia",
+   "title": "The Armenian genocide",
+   "region": "Middle East",
+   "where": "Harput (today Elazığ), one of the towns deportations began from (approximate)",
+   "lat": 38.706,
+   "lon": 39.25,
+   "from": 1915,
+   "to": 1917,
+   "facts": [
+    [
+     "On 24 April 1915 the Ottoman government arrested about 250 Armenian intellectuals and political leaders in Constantinople (Istanbul).",
+     "https://www.britannica.com/event/Armenian-Genocide"
+    ],
+    [
+     "The U.S. ambassador, Henry Morgenthau, reported on 27 April 1915 that more than a hundred Armenians had been arrested and were being sent into the interior.",
+     "https://history.state.gov/historicaldocuments/frus1915Supp/d1395"
+    ],
+    [
+     "Armenians across Anatolia were deported toward the Syrian desert; many of those who reached it were held in camps where they starved, and massacres continued into 1916.",
+     "https://www.britannica.com/event/Armenian-Genocide"
+    ],
+    [
+     "On 24 May 1915 the Allied governments warned that they would hold every member of the Ottoman government personally responsible for what they called new crimes against humanity and civilization.",
+     "https://history.state.gov/historicaldocuments/frus1915Supp/d1398"
+    ],
+    [
+     "In 2019 the U.S. House of Representatives passed a resolution commemorating the killing of 1.5 million Armenians from 1915 to 1923.",
+     "https://www.congress.gov/bill/116th-congress/house-resolution/296"
+    ],
+    [
+     "On 24 April 2021 the U.S. President formally used the words Armenian genocide in his annual remembrance statement.",
+     "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2021/04/24/statement-by-president-joe-biden-on-armenian-remembrance-day/"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "All the people of C. started the same day. I think we were about 600 families. We had with us all our cattle and all our property. The first night we reached AU. and slept that night in the fields. The next day we passed many corpses heaped together under bridges and on the road; their blood had collected in pools.",
+     "who": "An Armenian woman deported from the Harput region on 4 July 1915 (unnamed in the publication; towns are shown only as letters)",
+     "date": "account dated Alexandria, 2 November 1915",
+     "doc": "Bryce and Toynbee (eds.), The Treatment of Armenians in the Ottoman Empire, 1915–16 (1916), Doc. 68",
+     "url": "https://www.gutenberg.org/cache/epub/69630/pg69630-images.html",
+     "lic": "Public domain (1916)"
+    }
+   ],
+   "today": {
+    "text": "Türkiye does not deny the suffering of Armenians, including the loss of many innocent lives, during the First World War. However, greater numbers of Turks died or were killed in the years leading to and during the War.",
+    "who": "Republic of Türkiye, Ministry of Foreign Affairs (the Ottoman government's own words from 1915 were not found in a source we could check)",
+    "date": "as published on its website (checked November 2026)",
+    "url": "https://www.mfa.gov.tr/the-events-of-1915-and-the-turkish-armenian-controversy-over-history_-an-overview.en.mfa"
+   },
+   "disputed": [
+    [
+     "How many died. Britannica gives conservative estimates of 600,000 to more than 1,000,000; the 2019 House resolution and the 2021 presidential statement say 1.5 million.",
+     [
+      "https://www.britannica.com/event/Armenian-Genocide",
+      "https://www.congress.gov/bill/116th-congress/house-resolution/296",
+      "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2021/04/24/statement-by-president-joe-biden-on-armenian-remembrance-day/"
+     ]
+    ],
+    [
+     "Whether it was genocide. Turkey's government says Armenians were relocated away from a war zone during a fight for survival, that deaths came from wartime conditions, disease, famine and banditry, and that there is no authentic evidence of a plan; it calls the genocide label legally unfounded. The United States and many other governments call it genocide, and Britannica says most historians have concluded that it fits the definition. Morgenthau cabled in July 1915 of a 'systematic attempt to uproot peaceful Armenian populations.'",
+     [
+      "https://www.mfa.gov.tr/the-events-of-1915-and-the-turkish-armenian-controversy-over-history_-an-overview.en.mfa",
+      "https://history.state.gov/historicaldocuments/frus1915Supp/d1400",
+      "https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2021/04/24/statement-by-president-joe-biden-on-armenian-remembrance-day/",
+      "https://www.britannica.com/event/Armenian-Genocide"
+     ]
+    ]
+   ],
+   "blind": "The best-known survivor accounts were published by wartime Britain with names hidden; the Ottoman archives, and Turkish and Kurdish civilians' own experience of those years, are largely absent from these sources.",
+   "reading": [
+    [
+     "The Treatment of Armenians in the Ottoman Empire (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/69630"
+    ],
+    [
+     "U.S. diplomatic records, 1915 (Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1915Supp/d1395"
+    ]
+   ],
+   "witness": {
+    "text": "Persecution of Armenians assuming unprecedented proportions. Reports from widely scattered districts indicate systematic attempt to uproot peaceful Armenian populations and through arbitrary arrests, terrible tortures, wholesale expulsions and deportations from one end of the Empire to the other accompanied by frequent instances of rape, pillage, and murder, turning into massacre, to bring destruction and destitution on them.",
+    "who": "Henry Morgenthau, U.S. ambassador in Constantinople, telegram to the Secretary of State",
+    "date": "10 July 1915",
+    "url": "https://history.state.gov/historicaldocuments/frus1915Supp/d1400"
+   }
+  },
+  {
+   "id": "herero",
+   "title": "The Herero and Nama genocide",
+   "region": "Africa",
+   "where": "Waterberg, Namibia (approximate)",
+   "lat": -20.45,
+   "lon": 17.23,
+   "from": 1904,
+   "to": 1908,
+   "facts": [
+    [
+     "The war in German South West Africa began on 12 January 1904 at Okahandja.",
+     "https://www.britannica.com/topic/German-Herero-conflict-of-1904-1907"
+    ],
+    [
+     "On 11 August 1904 at the Waterberg, about 1,500 German troops under General Lothar von Trotha attacked an estimated 40,000 Herero, about 5,000 of them armed.",
+     "https://www.britannica.com/topic/German-Herero-conflict-of-1904-1907"
+    ],
+    [
+     "Most Herero fled into the Kalahari toward British Bechuanaland; German patrols guarded the desert's edge, and many thousands died of thirst.",
+     "https://www.britannica.com/topic/German-Herero-conflict-of-1904-1907"
+    ],
+    [
+     "Survivors were held in concentration camps; up to 80 percent of the prisoners on Shark Island, near Lüderitz, are estimated to have died there.",
+     "https://www.britannica.com/topic/German-Herero-conflict-of-1904-1907"
+    ],
+    [
+     "On 28 May 2021 Germany's Foreign Minister said Germany would officially call the events a genocide and pledged €1.1 billion, stating that no legal claims for compensation follow from it.",
+     "https://www.auswaertiges-amt.de/en/newsroom/news/-/2463598"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We were crushed and well-nigh exterminated by the Germans in the rising. With the exception of Samuel Maharero, Mutati, Traugott, Tjetjoo, Hosea and Kaijata (who fled to British territory) all our big chiefs and leaders died or were killed in the rising, and also the great majority of our people. All our cattle were lost and all other possessions such as wagons and sheep. At first the Germans took prisoners, but when General von Trotha took command no prisoners were taken. General von Trotha said, ‘No one is to live; men, women and children must all die.’ We can't say how many were killed.",
+     "who": "Hosea Mungunda, headman of the Herero at Windhoek, statement",
+     "date": "collected c. 1917–18, published 1918",
+     "doc": "Report on the Natives of South-West Africa and their Treatment by Germany (Cd. 9146, 1918)",
+     "url": "https://archive.org/details/b32172266",
+     "lic": "Public domain (1918 government publication)"
+    },
+    {
+     "text": "In 1906 the Germans took me a prisoner after we had made peace, and sent me with about a thousand other Hottentots to Aus, thence to Luderitzbucht, and finally to Shark Island. We were placed on the island, men, women, and children. We were beaten daily by the Germans, who used sjamboks. They were most cruel to us. We lived in tents on the island; food, blankets, and lashes were given to us in plenty, and the young girls were violated at night by the guards. Six months later we went by boat to Swakopmund, and thence by train to Karibib. Lots of my people died on Shark Island.",
+     "who": "Edward Fredericks, headman of the Bethany Nama, sworn statement",
+     "date": "collected c. 1917–18, published 1918",
+     "doc": "Cd. 9146 (1918), transcribed from the scan",
+     "url": "https://archive.org/details/b32172266",
+     "lic": "Public domain (1918 government publication)"
+    }
+   ],
+   "official": {
+    "text": "Any Herero found within the German frontier, with or without a gun, with or without cattle, will be shot. I spare neither women nor children—I drive them back to their people or I will fire upon them.",
+    "who": "General Lothar von Trotha's proclamation to the Herero (English translation by David Ciarlo, German History in Documents and Images; original in the German Federal Archives)",
+    "date": "2 October 1904",
+    "url": "https://germanhistorydocs.org/en/wilhelmine-germany-and-the-first-world-war-1890-1918/lothar-von-trothas-extermination-order-october-2-1904"
+   },
+   "disputed": [
+    [
+     "How many died. Britannica says about 75 percent of the Herero and half of the Nama; the BBC says up to 80 percent of the indigenous populations; the 1918 report put it at 60,000 or more.",
+     [
+      "https://www.britannica.com/topic/German-Herero-conflict-of-1904-1907",
+      "https://www.bbc.com/news/world-europe-57279008",
+      "https://archive.org/details/b32172266"
+     ]
+    ],
+    [
+     "The 2021 agreement. Germany calls its €1.1 billion a gesture of recognition with no legal claims attached and says Herero and Nama representatives were closely involved in the talks; a Herero activist told the BBC the offer was not enough, and a historian said many descendants felt excluded.",
+     [
+      "https://www.auswaertiges-amt.de/en/newsroom/news/-/2463598",
+      "https://www.bbc.com/news/world-europe-57279008"
+     ]
+    ]
+   ],
+   "warn": "The 1918 words are kept as printed, including terms that are now offensive.",
+   "blind": "Nearly all the survivor testimony was gathered by a British wartime administration that wanted to keep the territory, and reached print in English through interpreters; women's and San survivors' voices are few.",
+   "reading": [
+    [
+     "Samuel Maharero's letter to Governor Leutwein, 1904 (GHDI)",
+     "https://germanhistorydocs.org/en/wilhelmine-germany-and-the-first-world-war-1890-1918/letter-from-samuel-maharero-paramount-chief-of-the-herero-people-to-theodor-leutwein-the-governor-of-the-german-colony-of-southwest-africa-upon-the-outbreak-of-the-herero-war-march-6-1904"
+    ],
+    [
+     "The 1918 report, full scan (Internet Archive)",
+     "https://archive.org/details/b32172266"
+    ]
+   ]
+  },
+  {
+   "id": "bengal",
+   "title": "The Bengal famine of 1943",
+   "region": "Asia",
+   "where": "Calcutta (Kolkata), Bengal",
+   "lat": 22.5726,
+   "lon": 88.3639,
+   "from": 1943,
+   "to": 1944,
+   "facts": [
+    [
+     "The government's Famine Inquiry Commission estimated some 1.5 million deaths above the normal level in 1943 and the first half of 1944.",
+     "https://archive.org/details/in.ernet.dli.2015.206311"
+    ],
+    [
+     "Britannica puts the toll at some three million people, dead of malnutrition or disease.",
+     "https://www.britannica.com/topic/Bengal-famine-of-1943"
+    ],
+    [
+     "Rice imports stopped after Japan took Burma in 1942, and a cyclone in October 1942 damaged the autumn rice crop, though Britannica says these events had a relatively minor impact on the food supply.",
+     "https://www.britannica.com/topic/Bengal-famine-of-1943"
+    ],
+    [
+     "Under a military denial policy in 1942, rice and paddy judged surplus were removed from the coastal districts of Midnapore, Bakarganj and Khulna.",
+     "https://archive.org/details/in.ernet.dli.2015.206311"
+    ],
+    [
+     "In the House of Commons on 4 November 1943, the Labour MP Frederick Pethick-Lawrence blamed inflation, saying food-grain prices had risen by 100 to 700 percent.",
+     "https://api.parliament.uk/historic-hansard/commons/1943/nov/04/india-food-situation"
+    ],
+    [
+     "The economist Amartya Sen, who saw the famine as a boy, later described it as an entitlement failure: people could not afford food, rather than there being too little food overall.",
+     "https://www.britannica.com/topic/Bengal-famine-of-1943"
+    ]
+   ],
+   "voices": [],
+   "official": [
+    {
+     "text": "The cyclone and the partial failure of the aman crop were serious and unavoidable natural calamities. But after considering all the circumstances, we cannot avoid the conclusion that it lay in the power of the Government of Bengal, by bold, resolute and well-conceived measures at the right time to have largely prevented the tragedy of the famine as it actually took place.",
+     "who": "Famine Inquiry Commission, the government's own inquiry, Report on Bengal (transcribed from the scan; three scanning errors corrected)",
+     "date": "1945",
+     "url": "https://archive.org/details/in.ernet.dli.2015.206311"
+    },
+    {
+     "text": "Meanwhile, the tragic tale of loss of life has continued and is still continuing. The death rate directly or indirectly due to starvation, for Calcutta alone, has amounted to some 8,000 between 15th August and 15th October. There are no reliable figures available for the outside districts, but I fear that in South-West and South-East Bengal, the figures may have been even worse than those in Calcutta. Even now that sufficient outside supplies for the Province seem assured, there will be for some time no diminution in the loss of life, until the organisation of distribution has effectively covered the whole ground.",
+     "who": "Leo Amery, Secretary of State for India, in the House of Commons",
+     "date": "4 November 1943",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1943/nov/04/india-food-situation"
+    },
+    {
+     "text": "The problem before them has throughout been one of high prices and of local shortage, both essentially due to maldistribution rather than to an absolute over-all total shortage for the whole of India.",
+     "who": "Leo Amery, Secretary of State for India, on the Government of India's task, House of Commons",
+     "date": "4 November 1943",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1943/nov/04/india-food-situation"
+    }
+   ],
+   "disputed": [
+    [
+     "How many died, and how reliable the official record is. The Commission estimated about 1.5 million; other estimates run to about 3 million. The historian Madhusree Mukerjee, comparing the Commission's unpublished hearings with its report, found serious omissions in its rice-supply figures.",
+     [
+      "https://archive.org/details/in.ernet.dli.2015.206311",
+      "https://www.britannica.com/topic/Bengal-famine-of-1943",
+      "https://www.jstor.org/stable/24479300"
+     ]
+    ],
+    [
+     "Nature or policy. A 2019 study of India's famines found that five of six major ones were linked to drought, but not 1943; the economic historian Tirthankar Roy argues that focusing on 1943 gives a skewed view of imperial responsibility and weighs climate and environment more heavily.",
+     [
+      "https://api.crossref.org/works/10.1029/2018GL081477",
+      "https://www.epw.in/engage/discussion/hung-out-dry-famines-and-culpability-state"
+     ]
+    ]
+   ],
+   "blind": "Most deaths were in villages where nobody counted them; the Commission judged the recorded figures an under-estimate, by about 40 percent for 1943. The famine's victims are almost silent in the official record: this card has no first-hand account from them yet, and we are still looking for one we can quote.",
+   "reading": [
+    [
+     "Mukerjee, The Bengal Famine of 1943: An Appraisal of the Famine Inquiry Commission (EPW, 2014)",
+     "https://www.jstor.org/stable/24479300"
+    ],
+    [
+     "House of Commons debate, 4 November 1943 (Hansard)",
+     "https://api.parliament.uk/historic-hansard/commons/1943/nov/04/india-food-situation"
+    ]
+   ]
+  },
+  {
+   "id": "clearances",
+   "title": "The Highland Clearances",
+   "region": "Europe",
+   "where": "Strathnaver, Sutherland, Scotland (approximate)",
+   "lat": 58.45,
+   "lon": -4.2,
+   "from": 1814,
+   "to": 1886,
+   "facts": [
+    [
+     "The Clearances were forced evictions in the Scottish Highlands from the later 1700s into the mid-1800s, mainly to make way for sheep farming.",
+     "https://www.britannica.com/event/Highland-Clearances"
+    ],
+    [
+     "On the Sutherland estates, around 1810 to 1820, thousands of families were evicted and resettled on coastal crofts to gather kelp or fish.",
+     "https://www.britannica.com/event/Highland-Clearances"
+    ],
+    [
+     "In June 1814 the estate factor Patrick Sellar cleared the townships of a Strathnaver farm he was taking over himself.",
+     "https://www.communitylandscotland.org.uk/resources/jim-hunter-reflects-on-the-200-year-anniversary-of-the-trial-of-patrick-sellar/"
+    ],
+    [
+     "Sellar was tried for culpable homicide at Inverness in April 1816 and found not guilty.",
+     "https://www.communitylandscotland.org.uk/resources/jim-hunter-reflects-on-the-200-year-anniversary-of-the-trial-of-patrick-sellar/"
+    ],
+    [
+     "After the potato blight of the 1840s many Highlanders emigrated to the Lowlands, Canada, the United States and Australia, some with passages paid by landlords.",
+     "https://www.britannica.com/event/Highland-Clearances"
+    ],
+    [
+     "The Napier Commission, appointed in 1883, heard about 800 people at 61 places; the Crofters Holdings Act of 1886 then limited evictions and brought in fair rents and secure tenancy for crofters, though not for landless cottars.",
+     "https://www.highlifehighland.com/archives/highland-archive-service/online-exhibitions/the-battle-of-the-braes/the-napier-commission"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "I was present at the pulling down and burning of the house of William Chisholm, Badinloskin, in which was lying his wife's mother, an old bed-ridden woman of near 100 years of age, none of the family being present. I informed the persons about to set fire to the house of this circumstance, and prevailed on them to wait till Mr. Sellar came. On his arrival I told him of the poor old woman being in a condition unfit for removal. He replied, \"Damn her, the old witch, she has lived too long; let her burn.\" Fire was immediately set to the house, and the blankets in which she was carried were in flames before she could be got out. She was placed in a little shed, and it was with great difficulty they were prevented from firing it also.",
+     "who": "Donald MacLeod, a Strathnaver stonemason, describing the 1814 clearance decades later (one witness's account; Sellar was tried over these evictions and acquitted)",
+     "date": "published 1857",
+     "doc": "Gloomy Memories in the Highlands of Scotland (transcribed from the scan)",
+     "url": "https://archive.org/details/donaldmcleodsglo00mcle",
+     "lic": "Public domain (1857)"
+    }
+   ],
+   "official": {
+    "text": "So decided, indeed, has this progress been, and so much superior has the new system shown itself to be, in every point of view; especially in the manner in which it has influenced the habits of the people; that some parts of the arrangements have been executed to a greater extent than it was possible to contemplate at their commencement.",
+    "who": "James Loch, commissioner of the Sutherland estates, An Account of the Improvements on the Estates of the Marquess of Stafford (the estate's own published account)",
+    "date": "1820",
+    "url": "https://archive.org/details/b24880395"
+   },
+   "disputed": [
+    [
+     "Eviction or emigration. The historian James Hunter describes about 200 long-settled Sutherland communities destroyed by eviction; Eric Richards and others define clearance more broadly, including voluntary departure, and recent scholarship differs significantly from John Prebble's 1963 account of Highlanders forced into exile by chiefs turned landlords.",
+     [
+      "https://www.communitylandscotland.org.uk/resources/jim-hunter-reflects-on-the-200-year-anniversary-of-the-trial-of-patrick-sellar/",
+      "https://en.wikipedia.org/wiki/Highland_Clearances"
+     ]
+    ]
+   ],
+   "blind": "Almost all the evicted people's words reach us in English, through interpreters, clerks or later campaigners; very little survives in their own Gaelic, in their own hand.",
+   "reading": [
+    [
+     "The Napier Commission (High Life Highland archives)",
+     "https://www.highlifehighland.com/archives/highland-archive-service/online-exhibitions/the-battle-of-the-braes/the-napier-commission"
+    ],
+    [
+     "Gloomy Memories, full scan (Internet Archive)",
+     "https://archive.org/details/donaldmcleodsglo00mcle"
+    ]
+   ]
   }
  ]
 }

@@ -17,13 +17,13 @@
     const facts = s.facts.map(([t, u]) => `${esc(t)}${cite(u)}`).join(' ');
     const voices = s.voices.map(v => `<figure class="ut-q"><blockquote>${esc(v.text)}</blockquote><figcaption>${esc(v.who)}, ${esc(v.date)}. <a ${A(v.url)}>${esc(v.doc)}</a> · ${esc(v.lic)}</figcaption></figure>`).join('');
     const fig = o => `<figure class="ut-q ut-off"><blockquote>${esc(o.text)}</blockquote><figcaption>${esc(o.who)}, ${esc(o.date)}. <a ${A(o.url)}>Source</a></figcaption></figure>`;
-    const off = s.official ? [].concat(s.official).map(fig).join('') : '', press = s.press ? [].concat(s.press).map(fig).join('') : '';
+    const off = s.official ? [].concat(s.official).map(fig).join('') : '', press = s.press ? [].concat(s.press).map(fig).join('') : '', today = s.today ? [].concat(s.today).map(fig).join('') : ''; const wit = s.witness ? [].concat(s.witness).map(fig).join('') : '';
     const disp = (s.disputed || []).map(([t, us]) => `<li>${esc(t)} ${us.map(cite).join('')}</li>`).join('');
     return `<article class="ut-card" id="ut-${esc(s.id)}" data-id="${esc(s.id)}">
       <header><span class="ut-reg">${esc(s.region)} · ${esc(yrs(s))}</span><h3>${esc(s.title)}</h3><p class="small muted">${esc(s.where)} <button class="more" data-ut-go="${esc(s.id)}">Show on globe</button></p></header>
-      <h4 class="ut-h">In their own words</h4>${voices}
+      ${voices ? `<h4 class="ut-h">In their own words</h4>${voices}` : ''}${wit ? `<h4 class="ut-h">Outside witnesses at the time</h4>${wit}` : ''}
       ${s.warn ? `<p class="small muted">${esc(s.warn)}</p>` : ''}
-      ${off ? `<h4 class="ut-h">The official account at the time</h4>${off}` : ''}${press ? `<h4 class="ut-h">The colonial press at the time</h4>${press}` : ''}
+      ${off ? `<h4 class="ut-h">The official account at the time</h4>${off}` : ''}${press ? `<h4 class="ut-h">The colonial press at the time</h4>${press}` : ''}${today ? `<h4 class="ut-h">The state's position today</h4>${today}` : ''}
       <h4 class="ut-h">What the record shows <span class="ut-tag">the site's own summary, every sentence footnoted</span></h4><p class="ut-facts">${facts}</p>
       ${disp ? `<h4 class="ut-h">Still disputed</h4><ul class="ut-disp">${disp}</ul>` : ''}
       <p class="small"><b>Blind spot:</b> ${esc(s.blind)}</p>
@@ -38,7 +38,7 @@
       <div class="sit-tabs ut-tabs" role="group" aria-label="Region"><button data-r="all" aria-pressed="${region === 'all'}">All <span class="ct">${D.stories.length}</span></button>${regions.map(r => `<button data-r="${esc(r)}" aria-pressed="${region === r}">${esc(r)} <span class="ct">${D.stories.filter(s => s.region === r).length}</span></button>`).join('')}</div>
       <label class="ut-time small">Timeline: stories beginning by <b id="utYr">${upTo}</b> <input type="range" id="utRange" min="${min}" max="${max}" value="${upTo}" step="1" aria-label="Show stories that began by this year"></label>
       <div class="ut-list">${L.length ? L.map(card).join('') : '<p class="small muted">No story begins by then in this region yet.</p>'}</div>
-      <p class="small muted">${D.stories.length} stories so far, one per region; more are being researched. The site does not rank or score these events. Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p>`;
+      <p class="small muted">${D.stories.length} stories so far; more are being researched. The site does not rank or score these events. Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p>`;
     host.querySelectorAll('[data-r]').forEach(b => b.onclick = () => { region = b.dataset.r; render(); pins(); });
     const rg = host.querySelector('#utRange'); rg.oninput = () => { host.querySelector('#utYr').textContent = rg.value; }; rg.onchange = () => { upTo = +rg.value; render(); pins(); };
     host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => go(b.dataset.utGo)); }
