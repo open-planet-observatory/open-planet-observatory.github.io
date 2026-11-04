@@ -150,6 +150,6 @@
   function close() { if (el) el.hidden = true; }
   addEventListener('obs:hunt', open);
   addEventListener('keydown', e => { if (e.key === 'Escape' && el && !el.hidden && (el.contains(document.activeElement) || document.activeElement === document.body) && !document.querySelector('#uni.on') && !html.classList.contains('game-on') && !document.querySelector('.sky-big:not([hidden])')) close(); });
-  window.OwlHunt = { STOPS: STOPS.map(s => ({ id: s.id, title: s.title, icon: s.icon })), BONUS: BONUS.map(b => ({ id: b.id, name: b.name })), state: load, total: () => total(load()), ends: ENDS, open };
+  window.OwlHunt = { CITIES, bestView, dir, parseNum, close, STOPS: STOPS.map(s => ({ id: s.id, title: s.title, icon: s.icon })), BONUS: BONUS.map(b => ({ id: b.id, name: b.name })), state: load, total: () => total(load()), ends: ENDS, open };
   if (window.__wantHunt) setTimeout(open, 2500);
 })();

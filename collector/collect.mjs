@@ -25,6 +25,7 @@ import { collectPredictions } from './predictions.mjs';
 import { collectRecordWatch } from './recordwatch.mjs';
 import { collectForecastDesk } from './forecastdesk.mjs';
 import { collectMoonFeatures } from './moon-features.mjs';
+import { collectWeeklyHunt } from './weeklyhunt.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -297,8 +298,17 @@ for (const [name, [g, obj]] of Object.entries(files)) {
   await fs.writeFile(path.join(OUT, name + '.json'), json);
   await fs.writeFile(path.join(OUT, name + '.js'), `window.${g}=${json.replace(/</g, '\\u003c')};\n`);
 }
+// Weekly hunt: frozen each Monday from the files just written above (collector/weeklyhunt.mjs)
+let whunt = { status: 'not run' };
+{ let p = null; // last week's file holds the frozen answers and the archive, so try hard to read it (a 404 means there is none yet)
+  let none = !PREV; // true only when there is no earlier file (404) or no live site
+  if (PREV) for (let i = 0; i < 3 && !p; i++) { try { const r = await fetch(`${PREV}/data/hunt.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); else if (r.status === 404) { none = true; break; } } catch { } if (!p && i < 2) await new Promise(r => setTimeout(r, 5000)); }
+  // the earlier file couldn't be read (not a 404): don't re-freeze from scratch, which would change answers mid-week and drop the archive; this run publishes no hunt.json and the next run tries again
+  if (!p && !none) whunt = { out: null, status: 'error: could not read the last hunt.json; not rebuilt this run' };
+  else try { whunt = await collectWeeklyHunt(OUT, p, now.getTime()); } catch (e) { whunt = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
+  if (whunt.out) await fs.writeFile(path.join(OUT, 'hunt.json'), JSON.stringify(whunt.out)); log('weekly hunt', whunt.status); }
 meta.updated = now.toISOString();
-meta.lastRun = { snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
