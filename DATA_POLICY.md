@@ -125,6 +125,13 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - City cost-of-living rankings (Numbeo, Mercer, EIU) are proprietary: linked, not shown.
 - Blind spots: national averages say nothing about cities, regions or who gained; survey methods change; some countries' latest year is old (the year is always shown).
 
+## Untold history
+
+- History from below (Derik's decisions, 3 Nov 2026): stories usually told by the winning side, told here through the words of the people they happened to. World-balanced; viewer discretion advised. Anyone named in the cited historical record may be named; living private individuals never are. The site's war and violence filters elsewhere (This date in history) do not apply to this section.
+- Each story has: primary-source quotations, word for word, public domain, each linked to the copy it was checked against (checked in the browser against the live page or scan; scan transcriptions say so); the official account given at the time, word for word; "What the record shows", a short summary in the site's own words in which every sentence is footnoted to its source (an exception to the verbatim-only rule, approved for this section); "Still disputed", giving each side's sources; and a blind spot.
+- Copyrighted histories (e.g. Howard Zinn's) are linked as further reading only, never quoted at length. No scores or rankings of events.
+- Data: src/assets/history/untold.json, edited by hand; no collector.
+
 ## Records
 
 - Records (Learn menu) are rebuilt weekly by collector/records.mjs. Every figure is its source's own, in the source's units: measured values of places, objects and structures from Wikidata (CC0), and agency lists from USGS (largest earthquakes since 1900), the Smithsonian Global Volcanism Program (VEI 7 eruptions), NASA JPL CNEOS (largest fireballs), NOAA NCEI (warmest years), NSIDC (lowest September Arctic sea ice) and the NASA Exoplanet Archive. Voyager 1's distance is counted on from NASA JPL Horizons, as on the countdown.
