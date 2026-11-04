@@ -220,7 +220,7 @@ let solar = { out: null, status: 'not run' };
 // Voyager 1's one-light-day countdown (data/voyager.json): recomputed from Horizons once a day; kept otherwise
 { let v = null; if (PREV) { try { const r = await fetch(`${PREV}/data/voyager.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) v = await r.json(); } catch { } }
   meta.voyager = meta.voyager || {}; let st = 'kept';
-  if (!v || !v.crossUTC || due(meta.voyager, 'all', 1440)) { try { v = await collectVoyagerLightDay({ now }); meta.voyager.all = now.toISOString(); st = 'ok ' + v.crossUTC; } catch (e) { st = 'error: ' + e.message.slice(0, 120); if (v) v.stale = true; } }
+  if (!v || !v.crossUTC || !/each instant/.test(v.source || '') /* computed with the old light-time-corrected range: redo now */ || due(meta.voyager, 'all', 1440)) { try { v = await collectVoyagerLightDay({ now }); meta.voyager.all = now.toISOString(); st = 'ok ' + v.crossUTC; } catch (e) { st = 'error: ' + e.message.slice(0, 120); if (v) v.stale = true; } }
   if (v) await fs.writeFile(path.join(OUT, 'voyager.json'), JSON.stringify(v)); log('voyager', st); var voyager = v; }
 // "Where on Earth?" daily puzzle (collector/game.mjs): data/game.json, built once per UTC day, then kept unchanged.
 let game = { out: null, status: 'not run' };
