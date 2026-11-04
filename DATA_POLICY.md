@@ -130,6 +130,9 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - History from below (Derik's decisions, 3 Nov 2026): stories usually told by the winning side, told here through the words of the people they happened to. World-balanced; viewer discretion advised. Anyone named in the cited historical record may be named; living private individuals never are. The site's war and violence filters elsewhere (This date in history) do not apply to this section.
 - Each story has: primary-source quotations, word for word, public domain, each linked to the copy it was checked against (checked in the browser against the live page or scan; scan transcriptions say so); the official account given at the time, word for word; "What the record shows", a short summary in the site's own words in which every sentence is footnoted to its source (an exception to the verbatim-only rule, approved for this section); "Still disputed", giving each side's sources; and a blind spot.
 - Copyrighted histories (e.g. Howard Zinn's) are linked as further reading only, never quoted at length. No scores or rankings of events.
+- Translations quoted are themselves public domain (e.g. Crawley's 1874 Thucydides, the 1689 English Las Casas, Arthur Helps's 1855 Requerimiento, the 1840 Chinese Repository translation of Lin Zexu's letter); each card's note says when a voice reaches us through a translator or a sympathetic outsider rather than the people themselves.
+- Quotes are placed by who speaks: the people it happened to ("In their own words"), outside observers ("Outside witnesses"), officials, courts and perpetrators ("The official account"). Violence by the side the story is told from is stated, sourced, like everything else.
+- Years before 1 AD are shown as BC; the full page filters by era (by the year a story begins).
 - Data: src/assets/history/untold.json, edited by hand; no collector.
 
 ## Records
