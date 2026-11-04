@@ -1,5 +1,5 @@
 name: Source Bounty — suggest a free public data feed
-description: Found an open, live data feed The Owlmanac doesn't show yet? Send it here. Accepted finds are added to the site's Source library.
+description: Found an open, live data feed The Owlmanac doesn't show yet? Send it here. Accepted finds are added to the site's Source library, credited to you by GitHub name if you tick the box below.
 title: "[Source Bounty] "
 body:
   - type: markdown
@@ -65,6 +65,14 @@ body:
           required: true
         - label: It shows something the site doesn't already show, or shows it better.
           required: true
+  - type: checkboxes
+    id: credit
+    attributes:
+      label: Credit
+      description: Optional. Leave this unticked and an accepted find is listed without your name.
+      options:
+        - label: If this feed is accepted, credit me on the site by my GitHub name.
+          required: false
   - type: input
     id: bounty
     attributes:
