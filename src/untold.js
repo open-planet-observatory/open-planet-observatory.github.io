@@ -34,12 +34,13 @@
     if (!D) { host.innerHTML = '<p>The stories did not load. Nothing is shown in their place; try again later.</p>'; return; }
     const regions = [...new Set(D.stories.map(s => s.region))], min = Math.min(...D.stories.map(s => s.from)), max = Math.max(...D.stories.map(s => s.to));
     if (upTo == null) upTo = max; const L = list();
-    host.innerHTML = `<div class="ut-warn" role="note"><b>Viewer discretion advised.</b> These stories include killings, famine and forced removal, told partly in the words of the people it happened to and of those who did it. Every quotation is checked word for word against the copy linked beside it; every fact in the site's own summaries is footnoted.</div>
+    host.innerHTML = `${window.OwlPage ? '<p class="pg-cta"><button class="btn" id="utExpand">⤢ Open the full page: sort, filter and read side by side</button></p>' : ''}<div class="ut-warn" role="note"><b>Viewer discretion advised.</b> These stories include killings, famine and forced removal, told partly in the words of the people it happened to and of those who did it. Every quotation is checked word for word against the copy linked beside it; every fact in the site's own summaries is footnoted.</div>
       <div class="sit-tabs ut-tabs" role="group" aria-label="Region"><button data-r="all" aria-pressed="${region === 'all'}">All <span class="ct">${D.stories.length}</span></button>${regions.map(r => `<button data-r="${esc(r)}" aria-pressed="${region === r}">${esc(r)} <span class="ct">${D.stories.filter(s => s.region === r).length}</span></button>`).join('')}</div>
       <label class="ut-time small">Timeline: stories beginning by <b id="utYr">${upTo}</b> <input type="range" id="utRange" min="${min}" max="${max}" value="${upTo}" step="1" aria-label="Show stories that began by this year"></label>
       <div class="ut-list">${L.length ? L.map(card).join('') : '<p class="small muted">No story begins by then in this region yet.</p>'}</div>
       <p class="small muted">${D.stories.length} stories so far; more are being researched. The site does not rank or score these events. Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p>`;
     host.querySelectorAll('[data-r]').forEach(b => b.onclick = () => { region = b.dataset.r; render(); pins(); });
+    const ux = host.querySelector('#utExpand'); if (ux) ux.onclick = () => window.OwlPage.open('untold');
     const rg = host.querySelector('#utRange'); rg.oninput = () => { host.querySelector('#utYr').textContent = rg.value; }; rg.onchange = () => { upTo = +rg.value; render(); pins(); };
     host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => go(b.dataset.utGo)); }
   function go(id) { const s = D.stories.find(x => x.id === id), g = window.__obs3d; if (!s || !g || !window.Cesium) return; pins();
@@ -57,5 +58,32 @@
   const panel = host.closest('.panel'); const vis = () => panel && panel.dataset.on === 'true';
   if (panel) new MutationObserver(() => { if (vis()) load(); else if (ds) ds.show = false; }).observe(panel, { attributes: true, attributeFilter: ['data-on'] });
   if (vis()) load();
-  window.OwlUntold = { load, go };
+
+  /* ---- the expanded page: a sortable list on the left, the chosen story in a reading column on the right ---- */
+  let pg = { sort: 'old', region: 'all', themes: new Set(), sel: null };
+  function mini(s) { const d3 = window.d3, C = (O.countries || []); if (!d3 || !C.length) return '';
+    const W = 300, H = 160, pr = d3.geoNaturalEarth1().fitExtent([[2, 2], [W - 2, H - 2]], { type: 'Sphere' }), path = d3.geoPath(pr), [x, y] = pr([s.lon, s.lat]);
+    return `<figure class="pg-map" aria-label="Where it happened: ${esc(s.where)}"><svg viewBox="0 0 ${W} ${H}" role="img"><path class="pg-sph" d="${path({ type: 'Sphere' })}"/>${C.map(f => `<path class="pg-c" d="${path(f) || ''}"/>`).join('')}<circle class="pg-pin" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5"/></svg><figcaption>${esc(s.where)}</figcaption></figure>`; }
+  function pageList() { const L = D.stories.filter(s => (pg.region === 'all' || s.region === pg.region) && (!pg.themes.size || (s.themes || []).some(t => pg.themes.has(t))));
+    return L.sort((a, b) => pg.sort === 'old' ? a.from - b.from : b.from - a.from); }
+  function renderPage(host) {
+    if (!D) { host.innerHTML = '<p>The stories did not load. Nothing is shown in their place; try again later.</p>'; return; }
+    const regions = [...new Set(D.stories.map(s => s.region))].sort(), themes = [...new Set(D.stories.flatMap(s => s.themes || []))].sort();
+    const L = pageList(); if (!L.find(s => s.id === pg.sel)) pg.sel = L.length ? L[0].id : null; const S = D.stories.find(s => s.id === pg.sel);
+    host.innerHTML = `<div class="pg-tools"><label class="small">Sort <select id="pgSort"><option value="old"${pg.sort === 'old' ? ' selected' : ''}>Oldest first</option><option value="new"${pg.sort === 'new' ? ' selected' : ''}>Newest first</option></select></label>
+        <label class="small">Region <select id="pgReg"><option value="all">All regions</option>${regions.map(r => `<option${pg.region === r ? ' selected' : ''}>${esc(r)}</option>`).join('')}</select></label>
+        <div class="pg-chips" role="group" aria-label="Themes">${themes.map(t => `<button class="chip" data-t="${esc(t)}" aria-pressed="${pg.themes.has(t)}"><span>${esc(t)}</span></button>`).join('')}</div>
+        <span class="small muted pg-n">${L.length} of ${D.stories.length} stories</span></div>
+      <div class="ut-warn" role="note"><b>Viewer discretion advised.</b> These stories include killings, famine and forced removal, told partly in the words of the people it happened to and of those who did it. Every quotation is checked word for word against the copy linked beside it; every fact in the site's own summaries is footnoted.</div>
+      <div class="pg-split"><nav class="pg-list" aria-label="Stories">${L.map(s => `<button class="pg-row" data-id="${esc(s.id)}" aria-current="${s.id === pg.sel}"><span class="pg-yr">${esc(yrs(s))}</span><b>${esc(s.title)}</b><small>${esc(s.region)} · ${esc((s.themes || []).join(', '))}</small></button>`).join('') || '<p class="small muted">No story matches these filters yet.</p>'}
+          <p class="small muted">${esc(D.themesNote || '')} The site does not rank or score these events.</p></nav>
+        <div class="pg-read">${S ? `<button class="more pg-tolist">↑ All stories</button>${mini(S)}${card(S)}` : ''}<p class="small muted">Spotted an error? <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues" target="_blank" rel="noopener">Send a correction with its source</a>.</p></div></div>`;
+    host.querySelector('#pgSort').onchange = e => { pg.sort = e.target.value; renderPage(host); };
+    host.querySelector('#pgReg').onchange = e => { pg.region = e.target.value; renderPage(host); };
+    host.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const t = b.dataset.t; pg.themes.has(t) ? pg.themes.delete(t) : pg.themes.add(t); renderPage(host); });
+    host.querySelectorAll('.pg-row').forEach(b => b.onclick = () => { pg.sel = b.dataset.id; renderPage(host); const r = host.querySelector('.pg-read'); if (r) { r.scrollTop = 0; if (innerWidth <= 860) r.scrollIntoView({ block: 'start' }); } host.querySelector(`.pg-row[data-id="${pg.sel}"]`)?.focus({ preventScroll: true }); });
+    const tl = host.querySelector('.pg-tolist'); if (tl) tl.onclick = () => host.querySelector('.pg-list').scrollIntoView({ block: 'start' });
+    host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => { if (window.OwlPage) window.OwlPage.close(true); go(b.dataset.utGo); }); }
+  if (window.OwlPage) window.OwlPage.register('untold', { title: 'Untold history', render: async h => { if (!loaded) { h.innerHTML = '<p class="small muted">Loading…</p>'; await load(); } renderPage(h); } });
+  window.OwlUntold = { load, go, page: () => window.OwlPage && window.OwlPage.open('untold') };
 })();

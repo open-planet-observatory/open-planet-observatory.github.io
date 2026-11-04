@@ -84,6 +84,9 @@
      "Petition against the Treaty of New Echota (National Archives, DocsTeach)",
      "https://docsteach.org/lesson/analyzing-the-petition-against-the-treaty-of-new-echota/"
     ]
+   ],
+   "themes": [
+    "Removal and dispossession"
    ]
   },
   {
@@ -171,6 +174,10 @@
      "The three lives of the Casement Report (University of Notre Dame, Breac)",
      "https://breac.nd.edu/articles/the-three-lives-of-the-casement-report-its-impact-on-official-reactions-and-popular-opinion-in-belgium/"
     ]
+   ],
+   "themes": [
+    "Colonial rule",
+    "Forced labour"
    ]
   },
   {
@@ -253,6 +260,11 @@
      "House of Commons debate, 8 July 1920 (Hansard)",
      "https://api.parliament.uk/historic-hansard/commons/1920/jul/08/army-council-and-general-dyer"
     ]
+   ],
+   "themes": [
+    "Colonial rule",
+    "Massacre",
+    "Protest and dissent"
    ]
   },
   {
@@ -341,6 +353,10 @@
      "Peterloo Relief Fund account book (UNESCO UK Memory of the World)",
      "https://unesco.org.uk/our-sites/memory-of-the-world/peterloo-relief-fund-account-book"
     ]
+   ],
+   "themes": [
+    "Massacre",
+    "Protest and dissent"
    ]
   },
   {
@@ -429,7 +445,11 @@
     "who": "The Sydney Herald, editorial on the colony's new protectors of Aborigines, written while the Myall Creek accused awaited trial (the newspaper, now the Sydney Morning Herald, apologised in 2023)",
     "date": "5 October 1838",
     "url": "https://trove.nla.gov.au/newspaper/article/12856847"
-   }
+   },
+   "themes": [
+    "Colonial rule",
+    "Massacre"
+   ]
   },
   {
    "id": "armenia",
@@ -517,7 +537,11 @@
     "who": "Henry Morgenthau, U.S. ambassador in Constantinople, telegram to the Secretary of State",
     "date": "10 July 1915",
     "url": "https://history.state.gov/historicaldocuments/frus1915Supp/d1400"
-   }
+   },
+   "themes": [
+    "Genocide",
+    "Removal and dispossession"
+   ]
   },
   {
    "id": "herero",
@@ -602,6 +626,10 @@
      "The 1918 report, full scan (Internet Archive)",
      "https://archive.org/details/b32172266"
     ]
+   ],
+   "themes": [
+    "Colonial rule",
+    "Genocide"
    ]
   },
   {
@@ -687,6 +715,10 @@
      "House of Commons debate, 4 November 1943 (Hansard)",
      "https://api.parliament.uk/historic-hansard/commons/1943/nov/04/india-food-situation"
     ]
+   ],
+   "themes": [
+    "Colonial rule",
+    "Famine"
    ]
   },
   {
@@ -759,6 +791,9 @@
      "Gloomy Memories, full scan (Internet Archive)",
      "https://archive.org/details/donaldmcleodsglo00mcle"
     ]
+   ],
+   "themes": [
+    "Removal and dispossession"
    ]
   },
   {
@@ -858,7 +893,12 @@
      "Benny Morris, The Birth of the Palestinian Refugee Problem Revisited (Cambridge), conclusion",
      "https://www.cambridge.org/core/books/birth-of-the-palestinian-refugee-problem-revisited/conclusion/58780D641E46CFE10DEC479BEBB17734"
     ]
+   ],
+   "themes": [
+    "Removal and dispossession",
+    "War"
    ]
   }
- ]
+ ],
+ "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
 }
