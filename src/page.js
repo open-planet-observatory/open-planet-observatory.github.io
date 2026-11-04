@@ -13,7 +13,7 @@
     el.innerHTML = '<div class="pg-in"><div class="pg-h"><button class="pg-back" id="pgBack">← Back to the globe</button><h2 id="pgTitle"></h2></div><div class="pg-body" id="pgBody"></div></div>';
     document.body.appendChild(el); el.querySelector('#pgBack').onclick = () => close(); }
   function place() { if (!el) return; const t = document.getElementById('ops-top'); const r = t ? t.getBoundingClientRect() : { bottom: 56 }; el.style.top = Math.round(r.bottom + 6) + 'px'; }
-  function open(key) { const R = REG[key]; if (!R) return; build();
+  function open(key) { const R = REG[key]; if (!R) return; build(); rpOff();
     if (!cur) saved = { slim: html.classList.contains('slim'), rail: html.classList.contains('rail-closed'), drawer: html.classList.contains('drawer-closed'), panel: key };
     cur = key; html.classList.add('page-on'); if (O.setSlim) O.setSlim(true);
     const v = viewer(); if (v && !document.querySelector('#uni.on') && !html.classList.contains('moon-on')) { saved.loop = v.useDefaultRenderLoop; v.useDefaultRenderLoop = false; }
@@ -35,5 +35,20 @@
   function sync() { if (!xb) return; const p = document.querySelector('#drawerBody .panel[data-on="true"]'); xb.hidden = !(p && REG[p.dataset.k]); }
   const body = document.getElementById('drawerBody'); if (body) new MutationObserver(sync).observe(body, { attributes: true, subtree: true, attributeFilter: ['data-on'] });
   const api = { open, close, isOpen: () => !!cur, current: () => cur, register(key, R) { REG[key] = R; sync(); }, esc };
+  /* links like theowlmanac.com/#page=untold open the page once the site and the page's module are ready */
+  if (window.__wantPage) { const want = window.__wantPage; let n = 0; const t = setInterval(() => { if (REG[want] && (window.__obs3d || n > 20)) { clearInterval(t); setTimeout(() => open(want), 400); } else if (++n > 60) clearInterval(t); }, 500); }
+  /* Reading pause (Derik, 4 Nov 2026): while the pointer rests on a right-hand panel (or a finger scrolls it), the globe beside
+     it stops redrawing; it starts again the moment the pointer leaves the panel, the map is touched or the panel closes. It
+     never touches the loop while a full page, the Solar System, the Moon or a game owns it. */
+  let rp = false, rpT = 0; const drawer = document.getElementById('ops-drawer'), map = document.getElementById('ops-map');
+  const busy = () => cur || document.querySelector('#uni.on') || html.classList.contains('moon-on') || html.classList.contains('game-on') || html.classList.contains('drawer-closed');
+  function rpOn() { clearTimeout(rpT); if (rp || busy()) return; const v = viewer(); if (!v || !v.useDefaultRenderLoop) return; v.useDefaultRenderLoop = false; rp = true; }
+  function rpOff() { clearTimeout(rpT); if (!rp) return; rp = false; const v = viewer(); if (v && !cur && !document.querySelector('#uni.on') && !html.classList.contains('moon-on')) v.useDefaultRenderLoop = true; }
+  if (drawer) { drawer.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') { clearTimeout(rpT); rpT = setTimeout(rpOn, 700); } });
+    drawer.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rpOff(); });
+    drawer.addEventListener('touchstart', () => rpOn(), { passive: true }); drawer.addEventListener('wheel', () => rpOn(), { passive: true }); }
+  if (map) map.addEventListener('pointerdown', rpOff, true);
+  new MutationObserver(() => { if (rp && busy()) rpOff(); }).observe(html, { attributes: true, attributeFilter: ['class'] });
+  api.readingPaused = () => rp;
   window.OwlPage = api;
 })();
