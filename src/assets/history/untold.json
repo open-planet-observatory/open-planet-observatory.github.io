@@ -898,6 +898,451 @@
     "Removal and dispossession",
     "War"
    ]
+  },
+  {
+   "id": "irishfamine",
+   "title": "The Great Irish Famine",
+   "region": "Europe",
+   "where": "Skibbereen, County Cork, Ireland",
+   "lat": 51.5492,
+   "lon": -9.2675,
+   "from": 1845,
+   "to": 1852,
+   "themes": [
+    "Famine"
+   ],
+   "facts": [
+    [
+     "In 1845 potato blight reached Ireland and much of that year's crop rotted; the failures of 1846 to 1849 were worse.",
+     "https://www.britannica.com/event/Great-Famine-Irish-history"
+    ],
+    [
+     "About one million people died of starvation, typhus or other famine-related disease, and emigration during the famine may have reached two million.",
+     "https://www.britannica.com/event/Great-Famine-Irish-history"
+    ],
+    [
+     "Ireland's population fell from almost 8.4 million in 1844 to 6.6 million in 1851.",
+     "https://www.britannica.com/event/Great-Famine-Irish-history"
+    ],
+    [
+     "Grain went on being exported from Ireland to Britain during the famine; Peel's government allowed it, and Russell's government after it kept the same policy.",
+     "https://www.britannica.com/event/Great-Famine-Irish-history"
+    ],
+    [
+     "By August 1847 as many as three million people were receiving soup-kitchen rations; with public works, government relief cost about £8 million.",
+     "https://www.britannica.com/event/Great-Famine-Irish-history"
+    ]
+   ],
+   "voices": [],
+   "official": {
+    "text": "The deep and inveterate root of social evil remained, and this has been laid bare by a direct stroke of an all-wise and all-merciful Providence, as if this part of the case were beyond the unassisted power of man.",
+    "who": "Charles Trevelyan, Assistant Secretary to the Treasury, who ran famine relief, The Irish Crisis",
+    "date": "1848",
+    "url": "https://www.gutenberg.org/ebooks/56727"
+   },
+   "disputed": [
+    [
+     "Neglect or something worse. In 1861 the nationalist John Mitchel wrote that the Almighty sent the potato blight but the English created the Famine, and some writers since have called British policy genocidal; the majority of historians of the subject reject the genocide charge, while many, among them Christine Kinealy, fault the government's response and write that it used the crisis to push through long-desired changes in Ireland.",
+     [
+      "https://en.wikipedia.org/wiki/Great_Famine_(Ireland)"
+     ]
+    ],
+    [
+     "Food exports. Cecil Woodham-Smith called continued exports an indisputable fact that embittered relations; others point out that Ireland became a net importer of grain from 1847, bringing in several times more wheat than it sent out at the height of the famine.",
+     [
+      "https://en.wikipedia.org/wiki/Great_Famine_(Ireland)"
+     ]
+    ]
+   ],
+   "blind": "The voices that survive belong mostly to outsiders writing in English; the starving, many of whom spoke Irish and could not write, rarely left records of their own, and the official death tables are known to undercount.",
+   "reading": [
+    [
+     "O'Rourke, The History of the Great Irish Famine of 1847 (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/14412"
+    ],
+    [
+     "Nicholson, Annals of the Famine in Ireland (scan)",
+     "https://archive.org/details/annalsoffaminein00nich"
+    ]
+   ],
+   "witness": [
+    {
+     "text": "A servant in the house where I was stopping, at Kingstown, said that the milk woman wished me to see a man near by, that was in a state of actual starvation; and he was going out to attempt to work on the Queen's highway; a little labor was beginning opposite the house, and fifteen-pence a-day stimulated this poor man, who had seven to support, his rent to pay, and fuel to buy. He had been sick with fever; the clothes of his family that would fetch any price, had been pawned or sold, and all were starving together. He staggered with his spade to the work; the overseer objected; but he entreated to be allowed to try.",
+     "who": "Asenath Nicholson, an American who walked Ireland during the famine",
+     "date": "published 1851",
+     "doc": "Annals of the Famine in Ireland, p. 37 (transcribed from the scan)",
+     "url": "https://archive.org/details/annalsoffaminein00nich",
+     "lic": "Public domain (1851)"
+    },
+    {
+     "text": "In this town have I witnessed to-day, men--fathers, carrying perhaps their only child to its last home, its remains enclosed in a few deal boards patched together; I have seen them, on this day, in three or four instances, carrying those coffins under their arms or upon their shoulders, without a single individual in attendance upon them; without mourner or ceremony--without wailing or lamentation. The people in the street, the labourers congregated in town, regarded the spectacle without surprise; they looked on with indifference, because it was of hourly occurrence.",
+     "who": "The Cork Examiner's special correspondent in Skibbereen, as quoted by John O'Rourke",
+     "date": "14 December 1846",
+     "doc": "O'Rourke, The History of the Great Irish Famine of 1847 (1902 ed.)",
+     "url": "https://www.gutenberg.org/ebooks/14412",
+     "lic": "Public domain"
+    }
+   ],
+   "note": "Research in progress: this card has no famine victim's own words yet."
+  },
+  {
+   "id": "slavenarratives",
+   "title": "Slavery in the United States, in the words of the formerly enslaved",
+   "region": "Americas",
+   "where": "Little Rock, Arkansas, where Jeff Bailey was interviewed in 1938",
+   "lat": 34.7465,
+   "lon": -92.2896,
+   "from": 1860,
+   "to": 1865,
+   "themes": [
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "The 1860 census counted 3,953,760 enslaved people out of about 31.4 million Americans.",
+     "https://en.wikipedia.org/wiki/1860_United_States_census"
+    ],
+    [
+     "The 13th Amendment, passed by Congress on 31 January 1865 and ratified on 6 December 1865, abolished slavery in the United States, except as punishment for a crime.",
+     "https://www.archives.gov/milestone-documents/13th-amendment"
+    ],
+    [
+     "Between 1936 and 1938 the Federal Writers' Project recorded about 2,300 first-person accounts of slavery, now held by the Library of Congress.",
+     "https://en.wikipedia.org/wiki/WPA_Slave_Narrative_Collection"
+    ],
+    [
+     "The project's editors in Washington told interviewers how to spell Black speech, and most interviewers were white, working in the segregated South.",
+     "https://www.gutenberg.org/ebooks/13847"
+    ],
+    [
+     "Many of the people interviewed had been children under slavery: Jeff Bailey, born in 1861, was a small child at emancipation.",
+     "https://www.gutenberg.org/ebooks/11255"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "I seed slaves for sale on de auction block. They sol' 'em 'cordin' to strengt' and muscles. They was stripped to de wais'. I seed the women and little chillun cryin' and beggin' not to be separated, but it didn' do no good. They had to go.",
+     "who": "Stearlin Arnwine, aged 94, near Jacksonville, Texas",
+     "date": "interviewed c. 1937",
+     "doc": "Slave Narratives, Vol. XVI, Texas Narratives, Part 1",
+     "url": "https://www.gutenberg.org/ebooks/30576",
+     "lic": "Public domain (U.S. government work)"
+    },
+    {
+     "text": "I remember what they said when they freed my father. They said, 'You're free. You children are free. Go on back there and work and let your children work. Don't work them children too long. You'll git pay for your work.' That was in the Monticello courthouse yard. They said, 'You're free! Free!'",
+     "who": "Jeff Bailey, born in Monticello, Arkansas in 1861, interviewed in Little Rock by Samuel S. Taylor",
+     "date": "December 1938",
+     "doc": "Slave Narratives, Vol. II, Arkansas Narratives, Part 1",
+     "url": "https://www.gutenberg.org/ebooks/11255",
+     "lic": "Public domain (U.S. government work)"
+    }
+   ],
+   "warn": "Many interviewers wrote speech in dialect spellings, on which the project's editors gave guidance; the words are kept exactly as recorded.",
+   "official": {
+    "text": "Our position is thoroughly identified with the institution of slavery-- the greatest material interest of the world. Its labor supplies the product which constitutes by far the largest and most important portions of commerce of the earth.",
+    "who": "Mississippi, Declaration of the Immediate Causes which Induce and Justify the Secession of the State of Mississippi from the Federal Union",
+    "date": "1861",
+    "url": "https://avalon.law.yale.edu/19th_century/csa_missec.asp"
+   },
+   "disputed": [
+    [
+     "How far the narratives can be trusted. The collection's 1941 editor, B. A. Botkin, warned of bias, faulty memory and leading questions yet called it the most authentic source on enslaved people's lives; the historian John Blassingame warned that it can give a simplistic and distorted view of the plantation, and others argue that people speaking to white interviewers in the Jim Crow South kept a mask of civility.",
+     [
+      "https://www.gutenberg.org/ebooks/13847",
+      "https://en.wikipedia.org/wiki/WPA_Slave_Narrative_Collection"
+     ]
+    ]
+   ],
+   "blind": "These are formerly enslaved people's own memories, but mostly white government interviewers chose the questions, decided how speech was spelled and edited the typescripts, and many speakers were recalling childhood seventy years before.",
+   "reading": [
+    [
+     "Born in Slavery: Slave Narratives from the Federal Writers' Project (Library of Congress)",
+     "https://www.loc.gov/collections/slave-narratives-from-the-federal-writers-project-1936-to-1938/"
+    ],
+    [
+     "Administrative files and 1941 introduction (Project Gutenberg)",
+     "https://www.gutenberg.org/ebooks/13847"
+    ]
+   ]
+  },
+  {
+   "id": "haiti",
+   "title": "The Haitian Revolution and the price of independence",
+   "region": "Americas",
+   "where": "Gonaïves, Haiti, where independence was declared",
+   "lat": 19.44556,
+   "lon": -72.68833,
+   "from": 1791,
+   "to": 1825,
+   "themes": [
+    "Slavery",
+    "Colonial rule",
+    "Uprising"
+   ],
+   "facts": [
+    [
+     "In August 1791 thousands of enslaved people in the French colony of Saint-Domingue rose in rebellion.",
+     "https://www.britannica.com/topic/Haitian-Revolution"
+    ],
+    [
+     "In 1793 the French commissioner Sonthonax abolished slavery in the colony, and the French government confirmed it the following year.",
+     "https://www.britannica.com/topic/Haitian-Revolution"
+    ],
+    [
+     "Toussaint Louverture agreed to an armistice in May 1802, was imprisoned in France despite it, and died there on 7 April 1803.",
+     "https://www.britannica.com/topic/Haitian-Revolution"
+    ],
+    [
+     "On 1 January 1804 the former French colony of Saint-Domingue was declared independent under the name Haiti.",
+     "https://www.britannica.com/topic/Haitian-Revolution"
+    ],
+    [
+     "From February to April 1804, on Jean-Jacques Dessalines's orders, Haitian soldiers killed most of the French who remained, between 3,000 and 7,000 people.",
+     "https://en.wikipedia.org/wiki/1804_Haitian_massacre"
+    ],
+    [
+     "To pay the first instalment of a 150-million-franc indemnity demanded by France in 1825, Haiti borrowed 30 million francs; the bankers kept 6 million as commission.",
+     "https://github.com/nytimes/haiti-debt"
+    ],
+    [
+     "An 1838 treaty cut the total to 90 million francs; Haiti made its last indemnity payment in 1878 and said in 1887 that it had paid off the loan.",
+     "https://github.com/nytimes/haiti-debt"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "behold this land which we have watered with our sweat—or rather, with our blood,—those edifices which we have raised, and that in the hope of a just reward! Have we obtained it? The King—the whole World—has bewailed our lot, and broken our chains; while, on our part, we, humble victims, were ready for anything, not wishing to abandon our masters. What do we say? We are mistaken; those who, next to God, should have proved our fathers, have been tyrants, monsters unworthy of the fruits of our labours: and do you, brave general, desire that as sheep we should throw ourselves into the jaws of the wolf? No! it is too late.",
+     "who": "The insurgent leaders under Jean-François, replying to the colony's governor",
+     "date": "late 1791",
+     "doc": "English text in John R. Beard, The Life of Toussaint L'Ouverture (1853), transcribed from the scan",
+     "url": "https://archive.org/details/lifeoftoussaintl00bear",
+     "lic": "Public domain (1853)"
+    },
+    {
+     "text": "Requested the Generals to swear to abjure forever allegiance to France, to die rather than to live under her domination, and to fight to the last for the preservation of their independence. The Generals imbued with these sacred principles, after proclaiming in a loud voice their unanimous adhesion to the resolution of independence, swore for all their posterity and to the world to abjure forever allegiance to France, and to die rather than to live under her domination.",
+     "who": "The Act of Independence signed at Gonaïves by Jean-Jacques Dessalines and his generals",
+     "date": "1 January 1804",
+     "doc": "English text in J. N. Léger, Haiti: Her History and Her Detractors (1907)",
+     "url": "https://en.wikisource.org/wiki/Haiti:_Her_History_and_Her_Detractors/Part_I:_Chapter_X",
+     "lic": "Public domain (1907)"
+    }
+   ],
+   "official": {
+    "text": "Les habitans actuels de là partie française de Saint-Domingue verseront à la caisse générale des dépôts et consignations de France, en cinq termes égaux, d'année en année, le premier échéant au 31 décembre 1825, la somme de cent cinquante millions de francs, destinée à dédommager les anciens colons qui réclameront une indemnité.",
+    "who": "King Charles X's ordinance recognising Haiti, Article 2, in the original French as reproduced by Beaubrun Ardouin (in short: the inhabitants must pay France 150 million francs in five yearly instalments to compensate the former colonists)",
+    "date": "17 April 1825",
+    "url": "https://fr.wikisource.org/wiki/%C3%89tudes_sur_l%E2%80%99histoire_d%E2%80%99Ha%C3%AFti/Tome_9/4.7"
+   },
+   "disputed": [
+    [
+     "What the indemnity cost Haiti. A 2022 New York Times analysis estimated $21 billion to $115 billion in lost growth over two centuries; other economists have built their own long-run estimates of Haiti's debt burden, and the figure depends heavily on assumptions about growth.",
+     [
+      "https://github.com/nytimes/haiti-debt",
+      "https://en.wikipedia.org/wiki/Haitian_independence_debt",
+      "https://cepr.org/publications/dp16413"
+     ]
+    ],
+    [
+     "How many died in the war. J. N. Léger wrote in 1907 of over 50,000 French dead; modern estimates run to about 200,000 Haitian and 57,000 to 75,000 French dead, all uncertain.",
+     [
+      "https://en.wikisource.org/wiki/Haiti:_Her_History_and_Her_Detractors/Part_I:_Chapter_X",
+      "https://en.wikipedia.org/wiki/Haitian_Revolution"
+     ]
+    ]
+   ],
+   "blind": "Almost every surviving text of the revolution comes from leaders and their secretaries writing in French; the enslaved majority, most of them born in Africa and speaking Kreyòl, reach us mainly through others.",
+   "reading": [
+    [
+     "The New York Times debt data and method",
+     "https://github.com/nytimes/haiti-debt"
+    ],
+    [
+     "Beard, The Life of Toussaint L'Ouverture (scan)",
+     "https://archive.org/details/lifeoftoussaintl00bear"
+    ]
+   ]
+  },
+  {
+   "id": "maumau",
+   "title": "Kenya's Emergency and the detention camps",
+   "region": "Africa",
+   "where": "Hola, Tana River, Kenya (approximate)",
+   "lat": -1.5,
+   "lon": 40.03,
+   "from": 1952,
+   "to": 1960,
+   "themes": [
+    "Colonial rule",
+    "Detention and torture"
+   ],
+   "facts": [
+    [
+     "In October 1952 the British colonial government of Kenya declared a state of emergency, which was not lifted until 1960.",
+     "https://www.britannica.com/topic/Mau-Mau"
+    ],
+    [
+     "The BBC reports that some 150,000 Kenyans went through 'screening' and more than 1,000 were sent to the gallows.",
+     "https://www.bbc.co.uk/news/uk-13044974"
+    ],
+    [
+     "Mau Mau fighters also killed civilians: 1,819 Africans by the official count, which the historian David Anderson puts nearer 5,000, as well as 32 European and 26 Asian civilians.",
+     "https://en.wikipedia.org/wiki/Mau_Mau_rebellion"
+    ],
+    [
+     "At Hola camp in March 1959, eleven detainees died after being beaten; members of the House of Commons debated the deaths that July.",
+     "https://api.parliament.uk/historic-hansard/commons/1959/jul/27/hola-camp-kenya-report"
+    ],
+    [
+     "In April 2011 a High Court case brought out more than 17,000 pages of colonial files that had been held in secret at the Foreign Office's Hanslope Park.",
+     "https://www.bbc.co.uk/news/uk-13044974"
+    ],
+    [
+     "In June 2013 the British government settled with 5,228 Kenyan claimants for £19.9 million including costs, and agreed to fund a memorial in Nairobi.",
+     "https://hansard.parliament.uk/Commons/2013-06-06/debates/13060646000005/MauMauClaims(Settlement)"
+    ]
+   ],
+   "voices": [],
+   "note": "Research in progress: this card has no detainee's own words yet.",
+   "official": [
+    {
+     "text": "When I went out with the Askaris that morning I thought they would use batons against any prisoner refusing work without further instructions from me because I had been so instructed.",
+     "who": "Hola camp's Chief Warder, a camp officer, in evidence at the coroner's inquest, as read out in the House of Commons by Dingle Foot MP",
+     "date": "evidence at the 1959 inquest; read out 27 July 1959",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1959/jul/27/hola-camp-kenya-report"
+    },
+    {
+     "text": "I cannot accept his charge that this operation was likely to have serious, grave, or even tragic results. If the operation had been carried out as planned, that would not have been the consequence.",
+     "who": "Alan Lennox-Boyd, Colonial Secretary, defending the government in the House of Commons",
+     "date": "27 July 1959",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1959/jul/27/hola-camp-kenya-report"
+    }
+   ],
+   "today": {
+    "text": "However, I would like to make it clear now and for the first time on behalf of Her Majesty's Government that we understand the pain and grievance felt by those who were involved in the events of the emergency in Kenya. The British Government recognise that Kenyans were subject to torture and other forms of ill treatment at the hands of the colonial administration. The British Government sincerely regret that these abuses took place and that they marred Kenya's progress towards independence. Torture and ill treatment are abhorrent violations of human dignity, which we unreservedly condemn.",
+    "who": "William Hague, Foreign Secretary, statement to the House of Commons",
+    "date": "6 June 2013",
+    "url": "https://hansard.parliament.uk/Commons/2013-06-06/debates/13060646000005/MauMauClaims(Settlement)"
+   },
+   "disputed": [
+    [
+     "How many were detained. Britannica gives more than 20,000 in one article and more than 70,000 Kikuyu in another; the BBC says some 150,000 went through screening.",
+     [
+      "https://www.britannica.com/topic/Mau-Mau",
+      "https://www.britannica.com/event/Mau-Mau-Rebellion",
+      "https://www.bbc.co.uk/news/uk-13044974"
+     ]
+    ],
+    [
+     "How many died. Colonial figures counted more than 11,000 rebels killed, and some scholars put combat deaths above 20,000; the historian Caroline Elkins suggested as many as 300,000 Kikuyu may have died, critics say her estimate rests on thin census data, and the demographer John Blacker estimated about 50,000 deaths linked to the Emergency.",
+     [
+      "https://www.britannica.com/topic/Mau-Mau",
+      "https://en.wikipedia.org/wiki/Mau_Mau_rebellion"
+     ]
+    ]
+   ],
+   "blind": "Most of the record is British: officials, Parliament and the files kept back for decades. The detainees' own accounts survive mainly in court testimony and oral histories, and many colonial files were destroyed before independence.",
+   "reading": [
+    [
+     "Mau Mau claims settlement, House of Commons, 6 June 2013 (Hansard)",
+     "https://hansard.parliament.uk/Commons/2013-06-06/debates/13060646000005/MauMauClaims(Settlement)"
+    ],
+    [
+     "Hola Camp debate, House of Commons, 27 July 1959 (Hansard)",
+     "https://api.parliament.uk/historic-hansard/commons/1959/jul/27/hola-camp-kenya-report"
+    ]
+   ]
+  },
+  {
+   "id": "parihaka",
+   "title": "Parihaka",
+   "region": "Oceania",
+   "where": "Parihaka, Taranaki, Aotearoa New Zealand",
+   "lat": -39.2883,
+   "lon": 173.8404,
+   "from": 1866,
+   "to": 1881,
+   "themes": [
+    "Colonial rule",
+    "Removal and dispossession",
+    "Protest and dissent"
+   ],
+   "facts": [
+    [
+     "In 1865 the colonial government proclaimed the confiscation of a large part of Taranaki.",
+     "https://en.wikipedia.org/wiki/New_Zealand_land_confiscations"
+    ],
+    [
+     "Parihaka was founded in 1866 as a final refuge for Taranaki hapū whose homes and crops Crown troops had repeatedly destroyed.",
+     "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+    ],
+    [
+     "The West Coast Settlement (North Island) Act 1880 made pulling up survey pegs, ploughing and fencing punishable by up to two years in jail, with arrest allowed without a warrant.",
+     "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+    ],
+    [
+     "More than 400 protesters were held as political prisoners, and laws allowed them to be kept in South Island jails without trial; an 1882 law provided that the leaders Te Whiti and Tohu would not be tried.",
+     "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+    ],
+    [
+     "At dawn on 5 November 1881 about 1,600 troops and armed constabulary entered Parihaka.",
+     "https://en.wikipedia.org/wiki/Parihaka"
+    ],
+    [
+     "The Crown apologised to the people of Parihaka at a reconciliation ceremony, He Puanga Haeata, recorded in a deed signed on 9 June 2017; the Parihaka Reconciliation Act 2019 records that apology for invading Parihaka and forcibly evicting people who had sought refuge there.",
+     "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Te Whiti when under arrest spoke to his people and asked them to be lionhearted and patient. He said \"this is not my work but, comes from the hearts of the Europeans.\" Tohu followed and said \"These are the doings of war. Be not sorry, turn away the sorrowful heart from you. We go away as fools. As mistaken men we looked for peace, and we find war. Be steadfast; keep to peaceful works; be not dismayed; have no fear.\"",
+     "who": "Te Whiti o Rongomai and Tohu Kākahi at their arrest, as reported in English translation",
+     "date": "5 November 1881 (Patea Mail, 7 November 1881)",
+     "doc": "Taking Te Whiti, Tohu, & Hiroki (Papers Past)",
+     "url": "https://paperspast.natlib.govt.nz/newspapers/PATM18811107.2.6",
+     "lic": "No known copyright (Papers Past)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "A portion of the fence had been removed to allow free access, and 500 loaves had been baked and were ready as a present to the troops. Te Whiti and Tohu received the Specials well, and gave them an empty whare close by from which they could hear and see everything. The natives did not seem at all alarmed, and were warned by Tohu and others that they must not offer any resistance no matter what happened. At 8-30 the troops began to surround the pah, and as they took up position the native children went out and danced a haka before them.",
+     "who": "Press Association reporters who entered Parihaka despite the minister's press ban",
+     "date": "5 November 1881 (Patea Mail, 7 November 1881)",
+     "url": "https://paperspast.natlib.govt.nz/newspapers/PATM18811107.2.6"
+    }
+   ],
+   "official": {
+    "text": "The Queen and the law must be supreme in Parihaka as well as elsewhere, and Te Whiti and his people are now called upon to accept the proposals made to them, which would give large and ample reserves to the people.",
+    "who": "Proclamation by the Administrator of the Government, reprinted in the Thames Star (scanning errors corrected)",
+    "date": "19–20 October 1881",
+    "url": "https://paperspast.natlib.govt.nz/newspapers/THS18811020.2.13"
+   },
+   "disputed": [
+    [
+     "How many. The 1881 reporters counted about 1,500 people on the marae; later accounts give about 1,600 troops and say 1,600 people were driven out within weeks. The figures differ between sources.",
+     [
+      "https://paperspast.natlib.govt.nz/newspapers/PATM18811107.2.6",
+      "https://en.wikipedia.org/wiki/Parihaka"
+     ]
+    ],
+    [
+     "How it was framed. In 1881 one newspaper headlined the government notice a proclamation of war; the Crown called it making the Queen and the law supreme; in 2019 the Crown said it had responded to peace with tyranny.",
+     [
+      "https://paperspast.natlib.govt.nz/newspapers/THS18811020.2.13",
+      "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+     ]
+    ]
+   ],
+   "blind": "Almost every 1881 record was written by Pākehā reporters and officials and reaches us through interpreters' English; Parihaka's own account in te reo Māori is not in these sources.",
+   "reading": [
+    [
+     "Parihaka Reconciliation Act 2019, with the Crown apology",
+     "https://www.legislation.govt.nz/act/public/2019/60/en/latest/"
+    ],
+    [
+     "The Taranaki Report: Kaupapa Tuatahi (Waitangi Tribunal, 1996)",
+     "https://forms.justice.govt.nz/search/Documents/WT/wt_DOC_68453721/Taranaki%201996.compressed.pdf"
+    ]
+   ]
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
