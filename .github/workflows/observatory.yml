@@ -50,6 +50,8 @@ jobs:
       - name: Build page
         env:
           CESIUM_ION_TOKEN: ${{ secrets.CESIUM_ION_TOKEN }}
+          # Address of the games server (worker/), a repository variable; empty = boards switched off
+          OWL_API: ${{ vars.OWL_API }}
         run: node build/build.mjs hosted dist/data dist
       - uses: actions/upload-pages-artifact@v3
         with:
