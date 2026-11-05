@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-04",
+ "built": "2026-11-05",
  "stories": [
   {
    "id": "cherokee",
@@ -3783,6 +3783,870 @@
     [
      "Gareth Jones's Soviet famine articles (garethjones.org)",
      "https://www.garethjones.org/published_articles/overview/articles1933.htm"
+    ]
+   ]
+  },
+  {
+   "id": "baghdad1258",
+   "title": "The sack of Baghdad",
+   "region": "Middle East",
+   "where": "Baghdad, Iraq (approximate)",
+   "lat": 33.34,
+   "lon": 44.4,
+   "from": 1258,
+   "to": 1258,
+   "themes": [
+    "War",
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "Hülegü, a grandson of Genghis Khan sent by his brother Möngke to extend Mongol power in the Islamic lands, destroyed the Assassins' fortress at Alamut in 1256, then defeated the caliph's army, executed al-Musta'sim, the last of the Abbasid caliphs, and in 1258 seized and largely destroyed Baghdad, the religious and cultural capital of Islam.",
+     "https://www.britannica.com/biography/Hulegu"
+    ],
+    [
+     "When the caliph refused troops for the war on the Assassins, Hülegü demanded his submission in September 1257; al-Musta'sim answered with defiance, Hülegü's envoys were taunted and mocked by mobs in Baghdad's streets, and in January 1258 the Mongols routed a sortie by flooding the Abbasid camp and closed in on the city.",
+     "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+    ],
+    [
+     "The assault began on 29 or 30 January; the Mongols held the eastern battlements by 4 February, and on 7 February a large number of unarmed soldiers and inhabitants who came out of the city hoping to be spared were divided into groups and executed; the caliph surrendered on 10 February.",
+     "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+    ],
+    [
+     "The sack began on 13 February and, by the Wikipedia account, lasted a week (Ibn Kathir, a century later, says the killing went on for forty days); sayyids, scholars, merchants who traded with the Mongols, and the Christians, for whom Hülegü's Christian wife Doquz Khatun interceded, were told to mark their doors and were spared, and on 20 February the caliph was put to death, rolled in a carpet and trampled by horses.",
+     "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+    ],
+    [
+     "Baghdad was itself divided: Howorth (1888), following Abulfeda and Wassaf, records that the caliph's troops, under his son and the chancellor, attacked the Shi'a of al-Karkh and dragged their women through the streets, and that the Shi'a vizier Ibn al-Alqami protested that Karkh had been plundered.",
+     "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt"
+    ],
+    [
+     "The fall of Baghdad ended the 500-year-old Abbasid caliphate; a surviving member of the dynasty became a puppet caliph of the Mamluks in Cairo, while Baghdad, Wikipedia says, prospered under Hülegü's Ilkhanate though it declined beside the new capital, Tabriz.",
+     "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "O, young man only just commencing your career, who show such small regard for life, who, drunk with the prosperity and good fortune of ten days, deem yourself superior to the whole world, and think your orders equivalent to those of destiny, and irresistible. Why do you address me a demand which you cannot secure? Do you think by your skill, the strength of your army, and your courage, that you can make captive even one of the stars? You are probably unaware that from the east to the west, the worshippers of God, religious men, kings and beggars, old men and young ones, are all slaves of this Court, and form my armies",
+     "who": "Caliph al-Musta'sim, replying to Hülegü's summons, as recorded by the Mongol court historian Rashid al-Din and rendered into English by Henry Howorth from the French of Quatremère and d'Ohsson (the words of the defeated ruler, not of the townspeople)",
+     "date": "autumn 1257",
+     "doc": "Rashid al-Din, Jami' al-tawarikh, as given in H. H. Howorth, History of the Mongols, Part III: The Mongols of Persia (London, 1888), p. 116 (OCR corrected)",
+     "url": "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt",
+     "lic": "Public domain (published 1888)"
+    },
+    {
+     "text": "“The Khalif,” replied the warrior who had already twice defeated the Mongols, “was led by his destiny, and would not heed the counsel of his faithful servants.”",
+     "who": "Sulaiman Shah, commander of the caliph's army, questioned by Hülegü after he came out of the city under safe-conduct, as recorded by Rashid al-Din (Howorth's English); Hülegü then had him put to death with his household",
+     "date": "February 1258",
+     "doc": "Rashid al-Din, Jami' al-tawarikh, as given in H. H. Howorth, History of the Mongols, Part III: The Mongols of Persia (London, 1888), p. 125",
+     "url": "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt",
+     "lic": "Public domain (published 1888)"
+    },
+    {
+     "text": "In the morning we dwelt in a house like paradise or heaven, In the evening we had no longer a dwelling as if we had been homeless.",
+     "who": "Caliph al-Musta'sim, reciting the opening of a poem before his execution, as recorded by Rashid al-Din (Howorth's English)",
+     "date": "February 1258",
+     "doc": "Rashid al-Din, Jami' al-tawarikh, as given in H. H. Howorth, History of the Mongols, Part III: The Mongols of Persia (London, 1888), p. 128 (OCR corrected)",
+     "url": "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt",
+     "lic": "Public domain (published 1888)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "آسمانرا حق بود گر خون بگرید بر زمین / بر زوال ملک مستعصم امیرالمؤمنین",
+     "who": "Sa'di of Shiraz, the Persian poet, writing far from Baghdad, in his elegy on the end of the Abbasid caliphate (in short: heaven would be right to weep blood upon the earth for the fall of the kingdom of al-Musta'sim, Commander of the Faithful)",
+     "date": "after 1258",
+     "doc": "Sa'di, Kulliyat, Mawa'iz, elegy 'Asman ra haqq bovad', ed. M. A. Foroughi, as transcribed on Persian Wikisource",
+     "url": "https://fa.wikisource.org/wiki/%DA%A9%D9%84%DB%8C%D8%A7%D8%AA_%D8%B3%D8%B9%D8%AF%DB%8C/%D9%85%D9%88%D8%A7%D8%B9%D8%B8/%D8%A2%D8%B3%D9%85%D8%A7%D9%86_%D8%B1%D8%A7_%D8%AD%D9%82_%D8%A8%D9%88%D8%AF_%DA%AF%D8%B1_%D8%AE%D9%88%D9%86_%D8%A8%DA%AF%D8%B1%DB%8C%D8%AF_%D8%A8%D8%B1_%D8%B2%D9%85%DB%8C%D9%86",
+     "lic": "Public domain (13th-century poem)"
+    },
+    {
+     "text": "دجله خونابست ازین پس گر نهد سر در نشیب / خاک نخلستان بطحا را کند در خون عجین",
+     "who": "Sa'di, same elegy (in short: from now on the Tigris is a river of bloody water; if it runs on downhill it will knead the soil of the palm groves of Batha, the valley of Mecca, into blood)",
+     "date": "after 1258",
+     "doc": "Sa'di, Kulliyat, ed. Foroughi, Persian Wikisource",
+     "url": "https://fa.wikisource.org/wiki/%DA%A9%D9%84%DB%8C%D8%A7%D8%AA_%D8%B3%D8%B9%D8%AF%DB%8C/%D9%85%D9%88%D8%A7%D8%B9%D8%B8/%D8%A2%D8%B3%D9%85%D8%A7%D9%86_%D8%B1%D8%A7_%D8%AD%D9%82_%D8%A8%D9%88%D8%AF_%DA%AF%D8%B1_%D8%AE%D9%88%D9%86_%D8%A8%DA%AF%D8%B1%DB%8C%D8%AF_%D8%A8%D8%B1_%D8%B2%D9%85%DB%8C%D9%86",
+     "lic": "Public domain (13th-century poem)"
+    },
+    {
+     "text": "وكان الجماعة من الناس يجتمعون إلى الخانات ويغلقون عليهم الأبواب فتفتحها التتار إما بالكسر وإما بالنار. ثم يدخلون عليهم فيهربون منهم إلى أعالي الأمكنة فيقتلونهم بالأسطحة، حتى تجري الميازيب من الدماء في الأزقة",
+     "who": "Ibn Kathir, 14th-century Sunni historian of Damascus, writing about a century later, al-Bidaya wa'l-nihaya, year 656 (in short: groups of people would gather in the caravanserais and lock the doors; the Tatars opened them by breaking them down or by fire, then went in, and the people fled to the highest places, and they killed them on the roofs, until the gutters ran with blood into the lanes)",
+     "date": "February 1258; written 14th century",
+     "url": "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9"
+    },
+    {
+     "text": "ولما نودي ببغداد بالأمان خرج من تحت الأرض من كان بالمطامير والقنى والمقابر كأنهم الموتى إذا نبشوا من قبورهم، وقد أنكر بعضهم بعضا فلا يعرف الوالد ولده ولا الأخ أخاه",
+     "who": "Ibn Kathir, same year (in short: when safety was proclaimed in Baghdad, those who had hidden in pits, water channels and graveyards came up from under the ground like the dead dug from their graves; they did not know one another, so that a father did not recognise his son nor a brother his brother); he adds that a great epidemic then carried many of them off",
+     "date": "1258; written 14th century",
+     "url": "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9"
+    },
+    {
+     "text": "Then Hūlagū gave command, and the Caliph was left a-hungering, until his case was that of very great hunger, so that he called asking that somewhat might be given him to eat. And the accursed Hūlagū sent for a dish with gold therein, and a dish with silver therein, and a dish with gems, and ordered these all to be set before the Caliph al Musta’sim, saying to him, ‘Eat these.’ But the Caliph made answer, ‘These be not fit for eating.’",
+     "who": "Ibn al-Furat (born Cairo 1335), Egyptian historian, from his Vatican manuscript, in Guy Le Strange's translation (Journal of the Royal Asiatic Society, April 1900), as quoted by Henri Cordier in Yule's Marco Polo (1903); he goes on to say the caliph and his son were put in sacks and trampled to death",
+     "date": "1258; written decades later",
+     "url": "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm"
+    },
+    {
+     "text": "When he beheld that great heap of treasure he was astonished, and, summoning the Calif to his presence, he said to him: “Calif, tell me now why thou hast gathered such a huge treasure? What didst thou mean to do therewith? Knewest thou not that I was thine enemy, and that I was coming against thee with so great an host to cast thee forth of thine heritage? Wherefore didst thou not take of thy gear and employ it in paying knights and soldiers to defend thee and thy city?”",
+     "who": "Marco Polo, the Venetian traveller, retelling a story current among Christians (Travels, Book I, ch. 6, tr. Henry Yule, 3rd edition revised by Henri Cordier, 1903). A legend: Polo dates the capture 1255 and says the caliph was shut in his treasure tower and starved to death in four days",
+     "date": "1258; dictated c. 1298",
+     "url": "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm"
+    }
+   ],
+   "official": [
+    {
+     "text": "“You are the master of this house and I am your guest. Let us see what you can give us.” [...] “It is unnecessary to point out what is patent; disclose your hidden treasures.”",
+     "who": "Hülegü to the captive caliph in his palace, as recorded by Rashid al-Din, vizier and court historian of the Mongol Ilkhans, writing under Ghazan (r. 1295–1304) (Howorth's English, 1888, p. 125; the omitted words say the caliph offered 2,000 robes, 10,000 gold dinars and jewels, which Hülegü refused)",
+     "date": "15 February 1258",
+     "url": "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt"
+    },
+    {
+     "text": "The evening of Wednesday, the 14th of Safar, 656 (20th February, 1258), the Khalif was put to death in the village of Wakf, with his eldest son and five eunuchs who had never quitted him.",
+     "who": "Rashid al-Din's whole account of the caliph's death, as given by Henry Yule (Marco Polo, 1903, note to Book I, ch. 6); Rashid does not say how he was killed",
+     "date": "20 February 1258",
+     "url": "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm"
+    },
+    {
+     "text": "Eventually, after taking counsel with his chiefs, the Padishah ordered the execution of the Khalif. It was represented that the blood-drinking sword ought not to be stained with the gore of Mosta’sim. He was therefore rolled in a carpet, just as carpets are usually rolled up, insomuch that his limbs were crushed.",
+     "who": "Wassaf, Persian court historian of the Ilkhans, one of the writers who, Howorth says, wrote under the shadow of the Mongol rulers, in Yule's English from Hammer-Purgstall's German (Marco Polo, 1903, note to Book I, ch. 6)",
+     "date": "February 1258",
+     "url": "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm"
+    }
+   ],
+   "note": "Research in progress: no account by a citizen of Baghdad who lived through the sack has yet been found in a public-domain edition or translation. Guy Le Strange's 1900 article is from the Vatican manuscript of Ibn al-Furat, not of Rashid al-Din; its full text could not be reached (Cambridge Core paywall; the archive.org scan of JRAS 1900 lacks those pages), so it is quoted only as Cordier reprinted it. Bar Hebraeus is not quoted (English translation 1932), and Sa'di's Arabic elegy for Baghdad has not yet been checked.",
+   "warn": "Every word here comes through later or partisan writers. The words of the caliph, his commander and Hülegü are as recorded by Rashid al-Din, the conquerors' court historian, in Henry Howorth's English of 1888, which follows the French versions of Quatremère and d'Ohsson; Wassaf is in Yule's English after Hammer-Purgstall's German, and Ibn al-Furat in Le Strange's English. Sa'di's elegy (Persian) and Ibn Kathir's chronicle (Arabic) are quoted from Wikisource transcriptions of modern editions of these medieval texts, with the site's own plain-English summaries, not translations. Ibn Kathir writes as a Sunni partisan and calls the Shi'a vizier by a sectarian slur; Marco Polo's tale is a legend. The texts describe the killing of civilians.",
+   "disputed": [
+    [
+     "How many died, and for how long? Ibn Kathir writes that people differed on the number of Muslims killed in Baghdad: 800,000, 1,800,000 or 2,000,000. Howorth says Rashid al-Din gives 800,000 and al-Maqrizi 2,000,000. Wikipedia says the total is unknown and was probably swollen by an epidemic among the survivors; it reports Hülegü's own estimate both as about 200,000 and, in a letter to Louis IX of France, as two million, a figure it calls obviously inflated, noting that the Mongols exaggerated to intimidate other powers. Ibn Kathir also says the sword went on killing for forty days, where the modern accounts speak of about a week.",
+     [
+      "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9",
+      "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt",
+      "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+     ]
+    ],
+    [
+     "The libraries and the Tigris. The famous image of the river turned black with the ink of books thrown in comes, Wikipedia says, from an oft-quoted 16th-century historian; the historian Michal Biran has shown that large libraries reopened for learning and teaching within two years of the siege, and modern historians criticise as simplistic the idea that this one event ended the Islamic Golden Age. Sa'di's elegy of the time speaks of the Tigris running with blood, not ink.",
+     [
+      "https://en.wikipedia.org/wiki/Siege_of_Baghdad",
+      "https://fa.wikisource.org/wiki/%DA%A9%D9%84%DB%8C%D8%A7%D8%AA_%D8%B3%D8%B9%D8%AF%DB%8C/%D9%85%D9%88%D8%A7%D8%B9%D8%B8/%D8%A2%D8%B3%D9%85%D8%A7%D9%86_%D8%B1%D8%A7_%D8%AD%D9%82_%D8%A8%D9%88%D8%AF_%DA%AF%D8%B1_%D8%AE%D9%88%D9%86_%D8%A8%DA%AF%D8%B1%DB%8C%D8%AF_%D8%A8%D8%B1_%D8%B2%D9%85%DB%8C%D9%86"
+     ]
+    ],
+    [
+     "Did the vizier betray Baghdad? Later Sunni writers, among them Ibn Kathir, accuse the Shi'a vizier Ibn al-Alqami of cutting the army from about 100,000 to 10,000, writing to invite the Mongols, and urging the caliph's death in revenge for the sack of al-Karkh; Minhaj-i Siraj, author of the Tabaqat-i Nasiri, writing in Delhi, even blames him for flooding the caliph's camp. Howorth (1888) thought the charge of secret contacts 'had some truth in it', citing Wassaf, but called the dyke story 'most improbable', since the Mongol-era historians say the Mongols cut the dykes. Wikipedia notes that Mongol policy was to execute traitors, yet Hülegü reappointed him vizier; he died less than three months later.",
+     [
+      "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9",
+      "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt",
+      "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+     ]
+    ],
+    [
+     "How did the caliph die? Rashid al-Din gives only the date and place; Wassaf and later writers say he was rolled in a carpet and crushed, Ibn al-Furat that he was starved, shown dishes of gold and gems, then sewn in a sack and trampled; Armenian historians, Yule notes, say Hülegü killed him with his own hand; and the Christian story told by Marco Polo, that he starved among his treasure, Wikipedia traces to a scene recorded by Nasir al-Din al-Tusi in which Hülegü set a golden tray before him and told him to eat.",
+     [
+      "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm",
+      "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+     ]
+    ],
+    [
+     "Who was spared, and who killed? Ibn Kathir says no one escaped except the Jews and Christians, those who took refuge with them or in the vizier's house, and merchants who paid for safe-conduct. Wikipedia says the Christian Armenian historian Kirakos wrote that the Christians in Hülegü's army took special pleasure in the sack, and Howorth cites the Georgian Chronicle's claim that Georgian troops breached the walls and began the slaughter.",
+     [
+      "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9",
+      "https://en.wikipedia.org/wiki/Siege_of_Baghdad",
+      "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "No one who lived through the sack in Baghdad speaks here in their own words: the city's people appear only through their caliph and his commander, as the conquerors' historian recorded them, and through poets and chroniclers writing elsewhere or a century later. The many thousands killed, the women taken from the palace and the city, and the survivors of the epidemic that followed left no words in these sources.",
+   "reading": [
+    [
+     "Siege of Baghdad (1258) (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Siege_of_Baghdad"
+    ],
+    [
+     "Hülegü (Britannica)",
+     "https://www.britannica.com/biography/Hulegu"
+    ],
+    [
+     "H. H. Howorth, History of the Mongols, Part III (1888), pp. 113–130 (archive.org)",
+     "https://archive.org/stream/india.history.resource.86895/86895_djvu.txt"
+    ],
+    [
+     "Marco Polo, tr. Yule, 3rd ed. (1903), Book I, ch. 6 and notes (Project Gutenberg)",
+     "https://www.gutenberg.org/files/10636/10636-h/10636-h.htm"
+    ],
+    [
+     "Ibn Kathir, al-Bidaya wa'l-nihaya, year 656 (Arabic Wikisource)",
+     "https://ar.wikisource.org/wiki/%D8%A7%D9%84%D8%A8%D8%AF%D8%A7%D9%8A%D8%A9_%D9%88%D8%A7%D9%84%D9%86%D9%87%D8%A7%D9%8A%D8%A9/%D8%A7%D9%84%D8%AC%D8%B2%D8%A1_%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB_%D8%B9%D8%B4%D8%B1/%D8%AB%D9%85_%D8%AF%D8%AE%D9%84%D8%AA_%D8%B3%D9%86%D8%A9_%D8%B3%D8%AA_%D9%88%D8%AE%D9%85%D8%B3%D9%8A%D9%86_%D9%88%D8%B3%D8%AA%D9%85%D8%A7%D8%A6%D8%A9"
+    ],
+    [
+     "Sa'di, elegy on the fall of the Abbasids (Persian Wikisource)",
+     "https://fa.wikisource.org/wiki/%DA%A9%D9%84%DB%8C%D8%A7%D8%AA_%D8%B3%D8%B9%D8%AF%DB%8C/%D9%85%D9%88%D8%A7%D8%B9%D8%B8/%D8%A2%D8%B3%D9%85%D8%A7%D9%86_%D8%B1%D8%A7_%D8%AD%D9%82_%D8%A8%D9%88%D8%AF_%DA%AF%D8%B1_%D8%AE%D9%88%D9%86_%D8%A8%DA%AF%D8%B1%DB%8C%D8%AF_%D8%A8%D8%B1_%D8%B2%D9%85%DB%8C%D9%86"
+    ]
+   ]
+  },
+  {
+   "id": "albigensian1209",
+   "title": "The Albigensian Crusade and the massacre at Béziers",
+   "region": "Europe",
+   "where": "Béziers, Hérault, France",
+   "lat": 43.3476,
+   "lon": 3.219,
+   "from": 1209,
+   "to": 1229,
+   "themes": [
+    "Massacre",
+    "War",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "Pope Innocent III called the Albigensian Crusade (1209–29) against the Cathari, a dualist religious movement in southern France branded heretical by the Church; the war pitted the nobility of Catholic northern France against that of the south, where the Cathari were tolerated and even supported by the nobles. The Inquisition, established afterwards to try heretics, virtually eliminated Catharism in Languedoc within a century.",
+     "https://www.britannica.com/event/Albigensian-Crusade"
+    ],
+    [
+     "Shortly after his excommunication for abetting heretics, Raymond VI of Toulouse, the greatest baron of the region, was implicated in the murder of a papal legate sent to investigate; in March 1208 Innocent III called for a crusade against Raymond and the heretics of Languedoc.",
+     "https://www.britannica.com/event/Albigensian-Crusade"
+    ],
+    [
+     "On 22 July 1209 the crusaders took Béziers: the bishop had drawn up a list of 222 people, mostly Cathars, to be handed over, but the town refused and most Catholics chose not to leave; mercenaries broke in, and the people who fled into the churches were slaughtered regardless of age or sex, priests included.",
+     "https://en.wikipedia.org/wiki/Massacre_at_B%C3%A9ziers"
+    ],
+    [
+     "Command of the crusade then passed to Simon de Montfort, who defeated Peter II of Aragon, Raymond VI and the count of Foix at Muret on 12 September 1213; King Peter was among the dead.",
+     "https://en.wikipedia.org/wiki/Battle_of_Muret"
+    ],
+    [
+     "A southern rising around Raymond VI and his son recaptured much lost territory and Simon was killed during a siege of Toulouse; King Louis VIII restored northern control in 1226, and in 1229 Raymond VII accepted a treaty by which his lands would pass to the Capetian royal house at his death.",
+     "https://www.britannica.com/event/Albigensian-Crusade"
+    ],
+    [
+     "Resistance went on: on 28 May 1242 about fifty men from Montségur and dispossessed knights murdered two inquisitors and their retinue at Avignonet; Montségur fell after a nine-month siege, and about 210 Cathar perfecti and believers who would not recant were burned at the foot of the mountain on 16 March 1244.",
+     "https://en.wikipedia.org/wiki/Siege_of_Monts%C3%A9gur"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Et moi j'ai ouï dire qu'il en doit être ainsi : si, pour tuer des hommes et répandre le sang, pour perdre des âmes, pour consentir à des meurtres, pour croire des conseils pervers, pour allumer des incendies, pour détruire des barons, pour honnir Parage, pour prendre des terres par violence, pour faire triompher orgueil, pour attiser le mal et éteindre le bien, pour tuer des femmes, égorger des enfants, on peut en ce monde conquérir Jésus-Christ, il doit porter couronne et resplendir dans le ciel !",
+     "who": "The anonymous continuator of the Song of the Albigensian Crusade, a partisan of Toulouse, on the epitaph at Carcassonne that called Simon de Montfort a saint and martyr (in Paul Meyer's 1879 French translation of the Occitan). Gloss: 'I have heard that it must be so: if by killing men and shedding blood, losing souls, consenting to murders, following wicked counsel, setting fires, destroying barons, shaming Parage [the southern nobility's code of honour], seizing lands by force, making pride triumph, stirring up evil and quenching good, killing women and slaughtering children, a man can win Jesus Christ in this world, then he must wear a crown and shine in heaven!'",
+     "date": "1218 (Simon's death); written soon after",
+     "doc": "La Chanson de la croisade contre les Albigeois, laisse CCVIII (lines 8688–8696), tr. Paul Meyer, vol. II (1879), p. 430",
+     "url": "https://archive.org/details/lachansondelacro02guiluoft",
+     "lic": "Public domain (1879)"
+    },
+    {
+     "text": "et aussitôt le cri et le tumulte s'élèvent : on court vers la ville avec les armes tranchantes, et alors commence le massacre et l'effroyable boucherie. Les barons, les dames, les petits enfants, les hommes, les femmes, dépouillés et nus, sont passés au fil de l'épée. Les chairs, le sang, les cervelles, les troncs, les membres, les corps ouverts et pourfendus, les foies, les courées, mis en morceaux, brisés, gisent par les places comme s'il en avait plu. Du sang répandu, la terre, le sol, la rive sont rougis. Il ne reste homme ni femme jeune ou vieux : aucune créature n'échappe, à moins de s'être tenue cachée. La ville est détruite, le feu l'embrase.",
+     "who": "The anonymous Toulousain continuator of the Song, on the sack of Marmande by the crusade of Prince Louis, after its commander had been spared (Meyer's 1879 French translation). He was not inside the town; Meyer judges the scene arranged but the massacre itself confirmed by the royal chronicler Guillaume le Breton. Gloss: 'the shouting begins; they run at the town with blades, and the massacre and the dreadful butchery begin. Barons, ladies, little children, men and women, stripped naked, are put to the sword. Flesh, blood, brains, limbs, bodies split open, livers and entrails lie in the squares as if they had rained down; the earth and the river bank are red with blood. No man or woman, young or old, is left; no creature escapes unless it stayed hidden. The town is destroyed and set on fire.'",
+     "date": "1219",
+     "doc": "La Chanson de la croisade contre les Albigeois, laisse CCXII (lines 9305–9321), tr. Paul Meyer, vol. II (1879), p. 462",
+     "url": "https://archive.org/details/lachansondelacro02guiluoft",
+     "lic": "Public domain (1879)"
+    },
+    {
+     "text": "Roma, ben ancse a hom auzit retraire Quel cap sem vos te, per quel faitz soven raire; Per que cug e cre qu'ops vos auria traire, Roma, del cervel, Quar de mal capel Etz vos e Cistel, qu'a Bezers fezetz faire Mout estranh mazel.",
+     "who": "Guilhem Figueira, a tailor's son and troubadour from Toulouse exiled by the crusade, in his song against Rome, D'un sirventes far, said to have been written in Toulouse during the crusaders' siege of 1229 (Old Occitan). Rough gloss: 'Rome, it has always been said that your head is empty, which is why you keep it shaved; so I believe you need some brain put into you, Rome, for you and Cîteaux are of an evil cap, you who at Béziers had a most terrible slaughter done.'",
+     "date": "c. 1229",
+     "doc": "D'un sirventes far, stanza 22 (lines 148–154), in Emil Levy, Guilhem Figueira, ein provenzalischer Troubadour (Berlin, 1880), p. 42",
+     "url": "https://archive.org/details/guilhemfigueiraeinprolevy",
+     "lic": "Public domain (1880)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Voilà pourquoi [les habitants] furent à Béziers détruits et mis à mal : tous ils (les croisés) les occirent : ils ne peuvent leur faire pis. Ils massacraient tous ceux qui s'étaient réfugiés dans le moûtier; rien ne put les sauver, ni croix, ni autel, ni crucifix; et ces fous ribauds mendiants massacraient les clercs, et femmes et enfants, tellement que je ne crois pas qu'un seul en soit échappé. Dieu reçoive les âmes, s'il lui plaît, en paradis! car je ne pense pas que jamais, depuis le temps des Sarrazins, si sauvage massacre ait été résolu ni accompli.",
+     "who": "William of Tudela, a Navarrese cleric who supported the crusade and wrote the first part of the Song (Meyer's 1879 French translation of the Occitan). Just before this he says the crusade's leaders had agreed that any town that resisted would be put to the sword, so that fear would make the others surrender. Gloss: 'That is why the people of Béziers were destroyed: the crusaders killed them all. They massacred everyone who had fled into the church; neither cross, nor altar, nor crucifix could save them; the mad beggar-ribalds killed the clergy, women and children, so that I do not think one escaped. May God receive their souls in paradise! I do not think so savage a massacre has been decided or done since the time of the Saracens.'",
+     "date": "July 1209 (events)",
+     "url": "https://archive.org/details/lachansondelacro02guiluoft"
+    },
+    {
+     "text": "When they discovered, from the admissions of some of them, that there were Catholics mingled with the heretics, they said to the abbot, “Sir, what shall we do, for we cannot distinguish between the faithful and the heretics.” The abbot, like the others, was afraid that many, in fear of death, would pretend to be Catholics, and after their departure, would return to their heresy, and is said to have replied: “Kill them all; for the Lord knoweth them that are His (2 Tim. ii. 19)!” and so countless numbers in that town were slain.",
+     "who": "Caesarius of Heisterbach, a Cistercian monk in the Rhineland who approved of the crusade, writing a decade or more later and far from Béziers; the Latin says only that the abbot 'dixisse fertur', is said to have said, 'Caedite eos. Novit enim Dominus qui sunt eius.' (Dialogue on Miracles, Book V, ch. 21, tr. H. von E. Scott and C. C. Swinton Bland, 1929) The word 'all' in 'Kill them all' is the 1929 translators'; the Latin 'Caedite eos' means 'Kill them'. Caesarius also misdates the campaign to 1211.",
+     "date": "written c. 1219–1223",
+     "url": "https://archive.org/details/caesariusthedialogueonmiraclesvol.1"
+    }
+   ],
+   "official": {
+    "text": "dum tractaretur cum baronibus de liberatione illorum qui in civitate ipsa catholici censebantur, ribaldi et alii viles et inermes personae, non exspectato mandato principum, in civitatem fecerant insultum, et mirantibus nostris, cum clamaretur: Ad arma, ad arma, quasi sub duarum vel trium horarum spatio, transcensis fossatis ac muro, capta est civitas Biterrensis, nostrique non parcentes ordini, sexui, vel aetati, fere viginti millia hominum in ore gladii peremerunt",
+    "who": "Arnaud Amaury, abbot of Cîteaux, and Milo, the papal legates leading the crusade, reporting to Pope Innocent III (Latin, Innocent III's register, book XII, letter 108, in Migne's Patrologia Latina vol. 216, 1855). Gloss: 'while we were still negotiating with the barons to free those in the city held to be Catholics, the camp followers and other low, unarmed people attacked the city without waiting for the princes' orders; to our amazement, with cries of \"To arms, to arms!\", within two or three hours they had crossed the ditches and the wall and Béziers was taken, and our men, sparing neither rank nor sex nor age, put almost twenty thousand people to the sword.' The letter goes on to call the sack divine vengeance, and recalls that the townspeople had once murdered their own lord in the church of the Magdalene.",
+    "date": "August 1209",
+    "url": "https://archive.org/details/bim_early-english-books-1641-1700_patrologiae-cursus-completus-_1855_216"
+   },
+   "warn": "The official and Occitan voices are given in their original Latin and Old Occitan or in Paul Meyer's 1879 French translation, with the site's own plain glosses. The Song is partisan: its first author supported the crusade, its continuator was a Toulouse loyalist who was not present at Marmande. Caesarius wrote at second hand, years later, and only reports what Arnaud 'is said' to have said.",
+   "note": "Research in progress: no words of Cathar believers themselves are quoted yet. Their testimony survives mainly in inquisition registers (e.g. the Doat collection and Jacques Fournier's register, edited by Jean Duvernoy in 1965); a pre-1931 public-domain printing of such a deposition (e.g. in Döllinger's Beiträge zur Sektengeschichte, 1890) still needs to be found and checked. Even then it would be the inquisitor's record ('as recorded by the inquisitor').",
+   "disputed": [
+    [
+     "How many died at Béziers? The legates' own letter says almost 20,000 were put to the sword; Peter of les Vaux-de-Cernay (as quoted by Meyer) says up to 7,000 were killed in the church of the Magdalene alone; Caesarius says the city was said to have held more than 100,000 men. Among modern historians, Christopher Tyerman says the true figure was almost certainly far less, and Laurence Marvin argues that clearly most of the population and buildings survived and the city went on as a major town.",
+     [
+      "https://archive.org/details/bim_early-english-books-1641-1700_patrologiae-cursus-completus-_1855_216",
+      "https://archive.org/details/lachansondelacro02guiluoft",
+      "https://archive.org/details/caesariusthedialogueonmiraclesvol.1",
+      "https://en.wikipedia.org/wiki/Massacre_at_B%C3%A9ziers"
+     ]
+    ],
+    [
+     "Did Arnaud Amaury say 'Kill them all'? Only Caesarius reports it, years later and at a distance, and he writes 'is said to have replied'; Britannica says the legate 'allegedly' said it, and Marvin calls it apocryphal, noting that the legate may not even have known what was happening until it was over. Other historians cited by Wikipedia hold that, whether or not the words were spoken, they captured the spirit of the assault.",
+     [
+      "https://archive.org/details/caesariusthedialogueonmiraclesvol.1",
+      "https://www.britannica.com/event/Albigensian-Crusade",
+      "https://en.wikipedia.org/wiki/Massacre_at_B%C3%A9ziers"
+     ]
+    ],
+    [
+     "Was the massacre ordered or spontaneous? The legates told the pope that the camp followers attacked without waiting for orders while talks were still going on; William of Tudela says the crusade's leaders had already agreed that any town that resisted would be put to the sword to frighten the others into surrender.",
+     [
+      "https://archive.org/details/bim_early-english-books-1641-1700_patrologiae-cursus-completus-_1855_216",
+      "https://archive.org/details/lachansondelacro02guiluoft"
+     ]
+    ],
+    [
+     "Violence on the other side. The crusade's immediate cause was the killing of the papal legate Pierre de Castelnau in 1208, in which Raymond VI was implicated. Meyer's notes record that in 1218 the people of Avignon, partisans of Toulouse, captured the prince of Orange and put him to death (in Pope Honorius's words, cut to pieces), and that Raymond VII had the captured crusader captains Foucaut and Jean beheaded in 1220. In 1242 men from Montségur murdered two inquisitors and their companions at Avignonet.",
+     [
+      "https://en.wikipedia.org/wiki/Massacre_at_B%C3%A9ziers",
+      "https://www.britannica.com/event/Albigensian-Crusade",
+      "https://archive.org/details/lachansondelacro02guiluoft",
+      "https://en.wikipedia.org/wiki/Siege_of_Monts%C3%A9gur"
+     ]
+    ],
+    [
+     "How reliable is the Song's account of Marmande? Meyer judged that the continuator was not inside the town and that the council scene was arranged, but that the massacre itself is confirmed by the French royal chronicler Guillaume le Breton, who wrote that the crusaders killed all the townspeople with their women and children, up to five thousand.",
+     [
+      "https://archive.org/details/lachansondelacro02guiluoft"
+     ]
+    ]
+   ],
+   "blind": "The record of Béziers belongs almost wholly to the winners: the legates who reported to the pope, Cistercian and northern clerical chroniclers, and William of Tudela, who backed the crusade even while he mourned its victims. The southern side survives in the Song's anonymous continuator and in troubadours like Guilhem Figueira, voices of the Toulouse court and the southern nobility. The Cathars themselves, and the ordinary Catholic townspeople killed alongside them, left almost nothing in their own words; what they believed comes down to us mainly through the questions and records of the inquisitors who hunted them.",
+   "reading": [
+    [
+     "Albigensian Crusade (Britannica)",
+     "https://www.britannica.com/event/Albigensian-Crusade"
+    ],
+    [
+     "Massacre at Béziers (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Massacre_at_B%C3%A9ziers"
+    ],
+    [
+     "Paul Meyer, La Chanson de la croisade contre les Albigeois, vol. II, translation (1879, archive.org)",
+     "https://archive.org/details/lachansondelacro02guiluoft"
+    ],
+    [
+     "Caesarius of Heisterbach, The Dialogue on Miracles, vol. I, tr. Scott & Bland (1929, archive.org)",
+     "https://archive.org/details/caesariusthedialogueonmiraclesvol.1"
+    ],
+    [
+     "Emil Levy, Guilhem Figueira, ein provenzalischer Troubadour (1880, archive.org)",
+     "https://archive.org/details/guilhemfigueiraeinprolevy"
+    ],
+    [
+     "Siege of Montségur (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Siege_of_Monts%C3%A9gur"
+    ],
+    [
+     "Guilhem Figueira (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Guilhem_Figueira"
+    ]
+   ]
+  },
+  {
+   "id": "yangzhou1645",
+   "title": "The ten days of Yangzhou",
+   "region": "Asia",
+   "where": "Yangzhou, Jiangsu, China (approximate)",
+   "lat": 32.394,
+   "lon": 119.433,
+   "from": 1645,
+   "to": 1645,
+   "themes": [
+    "War",
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "Shi Kefa, a Ming loyalist general, was president of the Board of War at Nanking when Peking fell in 1644; the new court of the Prince of Fu sent him to command at Yangzhou, where he tried in vain to reconcile the Four Guardian Generals, who were warring among themselves and outraging the people of their districts.",
+     "https://en.wikisource.org/wiki/Eminent_Chinese_of_the_Ch%27ing_Period/Shih_K%27o-fa"
+    ],
+    [
+     "The Qing regent Dorgon wrote to Shi Kefa asking him to surrender; Shi declined, and his reply was circulated among later generations.",
+     "https://en.wikipedia.org/wiki/Shi_Kefa"
+    ],
+    [
+     "The forces of the Manchu prince Dodo surrounded Yangzhou on 13 May 1645 and took it after a seven days' siege; Shi failed in an attempt at suicide, rejected every offer of amity and was killed, and the Manchus then plundered and slaughtered the inhabitants for ten days, from 20 to 29 May.",
+     "https://en.wikisource.org/wiki/Eminent_Chinese_of_the_Ch%27ing_Period/Shih_K%27o-fa"
+    ],
+    [
+     "The Qing army included Han Chinese bannermen; Wikipedia describes homes burned with refugees inside, women raped and killed in the streets and bodies burned in piles, and says the massacre served as a warning to the rest of Jiangnan of what resistance would cost.",
+     "https://en.wikipedia.org/wiki/Yangzhou_massacre"
+    ],
+    [
+     "Wang Xiuchu's eyewitness Record of Ten Days in Yangzhou was not published under the Qing; copies survived and reached Japan, and accounts of the Yangzhou, Jiading and Jiangyin massacres were later republished by anti-Qing writers before the Taiping Rebellion and the 1911 revolution.",
+     "https://en.wikipedia.org/wiki/Yangzhou_massacre"
+    ],
+    [
+     "Shi's body was never found and only his garments were buried at Mei-hua-ling outside Yangzhou; the Qianlong emperor later gave him the posthumous name Chung-cheng (Zhongzheng), and in 1768 a temple to his memory was built beside the tomb.",
+     "https://en.wikisource.org/wiki/Eminent_Chinese_of_the_Ch%27ing_Period/Shih_K%27o-fa"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "越次早，督鎮牌諭至，內有『一人當之，不累百姓』之語，聞者莫不感泣。",
+     "who": "Wang Xiuchu, a townsman of Yangzhou, describing the placard Shi Kefa had posted the day the city fell (in short: next morning the commander's placard came, with the words 'I alone will bear it; the common people shall not be made to suffer'; everyone who heard it wept, moved)",
+     "date": "25th day of the 4th month (20 May 1645)",
+     "doc": "Wang Xiuchu, Yangzhou shiri ji (A Record of Ten Days in Yangzhou), as printed in the Mingji baishi huibian, transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+     "lic": "Public domain (17th-century text; 19th-century printing)"
+    },
+    {
+     "text": "一卒提刀前導，一卒橫槊後逐，一卒居中，或左或右以防逃逸。數十人如驅牛羊，稍不前即加捶撻，或即殺之；諸婦女長索繋頸，累累如貫珠，一步一跌，遍身泥土；滿地皆嬰兒，或襯馬蹄，或籍人足，肝腦塗地，泣聲盈埜。",
+     "who": "Wang Xiuchu, being marched off with his brothers and some fifty other captives (in short: one soldier went ahead with a sword, one behind with a lance, one in the middle to stop anyone escaping; several dozen of us were driven like oxen and sheep, and whoever lagged was beaten or killed on the spot; the women had a long rope tied round their necks, strung together like pearls, stumbling at every step and covered in mud; babies lay all over the ground under horses' hooves and people's feet, their brains spattered on the earth, and weeping filled the fields)",
+     "date": "26th day of the 4th month (21 May 1645)",
+     "doc": "Wang Xiuchu, Yangzhou shiri ji (A Record of Ten Days in Yangzhou), as printed in the Mingji baishi huibian, transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+     "lic": "Public domain (17th-century text; 19th-century printing)"
+    },
+    {
+     "text": "忽聞隔墻吾弟哀號聲，又聞舉刀砍擊聲，凡三擊，遂寂然。少間，復聞仲兄哀懇曰：「吾有金在家地窖中，放我取獻。」一擊復寂然。",
+     "who": "Wang Xiuchu, hiding in a loft after escaping the killing ground (in short: through the wall I suddenly heard my younger brother cry out, then a blade striking, three blows, then silence; a little later I heard my second brother beg, 'I have gold in a cellar at home; let me go and fetch it for you'; one blow, and silence again)",
+     "date": "26th day of the 4th month (21 May 1645)",
+     "doc": "Wang Xiuchu, Yangzhou shiri ji (A Record of Ten Days in Yangzhou), as printed in the Mingji baishi huibian, transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+     "lic": "Public domain (17th-century text; 19th-century printing)"
+    },
+    {
+     "text": "查焚尸簿載數，其八十萬餘，其落井投河、閉門焚縊者不與焉，被擄者不與焉。",
+     "who": "Wang Xiuchu, after the monks were ordered to burn the dead (in short: the register of burned corpses counted more than 800,000, not counting those who threw themselves into wells and rivers or shut their doors and burned or hanged themselves, nor those carried off); historians consider the figure greatly exaggerated (see Disputed)",
+     "date": "2nd day of the 5th month (27 May 1645)",
+     "doc": "Wang Xiuchu, Yangzhou shiri ji (A Record of Ten Days in Yangzhou), as printed in the Mingji baishi huibian, transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+     "lic": "Public domain (17th-century text; 19th-century printing)"
+    },
+    {
+     "text": "自四月二十五日起，至五月五日止，共十日。其間皆身所親歷，目所親睹，故漫記之如此，遠處風聞者不載也。",
+     "who": "Wang Xiuchu, closing his record; of the eight members of his close family caught up in the sack, he writes, three were left (in short: from the 25th of the fourth month to the 5th of the fifth, ten days in all; I lived through all of it myself and saw it with my own eyes, so I have written it down as it was; what I only heard of from far away I have left out)",
+     "date": "5th day of the 5th month (29 May 1645)",
+     "doc": "Wang Xiuchu, Yangzhou shiri ji (A Record of Ten Days in Yangzhou), as printed in the Mingji baishi huibian, transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+     "lic": "Public domain (17th-century text; 19th-century printing)"
+    },
+    {
+     "text": "法北望陵廟，無涕可揮；身蹈大戮，罪應萬死；所以不即從先帝於地下者，實惟社稷之故。",
+     "who": "Shi Kefa, Ming commander-in-chief and so an official of the losing state, killed when the city fell, in his reply to the Qing regent Dorgon (in short: looking north to the imperial tombs I have no tears left to shed; I have earned the gravest punishment and deserve ten thousand deaths; I did not follow the late emperor into the grave at once only for the sake of the dynasty's altars)",
+     "date": "15th day of the 9th month, 1644",
+     "doc": "Shi Kefa, Fu Duo'ergun shu (Reply to Dorgon), Chinese Wikisource, supplemented from the Nanjiang yishi",
+     "url": "https://zh.wikisource.org/wiki/%E5%BE%A9%E5%A4%9A%E7%88%BE%E8%A2%9E%E6%9B%B8",
+     "lic": "Public domain (17th-century text)"
+    }
+   ],
+   "official": [
+    {
+     "text": "今若擁號稱尊，便是天有二日，儼為敵國。予將簡西行之銳卒，轉旆東征；且擬釋彼重誅，命為前導。",
+     "who": "Dorgon, Prince Regent of the Qing, in his letter to Shi Kefa, which presents the Manchus as avengers of the Ming emperor against the rebel Li Zicheng (in short: if you now set up an emperor of your own, there will be two suns in the sky and you will be an enemy state; I will take the picked troops I was sending west, turn my banners east, and may even pardon the rebel and make him my vanguard). The letter is preserved in the Qing draft history, Qing shi gao",
+     "date": "1644",
+     "url": "https://zh.wikisource.org/wiki/%E8%87%B4%E5%8F%B2%E5%8F%AF%E6%B3%95%E6%9B%B8"
+    },
+    {
+     "text": "四月，師進次泗州，渡淮趨揚州，遣兵部尚書漢岱等先驅，得舟三百餘，圍七日，克之，殺明大學士史可法。",
+     "who": "The Qing shi gao (Draft History of the Qing), biography of Dodo, compiled by the Qing History Office of the Republic of China and published 1928 from Qing records (in short: in the fourth month the army advanced to Sizhou, crossed the Huai and made for Yangzhou; it sent the President of the Board of War Handai ahead, seized more than 300 boats, besieged the city seven days, took it, and killed the Ming Grand Secretary Shi Kefa). The official record says nothing of the killing of the townspeople",
+     "date": "May 1645; published 1928",
+     "url": "https://zh.wikisource.org/wiki/%E6%B8%85%E5%8F%B2%E7%A8%BF/%E5%8D%B7218"
+    },
+    {
+     "text": "至若史可法之支撐殘局、力矢孤忠，終蹈一死以殉；又如劉宗周、黃道周等之立朝謇諤、抵觸僉壬，及遭際時艱，臨危授命：均足稱一代完人，為褒揚所當及。其他或死守城池、或身殞行陣與夫俘擒駢戮、視死如歸者，爾時王旅徂征，自不得不申法令，以明順逆；而事後平情而論，若而人者皆無愧於疾風勁草，即自盡以全名節，其心亦並可矜憐！",
+     "who": "The Qianlong emperor, edict ordering posthumous honours for Ming loyalists, printed at the head of the Qinding Shengchao xunjie zhuchen lu (Record of the Martyred Officials of the Fallen Dynasty, 1776) (in short: Shi Kefa, who held up a collapsing cause with solitary loyalty and died for it, and others like him, were perfect men of their age and deserve praise; as for those who died defending cities, in battle, or executed as captives, at that time, while the royal army was on campaign, the law had to be enforced to show who submitted and who rebelled; but judged calmly afterwards, they were all like hardy grass in a gale, and even those who killed themselves to keep their honour deserve pity)",
+     "date": "10th day of the 11th month of Qianlong 40 (winter 1775–76)",
+     "url": "https://zh.wikisource.org/wiki/%E6%AC%BD%E5%AE%9A%E5%8B%9D%E6%9C%9D%E6%AE%89%E7%AF%80%E8%AB%B8%E8%87%A3%E9%8C%84"
+    },
+    {
+     "text": "夫可法，明臣也。其不屈，正也。不載其語，不有失忠臣之心乎？",
+     "who": "The Qianlong emperor, essay on Shi Kefa's reply to Dorgon, which he had searched for in the palace archives and ordered printed (in short: Shi Kefa was a Ming minister, and his refusal to yield was right; not to record his words would fail a loyal minister's heart). Reprinted in Li Yao's Nanjiang yishi (1830)",
+     "date": "Qianlong reign (1736–1795)",
+     "url": "https://zh.wikisource.org/wiki/%E5%8D%97%E7%96%86%E7%B9%B9%E5%8F%B2/%E5%BE%A1%E8%A3%BD%E6%9B%B8%E4%BA%8B"
+    }
+   ],
+   "note": "Research in progress: P. Aucourt's French translation of the memoir, 'Journal d'un bourgeois de Yang-tcheou (1645)' (Bulletin de l'École française d'Extrême-Orient, 1907), is public domain and could supply a checked European-language version; it has not yet been examined.",
+   "warn": "The memoir, Shi Kefa's letter and the Qing documents are quoted in classical Chinese from Chinese Wikisource transcriptions of public-domain texts; the plain-English summaries in 'who' are the site's own, not translations. The only pre-1931 English version, in Backhouse and Bland's Annals and Memoirs of the Court of Peking (1914), was checked against the Chinese and is not quoted: it departs from Wang's text in places (it has the captive women tied together 'at the knees' where Wang wrote that a long rope was tied round their necks, and softens a Qing soldier's boast that not one of tens of thousands of women seized in Korea had lost her chastity), it calls the author unknown, and Backhouse is known to have forged other Chinese documents. Chinese tradition holds that Dorgon's letter may have been drafted by Li Wen and Shi's reply by Hou Fangyu. The memoir describes rape and the killing of children.",
+   "disputed": [
+    [
+     "How many died? Wang says the register of corpses burned by the monks counted more than 800,000, not counting suicides and captives. Wikipedia reports that modern historians consider this an extreme exaggeration: Lynn Struve, following a 1964 study by Zhang Defang, notes that the city then probably held no more than 300,000 people and the whole prefecture about 800,000. Backhouse and Bland (1914) put the population at over a million and the dead at more than half a million. Wikipedia also says the killing was over by the sixth day, despite the memoir's title.",
+     [
+      "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+      "https://en.wikipedia.org/wiki/Yangzhou_massacre",
+      "https://archive.org/stream/annalsmemoirsco00blangoog/annalsmemoirsco00blangoog_djvu.txt"
+     ]
+    ],
+    [
+     "Silence and revival. The Qing draft history records only that Dodo's army besieged Yangzhou seven days, took it and killed Shi Kefa. Wang's record was not published under the Qing and survived in copies that reached Japan; late-Qing anti-Manchu writers republished it, and Wikipedia says such atrocity accounts were used by revolutionaries in 1911 to fuel massacres of Manchus, so the memoir has served as propaganda as well as testimony.",
+     [
+      "https://zh.wikisource.org/wiki/%E6%B8%85%E5%8F%B2%E7%A8%BF/%E5%8D%B7218",
+      "https://en.wikipedia.org/wiki/Yangzhou_massacre"
+     ]
+    ],
+    [
+     "The Ming side's own record. Wang does not spare it: two of the Ming soldiers billeted in his house trampled everything and cost over a thousand cash a day; he says Yangzhou men guided the Qing soldiers to rich houses; on the first day of the fifth month the troops of the Ming Earl of Xingping (an interlinear note identifies him as Gao Jie, but Gao Jie had been murdered at Suiyang months before, as the appendix printed with the memoir says, and the title had passed to his young son, so these were his old army) re-entered the city and took every last thread and grain; and on the tenth day he could not tell whether the plunderers were Qing soldiers, Ming garrison troops or rioters. An appendix printed with the memoir blames Gao Jie's army for earlier killing around the city and blames Shi Kefa's own decisions, quoting a friend who said Shi had ruined the south-east; Hummel's biography likewise says the Ming generals at Yangzhou were outraging the people of their districts.",
+     [
+      "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98",
+      "https://en.wikisource.org/wiki/Eminent_Chinese_of_the_Ch%27ing_Period/Shih_K%27o-fa"
+     ]
+    ],
+    [
+     "Hero or lesson? The Qing state that killed Shi Kefa made him a model of loyalty: Qianlong praised his solitary loyalty, blamed the Prince of Fu for not trusting him, and honoured him with a posthumous name, while saying that the killing of loyalists had been necessary at the time to show the difference between submission and rebellion.",
+     [
+      "https://zh.wikisource.org/wiki/%E5%8D%97%E7%96%86%E7%B9%B9%E5%8F%B2/%E5%BE%A1%E8%A3%BD%E6%9B%B8%E4%BA%8B",
+      "https://zh.wikisource.org/wiki/%E6%AC%BD%E5%AE%9A%E5%8B%9D%E6%9C%9D%E6%AE%89%E7%AF%80%E8%AB%B8%E8%87%A3%E9%8C%84"
+     ]
+    ]
+   ],
+   "blind": "Wang Xiuchu, a townsman who survived by hiding and paying, is almost the only voice of Yangzhou's people; he names his brothers but not the women he saw seized and raped, and those women, the children, the captives carried off and the soldiers of both armies have no words of their own. The Qing official record is silent on the killing, and the Ming words that survive are those of officials.",
+   "reading": [
+    [
+     "Yangzhou massacre (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Yangzhou_massacre"
+    ],
+    [
+     "Shih K'o-fa, in Eminent Chinese of the Ch'ing Period (1943, Wikisource)",
+     "https://en.wikisource.org/wiki/Eminent_Chinese_of_the_Ch%27ing_Period/Shih_K%27o-fa"
+    ],
+    [
+     "揚州十日記 Yangzhou shiri ji, Chinese text (Wikisource)",
+     "https://zh.wikisource.org/wiki/%E6%8F%9A%E5%B7%9E%E5%8D%81%E6%97%A5%E8%A8%98"
+    ],
+    [
+     "Backhouse and Bland, Annals and Memoirs of the Court of Peking (1914), ch. VII, 'The Sack of Yang Chou-fu' (archive.org; a loose translation)",
+     "https://archive.org/details/annalsmemoirsco00blangoog"
+    ]
+   ]
+  },
+  {
+   "id": "acadians1755",
+   "title": "Le Grand Dérangement: the expulsion of the Acadians",
+   "region": "Americas",
+   "where": "Grand-Pré and the Minas Basin, Nova Scotia, Canada",
+   "lat": 45.106,
+   "lon": -64.307,
+   "from": 1755,
+   "to": 1764,
+   "themes": [
+    "Removal and dispossession",
+    "Colonial rule",
+    "War"
+   ],
+   "facts": [
+    [
+     "The Acadians had lived in what is now Nova Scotia since the founding of Port-Royal in 1604, farming dyked marshland around the Bay of Fundy with the Mi'kmaq as friends and allies; sovereignty passed to Britain after 1713, and in 1730 the British persuaded them to swear, if not allegiance, at least neutrality in any war between Britain and France.",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ],
+    [
+     "Many Acadians refused an unconditional oath because it might commit their men to fight France and look to their Mi'kmaq neighbours like accepting the British claim to Acadia; others refused because they were anti-British, and over the decades some took part in French military operations and helped supply the French fortresses of Louisbourg and Beauséjour.",
+     "https://en.wikipedia.org/wiki/Expulsion_of_the_Acadians"
+    ],
+    [
+     "After Fort Beauséjour fell in June 1755, Governor Charles Lawrence noted some 270 Acadian militia among its inhabitants; in July 1755 he pressed Acadian delegates in Halifax to take an unqualified oath of allegiance, and when they refused he imprisoned them and ordered the deportation.",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ],
+    [
+     "On 5 September 1755 Lieutenant-Colonel John Winslow had the men and boys of the Grand-Pré district gathered in the church to hear the order; the plan was to capture as many men as possible, breach the dykes and burn the houses and crops, and between 1755 and 1763 approximately 10,000 Acadians were deported to the English colonies, France and the Caribbean.",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ],
+    [
+     "Of some 3,100 Acadians deported after the fall of Louisbourg in 1758 an estimated 1,649 died by drowning or disease, a death rate of 53 per cent; thousands died of disease or starvation aboard the ships.",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ],
+    [
+     "Some Acadians fought back, among them Joseph Broussard dit Beausoleil, who led retaliatory raids on British troops, and many hid in the forests, where they were hunted for five years; their lands went to New England settlers, and when Acadians were allowed to return after 1764 they settled far from their old homes.",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "It appears, Sir, that your Excellency doubts the sincerity with which we have promised to be faithful to his Britannic Majesty. We most humbly beg your Excellency to consider our past conduct. You will see, that, very far from violating the oath we have taken, we have maintained it in its entirety, in spite of the solicitations and the dreadful threats of another power. [...] It is not the gun which an inhabitant possesses, that will induce him to revolt, nor the privation of the same gun that will make him more faithful; but his conscience alone must induce him to maintain his oath.",
+     "who": "The inhabitants of Minas, Pisiquid and the River Canard, memorial to Governor Charles Lawrence after their guns and canoes were seized, signed by their deputies and others",
+     "date": "10 June 1755",
+     "doc": "Selections from the Public Documents of the Province of Nova Scotia, ed. Thomas B. Akins (Halifax, 1869), pp. 247-249, 'translated from the French' by Benjamin Curren",
+     "url": "https://archive.org/stream/selectionsfrompu00nova/selectionsfrompu00nova_djvu.txt",
+     "lic": "Public domain (Nova Scotia government publication, 1869)"
+    },
+    {
+     "text": "we were transported into the English Colonies, and this was done in so much haste, and with so little regard to our necessities and the tenderest ties of nature, that from the most social enjoyments and affluent circumstances, many found themselves destitute of the necessaries of life: Parents were separated from children, and husbands from wives, some of whom have not to this day met again; and we were so crowded in the transport vessels, that we had not room even for all our bodies to lay down at once, and consequently were prevented from carrying with us proper necessaries, especially for the support and comfort of the aged and weak, many of whom quickly ended their misery with their lives.",
+     "who": "The late French inhabitants of Nova Scotia formerly settled on the Bay of Minas, now residing in Pennsylvania, petition to King George",
+     "date": "undated (written in exile after 1755; printed 1829)",
+     "doc": "Thomas C. Haliburton, An Historical and Statistical Account of Nova-Scotia, vol. I (Halifax, 1829), p. 194",
+     "url": "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt",
+     "lic": "Public domain (1829)"
+    },
+    {
+     "text": "The miseries we have since endured are scarce sufficiently to be expressed, being reduced for a livelihood to toil and hard labour in a southern clime, so disagreeable to our constitutions, that most of us have been prevented, by sickness, from procuring the necessary subsistance for our families; and therefore are threatened with that which we esteem the greatest aggravation of all our sufferings, even of having our children forced from us, and bound out to strangers [...] We have already seen in this Province of Pennsylvania two hundred and fifty of our people, which is more than half the number that were landed here, perish through misery and various diseases.",
+     "who": "Same petition of the Acadians in Pennsylvania to King George",
+     "date": "undated (written in exile after 1755; printed 1829)",
+     "doc": "Thomas C. Haliburton, An Historical and Statistical Account of Nova-Scotia, vol. I (Halifax, 1829), p. 195",
+     "url": "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt",
+     "lic": "Public domain (1829)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Upon an impartial review of the transactions of this period, it must be admitted, that the transportation of the Acadians to distant colonies, with all the marks of ignominy and guilt peculiar to convicts, was cruel; and although such a conclusion could not then be drawn, yet subsequent events have disclosed that their expulsion was unnecessary.",
+     "who": "Thomas Chandler Haliburton, Nova Scotian lawyer and historian, writing two generations later in An Historical and Statistical Account of Nova-Scotia, vol. I, p. 195",
+     "date": "1829",
+     "url": "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "They were asked, what Excuse they could make for their Presumption in this Paragraph, and treating the Government with such Indignity and Contempt as to Expound to them the nature of Fidelity, and to prescribe what would be the Security proper to be relied on by the Government for their Sincerity.",
+     "who": "Minutes of the Nova Scotia Council, Halifax, on the Minas deputies' memorial and its sentence about guns and conscience; the next day, when the deputies would not take the oath without consulting their people, the Council declared it 'could no longer look on them as Subjects to His Britannick Majesty but as Subjects of the King of France' (Akins, Selections, 1869, pp. 254-256)",
+     "date": "3 July 1755",
+     "url": "https://archive.org/stream/selectionsfrompu00nova/selectionsfrompu00nova_djvu.txt"
+    },
+    {
+     "text": "After mature Consideration, it was unanimously Agreed That, to prevent as much as possible their Attempting to return and molest the Settlers that may be set down on their Lands, it would be most proper to send them to be distributed amongst the several Colonies on the Continent, and that a sufficient Number of Vessels should be hired with all possible Expedition for that purpose.",
+     "who": "Nova Scotia Council under Lieutenant-Governor Charles Lawrence, minutes signed by Lawrence (Akins, Selections, 1869, p. 267)",
+     "date": "28 July 1755",
+     "url": "https://archive.org/stream/selectionsfrompu00nova/selectionsfrompu00nova_djvu.txt"
+    },
+    {
+     "text": "The Part of Duty I am now upon is what thoh Necessary is Very Disagreable to my natural make & Temper as I Know it Must be Grevious to you who are of the Same Specia. But it is not my Buisness to annimedvert, but to obey Such orders as I receive and therefore without Hessitation Shall Deliver you his Majesty's orders and Instructions vizt. That your Lands & Tennements, Cattle of all Kinds and Live Stock of all Sortes are Forfitted to the Crown with all other your Effects Saving your money and Household Goods and you your Selves to be removed from this his Province.",
+     "who": "Lieutenant-Colonel John Winslow, address read through interpreters to the men held in the church at Grand-Pré, as entered in his journal (Collections of the Nova Scotia Historical Society, vol. III, 1883, pp. 94-95)",
+     "date": "5 September 1755",
+     "url": "https://archive.org/stream/collectionsofnov3188nova/collectionsofnov3188nova_djvu.txt"
+    },
+    {
+     "text": "order ye Prisoners to March, they all answered they would No go without their Fathers. I Told them that was a word I did not understand for that the Kings Command was to me absolute & Should be absolutely obeyed & That I Did not Love to use Harsh Means but that the time Did not admit of Parlies or Delays and Then ordered the whole Troops to Fix their Bayonets and advance Towards the French [...] and went of Praying, Singing & Crying being Met by the women & Children all the way (which is 1½ mile) with Great Lamentations upon their Knees praying &c.",
+     "who": "John Winslow's journal, on marching the first 141 young men of Grand-Pré to the transports (Collections of the Nova Scotia Historical Society, vol. III, 1883)",
+     "date": "10 September 1755",
+     "url": "https://archive.org/stream/collectionsofnov3188nova/collectionsofnov3188nova_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "Whereas the deportation of the Acadian people, commonly known as the Great Upheaval, continued until 1763 and had tragic consequences, including the deaths of many thousands of Acadians - from disease, in shipwrecks, in their places of refuge and in prison camps in Nova Scotia and England as well as in the British colonies in America; Whereas We acknowledge these historical facts and the trials and suffering experienced by the Acadian people during the Great Upheaval;",
+    "who": "Royal Proclamation designating 28 July as 'A Day of Commemoration of the Great Upheaval' (SI/2003-188), issued in the name of Queen Elizabeth II as Queen of Canada; it states that it is not a recognition of legal or financial responsibility",
+    "date": "10 December 2003",
+    "url": "https://laws-lois.justice.gc.ca/eng/regulations/SI-2003-188/FullText.html"
+   },
+   "warn": "The 1755 memorial was written in French; the card quotes the 1869 English translation printed by the Nova Scotia government. The Pennsylvania petition is quoted as Haliburton printed it in 1829, without a date. Winslow's journal keeps his own eighteenth-century spelling ('thoh', 'Specia' for species, 'annimedvert' for animadvert), which is reproduced as printed. Officials call the Acadians 'the French' and 'Recusants', and the memorial calls the Mi'kmaq 'savages'; these are the documents' words.",
+   "disputed": [
+    [
+     "Neutral or not. The Acadians' deputies insisted they had kept their oath of fidelity despite French threats, and the Pennsylvania petition admits only 'some weak and false-hearted persons', twelve of them outlawed by Governor Shirley, while denying that they took part in the killing of Major Noble and his men at Grand-Pré, of which they say they had warned; the Nova Scotia Council treated their refusal of the unconditional oath as proof of insincerity. Some 270 Acadian militia were found at Beauséjour in 1755, some Acadians had joined French military operations and supplied Louisbourg and Beauséjour, and historians note that some Acadians labelled 'neutral' were not; the expulsion nonetheless made no distinction between those who stayed neutral and those who took up arms.",
+     [
+      "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt",
+      "https://archive.org/stream/selectionsfrompu00nova/selectionsfrompu00nova_djvu.txt",
+      "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens",
+      "https://en.wikipedia.org/wiki/Expulsion_of_the_Acadians"
+     ]
+    ],
+    [
+     "Ethnic cleansing or wartime removal. John Mack Faragher compares the expulsion to ethnic cleansing and points to anti-Catholic laws and the land handed to Protestant settlers; John Grenier says Faragher overstates the religious motive, and Naomi Griffiths and A. J. B. Johnston see it as comparable to other deportations of the age, driven by a perceived military threat, and not ethnic cleansing. The event is widely called a crime against humanity, while the use of 'genocide' is debated. The Canadian Encyclopedia judges it as unnecessary on military grounds as it was inhumane; Haliburton already called it cruel and unnecessary in 1829.",
+     [
+      "https://en.wikipedia.org/wiki/Expulsion_of_the_Acadians",
+      "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens",
+      "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt"
+     ]
+    ],
+    [
+     "How many were deported and died. The Canadian Encyclopedia gives approximately 10,000 deported between 1755 and 1763, and 1,649 dead of some 3,100 deported after 1758; Wikipedia gives about 11,500 deported of an estimated 14,100 Acadians, of whom 5,000 died, including almost 1,000 when the Duke William, Violet and Ruby sank in 1758. The Pennsylvania exiles wrote that 250 of their people, more than half of those landed there, had died; Haliburton says 415 were sent to Pennsylvania.",
+     [
+      "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens",
+      "https://en.wikipedia.org/wiki/Expulsion_of_the_Acadians",
+      "https://archive.org/stream/historicalstatis01hali/historicalstatis01hali_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "The Acadians who speak here are their deputies and elders, men writing formal petitions to governors and the king, in documents later selected by a Nova Scotia records commissioner who said in his preface that the necessity of the removal had not been clearly understood; the women and children appear only in Winslow's journal, on their knees by the road. The thousands who died at sea or in the colonies, and the Mi'kmaq, allies and kin of many Acadians who fought the British for decades, have almost no words of their own in this record.",
+   "reading": [
+    [
+     "T. B. Akins (ed.), Selections from the Public Documents of the Province of Nova Scotia (1869, scan)",
+     "https://archive.org/details/selectionsfrompu00nova"
+    ],
+    [
+     "Journal of Colonel John Winslow, Collections of the Nova Scotia Historical Society, vol. III (1883, scan)",
+     "https://archive.org/details/collectionsofnov3188nova"
+    ],
+    [
+     "T. C. Haliburton, An Historical and Statistical Account of Nova-Scotia, vol. I (1829, scan)",
+     "https://archive.org/details/historicalstatis01hali"
+    ],
+    [
+     "The Canadian Encyclopedia, Acadian Expulsion (the Great Upheaval)",
+     "https://thecanadianencyclopedia.ca/en/article/la-deportation-des-acadiens"
+    ],
+    [
+     "Royal Proclamation of 2003 (SI/2003-188), Justice Laws Website",
+     "https://laws-lois.justice.gc.ca/eng/regulations/SI-2003-188/FullText.html"
+    ],
+    [
+     "Expulsion of the Acadians (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Expulsion_of_the_Acadians"
+    ]
+   ]
+  },
+  {
+   "id": "eora1788",
+   "title": "The Eora and the First Fleet: smallpox, reprisals and Pemulwuy's war",
+   "region": "Oceania",
+   "where": "Sydney Cove (Warrane), Port Jackson, New South Wales, Australia",
+   "lat": -33.859,
+   "lon": 151.211,
+   "from": 1788,
+   "to": 1802,
+   "themes": [
+    "Colonial rule",
+    "Removal and dispossession",
+    "Uprising",
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "The Eora are the traditional owners of the lands around Sydney Harbour; nearly 1,500 people arrived on the First Fleet, with limited food, foreign animals and firearms.",
+     "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    ],
+    [
+     "In 1789, some 16 months after the fleet arrived, an epidemic that the colonists called smallpox devastated the Aboriginal people around Sydney while sparing the British (Collins records one North American sailor who caught it and died); Governor Phillip estimated that perhaps half had died, and Bennelong also believed that half the Eora of the Sydney district had died.",
+     "https://en.wikipedia.org/wiki/Smallpox_in_Australia"
+    ],
+    [
+     "In December 1790 the Bidjigal man Pemulwuy was involved in the spearing of Governor Phillip's gamekeeper John McIntyre (spelt McEntire by Tench), a man the Eora feared and hated; Phillip called for a punitive raid by soldiers equipped with bags for heads, and when that party came back without corpses he sent it out again.",
+     "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    ],
+    [
+     "From 1792 Pemulwuy led raids on the farms spreading over Bidjigal land, in which huts were burnt, maize taken and travellers attacked; by April 1794 the violence between Aboriginal people and farmers was frequent and extensive, and in the 'Battle of Toongabbie' a settlers' reprisal party cut off the head of a slain warrior and carried it to Sydney.",
+     "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    ],
+    [
+     "On 1 May 1801 Governor King ordered that Aboriginal people near Parramatta, Georges River and Prospect could be shot on sight, and in November outlawed Pemulwuy with rewards for his death or capture; on or just before 2 June 1802 he was shot dead, and his head was cut off and sent to Sir Joseph Banks in England, where its whereabouts are now unknown.",
+     "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    ],
+    [
+     "A letter Bennelong drafted in 1796 addressed to a 'Mr. Phillips' (perhaps meant for former Governor Phillip, whose wife had nursed him in England), thanking Mrs Phillips for her care and asking for stockings and a handkerchief, is the first known text in English by an Aboriginal Australian (dictated to a scribe).",
+     "https://web.archive.org/web/20201021021051/https://aiatsis.gov.au/bennelongs-letter"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Sir, I am very well. I hope you are very well. I live at the governor's. I have every day dinner there. I have not my wife; another black man took her away. We have had muzzy doings; he speared me in the back, but I better now; his name is Carroway. All my friends alive and well. Not me go to England no more. I am at home now.",
+     "who": "Bennelong (Baneelon, Bannelong), Wangal man, letter dictated to a scribe and addressed to 'Mr. Phillips, Steward to Lord Sidney'; AIATSIS notes that no such steward has been found and that it may have been meant for former Governor Phillip, whose second wife nursed Bennelong when he was ill in England; signed 'Bannelong'",
+     "date": "29 August 1796",
+     "doc": "Letter from Bennelong, Sydney Cove, to Mr Phillips (original lost; text from the copy printed by F. X. von Zach, Monatliche Correspondenz, 1801), transcription on the AIATSIS page",
+     "url": "https://web.archive.org/web/20201021021051/https://aiatsis.gov.au/bennelongs-letter",
+     "lic": "Public domain (letter of 1796; printed 1801); transcription as given by AIATSIS, an Australian Government body"
+    },
+    {
+     "text": "He looked anxiously around him in the different coves we visited; not a vestige on the sand was to be found of human foot; the excavations in the rocks were filled with the putrid bodies of those who had fallen victims to the disorder; not a living person was any where to be met with. It seemed as if, flying from the contagion, they had left the dead to bury the dead. He lifted up his hands and eyes in silent agony for some time; at last he exclaimed, 'All dead! all dead!' and then hung his head in mournful silence, which he preserved during the remainder of our excursion.",
+     "who": "The Eora man held at the settlement, whom Collins does not name but who is identified as Arabanoo, seized by the colonists at Manly Cove on 31 December 1788 and held at Sydney, on being taken round the harbour during the 1789 epidemic, as recorded by David Collins, the colony's judge-advocate (Arabanoo himself died of the disease in May 1789)",
+     "date": "1789; published 1798",
+     "doc": "David Collins, An Account of the English Colony in New South Wales, vol. I (London, 1798), appendix on the natives",
+     "url": "https://www.gutenberg.org/cache/epub/12565/pg12565.txt",
+     "lic": "Public domain (1798)"
+    },
+    {
+     "text": "Bennillong told us, that his friend Cole-be's tribe being reduced by its effects to three persons, Cole-be, the boy Nan-bar-ray, and some one else, they found themselves compelled to unite with some other tribe, not only for their personal protection, but to prevent the extinction of their tribe.",
+     "who": "Bennelong, on what the 1789 epidemic did to the Cadigal clan of his friend Colbee, as recorded by David Collins",
+     "date": "1790s; published 1798",
+     "doc": "David Collins, An Account of the English Colony in New South Wales, vol. I (London, 1798), appendix on the natives",
+     "url": "https://www.gutenberg.org/cache/epub/12565/pg12565.txt",
+     "lic": "Public domain (1798)"
+    },
+    {
+     "text": "These two people inquired kindly how his excellency did, and seemed pleased to hear that he was likely to recover. They said that they were inhabitants of Rose Hill, and expressed great dissatisfaction at the number of white men who had settled in their former territories. In consequence of which declaration, the detachment at that post was reinforced on the following day.",
+     "who": "Two Aboriginal men of the Rose Hill (Parramatta) district, speaking a week after Governor Phillip was speared at Manly, as recorded by Watkin Tench, captain of marines",
+     "date": "14 September 1790; published 1793",
+     "doc": "Watkin Tench, A Complete Account of the Settlement at Port Jackson (London, 1793), ch. VIII",
+     "url": "https://www.gutenberg.org/cache/epub/3534/pg3534.txt",
+     "lic": "Public domain (1793)"
+    },
+    {
+     "text": "In passing along we shot some ducks, which Boladeree refused to swim for when requested, and told us in a surly tone that they swam for what was killed, and had the trouble of fetching it ashore, only for the white men to eat it. This reproof was, I fear, too justly founded; for of the few ducks we had been so fortunate as to procure, little had fallen to their share except the offals, and now and then a half-picked bone.",
+     "who": "Boladeree (Ballederry), an Eora man guiding an exploring party up the Hawkesbury, as recorded by Watkin Tench, who agrees with him",
+     "date": "April 1791; published 1793",
+     "doc": "Watkin Tench, A Complete Account of the Settlement at Port Jackson (London, 1793), ch. XIV (travelling diaries)",
+     "url": "https://www.gutenberg.org/cache/epub/3534/pg3534.txt",
+     "lic": "Public domain (1793)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "On inspection, it appeared that all the parties had died a natural death: pustules, similar to those occasioned by the small pox, were thickly spread on the bodies; but how a disease, to which our former observations had led us to suppose them strangers, could at once have introduced itself, and have spread so widely, seemed inexplicable.",
+     "who": "Watkin Tench, captain of marines in the First Fleet, on the bodies found in the coves of the harbour in April 1789, A Complete Account of the Settlement at Port Jackson, ch. IV (he was a colonist, not a neutral observer)",
+     "date": "1789; published 1793",
+     "url": "https://www.gutenberg.org/cache/epub/3534/pg3534.txt"
+    },
+    {
+     "text": "An armed party was directly sent out, who, coming up with them, killed four men and one woman, badly wounded a child, and took four men prisoners. It might have been supposed that these punishments, following the enormities so immediately, would have taught the natives to keep at a greater distance; but nothing seemed to deter them from prosecuting the revenge they had vowed against the settlers for the injuries they had received at their hands.",
+     "who": "David Collins, judge-advocate and secretary of the colony, on the Hawkesbury River after Aboriginal people stripped outlying settlers' huts, An Account of the English Colony in New South Wales, vol. I",
+     "date": "December 1795; published 1798",
+     "url": "https://www.gutenberg.org/cache/epub/12565/pg12565.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Several tribes of the natives still continuing to throw spears at any man they meet unarmed, by which several have been killed, or dangerously wounded, the governor, in order to deter the natives from such practices in future, has ordered out a party to search for the man who wounded the convict McEntire, in so dangerous a manner on Friday last, though no offence was offered on his part, in order to make a signal example of that tribe. [...] A party, consisting of two captains, two subalterns, and forty privates, with a proper number of non-commissioned officers from the garrison, with three days provisions, etc. are to be ready to march to-morrow morning at day-light, in order to bring in six of those natives who reside near the head of Botany Bay; or, if that should be found impracticable, to put that number to death.",
+     "who": "Governor Arthur Phillip, public order after the spearing of McEntire, as printed by Watkin Tench (ch. XII), who was chosen to lead the party; Tench adds that Phillip's spoken orders were 'to cut off and bring in the heads of the slain; for which purpose hatchets and bags would be furnished' (the order first named ten to be killed and two taken; Tench persuaded Phillip to make it six)",
+     "date": "December 1790; published 1793",
+     "url": "https://www.gutenberg.org/cache/epub/3534/pg3534.txt"
+    },
+    {
+     "text": "Decided measures therefore became necessary to prevent the out-settlers from being robbed and plundered, and to restore the natives to a friendly intercourse. With these views (founded on the opinions of the principal officers coinciding with mine), I gave orders for every person doing their utmost to bring Pemulwye in either dead or alive",
+     "who": "Governor Philip Gidley King to Lord Hobart, Secretary of State for the Colonies, despatch reporting Pemulwuy's death, as quoted by the National Museum of Australia",
+     "date": "30 October 1802",
+     "url": "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    }
+   ],
+   "today": {
+    "text": "However, conflict was inevitable because of fundamentally opposed viewpoints. The Eora had a complex system of laws that governed social relations, behaviour and resource use. The European invaders had no appreciation of this and believed the Eora people to be savages. An outbreak of smallpox in 1789, introduced by the European invaders, had a significant impact on the local people.",
+    "who": "National Museum of Australia (an Australian Government agency), Defining Moments: Pemulwuy",
+    "date": "page updated 13 May 2025",
+    "url": "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+   },
+   "warn": "Every Eora voice here except Bennelong's letter comes through the colonists who wrote it down, in their English and their words ('natives', 'Indians', 'savage', 'tribe'), which are quoted, not endorsed. Bennelong's letter was dictated to a scribe and survives only in a copy. Names are spelt many ways in the sources: Bennelong/Baneelon/Bennillong, Pemulwuy/Pimelwi/Pe-mul-wy/Pemulwye, Colbee/Cole-be, Bidjigal/Bideegal, McIntyre/McEntire/McIntire. Aboriginal and Torres Strait Islander readers should be aware that this card names people who have died and describes the taking of heads. The Rose Hill men's and Boladeree's words are Tench's paraphrases.",
+   "disputed": [
+    [
+     "Where the 1789 epidemic came from. Tench at the time could only ask whether it was native to the country, brought by La Pérouse's French ships, by Cook, or by the First Fleet itself, and Collins noted that the Eora already had a name for it (gal-gal-la), which some historians take as a sign it had visited before. Among historians who accept it was smallpox, one theory holds that it came overland from Macassan trepang fishers in the north; another that it came with European ships; the independent scholar Christopher Warren argues it was probably released deliberately by the British, a view some Aboriginal scholars share, while the historians Henry Reynolds, Peter Dowling and Cassandra Pybus regard deliberate release as unproven. A 2026 modelling study by Corey Bradshaw and colleagues in Nature Human Behaviour found that its results 'strongly suggest' the disease came from the British outpost (which held variola matter for inoculation, whether it escaped by accident or was released), that there was 'no plausible pathway' for it to arrive from the north in time, and that the epidemic may have spread thousands of kilometres, 'killing as many as 220,000 Aboriginal people'.",
+     [
+      "https://www.gutenberg.org/cache/epub/3534/pg3534.txt",
+      "https://www.gutenberg.org/cache/epub/12565/pg12565.txt",
+      "https://en.wikipedia.org/wiki/Smallpox_in_Australia",
+      "https://www.unsw.edu.au/newsroom/news/2026/07/sydneys-1789-smallpox-epidemic-came-from-first-fleet-killed-up-to-220000-indigenous-australians-new-research"
+     ]
+    ],
+    [
+     "Smallpox or chickenpox. Most historians call the 1789 disease smallpox, and the virologist Frank Fenner thought the scanty data favoured it; the medical writers Ford and Carmody argue that its failure to infect any British colonist rules smallpox out and point to chickenpox.",
+     [
+      "https://en.wikipedia.org/wiki/Smallpox_in_Australia"
+     ]
+    ],
+    [
+     "Unprovoked or retribution. McIntyre swore on his deathbed that he had given no offence and had fired on an Aboriginal man only once, and Phillip called the spearing unprovoked; but Tench records that 'most people doubted' his confession, and the Australian Dictionary of Biography, cited by the National Museum, suggests the spearing punished his violence towards Aboriginal people. Spearings of convicts and settlers were real and repeated (Phillip counted 17 killed or wounded by December 1790), as were the colonists' killings in reprisal.",
+     [
+      "https://www.gutenberg.org/cache/epub/3534/pg3534.txt",
+      "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+     ]
+    ],
+    [
+     "Who shot Pemulwuy. Following Keith Vincent Smith it has generally been assumed the killer was Henry Hacking; Doug Kohlhoff argues settlers from Parramatta, Toongabbie and Prospect Hill were more likely.",
+     [
+      "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+     ]
+    ]
+   ],
+   "blind": "Almost everything known about the Eora in these years was written by the colonists: Tench, Collins, Phillip, King. The Eora speak in their journals only when it suited the writer to record them, through interpreters and in English, and the single text in an Aboriginal voice, Bennelong's letter, was dictated to a scribe and survives in a German printed copy. Pemulwuy left no words at all; the women, the Bidjigal fighters and the people who died in the rock shelters in 1789 are seen only from outside, and the Eora's own record lives in oral tradition and Country, not in these books.",
+   "reading": [
+    [
+     "Watkin Tench, A Complete Account of the Settlement at Port Jackson (1793), Project Gutenberg",
+     "https://www.gutenberg.org/ebooks/3534"
+    ],
+    [
+     "David Collins, An Account of the English Colony in New South Wales, vol. I (1798), Project Gutenberg",
+     "https://www.gutenberg.org/ebooks/12565"
+    ],
+    [
+     "National Museum of Australia, Defining Moments: Pemulwuy",
+     "https://www.nma.gov.au/defining-moments/resources/pemulwuy"
+    ],
+    [
+     "AIATSIS, Bennelong's letter (archived copy)",
+     "https://web.archive.org/web/20201021021051/https://aiatsis.gov.au/bennelongs-letter"
+    ],
+    [
+     "National Library of Australia, Letter from Bennelong to Mr Phillips (manuscript copy)",
+     "https://nla.gov.au/nla.obj-557679852/view"
+    ],
+    [
+     "Smallpox in Australia (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Smallpox_in_Australia"
     ]
    ]
   }
