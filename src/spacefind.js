@@ -41,14 +41,14 @@
       const light = t !== ds[0] || v === 'light';
       T.push({ kind: 'planet', id: t.n, title: light ? 'Light minutes away' : 'The nearest planet', icon: '🪐',
         clue: light ? `Sunlight reflected off one planet takes about ${N(min, 0)} minutes to reach Earth today. Which planet is it? Find it in the Solar System view and click it.` : 'Which planet is closest to Earth today? Find it in the Solar System view and click it.',
-        hints: ['Zoom out to “Planets” on the distance scale at the right, then look around the Sun.', light ? `Light covers about 1 AU in 8.3 minutes, so it is about ${N(t.d, 1)} AU from us.` : `Today it is about ${N(t.d, 2)} AU from us.`], go: { uni: [null, 'Planets'] },
+        hints: ['Zoom out until every planet’s orbit is on screen, then look around the Sun.', light ? `Light covers about 1 AU in 8.3 minutes, so it is about ${N(t.d, 1)} AU from us.` : `Today it is about ${N(t.d, 2)} AU from us.`], go: { uni: [null, 'Planets'], frame: A.HelioVector(t.n, noon).Length() },
         reveal: `${t.n}, ${N(t.d, 2)} AU from Earth at noon UTC today, so its light takes ${N(min, 1)} minutes (Astronomy Engine).` }); }
     else if (craft.length) { const byR = craft.map(x => ({ ...x, d: Math.hypot(...x.p) })).sort((a, b) => a.d - b.d), v = pickOne(r, ['near', 'far', 'dist', 'dist']), any = pickOne(r, byR);
       const t = v === 'near' ? byR[0] : v === 'far' ? byR[byR.length - 1] : apart(byR, any) ? any : byR[0], w = t === byR[0] ? 'near' : t === byR[byR.length - 1] && v === 'far' ? 'far' : 'dist';
       const au = N(t.d, t.d < 10 ? 2 : 1);
       T.push({ kind: 'spacecraft', id: t.c.name, title: w === 'near' ? 'Closest to the Sun' : w === 'far' ? 'Farthest from home' : 'A spacecraft by distance', icon: '🛰️',
         clue: w === 'near' ? 'Of the spacecraft this site tracks, which one is closest to the Sun today? Find it and click it.' : w === 'far' ? 'Of the spacecraft this site tracks, which one is farthest from the Sun? Find it and click it.' : `Which of the spacecraft this site tracks is about ${au} AU from the Sun today? Find it and click it.`,
-        hints: [t.d > 40 ? 'Zoom far out past Neptune: the spacecraft labels thin out there.' : 'Zoom out to “Planets” on the distance scale at the right; spacecraft have green labels.', w === 'dist' ? `Its path is near ${t.d < 1.3 ? 'Earth’s orbit or inside it' : t.d < 2 ? 'Mars' : t.d < 7 ? 'Jupiter' : t.d < 12 ? 'Saturn' : 'the edge of the planets or beyond'}.` : `It is ${au} AU from the Sun.`], go: { uni: [null, 'Planets'] },
+        hints: [t.d > 40 ? 'Zoom far out past Neptune: the spacecraft labels thin out there.' : 'Zoom out until every planet’s orbit is on screen; spacecraft have green labels.', w === 'dist' ? `Its path is near ${t.d < 1.3 ? 'Earth’s orbit or inside it' : t.d < 2 ? 'Mars' : t.d < 7 ? 'Jupiter' : t.d < 12 ? 'Saturn' : 'the edge of the planets or beyond'}.` : `It is ${au} AU from the Sun.`], go: { uni: [null, 'Planets'], frame: t.d },
         reveal: `${t.c.name}, ${au} AU from the Sun at noon UTC today (NASA JPL Horizons).` }); }
     // 2 and 3. two bright named stars: one by name, one by its story
     const wk = W.hip || {}, bright = B.stars.filter(s => s[6] && s[6] !== 'Sol' && s[3] >= 2 && wk[s[0]]).sort((x, y) => x[4] - y[4]).slice(0, 16); /* the 3D view names only the two dozen brightest stars (Alpha Centauri, right beside the view's “Nearest stars” spot, is left out) */
@@ -145,10 +145,21 @@
       if (matchMedia('(max-width:640px)').matches) { const f = document.getElementById('uniFold'); if (f && f.getAttribute('aria-expanded') === 'true') f.click(); } /* on a phone, fold the view's controls to one row so the sky stays visible */
       render(); }
     else if (where) { const b = uniBtn({ web: 'Cosmic web', galaxy: 'Milky Way', edge: 'Edge' }[where] || ''); if (b) b.click(); }
-    if (openOnly || !click) return; const b = await until(() => uniBtn(click), 8000); if (b) b.click(); if (g.aim && targets[st.i]) aim(targets[st.i]); }
+    if (openOnly || !click) return; const b = await until(() => uniBtn(click), 8000); if (b) b.click(); if (g.aim && targets[st.i]) aim(targets[st.i]); if (g.frame) frame(g.frame); }
+  // pull back (keeping the direction of view) until a circle of radius R AU round the Sun fits the free part of the screen,
+  // panning so the Sun sits in the middle of that part; it doesn't say where on the circle the target is
+  async function frame(R) { const S = O().uniState(); await settle(S); const c = S.camera, tg = S.controls.target, V3 = c.position.constructor;
+    const H = innerHeight, W = innerWidth, r = el.getBoundingClientRect(), covers = !el.hidden && r.left < W / 2 && r.right > W / 2;
+    const top = 64, bot = (covers ? r.top : H) - 8, avail = Math.max(60, Math.min(W / 2 - 12, (bot - top) / 2)), tanH = Math.tan(c.fov * Math.PI / 360);
+    const dir = c.position.clone().sub(tg).normalize(), d1 = Math.max(c.position.distanceTo(tg), R * 1.2 * (H / 2) / (avail * tanH));
+    const up = new V3(0, 1, 0).applyQuaternion(c.quaternion), lift = (H / 2 - (top + bot) / 2) * 2 * d1 * tanH / H; /* world units to move the Sun up the screen */
+    const t1 = up.multiplyScalar(-lift), p1 = t1.clone().add(dir.multiplyScalar(d1)), t0v = tg.clone(), p0 = c.position.clone(), t0 = performance.now(), ms = 1300;
+    await new Promise(res => { const step = () => { const k = Math.min(1, (performance.now() - t0) / ms), e = k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
+      tg.lerpVectors(t0v, t1, e); c.position.lerpVectors(p0, p1, e); c.lookAt(tg); if (k < 1) requestAnimationFrame(step); else res(); }; step(); }); }
+  const settle = async S => { await wait(500); let last = -1; await until(() => { const d = S.camera.position.length(), still = !S.anim && Math.abs(d - last) < d * 1e-3; last = d; return still; }, 12000); }; /* let the view's own glide finish first */
   // turn the view (keeping its distance) so a star is in front, a little off the middle where the Sun's label sits
   async function aim(t) { const S = O().uniState(), o = S.objs.find(x => same(x, t) && (x.shown || x.pos)); if (!o) return;
-    await wait(500); let last = -1; await until(() => { const d = S.camera.position.length(), still = !S.anim && Math.abs(d - last) < d * 1e-3; last = d; return still; }, 12000); /* let the zoom glide finish first */
+    await settle(S);
     const V3 = S.camera.position.constructor, tg = S.controls.target.clone(), dist = S.camera.position.distanceTo(tg);
     const dir = new V3(...(o.shown || o.pos)).sub(tg).normalize(), up = S.camera.up.clone(), side = dir.clone().cross(Math.abs(dir.dot(up)) > .99 ? new V3(1, 0, 0) : up).normalize(), /* screen-right of the final view: the target sits right of the middle, away from this card */ want = dir.clone().multiplyScalar(-1).add(side.multiplyScalar(0.45)).normalize();
     const from = S.camera.position.clone().sub(tg).normalize(), t0 = performance.now(), ms = 1400;
