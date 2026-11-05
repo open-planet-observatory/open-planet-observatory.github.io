@@ -1,0 +1,86 @@
+{
+ "clips": {
+  "sun-soho": {
+   "key": "68513b8aeef5",
+   "seconds": 45,
+   "bytes": 450656,
+   "at": "2026-11-05T19:40:13.229Z"
+  },
+  "mars-wind-sol4": {
+   "key": "14e40cf4f639",
+   "seconds": 40,
+   "bytes": 400240,
+   "at": "2026-11-05T19:40:13.964Z"
+  },
+  "mars-dust-devil": {
+   "key": "17b51086db49",
+   "seconds": 27,
+   "bytes": 270782,
+   "at": "2026-11-05T19:40:14.923Z"
+  },
+  "mars-laser-zaps": {
+   "key": "1e4ddb811ca9",
+   "seconds": 11,
+   "bytes": 110803,
+   "at": "2026-11-05T19:40:15.206Z"
+  },
+  "mars-meteoroid-impact": {
+   "key": "0a82a4ed9c2e",
+   "seconds": 28,
+   "bytes": 280708,
+   "at": "2026-11-05T19:40:16.778Z"
+  },
+  "jupiter-bow-shock": {
+   "key": "9046cb69995c",
+   "seconds": 16.5,
+   "bytes": 165753,
+   "at": "2026-11-05T19:40:17.262Z"
+  },
+  "ganymede-flyby": {
+   "key": "1d8d5757c678",
+   "seconds": 45,
+   "bytes": 450765,
+   "at": "2026-11-05T19:40:18.577Z"
+  },
+  "saturn-radio": {
+   "key": "cccefa27e991",
+   "seconds": 13,
+   "bytes": 130395,
+   "at": "2026-11-05T19:40:19.161Z"
+  },
+  "saturn-enceladus": {
+   "key": "416fa8f6e390",
+   "seconds": 28.5,
+   "bytes": 285917,
+   "at": "2026-11-05T19:40:19.802Z"
+  },
+  "voyager1-interstellar": {
+   "key": "50983c273175",
+   "seconds": 38,
+   "bytes": 380741,
+   "at": "2026-11-05T19:40:21.147Z"
+  },
+  "galactic-centre": {
+   "key": "e80ecdf23060",
+   "seconds": 45,
+   "bytes": 450759,
+   "at": "2026-11-05T19:40:23.066Z"
+  },
+  "perseus-cluster": {
+   "key": "b350e1b6d159",
+   "seconds": 34,
+   "bytes": 340778,
+   "at": "2026-11-05T19:40:24.607Z"
+  },
+  "m87": {
+   "key": "4e13fab79f56",
+   "seconds": 33,
+   "bytes": 330590,
+   "at": "2026-11-05T19:40:25.973Z"
+  }
+ },
+ "updated": "2026-11-05T19:40:25.975Z",
+ "failed": [
+  "pillars-of-creation: fetch failed"
+ ]
+}
