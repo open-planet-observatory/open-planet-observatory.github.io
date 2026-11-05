@@ -79,6 +79,7 @@ async function build() {
    <button class="chip uni-show" id="uniShow" hidden title="Show the controls (H)">⌃ Controls</button>
    <div class="uni-ctl" role="group" aria-label="Solar System controls"><button class="uni-fold" id="uniFold" title="Fold the controls down to one row" aria-expanded="true" aria-label="Fold the controls">▾</button>
     <div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div>
+    <div class="seg uni-lrate" role="group" aria-label="Speed of the light streaks" id="uniLightRate" title="How fast the light streaks move. 1× is the real speed of light, and it stays the same at every zoom"><span>Light</span><button data-lr="1">Real</button><button data-lr="10">10×</button><button data-lr="100">100×</button><button data-lr="1000">1,000×</button></div>
     <div class="seg" role="group" aria-label="Time"><button data-rate="-30" title="Back 30 days per second">◀◀</button><button data-rate="0" aria-pressed="true" title="Live: now">Now</button><button data-rate="1" title="Forward 1 day per second">▶</button><button data-rate="30" title="Forward 30 days per second">▶▶</button></div>
     <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniGal">Milky Way</button><button class="more" id="uniNeigh">Neighbours</button><button class="more" id="uniWeb">Cosmic web</button><button class="more" id="uniEdge" title="The oldest light: ESA Planck's map of the cosmic microwave background">Edge</button></div>
     <details class="uni-more"><summary>More layers and tools</summary>
@@ -463,38 +464,45 @@ function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourStep
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
 // ---------- loop, open, close ----------
-/* ---- Light travelling (Derik, 5 Nov 2026): streaks flow outward from the Sun like wind on a map; past our galaxy they
-   flow in toward us from the other galaxies. Real light is far too slow to see at these scales, so the streaks are sped
-   up until one crosses the view in about five seconds, and the label says how many times faster than real that is. ---- */
-const LIGHT_N = 650, C_AU_S = C_KM_S / AU_KM, MPC_AU = 206264.806 * 1e6, ANDRO_MLY = 0.779 * 3.26156; /* Andromeda's NED-D distance, as in the neighbourhood view */
-function bigTimes(x) { if (!isFinite(x) || x <= 0) return ''; const p = Math.floor(Math.log10(x)), m = x / Math.pow(10, p);
-  if (x < 1e6) { const r = Math.pow(10, Math.max(0, p - 1)); return fmtN(Math.round(x / r) * r) + ' times'; }
-  const W = [[1e6, 'million'], [1e9, 'billion'], [1e12, 'trillion'], [1e15, 'quadrillion']]; for (let i = W.length - 1; i >= 0; i--) if (x >= W[i][0] && x < W[i][0] * 1e3) return 'about ' + fmtN(Math.round(x / W[i][0])) + ' ' + W[i][1] + ' times';
-  const sup = String(p).split('').map(d => '⁰¹²³⁴⁵⁶⁷⁸⁹'[+d]).join(''); return `about ${m.toFixed(0)} × 10${sup} times`; }
+/* ---- Light travelling (Derik, 5 Nov 2026): streaks of sunlight move at ONE fixed speed the visitor picks — real speed
+   by default, or 10×, 100×, 1,000× — and that speed never changes with the zoom. So light visibly races past Earth and
+   the Moon (1.3 s between them), creeps across the inner planets, and looks frozen across the whole Solar System: the
+   point is to feel the scale. The streaks are drawn around whatever is in view, each pointing away from the Sun. Past
+   the Solar System even 1,000× would be frozen solid, so no streaks are drawn there; the label gives the travel time. ---- */
+const LIGHT_N = 650, C_AU_S = C_KM_S / AU_KM, ANDRO_MLY = 0.779 * 3.26156; /* Andromeda's NED-D distance, as in the neighbourhood view */
+const LIGHT_RATES = [1, 10, 100, 1000];
+function lightRate() { try { const v = +localStorage.getItem('owl-light-rate'); if (LIGHT_RATES.includes(v)) return v; } catch (e) { } return 1; }
 function lightInit() { if (S.light) return; const g = new T.BufferGeometry(); const pos = new Float32Array(LIGHT_N * 6), col = new Float32Array(LIGHT_N * 6);
   g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('color', new T.BufferAttribute(col, 3));
   const m = new T.LineBasicMaterial({ vertexColors: true, transparent: true, blending: T.AdditiveBlending, depthWrite: false });
   const L = new T.LineSegments(g, m); L.frustumCulled = false; L.renderOrder = 5; L.visible = false; S.scene.add(L);
-  const dir = new Float32Array(LIGHT_N * 3), r = new Float32Array(LIGHT_N);
-  for (let i = 0; i < LIGHT_N; i++) { let x, y, z, q; do { x = Math.random() * 2 - 1; y = Math.random() * 2 - 1; z = Math.random() * 2 - 1; q = x * x + y * y + z * z; } while (q > 1 || q < 0.01); q = Math.sqrt(q); dir[i * 3] = x / q; dir[i * 3 + 1] = y / q; dir[i * 3 + 2] = z / q; r[i] = Math.random(); }
-  S.light = { L, g, pos, col, dir, r, key: '' }; }
+  S.light = { L, g, pos, col, p: new Float64Array(LIGHT_N * 3), age: new Float32Array(LIGHT_N), life: new Float32Array(LIGHT_N), R: 0, c: [0, 0, 0], key: '', rate: lightRate() };
+  const seg = ui.root.querySelector('#uniLightRate'); if (seg) { const sync = () => seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.lr === S.light.rate)));
+    seg.querySelectorAll('button').forEach(b => b.onclick = () => { S.light.rate = +b.dataset.lr; try { localStorage.setItem('owl-light-rate', String(S.light.rate)); } catch (e) { } S.light.key = ''; sync(); }); sync(); } }
+function lightSpawn(Lt, i, cx, cy, cz, R) { let x, y, z, q; do { x = Math.random() * 2 - 1; y = Math.random() * 2 - 1; z = Math.random() * 2 - 1; q = x * x + y * y + z * z; } while (q > 1);
+  Lt.p[i * 3] = cx + x * R; Lt.p[i * 3 + 1] = cy + y * R; Lt.p[i * 3 + 2] = cz + z * R; Lt.age[i] = 0; Lt.life[i] = 4 + Math.random() * 8; }
 function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementById('uniLight'); if (!Lt) return;
-  const D = S.camera.position.distanceTo(S.controls.target), inward = camAU > 3e11, focusedIn = !inward && D < camAU * 0.2; /* zoomed in on one body: the streaks would only flicker past */
-  const on = S.show.light !== false && !focusedIn && !document.getElementById('uni').classList.contains('clean');
-  Lt.L.visible = on; if (el && el.hidden === on) el.hidden = !on; if (!on) return;
-  const R = (inward ? Math.max(D, 2e12) : camAU) * 1.6, v = (inward ? Math.max(D, 2e12) : camAU) / 5; /* AU per real second */
-  const len = v * 0.3, pos = Lt.pos, col = Lt.col, dir = Lt.dir, r = Lt.r, step = v * dt / R;
-  const cr = inward ? 0.72 : 1, cg = inward ? 0.84 : 0.86, cb = inward ? 1 : 0.55;
-  for (let i = 0; i < LIGHT_N; i++) { let f = r[i] + (inward ? -step : step); if (f > 1) f -= 1; if (f < 0) f += 1; r[i] = f;
-    const head = f * R, tail = inward ? Math.min(R, head + len) : Math.max(0, head - len), dx = dir[i * 3], dy = dir[i * 3 + 1], dz = dir[i * 3 + 2], j = i * 6;
-    pos[j] = dx * head; pos[j + 1] = dy * head; pos[j + 2] = dz * head; pos[j + 3] = dx * tail; pos[j + 4] = dy * tail; pos[j + 5] = dz * tail;
-    const k = 0.32 * (inward ? f * (1 - f) * 4 : Math.min(1, f * 8) * (1 - f)); /* fade in near the source, out toward the edge */
-    col[j] = cr * k; col[j + 1] = cg * k; col[j + 2] = cb * k; col[j + 3] = col[j + 4] = col[j + 5] = 0; }
+  const t = S.controls.target, D = S.camera.position.distanceTo(t), W = 2 * D * Math.tan(S.camera.fov * Math.PI / 360) * S.camera.aspect; /* width of the view at the target, AU */
+  const inSystem = camAU < 3000, wantOn = S.show.light !== false && !ui.root.classList.contains('clean'), on = wantOn && inSystem;
+  Lt.L.visible = on; if (el && el.hidden === wantOn) el.hidden = !wantOn; if (!wantOn) return;
+  const rate = Lt.rate, rateTxt = rate === 1 ? 'at its real speed' : `${fmtN(rate)} times faster than real`;
+  if (!inSystem) { const key = 'far' + rate + (camAU > 1.1e13 ? 'g' : 's'); if (Lt.key !== key) { Lt.key = key;
+      el.textContent = camAU > 3e11 ? `✦ Light from other galaxies takes millions of years to reach us: ${fmtN(ANDRO_MLY, 1)} million from the Andromeda galaxy. At this scale it would look frozen even at 1,000×, so it isn't drawn.`
+        : `✦ Light takes 4.2 years to reach the nearest star. At this scale it would look frozen even at 1,000×, so it isn't drawn.`; } return; }
+  const v = rate * C_AU_S, R = Math.max(W * 0.75, 1e-4), cx = t.x, cy = t.y, cz = t.z;
+  /* the view moved or zoomed a lot: deal the streaks afresh around it */
+  if (!(Lt.R > 0) || R > Lt.R * 1.6 || R < Lt.R / 1.6 || Math.hypot(cx - Lt.c[0], cy - Lt.c[1], cz - Lt.c[2]) > R * 0.6) { Lt.R = R; Lt.c = [cx, cy, cz]; for (let i = 0; i < LIGHT_N; i++) { lightSpawn(Lt, i, cx, cy, cz, R); Lt.age[i] = Math.random() * Lt.life[i]; } }
+  const len = Math.min(Math.max(v * 0.35, R * 0.05), R * 0.3), P = Lt.p, pos = Lt.pos, col = Lt.col;
+  for (let i = 0; i < LIGHT_N; i++) { const k3 = i * 3; let x = P[k3], y = P[k3 + 1], z = P[k3 + 2]; const n = Math.hypot(x, y, z) || 1, dx = x / n, dy = y / n, dz = z / n; /* sunlight always points away from the Sun */
+    x += dx * v * dt; y += dy * v * dt; z += dz * v * dt; P[k3] = x; P[k3 + 1] = y; P[k3 + 2] = z; Lt.age[i] += dt;
+    if (Lt.age[i] > Lt.life[i] || Math.hypot(x - Lt.c[0], y - Lt.c[1], z - Lt.c[2]) > Lt.R) { lightSpawn(Lt, i, Lt.c[0], Lt.c[1], Lt.c[2], Lt.R); continue; }
+    const a = Lt.age[i] / Lt.life[i], k = 0.34 * Math.min(1, a * 6) * Math.min(1, (1 - a) * 4), tl = Math.min(len, n), j = i * 6;
+    pos[j] = x; pos[j + 1] = y; pos[j + 2] = z; pos[j + 3] = x - dx * tl; pos[j + 4] = y - dy * tl; pos[j + 5] = z - dz * tl;
+    col[j] = k; col[j + 1] = 0.86 * k; col[j + 2] = 0.55 * k; col[j + 3] = col[j + 4] = col[j + 5] = 0; }
   Lt.g.attributes.position.needsUpdate = true; Lt.g.attributes.color.needsUpdate = true;
-  const times = bigTimes(v / C_AU_S), key = (inward ? 'in' : camAU > 2e5 ? 'star' : 'sun') + times; if (el && Lt.key !== key) { Lt.key = key;
-    el.textContent = inward ? `✦ Light arriving from other galaxies, shown ${times} faster than real. From the Andromeda galaxy it travels for ${fmtN(ANDRO_MLY, 1)} million years.`
-      : camAU > 2e5 ? `✦ Starlight leaving the Sun, shown ${times} faster than real. Real light takes 4.2 years to reach the nearest star.`
-      : `✦ Sunlight streaming out, shown ${times} faster than real. Real sunlight takes 8 min 20 s to reach Earth.`; } }
+  const pxs = v / W * (S.renderer.domElement.clientWidth || 1000), cross = lightTime(W / rate);
+  const key = rate + '|' + cross + '|' + (pxs < 4); if (el && Lt.key !== key) { Lt.key = key;
+    el.textContent = `✦ Light ${rateTxt}: it needs ${cross} to cross this view${pxs < 4 ? ', so it looks still' : ''}. Real sunlight takes 8 min 20 s to reach Earth.`; } }
 
 /* ---- Sounds of space (Derik, 5 Nov 2026): NASA and Chandra recordings, each labelled by what it really is. Clips are
    built by the "Build space sounds" workflow from src/assets/sounds/sounds.json; only clips listed in built.json are
