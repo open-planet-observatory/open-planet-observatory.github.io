@@ -973,8 +973,8 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 /* left rail layout (src/railfmt.js, Derik 5 Nov 2026): map display box, Space views, quick filters, folding layer groups */
 #ops-rail .rail-display{display:flex;flex-direction:column;gap:8px;padding:8px 9px 10px;border:1px solid var(--glass-line);border-radius:12px;background:color-mix(in srgb,var(--ink,#fff) 4%,transparent)}
 #ops-rail .rail-display .rail-group>.gl{padding-top:0}
-#ops-rail .rail-space{gap:4px}
-#ops-rail .rail-space[hidden]{display:none}
+#ops-rail .rail-space-hold[hidden]{display:none!important}
+#ops-rail .rail-hint{margin:-4px 2px 0;font-size:.74rem;color:var(--ink-3);line-height:1.35}
 #ops-rail .rail-filters{display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--glass-line);padding-top:10px;margin-top:2px}
 #ops-rail .rail-sub{font-size:.76rem;font-weight:800;color:var(--ink-2);text-transform:uppercase;letter-spacing:.09em;padding:0 2px}
 #ops-rail .rail-filters .themes>.lab{display:none}
