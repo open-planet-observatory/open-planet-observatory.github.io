@@ -79,6 +79,7 @@
     get on() { return on || !!this.armed; }, /* armed (waiting for the first click) counts as on, so ♪ shows it will play */
     toggle() { if (on || this.armed) { if (this._disarm) this._disarm(); this.stop(); } else this.start(); },
     start() { try { if (!ctx) build(); ctx.resume(); on = true; ramp(master.gain, 0.55, 1.5); mix(); clearTimeout(melT); clearTimeout(pulseT); melody(); pulse(); try { localStorage.setItem('owl-music', 'on'); } catch (e) { } } catch (e) { console.warn('music', e); } dispatchEvent(new Event('owlmusic')); },
+    duck(d) { if (!ctx || !on) return; ramp(master.gain, d ? 0.05 : 0.55, d ? 0.5 : 1.5); }, /* fade the score under a space-sound clip, and back */
     stop() { on = false; if (ctx) { ramp(master.gain, 0, 0.6); setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 2500); } clearTimeout(melT); clearTimeout(pulseT); try { localStorage.setItem('owl-music', 'off'); } catch (e) { } dispatchEvent(new Event('owlmusic')); },
     autoOn() { let pref = null; try { pref = localStorage.getItem('owl-music'); } catch (e) { } if (!on && pref !== 'off') this.start(); }, /* the tour starts the music unless the visitor has turned it off before */
     setScale(s, force) { scale = Math.max(0, Math.min(1, s)); const now = performance.now(); if (on && (force || now - lastMix > 400)) { lastMix = now; mix(); } }, /* the audio ramps do the smoothing */
