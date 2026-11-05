@@ -1,5 +1,5 @@
 {
- "v": 1,
+ "v": 2,
  "note": "The Owlmanac's list of space sounds. collector/build-sounds.mjs (workflow 'Build space sounds') downloads each 'src', trims it to start/len seconds, evens out loudness and writes <id>.mp3 here plus built.json. 'words' are NASA's or Chandra's own descriptions, verbatim; 'how' is the site's short note on how the sound was made, from the source page.",
  "clips": [
   {
