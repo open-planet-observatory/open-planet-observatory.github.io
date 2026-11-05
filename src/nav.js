@@ -80,7 +80,7 @@
   document.getElementById('gnPlay').onclick = () => dispatchEvent(new Event('obs:hub'));
   /* the title and logo go back to the start: the whole globe, panels open, Situations showing */
   const home = () => { close(); if (window.OwlSiteTour) window.OwlSiteTour.end(); const gx = document.querySelector('#woe .woe-x'); if (gx && html.classList.contains('game-on')) gx.click();
-    if (document.querySelector('#uni.on') && O.closeUniverse) O.closeUniverse(); setSlim(false); if (innerWidth > 860) html.classList.remove('rail-closed'); if (O.openPanel) O.openPanel('situations');
+    if (document.querySelector('#uni.on') && O.closeUniverse) O.closeUniverse(); if (O.moonOpen && O.moonOpen() && O.closeMoon) O.closeMoon(); setSlim(false); if (innerWidth > 860) html.classList.remove('rail-closed'); if (O.openPanel) O.openPanel('situations');
     const r = document.getElementById('zreset'); setTimeout(() => { if (r) r.click(); }, document.querySelector('#uni.on') ? 1400 : 0); };
   const brand = top.querySelector('.brand');
   if (brand) { brand.querySelectorAll('.brand-logo,h1').forEach(el => { el.style.cursor = 'pointer'; el.setAttribute('role', 'link'); el.tabIndex = 0; el.title = 'Back to the start page'; const start = () => { home(); if (window.OwlSplash) window.OwlSplash.show(); }; el.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); start(); }); el.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); start(); } }); }); }

@@ -186,10 +186,10 @@
     return true; }
   function railBtn() { const uni = document.getElementById('uniBtn'); if (!uni) return false; if (document.getElementById('moonGlobeBtn')) return true;
     const rb = document.createElement('button'); rb.id = 'moonGlobeBtn'; rb.className = uni.className; rb.textContent = 'Moon view'; rb.title = 'The Moon as its own globe: seas, craters, landing sites, and Earth seen from it'; rb.onclick = () => openMoon(); uni.before(rb); return true; }
-  /* anything else in the side rail, the view pills or the Space menu acts on Earth (or another view): leave the Moon first */
+  /* anything else in the side rail, the view pills, any header menu item, the logo or a header button acts on Earth (or opens another view): leave the Moon first */
   document.addEventListener('click', e => { if (!open) return; const t = e.target.closest && e.target.closest('button,a,label,input');
     if (!t || t.closest('#moonGlobe') || t.id === 'moonGlobeBtn' || t.id === 'zmoon' || /^(zin|zout|zreset)$/.test(t.id) || t.dataset.u === 'moon') return;
-    if (t.closest('#ops-rail') || t.closest('.zoomctl') || (t.closest('.gn-m') && t.dataset.u)) closeMoon(); }, true);
+    if (t.closest('#ops-rail') || t.closest('.zoomctl') || t.closest('.gn-m') || t.closest('.brand') || /^(gnPlay|gnSiteTour|gnTour|gnSearch|gnVoyager)$/.test(t.id)) closeMoon(); }, true);
   if (!railBtn()) { let n = 0; const t = setInterval(() => { if (railBtn() || ++n > 120) clearInterval(t); }, 500); }
   if (!pill()) { let n = 0; const t = setInterval(() => { if (pill() || ++n > 60) clearInterval(t); }, 500); }
   addEventListener('keydown', e => { if (e.key === 'Escape' && open) closeMoon(); });

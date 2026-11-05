@@ -1,0 +1,107 @@
+# Site proof: opens every view of the live site and tries every way out of it, in Chromium, Firefox and
+# WebKit at a desktop and a phone size (tests/site-proof.mjs). Records page errors, sideways overflow and a
+# screenshot per step. Runs nightly and on demand; on failure it opens (or updates) one issue labelled
+# site-proof, and closes it again when a later run is clean. It never publishes anything.
+name: Site proof
+
+on:
+  schedule:
+    - cron: '23 9 * * *'   # 09:23 UTC = 4:23 AM ET, after the overnight data runs
+  workflow_dispatch:
+    inputs:
+      url:
+        description: Site to test
+        default: https://theowlmanac.com/
+        required: true
+      only:
+        description: Comma-separated view keys to run (blank = all)
+        default: ''
+        required: false
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: site-proof
+  cancel-in-progress: false
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+        size: [desktop, phone]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright (${{ matrix.browser }})
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Run the sweep
+        id: sweep
+        continue-on-error: true
+        env:
+          PROOF_SLOW: '1'
+        run: |
+          node tests/site-proof.mjs --url "${{ inputs.url || 'https://theowlmanac.com/' }}" \
+            --browsers ${{ matrix.browser }} --sizes ${{ matrix.size }} --out "proof-results/${{ matrix.browser }}-${{ matrix.size }}" \
+            ${{ inputs.only && format('--only {0}', inputs.only) || '' }}
+      - name: Add the report to the run summary
+        if: always()
+        run: cat "proof-results/${{ matrix.browser }}-${{ matrix.size }}/report.md" >> "$GITHUB_STEP_SUMMARY" || echo "no report written" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-${{ matrix.browser }}-${{ matrix.size }}
+          path: proof-results
+          retention-days: 14
+      - name: Fail the job when the sweep failed
+        if: steps.sweep.outcome == 'failure'
+        run: exit 1
+
+  report:
+    needs: proof
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: all
+          pattern: proof-*
+          merge-multiple: true
+      - name: Open, update or close the site-proof issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs'), path = require('path');
+            const runs = []; const dir = 'all';
+            for (const d of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const f = path.join(dir, d, 'report.json'); if (fs.existsSync(f)) runs.push({ name: d, ...JSON.parse(fs.readFileSync(f, 'utf8')) }); }
+            const all = runs.flatMap(r => r.results.map(x => ({ ...x, run: r.name })));
+            const fails = all.filter(r => !r.ok), skipped = all.filter(r => r.skipped);
+            const expected = 6, missing = expected - runs.length;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const date = new Date().toISOString().slice(0, 10);
+            const head = `**${date}** — ${all.length - fails.length} passed · ${fails.length} failed · ${skipped.length} skipped across ${runs.length} browser/size runs${missing > 0 ? ` (${missing} run(s) produced no report — see the run)` : ''}. [Run, screenshots and reports](${runUrl})`;
+            let body = head + '\n';
+            if (fails.length) { body += '\n| Browser | Size | View | Exit | What happened |\n|---|---|---|---|---|\n'; for (const r of fails) body += `| ${r.browser} | ${r.size} | ${r.scenario} | ${r.exit} | ${r.note.replace(/\|/g, '\\|')}${r.errors && r.errors.length ? '<br>`' + r.errors.slice(0, 2).map(e => e.replace(/\|/g, '\\|').replace(/`/g, "'")).join('`<br>`') + '`' : ''} |\n`; }
+            const { data: open } = await github.rest.issues.listForRepo({ ...context.repo, state: 'open', labels: 'site-proof', per_page: 5 });
+            const issue = open.find(i => i.title.startsWith('Site proof:'));
+            const broken = fails.length > 0 || missing > 0;
+            try { await github.rest.issues.getLabel({ ...context.repo, name: 'site-proof' }); } catch (e) { await github.rest.issues.createLabel({ ...context.repo, name: 'site-proof', color: 'd93f0b', description: 'Opened by the nightly site proof when a view cannot be left or the page errors' }); }
+            if (broken) {
+              if (issue) { await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body }); }
+              else { await github.rest.issues.create({ ...context.repo, title: `Site proof: ${fails.length} failing step(s)${missing > 0 ? ' and missing reports' : ''}`, labels: ['site-proof'], body: 'The nightly navigation sweep found views that cannot be left, page errors, or sideways overflow. Each row links to a screenshot in the run artifacts.\n\n' + body }); }
+              core.setFailed(`${fails.length} failing step(s)${missing > 0 ? `, ${missing} run(s) without a report` : ''}`);
+            } else if (issue) {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: issue.number, body: 'Clean run — closing.\n\n' + body });
+              await github.rest.issues.update({ ...context.repo, issue_number: issue.number, state: 'closed' });
+            }
+            core.summary.addRaw(body).write();
