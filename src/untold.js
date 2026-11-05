@@ -19,8 +19,8 @@
   function card(s) {
     const cites = [], cite = u => { let i = cites.indexOf(u); if (i < 0) { cites.push(u); i = cites.length - 1; } return `<sup><a ${A(u)} title="${esc(dom(u))}">${i + 1}</a></sup>`; };
     const facts = s.facts.map(([t, u]) => `${esc(t)}${cite(u)}`).join(' ');
-    const voices = s.voices.map(v => `<figure class="ut-q"><blockquote>${esc(v.text)}</blockquote><figcaption>${esc(v.who)}, ${esc(v.date)}. <a ${A(v.url)}>${esc(v.doc)}</a> · ${esc(v.lic)}</figcaption></figure>`).join('');
-    const fig = o => `<figure class="ut-q ut-off"><blockquote>${esc(o.text)}</blockquote><figcaption>${esc(o.who)}, ${esc(o.date)}. <a ${A(o.url)}>Source</a></figcaption></figure>`;
+    const voices = s.voices.map(v => `<figure class="ut-q"><blockquote dir="auto">${esc(v.text)}</blockquote><figcaption>${esc(v.who)}, ${esc(v.date)}. <a ${A(v.url)}>${esc(v.doc)}</a> · ${esc(v.lic)}</figcaption></figure>`).join('');
+    const fig = o => `<figure class="ut-q ut-off"><blockquote dir="auto">${esc(o.text)}</blockquote><figcaption>${esc(o.who)}, ${esc(o.date)}. <a ${A(o.url)}>Source</a></figcaption></figure>`;
     const off = s.official ? [].concat(s.official).map(fig).join('') : '', press = s.press ? [].concat(s.press).map(fig).join('') : '', today = s.today ? [].concat(s.today).map(fig).join('') : ''; const wit = s.witness ? [].concat(s.witness).map(fig).join('') : '';
     const disp = (s.disputed || []).map(([t, us]) => `<li>${esc(t)} ${us.map(cite).join('')}</li>`).join('');
     return `<article class="ut-card" id="ut-${esc(s.id)}" data-id="${esc(s.id)}">
