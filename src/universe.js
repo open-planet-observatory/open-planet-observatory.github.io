@@ -484,11 +484,13 @@ function lightSpawn(Lt, i, cx, cy, cz, R) { let x, y, z, q; do { x = Math.random
 function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementById('uniLight'); if (!Lt) return;
   const t = S.controls.target, D = S.camera.position.distanceTo(t), W = 2 * D * Math.tan(S.camera.fov * Math.PI / 360) * S.camera.aspect; /* width of the view at the target, AU */
   const inSystem = camAU < 3000, wantOn = S.show.light !== false && !ui.root.classList.contains('clean'), on = wantOn && inSystem;
-  Lt.L.visible = on; if (el && el.hidden === wantOn) el.hidden = !wantOn; if (!wantOn) return;
+  Lt.L.visible = on; if (el && el.hidden === wantOn) el.hidden = !wantOn;
+  const rs = document.getElementById('uniLightRate'); if (rs && rs.hidden === on) rs.hidden = !on; /* the speed buttons only show while streaks are drawn */
+  if (!wantOn) return;
   const rate = Lt.rate, rateTxt = rate === 1 ? 'at its real speed' : `${fmtN(rate)} times faster than real`;
   if (!inSystem) { const key = 'far' + rate + (camAU > 1.1e13 ? 'g' : 's'); if (Lt.key !== key) { Lt.key = key;
-      el.textContent = camAU > 3e11 ? `✦ Light from other galaxies takes millions of years to reach us: ${fmtN(ANDRO_MLY, 1)} million from the Andromeda galaxy. At this scale it would look frozen even at 1,000×, so it isn't drawn.`
-        : `✦ Light takes 4.2 years to reach the nearest star. At this scale it would look frozen even at 1,000×, so it isn't drawn.`; } return; }
+      el.textContent = camAU > 3e11 ? `✦ Light from other galaxies takes millions of years to reach us: ${fmtN(ANDRO_MLY, 1)} million from the Andromeda galaxy. At this scale it would look frozen even sped up 1,000 times, so it isn't drawn.`
+        : `✦ Light takes 4.2 years to reach the nearest star. At this scale it would look frozen even sped up 1,000 times, so it isn't drawn.`; } return; }
   const v = rate * C_AU_S, R = Math.max(W * 0.75, 1e-4), cx = t.x, cy = t.y, cz = t.z;
   /* the view moved or zoomed a lot: deal the streaks afresh around it */
   if (!(Lt.R > 0) || R > Lt.R * 1.6 || R < Lt.R / 1.6 || Math.hypot(cx - Lt.c[0], cy - Lt.c[1], cz - Lt.c[2]) > R * 0.6) { Lt.R = R; Lt.c = [cx, cy, cz]; for (let i = 0; i < LIGHT_N; i++) { lightSpawn(Lt, i, cx, cy, cz, R); Lt.age[i] = Math.random() * Lt.life[i]; } }

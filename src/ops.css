@@ -1017,4 +1017,5 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 @media (max-width:900px){#uni .uni-player{right:auto;left:14px;width:calc(100% - 28px);min-width:0;top:auto;bottom:210px}}
 @media (max-width:640px){#uni .uni-light{top:auto;bottom:236px;right:12px;max-width:62%}#uni .uni-sndlist{top:80px;max-height:calc(100% - 300px)}}
 @media (min-width:641px) and (max-width:900px){#uni .uni-light{right:48px}}
+#uni .uni-lrate[hidden]{display:none!important}
 #uni .uni-lrate>span{align-self:center;font-size:.72rem;opacity:.75;padding:0 6px 0 4px}
