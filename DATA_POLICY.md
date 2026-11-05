@@ -133,6 +133,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Translations quoted are themselves public domain (e.g. Crawley's 1874 Thucydides, the 1689 English Las Casas, Arthur Helps's 1855 Requerimiento, the 1840 Chinese Repository translation of Lin Zexu's letter); each card's note says when a voice reaches us through a translator or a sympathetic outsider rather than the people themselves.
 - Quotes are placed by who speaks: the people it happened to ("In their own words"), outside observers ("Outside witnesses"), officials, courts and perpetrators ("The official account"). Violence by the side the story is told from is stated, sourced, like everything else.
 - Years before 1 AD are shown as BC; the full page filters by era (by the year a story begins).
+- Non-government publications are quoted only if published before 1931 (public domain in the US) or openly licensed; later journalism (e.g. 1933 newspaper reports) is described in the site's own words, not quoted. Religious texts used as historical voices are quoted from public-domain translations (e.g. the King James Version) and labelled as such, with dating and authorship debates noted.
 - Data: src/assets/history/untold.json, edited by hand; no collector.
 
 ## Records

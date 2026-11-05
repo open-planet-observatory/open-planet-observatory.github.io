@@ -2930,6 +2930,861 @@
      "https://www.mofa.go.jp/policy/postwar/page22e_000883.html"
     ]
    ]
+  },
+  {
+   "id": "babylon587",
+   "title": "The fall of Jerusalem and the Babylonian exile",
+   "region": "Middle East",
+   "where": "City of David (Iron Age Jerusalem), south of today's Old City, Jerusalem (approximate)",
+   "lat": 31.7735,
+   "lon": 35.2358,
+   "from": -597,
+   "to": -538,
+   "themes": [
+    "War",
+    "Removal and dispossession",
+    "Famine"
+   ],
+   "facts": [
+    [
+     "Jehoiakim of Judah became a vassal of the Babylonian king Nebuchadnezzar II after Babylon defeated Egypt at Carchemish (605 BC), then rebelled; his son Jehoiachin, king for only three months, surrendered when Nebuchadnezzar attacked Judah in 597 BC and was sent into exile with his family, his court and thousands of soldiers and labourers.",
+     "https://www.britannica.com/event/Babylonian-Captivity"
+    ],
+    [
+     "A Babylonian chronicle tablet in the British Museum (BM 21946) records that in Nebuchadnezzar's seventh year the king of Babylon laid siege to the 'city of Judah', took it on the second day of Adar (16 March 597 BC), captured its king and installed a king of his own choice; the tablet was bought from a dealer in 1896 and first published in 1956.",
+     "https://en.wikipedia.org/wiki/Nebuchadnezzar_Chronicle"
+    ],
+    [
+     "Zedekiah, the king Nebuchadnezzar installed, is reported to have conspired with neighbouring states; Babylonian forces returned in 589/8, besieged Jerusalem and destroyed the city, its ramparts and the First Temple, followed by a second deportation in 587; Zedekiah's sons were slain in his presence, and he was blinded and taken in chains to Babylon.",
+     "https://www.britannica.com/event/Babylonian-Captivity"
+    ],
+    [
+     "Excavations indicate a sharp fall in Judah's population: scholars' estimates generally point to a drop from roughly 110,000 to between 15,000 and 40,000, a collapse caused not by deportation alone but also by wartime deaths and flight abroad.",
+     "https://en.wikipedia.org/wiki/Babylonian_captivity"
+    ],
+    [
+     "Britannica says that, contrary to the name 'Captivity', many exiles were not imprisoned or enslaved but resettled as tenant subjects, given land to cultivate and asked to pay taxes or serve in the army; the former king Jehoiachin, however, was imprisoned for over 20 years until his release in 562.",
+     "https://www.britannica.com/event/Babylonian-Captivity"
+    ],
+    [
+     "Cyrus the Great of Persia conquered Babylon in 539; the Book of Ezra says he let the Jews return in 538, but the evidence suggests they came back in small groups over many years, and many stayed in Babylonia, the beginning of an enduring Jewish diaspora.",
+     "https://www.britannica.com/event/Babylonian-Captivity"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "By the rivers of Babylon, there we sat down, yea, we wept, when we remembered Zion. We hanged our harps upon the willows in the midst thereof. For there they that carried us away captive required of us a song; and they that wasted us required of us mirth, saying, Sing us one of the songs of Zion. How shall we sing the LORD's song in a strange land? If I forget thee, O Jerusalem, let my right hand forget her cunning. If I do not remember thee, let my tongue cleave to the roof of my mouth; if I prefer not Jerusalem above my chief joy.",
+     "who": "Psalm 137, a lament of the exiles in Babylonia, as preserved in the Hebrew Bible",
+     "date": "6th century BC (date of composition debated)",
+     "doc": "Psalm 137:1–6, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    },
+    {
+     "text": "Remember, O LORD, the children of Edom in the day of Jerusalem; who said, Rase it, rase it, even to the foundation thereof. O daughter of Babylon, who art to be destroyed; happy shall he be, that rewardeth thee as thou hast served us. Happy shall he be, that taketh and dasheth thy little ones against the stones.",
+     "who": "Psalm 137, the lament's closing curse on Edom and Babylon, as preserved in the Hebrew Bible",
+     "date": "6th century BC (date of composition debated)",
+     "doc": "Psalm 137:7–9, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    },
+    {
+     "text": "How doth the city sit solitary, that was full of people! how is she become as a widow! she that was great among the nations, and princess among the provinces, how is she become tributary! She weepeth sore in the night, and her tears are on her cheeks: among all her lovers she hath none to comfort her: all her friends have dealt treacherously with her, they are become her enemies. Judah is gone into captivity because of affliction, and because of great servitude: she dwelleth among the heathen, she findeth no rest: all her persecutors overtook her between the straits.",
+     "who": "The Book of Lamentations, laments over the destroyed city, as preserved in the Hebrew Bible (Britannica says they reflect the suffering of those who remained in Judah)",
+     "date": "after 587/586 BC",
+     "doc": "Lamentations 1:1–3, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Lamentations",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    },
+    {
+     "text": "The tongue of the sucking child cleaveth to the roof of his mouth for thirst: the young children ask bread, and no man breaketh it unto them. They that did feed delicately are desolate in the streets: they that were brought up in scarlet embrace dunghills.",
+     "who": "The Book of Lamentations, on the famine of the siege, as preserved in the Hebrew Bible",
+     "date": "after 587/586 BC",
+     "doc": "Lamentations 4:4–5, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Lamentations",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    },
+    {
+     "text": "Remember, O LORD, what is come upon us: consider, and behold our reproach. Our inheritance is turned to strangers, our houses to aliens. We are orphans and fatherless, our mothers are as widows. We have drunken our water for money; our wood is sold unto us. Our necks are under persecution: we labour, and have no rest.",
+     "who": "The Book of Lamentations, the closing communal prayer, as preserved in the Hebrew Bible",
+     "date": "after 587/586 BC",
+     "doc": "Lamentations 5:1–5, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Lamentations",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    },
+    {
+     "text": "They ravished the women in Zion, and the maids in the cities of Judah. Princes are hanged up by their hand: the faces of elders were not honoured. They took the young men to grind, and the children fell under the wood. The elders have ceased from the gate, the young men from their musick. The joy of our heart is ceased; our dance is turned into mourning.",
+     "who": "The Book of Lamentations, as preserved in the Hebrew Bible",
+     "date": "after 587/586 BC",
+     "doc": "Lamentations 5:11–15, King James Version (1611)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Lamentations",
+     "lic": "Public domain (King James Version, 1611; Wikisource)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "And he carried away all Jerusalem, and all the princes, and all the mighty men of valour, even ten thousand captives, and all the craftsmen and smiths: none remained, save the poorest sort of the people of the land. And he carried away Jehoiachin to Babylon, and the king's mother, and the king's wives, and his officers, and the mighty of the land, those carried he into captivity from Jerusalem to Babylon. And all the men of might, even seven thousand, and craftsmen and smiths a thousand, all that were strong and apt for war, even them the king of Babylon brought captive to Babylon.",
+     "who": "The Judean historian of the Books of Kings, as preserved in the Hebrew Bible, on the deportation of 597 BC (2 Kings 24:14–16, King James Version, 1611)",
+     "date": "597 BC (events); Books of Kings compiled in the 6th century BC (dating debated)",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/2_Kings"
+    },
+    {
+     "text": "This is the people whom Nebuchadrezzar carried away captive: in the seventh year three thousand Jews and three and twenty: In the eighteenth year of Nebuchadrezzar he carried away captive from Jerusalem eight hundred thirty and two persons: In the three and twentieth year of Nebuchadrezzar Nebuzar-adan the captain of the guard carried away captive of the Jews seven hundred forty and five persons: all the persons were four thousand and six hundred.",
+     "who": "The closing chapter of the Book of Jeremiah, a different and much smaller count of the deportations (Jeremiah 52:28–30, King James Version, 1611)",
+     "date": "597, 587 and 582 BC",
+     "url": "https://en.wikisource.org/wiki/Bible_(King_James)/Jeremiah"
+    }
+   ],
+   "official": [
+    {
+     "text": "a surpassing Prince thou hast made me, and empire over multitudes of men, hast intrusted to me as precious lives; thy power have I extended on high, over Babylon thy city, before all mankind.",
+     "who": "Nebuchadnezzar II, addressing the god Marduk in his building inscription from Babylon (the 'East India House' inscription, column IX), tr. J. M. Rodwell for Records of the Past, reprinted in Babylonian and Assyrian Literature (1901). This inscription is about his building works and does not mention Judah.",
+     "date": "reign of Nebuchadnezzar II, 605–562 BC",
+     "url": "https://www.gutenberg.org/cache/epub/10887/pg10887-images.html"
+    },
+    {
+     "text": "For thy glory, O exalted Merodach a house have I made. May its greatness advance! May its fulness increase! in its midst abundance may it acquire! May its memorials be augmented! May it receive within itself the abundant tribute of the Kings of nations and of all peoples! From the West to the East by the rising sun may I have no foemen!",
+     "who": "Nebuchadnezzar II, closing prayer of the same inscription (column X), tr. J. M. Rodwell",
+     "date": "reign of Nebuchadnezzar II, 605–562 BC",
+     "url": "https://www.gutenberg.org/cache/epub/10887/pg10887-images.html"
+    },
+    {
+     "text": "When I made my triumphal entrance into Babylon, with joy and rejoicing I took up my lordly residence in the royal palace, Marduk, the great lord, moved the noble heart of the inhabitants of Babylon to me, while I gave daily care to his worship. My numerous troops marched peacefully into Babylon. In all Sumer and Akkad I permitted no enemy to enter.",
+     "who": "Cyrus the Great of Persia, the next conqueror, on taking Babylon: the Cyrus Cylinder, lines 22–24 (tr. R. W. Rogers, Cuneiform Parallels to the Old Testament, 1912)",
+     "date": "539 BC",
+     "url": "https://archive.org/stream/cuneiformparalle00rogerich/cuneiformparalle00rogerich_djvu.txt"
+    },
+    {
+     "text": "the cities on the other side of the Tigris, whose sites were of ancient foundation— the gods, who dwelt in them, I brought them back to their places, and caused them to dwell in a habitation for all time. All their inhabitants I collected and restored them to their dwelling places.",
+     "who": "Cyrus the Great, the Cyrus Cylinder, lines 31–32 (tr. R. W. Rogers, 1912). The places it names are in Mesopotamia; it does not mention Judah or Jerusalem.",
+     "date": "539 BC",
+     "url": "https://archive.org/stream/cuneiformparalle00rogerich/cuneiformparalle00rogerich_djvu.txt"
+    }
+   ],
+   "note": "The Babylonian Chronicle's own entry on the capture of Jerusalem in 597 BC (BM 21946) is summarised in the facts but not quoted: it was first published in 1956, so no public-domain translation exists.",
+   "warn": "The voices are religious poetry preserved in the Hebrew Bible, in the King James translation of 1611; scholars debate when and by whom they were written, and Britannica cautions that the biblical accounts give events a theological meaning. Nebuchadnezzar's and Cyrus's inscriptions are royal propaganda in 19th- and early 20th-century translations; Rogers marks gaps in the broken cylinder.",
+   "disputed": [
+    [
+     "How many were deported? 2 Kings 24 gives 10,000 captives in 597, and in another verse 7,000 men of might and 1,000 craftsmen; Jeremiah 52 lists 3,023 in Nebuchadnezzar's seventh year, 832 in his eighteenth and 745 in his twenty-third, 4,600 in all. Wikipedia's summary puts the 597 deportation at around 7,000 and notes that the dates, numbers of expulsions and numbers of exiles vary among the biblical accounts; Britannica says it is unclear whether the main deportation came in 598/7 or 587/6.",
+     [
+      "https://en.wikisource.org/wiki/Bible_(King_James)/2_Kings",
+      "https://en.wikisource.org/wiki/Bible_(King_James)/Jeremiah",
+      "https://en.wikipedia.org/wiki/Babylonian_captivity",
+      "https://www.britannica.com/event/Babylonian-Captivity"
+     ]
+    ],
+    [
+     "Was the land emptied? Some biblical texts describe all Judah as taken into exile, and 2 Kings says none remained save the poorest sort; Britannica says the idea of complete depopulation may carry more theological weight than historical basis, and that many historians and archaeologists think many rural people stayed, working the land and paying tribute to Babylon. Wikipedia's summary of the archaeology says other settlements in Judah went on without visible disruption, while the population still fell steeply.",
+     [
+      "https://www.britannica.com/event/Babylonian-Captivity",
+      "https://en.wikisource.org/wiki/Bible_(King_James)/2_Kings",
+      "https://en.wikipedia.org/wiki/Babylonian_captivity"
+     ]
+    ],
+    [
+     "How harsh was exile? The biblical texts speak of captivity and servitude; Britannica says most exiles were tenant subjects rather than prisoners or slaves, and that calling them captives also served a rhetorical purpose, while Wikipedia cites evidence of hardship too, with exiled leaders suspected of disloyalty and reduced to farm and building work.",
+     [
+      "https://www.britannica.com/event/Babylonian-Captivity",
+      "https://en.wikipedia.org/wiki/Babylonian_captivity"
+     ]
+    ],
+    [
+     "Who wrote the laments, and when? Rabbinic tradition credited Psalm 137 to the prophet Jeremiah, and Christian Bibles call Lamentations 'of Jeremiah'; Britannica says the content and style argue against Jeremiah's authorship and dates Lamentations to the exile.",
+     [
+      "https://en.wikipedia.org/wiki/Psalm_137",
+      "https://www.britannica.com/topic/The-Lamentations-of-Jeremiah"
+     ]
+    ],
+    [
+     "Did Cyrus free the Jews? The Book of Ezra says Cyrus decreed their return; the Cyrus Cylinder speaks of returning gods and peoples to their homes, but its places are Mesopotamian and it never mentions Judah or Jerusalem. The scholar Lester Grabbe, as quoted by Wikipedia, doubts the decree's authenticity but accepts a general policy of letting deportees return. The Shah of Iran's promotion of the cylinder as the 'first charter of human rights' is described by most historians as anachronistic.",
+     [
+      "https://www.britannica.com/event/Babylonian-Captivity",
+      "https://en.wikipedia.org/wiki/Babylonian_captivity",
+      "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+     ]
+    ],
+    [
+     "The exiles' own call for revenge. Psalm 137 ends by blessing whoever dashes Babylon's little ones against the stones; Wikipedia notes that churches and composers have often left the violent final verses out.",
+     [
+      "https://en.wikisource.org/wiki/Bible_(King_James)/Psalms",
+      "https://en.wikipedia.org/wiki/Psalm_137"
+     ]
+    ]
+   ],
+   "blind": "The surviving voices are those of Judah's literate elite, priests, poets and court historians, edited by their heirs. The rural poor left behind in Judah speak only through Lamentations, and nobody recorded what the ordinary exiles who settled by the canals of Babylonia thought. The Babylonian side survives only in royal inscriptions and a dry chronicle line; no Babylonian commoner's view of the deportees exists.",
+   "reading": [
+    [
+     "Babylonian Captivity (Britannica)",
+     "https://www.britannica.com/event/Babylonian-Captivity"
+    ],
+    [
+     "Nebuchadnezzar Chronicle (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Nebuchadnezzar_Chronicle"
+    ],
+    [
+     "Cyrus Cylinder (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Cyrus_Cylinder"
+    ],
+    [
+     "R. W. Rogers, Cuneiform Parallels to the Old Testament (1912, archive.org)",
+     "https://archive.org/details/cuneiformparalle00rogerich"
+    ]
+   ]
+  },
+  {
+   "id": "carthage146",
+   "title": "The destruction of Carthage",
+   "region": "Africa",
+   "where": "Byrsa hill, Carthage, near Tunis, Tunisia (approximate)",
+   "lat": 36.8528,
+   "lon": 10.3233,
+   "from": -149,
+   "to": -146,
+   "themes": [
+    "War",
+    "Massacre",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "After its defeat in the Second Punic War Carthage's political power stayed insignificant, but its trade revived so fast in the 2nd century BC that it alarmed an influential group of Roman statesmen, and Cato the Censor fostered the conviction that 'Carthage must be destroyed'; Britannica says Rome found its pretext in a formal breach of the treaty in 150, when Carthage resisted the Numidian king Masinissa's aggressions by force of arms.",
+     "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain"
+    ],
+    [
+     "For 50 years Masinissa, Rome's ally, had raided and seized Carthaginian territory while Rome backed him whenever Carthage asked for redress; when Carthage finally fought back, its army was defeated at Oroscopa and surrendered, many Carthaginians were then massacred by the Numidians, and Carthage condemned its own general Hasdrubal to death to placate Rome.",
+     "https://en.wikipedia.org/wiki/Third_Punic_War"
+    ],
+    [
+     "When a Roman army landed in 149, Carthage gave hostages and, according to Appian, handed over armour for 200,000 men and about 2,000 catapults; only then did the consul Censorinus order the citizens to abandon the city and settle at least ten miles from the sea, and Carthage chose to fight.",
+     "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+    ],
+    [
+     "The Roman attack failed for two years, until Scipio Aemilianus, consul in 147 and adopted grandson of the former conqueror of Carthage, walled off the isthmus and cut off supplies from overseas; in spring 146 his troops broke in from the harbour side and took the streets up to the citadel house by house.",
+     "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain"
+    ],
+    [
+     "Inside the city, Appian records, the Carthaginian commander Hasdrubal had captured Roman soldiers tortured and mutilated on the walls in full view of their comrades, then thrown from the walls alive, and put to death some Carthaginian senators who denounced him.",
+     "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+    ],
+    [
+     "Of a city population perhaps exceeding a quarter of a million, only 50,000 remained at the final surrender in 146; the survivors were sold into slavery, the city was razed and, Britannica says, its site cursed to lie desolate for ever, and Carthage's territory became the Roman province of Africa.",
+     "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We have not violated the treaty. We have no ships, no elephants. The tribute is not in default. On the contrary, we have fought on your side against three kings. You must not take offence at this recital, although we made it before when you demanded our arms. Calamities make men verbose, and nothing gives more force to an appeal than the terms of a treaty. Nor can we take refuge in anything else than words, since we have given all other power over to you.",
+     "who": "Banno, surnamed Tigillas, speaking for the Carthaginian envoys to the Roman consuls, as recorded by Appian",
+     "date": "149 BC; written 2nd century AD",
+     "doc": "Appian, Roman History, Book VIII (The Punic Wars), ch. 83, tr. Horace White (Loeb Classical Library, 1912), p. 543",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt",
+     "lic": "Public domain (translation first published 1912)"
+    },
+    {
+     "text": "We beseech you, in behalf of an ancient city founded by command of the gods, in behalf of a glory that has become great and a name that has pervaded the whole world, in behalf of the many temples it contains and of its gods who have done you no wrong. Do not deprive them of their nightly festivals, their processions and their solemnities. Deprive not the tombs of the dead, who harm you no more, of their offerings.",
+     "who": "Banno, for the Carthaginian envoys, as recorded by Appian",
+     "date": "149 BC; written 2nd century AD",
+     "doc": "Appian, The Punic Wars, ch. 84, tr. Horace White (Loeb, 1912), p. 545",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt",
+     "lic": "Public domain (translation first published 1912)"
+    },
+    {
+     "text": "Spare the city which has done you no harm, but, if you please, kill us, whom you have ordered to move away. In this way you will seem to vent your wrath upon men, not upon temples, gods, tombs, and an innocent city.",
+     "who": "Banno, for the Carthaginian envoys, as recorded by Appian",
+     "date": "149 BC; written 2nd century AD",
+     "doc": "Appian, The Punic Wars, ch. 84, tr. Horace White (Loeb, 1912), p. 545",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt",
+     "lic": "Public domain (translation first published 1912)"
+    },
+    {
+     "text": "Then, after a short silence, she asked Hasdrubal how without saying a word to her he had deserted them all and betaken himself to the Roman general to secure his own safety; how he had thus shamelessly abandoned the state and the citizens who trusted in him, and gone over secretly to the enemy; and how he had the face to sit now beside the enemy with suppliant boughs in his hands, that enemy to whom he had often boasted that the day would never dawn on which the sun would look on Hasdrubal alive and his city in flames",
+     "who": "The wife of the Carthaginian commander Hasdrubal (her name is not recorded), her words reported indirectly by Polybius, who was present with Scipio; the fragment breaks off here",
+     "date": "spring 146 BC",
+     "doc": "Polybius, Histories, Book 38, ch. 20, tr. W. R. Paton (Loeb Classical Library, vol. VI, 1927)",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/38*.html",
+     "lic": "Public domain (translation published 1927; LacusCurtius)"
+    },
+    {
+     "text": "For you, Romans, the gods have no cause of indignation, since you exercise the right of war. But upon this Hasdrubal, betrayer of his country and her temples, of me and his children, may the gods of Carthage take vengeance, and you be their instrument.” Then turning to Hasdrubal, “Wretch,” she exclaimed, “traitor, most effeminate of men, this fire will entomb me and my children. But as for you, what Roman triumph will you, the leader of great Carthage, decorate? Ah, what punishment will you not receive from him at whose feet you are now sitting.",
+     "who": "Hasdrubal's wife, as recorded by Appian, who introduces the speech with 'it is said'; Appian then says she killed her children, threw them into the burning temple and followed them",
+     "date": "spring 146 BC; written 2nd century AD",
+     "doc": "Appian, The Punic Wars, ch. 131, tr. Horace White (Loeb, 1912), pp. 635–637",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt",
+     "lic": "Public domain (translation first published 1912)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Turning round to me at once and grasping my hand Scipio said, \"A glorious moment, Polybius; but I have a dread foreboding that some day the same doom will be pronounced on my own country.\" It would be difficult to mention an utterance more statesmanlike and more profound.",
+     "who": "Polybius, the Greek historian, friend and (as Appian says) former tutor of Scipio Aemilianus, who was with him as the city burned (Histories 38.21, tr. W. R. Paton, 1927)",
+     "date": "spring 146 BC",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/38*.html"
+    },
+    {
+     "text": "Then came new scenes of horror. The fire spread and carried everything down, and the soldiers did not wait to destroy the buildings little by little, but pulled them all down together. So the crashing grew louder, and many fell with the stones into the midst dead. Others were seen still living, especially old men, women, and young children who had hidden in the inmost nooks of the houses, some of them wounded, some more or less burned, and uttering horrible cries.",
+     "who": "Appian of Alexandria, Greek historian under Roman rule, writing about 300 years later and thought to draw largely on Polybius (The Punic Wars, ch. 129, tr. Horace White, 1912)",
+     "date": "spring 146 BC; written 2nd century AD",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "advised the Senate that the former calamitous defeats of the Carthaginians had diminished not so much their power as their foolhardiness, and were likely to render them in the end not weaker, but more expert in war; their present contest with Numidia was but a prelude to a contest with Rome, while peace and treaty were mere names wherewith to cover their postponement of war till a fit occasion offered.",
+     "who": "Cato the Elder's case to the Senate after his embassy to Carthage, as reported by Plutarch, Life of Cato the Elder 26 (tr. Bernadotte Perrin, Loeb, 1914)",
+     "date": "c. 153–150 BC",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Cato_Major*.html"
+    },
+    {
+     "text": "it is said that Cato contrived to drop a Libyan fig in the Senate, as he shook out the folds of his toga, and then, as the senators admired its size and beauty, said that the country where it grew was only three days' sail from Rome. And in one thing he was even more savage, namely, in adding to his vote on any question whatsoever these words: \"In my opinion, Carthage must be destroyed.\"",
+     "who": "Plutarch, Life of Cato the Elder 27 (tr. Bernadotte Perrin, 1914)",
+     "date": "c. 153–149 BC",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Cato_Major*.html"
+    },
+    {
+     "text": "Your ready obedience up to this point, Carthaginians, in the matter of the hostages and the arms, is worthy of all praise. But in cases of necessity, we must not multiply words. Bear bravely the remaining command of the Senate. Yield Carthage to us, and betake yourselves where you like within your own territory at a distance of at least ten miles from the sea, for we are resolved to raze your city to the ground.",
+     "who": "The consul Lucius Marcius Censorinus, delivering the Senate's final demand to the Carthaginian envoys at Utica, as recorded by Appian (The Punic Wars, ch. 81, tr. Horace White, 1912)",
+     "date": "149 BC",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+    },
+    {
+     "text": "The healing drug for all evils is oblivion, and this is not possible to you unless you put away the sight. The plainest proof of this is that as often as you obtained forgiveness and peace from us you violated the agreement.",
+     "who": "Censorinus, answering Banno's plea, as recorded by Appian (The Punic Wars, ch. 88, tr. Horace White, 1912)",
+     "date": "149 BC",
+     "url": "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+    }
+   ],
+   "warn": "No Carthaginian account of the war survives. Every Carthaginian word here comes through Greek historians on or under the Roman side: Polybius, who was with Scipio at the end and, Wikipedia notes, tends to show him favourably, and Appian, who wrote about 300 years later and relied largely on Polybius. Speeches in ancient histories were composed by the historian to suit the occasion. The translations are Horace White's (Loeb, 1912), W. R. Paton's (Loeb, 1927) and Bernadotte Perrin's (Loeb, 1914).",
+   "disputed": [
+    [
+     "Was the earth salted? No ancient source says so. Wikipedia, citing the historian Ronald Ridley's 1986 article 'To Be Taken with a Pinch of Salt', says the story that Roman forces sowed the city with salt is a 19th-century invention; what is recorded is that a ten-man Senate commission ordered further demolition and forbade resettlement. Whether the site was also formally cursed is itself unclear: Britannica and one Wikipedia article say it was, another says the land was not cursed and people could still walk on it.",
+     [
+      "https://en.wikipedia.org/wiki/Third_Punic_War",
+      "https://en.wikipedia.org/wiki/Siege_of_Carthage_(Third_Punic_War)",
+      "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain"
+     ]
+    ],
+    [
+     "How many lived and died? Appian says 50,000 men and women came out of the citadel under Scipio's safe-conduct, and they were sold into slavery. The city's earlier size is uncertain: Britannica says perhaps more than a quarter of a million; Wikipedia reports estimates of 150,000–250,000 from several historians and 700,000 from Richard Miles, so the number killed cannot be fixed. Because of the massacre and expulsion, the historian Ben Kiernan has called it 'the first genocide'.",
+     [
+      "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt",
+      "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain",
+      "https://en.wikipedia.org/wiki/Siege_of_Carthage_(Third_Punic_War)"
+     ]
+    ],
+    [
+     "Who started it? Carthage did break the treaty of 201 BC by making war on Masinissa without Rome's consent, and Censorinus (as Appian has him) accuses Carthage of breaking every past peace. But Wikipedia says Carthage was no military threat to Rome, had paid off its indemnity and had long been denied redress against Masinissa, and that Rome used the breach as a pretext; modern scholars suggest motives from fear of trade competition to greed for glory and loot, with no consensus.",
+     [
+      "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain",
+      "https://en.wikipedia.org/wiki/Third_Punic_War",
+      "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+     ]
+    ],
+    [
+     "Rome was divided. Plutarch says Scipio Nasica ended his speeches 'Carthage must be spared', believing fear of Carthage kept the Roman people in check. The famous Latin phrase 'Carthago delenda est' is a later form: Wikipedia says Cato has been credited with it only since the 18th century; Plutarch, writing in Greek, gives the sense.",
+     [
+      "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Plutarch/Lives/Cato_Major*.html",
+      "https://en.wikipedia.org/wiki/Third_Punic_War"
+     ]
+    ],
+    [
+     "Hasdrubal's wife's last words exist in two versions. In Polybius's surviving fragment she first thanks Scipio for sparing her and her children and then reproaches her husband; Appian's fuller speech, introduced with 'it is said', has her curse Hasdrubal and kill herself and her children in the fire.",
+     [
+      "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/38*.html",
+      "https://archive.org/stream/appiansromanhist01appi/appiansromanhist01appi_djvu.txt"
+     ]
+    ],
+    [
+     "Carthage's own record. Greco-Roman and biblical sources suggest that Carthage practised child sacrifice; Wikipedia's summary of the scholarship says urns of cremated infants and animals were buried in sanctuaries now called tophets, and that whether children were sacrificed there is a long-running debate. Carthage had also carried off statues from Sicilian temples, which Scipio returned after the city fell.",
+     [
+      "https://en.wikipedia.org/wiki/Religion_in_Carthage",
+      "https://en.wikipedia.org/wiki/Third_Punic_War"
+     ]
+    ]
+   ],
+   "blind": "Carthage's own libraries and records died with it, and its people speak only in speeches written by Greek historians for Roman readers. The 50,000 sold into slavery, and the old people, women and children Appian describes dying in the ruins, have no recorded words; even the one Carthaginian woman given a speech is remembered only as Hasdrubal's wife.",
+   "reading": [
+    [
+     "Punic Wars: Third Punic War (Britannica)",
+     "https://www.britannica.com/event/Punic-Wars/Campaigns-in-Sicily-and-Spain"
+    ],
+    [
+     "Third Punic War (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Third_Punic_War"
+    ],
+    [
+     "Appian, Roman History vol. I, tr. Horace White (Loeb, archive.org; The Punic Wars is Book VIII)",
+     "https://archive.org/details/appiansromanhist01appi"
+    ],
+    [
+     "Polybius, Histories, Book 38, tr. Paton (LacusCurtius)",
+     "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Polybius/38*.html"
+    ]
+   ]
+  },
+  {
+   "id": "blackbirding",
+   "title": "Blackbirding: Pacific Islanders taken to labour in Queensland and Fiji",
+   "region": "Oceania",
+   "where": "Mackay, Queensland, Australia",
+   "lat": -21.1411,
+   "lon": 149.186,
+   "from": 1863,
+   "to": 1906,
+   "themes": [
+    "Forced labour",
+    "Slavery",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "In 1863 a group of 67 South Sea Islanders were brought to Queensland to work in the cotton and sugar industries, the first of more than 62,000 Pacific Island men, women and children transported to Australia over the next 40 years; some were kidnapped, or 'blackbirded', others were misled.",
+     "https://www.nma.gov.au/defining-moments/resources/islander-labourers"
+    ],
+    [
+     "The historian Clive Moore counts 62,000 contracts issued to around 50,000 Islanders, roughly two-thirds from Vanuatu and one-third from the Solomon Islands; the Pioneer Valley at Mackay always had the largest Islander population, and on average 50 in every 1,000 Islanders died each year in Queensland, 147 at worst in 1884.",
+     "https://www.multiculturalaustralia.edu.au/doc/mmaq01_moore_mackay.pdf"
+    ],
+    [
+     "Queensland's Polynesian Labourers Act of 1868 regulated the labourers' treatment and licensed recruiters, but could not be enforced beyond the colony's borders; Britain's Pacific Islanders Protection Act of 1872 (the Kidnapping Act) reduced blackbirding by British subjects, yet the practice continued to flourish.",
+     "https://www.britannica.com/topic/blackbirding"
+    ],
+    [
+     "In 1871 the brig Carl, recruiting for the plantations of Fiji, had its crew disguised as missionaries; Dr James Patrick Murray and his crew shot about 60 islanders, and Murray escaped trial by giving evidence against the crew, whose captain and mate were sentenced to death, commuted to life imprisonment.",
+     "https://en.wikipedia.org/wiki/Blackbirding"
+    ],
+    [
+     "Islanders also fought back: the Anglican missionary John Coleridge Patteson was killed at Nukapu in 1871, a killing usually explained as revenge for an attack a few days earlier in which one local man was killed and five abducted by a crew posing as missionaries, and as communities in Vanuatu and the Solomons gained modern firearms several recruiting vessels lost crew members to their resistance.",
+     "https://en.wikipedia.org/wiki/Blackbirding"
+    ],
+    [
+     "The Pacific Island Labourers Act of 1901, part of the White Australia policy, required the deportation of most Islanders from 1906; more than 7,500 were returned between late 1906 and 1908, some of whom had arrived so young they would have had no memory of their home country, and about 2,500 remained.",
+     "https://www.nma.gov.au/defining-moments/resources/islander-labourers"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Plenty men came to Queensland because of trouble at home, and if they went back they would be killed, and so they are frightened to go. [...] The white men asked us to come to this country and work for them, and the Government asked us to come, and said they would look out for us if we came, and we came and trusted to the white men, and now if he does not want us any more all right, but he should let us alone; we don't want to do him any harm, we only say don't drive us away. Plenty who don't care will go home themselves, but please don't drive away those who want to stop; you brought us here, we did not come ourselves.",
+     "who": "Pacific Islanders' Association, Mackay, letter to the Sugar Industry Labour Royal Commission, signed by its chairman Henry Tongoa and read by him in evidence",
+     "date": "17 April 1906",
+     "doc": "Report of the Royal Commission ... into the deportation and repatriation of Pacific Islanders, and the sufficiency of labour for the Queensland sugar industry (Brisbane, 1906), minutes of evidence, question 5215",
+     "url": "https://archive.org/details/DeportationReportFromTheRoyalCommission",
+     "lic": "Public domain (Queensland parliamentary paper, 1906)"
+    },
+    {
+     "text": "Your husband got ticket ? No. How many years has he been in Queensland ? I cannot tell you — a long time. He go work sugar ? No; ship steal him when he little chap. He got land ? Yes ; this place here.",
+     "who": "Goleen Narto, from Aoba (Ambae, Vanuatu), wife of the Islander Alick Ling, answering the commissioners' questions about her husband; she had been in Queensland 27 years",
+     "date": "14 April 1906",
+     "doc": "Same report, minutes of evidence, questions 4465–4468",
+     "url": "https://archive.org/details/DeportationReportFromTheRoyalCommission",
+     "lic": "Public domain (Queensland parliamentary paper, 1906)"
+    },
+    {
+     "text": "You want to go home or to stop? I want stop altogether longa Queensland. Suppose you go home and take your wife longa your island, you think other fellow kill her or steal her ? My own man all right; but bush man might kill her. But if they kill her it does not matter. We both Christians, and go to God.",
+     "who": "Harry Delamo, from Malaita (Solomon Islands), 22 years in Queensland, married to an Aboriginal woman, answering the commissioners",
+     "date": "14 May 1906",
+     "doc": "Same report, minutes of evidence, questions 10807–10808",
+     "url": "https://archive.org/details/DeportationReportFromTheRoyalCommission",
+     "lic": "Public domain (Queensland parliamentary paper, 1906)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "We found her a small schooner of forty-eight tons register, fitted up precisely like an African slaver, minus the irons, with 100 natives on board, who had been brought here from the New Hebrides, having experienced the pleasure of a dead beat to windward for twenty-one days; they were stark naked, and had not even a mat to lie upon: the shelves were just the same as might be knocked up for a lot of pigs,—no bunks or partitions of any sort being fitted, and yet the vessel was inspected by a Government officer at Queensland!",
+     "who": "George Palmer, commander of the Royal Navy ship HMS Rosario, on boarding the Queensland-licensed labour vessel Daphne at Levuka, Fiji, in Kidnapping in the South Seas, p. 108",
+     "date": "1869; published 1871",
+     "url": "https://archive.org/details/kidnappinginsout00palmuoft"
+    },
+    {
+     "text": "The letter received from Mr Armitt said that when between South and East Capes the boats were sent ashore, and among other recruits obtained two brothers. The mother came down and asked one to stop with her. The man in charge of the boat told \"Alec,\" the interpreter, to catch her. He jumped on shore and struck the woman on the head with his tomahawk, and threw her into the boat. The natives who saw the act speared two white men. Another boat went to the rescue, opened fire, and shot three of the natives.",
+     "who": "Te Aroha News (New Zealand), reporting reports read by the Premier of Queensland after the sentencing of the crew of the labour schooner Hopeful for kidnapping and murder in New Guinea waters",
+     "date": "3 January 1885 (reports of 1884)",
+     "url": "https://paperspast.natlib.govt.nz/newspapers/TAN18850103.2.20"
+    }
+   ],
+   "official": [
+    {
+     "text": "This free use of the term “steal” amongst the islanders accounts for numbers of unfounded charges of kidnapping made against us. [...] Apart from the immorality of such a proceeding, kidnapping would be extremely impolitic on the part of a recruiter who expected to be engaged for any length of time in the labour trade. One case of kidnapping would spoil the captain's, the recruiter's, and the ship's reputation on the islands, and the friends of the kidnapped man would not fail to kill the offenders at the first opportunity.",
+     "who": "William T. Wawn, labour-trade ship's master and recruiter for Queensland from 1875 to 1891, defending the trade in The South Sea Islanders and the Queensland Labour Trade, pp. 12–13 (between these sentences he admits that kidnapping 'has been occasionally perpetrated')",
+     "date": "1893",
+     "url": "https://archive.org/details/southseaislander00wawnuoft"
+    },
+    {
+     "text": "The Minister may order a Pacific Island labourer found in Australia after the thirty-first day of December, One thousand nine hundred and six, to be deported from Australia, and thereupon he shall be deported accordingly.",
+     "who": "Parliament of the Commonwealth of Australia, Pacific Island Labourers Act 1901 (No. 16 of 1901), section 8 (2)",
+     "date": "17 December 1901",
+     "url": "https://www.legislation.gov.au/C1901A00016/asmade/text"
+    }
+   ],
+   "today": {
+    "text": "Australian South Sea Islanders are the Australian-born direct descendants of people who were brought to Australia between 1863 and 1904 to work as indentured labourers in the primary industries. Over 50,000 people (mainly men) came from some 80 Pacific Islands, primarily Vanuatu and the Solomon Islands. The majority were kidnapped, 'Blackbirded' or deceived into coming. While some ancestors of Australian South Sea Islanders may have left their homelands by choice, they often experienced the same discrimination and harsh treatment as those who came unwillingly.",
+    "who": "Queensland Government, Australian South Sea Islanders page (the state formally recognised Australian South Sea Islanders on 7 September 2000); CC BY 4.0",
+    "date": "page last modified 24 April 2025",
+    "url": "https://www.dwatsipm.qld.gov.au/our-work/multicultural-affairs/multicultural-communities/australian-south-sea-islanders"
+   },
+   "warn": "The 1906 testimony is in the Pacific pidgin English the Islanders used, as taken down by the commission's clerks, with the commissioners' questions left in; 'ticket' means an exemption certificate. The recruiter and officials of the time call the Islanders 'natives', 'boys' and 'Kanakas'; these are quoted as their words, not endorsed.",
+   "disputed": [
+    [
+     "Kidnapped or recruited. The Queensland Government today says the majority were kidnapped, 'blackbirded' or deceived, and the State Library of Queensland calls the recruiters slave traders; Clive Moore writes that historians agree the first phase of recruiting in most areas was by kidnapping and deception, but that later recruits were lured less by trickery than by trade goods and the chance to better themselves, while most descendants prefer to see their forebears as kidnapped slaves, and the method of recruitment remains debated. The recruiter Wawn blamed Islanders' loose use of the word 'steal' for many charges, while admitting kidnapping happened.",
+     [
+      "https://www.dwatsipm.qld.gov.au/our-work/multicultural-affairs/multicultural-communities/australian-south-sea-islanders",
+      "https://www.slq.qld.gov.au/blog/sugar-slaves",
+      "https://www.multiculturalaustralia.edu.au/doc/mmaq01_moore_mackay.pdf",
+      "https://archive.org/details/southseaislander00wawnuoft"
+     ]
+    ],
+    [
+     "How many came. The National Museum of Australia gives more than 62,000 people; Clive Moore says 62,000 contracts went to around 50,000 Islanders, because many signed on more than once; the Queensland Government gives over 50,000.",
+     [
+      "https://www.nma.gov.au/defining-moments/resources/islander-labourers",
+      "https://www.multiculturalaustralia.edu.au/doc/mmaq01_moore_mackay.pdf",
+      "https://www.dwatsipm.qld.gov.au/our-work/multicultural-affairs/multicultural-communities/australian-south-sea-islanders"
+     ]
+    ],
+    [
+     "The cost of deportation. Islanders told the 1906 Royal Commission that men who had fled trouble at home would be killed if sent back and that couples from different islands could not safely return; the State Library of Queensland notes that relatively few were exempted (691 of the 4,897 people documented in the report), among them those married to Aboriginal or European people and those born in Queensland, while more than 7,500 were deported, some of whom had arrived as children.",
+     [
+      "https://archive.org/details/DeportationReportFromTheRoyalCommission",
+      "https://www.slq.qld.gov.au/blog/digitised-slq-islanders-speak-out-about-deportation-1906",
+      "https://www.nma.gov.au/defining-moments/resources/islander-labourers"
+     ]
+    ]
+   ],
+   "blind": "The Islanders who speak here are the few who were still in Queensland in 1906, answering white commissioners in a second language through the report's clerks; the men and women kidnapped in the 1860s and 1870s, the thousands who died on the plantations, and the families on the islands whose sons never came back left almost no words in the written record, which is mostly the recruiters', officials' and missionaries'.",
+   "reading": [
+    [
+     "Report of the Royal Commission on the deportation of Pacific Islanders (1906, scan)",
+     "https://archive.org/details/DeportationReportFromTheRoyalCommission"
+    ],
+    [
+     "National Museum of Australia, Defining Moments: Islander labourers",
+     "https://www.nma.gov.au/defining-moments/resources/islander-labourers"
+    ],
+    [
+     "Clive Moore, The South Sea Islanders of Mackay (2001)",
+     "https://www.multiculturalaustralia.edu.au/doc/mmaq01_moore_mackay.pdf"
+    ],
+    [
+     "George Palmer, Kidnapping in the South Seas (1871, scan)",
+     "https://archive.org/details/kidnappinginsout00palmuoft"
+    ],
+    [
+     "State Library of Queensland, Sugar slaves",
+     "https://www.slq.qld.gov.au/blog/sugar-slaves"
+    ],
+    [
+     "State Library of Queensland, Islanders speak out about deportation in 1906",
+     "https://www.slq.qld.gov.au/blog/digitised-slq-islanders-speak-out-about-deportation-1906"
+    ]
+   ]
+  },
+  {
+   "id": "guatemala1954",
+   "title": "The 1954 coup in Guatemala and what followed",
+   "region": "Americas",
+   "where": "Guatemala City, Guatemala",
+   "lat": 14.6349,
+   "lon": -90.5069,
+   "from": 1952,
+   "to": 1954,
+   "themes": [
+    "Removal and dispossession",
+    "War",
+    "Detention and torture"
+   ],
+   "facts": [
+    [
+     "When Jacobo Arbenz took office in 1951, a mere 2 percent of Guatemala's population controlled more than 72 percent of its arable land, and less than 12 percent of privately held land was being cultivated.",
+     "https://history.state.gov/historicaldocuments/frus1952-54Guat/intro"
+    ],
+    [
+     "On 17 June 1952 Arbenz promulgated Decree 900, the Agrarian Reform Law, drawn up with the help of Guatemala's Communists (the Guatemalan Labor Party); it redistributed idle lands in excess of 223 acres, paying owners in 25-year bonds at the value they had declared for tax.",
+     "https://history.state.gov/historicaldocuments/frus1952-54Guat/intro"
+    ],
+    [
+     "The reform brought Arbenz into conflict with the country's largest landowner, the US-based United Fruit Company, whose idle lands he tried to expropriate; by June 1954 about 500,000 people, one-sixth of the population, had received land, and the speed of the reform also led to some arbitrary land seizures and violence against landowners.",
+     "https://en.wikipedia.org/wiki/1954_Guatemalan_coup_d%27%C3%A9tat"
+    ],
+    [
+     "The CIA, working from Honduras and El Salvador, helped organize an invading army of exiles led by Col. Carlos Castillo Armas; the Guatemalan army refused to fight for Arbenz, and he was forced to resign on 27 June 1954 and go into exile.",
+     "https://www.britannica.com/biography/Jacobo-Arbenz"
+    ],
+    [
+     "Castillo Armas reversed most of the reforms of the previous decade; in the first months after the coup his government executed many supporters of Arbenz, with estimates ranging from hundreds to five thousand, and it banned unions, peasant organizations and opposition parties.",
+     "https://en.wikipedia.org/wiki/1954_Guatemalan_coup_d%27%C3%A9tat"
+    ],
+    [
+     "A civil war followed from the early 1960s until peace accords in 1996; the Historical Clarification Commission, set up under a 1994 agreement between the government and the URNG guerrillas with United Nations involvement, found that over 200,000 people were killed or disappeared, attributing 93% of the violations to state forces and related paramilitary groups and 3% to insurgent groups.",
+     "https://en.wikipedia.org/wiki/Historical_Clarification_Commission"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We all know how cities have been bombed and strafed, women and children have suffered. We know how representatives of workers and peasants have been murdered in occupied cities, especially in Bananera. That was an act of vengeance by the United Fruit Company. We are indignant over the cowardly attack by mercenary US fliers. They know Guatemala has no adequate air force so they try to sow panic. They bomb and strafe our forces preventing operations. Today they sank a ship taking on cotton in San Jose. In the name of what do they do these things? We all know what. They have taken the pretext of Communism. The truth is elsewhere — in financial interests of the United Fruit Company and other US firms that have invested much in Guatemala.",
+     "who": "President Jacobo Arbenz, the elected president being overthrown, resignation broadcast on Guatemalan radio, as monitored and translated by the CIA",
+     "date": "27 June 1954",
+     "doc": "\"Arbenz' speech delivered at 0310-0320 EST\", CIA transcript received 6/27/54, p. 1 (CIA Historical Review Program, released in full 2003)",
+     "url": "https://www.cia.gov/readingroom/docs/DOC_0000920952.pdf",
+     "lic": "Public domain (US government work)"
+    },
+    {
+     "text": "I took presidency with great faith in the democratic system, in freedom, in the idea that economic independence could be won. I still believe the program is fair. My faith in democratic freedom, in the independence of Guatemala has not been lost. Some day the enemy forces will be defeated. I am still a combatant of freedom and progress for my country. I say goodbye with sorrow, but firm in my convictions.",
+     "who": "President Jacobo Arbenz, the elected president being overthrown, same broadcast, as translated by the CIA",
+     "date": "27 June 1954",
+     "doc": "\"Arbenz' speech delivered at 0310-0320 EST\", CIA transcript, p. 2",
+     "url": "https://www.cia.gov/readingroom/docs/DOC_0000920952.pdf",
+     "lic": "Public domain (US government work)"
+    }
+   ],
+   "official": [
+    {
+     "text": "In Guatemala, international communism had an initial success. It began 10 years ago, when a revolution occurred in Guatemala. The revolution was not without justification. But the Communists seized on it, not as an opportunity for real reforms, but as a chance to gain political power. Communist agitators devoted themselves to infiltrating the public and private organizations of Guatemala.",
+     "who": "John Foster Dulles, US Secretary of State, radio and television address to the nation, printed in the Department of State Bulletin, 12 July 1954, p. 43",
+     "date": "30 June 1954",
+     "url": "https://archive.org/details/sim_department-of-state-bulletin_1954-07-12_31_785"
+    },
+    {
+     "text": "Throughout the period I have outlined, the Guatemalan Government and Communist agents throughout the world have persistently attempted to obscure the real issue—that of Communist imperialism—by claiming that the United States is only interested in protecting American business. We regret that there have been disputes between the Guatemalan Government and the United Fruit Company. We have urged repeatedly that these disputes be submitted for settlement to an international tribunal or to international arbitration. That is the way to dispose of problems of this sort. But this issue is relatively unimportant.",
+     "who": "John Foster Dulles, same address, Department of State Bulletin, 12 July 1954, p. 44",
+     "date": "30 June 1954",
+     "url": "https://archive.org/details/sim_department-of-state-bulletin_1954-07-12_31_785"
+    },
+    {
+     "text": "The enemy relies especially on mass support through communist-led labor and peasants unions and through front organizations of youth, students, women, peace committees, etc. Enemy public mass meetings and parades ought to be attacked by hecklers, spreading of sudden panic rumors (e.g. telling people gathering for an open-air meeting that an air raid is imminent or that store of explosives in a nearby building is about to blow up), use of stink bombs, setting inflammable displays, posters, banners, etc. afire, or the like.",
+     "who": "CIA, Operation PBSUCCESS headquarters in Florida, secret \"Policy Guidance for Final Phase of PBSUCCESS\" sent to all stations (declassified; Foreign Relations of the United States, 1952–1954, Guatemala, doc. 181)",
+     "date": "13 June 1954",
+     "url": "https://history.state.gov/historicaldocuments/frus1952-54Guat/d181"
+    },
+    {
+     "text": "He therefore asked what US would wish in return if it used its good offices to put end to fighting. Constantly emphasizing I could speak only as individual and not for US Government, I said there was only one important problem between our governments: That of communism. Colonel Diaz said he knew that and was prepared guarantee in name of army that Communist Party would be outlawed and its leaders exiled.",
+     "who": "John E. Peurifoy, US Ambassador in Guatemala, secret telegram to the State Department on his meeting with the army chief Col. Carlos Enrique Díaz hours after Arbenz resigned (Foreign Relations of the United States, 1952–1954, vol. IV, doc. 488)",
+     "date": "27 June 1954",
+     "url": "https://history.state.gov/historicaldocuments/frus1952-54v04/d488"
+    }
+   ],
+   "today": [
+    {
+     "text": "The historian who collected and prepared the volume knew that the compilation on Guatemala as published was incomplete and flawed. The role of the Central Intelligence Agency in the ouster of Guatemala’s elected president, Jacobo Arbenz Guzmán, was not documented in the volume. The historian responsible for the volume gained some access to CIA records of the operation. He inserted references to the covert operation into the Guatemala compilation, but they were denied in the declassification process.",
+     "who": "US Department of State, Office of the Historian, preface to the retrospective volume Foreign Relations of the United States, 1952–1954, Guatemala, on the official record it published in 1983",
+     "date": "2003",
+     "url": "https://history.state.gov/historicaldocuments/frus1952-54Guat/preface"
+    },
+    {
+     "text": "In the written agreement, the State recognizes its international responsibility for \"failing to comply with its obligation to guarantee, respect, and protect the human rights of the victims to a fair trial, to property, to equal protection before the law, and to judicial protection, which are protected in the American Convention on Human Rights and which were violated against former President Juan Jacobo Arbenz Guzmán, his wife, María Cristina Vilanova, and his children",
+     "who": "Inter-American Commission on Human Rights, press release 46/11, on the friendly settlement signed by the State of Guatemala with Arbenz's family; the agreement included a public ceremony and a letter of apology, and President Álvaro Colom made the formal apology at the National Palace in October 2011",
+     "date": "20 May 2011",
+     "url": "https://www.oas.org/en/iachr/media_center/PReleases/2011/046.asp"
+    }
+   ],
+   "warn": "Arbenz's broadcast survives here in a CIA monitoring translation, typed in haste ('I took presidency'); 'Some day' is a handwritten correction on the typescript. Dulles and the CIA speak of 'the enemy' and 'Communist agents'; they are quoted as the victors' account of the time, not endorsed.",
+   "disputed": [
+    [
+     "Why the United States acted. Dulles said in 1954 that the dispute with United Fruit was 'relatively unimportant' and the real issue was communism, and the State Department's historians summarise the CIA's view as 'Agrarian reform was not the issue—communism was'; Britannica says Washington feared both for American banana investments and bank loans and over Guatemala's ties with the communist bloc. Historians still disagree: some hold that United Fruit's lobbying, the expropriation of its lands and officials' ties to the company were the chief motive, others that strategic Cold War fears drove it, and others that it was part of wider US opposition to nationalist movements.",
+     [
+      "https://archive.org/details/sim_department-of-state-bulletin_1954-07-12_31_785",
+      "https://history.state.gov/historicaldocuments/frus1952-54Guat/intro",
+      "https://www.britannica.com/biography/Jacobo-Arbenz",
+      "https://en.wikipedia.org/wiki/1954_Guatemalan_coup_d%27%C3%A9tat"
+     ]
+    ],
+    [
+     "How communist was Arbenz's government. The State Department's historians record that Arbenz welcomed the Communists of the Guatemalan Labor Party and met them secretly in 1951 to draw up the agrarian reform law, and Britannica says he undoubtedly had communist support; but Britannica also says the US claim that Arbenz had close connections with the Soviet bloc proved unsubstantiated, and historians argue that knowing of a small number of communists close to Arbenz led the US to overstate their influence.",
+     [
+      "https://history.state.gov/historicaldocuments/frus1952-54Guat/intro",
+      "https://www.britannica.com/biography/Jacobo-Arbenz",
+      "https://en.wikipedia.org/wiki/1954_Guatemalan_coup_d%27%C3%A9tat"
+     ]
+    ],
+    [
+     "How far 1954 explains the civil war. The coup ended ten years of elected reforming government and was followed by military rule, but the civil war began in the early 1960s and had deep roots of its own, among them the violence and exclusion long directed at the poorest Guatemalans, above all the Maya, which accounts of the Historical Clarification Commission's work stress; the card does not treat every later killing as a direct result of 1954.",
+     [
+      "https://en.wikipedia.org/wiki/Historical_Clarification_Commission",
+      "https://en.wikipedia.org/wiki/1954_Guatemalan_coup_d%27%C3%A9tat"
+     ]
+    ]
+   ],
+   "blind": "The voice that survives is the deposed president's, and only in a hasty CIA translation; the peasants who received land under Decree 900 and lost it after 1954, and the union workers executed in the months after the coup, left almost no words in any public-domain record. The US side, by contrast, is documented in thousands of declassified pages.",
+   "reading": [
+    [
+     "Foreign Relations of the United States, 1952–1954, Guatemala (State Department, 2003)",
+     "https://history.state.gov/historicaldocuments/frus1952-54Guat"
+    ],
+    [
+     "Arbenz's resignation speech, CIA transcript (scan)",
+     "https://www.cia.gov/readingroom/docs/DOC_0000920952.pdf"
+    ],
+    [
+     "Dulles, 'International Communism in Guatemala', Department of State Bulletin, 12 July 1954 (scan)",
+     "https://archive.org/details/sim_department-of-state-bulletin_1954-07-12_31_785"
+    ],
+    [
+     "Britannica, Jacobo Arbenz",
+     "https://www.britannica.com/biography/Jacobo-Arbenz"
+    ],
+    [
+     "IACHR, friendly settlement in the Arbenz case (2011)",
+     "https://www.oas.org/en/iachr/media_center/PReleases/2011/046.asp"
+    ]
+   ],
+   "note": "Research in progress: no public-domain words of the peasants who received and lost land were found."
+  },
+  {
+   "id": "holodomor",
+   "title": "The Holodomor: the famine in Soviet Ukraine",
+   "region": "Europe",
+   "where": "Kharkiv, then capital of Soviet Ukraine (pin stands for the whole republic)",
+   "lat": 49.9935,
+   "lon": 36.2304,
+   "from": 1932,
+   "to": 1933,
+   "themes": [
+    "Famine",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "Stalin's decision in 1929 to collectivise agriculture forced peasants to give up their land and property to collective farms and led to the deportation of so-called kulaks, to falling production and food shortages, and to peasant rebellions, including armed uprisings in parts of Ukraine.",
+     "https://www.britannica.com/event/Holodomor"
+    ],
+    [
+     "The decree on the protection of socialist property of 7 August 1932, which peasants nicknamed the Law of Spikelets, allowed people to be prosecuted for gleaning leftover grain from the fields; by one estimate more than 200,000 people were charged under it.",
+     "https://en.wikipedia.org/wiki/Law_of_Spikelets"
+    ],
+    [
+     "From the autumn of 1932 farms, villages and whole towns in Ukraine were blacklisted and denied food, peasants were forbidden to leave the republic in search of food, requisitions were increased, and groups of police and communist officials ransacked peasant homes and took everything edible.",
+     "https://www.britannica.com/event/Holodomor"
+    ],
+    [
+     "On 22 January 1933 Stalin signed a secret decree restricting travel by peasants after requests for bread began in the Kuban and Ukraine.",
+     "https://en.wikipedia.org/wiki/Holodomor"
+    ],
+    [
+     "Between 1931 and 1934 at least 5 million people died of hunger across the USSR, among them, by one study of Ukrainian demographers, at least 3.9 million Ukrainians; police archives describe cannibalism, theft and lynching, and the famine came with a campaign of repression against Ukrainian culture and religious leaders.",
+     "https://www.britannica.com/event/Holodomor"
+    ],
+    [
+     "The Kremlin officially denied the famine for more than half a century; its first public mention in the Soviet Union came in 1986, and Stalin suppressed the results of the 1937 census, whose administrators were arrested and murdered, partly because it revealed the decimation of Ukraine's population.",
+     "https://www.britannica.com/event/Holodomor"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "They were both. People came from the district. But usually, the people that came from the district joined the local representatives of the village soviet, people we knew. The locals were comprised of people from the komnezam, the Committee of Non-Wealthy Peasants. Some of the people who went around confiscating food later died of hunger themselves. We learned this later, after we had already left the village. We heard that this or that one had died of hunger. These were the same people who had come to our house and took everything away. And this wasn't just confiscation from the storehouses, but confiscation of the smallest bag of barley you'd hide somewhere under the bed.",
+     "who": "A survivor born in 1923 in the Dnipropetrovsk region, a peasant's child, testifying anonymously (Case History LH46), asked whether the grain seizers were neighbours or outsiders",
+     "date": "1932–1933; interview published 1988",
+     "doc": "Commission on the Ukraine Famine, Investigation of the Ukrainian Famine, 1932–1933: Report to Congress (1988), Appendix I, Case History LH46, p. 343 (tr. from Ukrainian for the Commission)",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt",
+     "lic": "Public domain (US government work, 1988)"
+    },
+    {
+     "text": "We brought them home, and my brother's wife divided the oilcakes among the children, like a piece of chocolate; so that they shook when they placed it in their mouths and ate it. Because their little hands were swollen, their little legs were swollen, and the children repeated endlessly, \"I want some bread! I want some bread! I want some bread!\" But sometimes I did not bring anything, so they cried bitterly. They cried bitterly. They met me, these children, at the road about a quarter of a kilometer before the hut; they waited, as I walked toward them to see if I might bring something.",
+     "who": "A survivor born in 1917 in the Poltava region, a teenager working on a collective farm during the famine, testifying anonymously (Case History LH30), on the oilcake smuggled home under a belt from work",
+     "date": "1932–1933; interview published 1988",
+     "doc": "Report to Congress (1988), Appendix I, Case History LH30, p. 282 (tr. from Ukrainian for the Commission)",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt",
+     "lic": "Public domain (US government work, 1988)"
+    },
+    {
+     "text": "We were given only soup made of sorrel and goosefoot plants to eat. And this was but once a day. That was it! The Famine was horrible in Ukraine. I saw it all myself. A lot can be written on this topic. Educational institutions were affected. The students went without food. They abandoned Kiev, scattering in all directions. Large numbers of peasants began pouring into the railway stations. They rode on buffers and on tops of trains. They tried to pick them off along the way as the trains headed northwards. In Russia and Byelorussia there was no famine on this scale. Only in Ukraine, in the Kuban, along the Don.",
+     "who": "A teacher at a workers' high school in the Zhytomyr region, a survivor (Case History LH57)",
+     "date": "1932–1933; interview published 1988",
+     "doc": "Report to Congress (1988), Appendix I, Case History LH57, pp. 357–358 (tr. from Russian for the Commission)",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt",
+     "lic": "Public domain (US government work, 1988)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "The police are picking up peasants on the streets who have come from the countryside looking for bread, and as far as possible, placing them in makeshift cabins: Those who already show the characteristic signs of imminent death (swelling of the limbs) are loaded onto freight cars and carried some 50-odd kilometers away where they're dumped out in the open country and left to die far away from everybody else.",
+     "who": "The Royal Italian Embassy in Moscow to the Foreign Ministry in Rome, passing on the reports of its consul in Kharkiv, Sergio Gradenigo (tr. Neil L. Inglis for the US Commission on the Ukraine Famine, Report to Congress, 1988, Appendix II, p. 429)",
+     "date": "6 June 1933",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "When you go to a district on grain procurements business, they start to pull out of every pocket figures and tables on a lower harvest, which are from start to finish put together by hostile elements who have entrenched themselves in the collective farms, land sections, and the MTS. But you don't find one single word about the crop that was on the root and was pulled up, stolen, and hidden. Our comrades, including some plenipotentiaries, by failing to examine these false figures shoved at them, have in numerous cases become kulak advocates armed with these figures.",
+     "who": "Stanislav Kosior, First Secretary of the Communist Party of Ukraine, speech to the party's Central Committee plenum, printed in Bil'shovyk Ukrainy, 1933, no. 3 (tr. in the US Commission's Report to Congress, 1988, p. 88)",
+     "date": "5–7 February 1933",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+    },
+    {
+     "text": "alleged famine which was supposed to have occurred in the Ukrainian SSR fifty years ago",
+     "who": "Ivan Khmil', Ukrainian SSR delegation to the United Nations, dismissing the famine as a slander, as quoted in the US Commission's Report to Congress (1988), p. 54",
+     "date": "October 1983",
+     "url": "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "Recognises the Holodomor, the artificial famine of 1932-1933 in Ukraine caused by a deliberate policy of the Soviet regime, as a genocide against the Ukrainian people, as it was committed with the intent to destroy a group of people by deliberately inflicting conditions of life calculated to bring about its physical destruction;",
+    "who": "European Parliament, resolution '90 years after the Holodomor: recognising the mass killing through starvation as genocide', paragraph 1 (it cites Ukraine's law of 28 November 2006 on the Holodomor)",
+    "date": "15 December 2022",
+    "url": "https://www.europarl.europa.eu/doceo/document/TA-9-2022-0449_EN.html"
+   },
+   "note": "Research in progress: no letter from a starving peasant to the Soviet authorities was found in a public-domain English translation, so none is quoted here.",
+   "warn": "The survivors' words are English translations made for the US Commission on the Ukraine Famine from interviews recorded in the 1980s, half a century after the events, with émigrés, most of whom testified anonymously. Kosior's speech and the Italian dispatch are also the Commission's translations. Gareth Jones's article is quoted from a modern transcription of the newspaper page. The sources of the time call better-off peasants 'kulaks' and treat them as enemies.",
+   "disputed": [
+    [
+     "Scholars agree the famine was man-made; whether it was intended to destroy Ukrainians as a group is debated. Was it genocide? Robert Conquest, Andrea Graziosi and Timothy Snyder hold that the starvation was deliberate and that several of its most lethal policies were aimed only or mostly at Ukraine; Ukraine, the US Commission of 1988 and the European Parliament call it genocide. R. W. Davies and Stephen Wheatcroft judge the famine man-made but unintended, caused by rapid industrialisation and two bad harvests together with brutal, ruthless policies for which Stalin bears responsibility; Wheatcroft calls those policies criminal acts of fraud and manslaughter, though not outright murder or genocide.",
+     [
+      "https://en.wikipedia.org/wiki/Holodomor_genocide_question",
+      "https://www.britannica.com/event/Holodomor",
+      "https://www.europarl.europa.eu/doceo/document/TA-9-2022-0449_EN.html",
+      "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+     ]
+    ],
+    [
+     "How many died? A joint statement to the United Nations signed by 25 countries in 2003 spoke of 7 to 10 million dead; more recent scholarship estimates 3.5 to 5 million in Ukraine, and Britannica cites a Ukrainian demographic study of at least 3.9 million Ukrainians. Historians such as J. Arch Getty have called Conquest's figure of about five million much too high, citing lower demographic estimates. Current estimates for Ukraine alone (3.5–5 million) bracket Conquest's figure.",
+     [
+      "https://en.wikipedia.org/wiki/Holodomor",
+      "https://www.britannica.com/event/Holodomor",
+      "https://en.wikipedia.org/wiki/Holodomor_genocide_question"
+     ]
+    ],
+    [
+     "Ukraine alone? The famine was part of a wider Soviet famine that also struck Russia's grain regions, the Kuban and North Caucasus, and Kazakhstan, where an estimated 1.3 to 2.3 million people died, most of them Kazakhs, between 38 and 42 per cent of all Kazakhs. Gareth Jones himself wrote in 1933 that the famine was 'everywhere', in Ukraine, Russia, Central Asia and the North Caucasus. Norman Naimark notes that, unlike Ukrainians, Kazakhs were not stopped from fleeing famine areas to the cities.",
+     [
+      "https://en.wikipedia.org/wiki/Kazakh_famine_of_1930%E2%80%931933",
+      "https://www.garethjones.org/soviet_articles/famine_rules_russia.htm",
+      "https://en.wikipedia.org/wiki/Holodomor_genocide_question",
+      "https://www.britannica.com/event/Holodomor"
+     ]
+    ],
+    [
+     "The witnesses. The Commission itself warned that the Italian consul Gradenigo was a dedicated Fascist whose prejudices, including anti-Semitic views, show in his reports, and that his mortality estimate seems exaggerated. The correspondent Eugene Lyons later wrote that Jones had based his account largely on information from other Western correspondents and diplomats; and the Commission found that Duranty, while denying starvation in print, privately told British diplomats that as many as ten million people may have died of hunger in the past year. Lyons also called Jones's report the first reliable press report in the English-speaking world.",
+     [
+      "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+     ]
+    ],
+    [
+     "The survivors' testimony. The oral histories were recorded in the 1980s, half a century later, from survivors who had left the Soviet Union, so they come only from those who lived and emigrated. They also show that local villagers of the committees of poor peasants took part in the seizures alongside officials from the district, and that some of those who seized food later starved themselves.",
+     [
+      "https://archive.org/stream/investigationofu00unit_0/investigationofu00unit_0_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "Millions of the dead, most of them peasants, left almost no words of their own: a famine kills the poorest and youngest first, and letters or diaries were rarely kept or survive in translation. The testimony quoted here comes from those who lived, left the Soviet Union and spoke decades later in the West; the Soviet records of the time speak in the language of grain plans and 'kulak sabotage'; and foreign witnesses saw mainly the cities and the roads near them.",
+   "reading": [
+    [
+     "Investigation of the Ukrainian Famine, 1932–1933: Report to Congress (1988), full text",
+     "https://archive.org/details/investigationofu00unit_0"
+    ],
+    [
+     "Oral History Project of the Commission on the Ukraine Famine (1990), vol. 1",
+     "https://archive.org/details/investigationofu01mace"
+    ],
+    [
+     "Holodomor (Britannica, by Anne Applebaum)",
+     "https://www.britannica.com/event/Holodomor"
+    ],
+    [
+     "European Parliament resolution of 15 December 2022 on the Holodomor",
+     "https://www.europarl.europa.eu/doceo/document/TA-9-2022-0449_EN.html"
+    ],
+    [
+     "Gareth Jones's Soviet famine articles (garethjones.org)",
+     "https://www.garethjones.org/published_articles/overview/articles1933.htm"
+    ]
+   ]
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
