@@ -77,10 +77,14 @@
    "seconds": 33,
    "bytes": 330590,
    "at": "2026-11-05T19:40:25.973Z"
+  },
+  "pillars-of-creation": {
+   "key": "f9ac8b25d4d4",
+   "seconds": 30,
+   "bytes": 300816,
+   "at": "2026-11-05T19:45:08.616Z"
   }
  },
- "updated": "2026-11-05T19:40:25.975Z",
- "failed": [
-  "pillars-of-creation: fetch failed"
- ]
+ "updated": "2026-11-05T19:45:08.616Z",
+ "failed": []
 }
