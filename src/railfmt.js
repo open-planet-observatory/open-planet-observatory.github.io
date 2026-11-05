@@ -1,6 +1,6 @@
 // ---------- Left rail layout (Derik, 5 Nov 2026) ----------
 // "Filter options" heading; Map, Imagery and Lighting (and See-through Earth) together in a box at the top; the Moon,
-// Solar System, Milky Way and Cosmic web views under their own "Space views" subheading; then the quick filters
+// Solar System, Milky Way and Cosmic web views kept off the rail (the bottom pills and Space menu have them); then the quick filters
 // (Everything, Space, …) and every layer group (Earth, Space, People & systems, Nature, Weather & ocean…), each of which
 // folds and is folded by default, showing how many of its layers are on. Other scripts build these pieces at different
 // times (the globe adds Imagery and Lighting once it loads), so this watches the rail and files each piece as it appears.
@@ -14,16 +14,19 @@
   const mk = (cls, html) => { const d = document.createElement('div'); d.className = cls; if (html) d.innerHTML = html; return d; };
   // the fixed scaffolding, in order
   const disp = mk('rail-display', ''); disp.setAttribute('role', 'group'); disp.setAttribute('aria-label', 'Map display');
-  const space = mk('rail-group rail-space', '<span class="gl">Space views</span>');
+  /* the Moon / Solar System / Milky Way / Cosmic web buttons duplicate the bottom pills and the Space menu, so they are kept
+     out of sight (Derik, 5 Nov 2026), not deleted: other scripts still look them up by id. A one-line pointer replaces them. */
+  const space = mk('rail-space-hold'); space.hidden = true; space.setAttribute('aria-hidden', 'true');
+  const hint = document.createElement('p'); hint.className = 'rail-hint'; hint.textContent = 'Fly to the Moon and out into space with the buttons below the globe.';
   const filt = mk('rail-filters', '<span class="rail-sub">Quick filters</span>');
   const layers = mk('rail-layers', '');
   let built = false, busy = false;
-  const isLayerGroup = g => g.classList.contains('rail-group') && !g.classList.contains('rail-space') && !g.closest('.rail-display') && !g.dataset.fmt;
+  const isLayerGroup = g => g.classList.contains('rail-group') && !g.classList.contains('rail-space-hold') && !g.closest('.rail-display') && !g.dataset.fmt;
   function build() {
     const head = rail.querySelector('.rh'); if (!head) return false;
     const ey = head.querySelector('.eyebrow'); if (ey && ey.textContent !== 'Filter options') ey.textContent = 'Filter options';
     const rc = head.querySelector('#railClose'); if (rc) { rc.setAttribute('aria-label', 'Hide filter options'); rc.title = 'Hide'; }
-    head.after(disp); disp.after(space); space.after(filt); filt.after(layers); built = true; return true;
+    head.after(disp); disp.after(hint); hint.after(space); space.after(filt); filt.after(layers); built = true; return true;
   }
   function count(g) { const on = g.querySelectorAll('.chip[aria-pressed="true"]:not([hidden])').length, all = g.querySelectorAll('.chip:not([hidden])').length; return { on, all }; }
   function fold(g) { /* turn a layer group's label into a toggle */
@@ -55,7 +58,6 @@
       for (const g of [...rail.querySelectorAll(':scope > .rail-group')]) if (isLayerGroup(g) || (g.dataset.fmt === '1' && g.parentElement !== layers)) { layers.append(g); }
       for (const g of [...layers.querySelectorAll(':scope > .rail-group')]) if (!g.dataset.fmt) fold(g); else tally(g);
       const foot = rail.querySelector(':scope > .rail-foot'); if (foot && rail.lastElementChild !== foot) rail.append(foot);
-      space.hidden = !space.querySelector('button:not([hidden])');
     } finally { busy = false; }
   }
   let t = 0; const later = () => { clearTimeout(t); t = setTimeout(tidy, 60); };
