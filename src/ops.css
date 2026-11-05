@@ -960,6 +960,13 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 #weekly.folded .hunt-body{display:none}
 #uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:72px} /* clear of the 3D view's Go-to bar */
 @media (max-width:640px){#weekly{left:8px;right:8px;bottom:8px;width:auto;max-height:55vh;max-height:55dvh}#uni.on ~ #weekly,html:has(#uni.on) #weekly{bottom:84px}}
+#spacefind{position:fixed;z-index:2100;left:14px;bottom:14px;width:min(360px,calc(100vw - 28px));max-height:min(70vh,620px);max-height:min(70dvh,620px);display:flex;flex-direction:column;color:var(--ink);font:14px/1.45 var(--body);border-radius:14px;overflow:hidden;background:var(--glass,rgb(18 14 9 / .9))}
+#uni.on ~ #spacefind,#spacefind{color-scheme:dark}
+#spacefind.folded .hunt-body{display:none}
+#uni.on ~ #spacefind,html:has(#uni.on) #spacefind{bottom:72px} /* clear of the 3D view's Go-to bar */
+@media (max-width:640px){#spacefind{left:8px;right:8px;bottom:8px;width:auto;max-height:55vh;max-height:55dvh}#uni.on ~ #spacefind,html:has(#uni.on) #spacefind{bottom:84px}}
+@media (max-width:640px){html:has(#uni.on) #spacefind .hunt-note{display:none}}
+#spacefind .spf-rows{margin:8px 0 0;padding-left:18px}#spacefind .spf-rows li{margin:2px 0}
 /* Voyager videos (The Owlmanac): "coming" labels in the banner, and a ▶ beside the header countdown chip */
 .vy-soon{display:inline-block;padding:8px 13px;border-radius:999px;border:1px dashed rgba(255,255,255,.28);color:#c9d1dc;font-size:.82rem;font-weight:600}
 .gn-vyv{border:1px solid var(--glass-line);background:var(--glass-2);color:var(--accent,#D9A441);border-radius:999px;padding:5px 9px;font-size:.78rem;font-weight:700;white-space:nowrap;text-decoration:none;cursor:pointer;margin-left:-2px}

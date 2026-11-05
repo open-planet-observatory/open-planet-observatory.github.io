@@ -15,7 +15,7 @@
 // Scheduled (daily): Forecast Desk guesses older than 35 days are deleted.
 
 const ORIGINS = ['https://theowlmanac.com', 'https://www.theowlmanac.com', 'https://open-planet-observatory.github.io'];
-const GAMES = { woe: 'Where on Earth?', sky: 'Find it in the sky', fd: 'The Forecast Desk', hunt: 'One Light-Day' };
+const GAMES = { woe: 'Where on Earth?', sky: 'Find it in the sky', fd: 'The Forecast Desk', hunt: 'One Light-Day', space: 'Find it in space' };
 const HUNTS = { 'one-light-day': { ends: Date.parse('2026-11-23T00:00:00Z'), max: 6000 } };
 const FD_KEEP_DAYS = 35;
 
@@ -83,6 +83,10 @@ async function postScore(req, env, b) {
     const pts = scoreWoe(G, b.guesses); await put('woe', G.date, pts.reduce((a, x) => a + x, 0), G.rounds.length * 5000, pts); return json({ ok: true, game, day: G.date }, 200, req); }
   if (game === 'sky') { if (!isDay(b.day) || Math.abs(Date.parse(b.day + 'T12:00:00Z') - now) > 1.6 * 864e5) return json({ error: 'not today' }, 409, req);
     const rows = (Array.isArray(b.rows) ? b.rows : []).slice(0, 5).map(x => Math.max(0, Math.min(5000, Math.round(+x || 0)))); await put('sky', b.day, rows.reduce((a, x) => a + x, 0), 25000, rows); return json({ ok: true, game, day: b.day }, 200, req); }
+  // Find it in space: five targets a UTC day, up to 1,000 each, worked out and checked in the browser (honour system)
+  if (game === 'space') { if (!isDay(b.day) || (b.day !== todayUTC(now) && b.day !== todayUTC(now - 864e5))) return json({ error: 'not today' }, 409, req); /* a day started just before midnight UTC may finish after it */
+    const rows = (Array.isArray(b.rows) ? b.rows : []).slice(0, 5).map(x => Math.max(0, Math.min(1000, Math.round(+x || 0)))); if (rows.length !== 5) return json({ error: 'need five targets' }, 400, req);
+    await put('space', b.day, rows.reduce((a, x) => a + x, 0), 5000, rows); return json({ ok: true, game, day: b.day }, 200, req); }
   if (game === 'hunt') { let H = HUNTS[b.day];
     if (!H && isWeek(b.day)) { if (now < weekStart(b.day)) return json({ error: 'this hunt has not opened yet' }, 409, req); if (now > weekEnds(b.day)) return json({ error: 'the hunt has ended' }, 409, req);
       const W = await site(env, 'hunt.json'); if (!W || W.preview || W.week !== b.day) return json({ error: 'no such hunt' }, 404, req);
@@ -153,7 +157,7 @@ async function me(req, env, game, day) { const t = req.headers.get('x-owl-token'
   return json({ you: { rank: above.n + 1, score: m.score, max: m.max, listed: !!(pl && pl.name && pl.named_at <= m.at) }, name: pl ? pl.name : null }, 200, req); }
 
 async function counts(req, env, ctx, d) { const day = isDay(d) ? d : todayUTC(); const key = 'counts/' + day, hit = memGet(key); if (hit) return json(hit, 200, req); const out = {};
-  for (const g of ['woe', 'sky']) out[g] = (await env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE game = ? AND day = ?').bind(g, day).first()).n;
+  for (const g of ['woe', 'sky', 'space']) out[g] = (await env.DB.prepare('SELECT COUNT(*) AS n FROM scores WHERE game = ? AND day = ?').bind(g, day).first()).n;
   out.fd = (await env.DB.prepare('SELECT COUNT(DISTINCT player) AS n FROM fd_guesses WHERE day = ?').bind(day).first()).n;
   out.hunt = {}; for (const h of [...Object.keys(HUNTS), ...(weekOf(clock(env)) >= 'w' + FIRST_WEEK ? [weekOf(clock(env))] : [])]) out.hunt[h] = (await env.DB.prepare("SELECT COUNT(*) AS n FROM scores WHERE game = 'hunt' AND day = ?").bind(h).first()).n;
   const body = { day, counts: out }; memPut(key, body); return json(body, 200, req); }
