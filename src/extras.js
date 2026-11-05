@@ -16,7 +16,7 @@ if(tb){
  document.getElementById('themeNote').textContent=THEMES[0][4];
 }
 function applyTheme(k){const t=THEMES.find(x=>x[0]===k);if(!t)return;
- document.querySelectorAll('#layerbar .chip').forEach(c=>{const id=c.id.slice(5);const want=t[2].includes(id);if((c.getAttribute('aria-pressed')==='true')!==want)c.click()});
+ document.querySelectorAll('#layerbar .chip, #ops-rail .chip[id^="chip-"]').forEach(c=>{const id=c.id.slice(5);/* the rail moves the switches out of #layerbar, so look in both */const want=t[2].includes(id);if((c.getAttribute('aria-pressed')==='true')!==want)c.click()});
  const st=document.querySelector(`#sigTabs button[data-k="${t[3]}"]`);if(st&&st.getAttribute('aria-pressed')!=='true')st.click();
  document.querySelectorAll('#themes button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  document.getElementById('themeNote').textContent=t[4];
