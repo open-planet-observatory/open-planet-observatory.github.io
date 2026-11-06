@@ -3,7 +3,7 @@
 // probe (Astronomy Engine; JPL Horizons via data/solar.json), a bright named star (ESA Hipparcos, names from
 // d3-celestial), a star described by the first sentence of its Wikipedia article with its name blanked (CC BY-SA), a
 // galaxy (NASA/IPAC NED-D) and a galaxy cluster (NED, 2MASS Redshift Survey). The player finds each in the 3D views and
-// clicks it. Untold until found; 1,000 points each, less 250 per hint and 50 per wrong click on the same kind of thing
+// clicks it. Untold until found; 1,000 points each, less 250 per hint and 50 for each different wrong object of the same kind
 // (exploring other kinds is free), never below 250; a skipped target scores 0. Progress is kept in this browser
 // (localStorage owl-space-v1); finishing sends the five scores to the day's board (honour system).
 // The 3D view (src/universe.js) is not changed: this file listens to clicks on its canvas and reads what it picked.
@@ -35,16 +35,18 @@
     const [B, W, G, C, SOL] = await Promise.all([getJ('assets/stars/bright.json'), getJ('assets/stars/wiki.json'), getJ('assets/stars/galaxies.json'), getJ('assets/universe/cosmicweb.json'), getJ('data/solar.json').catch(() => null)]);
     // 1. a planet or a probe (alternate days), where it is at noon UTC
     const odd = Math.floor(Date.parse(day) / 864e5) % 2 === 1, craft = (SOL && SOL.craft || []).map(c => ({ c, p: craftAt(c, noon) })).filter(x => x.p);
+    const u1 = r(), u2 = r(), at = (u, list) => list[Math.floor(u * list.length) % list.length]; /* always two draws here, so the later targets are the same for everyone */
+    if (!odd && !A) throw new Error('the planet positions (Astronomy Engine) didn’t load');
+    if (odd && !craft.length) throw new Error('the spacecraft positions (data/solar.json) didn’t load');
     const apart = (list, x) => list.every(y => y === x || Math.abs(y.d - x.d) > 0.12 * x.d); /* a distance clue must point to one answer */
-    if (!odd && A) { const ds = PLANETS.map(n => ({ n, d: A.GeoVector(n, noon, true).Length() })).sort((a, b) => a.d - b.d);
-      const v = pickOne(r, ['near', 'light', 'light']), lt = pickOne(r, ds), t = v === 'light' && apart(ds, lt) ? lt : ds[0], min = t.d * 8.3167;
-      const light = t !== ds[0] || v === 'light';
+    if (!odd) { const ds = PLANETS.map(n => ({ n, d: A.GeoVector(n, noon, true).Length() })).sort((a, b) => a.d - b.d);
+      const lt = at(u2, ds), light = at(u1, ['near', 'light', 'light']) === 'light' && apart(ds, lt), t = light ? lt : ds[0], min = t.d * 8.3167; /* a light-minutes clue only when no other planet is close to that distance */
       T.push({ kind: 'planet', id: t.n, title: light ? 'Light minutes away' : 'The nearest planet', icon: '🪐',
         clue: light ? `Sunlight reflected off one planet takes about ${N(min, 0)} minutes to reach Earth today. Which planet is it? Find it in the Solar System view and click it.` : 'Which planet is closest to Earth today? Find it in the Solar System view and click it.',
         hints: ['Zoom out until every planet’s orbit is on screen, then look around the Sun.', light ? `Light covers about 1 AU in 8.3 minutes, so it is about ${N(t.d, 1)} AU from us.` : `Today it is about ${N(t.d, 2)} AU from us.`], go: { uni: [null, 'Planets'], frame: A.HelioVector(t.n, noon).Length() },
         reveal: `${t.n}, ${N(t.d, 2)} AU from Earth at noon UTC today, so its light takes ${N(min, 1)} minutes (Astronomy Engine).` }); }
-    else if (craft.length) { const byR = craft.map(x => ({ ...x, d: Math.hypot(...x.p) })).sort((a, b) => a.d - b.d), v = pickOne(r, ['near', 'far', 'dist', 'dist']), any = pickOne(r, byR);
-      const t = v === 'near' ? byR[0] : v === 'far' ? byR[byR.length - 1] : apart(byR, any) ? any : byR[0], w = t === byR[0] ? 'near' : t === byR[byR.length - 1] && v === 'far' ? 'far' : 'dist';
+    else { const byR = craft.map(x => ({ ...x, d: Math.hypot(...x.p) })).sort((a, b) => a.d - b.d), v = at(u1, ['near', 'far', 'dist', 'dist']), any = at(u2, byR);
+      const w = v === 'dist' && !apart(byR, any) ? 'near' : v, t = w === 'near' ? byR[0] : w === 'far' ? byR[byR.length - 1] : any;
       const au = N(t.d, t.d < 10 ? 2 : 1);
       T.push({ kind: 'spacecraft', id: t.c.name, title: w === 'near' ? 'Closest to the Sun' : w === 'far' ? 'Farthest from home' : 'A spacecraft by distance', icon: '🛰️',
         clue: w === 'near' ? 'Of the spacecraft this site tracks, which one is closest to the Sun today? Find it and click it.' : w === 'far' ? 'Of the spacecraft this site tracks, which one is farthest from the Sun? Find it and click it.' : `Which of the spacecraft this site tracks is about ${au} AU from the Sun today? Find it and click it.`,
@@ -60,7 +62,7 @@
       reveal: `${a.name} (${a.desig}), ${N(a.ly, a.ly < 100 ? 1 : 0)} light-years away (ESA Hipparcos).` });
     T.push({ ...b, title: 'A star by its story', icon: '📖', clue: null, /* filled from Wikipedia when the round starts */
       hints: [`It is in ${b.cons || 'the sky'}, ${N(b.ly, b.ly < 100 ? 1 : 0)} light-years away. Zoom out to “Nearest stars” on the distance scale, where the brightest stars carry their names.`, `It is ${b.name}.`], go: { uni: [null, 'Nearest stars'], aim: true },
-      reveal: `${b.name} (${b.desig}), ${N(b.ly, b.ly < 100 ? 1 : 0)} light-years away. Clue: Wikipedia, CC BY-SA 4.0.` });
+      reveal: `${b.name} (${b.desig}), ${N(b.ly, b.ly < 100 ? 1 : 0)} light-years away (ESA Hipparcos).` });
     // 4. a galaxy among the labelled two dozen (the same ranking the 3D view uses for its labels)
     const gx = G.galaxies.map(g => ({ g, rank: (g[8] || 0) * 1000 + g[4] })).sort((x, y) => y.rank - x.rank).slice(0, 22).map(x => x.g).filter(g => g[3] > 0.05);
     const g = pickOne(r, gx), gName = g[6] || g[0], gly = g[3] * LY_PC;
@@ -85,7 +87,7 @@
       s = s.replace(/\([^)]*▁[^)]*\)/g, '').replace(/\s{2,}/g, ' ').trim();
       if (s.length < 30 || new RegExp(t.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i').test(s)) throw new Error('clue unusable');
       t.clue = `“${s}” Find this star and click it.`; t.clueSrc = j.content_urls && j.content_urls.desktop && j.content_urls.desktop.page; }
-    catch (e) { t.clue = `Find the star that is ${N(t.ly, t.ly < 100 ? 1 : 0)} light-years away in ${t.cons || 'the sky'}, one of the brightest there. (Wikipedia didn’t answer, so this clue is the site’s own.)`; }
+    catch (e) { t.clueOwn = true; t.clue = `Find the star that is ${N(t.ly, t.ly < 100 ? 1 : 0)} light-years away in ${t.cons || 'the sky'}, one of the brightest there. (Wikipedia didn’t answer, so this clue is the site’s own.)`; }
     return t.clue; }
 
   // ---- reading the 3D view's clicks ----
@@ -100,12 +102,17 @@
 
   // ---- the game ----
   let el = null, day = null, targets = null, st = null, loadErr = null, busy = false;
-  const playing = () => !!(el && !el.hidden && targets && st && !st.done && st.i < targets.length);
-  const pts = i => st.found[i] === 'skip' ? 0 : st.found[i] ? Math.max(FLOOR, POINTS - HINT * (st.hints[i] || 0) - WRONG * (st.wrong[i] || 0)) : 0;
+  const playing = () => !!(el && !el.hidden && targets && st && !st.done && st.i < targets.length && !st.found[st.i]); /* a found or skipped target takes no more clicks */
+  const pts = i => st.found[i] === 'skip' ? 0 : st.found[i] && st.s[i] != null ? st.s[i] : st.found[i] ? Math.max(FLOOR, POINTS - HINT * (st.hints[i] || 0) - WRONG * (st.wrong[i] || 0)) : 0;
   const total = () => targets ? targets.reduce((a, _, i) => a + pts(i), 0) : 0;
   function onPick(o) { if (!playing() || busy) return; const t = targets[st.i];
-    if (same(o, t)) { st.found[st.i] = Date.now(); st.s[st.i] = pts(st.i); save(day, st); render(`✓ <b>${esc(t.title)}</b>: ${esc(t.reveal)} +${N(st.s[st.i])} points.`, true); }
-    else if (sameKind(o, t)) { st.wrong[st.i] = (st.wrong[st.i] || 0) + 1; save(day, st); render(`That’s ${esc(o.name)}. Not this one (−${WRONG}).`); } }
+    if (same(o, t)) { st.s[st.i] = Math.max(FLOOR, POINTS - HINT * (st.hints[st.i] || 0) - WRONG * (st.wrong[st.i] || 0)); st.found[st.i] = Date.now(); save(day, st); render(); }
+    else if (sameKind(o, t)) { const k = String(o.hip || o.ned || o.name), tr = (st.tried = st.tried || {})[st.i] = st.tried[st.i] || []; /* each wrong object costs once */
+      if (tr.includes(k)) { render(`That’s ${esc(o.name)} again: still not this one (no extra cost).`); return; }
+      tr.push(k); st.wrong[st.i] = (st.wrong[st.i] || 0) + 1; save(day, st); render(`That’s ${esc(o.name)}. Not this one (−${WRONG}).`); } }
+  // what a found or skipped target says (also after closing the card or reloading)
+  const credit = (t, i) => t.story ? (!(t.clueOwn || (st.own || {})[i]) ? ` <small>Clue: the first sentence of <a href="${esc(t.clueSrc || 'https://en.wikipedia.org/wiki/' + encodeURIComponent(t.wiki))}" target="_blank" rel="noopener">Wikipedia’s article</a> (CC BY-SA 4.0), with the star’s names blanked and any brackets containing them removed.</small>` : ' <small>Clue: the site’s own words (Wikipedia didn’t answer).</small>') : '';
+  const doneMsg = i => { const t = targets[i]; return (st.found[i] === 'skip' ? `Skipped. It was ${esc(t.reveal)}` : `✓ <b>${esc(t.title)}</b>: ${esc(t.reveal)} +${N(pts(i))} points.`) + credit(t, i); };
   function shell() { if (el) return el; el = document.createElement('div'); el.id = 'spacefind'; el.className = 'hunt glass'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Find it in space'); document.body.appendChild(el); return el; }
   function head() { const n = targets ? targets.filter((_, i) => st.found[i] && st.found[i] !== 'skip').length : 0;
     return `<div class="hunt-head"><div><b>Find it in space</b><span>${esc(day)} (UTC) · ${n}/5 found · ${N(total())} pts</span></div><button class="hunt-min" aria-label="Fold the card" title="Fold">▾</button><button class="hunt-x" aria-label="Close (progress is kept)" title="Close (progress is kept)">✕</button></div>`; }
@@ -115,17 +122,17 @@
     let body;
     if (st.done || st.i >= targets.length) { body = finale(); }
     else { const t = targets[st.i], used = st.hints[st.i] || 0;
-      if (justFound) body = `<div class="hunt-kind">Target ${st.i + 1} of 5 · ${t.icon} ${esc(t.title)}</div><p class="hunt-msg" aria-live="polite">${msg}</p><div class="hunt-row"><button class="spf-next">${st.i + 1 < targets.length ? 'Next target →' : 'See my score →'}</button></div>`;
-      else { busy = !t.clue; if (!t.clue) { el.innerHTML = head() + '<div class="hunt-body"><p>Reading the clue…</p></div>'; await storyClue(t); busy = false; }
+      if (st.found[st.i]) body = `<div class="hunt-kind">Target ${st.i + 1} of 5 · ${t.icon} ${esc(t.title)}</div><p class="hunt-msg" role="status">${doneMsg(st.i)}</p><div class="hunt-row"><button class="spf-next">${st.i + 1 < targets.length ? 'Next target →' : 'See my score →'}</button></div>`;
+      else { busy = !t.clue; if (!t.clue) { el.innerHTML = head() + '<div class="hunt-body"><p>Reading the clue…</p></div>'; await storyClue(t); busy = false; st.own = st.own || {}; if (t.clueOwn) { st.own[st.i] = true; save(day, st); } } /* kept, so the credit stays right after a reload */
         body = `<div class="hunt-kind">Target ${st.i + 1} of 5 · ${t.icon} ${esc(t.title)}</div><p class="hunt-clue">${esc(t.clue)}</p>
           ${used ? `<ol class="hunt-hints">${t.hints.slice(0, used).map(x => `<li>${esc(x)}</li>`).join('')}</ol>` : ''}
           <p class="hunt-msg" aria-live="polite">${msg || (uniOpen() ? 'Click it in the 3D view.' : '')}</p>
           <div class="hunt-row">${uniOpen() ? '' : '<button class="spf-open">Open the 3D view</button>'}${used < t.hints.length ? `<button class="hunt-hint">Hint (−${HINT})</button>` : ''}${used >= 1 ? '<button class="hunt-go">Take me nearby</button>' : ''}<button class="spf-skip">Skip (0 points)</button></div>`; } }
-    el.innerHTML = head() + `<div class="hunt-body">${body}<p class="hunt-note">${noStore ? 'This browser isn’t letting the site save anything, so your progress lasts only until you reload.' : 'Same five targets for everyone today (UTC). Wrong clicks cost points only on the same kind of thing, so explore freely. Progress is kept in this browser.'}</p></div>`;
+    el.innerHTML = head() + `<div class="hunt-body">${body}<p class="hunt-note">${noStore ? 'This browser isn’t letting the site save anything, so your progress lasts only until you reload.' : 'Same five targets for everyone today (UTC). Wrong clicks cost points only on the same kind of thing, so explore freely. Progress is kept in this browser. Played by clicking or tapping in the 3D view.'}</p></div>`;
     wire(); place(); }
   function finale() { const share = `Find it in space · ${day}\n${N(total())} / 5,000 · ${targets.map((t, i) => st.found[i] && st.found[i] !== 'skip' ? t.icon : '▫️').join('')}\ntheowlmanac.com`;
     return `<div class="hunt-kind">Today’s five</div><p class="hunt-big"><b>${N(total())}</b> of 5,000 points</p>
-      <ol class="spf-rows">${targets.map((t, i) => `<li>${t.icon} ${esc(t.title)}: <b>${st.found[i] === 'skip' ? 'skipped' : N(pts(i))}</b><br><small>${esc(t.reveal)}</small></li>`).join('')}</ol>
+      <ol class="spf-rows">${targets.map((t, i) => `<li>${t.icon} ${esc(t.title)}: <b>${st.found[i] === 'skip' ? 'skipped' : N(pts(i))}</b><br><small>${esc(t.reveal)}</small>${credit(t, i)}</li>`).join('')}</ol>
       <div class="ob-host" id="spaceBoard"></div><div class="hunt-row"><button class="hunt-share" data-t="${esc(share)}">Copy my result</button></div><pre class="hunt-pre">${esc(share)}</pre>`; }
   function wire() { const q = s => el.querySelector(s);
     q('.hunt-x').onclick = close; const mn = q('.hunt-min'); if (mn) mn.onclick = () => { el.classList.toggle('folded'); mn.textContent = el.classList.contains('folded') ? '▴' : '▾'; };
@@ -133,7 +140,7 @@
     const op = q('.spf-open'); if (op) op.onclick = () => goTo(targets[st.i].go, true);
     const hb = q('.hunt-hint'); if (hb) hb.onclick = () => { st.hints[st.i] = (st.hints[st.i] || 0) + 1; save(day, st); render(); };
     const go = q('.hunt-go'); if (go) go.onclick = () => goTo(targets[st.i].go);
-    const sk = q('.spf-skip'); if (sk) sk.onclick = e => { if (e.target.dataset.sure !== '1') { e.target.dataset.sure = '1'; e.target.textContent = 'Skip it? Press again'; return; } st.found[st.i] = 'skip'; st.s[st.i] = 0; save(day, st); render(`Skipped. It was ${esc(targets[st.i].reveal)}`, true); };
+    const sk = q('.spf-skip'); if (sk) sk.onclick = e => { if (e.target.dataset.sure !== '1') { e.target.dataset.sure = '1'; e.target.textContent = 'Skip it? Press again'; return; } st.found[st.i] = 'skip'; st.s[st.i] = 0; save(day, st); render(); };
     const host = q('#spaceBoard'); if (host && window.OwlBoards) window.OwlBoards.show(host, 'space', day, { rows: targets.map((_, i) => pts(i)) });
     const sh = q('.hunt-share'); if (sh) sh.onclick = async () => { try { await navigator.clipboard.writeText(sh.dataset.t); sh.textContent = 'Copied'; } catch (e) { sh.textContent = 'Select the text below to copy it'; } }; }
   // open the 3D view and, for "Take me nearby", press a Go-to button close to the target (never the target itself)
@@ -165,15 +172,18 @@
     const from = S.camera.position.clone().sub(tg).normalize(), t0 = performance.now(), ms = 1400;
     await new Promise(res => { const step = () => { const k = Math.min(1, (performance.now() - t0) / ms), e = k < .5 ? 2 * k * k : 1 - (-2 * k + 2) ** 2 / 2;
       S.camera.position.copy(tg).add(from.clone().lerp(want, e).normalize().multiplyScalar(dist)); S.camera.lookAt(tg); if (k < 1) requestAnimationFrame(step); else res(); }; step(); }); }
-  async function open() { shell(); el.hidden = false; el.classList.remove('folded'); const d = today();
-    if (d !== day || !targets) { day = d; targets = null; loadErr = null; st = load(day); render(); try { targets = await build(day); } catch (e) { loadErr = e.message; } }
-    render(); }
+  let opener = null, loading = null;
+  async function open() { shell(); if (el.hidden !== false || !opener) opener = document.activeElement; el.hidden = false; el.classList.remove('folded'); el.tabIndex = -1; const d = today();
+    if (d !== day || (!targets && !loading)) { day = d; targets = null; loadErr = null; st = load(day); render(); el.focus({ preventScroll: true });
+      loading = build(day).then(T => { targets = T; }, e => { loadErr = e.message; }); await loading; loading = null; }
+    else if (loading) await loading;
+    await render(); const b = ['.spf-next', '.spf-open', '.hunt-hint', '.hunt-share', '.hunt-x'].map(q => el.querySelector(q)).find(Boolean); if (b) b.focus({ preventScroll: true }); } /* focus moves into the card; Escape or ✕ hands it back */
   // in the 3D view, sit above its control panel (which changes height when folded or on a phone)
   function place() { if (!el || el.hidden) return; const c = uniOpen() && document.querySelector('#uni .uni-ctl');
     if (!c || !c.offsetHeight) { el.style.bottom = el.style.maxHeight = ''; return; }
     const top = c.getBoundingClientRect().top; el.style.bottom = Math.round(innerHeight - top + 8) + 'px'; el.style.maxHeight = Math.max(160, Math.round(top - 8 - 64)) + 'px'; }
   setInterval(place, 700); addEventListener('resize', place);
-  function close() { if (el) el.hidden = true; }
+  function close() { if (!el) return; const back = el.contains(document.activeElement); el.hidden = true; if (back && opener && opener.isConnected && opener.offsetParent && opener.focus) opener.focus({ preventScroll: true }); opener = null; }
   addEventListener('obs:spacefind', open);
   if (window.__wantSpace) setTimeout(open, 2500);
   addEventListener('keydown', e => { if (e.key === 'Escape' && el && !el.hidden && el.contains(document.activeElement)) close(); });
