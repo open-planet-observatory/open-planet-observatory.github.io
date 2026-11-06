@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-05",
+ "built": "2026-11-06",
  "stories": [
   {
    "id": "cherokee",
@@ -4647,6 +4647,1002 @@
     [
      "Smallpox in Australia (Wikipedia)",
      "https://en.wikipedia.org/wiki/Smallpox_in_Australia"
+    ]
+   ]
+  },
+  {
+   "id": "rhineland1096",
+   "title": "The Rhineland massacres of 1096",
+   "region": "Europe",
+   "where": "Mainz, Germany (also Speyer, Worms and Cologne; approximate)",
+   "lat": 49.9992,
+   "lon": 8.2736,
+   "from": 1096,
+   "to": 1096,
+   "themes": [
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "Peter the Hermit's preaching in Germany inspired bands of Crusaders who never reached Jerusalem; one of them, led by Count Emicho, carried out a series of pogroms against the Jews of Rhineland towns in 1096, first in Speyer and then with increasing ferocity in Worms, Mainz and Cologne.",
+     "https://www.britannica.com/event/Crusades/The-First-Crusade-and-the-establishment-of-the-Latin-states"
+    ],
+    [
+     "On 3 May 1096 (8 Iyyar) Crusaders surrounded the synagogue of Speyer and, unable to break in, killed eleven Jews they found outside it; on 18 May they attacked Worms, killing first those who had stayed in their houses and, eight days later, those who had sought refuge in the bishop's castle, about 800 victims in all.",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ],
+    [
+     "In Mainz the Jews paid the bishop 400 pieces of silver for protection; when Emicho's Crusaders arrived on 27 May the burghers opened the gates, the Jews took up arms under Kalonymus ben Meshullam, the bishop fled, and more than 1,000 Jews died, at the enemy's hands or their own.",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ],
+    [
+     "Offered only baptism or death, many chose to be killed or to take their own lives rather than abandon their faith, and only a few survived by accepting conversion; this freely accepted martyrdom, Kiddush ha-Shem ('for the glory of God'), became the defining Jewish answer to the Crusaders.",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ],
+    [
+     "In Cologne, attacked on 30 May, the bishop dispersed the Jews to nearby villages, but the Crusaders found them there; Emicho's army was later crushed by the Hungarians, and the Encyclopaedia Judaica counts more than 5,000 victims in all that year, a total that also covers Trier, Regensburg, Metz, Prague and Bohemia.",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ],
+    [
+     "In 1097 Emperor Henry IV allowed Jews baptized under duress to return openly to Judaism, which the antipope Clement III strongly condemned, and in 1098 he ordered an inquiry into what had become of the murdered Mainz Jews' property.",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Alle Gemeinden haben ein Fasten angeordnet, wir thun das unsrige, Gott möge uns und euch befreien aus jeder Noth und Bedrängniss, denn wir sind euretwegen in grosser Furcht. Was uns selbst betrifft, so brauchen wir uns nicht zu ängstigen; wir haben derartiges nicht einmal gerüchtsweise vernommen, von einer Gefahr, dass das Schwert über unserm Leben schwebe, haben wir nichts gehört.",
+     "who": "The leaders of the Jewish community of Mainz, answering a warning letter from the Jews of France, as recorded in the anonymous Hebrew chronicle known as the Mainz Anonymous (German tr. S. Baer, 1892). In plain English: 'All the communities have proclaimed a fast; we are doing our part. May God deliver us and you from every distress and trouble, for we are in great fear for your sake. As for ourselves, we need not be afraid; we have not heard so much as a rumour of such things, nothing of any danger of the sword hanging over our lives.'",
+     "date": "spring 1096",
+     "doc": "Anonymer Bericht der Darmstädter Handschrift (Mainz Anonymous), in Neubauer & Stern, Hebräische Berichte über die Judenverfolgungen während der Kreuzzüge (Berlin, 1892), p. 170 (OCR corrected)",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "Als der Bischof Johann das erfuhr, kam er mit vieler Mannschaft, um der Gemeinde aufrichtig beizustehen, er liess sie in seine Gemächer bringen und rettete sie aus den Händen der Feinde. Einige der Städter liess er ergreifen und ihnen die Hände abhauen, denn er war ein Frommer unter den Völkern, darum liess Gott durch ihn uns Heil und Rettung entstehen.",
+     "who": "The Jews of Speyer on their bishop, John, as recorded in the Mainz Anonymous (German tr. S. Baer, 1892). In plain English: 'When Bishop John learned of it, he came with many men to help the community in good faith; he had them brought into his chambers and saved them from the hands of the enemy. He had some of the townsmen seized and their hands cut off, for he was a righteous man among the nations; therefore God brought us help and rescue through him.'",
+     "date": "May 1096",
+     "doc": "Anonymer Bericht der Darmstädter Handschrift (Mainz Anonymous), in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), p. 171",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "Ewiger, Gott Israels, willst du denn ein Ende machen dem Ueberreste Israels? Wo sind all deine furchtbaren Wunderthaten, von denen unsere Väter uns erzählten? Hast du uns nicht aus Egypten und Babel heraufgeführt und so oft uns gerettet?",
+     "who": "The Jews of Mainz, crying out on hearing of the killings in Speyer and Worms, as preserved in the Hebrew chronicle of Solomon bar Samson (German tr. S. Baer, 1892). In plain English: 'Lord, God of Israel, will you make an end of the remnant of Israel? Where are all your awesome wonders that our fathers told us of? Did you not bring us up out of Egypt and Babylon and save us so many times?'",
+     "date": "late May 1096",
+     "doc": "Bericht des Salomo bar Simeon, in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), p. 86 (OCR corrected)",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "Denn darum streueten wir unser Geld aus und gaben dem Bischof und seinen Oberen und Dienern und den Städtern gegen 400 Mark Silber und dem Bösewicht Emicho sieben Pfund Gold, damit sie uns beistehen sollten. Aber es nützte uns nicht das Geringste, bis jetzt fand unsere Wunde keine Heilung.",
+     "who": "The Jews of Mainz, in a first-person passage that Solomon bar Samson took over from an earlier account (German tr. S. Baer, 1892). In plain English: 'That is why we scattered our money and gave the bishop, his officers and servants and the townspeople some 400 marks of silver, and the wicked Emicho seven pounds of gold, so that they would stand by us. But it did not help us in the least; to this day our wound has found no healing.'",
+     "date": "May 1096",
+     "doc": "Bericht des Salomo bar Simeon, in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), p. 93 (OCR corrected)",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "Israels Männer umgürteten sich ein Jeder mit seinen Waffen im inneren Hofe des Bischofs und näherten sich alle dem Thore, um mit den Irrenden und den Städtern zu kämpfen, und sie kämpften gegen einander bis in die Mitte des Thores. Aber unsere Sünden verursachten, dass die Feinde siegten und die Thore einnahmen. […] Auch die Leute des Bischofs, welche sie doch ihres Beistandes versichert hatten, flohen zuerst, und überlieferten sie so der Hand der Feinde",
+     "who": "The Jews of Mainz on the defence of the archbishop's courtyard, as preserved by Solomon bar Samson (German tr. S. Baer, 1892; 'die Irrenden', 'those who go astray', is the chronicle's name for the Crusaders). In plain English: 'The men of Israel each girded on his weapons in the inner courtyard of the bishop, and all of them went towards the gate to fight the Crusaders and the townsmen, and they fought each other up to the middle of the gateway. But our sins caused the enemy to prevail and take the gates. […] The bishop's men too, who had assured them of their help, were the first to flee, and so delivered them into the hands of the enemy.'",
+     "date": "27 May 1096",
+     "doc": "Bericht des Salomo bar Simeon, in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), p. 95 (OCR corrected)",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "Jammere ob der einzigen Gemeinde, die ihren Schöpfer als Einzigen verherrlichte durch zehn heilige Märtyrer. […] Die heilige Vereinigung — im Glanzmonat ward sie der Herrlichkeit zugesellt und in den Verband der Seligen aufgenommen.",
+     "who": "Eliezer bar Nathan of Mainz, a rabbi and liturgical poet born about 1090, a child at the time, in a short lament for the martyrs of Speyer set into his chronicle (German tr. S. Baer, 1892, who notes that he could not render these elegies word for word). In plain English: 'Lament for the singular community that glorified its Creator as the One through ten holy martyrs. […] The holy fellowship, in the month of splendour, was joined to glory and received into the company of the blessed.'",
+     "date": "May 1096; written in the 12th century",
+     "doc": "Bericht des Elieser bar Nathan, in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), pp. 154–155",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "An einem Orte waren vereinigt: Thora, Grösse, Reichthum, Ehre, Weisheit, Demuth und Wohlthätigkeit, Zaun um Zaun zur Umzäunung ihrer Worte. Und jetzt ist ihre Weisheit vernichtet; sie sind aufgerieben worden wie Jerusalems Söhne bei dessen Zerstörung.",
+     "who": "Solomon bar Samson's own lament, written about 1140, for the community of Mainz (German tr. S. Baer, 1892). In plain English: 'In one place were united Torah, greatness, wealth, honour, wisdom, humility and charity, fence upon fence to guard their words. And now their wisdom is destroyed; they have been worn away like the sons of Jerusalem at its destruction.'",
+     "date": "1096; chronicle completed about 1140",
+     "doc": "Bericht des Salomo bar Simeon, in Neubauer & Stern, Hebräische Berichte (Berlin, 1892), p. 94 (OCR corrected)",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+     "lic": "Public domain (published 1892)"
+    },
+    {
+     "text": "The Jews of this city, knowing of the slaughter of their brethren, and that they themselves could not escape the hands of so many, fled in hope of safety to Bishop Rothard. They put an infinite treasure in his guard and trust, having much faith in his protection, because he was Bishop of the city. Then that excellent Bishop of the city cautiously set aside the incredible amount of money received from them. He placed the Jews in the very spacious hall of his own house, away from the sight of Count Emico and his followers, that they might remain safe and sound in a very secure and strong place.",
+     "who": "Albert of Aachen, canon of Aachen, who never went east but wrote his history of the First Crusade from the accounts of returning crusaders (tr. August C. Krey, 1921)",
+     "date": "May 1096; written in the 12th century",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "This slaughter of Jews was done first by citizens of Cologne. These suddenly fell upon a small band of Jews and severely wounded and killed many; they destroyed the houses and synagogues of the Jews and divided among themselves a very large amount of money.",
+     "who": "Albert of Aachen on the townspeople of Cologne (tr. August C. Krey, 1921)",
+     "date": "1096; written in the 12th century",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "So the hand of the Lord is believed to have been against the pilgrims, who had sinned by excessive impurity and fornication, and who had slaughtered the exiled Jews through greed of money, rather than for the sake of God's justice, although the Jews were opposed to Christ. The Lord is a just judge and orders no one unwillingly, or under compulsion, to come under the yoke of the Catholic faith.",
+     "who": "Albert of Aachen, explaining the rout of Emicho's army in Hungary (tr. August C. Krey, 1921)",
+     "date": "summer 1096; written in the 12th century",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "Im Jahre 900 habe ich Salomo bar Simon diese Begebenheit abgeschrieben in Mainz. Dort habe ich von den Alten das Ereigniss erfragt und nach ihren Aussagen jede Sache gehörig geordnet; sie haben mir diese Heiligung erzählt.",
+     "who": "Solomon bar Samson, the Mainz chronicler, on how he compiled his account (German tr. S. Baer, 1892; the Hebrew year 900 of the fifth millennium is 1140). In plain English: 'In the year 900 I, Solomon bar Simson, copied out this account ('abgeschrieben', literally 'copied') in Mainz. There I asked the elders about what happened and set everything in order according to their testimony; they told me of this sanctification.'",
+     "date": "1140",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Just at that time, there appeared a certain soldier, Emico, Count of the lands around the Rhine, a man long of very ill repute on account of his tyrannical mode of life. Called by divine revelation, like another Saul, as he maintained, to the practice of religion of this kind, he usurped to himself the command of almost twelve thousand cross bearers. As they were led through the cities of the Rhine and the Main and also the Danube, they either utterly destroyed the execrable race of the Jews wherever they found them (being even in this matter zealously devoted to the Christian religion) or forced them into the bosom of the Church.",
+     "who": "Ekkehard of Aura, German Benedictine monk and chronicler, later abbot of Aura, who went on the Crusade of 1101 and gives the account of the crusading Church; he condemns Emicho, but describes the attacks on Jews as zeal for the Christian religion (tr. August C. Krey, 1921)",
+     "date": "1096; written early 12th century",
+     "url": "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+    },
+    {
+     "text": "Sehet, wir ziehen nach einem fernen Lande, ziehen dahin, um mit den Königen des Landes Krieg zu führen, wir wagen unser Leben, um alle jene Nationen, die nicht an den Gekreuzigten glauben, zu töten und zu zertrümmern — um wie viel mehr verdienen es die Juden, die ihn umgebracht und gehängt haben!",
+     "who": "The Crusaders' reasoning, as recorded by their victims in the Mainz Anonymous (German tr. S. Baer, 1892). In plain English: 'Look, we are going to a distant land to make war on its kings; we risk our lives to kill and crush all the nations that do not believe in the Crucified. How much more do the Jews deserve it, who killed and hanged him!'",
+     "date": "spring 1096",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt"
+    },
+    {
+     "text": "Da entbrannte der Zorn des Königs und er schickte in alle Provinzen seines Reiches, an die Fürsten, Bischöfe, Grafen, auch an den Herzog Gottfried Briefe, Worte des Friedens, dass sie die Juden beschützen sollen, damit keiner sie anrühre, ihnen Böses zu thun, dass sie vielmehr ihnen beistehen und Zuflucht gewähren sollen.",
+     "who": "Emperor Henry IV's order to protect the Jews, after Kalonymus of Mainz sent him word in Italy, as recorded by Solomon bar Samson; the letters themselves do not survive (German tr. S. Baer, 1892). In plain English: 'Then the king's anger was kindled, and he sent letters, words of peace, to all the provinces of his realm, to the princes, bishops and counts and to Duke Godfrey too, that they should protect the Jews, so that no one should touch them to do them harm, but rather stand by them and give them refuge.'",
+     "date": "early 1096",
+     "url": "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "Die SchUM-Stätten zeigen aber auch von die dunklen Seiten dieser Geschichte. Jüdinnen und Juden wurden in Speyer, Mainz und Worms immer wieder verfolgt, ihre Wohnviertel verwüstet, ihre Gemeinden zerstört.",
+    "who": "Frank-Walter Steinmeier, President of Germany, presenting the UNESCO World Heritage certificate for the ShUM sites of Speyer, Worms and Mainz, inscribed in 2021 (German, as published by the Federal Government). He speaks of the persecutions over the centuries in general, not of 1096 alone. In plain English: 'But the ShUM sites also show the dark sides of this history. Jews in Speyer, Mainz and Worms were persecuted again and again, their quarters devastated, their communities destroyed.'",
+    "date": "1 February 2023",
+    "url": "https://www.bundesregierung.de/breg-de/service/newsletter-und-abos/bulletin/rede-von-bundespraesident-dr-frank-walter-steinmeier-2162684"
+   },
+   "warn": "The Hebrew chronicles are quoted in Seligmann Baer's 1892 German translation, with the site's own plain-English glosses. Baer softened or left out the chronicles' insults against Christianity and marked those places with an asterisk, and he says the short elegies could not be rendered word for word. The chronicles are religious memorials written a generation or more later; they call the Crusaders 'those who go astray' and curse Emicho. Albert of Aachen and Ekkehard are Christian clerics writing from reports, in August C. Krey's 1921 English.",
+   "disputed": [
+    [
+     "How many died. The Hebrew chronicles count eleven dead at Speyer (Solomon bar Samson and the Mainz Anonymous) or ten (Eliezer bar Nathan), about 800 at Worms, and 1,100 at Mainz on a single day; Albert of Aachen puts the Mainz dead in the bishop's hall at about 700. The Encyclopaedia Judaica gives more than 1,000 for Mainz and more than 5,000 victims in all (including Trier, Regensburg, Metz and Bohemia); Wikipedia's summary gives 2,000 Jews.",
+     [
+      "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+      "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt",
+      "https://www.jewishvirtuallibrary.org/the-crusades",
+      "https://en.wikipedia.org/wiki/Rhineland_massacres"
+     ]
+    ],
+    [
+     "Faith or money? The chronicles give the attackers a religious motive: revenge for the Crucifixion before fighting Muslims, and the Mainz Anonymous reports a proclamation that whoever killed a Jew would have all his sins forgiven. Albert of Aachen, a Christian, says they killed 'through greed of money', and the townspeople of Cologne and Worms shared in the attacks and the plunder; historians also point to crusaders' need for money and their debts. According to the Encyclopaedia Judaica, nothing in Pope Urban II's call seemed to threaten the Jews; bishops and the emperor tried, with mixed results, to protect them.",
+     [
+      "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+      "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt",
+      "https://www.jewishvirtuallibrary.org/the-crusades",
+      "https://en.wikipedia.org/wiki/Rhineland_massacres"
+     ]
+    ],
+    [
+     "Did the bishops protect or betray? The Mainz Anonymous calls Bishop John of Speyer a righteous man who saved his Jews without a bribe. At Mainz, Solomon bar Samson writes that the archbishop's officers advised the Jews to hand over their money only to get them and their wealth into their power, while his editor notes that the chronicle treats the archbishop himself as sincere at first; Albert of Aachen calls Ruthard 'that excellent Bishop'. Ruthard fled; Solomon says the crowd wanted to kill him too for speaking for Israel.",
+     [
+      "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+      "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt"
+     ]
+    ],
+    [
+     "When and by whom the chronicles were written. Solomon bar Samson says he wrote in Mainz in 1140 from what the elders told him, but parts of his text are in the first person, which his 1892 editor took as a sign of an eyewitness or contemporary source; the editor also found episodes placed out of order. Albert of Aachen has the killing begin in Cologne, while the Hebrew chronicles start with Speyer. Modern historians debate whether the chronicles show the victims' own views (Israel Yuval) or those of the survivors' descendants writing in the 12th century (Jeremy Cohen).",
+     [
+      "https://archive.org/stream/hebrischeberic00neubuoft/hebrischeberic00neubuoft_djvu.txt",
+      "https://archive.org/stream/firstcrusadeacco00kreyuoft/firstcrusadeacco00kreyuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/Rhineland_massacres"
+     ]
+    ]
+   ],
+   "blind": "The dead left no words of their own. What survives on the Jewish side is three Hebrew chronicles put together in the 12th century by survivors and their descendants as memorials of martyrdom, shaped by liturgy and scripture, plus later laments and memorial books. The Christian side is told by clerics such as Albert of Aachen and Ekkehard, who wrote from reports and judged the attackers by their own faith. Emicho, his followers and the townspeople who joined them left no account of their own, and the forced converts who later returned to Judaism appear only in a line or two.",
+   "reading": [
+    [
+     "A. Neubauer and M. Stern (eds.), tr. S. Baer, Hebräische Berichte über die Judenverfolgungen während der Kreuzzüge (Berlin, 1892), full text",
+     "https://archive.org/details/hebrischeberic00neubuoft"
+    ],
+    [
+     "August C. Krey, The First Crusade: The Accounts of Eye-Witnesses and Participants (1921), full text",
+     "https://archive.org/details/firstcrusadeacco00kreyuoft"
+    ],
+    [
+     "Crusades (Encyclopaedia Judaica, Jewish Virtual Library)",
+     "https://www.jewishvirtuallibrary.org/the-crusades"
+    ],
+    [
+     "ShUM Sites of Speyer, Worms and Mainz (UNESCO World Heritage Centre)",
+     "https://whc.unesco.org/en/list/1636/"
+    ]
+   ]
+  },
+  {
+   "id": "imjin1592",
+   "title": "The Japanese invasions of Korea (the Imjin War)",
+   "region": "Asia",
+   "where": "Korean peninsula (pin: Seoul, South Korea)",
+   "lat": 37.57,
+   "lon": 126.98,
+   "from": 1592,
+   "to": 1598,
+   "themes": [
+    "War",
+    "Massacre",
+    "Famine",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "Having unified Japan, Toyotomi Hideyoshi launched invasions of Korea in 1592 and 1597 with the ultimate, though unrealistic, goal of conquering China and beyond; the campaigns failed, the Korean admiral Yi Sun-sin won lasting fame for repelling the Japanese fleets, and Hideyoshi died in 1598.",
+     "https://www.britannica.com/biography/Toyotomi-Hideyoshi"
+    ],
+    [
+     "Japan quickly occupied large parts of Korea in 1592, but Ming Chinese reinforcements and the Joseon navy's attacks on Japanese supply fleets forced a withdrawal from the north; Korean civilian militias then fought a guerrilla war, a truce followed in 1596, and after a second invasion in 1597 the Japanese withdrew in 1598.",
+     "https://en.wikipedia.org/wiki/Imjin_War"
+    ],
+    [
+     "At Dongnae, in the first days of the war, the commander Konishi Yukinaga ordered that no prisoners be taken after the Korean commander refused to let his army pass; Wikipedia says the twelve-hour siege killed 3,000 and the Japanese killed everyone, civilians included.",
+     "https://en.wikipedia.org/wiki/Imjin_War"
+    ],
+    [
+     "Korea suffered the most of the three countries: its arable land fell to 66% of the prewar total, 90% of the cultivated land in Gyeongsang Province alone was destroyed, famine, disease and rebellion followed, and the palaces of Gyeongbokgung, Changdeokgung and Changgyeonggung were burned.",
+     "https://en.wikipedia.org/wiki/Imjin_War"
+    ],
+    [
+     "The violence did not run one way only: Wikipedia, in part citing Stephen Turnbull, says the Ming forces were often no better than the Japanese in the destruction and crimes they committed, that Korean armies also seized food from civilians and Korean bandits robbed other Koreans, and that Korean women were assaulted by Japanese, Chinese and Korean soldiers alike; the baekjeong, an outcast group, set fire to government offices holding the census ledgers.",
+     "https://en.wikipedia.org/wiki/Imjin_War"
+    ],
+    [
+     "In the second invasion, Japanese soldiers brought back noses instead of whole heads as proof of their kills, civilians' as well as soldiers'; Hideyoshi had them entombed on the grounds of the Hōkōji temple in Kyoto, in a mound first called the Nose Mound and later the Ear Mound (Mimizuka), dedicated on 28 September 1597.",
+     "https://en.wikipedia.org/wiki/Mimizuka"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "於是城中吏民作亂。挺刃橫路縱擊之。墜廟社主路中。指從行宰臣大罵曰。汝等平日。偸食國祿。今乃誤國欺民乃爾耶。[…] 路上見婦女幼稚。皆怒髮上指。相與號呼曰。旣欲棄城。何故紿我輩入城。獨使魚肉於賊手耶。",
+     "who": "The clerks, townspeople, women and children of P'yŏngyang, when the king's court prepared to abandon the city, as recorded by Yu Sŏng-nyong, the king's chief state councillor, who was there (classical Chinese). Gloss: 'Then the clerks and people of the city rose up, blocked the road with blades and struck out, and knocked the royal ancestral tablets onto the road. Pointing at the ministers they cursed: \"All your days you have fed on the state's stipends, and now you ruin the country and deceive the people like this!\" [...] On the road I saw women and children, hair standing on end with rage, crying out together: \"If you meant to abandon the city, why did you trick us into coming inside, only to leave us alone as fish and meat for the bandits?\"'",
+     "date": "1592, 6th lunar month (July by the Western calendar)",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 1, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%B8%80",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "有人在田間。望之痛哭曰。國家棄我去。我輩何恃而生也。",
+     "who": "A man in the fields, watching the king flee Seoul for the north, as recorded by Yu Sŏng-nyong, who rode in the king's party (classical Chinese). Gloss: 'There was a man in the fields who watched us and wept bitterly: \"The state has abandoned us and gone. What are we to live on now?\"'",
+     "date": "1592, 30th day of the 4th lunar month (June by the Western calendar), the day the king left Seoul",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 1, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%B8%80",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "余隨入城見城中遺民百不一存其存者皆飢羸疲困面色如鬼時日氣烘熱人死及馬死者處處暴露臭穢滿城行者揜鼻方過公私廬舍一空",
+     "who": "Yu Sŏng-nyong, chief state councillor of the defeated Korean court, entering Seoul after the Japanese left it (classical Chinese). Gloss: 'I followed them into the city. Of the people left in it, not one in a hundred survived, and those who did were all starved, wasted and exhausted, their faces like ghosts. The weather was hot; dead people and dead horses lay exposed everywhere, the stench filled the city, and passers-by had to cover their noses. Public and private houses alike were empty.'",
+     "date": "1593, 20th day of the 4th lunar month (May by the Western calendar)",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 2, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%BA%8C",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "中外飢甚且困於饋運老弱顚溝壑壯者爲盜賊重以癘疫死亡殆盡至父子夫婦相食暴骨如莾",
+     "who": "Yu Sŏng-nyong, chief state councillor, on the country while Ming troops were stationed in the south during the truce (classical Chinese). Gloss: 'Throughout the land the hunger was extreme, made worse by the burden of carrying supplies; the old and weak fell into the ditches, the able-bodied became bandits, and on top of this came epidemics, until almost all were dead; fathers and sons, husbands and wives ate one another, and bones lay exposed like weeds.'",
+     "date": "late 1593 – 1594",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 2, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%BA%8C",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "賊兵退時賊蹂躪三道所過皆焚燒廬舍殺戮人民凡得我國人悉割其鼻以示威",
+     "who": "Yu Sŏng-nyong, chief state councillor, on the second invasion (classical Chinese). Gloss: 'When the enemy's troops withdrew, they trampled three provinces; wherever they passed they burned the houses and slaughtered the people, and of every one of our people they caught they cut off the nose, to strike terror.'",
+     "date": "1597",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 2, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%BA%8C",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "余見璘軍人歐辱守令無忌以繩繫察訪李尙規頸曳之流血滿面",
+     "who": "Yu Sŏng-nyong, chief state councillor, on the Ming admiral Chen Lin's soldiers, Korea's allies (classical Chinese). Gloss: 'I saw Chen Lin's soldiers beat and humiliate district magistrates without restraint; they tied a rope round the neck of the post-station inspector Yi Sang-gyu and dragged him along, his face covered in blood.' Yu adds that Yi Sun-sin later made Chen Lin's men and his own obey the same rule, and anyone who took so much as a thread from the people was seized and beaten.",
+     "date": "1598",
+     "doc": "Yu Sŏng-nyong, Chingbirok (懲毖錄), book 2, as transcribed on Chinese Wikisource",
+     "url": "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%BA%8C",
+     "lic": "Public domain (written c. 1600–1604; author died 1607)"
+    },
+    {
+     "text": "蛇渡僉使來言。豆峙度賊事虛傳。而光陽之人。變着倭服。自相作亂云。不勝痛憤。昏。吳壽成自光陽來告曰。光陽賊事。皆晉州避亂人及縣人出此凶計。官庫一空。閭里寂然。",
+     "who": "Yi Sun-sin, commander of the Korean navy, in his war diary (Nanjung ilgi), on a raid he had been told was Japanese (classical Chinese). Gloss: 'The commander of Sado came and said the report of enemies crossing at Tuch'i was false: people of Kwangyang had put on Japanese clothes and were rioting among themselves. I could not bear my pain and anger. In the evening O Su-sŏng came from Kwangyang and reported that the \"enemy\" affair at Kwangyang was all the evil scheme of refugees from Chinju and people of the county; the government storehouses were emptied and the villages lay silent.'",
+     "date": "1593, 11th day of the 7th lunar month (August by the Western calendar)",
+     "doc": "Yi Sun-sin, war diary, year Kyesa, in Yi Ch'ungmugong chŏnsŏ (李忠武公全書, 1795), book 5, as transcribed on Korean Wikisource",
+     "url": "https://ko.wikisource.org/wiki/%EC%9D%B4%EC%B6%A9%EB%AC%B4%EA%B3%B5%EC%A0%84%EC%84%9C/%EC%A0%9C5%EA%B6%8C",
+     "lic": "Public domain (diary 1592–1598; printed 1795)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "As a mark of his spiteful spirit, Hideyoshi ordered that in this second invasion the noses and ears of all Koreans killed or captured should be cut off and sent to Japan. And so from time to time these half-savage soldiers sent loads of Korean noses and ears, pickled in salt, and they were buried in the monastery of Ta-bul-sa in the city of Kyoto, there to remain to all ages a disgusting memento of the most unprovoked and wanton cruelty that ever disgraced the annals of a great people. Many of the Koreans who lost their noses or ears at that time survived many years",
+     "who": "Homer B. Hulbert, American missionary and teacher in Korea, writing from Korean records with the help of a Korean scholar (The History of Korea, vol. 2, 1905); a strongly pro-Korean writer",
+     "date": "1905, on 1597",
+     "url": "https://www.gutenberg.org/cache/epub/52749/pg52749.txt"
+    },
+    {
+     "text": "the Kagoshima samurai rose to the demands of the occasion, and repulsed the allies with terrific slaughter, pursuing them hotly for miles and taking as many as 38,700 heads. These were buried under a tumulus; but the ears and noses had previously been cut off, packed in barrels, and sent to Japan, where they were subsequently deposited near the Temple of Dai-butsu in the capital, and that Mimi-dzuka, or “Ear-mound,” raised over them which is still shown to travellers as one of the sights of Kyoto by Japanese ciceroni.",
+     "who": "James Murdoch, Scottish historian of Japan, on the Satsuma victory over the Ming and Korean armies at Sach'ŏn (A History of Japan, vol. 2, 1903, p. 358)",
+     "date": "1903, on October 1598",
+     "url": "https://archive.org/stream/historyofjapan02murd_0/historyofjapan02murd_0_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "夫人生于世也，雖歷長生，古來不满百年焉。欝欝久居此乎，不屑國家之隔，山海之遠，一超直入大明國；易吾朝風俗於四百餘州，施帝都政化於億萬斯年者，在方寸中。貴國先驅而入朝，依有遠慮，無近憂者乎？",
+     "who": "Toyotomi Hideyoshi, ruler of Japan (kampaku), in his letter to the King of Korea, as preserved in the Japanese collection Zoku zenrin kokuhōki (classical Chinese). Gloss: 'A man's life, however long, has never reached a hundred years. Why should I stay pent up here? Heedless of the distance of seas and mountains, I will leap straight into the great Ming, change its four hundred provinces to the customs of my country, and spread the rule of my imperial capital for ten thousand years: this is in my heart. If your country goes ahead as vanguard and comes to court, will you not, having thought far ahead, be spared nearby troubles?' The Korean envoys read it as a demand that Korea lead the attack on China.",
+     "date": "winter 1590 (Tenshō 18, 11th month)",
+     "url": "https://zh.wikisource.org/wiki/%E6%97%A5%E6%9C%AC%E5%9C%8B%E9%97%9C%E7%99%BD%E7%A7%80%E5%90%89%E8%87%B4%E6%9C%9D%E9%AE%AE%E5%9C%8B%E7%8E%8B%E6%9B%B8"
+    },
+    {
+     "text": "按史征韓後役我軍連捷諸将有所斬獲截敵鼻献功其数幾万公喜其勝賞其功而愍彼士為国致命埋其獲於京都大仏之前為築墳塋立大卒塔婆名曰鼻塚",
+     "who": "Inscription of 1898 beside the mound in Kyoto, signed by the abbot Murata Jakujun (Kyoto City notes the text was drafted for him by Yumoto Fumihiko) for the 300th anniversary of Hideyoshi's death, which praises his 'compassion' (classical Chinese, as transcribed by Kyoto City; parts worn away were restored from an 1898 newspaper). Gloss: 'According to the histories, in the later campaign against Korea our armies won victory after victory; the generals took heads and cut off the enemies' noses to present as proof of merit, in their tens of thousands. His Highness rejoiced in the victory and rewarded their merit, but, pitying those soldiers who had given their lives for their country, he buried the trophies before the Great Buddha in Kyoto, raised a grave mound with a great stupa, and named it the Nose Mound.'",
+     "date": "20 March 1898",
+     "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/ishibumi/html/hi140.html"
+    }
+   ],
+   "today": {
+    "text": "この侵略を韓国では壬辰丁酉倭乱といい，朝鮮は膨大な損害を被った。日本軍は朝鮮の軍民の鼻を切り取り戦功の証明とした。",
+    "who": "Kyoto City, in its official register of the city's historical monuments (Japanese). Gloss: 'In Korea this invasion is called the Imjin and Chŏngyu Japanese war, and Korea suffered enormous damage. The Japanese army cut off the noses of Korean soldiers and civilians as proof of military merit.'",
+    "date": "page surveyed 2008",
+    "url": "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/ishibumi/html/hi140.html"
+   },
+   "note": "Research in progress: no Japanese eyewitness who condemned the killing is quoted yet. The army chaplain Keinen's diary (Chōsen nichinichi ki) was not found in a public-domain transcription, and Luís Fróis's Portuguese history of Japan was not found in a pre-1931 printed copy of the Korean chapters. The words of ordinary Koreans survive only as Yu Sŏng-nyong recorded them.",
+   "warn": "The Korean, Chinese and Japanese texts are quoted in their original classical Chinese and Japanese from Wikisource and Kyoto City transcriptions, with the site's own plain-English glosses, not published translations. Yu Sŏng-nyong was the chief minister who ran the war and wrote partly to defend his record; Hulbert (1905) writes as a partisan of Korea in the language of his time. The texts describe mass killing, mutilation and cannibalism in famine.",
+   "disputed": [
+    [
+     "How many died? Wikipedia's summary gives more than 1,000,000 Korean civilian and military deaths, more than 30,000 Ming dead and more than 100,000 Japanese killed, captured or missing, and flags the Japanese figure as resting on a possibly unreliable source. Old Korean counts are not always trusted: Hulbert (1905) reports the Korean accounts' 'almost incredible' figure of 70,000 Koreans killed at Chinju in 1593, with an equal number of Japanese, and says the Japanese figure must be an exaggeration.",
+     [
+      "https://en.wikipedia.org/wiki/Imjin_War",
+      "https://www.gutenberg.org/cache/epub/52749/pg52749.txt"
+     ]
+    ],
+    [
+     "How many noses lie in the mound? Wikipedia says at least 38,000 Koreans and over 30,000 Chinese, and elsewhere cites a count of 185,738 Korean and 29,014 Chinese heads taken in all (214,752), noting that some were probably discarded; Murdoch (1903) gives 38,700 heads taken by the Satsuma men at Sach'ŏn alone in October 1598, a year after the mound was dedicated, and says their noses went to Kyoto too; the 1898 Kyoto inscription says 'tens of thousands'; and the Korean monk Pak Sam-jung, campaigning in 1996 to bring them home, spoke of 126,000 people. Japanese collectors, Wikipedia notes, took noses from civilians as well as soldiers.",
+     [
+      "https://en.wikipedia.org/wiki/Mimizuka",
+      "https://archive.org/stream/historyofjapan02murd_0/historyofjapan02murd_0_djvu.txt",
+      "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/ishibumi/html/hi140.html"
+     ]
+    ],
+    [
+     "Captives and potters. Wikipedia says 50,000 to 60,000 captives were taken to Japan, that only 7,500 were returned by diplomacy, and that many of the rest were sold to Portuguese traders; Hulbert says an envoy brought back about 3,000 in 1606. Korean potters were set to work in kilns founded by Japanese lords, but Wikipedia also says the Arita porcelain makers of 1616 had been 'enticed to relocate' after the war, so not every potter in Japan was a captive in the same sense.",
+     [
+      "https://en.wikipedia.org/wiki/Imjin_War",
+      "https://www.gutenberg.org/cache/epub/52749/pg52749.txt"
+     ]
+    ],
+    [
+     "Did the Ming save Korea? Wikipedia says Ming reinforcements, with the Korean navy, forced the Japanese out of the north. Murdoch (1903) agrees with Hulbert that before China raised a hand the invasion had virtually collapsed, and says that in a way the Chinese counter-invasion was a calamity for Korea; Yu Sŏng-nyong's own record shows Ming soldiers abusing Korean officials, and Turnbull (as Wikipedia reports him) says Ming forces were often no better than the Japanese.",
+     [
+      "https://en.wikipedia.org/wiki/Imjin_War",
+      "https://archive.org/stream/historyofjapan02murd_0/historyofjapan02murd_0_djvu.txt",
+      "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84/%E5%8D%B7%E4%BA%8C"
+     ]
+    ]
+   ],
+   "blind": "The Korean side of this war is told almost entirely by its ruling class: the chief minister Yu Sŏng-nyong and the admiral Yi Sun-sin, both writing to the court and to posterity. Ordinary Koreans speak only in the lines Yu chose to record, and the tens of thousands carried off to Japan and sold abroad, the women assaulted by every army, and the outcasts who burned the census registers left no words of their own. Japanese foot soldiers and the Chinese conscripts who died in Korea are just as silent, while Hideyoshi's letters and the monuments to his 'compassion' survive in full.",
+   "reading": [
+    [
+     "Toyotomi Hideyoshi (Britannica)",
+     "https://www.britannica.com/biography/Toyotomi-Hideyoshi"
+    ],
+    [
+     "Imjin War (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Imjin_War"
+    ],
+    [
+     "Mimizuka (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Mimizuka"
+    ],
+    [
+     "Yu Sŏng-nyong, Chingbirok 懲毖錄 (Chinese Wikisource)",
+     "https://zh.wikisource.org/wiki/%E6%87%B2%E6%AF%96%E9%8C%84"
+    ],
+    [
+     "Yi Sun-sin, war diary, in Yi Ch'ungmugong chŏnsŏ, books 5–7 (Korean Wikisource)",
+     "https://ko.wikisource.org/wiki/%EC%9D%B4%EC%B6%A9%EB%AC%B4%EA%B3%B5%EC%A0%84%EC%84%9C"
+    ],
+    [
+     "H. B. Hulbert, The History of Korea, vol. 2 (1905, Project Gutenberg)",
+     "https://www.gutenberg.org/cache/epub/52749/pg52749.txt"
+    ],
+    [
+     "J. Murdoch, A History of Japan, vol. 2 (1903, archive.org)",
+     "https://archive.org/stream/historyofjapan02murd_0/historyofjapan02murd_0_djvu.txt"
+    ],
+    [
+     "Kyoto City: Mimizuka repair memorial stone (in Japanese)",
+     "https://www2.city.kyoto.lg.jp/somu/rekishi/fm/ishibumi/html/hi140.html"
+    ]
+   ]
+  },
+  {
+   "id": "banda1621",
+   "title": "The Dutch conquest of the Banda Islands",
+   "region": "Asia",
+   "where": "Lonthor (Banda Besar), Banda Islands, Indonesia (approximate)",
+   "lat": -4.55,
+   "lon": 129.92,
+   "from": 1609,
+   "to": 1621,
+   "themes": [
+    "Colonial rule",
+    "Massacre",
+    "Removal and dispossession",
+    "Slavery",
+    "Famine"
+   ],
+   "facts": [
+    [
+     "Nutmeg is native to the volcanic Banda Islands; today their inhabitants are mostly descendants of Javanese, Makassarese and people from neighbouring islands brought in as labourers to work the Dutch nutmeg plantations.",
+     "https://www.britannica.com/place/Banda-Islands"
+    ],
+    [
+     "The Dutch East India Company (VOC) wanted the Bandanese to sell their spices to it alone, while the Bandanese preferred free trade; in May 1609 Bandanese chiefs lured the Dutch commander Pieter Verhoeff and two other commanders into an ambush and killed them, 46 Dutchmen died in all, and the Dutch retaliated by plundering villages before a peace in August put the islands under Dutch authority.",
+     "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+    ],
+    [
+     "The Bandanese went on selling to the English and to Asian traders in breach of their treaties, and by 1614 the VOC directors had concluded that the whole archipelago must be conquered even if it meant destroying the native population; in 1616, when the Dutch took the island of Ai, about 400 people, many of them women and children, drowned trying to flee to English-held Run.",
+     "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+    ],
+    [
+     "In 1621 Governor-General Jan Pieterszoon Coen brought a fleet with Dutch soldiers and Japanese mercenaries, took Lonthor, the main island, on 11 March, and accepted the surrender of the orang kaya (the island elders); after confessions of a conspiracy were extracted by torture, Wikipedia says, condemned orang kaya were beheaded by Japanese mercenaries.",
+     "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+    ],
+    [
+     "Coen reported to the directors in May 1621 that he was sending 789 people to Jacatra (Batavia) on the ship Dragon, 287 men, 256 women and 246 children, and that some 150 of the people who had fled into the mountains had already died of dysentery.",
+     "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt"
+    ],
+    [
+     "The Dutch repopulated the islands mainly with enslaved people from the East Indies, India and China working for Dutch planters (perkeniers); surviving Bandanese were enslaved too, and Wikipedia says the native Bandanese population had dropped to 100 by 1681.",
+     "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "soo de gouverneur een nieuw accoort ende eewige vrede met haer wilde maecken, sy waeren bereyt en daertoe wel genegen, mits dat daervan op haer landt souden handelen; soo niet, souden na de compst van den generael vertoeven.",
+     "who": "The Bandanese of Lonthor and the rest of Banda, answering the Dutch governor's offer of peace, as recorded by Jan Pieterszoon Coen in his report to the VOC directors (Dutch, in reported speech). Gloss: 'if the governor wished to make a new agreement and eternal peace with them, they were ready and well inclined to it, provided it was negotiated on their own land; if not, they would wait for the coming of the governor-general.'",
+     "date": "late 1619 or early 1620 (reported 31 July 1620)",
+     "doc": "Coen to the Heeren XVII, 31 July 1620, in H. T. Colenbrander (ed.), Jan Pietersz. Coen: Bescheiden omtrent zijn bedrijf in Indië, vol. 1 (The Hague, 1919), p. 569 (OCR corrected)",
+     "url": "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt",
+     "lic": "Public domain (published 1919)"
+    },
+    {
+     "text": "presenteerende een eewich accoort met ons te maecken, alle andre natie van den handel van Banda 't excluderen ende alle de noten ende foelie aen ons alleen te leveren.",
+     "who": "Envoys of the Bandanese, coming to the Dutch while Coen's fleet prepared to attack, as recorded by Coen (Dutch, reported speech). Gloss: 'offering to make an eternal agreement with us, to exclude every other nation from the trade of Banda and to deliver all the nutmeg and mace to us alone.' Coen answered that they had long promised and sworn this and not kept it, and demanded a fort in their chief places; the Bandanese would not agree, and the talks ended.",
+     "date": "early 1621",
+     "doc": "Coen and Martinus Sonck to the Heeren XVII, 6 May 1621, in Colenbrander (ed.), Coen: Bescheiden, vol. 1 (1919), p. 626",
+     "url": "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt",
+     "lic": "Public domain (published 1919)"
+    },
+    {
+     "text": "Whereupon the said Inhabitants asked us if we could and would defend them, but perceiving we were not able to defend our selves, much lesse to secure them : they were forced to yeeld themselves and the Iland into his hands. [...] which they at the first refused to doe, alleaging that they had formerly given and surrendred the Land to the King of England, and in respect they had lived so long with the English, they would not now offer us any injurie or violence.",
+     "who": "The people of the island of Run, when a Dutch force came to take it and ordered them to throw down the English guns, as recorded by the English East India Company's factors on Run in a letter to the Company (rivals of the Dutch)",
+     "date": "March 1621",
+     "doc": "'A Letter written to the East India Company in England, from their Factours', in Samuel Purchas, Hakluytus Posthumus or Purchas his Pilgrimes (1625), reprinted Glasgow 1905, vol. 5, pp. 139–140",
+     "url": "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt",
+     "lic": "Public domain (first published 1625; this reprint 1905)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Which when the Bandanezes perceived (doubting that he meant to make them all slaves and to carrie them to some other places) they agreed together to retyre themselves into the highest and strongest places of the Land, and there did fortifie themselves, whereupon the Dutch slue of them and tooke twelve hundred persons Prisoners, most of them being women and children, which they have since carryed to Jacatra and other places.",
+     "who": "The English East India Company's factors in Banda, in a letter to the Company in London, printed by Samuel Purchas; the English were the Dutch company's rivals for the islands and had lost Run to them",
+     "date": "1621 (printed 1625)",
+     "url": "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt"
+    },
+    {
+     "text": "considering they have lately at Banda hanged 40 of the principal of those people and carried 800 persons along with General Coen to inhabit Jacatra, “breeds such fear and doubt in these people, as they remain in ecstasy ;” many of them fled",
+     "who": "William Nicolls, English East India Company agent in the Moluccas, writing to the English merchants in Japan about the effect of the news on the islanders there, as abstracted by the British government's Calendar of State Papers (1870), no. 1050",
+     "date": "July 1621",
+     "url": "https://archive.org/stream/calendarofstatep0000wnoe/calendarofstatep0000wnoe_djvu.txt"
+    },
+    {
+     "text": "desirous to revenge the wrongs and cruelties offered unto them by the Hollanders, did dissemble their intents, entertayning Van Hoofe with vaine hopes, promising him to come to some agreement ; by which meanes they drew Van Hoofe with threescore or more of his Commanders and Souldiours, unto a place in which the Bandaneses had advantage. Now instead of agreement, in warlike manner they set upon Van Hoofe, and slew him and almost his Companie.",
+     "who": "The English East India Company's printed answer to the Dutch declaration, describing how the Bandanese killed the Dutch admiral Verhoeff ('Van Hoofe') in 1609; written to defend the English case, it still records the killing plainly",
+     "date": "1622, on 1609 (printed by Purchas, 1625)",
+     "url": "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Aldus hebben wy door Goodts genade de moetwillige, trotse Bandanesen (die soo lange voor de haentiens van Indien vernaempt zijn geweest) sonder bloetstortinge, tegen opinie van veele, overwonnen.",
+     "who": "Jan Pieterszoon Coen, governor-general of the VOC, with Martinus Sonck, reporting to the directors (Dutch). Gloss: 'Thus by God's grace, against the opinion of many, we have conquered without bloodshed the wilful, proud Bandanese, who have so long been famed as the fighting cocks of the Indies.'",
+     "date": "6 May 1621",
+     "url": "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt"
+    },
+    {
+     "text": "By den raedt hierop gelet wesende, zijn alle de gevangen orangkays ter doot verwesen ende 44 met den swaerde gerecht. Twee hebben haer selven in torture verstiet, ende een isser over boort gesprongen ende verdroncken.",
+     "who": "Coen and his council (signed Coen, Pieter de Carpentier, Jan Dircksz. Lam and Willem van Antsen) to the directors, after reporting that the 45 captive orang kaya had 'confessed' to plotting to retake the forts and murder Coen (Dutch). Gloss: 'The council having considered this, all the captured orang kaya were condemned to death and 44 executed with the sword. Two killed themselves under torture, and one jumped overboard and drowned.'",
+     "date": "16 November 1621, on May 1621",
+     "url": "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt"
+    },
+    {
+     "text": "Ontrent 2500 sijnder soo van honger ende ellende als met den swaerde vergaen. Alsnoch hebben niet gehoort, datter van gants Banda meer dan ontrent 300 Bandanesen ontcomen zijn. Het schijnt dat de hartneckicheyt in dese lieden soo groot geweest is, dat liever al te zamen in miserie hebben willen vergaen, dan aen d' onse overgeven.",
+     "who": "Coen and his council to the directors, on the end of the campaign in the mountains (Dutch). Gloss: 'About 2,500 have perished, from hunger and misery as well as by the sword. So far we have not heard that more than about 300 Bandanese from all of Banda escaped. It seems their stubbornness was so great that they would rather all perish in misery than give themselves up to us.' The letter goes on to blame their leaders' pride.",
+     "date": "16 November 1621",
+     "url": "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt"
+    },
+    {
+     "text": "This that is formerly declared, is the true state and proceedings of that, which hath beene done now lately, and before in the Iland of Banda, wherein nothing hath beene done, but that which (according to the Law of Nations, and the aforesaid Contract, made, and promised to bee holden, and without any wrong done to the Liberties of the English Companie, agreed upon with the Companie of the Netherland) might and ought to have beene done.",
+     "who": "The Dutch East India Company's public declaration on Banda, printed at Amsterdam in 1622, in the English translation printed by Purchas; it accuses the Bandanese of breaking their contracts of 1609, 1616 and 1617, robbing the Company's warehouses and murdering its servants",
+     "date": "1622",
+     "url": "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt"
+    }
+   ],
+   "note": "Research in progress: no Bandanese account in their own words has yet been found in a public-domain printing. The Hikayat Lonthoir (oral tradition of the Bandanese exiles in the Kei Islands) was not found in a pre-1931 edition, and the 1616 letter of the Bandanese to the King of England quoted by Wikipedia was not found in a checked public-domain copy. No Dutch or Indonesian government statement on the conquest was found to quote.",
+   "warn": "Every Bandanese word here comes through their enemies or rivals: Coen's own reports in 17th-century Dutch (quoted from the 1919 printed edition, with the site's plain-English glosses and corrections of scanning errors), and English East India Company men who were fighting the Dutch for the same islands. The Dutch account speaks of conquest 'without bloodshed' and of confessions obtained under torture. The texts describe mass death, executions and the deportation of families.",
+   "disputed": [
+    [
+     "How many Bandanese were there, and how many died? Wikipedia reports that Vincent Loth and Charles Corn put the whole population before the conquest at about 15,000, of whom only about 1,000 survived; Peter Lape estimated that 90% were killed, enslaved or deported; Hans Straver put Lonthor alone at 4,500–5,000, with about 1,700 enslaved and 2,500 dead of famine and disease. Coen wrote in May that about 1,200 people had been taken in all, and his council in November counted about 2,500 dead and only about 300 escaped; the English factors spoke of 1,200 prisoners, mostly women and children. Wikipedia's article on the conquest gives 2,800 Bandanese killed and 1,700 enslaved.",
+     [
+      "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands",
+      "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt",
+      "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt"
+     ]
+    ],
+    [
+     "The killing of the orang kaya. Coen's council wrote that 45 were seized, 44 executed 'with the sword', two died under torture and one drowned; Wikipedia says 24 were beheaded by Japanese mercenaries on 8 May; the English agent Nicolls heard that 40 'of the principal' had been hanged. The charge of a conspiracy rests on confessions the Dutch themselves say were taken under torture. Coen's council's own letter says only that the orang kaya were executed 'with the sword' and does not name who carried it out.",
+     [
+      "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt",
+      "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands",
+      "https://archive.org/stream/calendarofstatep0000wnoe/calendarofstatep0000wnoe_djvu.txt"
+     ]
+    ],
+    [
+     "Who broke faith? The VOC's declaration says the Bandanese broke contracts made in 1609, 1616 and 1617, robbed its warehouses and murdered its servants, encouraged by the English. The English answer replied that the Dutch never had any agreement in Banda but what was gotten by force, while conceding that the Bandanese killed Verhoeff and his men in 1609 by a feigned negotiation; Wikipedia agrees that the chiefs lured him into an ambush.",
+     [
+      "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt",
+      "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+     ]
+    ],
+    [
+     "Hero or 'Butcher of Banda'? Wikipedia says Coen was long considered a Dutch national hero, but his legacy has been controversial since the 19th century; the conquest is now widely called a genocide, and in 2012, after a citizens' initiative, the city council of Hoorn, his birthplace, added a text to his statue's pedestal explaining the controversy and some of his atrocities.",
+     [
+      "https://en.wikipedia.org/wiki/Jan_Pieterszoon_Coen"
+     ]
+    ]
+   ],
+   "blind": "The Bandanese who lived through the conquest left no writing that survives in a printed edition: what they said reaches us only as Coen chose to report it to his directors, or as English traders, who wanted the nutmeg for themselves, reported it home. The thousands who starved in the mountains, the families shipped to Batavia and sold, the orang kaya condemned on confessions taken under torture, and the Japanese mercenaries who carried out the executions all go unheard. The exiles' own memory, carried to the Kei Islands, survives in oral tradition rather than in these archives.",
+   "reading": [
+    [
+     "Banda Islands (Britannica)",
+     "https://www.britannica.com/place/Banda-Islands"
+    ],
+    [
+     "Dutch conquest of the Banda Islands (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Dutch_conquest_of_the_Banda_Islands"
+    ],
+    [
+     "Jan Pieterszoon Coen (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Jan_Pieterszoon_Coen"
+    ],
+    [
+     "H. T. Colenbrander (ed.), Jan Pietersz. Coen: Bescheiden omtrent zijn bedrijf in Indië, vol. 1 (1919, archive.org)",
+     "https://archive.org/stream/janpieterszcoenb01coen/janpieterszcoenb01coen_djvu.txt"
+    ],
+    [
+     "Purchas his Pilgrimes, vol. 5 (1625; Glasgow reprint 1905, archive.org): Courthope's and Hayes's journals, the factors' letter, the Dutch declaration and the English answer",
+     "https://archive.org/stream/hakluytusposthum05purc/hakluytusposthum05purc_djvu.txt"
+    ],
+    [
+     "Calendar of State Papers, Colonial Series, East Indies, China and Japan, 1617–1621 (1870, archive.org)",
+     "https://archive.org/stream/calendarofstatep0000wnoe/calendarofstatep0000wnoe_djvu.txt"
+    ]
+   ]
+  },
+  {
+   "id": "khoikhoi1652",
+   "title": "The Khoikhoi and the Dutch at the Cape: 'the natural owner, or the foreign invader?'",
+   "region": "Africa",
+   "where": "Table Bay and the Cape Peninsula, Western Cape, South Africa",
+   "lat": -33.926,
+   "lon": 18.428,
+   "from": 1652,
+   "to": 1677,
+   "themes": [
+    "Colonial rule",
+    "Removal and dispossession",
+    "War",
+    "Uprising"
+   ],
+   "facts": [
+    [
+     "Jan van Riebeeck landed at the Cape on 6 April 1652 to set up a refreshment station for Dutch East India Company (VOC) ships; in 1657 the Company released some employees from their contracts and gave them freehold land along the Liesbeeck Valley, and in 1659 Khoikhoi men led by Doman, angered by the spreading farms and the loss of prime grazing land, seized seven of the Company's draught oxen, opening the first Khoikhoi–Dutch war (1659–60).",
+     "https://www.sahistory.org.za/article/establishment-cape-and-its-impact-khoikhoi-and-dutch"
+    ],
+    [
+     "Doman attacked on rainy days, when the Dutch muskets would not fire, and was wounded on 19 July 1659; the war ended when the Dutch made peace with the Goringhaiqua and the Goarchoqua around April and May 1660, after which the Khoikhoi lost more land, by 1676 they were barred from living near the castle, and in 1713 a smallpox epidemic further weakened them.",
+     "https://www.sahistory.org.za/article/establishment-cape-and-its-impact-khoikhoi-and-dutch"
+    ],
+    [
+     "To close the settlement's eastern boundary van Riebeeck built a wooden fence with watch towers from the Salt River towards Kirstenbosch and, in 1660, planted a hedge of indigenous wild almond (Brabejum stellatifolium) and thorny shrubs, meant also to stop Khoikhoi raids on the colonists' livestock; a remnant of the hedge still grows in Kirstenbosch.",
+     "https://www.sanbi.org/gardens/kirstenboch/history/kirstenbosch-nbg-van-riebeecks-hedge/"
+    ],
+    [
+     "The Company's own record shows violence on both sides: in October 1653 its interpreter Autshumato (Herry) left the fort with his people on the day 42 Company cattle were driven off and a Dutch herd boy was found murdered; in July 1658 the Council ordered all Herry's cattle at the Salt River seized and held him prisoner, and in December 1659 he escaped from Robben Island.",
+     "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    ],
+    [
+     "In July 1673 men of the Cochoqua chief Gonnema, coming as if to barter sheep, killed a corporal, a soldier and two free men at the Company's Saldanha Bay post; a Dutch and burger force returned on 25 July with about 800 cattle and 900 sheep, and on 26 June 1677 Gonnema's envoys accepted a peace that bound the Cochoqua to deliver 30 horned cattle a year as tribute.",
+     "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    ],
+    [
+     "Krotoa (Eva), niece of Autshumato, was taken into van Riebeeck's household at about 10 or 11 and became the Company's interpreter; she married Pieter van Meerhof on 2 June 1664, was banished to Robben Island in March 1669, and died there on 29 July 1674.",
+     "https://www.sahistory.org.za/people/krotoa-eva"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "They also asked, whether, if they were to come into Holland, they would be permitted to act in a similar manner, saying, “what would it signify if you remained here at the Fort, but you come quite into the interior, selecting the best for yourselves, and never once asking whether we like it, or whether it will put us to any inconvenience.”",
+     "who": "The Goringhaiqua ('Caepmans') leaders, among them the chief Gogosoa and Autshumato (Herry), about 40 in all, making peace at the fort after the first war, as recorded in Jan van Riebeeck's journal",
+     "date": "6 April 1660",
+     "doc": "Journal of Commander Van Riebeeck, 6 April 1660, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 205",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    },
+    {
+     "text": "have we then no cause to prevent you from procuring any cattle? for, if you get many cattle, you come and occupy our pasture with them, and then say the land is not wide enough for us both! who then can be required, with the greatest degree of justice, to give way, the natural owner, or the foreign invader?",
+     "who": "The same Goringhaiqua leaders, answering the Dutch objection that there was not grass enough for both peoples' cattle, as recorded in van Riebeeck's journal",
+     "date": "6 April 1660",
+     "doc": "Journal of Commander Van Riebeeck, 6 April 1660, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 205",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    },
+    {
+     "text": "being asked why they did us this injury, declared that it was for no other reason than because they saw that we were breaking up the best land and grass, where their cattle were accustomed to graze, trying to establish ourselves every where, with houses and farms, as if we were never more to remove, but designed to take, for our permanent occupation, more and more of this Cape country, which had belonged to them from time immemorial.",
+     "who": "A wounded Goringhaiqua ('Caepman') fighter taken prisoner in July 1659, who 'spoke tolerable Dutch', as reported by van Riebeeck and his Council to Batavia",
+     "date": "July 1659 (despatch of 29 July 1659)",
+     "doc": "Despatch from Commander Van Riebeeck and Council to the Governor General and Council, Batavia, 29 July 1659, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 186",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    },
+    {
+     "text": "I shall tell the real truth, Herry admits that his people took the cattle, and murdered the boy, but the Caepmans also had some of the cattle, yes, after Herry had had them for some days, the Caepmans—of whom Schacher is the chief—took them from him",
+     "who": "Krotoa (Eva), interpreting for her uncle Autshumato (Herry) when he and the Goringhaiqua leader Schacher were confronted before the Council; the journal says these were 'the precise words which were spoken in Dutch' by her",
+     "date": "early July 1658",
+     "doc": "Journal of Commander Van Riebeeck, July 1658, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 132",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    },
+    {
+     "text": "She said she would remember our word, for, (said she in Dutch,) she had a Dutch heart in her breast, and would never forget the Dutch, but would do them every good wherever she was able",
+     "who": "Krotoa (Eva), leaving with her sister and brother-in-law Oedasoa, chief of the Cochoqua, as reported (not verbatim) in van Riebeeck's journal",
+     "date": "9 November 1658",
+     "doc": "Journal of Commander Van Riebeeck, 9 November 1658, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 149",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    },
+    {
+     "text": "see! there comes the Hollander’s advocate again, she is coming to deceive her own countrymen with a parcel of lies, and to betray to the last,",
+     "who": "Doman (Nommoa), the Company's other Khoikhoi interpreter and later leader of the 1659 war, taunting Krotoa, as recorded in van Riebeeck's journal",
+     "date": "August 1658",
+     "doc": "Journal of Commander Van Riebeeck, August 1658, in D. Moodie (ed. and trans.), The Record: or a Series of Official Papers relative to the Condition and Treatment of the Native Tribes of South Africa, Part I (Cape Town, 1838), p. 139",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+     "lic": "Public domain (Moodie's English translation, published Cape Town 1838)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "replied, “I am certain I hit him, for I aimed at his middle,” and when the first attester said, “You have made a pretty business of it,” the said Willems rejoined “Well! what does it signify?”",
+     "who": "Ockert Cornelissen and Jacobus Haunkicher, former servants of the free burgher Willem Willems, sworn statement to the Cape Court of Justice on the shooting of a Khoikhoi man (unnamed in the record) who had knocked over a water jug in April 1672; the man died a few days later, Willems fled to Holland and obtained a pardon from the Prince of Orange",
+     "date": "5 July 1673",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "that they had now lost that land in war, and therefore could only expect to be henceforth entirely deprived of it, the rather because they could not be induced to restore the cattle which they had, wrongfully and without cause, stolen from us; that their country had thus fallen to our lot, being justly won by the sword in defensive warfare, and that it was our intention to retain it.",
+     "who": "Commander Jan van Riebeeck's answer to the Goringhaiqua leaders, in his journal (Moodie's translation, 1838, p. 205)",
+     "date": "6 April 1660",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    },
+    {
+     "text": "because you had occupied, for your own use, their best and most productive lands, which had been theirs from time immemorial, and which put them to much inconvenience; a grievance of these savage men, which we must certainly admit, is not entirely unfounded, and in which, notwithstanding, we shall not be able to give them any satisfaction while we continue to reside at the Cape.",
+     "who": "The Governor-General and Council of the Indies at Batavia to van Riebeeck, on the prisoner's reasons for the war (Moodie, 1838, pp. 196–197)",
+     "date": "15 December 1659",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    },
+    {
+     "text": "The discontent shown by those people, in consequence of our appropriating to ourselves—and to their exclusion—the land which they have used for their cattle from time immemorial, is neither surprising nor groundless, and we should, therefore, be glad to see that we could purchase it from them, or otherwise satisfy them.",
+     "who": "The VOC directors (Chamber XVII), Amsterdam, to van Riebeeck and Council (Moodie, 1838, p. 212)",
+     "date": "21 August 1660",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    },
+    {
+     "text": "he declared himself to be satisfied with them; and promised that he and his heirs and descendants should abide by them and maintain them to the latest day; acknowledging at the same time to have received the stipulated price, estimated (begroot) at 4000 reals of 8, in sundry wares to his satisfaction",
+     "who": "Agreement between Commissioner Arnout van Overbeke and Council and 'the Hottentoo Prince Manckhagou, alias Schacher', ceding 'the whole district of the Cabo de Boa Esperance' to the Company; signed by Schacher with a mark (Moodie, 1838, p. 318)",
+     "date": "19 April 1672",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    },
+    {
+     "text": "The land of the Cape, which the owners often complained had been wrongfully withheld from them, was also subsequently ceded and transferred to the Company in full property by contract with the rightful sovereign (regten Heer) for a like sum of R 4000, but which was paid with the value—in tobacco, beads, brandy, bread, and other trifles—of ƒ33 : 17, also prime cost, a sum so inconsiderable that the matter should not have been so long postponed.",
+     "who": "Governor Isbrand Goske and Council to the VOC directors (Chamber XVII) (Moodie, 1838, p. 325)",
+     "date": "10 May 1673",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    },
+    {
+     "text": "to take such revenge (resentiment) upon him Gonnema, and all who may with him have raised their hands against our men, that their posterity may retain the impression of fear, and may never again offend the Netherlanders.",
+     "who": "Resolution of the Cape Council under Governor Isbrand Goske, sending 36 Company men and 36 burghers against the Cochoqua chief Gonnema (Moodie, 1838, p. 327)",
+     "date": "11 July 1673",
+     "url": "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    }
+   ],
+   "today": [
+    {
+     "text": "For many, this hedge marks the first step on the road to Apartheid and symbolises how white South Africa cut itself off from the rest of Africa, dispossessed the indigenous people and kept the best of the resources for itself.",
+     "who": "South African National Biodiversity Institute (SANBI), Kirstenbosch National Botanical Garden, page on Van Riebeeck's Hedge",
+     "date": "current page, checked 5 November 2026",
+     "url": "https://www.sanbi.org/gardens/kirstenboch/history/kirstenbosch-nbg-van-riebeecks-hedge/"
+    },
+    {
+     "text": "We have chosen the life of our mother Krotoa, to signify the somehow uncelebrated role of women in shaping events that have crafted the destiny of our nation’s history",
+     "who": "Nosiviwe Mapisa-Nqakula, South African Minister of Defence and Military Veterans, unveiling a monument to Krotoa at the Castle of Good Hope (reported by Vuk'uzenzele, government newspaper)",
+     "date": "August 2016",
+     "url": "https://www.vukuzenzele.gov.za/honouring-south-african-heroine"
+    }
+   ],
+   "note": "Research in progress: all quotations come from Moodie's 1838 English translation, checked against the archive.org scan; they have not yet been compared with the Dutch original (Dagverhaal van Jan van Riebeeck) or with Leibbrandt's Precis.",
+   "warn": "Every Khoikhoi word here was spoken through interpreters (Krotoa, Doman, Autshumato), written down in Dutch by the Company's clerks and translated into English by Donald Moodie in 1838. The record calls the Khoikhoi 'Hottentoos' or 'Hottentots', a term now considered offensive; it is kept only inside quotations. OCR errors in the scan (e.g. 'Kerry' for 'Herry') were corrected against the page images.",
+   "disputed": [
+    [
+     "Cause of the first war. Van Riebeeck's journal calls the Khoikhoi raids cattle stolen 'wrongfully and without cause' and the land 'justly won by the sword in defensive warfare'; the Khoikhoi speakers it records put the cause in the loss of their grazing land, as does SAHO today. Wikipedia notes that the Khoisan's loss of influence is 'often seen' as their trading it away for livestock, against the view that their resistance was a response to dispossession.",
+     [
+      "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+      "https://www.sahistory.org.za/article/establishment-cape-and-its-impact-khoikhoi-and-dutch",
+      "https://en.wikipedia.org/wiki/Khoikhoi%E2%80%93Dutch_Wars"
+     ]
+    ],
+    [
+     "Bought or taken? The 1672 agreements record the Cape district and Hottentots Holland as sold for goods 'estimated' at 4000 reals each and delivered 'to his satisfaction'; Governor Goske's own despatch of 1673 values the goods at ƒ33 : 17 and ƒ81 : 16 prime cost. Moodie notes that the directors' 1660 suggestion of purchase was not carried out until about ten years later, and SAHO states that after the second war the VOC claimed the land by conquest.",
+     [
+      "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+      "https://www.sahistory.org.za/article/establishment-cape-and-its-impact-khoikhoi-and-dutch"
+     ]
+    ],
+    [
+     "Krotoa: go-between or collaborator? Doman called her 'the Hollander's advocate'; SAHO describes her as a staunch friend of the Dutch who was torn between them and her own people whose land was being taken; the South African government in 2016 honoured her as instrumental in working out the terms that ended the first war.",
+     [
+      "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt",
+      "https://www.sahistory.org.za/people/krotoa-eva",
+      "https://www.vukuzenzele.gov.za/honouring-south-african-heroine"
+     ]
+    ]
+   ],
+   "blind": "The Khoikhoi left no writing of their own: their arguments survive only as the VOC's clerks chose to record them, through interpreters whose own loyalties were questioned on both sides, and then in a 19th-century English translation. The man Willem Willems shot, the herd boy killed in 1653 (named only as David) and most Khoikhoi casualties are unnamed or uncounted; the Cochoqua side of the second war is almost silent, apart from envoys' names and their cry of 'Sam, Sam' (peace) when the 1677 terms were read to them.",
+   "reading": [
+    [
+     "D. Moodie, The Record (Cape Town, 1838), full text on archive.org",
+     "https://archive.org/stream/recordorseriesof00mood/recordorseriesof00mood_djvu.txt"
+    ],
+    [
+     "SAHO: Establishment of the Cape and its impact on Khoikhoi and Dutch",
+     "https://www.sahistory.org.za/article/establishment-cape-and-its-impact-khoikhoi-and-dutch"
+    ],
+    [
+     "SAHO: Krotoa (Eva)",
+     "https://www.sahistory.org.za/people/krotoa-eva"
+    ],
+    [
+     "SANBI: Kirstenbosch NBG, Van Riebeeck's Hedge",
+     "https://www.sanbi.org/gardens/kirstenboch/history/kirstenbosch-nbg-van-riebeecks-hedge/"
+    ],
+    [
+     "Wikipedia: Khoikhoi–Dutch Wars",
+     "https://en.wikipedia.org/wiki/Khoikhoi%E2%80%93Dutch_Wars"
+    ],
+    [
+     "Vuk'uzenzele: Honouring a South African heroine (2016)",
+     "https://www.vukuzenzele.gov.za/honouring-south-african-heroine"
+    ]
+   ]
+  },
+  {
+   "id": "lebanon1860",
+   "title": "The 1860 civil war in Mount Lebanon and the Damascus massacre",
+   "region": "Middle East",
+   "where": "Mount Lebanon and Damascus (pin: Deir al-Qamar, Lebanon, approximate)",
+   "lat": 33.7,
+   "lon": 35.56,
+   "from": 1858,
+   "to": 1861,
+   "themes": [
+    "War",
+    "Massacre",
+    "Uprising",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "In 1858 Tanyus Shahin, a Maronite peasant leader in Kasrawan, demanded that the feudal class of Mount Lebanon give up its privileges; when this was refused, the poor peasants revolted against the shaykhs, pillaging their land and burning their homes.",
+     "https://countrystudies.us/lebanon/18.htm"
+    ],
+    [
+     "In the spring of 1860 tit-for-tat killings spread through the mixed Christian–Druze districts; on 29 May Maronites from Keserwan raided mixed villages and forced out their Druze residents, and by 31 May Druze fighters controlled the Metn, where between 35 and 40 Maronite-majority villages were set alight and some 600 Maronites slain.",
+     "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+    ],
+    [
+     "At Hasbaya, where Christians had taken refuge in the government house on the Ottoman commander's advice and surrendered around 500 guns, Druze fighters killed about 1,000 Christian males, men and boys, while sparing the women; Christian deaths at Hasbaya and Rashaya together were roughly 1,800, and between 1,200 and 2,200 Christians were killed at Deir al-Qamar.",
+     "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+    ],
+    [
+     "In July 1860 a crowd of Druzes, Bedouins, Muslim city commoners and Kurdish auxiliary forces attacked Bab Tuma, the Christian quarter of Damascus, and some Ottoman soldiers joined or led the rioters; the Algerian exile Abd al-Qadir al-Jaza'iri had earlier persuaded the French consul to fund arms for about 1,000 of his men, mostly Algerians, to defend the Christians, and the violence tapered off completely by 17 July.",
+     "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+    ],
+    [
+     "The Ottoman envoy Fuad Pasha oversaw a court-martial alongside an international tribunal; Druze notables such as Sa'id Jumblatt were sentenced to death for rebellion, Ottoman and European sources record roughly 357 executions in Damascus, and a French expeditionary corps of 6,000 soldiers landed in Beirut on 16 August 1860.",
+     "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+    ],
+    [
+     "An international commission of France, Britain, Austria, Prussia and the Ottoman Empire, meeting from 5 October 1860, blamed the 1842 partition of Mount Lebanon for the massacre; under the Statute of 1861 Mount Lebanon was separated from Syria and placed under a non-Lebanese Christian governor (mutasarrif) appointed by the sultan with the powers' approval, assisted by a council of twelve members from the different religious communities.",
+     "https://countrystudies.us/lebanon/18.htm"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Their acts of violence towards us in killing our co-religionists, both secretly and openly, have become well known to all; their wish is evidently to compass our ruin and entire extermination. [...] so that we have now been reduced to the necessity of defending ourselves, and to seek, by all means in our power, for relief from the oppression and distress surrounding us from these foes, who seemed determined to exterminate us. We believe that we are justified in resorting to these extremes by all laws, natural, judicial, and administrative.",
+     "who": "The Christians of the Mixed Districts of Mount Lebanon, in a memorial to Khurshid Pasha, the Ottoman governor at Beirut, ten days before the war broke out; it also shows that the Christians were arming",
+     "date": "20 May 1860",
+     "doc": "Memorial from the Christians of the Mixed Districts in Mount Lebanon to Khorsheed Pasha, as reprinted from the British consular correspondence in J. Lewis Farley, The Massacres in Syria (London, 1861), pp. 131–133 (OCR corrected)",
+     "url": "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt",
+     "lic": "Public domain (published 1861)"
+    },
+    {
+     "text": "The woman in question at last turned round to the cadi in indignation and disgust, and said, \"You have forgot to ask me one important question, whether my husband went to heaven or to hell!\"",
+     "who": "A Christian widow at the Ottoman special tribunal at Mukhtara, after producing two witnesses to her husband's killing by a Druze and being questioned about the gun, the wound and how he fell, as recorded by Colonel Charles Churchill",
+     "date": "December 1860",
+     "doc": "Charles Churchill, The Druzes and the Maronites under the Turkish Rule from 1840 to 1860 (London, 1862), pp. 244–245",
+     "url": "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+     "lic": "Public domain (published 1862)"
+    },
+    {
+     "text": "These notables remitted, some days afterwards, to his Excellency, a list of the names of four thousand six hundred Druses, Mussulmans, and Metuâlis, inhabiting the Lebanon, the Anti-Lebanon, and the Haurân, and taken from among thirty thousand combatants, and not solely from among eight thousand Druses, as it is pretended [...] the undersigned bishops declare that they have never signed any such paper, and therefore that it would be impossible to produce it.",
+     "who": "The bishops of Beirut, Acre, Zahle and Baalbek (Tobia Aoun, Butros Boustani, Basil Chahiat, Malathios), answering Lord John Russell's statement in Parliament that they had demanded 4,600 executions, in a letter to the European commissioners",
+     "date": "10 March 1861",
+     "doc": "Letter of the bishops of Lebanon to the European commissioners at Beirut, in J. Lewis Farley, The Massacres in Syria (London, 1861), pp. 138–142 (OCR corrected)",
+     "url": "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt",
+     "lic": "Public domain (published 1861)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "But many of the Moslemin scorned to disown the Christians and provided them with excellent eatables and sent to them plenty of money for their expenses [to cover the expenses for their sustenance]. And in [the suburb of] al-Maydan were [lived] Saleh Agha al-Muhayiny and Sa'yd Agha an-Nury, companions of manliness and religion [doughty and righteous men], who forbade the Moslemin of al-Maydan to interfere with [undertake anything against] the followers of Jesus [Christians].",
+     "who": "Iskander ibn Ya'qub Abkarius, a Christian man of letters of Beirut, in his Arabic chronicle of the 1860 massacres, written at the time; English by J. F. Scheltema (the square brackets are the translator's) (a Beirut writer describing Damascus, so placed with the outside witnesses)",
+     "date": "1860s (translation published 1920)",
+     "doc": "Abkarius, Book of the Marvels of the Time concerning the Massacres in the Arab Country, tr. J. F. Scheltema, The Lebanon in Turmoil: Syria and the Powers in 1860 (New Haven: Yale University Press, 1920), p. 134 (OCR corrected)",
+     "url": "https://archive.org/stream/cu31924028522179/cu31924028522179_djvu.txt",
+     "lic": "Public domain in the US (published 1920)"
+    },
+    {
+     "text": "The Turkish soldiers came to assist them, under the pretence of putting an end to the disturbance, but making common cause with the rioters, and killing, robbing, and plundering with them. A few old Mussulmans made efforts to stop the business, but the Turkish officers had no wish for peace [...] Seeing matters were so desperate, I lost no time in taking under my protection these unfortunate Christians. I sallied forth, taking my Algerines with me, and we were able to save the lives of men, women, and children, and bring them home with us.",
+     "who": "The Emir Abd al-Qadir al-Jaza'iri, the exiled Algerian resistance leader living in Damascus, in a letter to the managers of a silk works, as printed in English translation in New York in 1860",
+     "date": "July 1860",
+     "url": "https://archive.org/stream/massacresinsyri00unkngoog/massacresinsyri00unkngoog_djvu.txt"
+    },
+    {
+     "text": "With the exception of the very lowest class, the settled Mussulman population of Damascus took no part in the slaughter of the Christians. On the contrary, ulemas, mollahs, and sheikhs of the different religious orders of Islamism, and many of the notables of the place, were active in saving Christian lives, wherever an opportunity of so doing offered itself.",
+     "who": "The Constantinople correspondent of the London Times, as reprinted in The Massacres in Syria (New York, 1860)",
+     "date": "1 August 1860",
+     "url": "https://archive.org/stream/massacresinsyri00unkngoog/massacresinsyri00unkngoog_djvu.txt"
+    },
+    {
+     "text": "I went to distribute clothing yesterday to one room; there were six women, all new made widows, with no male child or friend to comfort or care for them. Another room had five such widows. A friend of mine has taken nine women into his family, all widows, made such in the slaughter at Deir el Komr.",
+     "who": "William M. Thomson, American missionary at Beirut, in a letter printed in The Missionary Herald",
+     "date": "29 August 1860",
+     "url": "https://archive.org/stream/missionaryherald0056unse/missionaryherald0056unse_djvu.txt"
+    },
+    {
+     "text": "Several hundred Christians followed in the track of the French expedition, and committed some excesses. Wound up to a pitch of exasperation which knew no control at the complete impunity which had hitherto attended the cold-blooded barbarities of the Druzes, they slew, it is said, upwards of one hundred of them, including a few women.",
+     "who": "Charles Churchill, a British officer long resident in Lebanon, whose book is strongly hostile to the Ottoman authorities and the Druze chiefs, on Christian reprisals",
+     "date": "September 1860 (published 1862)",
+     "url": "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "\"Tell the Ambassador,\" said Fuad Pasha to the chief dragoman of the French Embassy, \"that at the peril of my life, I shall wipe out the stain which rests upon the honour of the army, and that the troops will do their duty.\"",
+     "who": "Fuad Pasha, Ottoman foreign minister and the Sultan's extraordinary commissioner for Syria, before sailing for Beirut, as recorded by the British writer J. Lewis Farley",
+     "date": "July 1860",
+     "url": "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt"
+    },
+    {
+     "text": "The plenipotentiary of the Sublime Porte takes note of this declaration of the representatives of the high contracting powers, and undertakes to transmit it to his court — pointing out — that the Sublime Porte has employed, and continues to employ, her efforts in the sense of the wish expressed above.",
+     "who": "The Ottoman plenipotentiary's reply in the Paris protocol, after the five European powers declared they sought no territorial advantage or exclusive influence and called for better conditions for the Sultan's Christian subjects, as quoted by Churchill",
+     "date": "3 August 1860",
+     "url": "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt"
+    },
+    {
+     "text": "The Maronites were armed, and the Druses, therefore, expected that they should be attacked. The Maronites, on the other hand, were apprehensive of being themselves attacked, and, being mutually animated by the most violent animosity, those massacres took place which we have all so much to lament. As an instance of the fierceness of the different races, I may mention that, according to the report of Lord Dufferin, Fuad Pasha having asked the Bishops of the different Christian sects how many of the 8,000 adult males in that part of the country ought, in their opinion, to be put to death in expiation of the massacres which had taken place, the Bishops, by their signatures to a paper, required that no less than 4,600 of the 8,000 should be executed",
+     "who": "Lord John Russell, British Foreign Secretary, in the House of Commons (Hansard); the bishops denied signing any such paper (see voices)",
+     "date": "8 February 1861",
+     "url": "https://api.parliament.uk/historic-hansard/commons/1861/feb/08/affairs-of-syria-question"
+    },
+    {
+     "text": "I have never interfered in any way whatever in the war. I have always done all I possibly could for the Christians. My constant endeavours have been to pacify and keep down the Druzes; but they wont listen to me. I have no power over my people. The commonest man among them disobeys my orders and laughs at my authority. I know all sorts of absurd reports have been spread about my being an influential person amongst the Druzes, and all the blame of what is happening has been laid most unjustly at my door.",
+     "who": "Sa'id Bey Jumblatt, the leading Druze chief, to an English envoy who brought the consuls' demand for peace, as recorded 'in nearly the following terms' by Charles Churchill, who did not believe him; Jumblatt was later sentenced to death by the Ottoman tribunal (the Druze leader's words as a hostile witness reported them, so placed with the official account)",
+     "date": "June 1860",
+     "doc": "Charles Churchill, The Druzes and the Maronites under the Turkish Rule (London, 1862), pp. 202–203 (OCR corrected)",
+     "url": "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+     "lic": "Public domain (published 1862)"
+    }
+   ],
+   "note": "Research in progress: the British Parliamentary Papers ('Correspondence relating to the Affairs of Syria, 1860–61') could not be opened in a checkable full-text copy (HathiTrust showed a bot check), so consular despatches are quoted only as reprinted by Farley (1861) and Churchill (1862). Mikhail Mishaqa's own English narrative of his escape, dated Damascus, August 1860, is printed in The Massacres in Syria (New York, 1860), but the scan's text is too garbled to verify word for word; his memoir in English (1988) is in copyright. No text of the Règlement Organique and no current government statement was quoted.",
+   "warn": "Abd al-Qadir's letter and Abkarius's chronicle are English translations from Arabic (1860 and 1920). Churchill and Farley were partisan British writers of the time: Churchill blames the Turks and the Druze chiefs, Farley defends the Maronites. Sa'id Jumblatt's words reach us only through Churchill, who says he gives them in 'nearly' his terms and disbelieved them. The texts describe massacres and the plight of widows; scanning errors have been corrected.",
+   "disputed": [
+    [
+     "Death tolls. The Library of Congress study speaks of about 10,000 Christians killed by the Druzes; Wikipedia says most sources put those killed in and around Mount Lebanon between 7,000 and 11,000, some over 20,000, and its summary gives 12,000 for Damascus. Churchill counted 11,000 Christians massacred and 4,000 dead of destitution. For Damascus, Abd al-Qadir's letter gave an estimate of 3,300, the Times correspondent reported consular figures of 6,000 to 8,000 against a private letter's 2,000, the missionary Thomson wrote of more than 5,000, and Abkarius put the dead at about 5,000.",
+     [
+      "https://countrystudies.us/lebanon/18.htm",
+      "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus",
+      "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+      "https://archive.org/stream/massacresinsyri00unkngoog/massacresinsyri00unkngoog_djvu.txt",
+      "https://archive.org/stream/missionaryherald0056unse/missionaryherald0056unse_djvu.txt",
+      "https://archive.org/stream/cu31924028522179/cu31924028522179_djvu.txt"
+     ]
+    ],
+    [
+     "Ottoman complicity. Churchill wrote that the Turks connived at, instigated, ordered and shared in the Damascus massacre, and Abd al-Qadir wrote that Turkish soldiers made common cause with the rioters; the Times correspondent believed the governor Ahmed Pasha sincere but utterly incapable. Wikipedia reports that some Ottoman soldiers joined or led the rioters and that Ottoman troops aided Druze and Muslim forces by direct support or by disarming Christians, while Fuad Pasha's executions of officials and rioters were praised even by his harshest European critics.",
+     [
+      "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+      "https://archive.org/stream/massacresinsyri00unkngoog/massacresinsyri00unkngoog_djvu.txt",
+      "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+     ]
+    ],
+    [
+     "Who started the war? Farley argued from the consuls' reports that the Maronites were not the aggressors; Russell told Parliament that both sides were armed and each feared attack. Churchill himself describes the Maronite peasant revolt against their own sheikhs and Christian reprisals in September 1860, and Wikipedia quotes the historian Ussama Makdisi that whether the Maronite mobilization was a response to Druze provocations or the cause of Druze aggression 'is not, and probably will never be, known'.",
+     [
+      "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt",
+      "https://api.parliament.uk/historic-hansard/commons/1861/feb/08/affairs-of-syria-question",
+      "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+     ]
+    ],
+    [
+     "Punishment and the 4,600 names. Russell, citing Lord Dufferin, said the bishops had signed a demand that 4,600 of 8,000 Druze men be executed; the bishops replied that lay notables had given Fuad Pasha a list of 4,600 accused on his own request, never a death list, and Churchill writes that after the Christian deputies withdrew, 500 Druze prisoners were released and about 240 exiled to Tripoli in Africa. In Parliament Sir James Fergusson said the Beirut trial of the Druze chiefs was 'perhaps, the grossest perversion of justice which history recorded'.",
+     [
+      "https://api.parliament.uk/historic-hansard/commons/1861/feb/08/affairs-of-syria-question",
+      "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt",
+      "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt"
+     ]
+    ],
+    [
+     "European motives. In the Paris protocol of 3 August 1860 the powers declared they sought no territorial advantage or exclusive influence; Wikipedia says France sent 6,000 soldiers to protect the Syrian Christians and to increase its own power in the region, and Churchill blamed British and Turkish jealousy for keeping the French from acting. Wikipedia also notes that Makdisi criticises European writers, Churchill among them, for presenting 1860 as 'age-old' sectarian hatred.",
+     [
+      "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+     ]
+    ]
+   ],
+   "blind": "The record is dominated by Christian sufferers, their bishops and their British, American and French sympathisers, and by the Ottoman and British officials who argued over punishment. The Druze peasants who fought, burned and were killed, and the Druze families who fled or were later attacked in reprisal, have no voice here except their chief, Sa'id Jumblatt, whose words reach us through a hostile Englishman. The Muslim townspeople of Damascus, both those who rioted and those who hid Christians, speak only through others; so do the hundreds hanged or shot on Fuad Pasha's orders. The women of Hasbaya, Deir al-Qamar and Damascus appear as widows counted by missionaries, and only one is heard, through Churchill.",
+   "reading": [
+    [
+     "Lebanon: Religious Conflicts (Library of Congress Country Study)",
+     "https://countrystudies.us/lebanon/18.htm"
+    ],
+    [
+     "1860 civil conflict in Mount Lebanon and Damascus (Wikipedia)",
+     "https://en.wikipedia.org/wiki/1860_civil_conflict_in_Mount_Lebanon_and_Damascus"
+    ],
+    [
+     "Charles Churchill, The Druzes and the Maronites under the Turkish Rule from 1840 to 1860 (1862, archive.org)",
+     "https://archive.org/stream/druzesmaronitesu00churuoft/druzesmaronitesu00churuoft_djvu.txt"
+    ],
+    [
+     "J. Lewis Farley, The Massacres in Syria (1861, archive.org)",
+     "https://archive.org/stream/massacresinsyri00farlgoog/massacresinsyri00farlgoog_djvu.txt"
+    ],
+    [
+     "Iskander Abkarius, The Lebanon in Turmoil, tr. J. F. Scheltema (1920, archive.org)",
+     "https://archive.org/stream/cu31924028522179/cu31924028522179_djvu.txt"
+    ],
+    [
+     "The Massacres in Syria (New York: De Witt, 1860, archive.org): Abd al-Qadir's letter and Mishaqa's narrative",
+     "https://archive.org/stream/massacresinsyri00unkngoog/massacresinsyri00unkngoog_djvu.txt"
+    ],
+    [
+     "House of Commons, 'Affairs of Syria', 8 February 1861 (Hansard)",
+     "https://api.parliament.uk/historic-hansard/commons/1861/feb/08/affairs-of-syria-question"
     ]
    ]
   }
