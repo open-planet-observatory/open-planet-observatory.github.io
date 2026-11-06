@@ -1082,3 +1082,9 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 .st-card .st-x{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:999px;border:1px solid var(--glass-line);background:none;color:var(--ink-2);font-size:1.05rem;line-height:1;cursor:pointer}
 .st-card .st-x:hover{color:var(--ink);background:var(--glass-2)}
 .st-card .st-n{padding-right:30px}
+
+/* Globe and Flat views have no imagery or lighting (they belong to the 3D globe): show a note instead */
+#imgGroup .img2d{display:none;margin:4px 0 2px}
+html.map2d #imgGroup .img2d{display:block}
+html.map2d #imgGroup > :not(.gl):not(.img2d){display:none!important}
+html.map2d .rail-light{display:none!important}
