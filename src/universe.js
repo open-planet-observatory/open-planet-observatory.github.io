@@ -91,7 +91,7 @@ async function build() {
      <details class="uni-credits"><summary>Sources and credits</summary><p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Nearby galaxies: NASA/IPAC NED-D distances and NED positions; names, sizes: Wikipedia/Wikidata · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Cosmic web: 2MASS Redshift Survey (Huchra et al. 2012) via NASA HEASARC; clusters: NASA/IPAC NED · Constellation figures: d3-celestial · Sun's motion: Schönrich, Binney &amp; Dehnen 2010; Reid et al. 2019</p></details>
     </details>
    </div>
-   <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div><p class="uni-light" id="uniLight" hidden></p><div class="uni-drift-note" id="uniDrift" hidden><p id="uniDriftTxt"></p><button type="button" class="chip" id="uniDriftInfo" aria-expanded="false">ⓘ The spiral myth</button><div class="uni-drift-card" id="uniDriftCard" hidden></div></div>
+   <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div><p class="uni-light" id="uniLight" hidden></p><div class="uni-drift-note" id="uniDrift" hidden><p id="uniDriftTxt"></p><button type="button" class="chip" id="uniDriftFly" aria-pressed="false" title="Glide alongside the Sun while time runs forward (90 days a second), so the spirals grow">▶ Fly alongside</button> <button type="button" class="chip" id="uniDriftInfo" aria-expanded="false">ⓘ The spiral myth</button><div class="uni-drift-card" id="uniDriftCard" hidden></div></div>
    <div class="sat-card uni-card uni-sndlist" id="uniSndList" hidden></div>
    <div class="uni-player" id="uniPlayer" hidden role="region" aria-label="Now playing"></div>
    <div class="sat-card uni-card" id="uniCard" hidden></div>
@@ -180,13 +180,13 @@ async function build() {
   root.querySelector('#uniNeo').onclick = () => neoCard();
   if (!S.solar) { const b = root.querySelector('[data-goto="Voyager 1"]'); if (b) { b.disabled = true; b.title = 'JPL spacecraft data did not arrive, so there is nothing to fly to'; } root.querySelectorAll('[data-show="craft"],[data-show="comets"]').forEach(c => { c.disabled = true; c.closest('label').title = 'JPL data did not arrive today'; }); }
   // click to select
-  let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
+  let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; if (S.drift && S.drift.fly && !S.tour) flyStop(); });
   canvas.addEventListener('pointerup', e => { if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return; const r = canvas.getBoundingClientRect(); const far = camera.position.length() >= 1.5e15; const hit = far ? S.objs.find(o => o.edge) : pick(e.clientX - r.left, e.clientY - r.top); if (hit) focusOn(hit, true); }); /* out at the edge, every tap is on the edge: no planet picking */
   /* Wheel and trackpad zoom are eased here instead of in OrbitControls: each notch adds to a target, and the camera glides
      there over ~150 ms, scaling about the point under the pointer (pinch on touch screens still goes through OrbitControls). */
   root.addEventListener('wheel', e => { if (e.target !== canvas) return; e.preventDefault(); e.stopPropagation();
     let dy = e.deltaY * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? 400 : 1); if (e.ctrlKey) dy *= 4; dy = Math.max(-240, Math.min(240, dy));
-    const now = performance.now(); S._lastInput = now; if (S.tour) stopTour(); S.anim = null;
+    const now = performance.now(); S._lastInput = now; if (S.tour) stopTour(); S.anim = null; flyStop();
     if (dy < 0) S._zoomIn = now;
     if (dy < 0 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { closeUniverse(); return; }
     const z = S.zoom || (S.zoom = { v: 0, x: 0, y: 0 }); z.v = Math.max(-3, Math.min(3, z.v + dy * 0.0021)); z.x = e.clientX; z.y = e.clientY; }, { capture: true, passive: false });
@@ -448,7 +448,7 @@ function tourSteps() { const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.
   { earth: true, ms: 2500, hold: 4000, cap: 'Home: Earth, lit by the Sun as it is right now. Hold on.' },
   { dist: 0.025, ms: 3000, hold: 4500, cap: sunOk ? "This is our Sun, as NASA's Solar Dynamics Observatory saw it today in ultraviolet light." : 'This is our Sun, an ordinary star.' },
   { dist: 45, ms: 5000, hold: 4500, cap: 'Eight planets circle it. Sunlight reaches Earth in about 8 minutes, and Neptune in about 4 hours.' },
-  { drift: true, ms: 10, hold: 9000, cap: "The Sun isn't standing still: it carries the planets around the galaxy at about 247 km/s. Slowed down 100 times here, each planet's path becomes a long, leaning spiral." },
+  { drift: true, ms: 10, hold: 12000, cap: "The Sun isn't standing still: it carries the planets around the galaxy at about 247 km/s. Slowed down 100 times here, each planet's path becomes a long, leaning spiral." },
   { dist: 3.5e5, ms: 5500, hold: 5000, cap: 'The nearest stars are more than 4 light-years away. From here, the whole Solar System is smaller than a pixel.' },
   { dist: 7e6, ms: 5500, hold: 5500, cap: 'Within about 100 light-years are thousands of stars, including many of the brightest in our night sky: Sirius, Vega, Arcturus.' },
   { dist: 2.5e8, ms: 6000, hold: 6000, cap: "These are about a million stars whose distances ESA's Gaia spacecraft measured. Even they fill only a small corner of the galaxy." },
@@ -464,7 +464,7 @@ function startTour() { stopTour(); S.tour = { i: -1 }; ui.root.classList.add('to
 function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); if (S.tour.drift) driftSet('', 1); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Tour Universe'; caption(''); }
 function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { stopTour(); caption('That is the end of the tour. Drag to look around, click the edge to read about it, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } const st = steps[tr.i]; caption(st.cap);
   if (tr.drift && !st.drift) { tr.drift = false; driftSet('', 1); } /* the tour's spiral step hands the view back as it was */
-  if (st.drift) { tr.drift = true; driftSet('gal', 100); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
+  if (st.drift) { tr.drift = true; driftSet('gal', 100); flyStart(); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
 // ---------- loop, open, close ----------
@@ -491,33 +491,56 @@ function driftVec(mode) { const g = DRIFT_V[mode]; const R = A.Rotation_GAL_EQJ(
 function driftWire(root) { S.drift = { mode: '', sq: 1, lines: [], t: 0, key: '' };
   root.querySelectorAll('[data-drift]').forEach(b => b.onclick = () => driftSet(b.dataset.drift, S.drift.sq));
   root.querySelectorAll('[data-sq]').forEach(b => b.onclick = () => driftSet(S.drift.mode, +b.dataset.sq));
+  root.querySelector('#uniDriftFly').onclick = () => S.drift.fly ? flyStop() : flyStart();
   root.querySelector('#uniDriftInfo').onclick = () => { const c = root.querySelector('#uniDriftCard'), b = root.querySelector('#uniDriftInfo'); c.hidden = !c.hidden; b.setAttribute('aria-expanded', String(!c.hidden)); if (!c.hidden) driftCard(); }; }
 function driftSet(mode, sq) { const D = S.drift, was = D.mode; D.mode = mode; D.sq = sq; D.key = '';
   ui.root.querySelectorAll('[data-drift]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drift === mode)));
   ui.root.querySelectorAll('[data-sq]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.sq === sq)));
   ui.root.querySelector('#uniDriftSq').hidden = !mode; ui.root.querySelector('#uniDrift').hidden = !mode;
-  if (!mode) { D.lines.forEach(l => { S.scene.remove(l); l.geometry.dispose(); l.material.dispose(); }); D.lines = []; S.groups.orbits.visible = S.show.orbits; D.hideOrb = false; return; }
+  if (!mode) { flyStop(); D.lines.forEach(l => { S.scene.remove(l); l.geometry.dispose(); l.material.dispose(); }); D.lines = []; S.groups.orbits.visible = S.show.orbits; D.hideOrb = false; return; }
   D.hideOrb = true; /* the still ellipses would mislead next to moving paths */
   if (mode !== was) { const v = driftVec(mode).u, side = new T.Vector3(v[1], -v[0], 0).normalize(); if (side.lengthSq() < 1e-6) side.set(1, 0, 0); /* look at the trails from the side and a little above */
     const L = Math.max(6, 365.25 * DRIFT_ORBITS * driftVec(mode).sp * KMS_AU_DAY / sq) * 0.55, dir = new T.Vector3(...v).multiplyScalar(-L * 0.5); const tgt = dir.clone();
     const cam = tgt.clone().add(side.multiplyScalar(L * 1.1)).add(new T.Vector3(0, 0, L * 0.45)); S.focus = null; flyCam(cam, tgt); } }
 function flyCam(cam, tgt) { const c0 = S.camera.position.clone(), t0 = S.controls.target.clone(), t1 = performance.now(), dur = RM() ? 0 : 1600;
   S.anim = now => { const k = dur ? Math.min(1, (now - t1) / dur) : 1, e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; S.camera.position.lerpVectors(c0, cam, e); S.controls.target.lerpVectors(t0, tgt, e); if (k >= 1) S.anim = null; }; }
-function driftUpdate(camAU) { const D = S.drift; if (!D || !D.mode) return; if (D.hideOrb) S.groups.orbits.visible = false;
-  const now = performance.now(), key = D.mode + D.sq; if (D.key === key && (now - D.t < 400 || Math.abs(simMs - D.ms) < 864e5 * 0.5)) return;
-  D.t = now; D.key = key; D.ms = simMs; const dv = driftVec(D.mode), v = dv.u.map(x => x * dv.sp * KMS_AU_DAY / D.sq); /* AU per day */
-  if (!D.lines.length) { for (const [name, , colour] of PLANETS.slice(0, 8)) { const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(DRIFT_PTS * DRIFT_ORBITS * 3), 3)); g.setAttribute('color', new T.BufferAttribute(new Float32Array(DRIFT_PTS * DRIFT_ORBITS * 3), 3));
-      const l = new T.Line(g, new T.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.95, blending: T.AdditiveBlending, depthWrite: false })); l.frustumCulled = false; l.userData = { name, colour: new T.Color(colour) }; S.scene.add(l); D.lines.push(l); }
-    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(6), 3)); const sl = new T.Line(g, new T.LineDashedMaterial({ color: 0xffd166, dashSize: 1, gapSize: 1, transparent: true, opacity: 0.55 })); sl.frustumCulled = false; sl.userData = { sun: true }; S.scene.add(sl); D.lines.push(sl); }
-  const n = DRIFT_PTS * DRIFT_ORBITS; let maxSpan = 0;
-  for (const l of D.lines) { if (l.userData.sun) continue; const per = PLANETS.find(p => p[0] === l.userData.name)[3], span = per * DRIFT_ORBITS; maxSpan = Math.max(maxSpan, span);
-    const pos = l.geometry.attributes.position.array, col = l.geometry.attributes.color.array, c = l.userData.colour;
-    for (let i = 0; i < n; i++) { const back = span * (1 - i / (n - 1)), d = new Date(simMs - back * 864e5); const h = helio(l.userData.name, d); const k = i * 3;
-      pos[k] = h[0] - v[0] * back; pos[k + 1] = h[1] - v[1] * back; pos[k + 2] = h[2] - v[2] * back; const f = 0.12 + 0.88 * (i / (n - 1)); col[k] = c.r * f; col[k + 1] = c.g * f; col[k + 2] = c.b * f; }
-    l.geometry.attributes.position.needsUpdate = true; l.geometry.attributes.color.needsUpdate = true; }
-  const sl = D.lines.find(l => l.userData.sun), sp = sl.geometry.attributes.position.array, tail = Math.min(maxSpan, 365.25 * 40); sp[3] = -v[0] * tail; sp[4] = -v[1] * tail; sp[5] = -v[2] * tail; sl.geometry.attributes.position.needsUpdate = true; sl.computeLineDistances(); sl.material.dashSize = sl.material.gapSize = Math.hypot(sp[3], sp[4], sp[5]) / 80;
+/* Trails keep a rolling buffer of real positions (Astronomy Engine), one sample every 1/150 of the planet's orbit, appended
+   as time runs and dropped after three orbits; each frame the buffer is redrawn as p(t) − v·(now − t), so time can run
+   (Fly alongside) without recomputing every point. */
+function driftDV(D) { if (!D.dv || D.dvMode !== D.mode) { D.dv = driftVec(D.mode); D.dvMode = D.mode; } return D.dv; }
+function driftLines(D) { const N = DRIFT_PTS * DRIFT_ORBITS + 8;
+  for (const [name, , colour, per] of PLANETS.slice(0, 8)) { const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(N * 3), 3)); g.setAttribute('color', new T.BufferAttribute(new Float32Array(N * 3), 3));
+    const l = new T.Line(g, new T.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.95, blending: T.AdditiveBlending, depthWrite: false })); l.frustumCulled = false; l.userData = { name, per, colour: new T.Color(colour), t: [], h: [] }; S.scene.add(l); D.lines.push(l); }
+  const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(6), 3)); const sl = new T.Line(g, new T.LineDashedMaterial({ color: 0xffd166, dashSize: 1, gapSize: 1, transparent: true, opacity: 0.55 })); sl.frustumCulled = false; sl.userData = { sun: true }; S.scene.add(sl); D.lines.push(sl); }
+function driftUpdate(dt, camAU) { const D = S.drift; if (!D || !D.mode) return; if (D.hideOrb) S.groups.orbits.visible = false;
+  if (!D.lines.length) driftLines(D);
+  const dv = driftDV(D), v = dv.u.map(x => x * dv.sp * KMS_AU_DAY / D.sq), N = DRIFT_PTS * DRIFT_ORBITS + 8; let maxSpan = 0;
+  for (const l of D.lines) { const U = l.userData; if (U.sun) continue; const span = U.per * DRIFT_ORBITS * 864e5, step = U.per / DRIFT_PTS * 864e5; maxSpan = Math.max(maxSpan, span);
+    const T0 = U.t, H = U.h, last = T0.length ? T0[T0.length - 1] : -Infinity;
+    if (!T0.length || simMs < last - step || simMs - last > span) { T0.length = 0; H.length = 0; for (let k = DRIFT_PTS * DRIFT_ORBITS; k >= 0; k--) { const t = simMs - k * step; T0.push(t); H.push(helio(U.name, new Date(t))); } }
+    else { let t = last + step; while (t <= simMs) { T0.push(t); H.push(helio(U.name, new Date(t))); t += step; } while (T0.length > 2 && T0[0] < simMs - span) { T0.shift(); H.shift(); } }
+    const pos = l.geometry.attributes.position.array, col = l.geometry.attributes.color.array, c = U.colour, n = Math.min(T0.length, N - 1);
+    for (let i = 0; i < n; i++) { const back = (simMs - T0[i]) / 864e5, h = H[i], k = i * 3; pos[k] = h[0] - v[0] * back; pos[k + 1] = h[1] - v[1] * back; pos[k + 2] = h[2] - v[2] * back;
+      const f = 0.12 + 0.88 * (i / n); col[k] = c.r * f; col[k + 1] = c.g * f; col[k + 2] = c.b * f; }
+    const o = S.byName[U.name], hp = o && o.pos ? o.pos : helio(U.name, new Date(simMs)), k = n * 3; pos[k] = hp[0]; pos[k + 1] = hp[1]; pos[k + 2] = hp[2]; col[k] = c.r; col[k + 1] = c.g; col[k + 2] = c.b; /* the line ends at the planet */
+    l.geometry.setDrawRange(0, n + 1); l.geometry.attributes.position.needsUpdate = true; l.geometry.attributes.color.needsUpdate = true; }
+  const sl = D.lines.find(l => l.userData.sun), sp = sl.geometry.attributes.position.array, tail = Math.min(maxSpan / 864e5, 365.25 * 40);
+  if (sp[3] !== -v[0] * tail) { sp[3] = -v[0] * tail; sp[4] = -v[1] * tail; sp[5] = -v[2] * tail; sl.geometry.attributes.position.needsUpdate = true; sl.computeLineDistances(); sl.material.dashSize = sl.material.gapSize = Math.hypot(sp[3], sp[4], sp[5]) / 80; }
+  if (D.fly) flyFrame(dt, dv.u);
+  const key = D.mode + D.sq + (D.fly ? 'f' : ''); if (D.key === key) return; D.key = key;
   const yr = dv.sp * KMS_AU_DAY * 365.25 / D.sq, el = document.getElementById('uniDriftTxt');
-  if (el) el.innerHTML = `↻ ${D.mode === 'gal' ? `Moving with the galaxy: the Sun travels about ${dv.sp.toFixed(0)} km/s around the Milky Way's centre` : `Moving past the stars around us: the Sun travels about ${dv.sp.toFixed(0)} km/s relative to them`}, toward ${esc(dv.con)}. ${D.sq === 1 ? 'Real speeds' : `The Sun's motion is shown ${D.sq.toLocaleString('en-US')} times slower than real so the coils show; the planets move at their true speed`}: in one year the Sun goes ${yr < 10 ? yr.toFixed(1) : Math.round(yr).toLocaleString('en-US')} AU, while Earth swings 1 AU either side. Each line is a planet's last three orbits.`; }
+  if (el) el.innerHTML = `↻ ${D.mode === 'gal' ? `Moving with the galaxy: the Sun travels about ${dv.sp.toFixed(0)} km/s around the Milky Way's centre` : `Moving past the stars around us: the Sun travels about ${dv.sp.toFixed(0)} km/s relative to them`}, toward ${esc(dv.con)}. ${D.sq === 1 ? 'Real speeds' : `The Sun's motion is shown ${D.sq.toLocaleString('en-US')} times slower than real so the coils show; the planets move at their true speed`}: in one year the Sun goes ${yr < 10 ? yr.toFixed(1) : Math.round(yr).toLocaleString('en-US')} AU, while Earth swings 1 AU either side. Each line is a planet's last three orbits.${D.fly ? ' Time is running 90 days a second.' : ''}`; }
+/* Fly alongside: time runs forward and the camera glides around the Sun's direction of travel, looking back along the
+   trails, framed to take in the planets out to Jupiter. Any drag, scroll or the button stops it. */
+const FLY_RATE = 90, FLY_DIST = 16;
+function flyStart() { const D = S.drift; if (!D || !D.mode) return; D.fly = { th: 0.6, eased: 0 }; S.focus = null; S.anim = null; rate = FLY_RATE;
+  ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', 'false')); const b = document.getElementById('uniDriftFly'); if (b) { b.textContent = '■ Stop flying'; b.setAttribute('aria-pressed', 'true'); } D.key = ''; }
+function flyStop() { const D = S && S.drift; if (!D || !D.fly) return; D.fly = null; rate = 0; simMs = Date.now();
+  ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', String(x.dataset.rate === '0'))); const b = document.getElementById('uniDriftFly'); if (b) { b.textContent = '▶ Fly alongside'; b.setAttribute('aria-pressed', 'false'); } D.key = ''; }
+function flyFrame(dt, u) { const F = S.drift.fly; F.th += dt * (RM() ? 0 : 0.07); F.eased = Math.min(1, F.eased + dt * 0.45);
+  const U = new T.Vector3(...u), a = new T.Vector3(0, 0, 1).cross(U); if (a.lengthSq() < 1e-6) a.set(1, 0, 0); a.normalize(); const b = U.clone().cross(a).normalize();
+  const tgt = U.clone().multiplyScalar(-FLY_DIST * 0.18), cam = tgt.clone().add(a.multiplyScalar(Math.cos(F.th) * FLY_DIST)).add(b.multiplyScalar(Math.sin(F.th) * FLY_DIST)).add(U.clone().multiplyScalar(FLY_DIST * 0.55));
+  const k = F.eased < 1 ? 1 - Math.exp(-dt * 2.2) : 1; S.camera.position.lerp(cam, k); S.controls.target.lerp(tgt, k); }
 function driftCard() { const c = document.getElementById('uniDriftCard'), g = driftVec('gal'), l = driftVec('lsr'), yr = x => Math.round(x.sp * KMS_AU_DAY * 365.25);
   c.innerHTML = `<p><b>Do the planets spiral behind the Sun?</b> In a frame where the Sun moves, every planet's ellipse is stretched into a helix: that part of the popular "vortex" animations is right. Three things in them are not:</p>
   <ol><li><b>The tilt and the trailing.</b> The Sun does not lead with the planets trailing behind it like a comet's tail: it stays at the centre of every coil, because each planet keeps circling it. And the planets' orbits are not square-on to the Sun's path. Measured here, the Sun's path around the galaxy is at about ${Math.round(Math.abs(g.tilt))}° to the plane of the planets' orbits, not 90°, so the coils lean; its path past nearby stars is at about ${Math.round(Math.abs(l.tilt))}°.</li>
@@ -609,7 +632,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
       const dir = V().set(mx * tf * S.camera.aspect, my * tf, -1).normalize().transformDirection(S.camera.matrixWorld), view = t.clone().sub(c).normalize(); const cosA = dir.dot(view); if (cosA > 0.2) P = c.clone().add(dir.multiplyScalar(d / cosA)); } }
     if (isFinite(k) && k > 0) { t.sub(P).multiplyScalar(k).add(P); c.sub(P).multiplyScalar(k).add(P); } if (Math.abs(z.v) <= 1e-4) z.v = 0; }
   const camAU = S.camera.position.length();
-  lightUpdate(dt, camAU); driftUpdate(camAU);
+  lightUpdate(dt, camAU); driftUpdate(dt, camAU);
   if (camAU > 3e11) ensureCosmos(); if (COS) COS.update(camAU);
   if (window.OwlMusic) OwlMusic.setScale((Math.log10(Math.max(camAU, 1e-4)) + 3.2) / 19.05); /* the score darkens with distance: 0 at Earth, 1 at the edge */
   /* far out and left alone, the web turns slowly, like a model on a stand; any touch stops it */
