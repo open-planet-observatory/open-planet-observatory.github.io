@@ -619,8 +619,10 @@ function sndList() { const el = document.getElementById('uniSndList'), btn = doc
 function sndWire(root) { root.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-snd]'); if (b) { e.preventDefault(); sndPlay(b.dataset.snd); } });
   const btn = root.querySelector('#uniSndBtn'); if (btn) { btn.hidden = true; btn.onclick = () => sndLoad().then(sndList); } sndLoad(); }
 
-function frame(now) { if (!open) return; requestAnimationFrame(frame);
-  const dt = lastFrame ? Math.min(0.1, (now - lastFrame) / 1000) : 0; lastFrame = now; if (rate) simMs += rate * DAY * dt; else simMs = Date.now();
+/* Recording (only with ?rec in the address): the maintainer's video tool steps frames at a fixed rate instead of real time */
+const REC = { on: /[?&]rec\b/.test(location.search), manual: false, stepping: false, dt: 1 / 30 };
+function frame(now) { if (!open) return; if (!REC.stepping) requestAnimationFrame(frame); if (REC.manual && !REC.stepping) return;
+  const dt = REC.stepping ? REC.dt : lastFrame ? Math.min(0.1, (now - lastFrame) / 1000) : 0; lastFrame = now; if (rate) simMs += rate * DAY * dt; else if (!REC.manual) simMs = Date.now();
   const prevFocus = S.focus && (S.focus.shown || S.focus.pos) ? V().fromArray(S.focus.shown || S.focus.pos) : null;
   update();
   if (S.anim) S.anim(now); else if (S.focus && prevFocus) { const p = S.focus.shown || S.focus.pos; if (p) { const d = V().fromArray(p).sub(prevFocus); S.camera.position.add(d); S.controls.target.add(d); } }
@@ -637,7 +639,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
   if (window.OwlMusic) OwlMusic.setScale((Math.log10(Math.max(camAU, 1e-4)) + 3.2) / 19.05); /* the score darkens with distance: 0 at Earth, 1 at the edge */
   /* far out and left alone, the web turns slowly, like a model on a stand; any touch stops it */
   S.controls.autoRotate = camAU > 2e13 && !S.anim && !S.focus && !S.tour && !S._jr && !RM() && now - Math.max(S._lastInput || 0, S._rotHold || 0) > 6000; S.controls.autoRotateSpeed = 0.22;
-  const near = camAU < 2e5; S.groups.bodies.visible = near; S.groups.orbits.visible = near && S.show.orbits; S.groups.craft.visible = near && S.show.craft; S.groups.comets.visible = near && S.show.comets; /* light-years out, the planets are a speck: the Sun's star point stands in */
+  const near = camAU < 2e5; S.groups.bodies.visible = near; S.groups.orbits.visible = near && S.show.orbits && !(S.drift && S.drift.hideOrb); /* the still ellipses would mislead next to the moving paths */ S.groups.craft.visible = near && S.show.craft; S.groups.comets.visible = near && S.show.comets; /* light-years out, the planets are a speck: the Sun's star point stands in */
   if (STARS) { STARS.update(camAU); if (camAU > 2000) STARS.loadGaia().catch(e => console.warn('Gaia stars', e)); }
   const tt = camAU < 3000 ? 'The Solar System, now' : camAU < 2e8 ? 'The stars around us' : camAU < 6e10 ? 'The Milky Way' : camAU < 1.1e13 ? 'Our galactic neighbourhood' : camAU < 1e15 ? 'The cosmic web' : 'The observable universe'; if (ui.title && ui.title.textContent !== tt) ui.title.textContent = tt; if (ui.date) { const hd = camAU > 2e5; if (ui.date.hidden !== hd) ui.date.hidden = hd; } /* the clock matters among the planets, not across the galaxy */
   S.controls.update();
@@ -689,6 +691,8 @@ async function openUniverse(dest) {
 }
 function flyToHost(name) { const norm = t => String(t).toLowerCase().replace(/centauri/g, 'cen').replace(/[^a-z0-9]/g, ''); const k = norm(name); const o = S.objs.find(x => x.host && x.name === name) || S.objs.find(x => x.host && norm(x.name) === k) || S.objs.find(x => x.star && x.name && (norm(x.name) === k || k.startsWith(norm(x.name)) || (x.desig && norm(x.desig) === k))); if (!o) { const n = document.getElementById('uniNote'); if (n) { n.hidden = false; n.textContent = name + ' is not in the star view (its distance may be missing from NASA\u2019s list).'; } return; }
   S.show.exo = true; const cb = ui.root.querySelector('[data-show="exo"]'); if (cb) cb.checked = true; focusOn(o, true); }
+if (REC.on) window.__uniRec = { manual: on => { REC.manual = on; }, step: (dt = 1 / 30) => { REC.stepping = true; REC.dt = dt; try { frame(performance.now()); } finally { REC.stepping = false; } },
+  drift: (mode, sq) => driftSet(mode, sq), fly: on => on ? flyStart() : flyStop(), rate: r => { rate = r; }, time: ms => { simMs = ms; }, clean: on => ui.setClean(on), cap: t => caption(t), cam: (p, t) => { S.focus = null; S.anim = null; S.camera.position.set(...p); S.controls.target.set(...t); }, light: on => { S.show.light = on; }, state: () => ({ simMs, rate, cam: S.camera.position.toArray(), drift: S.drift && S.drift.mode }) };
 function closeUniverse() { if (!open) return; stopTour(); sndStop(); { const sl = document.getElementById('uniSndList'); if (sl) sl.hidden = true; } if (window.OwlMusic) OwlMusic.setScale(0, true); if (ui.setClean) ui.setClean(false); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
   setTimeout(() => { const g = window.__obs3d; let gl = null; try { if (g && g.viewer) { gl = sceneToGlobe(new Date(simMs)); g.viewer.camera.setView({ destination: window.Cesium.Cartesian3.fromDegrees(gl.lon, gl.lat, gl.h) }); g.viewer.useDefaultRenderLoop = true; } } catch (x) { gl = null; } /* the globe takes over from the same place */
     open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 500);
