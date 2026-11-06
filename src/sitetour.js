@@ -47,10 +47,10 @@
       else { x = Math.min(Math.max(12, r.left), W - cw - 12); y = Math.max(12, r.top - ch - 16); } }
     card.style.left = Math.round(x) + 'px'; card.style.top = Math.round(y) + 'px'; }
   function show() { const st = STEPS[i]; if (st.prep) try { st.prep(); } catch (e) { }
-    card.innerHTML = `<div class="st-n">Tour Site · ${i + 1} of ${STEPS.length}</div><h3 id="stTitle">${st.title}</h3><p>${st.body}</p>
+    card.innerHTML = `<button class="st-x" type="button" aria-label="End the tour" title="End the tour (Esc)">×</button><div class="st-n">Tour Site · ${i + 1} of ${STEPS.length}</div><h3 id="stTitle">${st.title}</h3><p>${st.body}</p>
       <div class="st-row"><div class="st-dots" aria-hidden="true">${STEPS.map((_, k) => `<i class="${k === i ? 'on' : ''}"></i>`).join('')}</div><span class="st-sp"></span>
       ${i ? '<button class="st-back">Back</button>' : '<button class="st-skip">Skip</button>'}<button class="st-next">${i === STEPS.length - 1 ? 'Done' : 'Next'}</button></div>`;
-    const b = card.querySelector('.st-back'), s = card.querySelector('.st-skip'); if (b) b.onclick = () => go(-1); if (s) s.onclick = end; card.querySelector('.st-next').onclick = () => go(1);
+    const b = card.querySelector('.st-back'), s = card.querySelector('.st-skip'); if (b) b.onclick = () => go(-1); if (s) s.onclick = end; card.querySelector('.st-x').onclick = end; /* an × on every step, so the tour can be left at any time (the maintainer, 6 Nov 2026) */ card.querySelector('.st-next').onclick = () => go(1);
     setTimeout(() => { place(); card.querySelector('.st-next').focus({ preventScroll: true }); }, st.prep ? 380 : 30); /* let a panel finish opening before measuring it */ }
   function go(d) { const n = i + d; if (n >= STEPS.length) return end(); if (n < 0) return; i = n; show(); }
   function end() { [shade, card, catcher].forEach(e => e && e.remove()); shade = card = catcher = null; removeEventListener('keydown', keyH, true); removeEventListener('resize', resH); if (prevFocus && prevFocus.focus) prevFocus.focus({ preventScroll: true }); }

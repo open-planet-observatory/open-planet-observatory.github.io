@@ -448,6 +448,7 @@ function tourSteps() { const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.
   { earth: true, ms: 2500, hold: 4000, cap: 'Home: Earth, lit by the Sun as it is right now. Hold on.' },
   { dist: 0.025, ms: 3000, hold: 4500, cap: sunOk ? "This is our Sun, as NASA's Solar Dynamics Observatory saw it today in ultraviolet light." : 'This is our Sun, an ordinary star.' },
   { dist: 45, ms: 5000, hold: 4500, cap: 'Eight planets circle it. Sunlight reaches Earth in about 8 minutes, and Neptune in about 4 hours.' },
+  { drift: true, ms: 10, hold: 9000, cap: "The Sun isn't standing still: it carries the planets around the galaxy at about 247 km/s. Slowed down 100 times here, each planet's path becomes a long, leaning spiral." },
   { dist: 3.5e5, ms: 5500, hold: 5000, cap: 'The nearest stars are more than 4 light-years away. From here, the whole Solar System is smaller than a pixel.' },
   { dist: 7e6, ms: 5500, hold: 5500, cap: 'Within about 100 light-years are thousands of stars, including many of the brightest in our night sky: Sirius, Vega, Arcturus.' },
   { dist: 2.5e8, ms: 6000, hold: 6000, cap: "These are about a million stars whose distances ESA's Gaia spacecraft measured. Even they fill only a small corner of the galaxy." },
@@ -460,9 +461,10 @@ function caption(t) { const c = document.getElementById('uniCap'); if (!c) retur
 function startTour() { stopTour(); S.tour = { i: -1 }; ui.root.classList.add('touring'); document.getElementById('uniTour').textContent = '■ Stop the tour';
   rate = 0; simMs = Date.now(); ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x.dataset.rate === '0'));
   S.focus = null; ui.card.hidden = true; document.getElementById('uniNeoCard').hidden = true; nextStep(); }
-function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Tour Universe'; caption(''); }
+function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); if (S.tour.drift) driftSet('', 1); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Tour Universe'; caption(''); }
 function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { stopTour(); caption('That is the end of the tour. Drag to look around, click the edge to read about it, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } const st = steps[tr.i]; caption(st.cap);
-  if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
+  if (tr.drift && !st.drift) { tr.drift = false; driftSet('', 1); } /* the tour's spiral step hands the view back as it was */
+  if (st.drift) { tr.drift = true; driftSet('gal', 100); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
 // ---------- loop, open, close ----------
@@ -530,8 +532,14 @@ function lightInit() { if (S.light) return; const g = new T.BufferGeometry(); co
   S.light = { L, g, pos, col, p: new Float64Array(LIGHT_N * 3), age: new Float32Array(LIGHT_N), life: new Float32Array(LIGHT_N), R: 0, c: [0, 0, 0], key: '', rate: lightRate() };
   const seg = ui.root.querySelector('#uniLightRate'); if (seg) { const sync = () => seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.lr === S.light.rate)));
     seg.querySelectorAll('button').forEach(b => b.onclick = () => { S.light.rate = +b.dataset.lr; try { localStorage.setItem('owl-light-rate', String(S.light.rate)); } catch (e) { } S.light.key = ''; sync(); }); sync(); } }
-function lightSpawn(Lt, i, cx, cy, cz, R) { let x, y, z, q; do { x = Math.random() * 2 - 1; y = Math.random() * 2 - 1; z = Math.random() * 2 - 1; q = x * x + y * y + z * z; } while (q > 1);
-  Lt.p[i * 3] = cx + x * R; Lt.p[i * 3 + 1] = cy + y * R; Lt.p[i * 3 + 2] = cz + z * R; Lt.age[i] = 0; Lt.life[i] = 4 + Math.random() * 8; }
+const SUN_R_AU = 695700 / 149597870.7;
+function lightSpawn(Lt, i, cx, cy, cz, R) { let x, y, z, q, px, py, pz, tries = 0; const cam = Lt.cam;
+  do { do { x = Math.random() * 2 - 1; y = Math.random() * 2 - 1; z = Math.random() * 2 - 1; q = x * x + y * y + z * z; } while (q > 1);
+    px = cx + x * R; py = cy + y * R; pz = cz + z * R; tries++; }
+  /* not right in front of the camera, where a streak would sweep across the whole screen */
+  while (cam && tries < 8 && Math.hypot(px - cam[0], py - cam[1], pz - cam[2]) < cam[3] * 0.45);
+  const n = Math.hypot(px, py, pz); if (n < SUN_R_AU) { const f = SUN_R_AU * (1 + Math.random() * 0.05) / (n || 1e-9); px *= f; py *= f; pz *= f; } /* sunlight starts at the Sun's surface, not inside it */
+  Lt.p[i * 3] = px; Lt.p[i * 3 + 1] = py; Lt.p[i * 3 + 2] = pz; Lt.age[i] = 0; Lt.life[i] = 4 + Math.random() * 8; }
 function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementById('uniLight'); if (!Lt) return;
   const t = S.controls.target, D = S.camera.position.distanceTo(t), W = 2 * D * Math.tan(S.camera.fov * Math.PI / 360) * S.camera.aspect; /* width of the view at the target, AU */
   const inSystem = camAU < 3000, wantOn = S.show.light !== false && !ui.root.classList.contains('clean') && !(S.drift && S.drift.mode), on = wantOn && inSystem;
@@ -542,7 +550,7 @@ function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementBy
   if (!inSystem) { const key = 'far' + rate + (camAU > 1.1e13 ? 'g' : 's'); if (Lt.key !== key) { Lt.key = key;
       el.textContent = camAU > 3e11 ? `✦ Light from other galaxies takes millions of years to reach us: ${fmtN(ANDRO_MLY, 1)} million from the Andromeda galaxy. At this scale it would look frozen even sped up 1,000 times, so it isn't drawn.`
         : `✦ Light takes 4.2 years to reach the nearest star. At this scale it would look frozen even sped up 1,000 times, so it isn't drawn.`; } return; }
-  const v = rate * C_AU_S, R = Math.max(W * 0.75, 1e-4), cx = t.x, cy = t.y, cz = t.z;
+  const v = rate * C_AU_S, R = Math.max(W * 0.75, 1e-4), cx = t.x, cy = t.y, cz = t.z; { const cp = S.camera.position; Lt.cam = [cp.x, cp.y, cp.z, D]; }
   /* the view moved or zoomed a lot: deal the streaks afresh around it */
   if (!(Lt.R > 0) || R > Lt.R * 1.6 || R < Lt.R / 1.6 || Math.hypot(cx - Lt.c[0], cy - Lt.c[1], cz - Lt.c[2]) > R * 0.6) { Lt.R = R; Lt.c = [cx, cy, cz]; for (let i = 0; i < LIGHT_N; i++) { lightSpawn(Lt, i, cx, cy, cz, R); Lt.age[i] = Math.random() * Lt.life[i]; } }
   const len = Math.min(Math.max(v * 0.35, R * 0.05), R * 0.3), P = Lt.p, pos = Lt.pos, col = Lt.col;
@@ -555,7 +563,7 @@ function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementBy
   Lt.g.attributes.position.needsUpdate = true; Lt.g.attributes.color.needsUpdate = true;
   const pxs = v / W * (S.renderer.domElement.clientWidth || 1000), cross = lightTime(W / rate);
   const key = rate + '|' + cross + '|' + (pxs < 4); if (el && Lt.key !== key) { Lt.key = key;
-    el.textContent = `✦ Light ${rateTxt}: it needs ${cross} to cross this view${pxs < 4 ? ', so it looks still' : ''}. Real sunlight takes 8 min 20 s to reach Earth.`; } }
+    el.textContent = `✦ Light ${rateTxt}: it needs ${cross} to cross this view${pxs < 4 ? ', so it looks still' : ''}. ${W < 100 * SUN_R_AU && t.length() < 50 * SUN_R_AU ? `Even at that speed it takes ${lightTime(2 * SUN_R_AU / rate)} to cross the Sun, which is 1.39 million km wide.` : 'Real sunlight takes 8 min 20 s to reach Earth.'}`; } }
 
 /* ---- Sounds of space (Derik, 5 Nov 2026): NASA and Chandra recordings, each labelled by what it really is. Clips are
    built by the "Build space sounds" workflow from src/assets/sounds/sounds.json; only clips listed in built.json are
