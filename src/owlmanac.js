@@ -30,7 +30,7 @@ if(brand&&!brand.querySelector('.owl-kicker')){
  const logo=brand.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const a=document.createElement('a');a.href=CH;a.target='_blank';a.rel='noopener';a.title='The Owlmanac on YouTube';logo.parentNode.insertBefore(a,logo);a.appendChild(logo)}}
 const right=document.querySelector('#ops-top .top-right')||document.querySelector('#ops-top .themebtn')?.parentElement||document.querySelector('#ops-top');
 if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>The Owlmanac on YouTube</span>`;b.title='The Owlmanac on YouTube: watch the trailer, subscribe';b.setAttribute('aria-haspopup','dialog');
- /* a plain click opens the channel card (trailer, Short, subscribe); a modified click still opens YouTube (Derik, 6 Nov 2026) */
+ /* a plain click opens the channel card (trailer, Short, subscribe); a modified click still opens YouTube (the maintainer, 6 Nov 2026) */
  b.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();channelCard()});
  const theme=[...right.querySelectorAll('button')].find(x=>/mode/i.test(x.textContent));if(theme)theme.parentNode.insertBefore(b,theme);else right.appendChild(b)}
 
