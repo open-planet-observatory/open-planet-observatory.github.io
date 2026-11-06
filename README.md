@@ -55,6 +55,10 @@ Local build: `npm ci`, then `npm run collect && npm run build` (needs internet),
 
 Code: AGPL-3.0-or-later. Data: each source's own terms (see the source library on the page).
 
+## Trademarks
+
+"Owlmanac", "The Owlmanac Observatory" and the owl logo are trademarks. They are not licensed under the AGPL: you are welcome to fork and run the code, but please give your copy a different name and logo so visitors are not confused about who runs it.
+
 ## Notes
 
 - GDELT (news volume and disruption headlines) refuses requests from GitHub's runners on some days; the page keeps the last good news data and says when it was collected.
