@@ -1,6 +1,6 @@
 // ---------- The Owlmanac: the channel behind the Observatory ----------
 // Header lockup + YouTube button, an episode shelf where each episode is paired with the map layer it explains,
-// and links from the Moon card. Episode titles are the channel's own; links open YouTube (nothing embedded or re-hosted).
+// and links from the Moon card. Episode titles are the channel's own; episode links open YouTube. The channel card plays the teasers in YouTube's own player, loaded only on press (nothing re-hosted).
 (function(){
 const O=window.__obs;
 const CH='https://www.youtube.com/@TheOwlmanac';
@@ -29,8 +29,31 @@ const brand=document.querySelector('#ops-top .brand');
 if(brand&&!brand.querySelector('.owl-kicker')){
  const logo=brand.querySelector('.brand-logo');if(logo&&!logo.closest('a')){const a=document.createElement('a');a.href=CH;a.target='_blank';a.rel='noopener';a.title='The Owlmanac on YouTube';logo.parentNode.insertBefore(a,logo);a.appendChild(logo)}}
 const right=document.querySelector('#ops-top .top-right')||document.querySelector('#ops-top .themebtn')?.parentElement||document.querySelector('#ops-top');
-if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>Watch The Owlmanac</span>`;b.title='The Owlmanac on YouTube: strange, true, seriously';
+if(right&&!document.getElementById('owlYt')){const b=document.createElement('a');b.id='owlYt';b.className='tbtn owl-yt';b.href=CH;b.target='_blank';b.rel='noopener';b.innerHTML=`${yt}<span>The Owlmanac on YouTube</span>`;b.title='The Owlmanac on YouTube: watch the trailer, subscribe';b.setAttribute('aria-haspopup','dialog');
+ /* a plain click opens the channel card (trailer, Short, subscribe); a modified click still opens YouTube (Derik, 6 Nov 2026) */
+ b.addEventListener('click',e=>{if(e.metaKey||e.ctrlKey||e.shiftKey||e.button)return;e.preventDefault();channelCard()});
  const theme=[...right.querySelectorAll('button')].find(x=>/mode/i.test(x.textContent));if(theme)theme.parentNode.insertBefore(b,theme);else right.appendChild(b)}
+
+// ---------- the channel card: the YouTube channel's own videos, clearly the channel's, not the Observatory's ----------
+let chEl=null,chBack=null;
+function chClose(){if(!chEl||chEl.hidden)return;chEl.hidden=true;chEl.querySelectorAll('.och-v').forEach(v=>{const f=v.querySelector('iframe');if(f){f.remove();v.classList.remove('on')}});try{window.OwlMusic&&OwlMusic.duck(false)}catch(e){}if(chBack&&chBack.focus)chBack.focus()}
+function channelCard(){chBack=document.activeElement;
+ if(!chEl){chEl=document.createElement('div');chEl.id='owlCh';chEl.className='och';chEl.hidden=true;document.body.appendChild(chEl);
+  chEl.addEventListener('click',e=>{if(e.target===chEl)chClose()});document.addEventListener('keydown',e=>{if(e.key==='Escape')chClose()})}
+ const T=(window.OWL_TEASERS||[]);const VY=(window.voyagerVideoList?window.voyagerVideoList():[]);
+ const slot=t=>`<figure class="och-v och-${t.kind}${t.id?'':' soon'}">${t.id?`<button type="button" class="och-play" data-yt="${esc(t.id)}" aria-label="Play ${esc(t.title)} (from YouTube)">`:'<div class="och-play">'}<img src="${esc(t.poster)}" alt="" loading="lazy"><span class="och-tri" aria-hidden="true">${t.id?'▶':''}</span>${t.id?'':'<span class="och-soon">Coming soon to YouTube</span>'}${t.id?'</button>':'</div>'}<figcaption><b>${t.kind==='short'?'Short':'Trailer'}</b> · ${esc(t.title)}${t.id?` · <a href="https://www.youtube.com/${t.kind==='short'?'shorts/':'watch?v='}${esc(t.id)}" target="_blank" rel="noopener">YouTube ↗</a>`:''}</figcaption></figure>`;
+ chEl.innerHTML=`<div class="och-box glass" role="dialog" aria-modal="true" aria-labelledby="ochH">
+  <div class="och-h"><span class="och-logo">${yt}</span><div><div class="och-k">YouTube channel</div><h2 id="ochH">The Owlmanac</h2></div><button type="button" class="och-x" aria-label="Close">×</button></div>
+  <p class="och-s">Strange, true, seriously: short videos from the channel behind this site. They are the channel's own work, not part of the Observatory's data: many of their pictures are AI illustrations, which the videos mark, and real images such as NASA's are credited.</p>
+  <div class="och-vids">${T.map(slot).join('')}</div>
+  ${VY.length?`<p class="och-next"><b>Coming up:</b> ${VY.map(v=>v.live?`<a href="${esc(v.url)}" target="_blank" rel="noopener">${esc(v.title)} ↗</a>`:`${esc(v.title)} <span class="och-when">(${esc(v.when)})</span>`).join(' · ')}</p>`:''}
+  <div class="och-act"><a class="och-sub" href="${CH}?sub_confirmation=1" target="_blank" rel="noopener">${yt} Subscribe on YouTube</a><a class="tbtn" href="${CH}/videos" target="_blank" rel="noopener">All videos ↗</a><button type="button" class="tbtn" data-och="shelf">Episodes paired with the map</button></div>
+  <p class="och-fine">The players load from YouTube (youtube-nocookie.com) only when you press play.</p></div>`;
+ chEl.querySelector('.och-x').onclick=chClose;
+ chEl.querySelector('[data-och="shelf"]').onclick=()=>{chClose();if(O&&O.openPanel)O.openPanel('cams');setTimeout(()=>{const g=document.getElementById('owlGrid');g&&g.scrollIntoView({block:'start'})},300)};
+ chEl.querySelectorAll('[data-yt]').forEach(b=>b.onclick=()=>{const v=b.closest('.och-v');const f=document.createElement('iframe');f.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(b.dataset.yt)}?autoplay=1&rel=0&playsinline=1&modestbranding=1`;f.title=b.getAttribute('aria-label').replace(' (from YouTube)','');f.allow='autoplay; encrypted-media; picture-in-picture; fullscreen';f.allowFullscreen=true;f.referrerPolicy='strict-origin-when-cross-origin';v.classList.add('on');b.after(f);try{window.OwlMusic&&OwlMusic.duck(true)}catch(e){}});
+ chEl.hidden=false;chEl.querySelector('.och-x').focus()}
+window.OwlChannel={open:channelCard,close:chClose};
 // episode shelf, above NASA's stories
 const sg=document.getElementById('storyGrid');
 if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling;
