@@ -80,16 +80,18 @@ async function build() {
    <div class="uni-ctl" role="group" aria-label="Solar System controls"><button class="uni-fold" id="uniFold" title="Fold the controls down to one row" aria-expanded="true" aria-label="Fold the controls">▾</button>
     <div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div>
     <div class="seg uni-lrate" role="group" aria-label="Speed of the light streaks" id="uniLightRate" title="How fast the light streaks move. 1× is the real speed of light, and it stays the same at every zoom"><span>Light</span><button data-lr="1">Real</button><button data-lr="10">10×</button><button data-lr="100">100×</button><button data-lr="1000">1,000×</button></div>
+    <div class="seg uni-drift" role="group" aria-label="How the Sun moves" id="uniDriftSeg" title="Show the planets' paths as the Sun travels: past the stars around us, or around the centre of the Milky Way"><span>Sun</span><button data-drift="" aria-pressed="true">Still</button><button data-drift="lsr" aria-pressed="false">Past nearby stars</button><button data-drift="gal" aria-pressed="false">Around the galaxy</button></div>
+    <div class="seg uni-drift" role="group" aria-label="Slow the Sun's motion" id="uniDriftSq" hidden title="Slow the Sun's motion so the coils show. Real is the true speed; the planets always move at their true speed"><span>Sun's speed</span><button data-sq="1" aria-pressed="true">Real</button><button data-sq="10">÷10</button><button data-sq="100">÷100</button><button data-sq="1000">÷1,000</button></div>
     <div class="seg" role="group" aria-label="Time"><button data-rate="-30" title="Back 30 days per second">◀◀</button><button data-rate="0" aria-pressed="true" title="Live: now">Now</button><button data-rate="1" title="Forward 1 day per second">▶</button><button data-rate="30" title="Forward 30 days per second">▶▶</button></div>
     <div class="uni-goto" role="group" aria-label="Go to"><span>Go to</span>${['Sun', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Neptune', 'Voyager 1'].map(n => `<button class="more" data-goto="${n}">${n}</button>`).join('')}<button class="more" id="uniGal">Milky Way</button><button class="more" id="uniNeigh">Neighbours</button><button class="more" id="uniWeb">Cosmic web</button><button class="more" id="uniEdge" title="The oldest light: ESA Planck's map of the cosmic microwave background">Edge</button></div>
     <details class="uni-more"><summary>More layers and tools</summary>
      <div class="uni-toggles"><label><input type="checkbox" data-show="orbits" checked> Orbits</label><label><input type="checkbox" data-show="craft" checked> Spacecraft</label><label><input type="checkbox" data-show="comets" checked> Comets</label><label><input type="checkbox" data-show="labels" checked> Labels</label><label title="Streaks show light leaving the Sun (and, past our galaxy, arriving from other galaxies), sped up so you can see it move"><input type="checkbox" data-show="light" checked> Light travelling (sped up)</label><label><input type="checkbox" data-show="sky" checked> Real sky (ESA Gaia)</label><label><input type="checkbox" data-show="galaxy" checked> Galaxy glow (model)</label><label><input type="checkbox" data-show="arms"> Measured arm stretches</label><label><input type="checkbox" data-show="galaxies" checked> Nearby galaxies</label><label><input type="checkbox" data-show="web" checked> Cosmic web (2MRS)</label><label><input type="checkbox" data-show="constellations"> Constellations</label><label><input type="checkbox" data-show="exo"> Stars with planets</label></div>
      <div class="uni-goto"><button class="more" id="uniNear">Nearest stars</button><button class="more" id="uniNeo">Asteroids passing Earth</button></div>
      <p class="uni-help">Drag to turn · Right-drag, Shift-drag or two fingers to move · Scroll or pinch to zoom toward the pointer · Arrow keys move too · H hides everything</p>
-     <details class="uni-credits"><summary>Sources and credits</summary><p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Nearby galaxies: NASA/IPAC NED-D distances and NED positions; names, sizes: Wikipedia/Wikidata · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Cosmic web: 2MASS Redshift Survey (Huchra et al. 2012) via NASA HEASARC; clusters: NASA/IPAC NED · Constellation figures: d3-celestial</p></details>
+     <details class="uni-credits"><summary>Sources and credits</summary><p class="uni-credit">Planets: Astronomy Engine · Spacecraft, comets, asteroids: NASA JPL · Stars: ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC; CC BY-NC 3.0 IGO) · Sky: ESA Gaia all-sky map (ESA/Gaia/DPAC, CC BY-SA 3.0 IGO) · Planet hosts: NASA Exoplanet Archive · Today's Sun: NASA SDO · Galaxy: a model from Reid et al. 2019, Wegg et al. 2015, Bland-Hawthorn &amp; Gerhard 2016 · Nearby galaxies: NASA/IPAC NED-D distances and NED positions; names, sizes: Wikipedia/Wikidata · Star stories: Wikipedia (CC BY-SA 4.0) via Wikidata · Cosmic web: 2MASS Redshift Survey (Huchra et al. 2012) via NASA HEASARC; clusters: NASA/IPAC NED · Constellation figures: d3-celestial · Sun's motion: Schönrich, Binney &amp; Dehnen 2010; Reid et al. 2019</p></details>
     </details>
    </div>
-   <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div><p class="uni-light" id="uniLight" hidden></p>
+   <div class="uni-scale"><i id="uniBar"></i><span id="uniScale"></span></div><p class="uni-light" id="uniLight" hidden></p><div class="uni-drift-note" id="uniDrift" hidden><p id="uniDriftTxt"></p><button type="button" class="chip" id="uniDriftInfo" aria-expanded="false">ⓘ The spiral myth</button><div class="uni-drift-card" id="uniDriftCard" hidden></div></div>
    <div class="sat-card uni-card uni-sndlist" id="uniSndList" hidden></div>
    <div class="uni-player" id="uniPlayer" hidden role="region" aria-label="Now playing"></div>
    <div class="sat-card uni-card" id="uniCard" hidden></div>
@@ -114,7 +116,7 @@ async function build() {
   scene.add(new T.AmbientLight(0xffffff, 0.08)); const sunLight = new T.PointLight(0xffffff, 3.2, 0, 0); scene.add(sunLight);
   S = { renderer, scene, camera, controls, objs: [], groups: {}, size: 'vis', show: { orbits: true, craft: true, comets: true, labels: true, constellations: false, exo: false, arms: false, galaxy: true, sky: true, galaxies: true, web: true, light: !RM() }, focus: null, anim: null, solar: null };
   for (const k of ['orbits', 'craft', 'comets', 'bodies']) { S.groups[k] = new T.Group(); scene.add(S.groups[k]); }
-  lightInit(); sndWire(root); { const lc = root.querySelector('[data-show="light"]'); if (lc) lc.checked = S.show.light; }
+  lightInit(); sndWire(root); driftWire(root); { const lc = root.querySelector('[data-show="light"]'); if (lc) lc.checked = S.show.light; }
   const sphere = new T.SphereGeometry(1, 48, 32);
   const glowTex = (() => { const c = document.createElement('canvas'); c.width = c.height = 128; const g = c.getContext('2d'); const r = g.createRadialGradient(64, 64, 0, 64, 64, 64); r.addColorStop(0, 'rgba(255,244,214,1)'); r.addColorStop(.25, 'rgba(255,214,140,.55)'); r.addColorStop(1, 'rgba(255,190,90,0)'); g.fillStyle = r; g.fillRect(0, 0, 128, 128); return new T.CanvasTexture(c); })();
   const add = o => { S.objs.push(o); return o; };
@@ -472,6 +474,55 @@ function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourStep
 const LIGHT_N = 650, C_AU_S = C_KM_S / AU_KM, ANDRO_MLY = 0.779 * 3.26156; /* Andromeda's NED-D distance, as in the neighbourhood view */
 const LIGHT_RATES = [1, 10, 100, 1000];
 function lightRate() { try { const v = +localStorage.getItem('owl-light-rate'); if (LIGHT_RATES.includes(v)) return v; } catch (e) { } return 1; }
+// ---------- The Solar System on the move (the maintainer, 6 Nov 2026) ----------
+// Each planet's last three orbits drawn in a frame where the Sun moves: past the stars around us (the Local Standard of
+// Rest) or around the centre of the Milky Way. Planet positions are Astronomy Engine's; the Sun's velocity, in Galactic
+// (U toward the centre, V along rotation, W to the north pole) km/s: solar motion (11.1, 12.24, 7.25) from Schönrich,
+// Binney & Dehnen 2010, MNRAS 403, 1829; total circular velocity (Θ0 + V⊙) = 247 km/s from Reid et al. 2019, ApJ 885, 131.
+// "Real" uses those speeds; ÷10 … ÷1,000 slow only the Sun so the coils show, and the label says so. Popular "vortex"
+// animations put the orbits square-on to the Sun's path and squeeze them; the ⓘ card says how the real view differs.
+const DRIFT_V = { lsr: [11.1, 12.24, 7.25], gal: [11.1, 247, 7.25] }, KMS_AU_DAY = 86400 / 149597870.7, DRIFT_ORBITS = 3, DRIFT_PTS = 150;
+const DRIFT_REF = 'Schönrich, Binney &amp; Dehnen 2010 (<a href="https://doi.org/10.1111/j.1365-2966.2010.16253.x" target="_blank" rel="noopener">MNRAS 403, 1829</a>); Reid et al. 2019 (<a href="https://doi.org/10.3847/1538-4357/ab4a11" target="_blank" rel="noopener">ApJ 885, 131</a>)';
+function driftVec(mode) { const g = DRIFT_V[mode]; const R = A.Rotation_GAL_EQJ(); const q = A.RotateVector(R, new A.Vector(g[0], g[1], g[2], new A.AstroTime(new Date()))); const e = toEcl(q); const sp = Math.hypot(...g);
+  const u = e.map(x => x / sp); /* where the Sun is heading, as a constellation */ let con = ''; try { const eq = A.EquatorFromVector(new A.Vector(q.x / sp, q.y / sp, q.z / sp, q.t)); con = A.Constellation(eq.ra, eq.dec).name; } catch (er) { }
+  const tilt = 90 - Math.acos(Math.abs(u[2])) * 180 / Math.PI; /* angle between the Sun's path and the plane of the planets' orbits */ return { u, sp, con, tilt }; }
+function driftWire(root) { S.drift = { mode: '', sq: 1, lines: [], t: 0, key: '' };
+  root.querySelectorAll('[data-drift]').forEach(b => b.onclick = () => driftSet(b.dataset.drift, S.drift.sq));
+  root.querySelectorAll('[data-sq]').forEach(b => b.onclick = () => driftSet(S.drift.mode, +b.dataset.sq));
+  root.querySelector('#uniDriftInfo').onclick = () => { const c = root.querySelector('#uniDriftCard'), b = root.querySelector('#uniDriftInfo'); c.hidden = !c.hidden; b.setAttribute('aria-expanded', String(!c.hidden)); if (!c.hidden) driftCard(); }; }
+function driftSet(mode, sq) { const D = S.drift, was = D.mode; D.mode = mode; D.sq = sq; D.key = '';
+  ui.root.querySelectorAll('[data-drift]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.drift === mode)));
+  ui.root.querySelectorAll('[data-sq]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.sq === sq)));
+  ui.root.querySelector('#uniDriftSq').hidden = !mode; ui.root.querySelector('#uniDrift').hidden = !mode;
+  if (!mode) { D.lines.forEach(l => { S.scene.remove(l); l.geometry.dispose(); l.material.dispose(); }); D.lines = []; S.groups.orbits.visible = S.show.orbits; D.hideOrb = false; return; }
+  D.hideOrb = true; /* the still ellipses would mislead next to moving paths */
+  if (mode !== was) { const v = driftVec(mode).u, side = new T.Vector3(v[1], -v[0], 0).normalize(); if (side.lengthSq() < 1e-6) side.set(1, 0, 0); /* look at the trails from the side and a little above */
+    const L = Math.max(6, 365.25 * DRIFT_ORBITS * driftVec(mode).sp * KMS_AU_DAY / sq) * 0.55, dir = new T.Vector3(...v).multiplyScalar(-L * 0.5); const tgt = dir.clone();
+    const cam = tgt.clone().add(side.multiplyScalar(L * 1.1)).add(new T.Vector3(0, 0, L * 0.45)); S.focus = null; flyCam(cam, tgt); } }
+function flyCam(cam, tgt) { const c0 = S.camera.position.clone(), t0 = S.controls.target.clone(), t1 = performance.now(), dur = RM() ? 0 : 1600;
+  S.anim = now => { const k = dur ? Math.min(1, (now - t1) / dur) : 1, e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; S.camera.position.lerpVectors(c0, cam, e); S.controls.target.lerpVectors(t0, tgt, e); if (k >= 1) S.anim = null; }; }
+function driftUpdate(camAU) { const D = S.drift; if (!D || !D.mode) return; if (D.hideOrb) S.groups.orbits.visible = false;
+  const now = performance.now(), key = D.mode + D.sq; if (D.key === key && (now - D.t < 400 || Math.abs(simMs - D.ms) < 864e5 * 0.5)) return;
+  D.t = now; D.key = key; D.ms = simMs; const dv = driftVec(D.mode), v = dv.u.map(x => x * dv.sp * KMS_AU_DAY / D.sq); /* AU per day */
+  if (!D.lines.length) { for (const [name, , colour] of PLANETS.slice(0, 8)) { const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(DRIFT_PTS * DRIFT_ORBITS * 3), 3)); g.setAttribute('color', new T.BufferAttribute(new Float32Array(DRIFT_PTS * DRIFT_ORBITS * 3), 3));
+      const l = new T.Line(g, new T.LineBasicMaterial({ vertexColors: true, transparent: true, opacity: 0.95, blending: T.AdditiveBlending, depthWrite: false })); l.frustumCulled = false; l.userData = { name, colour: new T.Color(colour) }; S.scene.add(l); D.lines.push(l); }
+    const g = new T.BufferGeometry(); g.setAttribute('position', new T.BufferAttribute(new Float32Array(6), 3)); const sl = new T.Line(g, new T.LineDashedMaterial({ color: 0xffd166, dashSize: 1, gapSize: 1, transparent: true, opacity: 0.55 })); sl.frustumCulled = false; sl.userData = { sun: true }; S.scene.add(sl); D.lines.push(sl); }
+  const n = DRIFT_PTS * DRIFT_ORBITS; let maxSpan = 0;
+  for (const l of D.lines) { if (l.userData.sun) continue; const per = PLANETS.find(p => p[0] === l.userData.name)[3], span = per * DRIFT_ORBITS; maxSpan = Math.max(maxSpan, span);
+    const pos = l.geometry.attributes.position.array, col = l.geometry.attributes.color.array, c = l.userData.colour;
+    for (let i = 0; i < n; i++) { const back = span * (1 - i / (n - 1)), d = new Date(simMs - back * 864e5); const h = helio(l.userData.name, d); const k = i * 3;
+      pos[k] = h[0] - v[0] * back; pos[k + 1] = h[1] - v[1] * back; pos[k + 2] = h[2] - v[2] * back; const f = 0.12 + 0.88 * (i / (n - 1)); col[k] = c.r * f; col[k + 1] = c.g * f; col[k + 2] = c.b * f; }
+    l.geometry.attributes.position.needsUpdate = true; l.geometry.attributes.color.needsUpdate = true; }
+  const sl = D.lines.find(l => l.userData.sun), sp = sl.geometry.attributes.position.array, tail = Math.min(maxSpan, 365.25 * 40); sp[3] = -v[0] * tail; sp[4] = -v[1] * tail; sp[5] = -v[2] * tail; sl.geometry.attributes.position.needsUpdate = true; sl.computeLineDistances(); sl.material.dashSize = sl.material.gapSize = Math.hypot(sp[3], sp[4], sp[5]) / 80;
+  const yr = dv.sp * KMS_AU_DAY * 365.25 / D.sq, el = document.getElementById('uniDriftTxt');
+  if (el) el.innerHTML = `↻ ${D.mode === 'gal' ? `Moving with the galaxy: the Sun travels about ${dv.sp.toFixed(0)} km/s around the Milky Way's centre` : `Moving past the stars around us: the Sun travels about ${dv.sp.toFixed(0)} km/s relative to them`}, toward ${esc(dv.con)}. ${D.sq === 1 ? 'Real speeds' : `The Sun's motion is shown ${D.sq.toLocaleString('en-US')} times slower than real so the coils show; the planets move at their true speed`}: in one year the Sun goes ${yr < 10 ? yr.toFixed(1) : Math.round(yr).toLocaleString('en-US')} AU, while Earth swings 1 AU either side. Each line is a planet's last three orbits.`; }
+function driftCard() { const c = document.getElementById('uniDriftCard'), g = driftVec('gal'), l = driftVec('lsr'), yr = x => Math.round(x.sp * KMS_AU_DAY * 365.25);
+  c.innerHTML = `<p><b>Do the planets spiral behind the Sun?</b> In a frame where the Sun moves, every planet's ellipse is stretched into a helix: that part of the popular "vortex" animations is right. Three things in them are not:</p>
+  <ol><li><b>The tilt and the trailing.</b> The Sun does not lead with the planets trailing behind it like a comet's tail: it stays at the centre of every coil, because each planet keeps circling it. And the planets' orbits are not square-on to the Sun's path. Measured here, the Sun's path around the galaxy is at about ${Math.round(Math.abs(g.tilt))}° to the plane of the planets' orbits, not 90°, so the coils lean; its path past nearby stars is at about ${Math.round(Math.abs(l.tilt))}°.</li>
+  <li><b>The stretch.</b> The Sun is far faster than any planet, so the real coils are very long: about ${yr(g)} AU per year around the galaxy against Earth's 1 AU swing to either side (Earth moves about 30 km/s, the Sun about ${g.sp.toFixed(0)} km/s). The animations compress this a great deal.</li>
+  <li><b>The frame.</b> There is no single true path. Against the stars around us the Sun moves about ${l.sp.toFixed(0)} km/s (about ${yr(l)} AU a year), so the coils are much tighter; against the galaxy's centre it is ${g.sp.toFixed(0)} km/s. Which spiral you see depends on what you measure the motion against.</li></ol>
+  <p class="uni-credit">Sun's motion: ${DRIFT_REF}. Planet positions: Astronomy Engine. The tilts and distances above are worked out on this page from those numbers.</p>`; }
+
 function lightInit() { if (S.light) return; const g = new T.BufferGeometry(); const pos = new Float32Array(LIGHT_N * 6), col = new Float32Array(LIGHT_N * 6);
   g.setAttribute('position', new T.BufferAttribute(pos, 3)); g.setAttribute('color', new T.BufferAttribute(col, 3));
   const m = new T.LineBasicMaterial({ vertexColors: true, transparent: true, blending: T.AdditiveBlending, depthWrite: false });
@@ -483,7 +534,7 @@ function lightSpawn(Lt, i, cx, cy, cz, R) { let x, y, z, q; do { x = Math.random
   Lt.p[i * 3] = cx + x * R; Lt.p[i * 3 + 1] = cy + y * R; Lt.p[i * 3 + 2] = cz + z * R; Lt.age[i] = 0; Lt.life[i] = 4 + Math.random() * 8; }
 function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementById('uniLight'); if (!Lt) return;
   const t = S.controls.target, D = S.camera.position.distanceTo(t), W = 2 * D * Math.tan(S.camera.fov * Math.PI / 360) * S.camera.aspect; /* width of the view at the target, AU */
-  const inSystem = camAU < 3000, wantOn = S.show.light !== false && !ui.root.classList.contains('clean'), on = wantOn && inSystem;
+  const inSystem = camAU < 3000, wantOn = S.show.light !== false && !ui.root.classList.contains('clean') && !(S.drift && S.drift.mode), on = wantOn && inSystem;
   Lt.L.visible = on; if (el && el.hidden === wantOn) el.hidden = !wantOn;
   const rs = document.getElementById('uniLightRate'); if (rs && rs.hidden === on) rs.hidden = !on; /* the speed buttons only show while streaks are drawn */
   if (!wantOn) return;
@@ -550,7 +601,7 @@ function frame(now) { if (!open) return; requestAnimationFrame(frame);
       const dir = V().set(mx * tf * S.camera.aspect, my * tf, -1).normalize().transformDirection(S.camera.matrixWorld), view = t.clone().sub(c).normalize(); const cosA = dir.dot(view); if (cosA > 0.2) P = c.clone().add(dir.multiplyScalar(d / cosA)); } }
     if (isFinite(k) && k > 0) { t.sub(P).multiplyScalar(k).add(P); c.sub(P).multiplyScalar(k).add(P); } if (Math.abs(z.v) <= 1e-4) z.v = 0; }
   const camAU = S.camera.position.length();
-  lightUpdate(dt, camAU);
+  lightUpdate(dt, camAU); driftUpdate(camAU);
   if (camAU > 3e11) ensureCosmos(); if (COS) COS.update(camAU);
   if (window.OwlMusic) OwlMusic.setScale((Math.log10(Math.max(camAU, 1e-4)) + 3.2) / 19.05); /* the score darkens with distance: 0 at Earth, 1 at the edge */
   /* far out and left alone, the web turns slowly, like a model on a stand; any touch stops it */

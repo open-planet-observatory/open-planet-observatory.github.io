@@ -1062,3 +1062,18 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 .och-act .tbtn{text-decoration:none}
 .och-fine{font-size:.68rem;color:var(--ink-3);margin:10px 0 0}
 @media (max-width:640px){.och{padding:8px;align-items:flex-end}.och-box{padding:12px;max-height:calc(100vh - 16px)}.och-vids{grid-template-columns:minmax(0,1fr);gap:10px}.och-short{width:58%;justify-self:center}}
+
+/* The Solar System on the move (src/universe.js drift mode) */
+#uni .uni-drift[hidden]{display:none!important}
+#uni .uni-drift>span{align-self:center;font-size:.72rem;opacity:.75;padding:0 6px 0 4px}
+#uni .uni-drift-note{position:absolute;right:112px;top:100px;max-width:330px;text-align:right;z-index:3}
+#uni .uni-drift-note[hidden]{display:none}
+#uni .uni-drift-note p{margin:0 0 6px;font-size:.76rem;line-height:1.38;color:#ffe3a8;text-shadow:0 1px 3px #000}
+#uni .uni-drift-card{text-align:left;margin-top:8px;background:rgba(12,16,26,.92);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:10px 12px;font-size:.78rem;line-height:1.42;color:#e9eef5;max-height:min(52vh,420px);overflow:auto}
+#uni .uni-drift-card[hidden]{display:none}
+#uni .uni-drift-card ol{padding-left:18px;margin:6px 0}
+#uni .uni-drift-card li{margin-bottom:5px}
+#uni .uni-drift-card a{color:#9cc7ff}
+#uni.clean .uni-drift-note{display:none}
+@media (min-width:641px) and (max-width:900px){#uni .uni-drift-note{right:48px}}
+@media (max-width:640px){#uni .uni-drift-note{top:auto;bottom:236px;right:12px;left:12px;max-width:none}#uni .uni-drift-note p{font-size:.7rem;background:rgba(8,10,16,.6);border-radius:8px;padding:4px 6px}#uni .uni-drift-card{max-height:38vh}}
