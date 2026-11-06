@@ -1077,3 +1077,8 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 #uni.clean .uni-drift-note{display:none}
 @media (min-width:641px) and (max-width:900px){#uni .uni-drift-note{right:48px}}
 @media (max-width:640px){#uni .uni-drift-note{top:auto;bottom:236px;right:12px;left:12px;max-width:none}#uni .uni-drift-note p{font-size:.7rem;background:rgba(8,10,16,.6);border-radius:8px;padding:4px 6px}#uni .uni-drift-card{max-height:38vh}}
+
+/* Tour Site: × to end the tour from any step */
+.st-card .st-x{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:999px;border:1px solid var(--glass-line);background:none;color:var(--ink-2);font-size:1.05rem;line-height:1;cursor:pointer}
+.st-card .st-x:hover{color:var(--ink);background:var(--glass-2)}
+.st-card .st-n{padding-right:30px}
