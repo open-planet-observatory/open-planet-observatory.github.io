@@ -75,7 +75,7 @@ async function build() {
   const host = document.body; // above every panel: the view is full screen
   const root = document.createElement('div'); root.id = 'uni'; root.hidden = true; root.innerHTML = `
    <canvas id="uniCanvas" aria-label="The Solar System, live"></canvas><div id="uniLabels" aria-hidden="true"></div>
-   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from Earth out to the edge of the observable universe">▶ Tour Universe</button><button class="chip uni-sndbtn" id="uniSndBtn" aria-expanded="false" title="Sounds of space: real recordings, real waves made audible, and data turned into sound (NASA and Chandra)">♫ Sounds</button><button class="chip uni-music" id="uniMusic" aria-pressed="false" title="Music: an ambient score that darkens as you fly out. Press to stop or start it">♪</button><button class="chip uni-hide" id="uniHide" title="Hide every panel and label frame for a clean view (H). Press again, or H, to bring them back" aria-pressed="false">Clean view</button></div>
+   <div class="uni-top"><button class="chip" id="uniBack">← Back to Earth</button><b class="uni-title">The Solar System, now</b><span class="uni-date" id="uniDate"></span><button class="chip uni-flybtn" id="uniFlight" title="A wordless flight from the edge of the observable universe in to the Sun and Earth, and back out (about 45 seconds)">✦ Fly-through</button><button class="chip uni-tourbtn" id="uniTour" title="A guided flight from Earth out to the edge of the observable universe">▶ Tour Universe</button><button class="chip uni-sndbtn" id="uniSndBtn" aria-expanded="false" title="Sounds of space: real recordings, real waves made audible, and data turned into sound (NASA and Chandra)">♫ Sounds</button><button class="chip uni-music" id="uniMusic" aria-pressed="false" title="Music: an ambient score that darkens as you fly out. Press to stop or start it">♪</button><button class="chip uni-hide" id="uniHide" title="Hide every panel and label frame for a clean view (H). Press again, or H, to bring them back" aria-pressed="false">Clean view</button></div>
    <button class="chip uni-show" id="uniShow" hidden title="Show the controls (H)">⌃ Controls</button>
    <div class="uni-ctl" role="group" aria-label="Solar System controls"><button class="uni-fold" id="uniFold" title="Fold the controls down to one row" aria-expanded="true" aria-label="Fold the controls">▾</button>
     <div class="uni-grp"><div class="uni-h">Body sizes</div><div class="seg" role="group" aria-label="Sizes"><button data-size="vis" aria-pressed="true" title="Bodies too small to see are enlarged; moons pushed out from enlarged planets">Visible sizes</button><button data-size="true" aria-pressed="false" title="Everything at its real size; distances are always real">True scale</button></div></div>
@@ -180,7 +180,7 @@ async function build() {
   root.querySelector('#uniNeo').onclick = () => neoCard();
   if (!S.solar) { const b = root.querySelector('[data-goto="Voyager 1"]'); if (b) { b.disabled = true; b.title = 'JPL spacecraft data did not arrive, so there is nothing to fly to'; } root.querySelectorAll('[data-show="craft"],[data-show="comets"]').forEach(c => { c.disabled = true; c.closest('label').title = 'JPL data did not arrive today'; }); }
   // click to select
-  let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; if (S.drift && S.drift.fly && !S.tour) flyStop(); });
+  let down = null; canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; if (S.flight) flightEnd(); if (S.drift && S.drift.fly && !S.tour) flyStop(); });
   canvas.addEventListener('pointerup', e => { if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 5) return; const r = canvas.getBoundingClientRect(); const far = camera.position.length() >= 1.5e15; const hit = far ? S.objs.find(o => o.edge) : pick(e.clientX - r.left, e.clientY - r.top); if (hit) focusOn(hit, true); }); /* out at the edge, every tap is on the edge: no planet picking */
   /* Wheel and trackpad zoom are eased here instead of in OrbitControls: each notch adds to a target, and the camera glides
      there over ~150 ms, scaling about the point under the pointer (pinch on touch screens still goes through OrbitControls). */
@@ -196,6 +196,7 @@ async function build() {
   root.querySelector('#uniNeigh').onclick = () => neighboursView();
   root.querySelector('#uniWeb').onclick = () => webView();
   root.querySelector('#uniEdge').onclick = () => edgeView();
+  root.querySelector('#uniFlight').onclick = () => { if (S.flight) return flightEnd(); flight(); };
   root.querySelector('#uniTour').onclick = () => { if (S.tour) return stopTour(); if (window.OwlMusic) OwlMusic.autoOn(); startTour(); };
   { const mb = root.querySelector('#uniMusic'); const sync = () => { const on = !!(window.OwlMusic && OwlMusic.on); mb.setAttribute('aria-pressed', String(on)); mb.classList.toggle('on', on); }; mb.onclick = () => { if (window.OwlMusic) OwlMusic.toggle(); sync(); }; addEventListener('owlmusic', sync); sync(); }
   root.querySelector('#uniModel').onclick = () => { S.focus = null; card(GLOW_MODEL); };
@@ -467,6 +468,46 @@ function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourStep
   if (st.drift) { tr.drift = true; driftSet('gal', 100); flyStart(); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
+// ---------- the wordless fly-through (Derik, 7 Nov 2026: "no words, simply for effect") ----------
+/* One continuous camera move: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and
+   the stars to today's Sun (NASA SDO), across to Earth, then all the way back out. Distances fall and rise in log space, so
+   every scale passes at the same pace. Nothing is labelled while it plays; any touch, scroll or Esc hands the view back. */
+function flightFade(on) { let f = document.getElementById('uniFade'); if (!f) { f = document.createElement('div'); f.id = 'uniFade'; document.body.appendChild(f); } requestAnimationFrame(() => f.classList.toggle('on', on)); return f; }
+async function flight() { if (!SM || !open) return; stopTour(); flyStop(); if (S.drift && S.drift.mode) driftSet('', 1); flightEnd(true);
+  const tok = S.flight = { t0: 0, light: S.show.light }; S.show.light = false; /* the streaks would crowd the planets */ ui.root.classList.add('flight'); ui.card.hidden = true; caption(''); if (window.OwlMusic && OwlMusic.autoOn) OwlMusic.autoOn();
+  flightFade(true); rate = 0; simMs = Date.now();
+  const c = ensureCosmos(); await Promise.race([Promise.resolve(c).then(() => COS && COS.loadEdge()).catch(() => { }), new Promise(r => setTimeout(r, 9000))]);
+  if (S.flight !== tok) return;
+  const sg = V().fromArray(SM.galToEcl(galVec(47.37, 6.32))).normalize(), side = V().fromArray(SM.galToEcl(galVec(137.37, 0))).normalize();
+  const hv = Math.tan(S.camera.fov * Math.PI / 360), half = Math.atan(Math.min(hv, hv * S.camera.aspect));
+  const DOUT = Math.min(3e16, Math.max(1.3e16, COSMOS_EDGE / Math.sin(half * 0.56)));
+  const dOut = sg.clone().multiplyScalar(0.5).add(side.clone().multiplyScalar(0.86)).normalize();
+  const ep = V().fromArray(S.byName.Earth.pos), sunDir = ep.clone().negate().normalize();
+  const dEarth = sunDir.clone().add(new T.Vector3(0, 0, 0.35)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6); /* Earth's sunlit side */
+  const dSun = ep.clone().normalize().add(new T.Vector3(0, 0, 0.45)).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), -0.5); /* the Sun from roughly Earth's side */
+  const dBack = dOut.clone().applyAxisAngle(new T.Vector3(0, 0, 1), 0.9); /* leave by a different side than we came in */
+  const L = Math.log, SUN = 0.03, EAR = 6.6e-4; const sm = k => k * k * (3 - 2 * k), io = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+  const slerp = (a, b, k) => { const d = Math.min(1, Math.max(-1, a.dot(b))), w = Math.acos(d); if (w < 1e-4) return a.clone(); const s1 = Math.sin((1 - k) * w) / Math.sin(w), s2 = Math.sin(k * w) / Math.sin(w); return a.clone().multiplyScalar(s1).add(b.clone().multiplyScalar(s2)).normalize(); };
+  const spin = (d, a) => d.clone().applyAxisAngle(new T.Vector3(0, 0, 1), a);
+  /* phases in seconds: hold outside, fall in to the Sun, linger, cross to Earth, linger, rise back out, hold outside */
+  const P = [['out0', 2.5], ['in', 17], ['sun', 3], ['cross', 4.5], ['earth', 3.5], ['back', 14], ['out1', 3]]; const total = P.reduce((a, p) => a + p[1], 0);
+  const pose = t => { let a = 0; for (const [n, d] of P) { if (t < a + d) { const k = (t - a) / d; return [n, k]; } a += d; } return ['end', 1]; };
+  const put = (tgt, dir, dist) => { S.controls.target.copy(tgt); S.camera.position.copy(tgt).add(dir.clone().multiplyScalar(dist)); };
+  put(V(), dOut, DOUT); S.focus = null;
+  const F = now => { if (!tok.t0) tok.t0 = now; const t = (now - tok.t0) / 1000; const [n, k] = pose(t);
+    if (n === 'out0') put(V(), spin(dOut, 0.05 * k), DOUT);
+    else if (n === 'in') { const e = io(k); put(V(), slerp(spin(dOut, 0.05), dSun, sm(k)), Math.exp(L(DOUT) + (L(SUN) - L(DOUT)) * e)); }
+    else if (n === 'sun') put(V(), spin(dSun, 0.12 * k), SUN);
+    else if (n === 'cross') { const e = io(k); put(V().lerpVectors(V(), ep, e), slerp(spin(dSun, 0.12), dEarth, e), Math.exp(L(SUN) + (L(EAR) - L(SUN)) * e)); }
+    else if (n === 'earth') put(ep, spin(dEarth, 0.1 * k), EAR);
+    else if (n === 'back') { const e = io(k), d = Math.exp(L(EAR) + (L(DOUT) - L(EAR)) * e); const w = Math.min(1, Math.max(0, (L(d) - L(0.05)) / (L(20) - L(0.05)))); put(ep.clone().multiplyScalar(1 - sm(w)), slerp(spin(dEarth, 0.1), dBack, sm(k)), d); }
+    else if (n === 'out1') put(V(), spin(dBack, 0.05 * k), DOUT);
+    else { S.anim = null; flightEnd(); } };
+  S.anim = F; tok.F = F; setTimeout(() => { if (S.flight === tok) flightFade(false); }, 350);
+  tok.watch = setInterval(() => { if (S.flight !== tok) return clearInterval(tok.watch); if (S.anim !== F) flightEnd(); }, 200); /* a touch or scroll took the view */
+  tok.total = total; }
+function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
+
 // ---------- loop, open, close ----------
 /* ---- Light travelling (Derik, 5 Nov 2026): streaks of sunlight move at ONE fixed speed the visitor picks — real speed
    by default, or 10×, 100×, 1,000× — and that speed never changes with the zoom. So light visibly races past Earth and
@@ -663,9 +704,10 @@ function frame(now) { if (!open) return; if (!REC.stepping) requestAnimationFram
 }
 async function openUniverse(dest) {
   const hostName = typeof dest === 'string' && dest.startsWith('host:') ? dest.slice(5) : null;
-  if (open) { if (dest === 'tour') { stopTour(); startTour(); return; } if (dest === 'galaxy') galaxyView(4000, true); else if (dest === 'web') webView(6000); else if (dest === 'edge') edgeView(7000); else if (hostName) flyToHost(hostName); else { S.focus = null; animateTo(new T.Vector3(0, 0, 0), 4.2, 3000); } return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
+  if (open) { if (dest === 'flight') { flight(); return; } if (dest === 'tour') { stopTour(); startTour(); return; } if (dest === 'galaxy') galaxyView(4000, true); else if (dest === 'web') webView(6000); else if (dest === 'edge') edgeView(7000); else if (hostName) flyToHost(hostName); else { S.focus = null; animateTo(new T.Vector3(0, 0, 0), 4.2, 3000); } return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
   const g = window.__obs3d;
   if (openUniverse.busy) return; openUniverse.busy = true; /* a double press opens once */
+  if (dest === 'flight') flightFade(true); /* the fly-through starts from black, outside the universe */
   const bp = built ? null : (openUniverse.bp || (openUniverse.bp = build().then(() => true, e => { console.warn('Solar System view could not start', e); openUniverse.bp = null; return false; }))); /* load while the globe pulls back, not after */
   const fromGlobe = !!(g && g.viewer && getComputedStyle(g.viewer.container).display !== 'none'); let gcam = null;
   if (fromGlobe) { /* pull back from the globe while the 3D view loads; the hand-over happens mid-flight, from the same place */
@@ -688,6 +730,7 @@ async function openUniverse(dest) {
     else if (dest === 'web') { ensureCosmos(); journeyToWeb(); } /* one flight out through every scale, pausing at each */
     else if (dest === 'edge') { ensureCosmos(); journeyToWeb(true); }
     else if (dest === 'tour') { ensureCosmos(); startTour(); }
+    else if (dest === 'flight') flight();
     else if (hostName) flyToHost(hostName); else animateTo(new T.Vector3(0, 0, 0), 4.2, 4200); };
   setTimeout(go, gcam ? 250 : 500);
   /* the address bar is left alone: a reload always returns to Earth; #sky=solar / #sky=galaxy still open these views when someone arrives with them */
@@ -696,7 +739,7 @@ function flyToHost(name) { const norm = t => String(t).toLowerCase().replace(/ce
   S.show.exo = true; const cb = ui.root.querySelector('[data-show="exo"]'); if (cb) cb.checked = true; focusOn(o, true); }
 if (REC.on) window.__uniRec = { manual: on => { REC.manual = on; }, step: (dt = 1 / 30) => { REC.stepping = true; REC.dt = dt; try { frame(performance.now()); } finally { REC.stepping = false; } },
   drift: (mode, sq) => driftSet(mode, sq), fly: on => on ? flyStart() : flyStop(), rate: r => { rate = r; }, time: ms => { simMs = ms; }, clean: on => ui.setClean(on), cap: t => caption(t), cam: (p, t) => { S.focus = null; S.anim = null; S.camera.position.set(...p); S.controls.target.set(...t); }, light: on => { S.show.light = on; }, state: () => ({ simMs, rate, cam: S.camera.position.toArray(), drift: S.drift && S.drift.mode }) };
-function closeUniverse() { if (!open) return; stopTour(); sndStop(); { const sl = document.getElementById('uniSndList'); if (sl) sl.hidden = true; } if (window.OwlMusic) OwlMusic.setScale(0, true); if (ui.setClean) ui.setClean(false); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
+function closeUniverse() { if (!open) return; flightEnd(true); stopTour(); sndStop(); { const sl = document.getElementById('uniSndList'); if (sl) sl.hidden = true; } if (window.OwlMusic) OwlMusic.setScale(0, true); if (ui.setClean) ui.setClean(false); const e = S.byName.Earth; animateTo(V().fromArray(e.pos), 7e-4, 1200);
   setTimeout(() => { const g = window.__obs3d; let gl = null; try { if (g && g.viewer) { gl = sceneToGlobe(new Date(simMs)); g.viewer.camera.setView({ destination: window.Cesium.Cartesian3.fromDegrees(gl.lon, gl.lat, gl.h) }); g.viewer.useDefaultRenderLoop = true; } } catch (x) { gl = null; } /* the globe takes over from the same place */
     open = false; S.controls.enabled = false; ui.root.classList.remove('on'); setTimeout(() => { ui.root.hidden = true; }, 500);
     if (g && g.viewer) g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(gl ? gl.lon : -75, gl ? gl.lat : 25, 2.3e7), duration: 1.6, easingFunction: window.Cesium.EasingFunction.QUADRATIC_OUT });
@@ -704,9 +747,10 @@ function closeUniverse() { if (!open) return; stopTour(); sndStop(); { const sl 
 O && (O.openUniverse = openUniverse, O.uniState = () => S, O.closeUniverse = () => closeUniverse(), O.goEarth = goEarth);
 if (/sky=edge/.test(location.hash)) setTimeout(() => openUniverse('edge'), 2500);
 else if (/sky=tour/.test(location.hash)) setTimeout(() => openUniverse('tour'), 2500);
+else if (/sky=flight/.test(location.hash)) setTimeout(() => openUniverse('flight'), 2500);
 else if (/sky=web/.test(location.hash) || window.__wantWeb) setTimeout(() => openUniverse('web'), 2500);
 else if (window.__wantGalaxy || /sky=galaxy/.test(location.hash)) setTimeout(() => openUniverse('galaxy'), 2500);
 else if (window.__wantSolar || /(view|sky)=solar/.test(location.hash)) setTimeout(openUniverse, 2500);
-addEventListener('keydown', e => { if (!open) return; if (e.key === 'Escape') { if (ui.root.classList.contains('clean')) ui.setClean(false); else closeUniverse(); } else if ((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea|select/i.test(e.target.tagName)) ui.setClean(!ui.root.classList.contains('clean')); });
+addEventListener('keydown', e => { if (!open) return; if (S.flight && e.key === 'Escape') { flightEnd(); return; } if (e.key === 'Escape') { if (ui.root.classList.contains('clean')) ui.setClean(false); else closeUniverse(); } else if ((e.key === 'h' || e.key === 'H') && !e.metaKey && !e.ctrlKey && !e.altKey && !/input|textarea|select/i.test(e.target.tagName)) ui.setClean(!ui.root.classList.contains('clean')); });
 /* fetch the 3D library while the visitor reads the page, so the first press of ☉, ✺ or ❖ starts sooner */
 setTimeout(() => { const go = () => { import('three').catch(() => { }); }; if ('requestIdleCallback' in window) requestIdleCallback(go, { timeout: 5000 }); else go(); }, 8000);
