@@ -266,7 +266,11 @@ export const GROUPS = {
   // offers no public API, so this reads the same gateway list its own map loads, once a day. Only gateways heard in the
   // past 5 days, counted into 0.5° areas: gateway ids, EUIs, names, descriptions and exact positions are dropped here and
   // never published (many gateways sit at people's homes).
+  // PAUSED 2026-11-07: api.ttnmapper.org answered HTTP 403 to the GitHub runner. A refused request is not retried
+  // every 10 minutes: the group stops here without contacting TTN Mapper until the maintainer agrees (then set true).
   async lora() {
+    const ALLOWED = false;
+    if (!ALLOWED) throw new Error('paused: TTN Mapper refused automated requests (HTTP 403); waiting for the maintainer');
     const net = 'NS_TTS_V3://ttn@000013';
     const d = await J('https://api.ttnmapper.org/network/' + encodeURIComponent(net) + '/gateways');
     if (!Array.isArray(d)) throw new Error('TTN Mapper gateway list is not a list');

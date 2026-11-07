@@ -63,7 +63,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 ## Low-power radio networks (LoRa)
 
-- LoRaWAN gateways come from TTN Mapper, whose FAQ says all its data "should be considered under the PDDL v 1.0 license". TTN Mapper offers no public API and its old GeoJSON and dump pages are gone, so the collector reads the same gateway list TTN Mapper's own map loads, once a day. If TTN Mapper asks, this stops.
+- LoRaWAN gateways come from TTN Mapper, whose FAQ says all its data "should be considered under the PDDL v 1.0 license". TTN Mapper offers no public API and its old GeoJSON and dump pages are gone, so the collector reads the same gateway list TTN Mapper's own map loads, once a day. If TTN Mapper asks, this stops. On the first run (7 November 2026) TTN Mapper's server answered HTTP 403, so the collector is paused and makes no requests until the maintainer agrees.
 - Only gateways heard in the past 5 days are counted, into 0.5° areas (about 55 km). Gateway ids, EUIs, names, descriptions and exact positions are dropped before anything is saved: many gateways sit in people's homes.
 - Meshtastic and other mesh networks are linked, not collected. Their public map reports carry node names and positions, and message text on public channels is people talking. The site never shows either. Packet Broker's gateway API states no reuse terms, so it is linked only. The site is not affiliated with TTN Mapper, The Things Network or the Meshtastic project.
 
