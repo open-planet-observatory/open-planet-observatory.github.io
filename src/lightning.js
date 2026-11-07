@@ -57,8 +57,8 @@
       for (let i = 0; i < idx && i < fl.length; i++) { const f = fl[i]; if (!f.p) continue; const age = (p - f.t) / 1000; if (age > KEEP) { pts.remove(f.p); f.p = null; continue; }
         const x = age / KEEP; f.p.color = C.Color.fromHsl(0.6 + 0.12 * x, 0.9, 0.82 - 0.3 * x, 0.85 * Math.pow(1 - x, 1.6) + 0.04); f.p.pixelSize = age < 4 ? 7 - age * 0.6 : 4.6 - 1.6 * x; } }
     if (!frame.s || now - frame.s > 5000) { frame.s = now; status(); } }
-  function fire(f) { let b = pool.pop(); if (!b) { if (act.length > 400) return; b = bbs.add({ image: glowImg, position: pos(f) }); } else b.position = pos(f);
-    const sz = Math.min(2.6, 0.35 + Math.sqrt(Math.max(f.km2, 20)) / 18), br = Math.min(1, 0.55 + Math.log10(Math.max(f.e, 1e-15) / 1e-15) / 4);
+  function fire(f) { const P = pos(f), cam = V.camera.positionWC; if (C.Cartesian3.dot(C.Cartesian3.normalize(P, new C.Cartesian3()), C.Cartesian3.subtract(cam, P, new C.Cartesian3())) < 0) return; /* behind the Earth */ let b = pool.pop(); if (!b) { if (act.length > 400) return; b = bbs.add({ image: glowImg, position: P, disableDepthTestDistance: Number.POSITIVE_INFINITY }); } else b.position = P; /* drawn whole, never cut by the globe's edge */
+    const sz = Math.min(1.3, 0.22 + Math.sqrt(Math.max(f.km2, 20)) / 40), br = Math.min(1, 0.55 + Math.log10(Math.max(f.e, 1e-15) / 1e-15) / 4);
     b.show = true; b.scale = sz; act.push({ f, b, sz, br, s: Math.random() * 6 }); }
   function circle(lon0) { const R = 54 * Math.PI / 180, la0 = 0, lo0 = lon0 * Math.PI / 180, out = []; /* ~54° of arc from the sub-satellite point: roughly the edge of GLM's view */
     for (let i = 0; i <= 180; i++) { const az = i / 180 * 2 * Math.PI, lat = Math.asin(Math.sin(la0) * Math.cos(R) + Math.cos(la0) * Math.sin(R) * Math.cos(az)), lon = lo0 + Math.atan2(Math.sin(az) * Math.sin(R) * Math.cos(la0), Math.cos(R) - Math.sin(la0) * Math.sin(lat));

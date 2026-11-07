@@ -56,7 +56,7 @@ const IMAGERY={
  daily:{name:'Yesterday’s satellite view (NASA VIIRS on NOAA-21, or NOAA-20 if that day is missing; 250 m, with that day’s clouds)',label:'Yesterday',make:dailyProvider},
  bing:{name:'Close-up aerial photos from Bing Maps (Microsoft, via Cesium ion): sharp enough to see buildings and fields, but a mosaic of photos taken over past years, not today’s view',label:'Close-up',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
  seafloor:{name:'Relief: ocean depths coloured from deep (purple) to shallow (yellow), with the sea floor and the land’s mountains shaded by slope, from NOAA ETOPO1; or GEBCO 2026 grey shading (not for navigation)',label:'Relief',make:()=>seaStyle==='gebco'?gebco('GEBCO_LATEST'):depthProvider(),seafloor:true},
- lightning:{name:'Lightning, live: every flash NOAA’s GOES-19 and GOES-18 lightning mappers detect over the Americas and nearby oceans, replayed about a minute behind real time, over a darkened globe with city lights (NASA)',label:'Lightning ⚡',make:()=>gibs('VIIRS_CityLights_2012',8,'jpeg'),lightning:true},
+ lightning:{name:'Lightning, live: every flash NOAA’s GOES-19 and GOES-18 lightning mappers detect over the Americas and nearby oceans, replayed about a minute behind real time, over a darkened globe (NASA Blue Marble)',label:'Lightning ⚡',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),lightning:true},
  basic:{name:'Basic (offline)',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
 };
 let imageryChoice='bluemarble';try{imageryChoice=localStorage.getItem('obs-imagery2')||imageryChoice}catch(e){}
@@ -97,7 +97,7 @@ function setDetail(on){if(on&&!detailLayer&&!window.OBS_OFFLINE_IMAGERY){try{det
 // The night side keeps a dim base plus NASA's "Earth at Night" city lights, like a real view from orbit.
 async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});nightLayer.show=globe.enableLighting;viewer.imageryLayers.add(nightLayer)}catch(e){}}
 async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
- try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});if(def.lightning){layer.brightness=.55;layer.saturation=.4}/* dim, so the flashes are the brightest thing on the globe */
+ try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});if(def.lightning){layer.brightness=.32;layer.saturation=.55;layer.contrast=1.15}/* dim, so the flashes are the brightest thing on the globe */
   // Fall back to the offline map only if the source is really down (many errors, nothing loaded), and don't remember that.
   let bad=0,good=0;p.errorEvent.addEventListener(()=>{bad++;if(k!=='basic'&&!layer.__failed&&bad>=25&&good===0){layer.__failed=true;note(def.label+' imagery did not load; showing the offline map for now. Choose it again to retry.');setImagery('basic',true)}});
   const origReq=p.requestImage.bind(p);p.requestImage=function(){const r=origReq.apply(p,arguments);if(r&&r.then)r.then(x=>{if(x)good++},()=>{});return r};
