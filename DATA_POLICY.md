@@ -61,6 +61,12 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Ground radiation comes from Safecast's volunteer sensors (CC0). The collector keeps only each reading's counts and position, then publishes 1° area medians with a sensor count. Device ids, owners, contact details and exact positions are dropped before anything is saved.
 - Relief appeals are IFRC GO's records, in IFRC's own names and Swiss-franc amounts. Sorting by unfunded amount is a sort, not a rating. The "How to help" list is the site's own guide, not an endorsement, and no group on it pays or is paid.
 
+## Low-power radio networks (LoRa)
+
+- LoRaWAN gateways come from TTN Mapper, whose FAQ says all its data "should be considered under the PDDL v 1.0 license". TTN Mapper offers no public API and its old GeoJSON and dump pages are gone, so the collector reads the same gateway list TTN Mapper's own map loads, once a day. If TTN Mapper asks, this stops.
+- Only gateways heard in the past 5 days are counted, into 0.5° areas (about 55 km). Gateway ids, EUIs, names, descriptions and exact positions are dropped before anything is saved: many gateways sit in people's homes.
+- Meshtastic and other mesh networks are linked, not collected. Their public map reports carry node names and positions, and message text on public channels is people talking. The site never shows either. Packet Broker's gateway API states no reuse terms, so it is linked only. The site is not affiliated with TTN Mapper, The Things Network or the Meshtastic project.
+
 ## Gravity, water and ice
 
 - GRACE-FO ice-mass series and the monthly water map are NASA JPL's mascon solution, downloaded from NASA PO.DAAC with the project's own free NASA Earthdata Login (kept as repository secrets, never in the page). JPL's trend line is quoted in its own words; the site computes no trends. The water map is coloured by this site from JPL's values and shown over land only.

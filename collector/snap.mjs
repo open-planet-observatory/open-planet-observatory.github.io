@@ -262,6 +262,28 @@ export const GROUPS = {
       cells: [...by].map(([k, n]) => k + ',' + n).join(';') } };
   },
 
+  // LoRaWAN gateways that TTN Mapper lists for The Things Network (data under PDDL 1.0, per TTN Mapper's FAQ). TTN Mapper
+  // offers no public API, so this reads the same gateway list its own map loads, once a day. Only gateways heard in the
+  // past 5 days, counted into 0.5° areas: gateway ids, EUIs, names, descriptions and exact positions are dropped here and
+  // never published (many gateways sit at people's homes).
+  async lora() {
+    const net = 'NS_TTS_V3://ttn@000013';
+    const d = await J('https://api.ttnmapper.org/network/' + encodeURIComponent(net) + '/gateways');
+    if (!Array.isArray(d)) throw new Error('TTN Mapper gateway list is not a list');
+    const now = Date.now(), cell = 0.5, by = new Map(); let n = 0, ttn = 0;
+    for (const g of d) {
+      const la = +g.latitude, lo = +g.longitude;
+      if (!Number.isFinite(la) || !Number.isFinite(lo) || (Math.abs(la) < 1 && Math.abs(lo) < 1) || Math.abs(la) > 90 || Math.abs(lo) > 180) continue;
+      const t = Date.parse(g.last_heard); if (!(now - t < 5 * 864e5)) continue;
+      n++; if (g.network_id === net) ttn++;
+      const k = (Math.floor(lo / cell) * cell + cell / 2) + ',' + (Math.floor(la / cell) * cell + cell / 2);
+      by.set(k, (by.get(k) || 0) + 1);
+    }
+    if (n < 100) throw new Error('fewer than 100 gateways in the TTN Mapper list (' + n + ')');
+    return { lora: { asOf: new Date().toISOString().slice(0, 16) + 'Z', gateways: n, ttn, other: n - ttn, cell,
+      cells: [...by].map(([k, c]) => k + ',' + c).join(';') } };
+  },
+
   // English-language news volume per hazard per day (GDELT). GDELT rate-limits hard: one query every 12 s.
   async news() {
     const Q = [['Earthquake', 'earthquake'], ['Wildfire', 'wildfire'], ['Flood', 'flood OR flooding'], ['Hurricane / typhoon', 'hurricane OR typhoon OR cyclone']];
@@ -282,4 +304,4 @@ export const GROUPS = {
 
 // How often each group is refreshed, in minutes. The workflow runs every 10 minutes.
 export const EVERY = { quakes: 10, alerts: 10, eonet: 30, air: process.env.OPENSKY_CLIENT_ID ? 10 : 30, // anonymous OpenSky access has a small daily allowance
-  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10, storms: 30, groundRad: 30, relief: 360 };
+  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10, storms: 30, groundRad: 30, relief: 360, lora: 1440 };

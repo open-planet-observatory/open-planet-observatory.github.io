@@ -109,6 +109,13 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
     const all = cells.map(c => c[2]).sort((a, b) => a - b), mid = all[all.length >> 1];
     ok(mid > 15 && mid < 80, 'Earth', 'grad-typical', 'The typical cell reads normal background (median of cells 15–80 CPM, about 0.05–0.25 µSv/h)', `${mid} CPM`);
   }
+  const LR = snap.lora; if (LR) {
+    const cells = String(LR.cells || '').split(';').filter(Boolean).map(c => c.split(',').map(Number));
+    const half = x => Math.abs(x * 4 - Math.round(x * 4)) < 1e-6 && Math.abs(x * 2 - Math.round(x * 2)) > 1e-6;
+    ok(cells.length && cells.every(c => c.length === 3 && c.every(Number.isFinite) && half(c[0]) && half(c[1]) && c[2] >= 1), 'Technology', 'lora-shape', 'LoRaWAN gateways are published only as counts per 0.5° area (area centre, count): no gateway ids, names or exact positions', `${cells.length} areas, ${LR.gateways} gateways`);
+    ok(cells.reduce((t, c) => t + c[2], 0) === LR.gateways, 'Technology', 'lora-sum', 'The area counts add up to the gateway total', `${LR.gateways}`);
+    ok(LR.gateways > 2000, 'Technology', 'lora-count', 'TTN Mapper lists more than 2,000 gateways heard in the past 5 days', `${LR.gateways}`, 'warn');
+  }
   const RL = snap.relief; if (RL) {
     const A = RL.appeals || [];
     ok(A.length >= 10 && A.length < 1000, 'People', 'relief-count', 'IFRC lists between 10 and 1,000 active appeals and DREF operations', `${A.length} active`);
