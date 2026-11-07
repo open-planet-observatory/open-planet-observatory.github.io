@@ -474,7 +474,7 @@ function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourStep
    every scale passes at the same pace. Nothing is labelled while it plays; any touch, scroll or Esc hands the view back. */
 function flightFade(on) { let f = document.getElementById('uniFade'); if (!f) { f = document.createElement('div'); f.id = 'uniFade'; document.body.appendChild(f); } requestAnimationFrame(() => f.classList.toggle('on', on)); return f; }
 async function flight() { if (!SM || !open) return; stopTour(); flyStop(); if (S.drift && S.drift.mode) driftSet('', 1); flightEnd(true);
-  const tok = S.flight = { t0: 0, light: S.show.light }; S.show.light = false; /* the streaks would crowd the planets */ ui.root.classList.add('flight'); ui.card.hidden = true; caption(''); if (window.OwlMusic && OwlMusic.autoOn) OwlMusic.autoOn();
+  const tok = S.flight = { t0: 0, light: S.show.light }; S.show.light = false; /* the streaks would crowd the planets */ ui.root.classList.add('flight'); ui.card.hidden = true; caption(''); /* the score is part of the flight: it plays even if the visitor had turned it off, and goes quiet again after (that choice is not overwritten) */ if (window.OwlMusic && OwlMusic.start && !OwlMusic.on) { tok.music = true; OwlMusic.start(true); } else if (window.__owlTempMusic) tok.music = true; window.__owlTempMusic = false;
   flightFade(true); rate = 0; simMs = Date.now();
   const c = ensureCosmos(); await Promise.race([Promise.resolve(c).then(() => COS && COS.loadEdge()).catch(() => { }), new Promise(r => setTimeout(r, 9000))]);
   if (S.flight !== tok) return;
@@ -506,7 +506,7 @@ async function flight() { if (!SM || !open) return; stopTour(); flyStop(); if (S
   S.anim = F; tok.F = F; setTimeout(() => { if (S.flight === tok) flightFade(false); }, 350);
   tok.watch = setInterval(() => { if (S.flight !== tok) return clearInterval(tok.watch); if (S.anim !== F) flightEnd(); }, 200); /* a touch or scroll took the view */
   tok.total = total; }
-function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
+function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; if (f.music && window.OwlMusic && OwlMusic.on) OwlMusic.stop(true); ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
 
 // ---------- loop, open, close ----------
 /* ---- Light travelling (Derik, 5 Nov 2026): streaks of sunlight move at ONE fixed speed the visitor picks — real speed
