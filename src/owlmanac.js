@@ -82,5 +82,6 @@ if(sp){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').ma
  const when=(ok,fn,t0=Date.now())=>{if(ok())fn();else if(Date.now()-t0<20000)setTimeout(()=>when(ok,fn,t0),200)};
  sp.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.sp;go();
   if(k==='site')when(()=>window.OwlSiteTour,()=>window.OwlSiteTour.start());
-  else when(()=>window.__obs&&window.__obs.openUniverse,()=>{if(window.OwlMusic&&window.OwlMusic.autoOn)window.OwlMusic.autoOn();window.__obs.openUniverse(k==='fly'?'flight':'tour')})}))}
+  else{const M=window.OwlMusic;if(k==='fly'){if(M&&M.start&&!M.on){M.start(true);window.__owlTempMusic=true}}/* start the score inside the click, where browsers allow sound; the flight hands it back afterwards */else if(M&&M.autoOn)M.autoOn();
+   when(()=>window.__obs&&window.__obs.openUniverse,()=>window.__obs.openUniverse(k==='fly'?'flight':'tour'))}}))}
 })();
