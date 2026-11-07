@@ -97,13 +97,13 @@ function setDetail(on){if(on&&!detailLayer&&!window.OBS_OFFLINE_IMAGERY){try{det
 // The night side keeps a dim base plus NASA's "Earth at Night" city lights, like a real view from orbit.
 async function addNightLights(){if(nightLayer||window.OBS_OFFLINE_IMAGERY)return;try{const p=gibs('VIIRS_CityLights_2012',8,'jpeg');nightLayer=new C.ImageryLayer(p,{dayAlpha:0,nightAlpha:1});nightLayer.show=globe.enableLighting;viewer.imageryLayers.add(nightLayer)}catch(e){}}
 async function setImagery(k,auto){const def=IMAGERY[k]||IMAGERY.bluemarble;
- try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});if(def.lightning){layer.brightness=.32;layer.saturation=.55;layer.contrast=1.15}/* dim, so the flashes are the brightest thing on the globe */
+ try{const p=await def.make();const layer=new C.ImageryLayer(p,{nightAlpha:k==='basic'?1:.55});if(def.lightning){layer.brightness=.3;layer.saturation=.6;layer.contrast=1.1}/* dim, so the flashes are the brightest thing on the globe */
   // Fall back to the offline map only if the source is really down (many errors, nothing loaded), and don't remember that.
   let bad=0,good=0;p.errorEvent.addEventListener(()=>{bad++;if(k!=='basic'&&!layer.__failed&&bad>=25&&good===0){layer.__failed=true;note(def.label+' imagery did not load; showing the offline map for now. Choose it again to retry.');setImagery('basic',true)}});
   const origReq=p.requestImage.bind(p);p.requestImage=function(){const r=origReq.apply(p,arguments);if(r&&r.then)r.then(x=>{if(x)good++},()=>{});return r};
   if(baseLayer)viewer.imageryLayers.remove(baseLayer,true);baseLayer=layer;viewer.imageryLayers.add(layer,0);setDetail(!!def.detail);addNightLights();if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer);
   imageryChoice=k;syncMeasured();seaLight(!!def.seafloor,!!def.lightning);try{satPts.show=satLbl.show=!def.seafloor&&!def.lightning}catch(e){}/* the sea floor is seen best without the satellite cloud in front of it */if(!auto){note(def.seafloor?'Most of the sea floor has never been sounded by a ship; both grids fill those areas with depths estimated from satellite measurements of the sea surface. “Measured only” shows which parts GEBCO has from real soundings. Satellites are hidden and the globe is lit evenly while the sea floor is shown. Not for navigation.':'');if(!def.lightning)try{localStorage.setItem('obs-imagery2',k)}catch(e){}/* lightning streams megabytes: never switched on by itself on a later visit */}
-  if(window.OwlLightning){if(def.lightning){OwlLightning.start();if(!auto)viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-88,10,1.9e7),duration:2.2})}else OwlLightning.stop()}
+  if(window.OwlLightning){if(def.lightning){OwlLightning.start();if(!auto){spin=false;O.setSpin&&O.setSpin(false)}/* the storms stay in view */if(!auto)viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-88,10,1.9e7),duration:2.2})}else OwlLightning.stop()}
   document.querySelectorAll('#imgSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  }catch(e){if(k!=='basic')setImagery('basic',true)}}
 /* the sea floor is read best lit evenly: lighting goes off while it is shown and comes back as it was */
@@ -118,7 +118,7 @@ let measuredLayer=null,measuredOn=false;
 function syncMeasured(){const on=measuredOn&&IMAGERY[imageryChoice]?.seafloor;const btn=document.getElementById('measuredBtn');if(btn){btn.hidden=!IMAGERY[imageryChoice]?.seafloor;btn.setAttribute('aria-pressed',on)}
  if(on&&!measuredLayer){try{measuredLayer=new C.ImageryLayer(gebco('GEBCO_LATEST_3',true),{nightAlpha:1});viewer.imageryLayers.add(measuredLayer,1)}catch(e){}}
  if(!on&&measuredLayer){viewer.imageryLayers.remove(measuredLayer,true);measuredLayer=null}
- if(baseLayer)baseLayer.brightness=on?.32:1}
+ if(baseLayer&&!IMAGERY[imageryChoice]?.lightning)baseLayer.brightness=on?.32:1}
 setImagery(imageryChoice);
 function note(t){const n=document.getElementById('imgNote');if(n)n.textContent=t}
 

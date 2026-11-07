@@ -12,7 +12,7 @@
   const SATS = [{ id: 'GOES-19', b: 'noaa-goes19', lon: -75.2 }, { id: 'GOES-18', b: 'noaa-goes18', lon: -137.0 }];
   const SPLIT = -106.1, EPOCH = Date.UTC(2000, 0, 1, 12), KEEP = 180, H = 12000; /* afterglow seconds; drawn at cloud-top height (m) */
   const TSC = 0.0003814756, TOF = -5, ESC = 9.99996e-16, EOF = 2.8515e-16, ASC = 152601.86; /* GLM L2 packing (product user guide) */
-  let hid = [], on = false, h5 = null, V = null, pts = null, bbs = null, edge = [], pool = [], act = [], fl = [], idx = 0, lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0, pre = null;
+  let dyn = null, hid = [], on = false, h5 = null, V = null, pts = null, bbs = null, edge = [], pool = [], act = [], fl = [], idx = 0, lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0, pre = null;
   const phone = matchMedia('(max-width:700px)').matches;
   const note = t => { const n = document.getElementById('imgNote'); if (n) n.innerHTML = t; };
   const glowImg = (() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'); const r = g.createRadialGradient(32, 32, 0, 32, 32, 32);
@@ -70,12 +70,13 @@
     pts = V.scene.primitives.add(new C.PointPrimitiveCollection()); bbs = V.scene.primitives.add(new C.BillboardCollection({ blendOption: C.BlendOption.TRANSLUCENT }));
     edge = SATS.map(s => V.entities.add({ polyline: { positions: C.Cartesian3.fromDegreesArray(circle(s.lon)), width: 1.2, material: new C.PolylineDashMaterialProperty({ color: C.Color.fromCssColorString('#9fc7ff').withAlpha(.35), dashLength: 14 }), arcType: C.ArcType.GEODESIC } }));
     /* the flashes are the feature: the other map layers step aside while they play, and come back as they were */
+    dyn = V.scene.globe.dynamicAtmosphereLighting; V.scene.globe.dynamicAtmosphereLighting = false; /* the night side would go black even with the globe lit evenly */
     hid = []; for (let i = 0; i < V.dataSources.length; i++) { const d = V.dataSources.get(i); if (d.show) { d.show = false; hid.push(d); } }
     pre = V.scene.preRender.addEventListener(frame); tick = setInterval(() => { if (on) V.scene.requestRender(); }, 1000 / 30);
     poll(true); }
   function stop() { if (!on) return; on = false; clearTimeout(timer); clearInterval(tick); if (pre) pre(); pre = null;
     try { V.scene.primitives.remove(pts); V.scene.primitives.remove(bbs); edge.forEach(e => V.entities.remove(e)); } catch (e) { }
-    hid.forEach(d => { try { d.show = true; } catch (e) { } }); hid = [];
+    hid.forEach(d => { try { d.show = true; } catch (e) { } }); hid = []; if (dyn != null) V.scene.globe.dynamicAtmosphereLighting = dyn; dyn = null;
     pts = bbs = null; edge = []; pool = []; act = []; fl = []; idx = 0; lag = null; last = {}; failed = 0; }
   window.OwlLightning = { start, stop, get on() { return on; } };
 })();
