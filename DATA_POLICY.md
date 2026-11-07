@@ -278,3 +278,18 @@ The header button "The Owlmanac on YouTube" opens a card for the YouTube channel
 
 ## The Solar System on the move
 The Solar System view's "Sun" switch (Still / Past nearby stars / Around the galaxy) draws each planet's last three orbits in a frame where the Sun moves, so the ellipses become helices. Planet positions are Astronomy Engine's. The Sun's velocity in Galactic coordinates comes from published measurements: its motion relative to the stars around it (the Local Standard of Rest), (U, V, W) = (11.1, 12.24, 7.25) km/s, from Schönrich, Binney & Dehnen 2010 (MNRAS 403, 1829); and its total circular velocity around the Galactic centre, 247 km/s, from Reid et al. 2019 (ApJ 885, 131). "Real" uses those speeds; ÷10 to ÷1,000 slow only the Sun's motion so the coils can be seen, and the on-screen line always says by how much. "Fly alongside" runs time forward at 90 days a second and glides the camera around the Sun's direction of travel; the trails keep a rolling buffer of real positions (one sample every 1/150 of each orbit). The direction (a constellation), the angle between the Sun's path and the plane of the planets' orbits, and the distances per year are worked out in the page from these numbers. The "spiral myth" note explains, in the site's own words, how this differs from popular "vortex" animations; it names no one.
+
+## Lightning, live (Earth view)
+
+The "Lightning" imagery choice streams NOAA's Geostationary Lightning Mapper (GLM) Level 2 flash files from GOES-19 (GOES-East, 75.2°W) and GOES-18 (GOES-West, 137.0°W), straight from NOAA's open buckets on AWS (NOAA Open Data Dissemination; U.S. government data, public domain). A file arrives every 20 seconds per satellite; the visitor's browser reads each one (with jsfive, a public-domain HDF5 reader served from this site and loaded only when the layer is on) and replays every flash at its recorded time, about a minute behind real time. The files carry a legacy metadata line about restricted access; NOAA publishes them openly and the AWS registry lists no restrictions on use.
+
+- Each glow is one detected flash, at its recorded place and time. Its size follows the flash's measured area and its brightness the measured optical energy. The flicker during a flash's measured duration is drawing, not data. Dots stay for three minutes and fade.
+- Only flashes with GLM's "good quality" flag are drawn. Where the two satellites' views overlap, flashes east of 106.1°W are taken from GOES-19 and west of it from GOES-18, so none is drawn twice.
+- The flash count shown is a count of those flashes in the last minute, nothing more: no index or forecast.
+- Blind spots: the two satellites see the Americas and nearby oceans only (the dashed lines mark the edge roughly); outside them nothing is shown, which does not mean no lightning. GLM misses some weak flashes, more by day than by night. If NOAA's feed does not answer, the layer says so and shows no new flashes; it never shows old flashes as new.
+- Other map layers are set aside while lightning plays and come back as they were. The choice is never remembered for a later visit, because it streams several megabytes a minute.
+- Global coverage would need another source. Blitzortung (volunteer network) is linked, not used: its terms limit reuse, and a request for permission is pending the maintainer's decision.
+
+## The fly-through (Solar System view and the landing page)
+
+A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it.

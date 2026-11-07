@@ -70,11 +70,17 @@ if(sg&&!document.getElementById('owlGrid')){const head=sg.previousElementSibling
 function moonLinks(){const c=document.getElementById('moonCard');if(!c||c.querySelector('.owl-moon'))return;const foot=c.querySelector('.sg-foot');const d=document.createElement('p');d.className='small owl-moon';
  d.innerHTML=`<b>From The Owlmanac:</b> ${EPISODES.filter(e=>e[3]==='moon').map(e=>`<a href="${esc(e[1])}" target="_blank" rel="noopener">${esc(e[0])} ↗</a>`).join(' · ')}`;if(foot)foot.before(d);else c.appendChild(d)}
 moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObserver(moonLinks).observe(mh,{childList:true});
-// Intro splash (markup is written by the build before any script): the artwork stays until the visitor clicks or presses a key, or for 12 s at most (Derik, 2026-11-01: give people time to see it). When the globe is ready behind it, the loading bar finishes.
+// Intro splash (markup is written by the build before any script). It stays until the visitor chooses: Enter, Esc, or one of the
+// starting points under it (Derik, 7 Nov 2026: no automatic switch to the home page; site tour, universe tour, fly-through and the YouTube channel from here).
 const sp=document.getElementById('owlSplash');
-if(sp){const t0=performance.now();let ready=false,gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>sp.remove(),rm?0:800);document.removeEventListener('keydown',go)};
- document.addEventListener('obs:globe-ready',()=>{ready=true;sp.classList.add('ready')},{once:true});
- sp.addEventListener('click',go);document.addEventListener('keydown',go);sp.querySelector('.go')?.focus({preventScroll:true});
- setTimeout(go,12000)}
+if(sp){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>sp.remove(),rm?0:800);document.removeEventListener('keydown',key)};
+ const key=e=>{if(e.key==='Escape')go()};
+ document.addEventListener('obs:globe-ready',()=>{sp.classList.add('ready')},{once:true});
+ sp.querySelector('.go')?.addEventListener('click',go);document.addEventListener('keydown',key);sp.querySelector('.go')?.focus({preventScroll:true});
+ /* the starting points wait for the page behind to be ready enough, then run */
+ const when=(ok,fn,t0=Date.now())=>{if(ok())fn();else if(Date.now()-t0<20000)setTimeout(()=>when(ok,fn,t0),200)};
+ sp.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.sp;go();
+  if(k==='site')when(()=>window.OwlSiteTour,()=>window.OwlSiteTour.start());
+  else when(()=>window.__obs&&window.__obs.openUniverse,()=>{if(window.OwlMusic&&window.OwlMusic.autoOn)window.OwlMusic.autoOn();window.__obs.openUniverse(k==='fly'?'flight':'tour')})}))}
 })();
