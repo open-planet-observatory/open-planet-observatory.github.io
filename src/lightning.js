@@ -16,7 +16,7 @@
   const SATS = [{ id: 'GOES-19', b: 'noaa-goes19', lon: -75.2 }, { id: 'GOES-18', b: 'noaa-goes18', lon: -137.0 }];
   const SPLIT = -106.1, EPOCH = Date.UTC(2000, 0, 1, 12), KEEP = 180, H = 12000; /* afterglow seconds; drawn at cloud-top height (m) */
   const TSC = 0.0003814756, TOF = -5, ESC = 9.99996e-16, EOF = 2.8515e-16, ASC = 152601.86; /* GLM L2 packing (product user guide) */
-  let dyn = null, hid = [], on = false, h5 = null, V = null, pts = null, cv = null, cx = null, key = null, post = null, edge = [], act = [], fl = [], idx = 0, lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0;
+  let dyn = null, hid = [], on = false, h5 = null, V = null, pts = null, cv = null, cx = null, key = null, post = null, edge = [], act = [], fl = [], q = [], lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0;
   const GSC = 9.9988e-17, CLS = [{ n: 'Faint', c: [150, 125, 255], hex: '#967dff', r: 'under 30 fJ' }, { n: 'Moderate', c: [120, 210, 255], hex: '#78d2ff', r: '30–300 fJ' }, { n: 'Bright', c: [255, 240, 196], hex: '#fff0c4', r: 'over 300 fJ' }];
   const cls = e => e < 3e-14 ? 0 : e < 3e-13 ? 1 : 2;
   const W2W = (C.SceneTransforms.worldToWindowCoordinates || C.SceneTransforms.wgs84ToWindowCoordinates).bind(C.SceneTransforms);
@@ -42,12 +42,12 @@
     return { out, tEnd }; }
   async function poll(first) { if (!on) return; let got = 0, newest = 0;
     for (const s of SATS) { try { let keys = await list(s, last[s.b]); if (first) keys = keys.slice(-(phone ? 3 : 6)); else keys = keys.slice(-3);
-        for (const k of keys) { const { out, tEnd } = await read(s, k); if (!on) return; fl.push(...out); got += out.length; newest = Math.max(newest, tEnd); last[s.b] = k; loaded++; } s.ok = true; }
+        for (const k of keys) { const { out, tEnd } = await read(s, k); if (!on) return; fl.push(...out); q.push(...out); got += out.length; newest = Math.max(newest, tEnd); last[s.b] = k; loaded++; } s.ok = true; }
       catch (e) { s.ok = false; console.warn('lightning', s.id, e); } }
     if (!SATS.some(s => s.ok)) { failed++; note(`The NOAA lightning feed did not answer${failed > 1 ? ' again' : ''}, so no new flashes are shown. Trying again every 20 seconds.`); }
     else failed = 0;
-    if (got) { fl.sort((a, b) => a.t - b.t); if (lag == null && newest) lag = Date.now() - newest + 40000; /* play from 40 s before the newest file */
-      const cut = play() - KEEP * 1000 - 5000; let k = 0; while (k < fl.length && fl[k].t < cut) { if (fl[k].p) pts.remove(fl[k].p); k++; } if (k) { fl.splice(0, k); idx = Math.max(0, idx - k); } }
+    if (got) { fl.sort((a, b) => a.t - b.t); q.sort((a, b) => a.t - b.t); /* new files can hold flashes from before the playhead (the other satellite runs behind): they wait in their own queue, so nothing already drawn is replayed */ if (lag == null && newest) lag = Date.now() - newest + 40000; /* play from 40 s before the newest file */
+      const cut = play() - KEEP * 1000 - 5000; let k = 0; while (k < fl.length && fl[k].t < cut) { if (fl[k].p) pts.remove(fl[k].p); k++; } if (k) fl.splice(0, k); }
     if (first && lag != null) backfill(); status();
     timer = setTimeout(() => poll(false), 20000); }
   const play = () => Date.now() - (lag || 0);
@@ -55,7 +55,7 @@
   /* the flash's shape: its groups in time order, each joined to the nearest earlier group (distance on a local flat map) */
   function tree(f) { const G = f.g.sort((x, y) => x[2] - y[2]); if (!G.length) G.push([f.lat, f.lon, 0, f.e]); const k = Math.cos(f.lat * Math.PI / 180);
     f.par = G.map((x, i) => { let best = -1, bd = 1e9; for (let j = 0; j < i; j++) { const dx = (x[1] - G[j][1]) * k, dy = x[0] - G[j][0], d = dx * dx + dy * dy; if (d < bd) { bd = d; best = j; } } return best; }); }
-  function backfill() { const p = play(); while (idx < fl.length && fl[idx].t <= p) { glowDot(fl[idx]); fl[idx].g = null; idx++; } }
+  function backfill() { const p = play(); while (q.length && q[0].t <= p) { const f = q.shift(); glowDot(f); f.g = null; } }
   function glowDot(f) { const k = CLS[f.c].c; f.p = pts.add({ position: pos(f), pixelSize: 3 + f.c, color: C.Color.fromBytes(k[0], k[1], k[2], 230) }); }
   function status() { if (!on || failed) return; const p = play(), n = [0, 0, 0]; for (const f of fl) if (f.t <= p && f.t > p - 60000) n[f.c]++; const tot = n[0] + n[1] + n[2], sec = lag ? Math.round(lag / 1000) : null;
     const seen = SATS.filter(s => s.ok).map(s => s.id).join(' and ');
@@ -63,19 +63,20 @@
     if (key) { const pc = x => tot ? Math.round(100 * x / tot) : 0, K = draw.K || 1;
       key.innerHTML = `<div class="lk-h"><b>⚡ Lightning, last minute</b><span>${tot.toLocaleString()} flashes</span></div><div class="lk-bar">${CLS.map((k, i) => `<i style="flex:${n[i] || 0.0001};background:${k.hex}"></i>`).join('')}</div><div class="lk-row">${CLS.map((k, i) => `<span title="Optical energy ${k.r}"><i style="background:${k.hex}"></i>${k.n} ${pc(n[i])}%</span>`).join('')}</div><p>Strength = light energy NOAA's satellites measured. Lines trace each flash through the cloud in the order it lit.${K > 1.3 ? ` Shapes drawn ${Math.round(K)}× larger at this zoom.` : ''} Positive vs negative charge: not measured by these satellites.</p>`; } }
   function frame() { if (!on) return; const p = play(), now = performance.now();
-    while (idx < fl.length && fl[idx].t <= p) { const f = fl[idx++]; glowDot(f); if (p - f.t < 3000 && act.length < 300) act.push(f); else f.g = null; }
+    while (q.length && q[0].t <= p) { const f = q.shift(); if (!pts) return; glowDot(f); if (p - f.t < 3000 && act.length < 300) act.push(f); else f.g = null; }
     if (!frame.t || now - frame.t > 250) { frame.t = now; /* the dots cool and fade over three minutes */
-      for (let i = 0; i < idx && i < fl.length; i++) { const f = fl[i]; if (!f.p) continue; const age = (p - f.t) / 1000; if (age > KEEP) { pts.remove(f.p); f.p = null; continue; }
+      for (let i = 0; i < fl.length; i++) { const f = fl[i]; if (!f.p) continue; const age = (p - f.t) / 1000; if (age > KEEP) { pts.remove(f.p); f.p = null; continue; }
         const x = age / KEEP, k = CLS[f.c].c, w = age < 3 ? 1 : 0; f.p.color = C.Color.fromBytes(k[0], k[1], k[2], Math.round(255 * (0.9 * Math.pow(1 - x, 1.5) + 0.05))); f.p.pixelSize = (2.4 + f.c * 0.8) * (1 + w * 0.6) * (1 - 0.35 * x); } }
     if (!frame.s || now - frame.s > 5000) { frame.s = now; status(); } }
   /* drawn on a canvas over the globe after every frame, in screen space, with additive light */
   const tmp = new C.Cartesian3(), nrm = new C.Cartesian3(), win = new C.Cartesian2();
-  function draw() { if (!on || !cv) return; const sc = V.scene, dpr = Math.min(2, devicePixelRatio || 1), w = V.canvas.clientWidth, h = V.canvas.clientHeight;
+  function draw() { try { drawFrame(); } catch (e) { console.warn('lightning draw', e); if (cx) { try { cx.setTransform(1, 0, 0, 1, 0, 0); cx.clearRect(0, 0, cv.width, cv.height); } catch (x) { } } } } /* a drawing fault must never stop the globe */
+  function drawFrame() { if (!on || !cv) return; const sc = V.scene, dpr = Math.min(2, devicePixelRatio || 1), w = V.canvas.clientWidth, h = V.canvas.clientHeight;
     if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
     cx.setTransform(1, 0, 0, 1, 0, 0); cx.clearRect(0, 0, cv.width, cv.height); cx.setTransform(dpr, 0, 0, dpr, 0, 0); cx.globalCompositeOperation = 'lighter'; cx.lineCap = 'round';
     const camH = V.camera.positionCartographic.height, fov = V.camera.frustum.fovy || 1, mpp = 2 * camH * Math.tan(fov / 2) / Math.max(1, h);
     const K = Math.max(1, Math.min(20, mpp / 600)); draw.K = K; const cam = V.camera.positionWC, p = play();
-    for (let i = act.length - 1; i >= 0; i--) { const f = act[i], k = p - f.t, dur = f.d * 1000;
+    for (let i = act.length - 1; i >= 0; i--) { const f = act[i], k = p - f.t, dur = f.d * 1000; if (!f.g) { act.splice(i, 1); continue; }
       const fade = k <= dur ? 1 : Math.exp(-(k - dur) / 650); if (fade < 0.03 || k > dur + 3000) { act.splice(i, 1); f.g = null; f.sp = null; continue; }
       const P = pos(f); C.Cartesian3.normalize(P, nrm); if (C.Cartesian3.dot(nrm, C.Cartesian3.subtract(cam, P, tmp)) < 0) continue; /* behind the Earth */
       const c0 = W2W(sc, P, win); if (!c0) continue; const ox = c0.x, oy = c0.y; if (ox < -300 || oy < -300 || ox > w + 300 || oy > h + 300) continue;
@@ -106,11 +107,11 @@
     /* the flashes are the feature: the other map layers step aside while they play, and come back as they were */
     dyn = V.scene.globe.dynamicAtmosphereLighting; V.scene.globe.dynamicAtmosphereLighting = false; /* the night side would go black even with the globe lit evenly */
     hid = []; for (let i = 0; i < V.dataSources.length; i++) { const d = V.dataSources.get(i); if (d.show) { d.show = false; hid.push(d); } }
-    post = [V.scene.preRender.addEventListener(frame), V.scene.postRender.addEventListener(draw)]; tick = setInterval(() => { if (on) V.scene.requestRender(); }, 1000 / 30);
+    post = [V.scene.preRender.addEventListener(() => { try { frame(); } catch (e) { console.warn('lightning frame', e); } }), V.scene.postRender.addEventListener(draw)]; tick = setInterval(() => { if (on) V.scene.requestRender(); }, 1000 / 30);
     poll(true); }
   function stop() { if (!on) return; on = false; clearTimeout(timer); clearInterval(tick); if (post) post.forEach(x => x()); post = null; if (cv) cv.remove(); if (key) key.remove(); cv = cx = key = null;
     try { V.scene.primitives.remove(pts); edge.forEach(e => V.entities.remove(e)); } catch (e) { }
     hid.forEach(d => { try { d.show = true; } catch (e) { } }); hid = []; if (dyn != null) V.scene.globe.dynamicAtmosphereLighting = dyn; dyn = null;
-    pts = null; edge = []; act = []; fl = []; idx = 0; lag = null; last = {}; failed = 0; }
-  window.OwlLightning = { start, stop, get on() { return on; }, state: () => ({ flashes: fl.length, active: act.length, played: idx, lag, files: loaded }) };
+    pts = null; edge = []; act = []; fl = []; q = []; lag = null; last = {}; failed = 0; }
+  window.OwlLightning = { start, stop, get on() { return on; }, state: () => ({ flashes: fl.length, active: act.length, waiting: q.length, lag, files: loaded }) };
 })();
