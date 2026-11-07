@@ -372,7 +372,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-ctl{padding-right:34px}
 .uni-fold{position:absolute;right:6px;top:6px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#c9d2de;font-size:.8rem;line-height:1;cursor:pointer;padding:0}
 .uni-fold:hover{background:rgba(255,255,255,.14)}
-#uni.folded .uni-ctl>.seg,#uni.folded .uni-ctl>.uni-more{display:none}
+#uni.folded .uni-ctl>.seg,#uni.folded .uni-ctl>.uni-grp,#uni.folded .uni-ctl>.uni-more{display:none}
 #uni.folded .uni-ctl{padding:8px 34px 8px 12px}
 .uni-credits summary{cursor:pointer;font-size:.72rem;color:#8d97a6;padding:2px 0}
 .uni-credits[open] summary{margin-bottom:4px}
@@ -1076,7 +1076,7 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 #uni .uni-drift-card a{color:#9cc7ff}
 #uni.clean .uni-drift-note{display:none}
 @media (min-width:641px) and (max-width:900px){#uni .uni-drift-note{right:48px}}
-@media (max-width:640px){#uni .uni-drift-note{top:auto;bottom:236px;right:12px;left:12px;max-width:none}#uni .uni-drift-note p{font-size:.7rem;background:rgba(8,10,16,.6);border-radius:8px;padding:4px 6px}#uni .uni-drift-card{max-height:38vh}}
+@media (max-width:640px){#uni .uni-drift-note{top:150px;bottom:auto;right:12px;left:12px;max-width:none}#uni .uni-drift-note p{font-size:.7rem;background:rgba(8,10,16,.6);border-radius:8px;padding:4px 6px}#uni .uni-drift-card{max-height:38vh}}
 
 /* Tour Site: × to end the tour from any step */
 .st-card .st-x{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:999px;border:1px solid var(--glass-line);background:none;color:var(--ink-2);font-size:1.05rem;line-height:1;cursor:pointer}
@@ -1088,3 +1088,9 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 html.map2d #imgGroup .img2d{display:block}
 html.map2d #imgGroup > :not(.gl):not(.img2d){display:none!important}
 html.map2d .rail-light{display:none!important}
+
+/* Solar System controls: each row has its own small heading, so Light, Viewpoint and Sun's speed read as categories */
+#uni .uni-grp{display:flex;flex-direction:column;gap:3px}
+#uni .uni-grp[hidden]{display:none!important}
+#uni .uni-h{font-size:.64rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#aab4c3;padding-left:4px}
+#uni .uni-grp>.seg{align-self:flex-start}
