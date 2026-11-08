@@ -1162,3 +1162,24 @@ html.map2d .rail-light{display:none!important}
 .ltg-key.min .lk-bar,.ltg-key.min .lk-row,.ltg-key.min .lk-mtg,.ltg-key.min p{display:none}
 .ltg-key.min{width:auto}
 #imgNote .ltg-more{margin-top:6px}#imgNote .ltg-more summary{cursor:pointer;color:var(--accent,#D9A441);font-weight:600}
+
+/* landing page, 8 Nov 2026: the kicker line at the top left, no explanation under the title, Voyager 1's distance at the top right */
+#owlSplash>.k{position:absolute;top:max(22px,env(safe-area-inset-top,0px));left:max(28px,env(safe-area-inset-left,0px));z-index:2;font-family:var(--mono,ui-monospace,monospace);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#D9A441;text-shadow:0 1px 8px rgb(0 0 0 / .8);animation:owlSplashUp .8s .25s ease both}
+#owlSplash h1{margin-top:0}
+#owlSplash .sp-voy{position:absolute;z-index:2;top:max(18px,env(safe-area-inset-top,0px));right:max(28px,env(safe-area-inset-right,0px));width:min(400px,40vw);padding:10px 12px 9px;border-radius:14px;background:rgb(11 9 6 / .62);border:1px solid rgb(217 164 65 / .35);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);color:#EFE4CC;animation:owlSplashIn 1s .6s ease both}
+#owlSplash .sp-voy[hidden]{display:none}
+.vy-line{font-size:.78rem;line-height:1.35}.vy-line svg{display:block;width:100%;height:auto;overflow:visible}
+.vy-line .vl-t{font:600 9.5px var(--mono,ui-monospace,monospace);fill:#C9B995;letter-spacing:.02em}.vy-line .vl-g{fill:#F2C43C}.vy-line .vl-b{fill:#EFE4CC;font-size:10.5px}
+.vy-line .vl-n{margin-top:2px;color:#C9B995;font-variant-numeric:tabular-nums}.vy-line .vl-n b{color:#EFE4CC;font-weight:700}
+.vy-line .vl-s{animation:vlSig 4.5s linear infinite}
+@keyframes vlSig{0%{transform:translateX(0);opacity:0}6%{opacity:1}92%{opacity:1}100%{transform:translateX(var(--vx,300px));opacity:0}}
+@media (prefers-reduced-motion:reduce){.vy-line .vl-s{animation:none;opacity:0}}
+.vy-line.in-panel{margin:-4px 0 14px;padding:8px 12px 9px;border:1px solid rgba(242,196,60,.3);border-radius:12px}
+.vy-line.in-panel[hidden]{display:none}
+.vy-line.in-panel .vl-t{fill:var(--ink-3,#9A8B6D)}.vy-line.in-panel .vl-b{fill:var(--ink,#EFE4CC)}.vy-line.in-panel .vl-n{color:var(--ink-3,#9A8B6D)}.vy-line.in-panel .vl-n b{color:var(--ink,#EFE4CC)}
+@media (max-width:640px){#owlSplash>.k{font-size:.62rem;letter-spacing:.16em;right:140px}
+ #owlSplash{flex-direction:column;justify-content:flex-end;align-items:stretch}
+ #owlSplash .sp-voy{top:auto;position:relative;right:auto;width:auto;margin:0 max(16px,env(safe-area-inset-left,0px)) 14px;animation:none}}
+.vy-line .vl-h{display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:2px}.vy-line .vl-h b{color:#F2C43C;font-size:.82rem}.vy-line .vl-h span{font:600 .62rem var(--mono,ui-monospace,monospace);letter-spacing:.12em;text-transform:uppercase;color:#9A8B6D}
+.vy-line.in-panel .vl-h b{color:var(--accent,#D9A441)}
+html.owl-splash-on .hint-bubble{display:none}

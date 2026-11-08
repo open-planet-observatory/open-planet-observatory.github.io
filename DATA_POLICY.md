@@ -170,6 +170,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 ## Voyager 1 countdown
 
 - The moment Voyager 1 first reaches one light-day from Earth (173.1446 AU) is computed by the collector from NASA JPL Horizons' distance between Voyager 1 and Earth's centre at each instant (no light-time correction; 6-hour grid, refined to the second between one-minute values), and recomputed daily. It matches NASA's own countdown (18 November 2026, 10:16:07 UTC). Until 4 November 2026 the site used Horizons' light-time-corrected range, which placed the moment about 16 hours late. The distance on the banner counts up from Horizons' latest hourly value at its stated range-rate. If Horizons does not answer, the banner says the figure is yesterday's. The banner retires itself a week after the moment.
+- The distance line (landing page and under the banner) is drawn to scale, linear, from Earth, using the same counted-up distance. Its marks are Neptune's average distance from the Sun (30.07 AU), where Voyager 1 entered interstellar space (August 2012, per NASA; 121.6 AU from the Sun on 25 August 2012 in JPL Horizons) and one light-day (173.1446 AU). The marks are distances from the Sun while Voyager's is from Earth; at this scale the difference (at most 1 AU) is under a pixel. Light time = distance ÷ the speed of light. The moving dot stands for a radio signal and is drawn sped up.
 - Video links on the banner are The Owlmanac's own; each appears from its scheduled release time.
 
 ## Forecast where you click
