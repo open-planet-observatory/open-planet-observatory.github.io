@@ -1139,7 +1139,7 @@ html.map2d .rail-light{display:none!important}
 /* Tech & Industry hidden for now: its map layer goes with it */
 #chip-econ{display:none!important}
 /* landing page: the 3D emblem turns in the lower right; the starting points read as buttons */
-#owlSplash .mark3d{position:absolute;right:max(28px,env(safe-area-inset-right,0px));bottom:max(30px,env(safe-area-inset-bottom,0px));width:clamp(170px,19vw,290px);aspect-ratio:1;filter:drop-shadow(0 8px 26px rgb(0 0 0 / .65)) drop-shadow(0 0 22px rgb(217 164 65 / .18));pointer-events:none;animation:owlSplashIn 1.2s .4s ease both}
+#owlSplash .mark3d{position:absolute;right:max(28px,env(safe-area-inset-right,0px));bottom:max(30px,env(safe-area-inset-bottom,0px));width:clamp(170px,19vw,290px);aspect-ratio:1;filter:drop-shadow(-8px 16px 24px rgb(0 0 0 / .7)) drop-shadow(0 0 22px rgb(217 164 65 / .14));pointer-events:none;animation:owlSplashIn 1.2s .4s ease both}
 #owlSplash .mark3d canvas{display:block}
 #owlSplash .sp-links{gap:10px 10px;border-top:0;padding-top:4px}
 #owlSplash .sp-links button,#owlSplash .sp-links a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid rgb(217 164 65 / .55);border-radius:999px;background:rgb(11 9 6 / .45);text-decoration:none;backdrop-filter:blur(6px);font-size:.85rem;transition:background .2s,border-color .2s}

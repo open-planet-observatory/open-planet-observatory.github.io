@@ -37,13 +37,24 @@ export function mountEmblem(el, opt = {}) {
   const scene = new T.Scene(), cam = new T.PerspectiveCamera(28, 1, 0.1, 50);
   const g = geometry(), tex = new T.TextureLoader().load(new URL('./owl-faces.jpg', import.meta.url).href, () => draw()); tex.colorSpace = T.SRGBColorSpace; tex.anisotropy = r.capabilities.getMaxAnisotropy();
   const mat = new T.MeshStandardMaterial({ map: tex, roughness: 0.62, metalness: 0.12, flatShading: true });
-  const mesh = new T.Mesh(g, mat); const ridges = new T.LineSegments(new T.EdgesGeometry(g, 1), new T.LineBasicMaterial({ color: '#fff3d8', transparent: true, opacity: 0.85 }));
+  const mesh = new T.Mesh(g, mat); const ridges = new T.LineSegments(new T.EdgesGeometry(g, 1), new T.LineBasicMaterial({ color: '#fff3d8', transparent: true, opacity: 0.6 }));
   const obj = new T.Group(); obj.add(mesh, ridges); scene.add(obj);
   const rad = g.boundingSphere.radius; cam.position.set(0, 0, rad / Math.sin(14 * Math.PI / 180) * 1.08); cam.lookAt(0, 0, 0);
-  scene.add(new T.AmbientLight('#fff4e0', 0.55));
-  const key = new T.DirectionalLight('#fff1d6', 3.0); key.position.set(-3, 4, 5); scene.add(key);
-  const fill = new T.DirectionalLight('#c8a06a', 0.9); fill.position.set(4, -2, 2); scene.add(fill);
-  const rim = new T.DirectionalLight('#ffd9a0', 1.6); rim.position.set(1, 2, -6); scene.add(rim);
+  /* Lit by the star in the artwork (8 Nov 2026: "as though there were light shining from the star in the top right and
+     shadowing the graphic as if they are in the same 3D space"). opt.star() gives the star's place on screen; the key light
+     comes from that direction, a little in front so the owls stay readable, and the spikes cast real shadows on each other. */
+  r.shadowMap.enabled = true; r.shadowMap.type = T.PCFSoftShadowMap;
+  mesh.castShadow = true; mesh.receiveShadow = true;
+  scene.add(new T.AmbientLight('#fff4e0', 0.16));
+  const key = new T.DirectionalLight('#fff3dc', 4.2); key.castShadow = true; scene.add(key); scene.add(key.target);
+  key.shadow.mapSize.set(2048, 2048); key.shadow.bias = -0.0006; key.shadow.normalBias = 0.025; key.shadow.radius = 3;
+  const sc = key.shadow.camera; sc.left = sc.bottom = -rad * 1.2; sc.right = sc.top = rad * 1.2; sc.near = 0.1; sc.far = rad * 8;
+  const fill = new T.DirectionalLight('#8a6a44', 0.28); scene.add(fill); /* faint bounce from the opposite side, so the shade is never pure black */
+  const rim = new T.DirectionalLight('#ffd9a0', 1.1); scene.add(rim); /* the same star catching the far edges */
+  function aim() { let dx = 0.6, dy = 0.75; /* default: up and to the right */
+    try { const st = opt.star && opt.star(); if (st) { const b = el.getBoundingClientRect(); const x = st[0] - (b.left + b.width / 2), y = (b.top + b.height / 2) - st[1]; const n = Math.hypot(x, y); if (n > 1) { dx = x / n; dy = y / n; } } } catch (e) { }
+    const d = rad * 4; key.position.set(dx * d, dy * d, d * 0.45); fill.position.set(-dx * d, -dy * d, d * 0.3); rim.position.set(dx * d * 0.6, dy * d * 0.6, -d); }
+  aim(); addEventListener('resize', aim); [400, 1500, 4000].forEach(ms => setTimeout(() => { aim(); if (alive) draw(); }, ms)); /* again once the artwork has loaded */
   obj.rotation.set(0.42, 0.3, 0.12);
   let raf = 0, last = 0, t = 0, alive = true;
   const size = () => { const w = el.clientWidth || 200, h = el.clientHeight || w; r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
@@ -52,7 +63,7 @@ export function mountEmblem(el, opt = {}) {
     obj.rotation.y += dt * 0.32; obj.rotation.x = 0.42 + 0.1 * Math.sin(t * 0.37); draw(); }
   const ro = new ResizeObserver(draw); ro.observe(el);
   if (still || rm) draw(); else raf = requestAnimationFrame(loop);
-  const api = () => { alive = false; cancelAnimationFrame(raf); ro.disconnect(); g.dispose(); mat.dispose(); tex.dispose(); r.dispose(); r.domElement.remove(); };
+  const api = () => { alive = false; removeEventListener('resize', aim); cancelAnimationFrame(raf); ro.disconnect(); g.dispose(); mat.dispose(); tex.dispose(); r.dispose(); r.domElement.remove(); };
   api.at = (yaw, pitch) => { obj.rotation.y = yaw; if (pitch != null) obj.rotation.x = pitch; draw(); }; /* for stills and recordings */
   api.ready = new Promise(res => { const chk = () => tex.image ? res() : setTimeout(chk, 50); chk(); });
   return api;

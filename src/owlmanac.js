@@ -73,7 +73,10 @@ moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObser
 // Intro splash (markup is written by the build before any script). It stays until the visitor chooses: Enter, Esc, or one of the
 // starting points under it (Derik, 7 Nov 2026: no automatic switch to the home page; site tour, universe tour, fly-through and the YouTube channel from here).
 /* the turning emblem (a real 3D model: assets/emblem/emblem.js) lives in the splash's lower right */
-function emblem(sp){const box=sp.querySelector('.mark3d');if(!box)return null;let stop=null,dead=false;import('./assets/emblem/emblem.js').then(m=>{if(!dead)stop=m.mountEmblem(box)}).catch(e=>console.warn('emblem',e));return()=>{dead=true;if(stop)stop()}}
+/* where the bright star of the artwork is on screen (it sits in the image's top-right corner; the picture is drawn with object-fit:cover at 62% 50%) */
+function starAt(sp){const im=sp.querySelector('img');if(!im||!im.naturalWidth)return null;const ph=/phone/.test(im.currentSrc||'');const fx=ph?.965:.996,fy=ph?.031:.071;
+ const ox=parseFloat(getComputedStyle(im).objectPosition)/100;const W=innerWidth,H=innerHeight,w=im.naturalWidth,h=im.naturalHeight,k=Math.max(W/w,H/h);return [(W-w*k)*(isNaN(ox)?.62:ox)+fx*w*k,(H-h*k)*.5+fy*h*k]}
+function emblem(sp){const box=sp.querySelector('.mark3d');if(!box)return null;let stop=null,dead=false;import('./assets/emblem/emblem.js').then(m=>{if(!dead)stop=m.mountEmblem(box,{star:()=>starAt(sp)})}).catch(e=>console.warn('emblem',e));return()=>{dead=true;if(stop)stop()}}
 function wire(sp,again){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;const em=emblem(sp);
  const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>{sp.remove();if(em)em()},rm?0:800);document.removeEventListener('keydown',key)};
  const key=e=>{if(e.key==='Escape')go()};
