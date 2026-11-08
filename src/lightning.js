@@ -16,12 +16,21 @@
   const SATS = [{ id: 'GOES-19', b: 'noaa-goes19', lon: -75.2 }, { id: 'GOES-18', b: 'noaa-goes18', lon: -137.0 }];
   const SPLIT = -106.1, EPOCH = Date.UTC(2000, 0, 1, 12), KEEP = 180, H = 12000; /* afterglow seconds; drawn at cloud-top height (m) */
   const TSC = 0.0003814756, TOF = -5, ESC = 9.99996e-16, EOF = 2.8515e-16, ASC = 152601.86; /* GLM L2 packing (product user guide) */
-  let dyn = null, hid = [], on = false, h5 = null, V = null, pts = null, cv = null, cx = null, key = null, post = null, edge = [], act = [], fl = [], q = [], lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0;
+  let mt = { q: [], fin: [], act: [], last: null, lag: null, fail: 0, timer: null, win: 0 }, dyn = null, hid = [], on = false, h5 = null, V = null, pts = null, cv = null, cx = null, key = null, post = null, edge = [], act = [], fl = [], q = [], lag = null, last = {}, timer = null, tick = null, failed = 0, loaded = 0;
   const GSC = 9.9988e-17, CLS = [{ n: 'Faint', c: [150, 125, 255], hex: '#967dff', r: 'under 30 fJ' }, { n: 'Moderate', c: [120, 210, 255], hex: '#78d2ff', r: '30–300 fJ' }, { n: 'Bright', c: [255, 240, 196], hex: '#fff0c4', r: 'over 300 fJ' }];
   const cls = e => e < 3e-14 ? 0 : e < 3e-13 ? 1 : 2;
+  /* Europe and Africa: EUMETSAT's Meteosat-12 (MTG-I1) Lightning Imager, Level 2 "accumulated flash area" from the keyless
+     EUMETView map service (CC BY 4.0, "Contains modified EUMETSAT Meteosat data"). It is a picture of where flashes happened
+     in each 5-minute window, not individual flashes: the page reads the lit pixels, groups them into ~0.3° areas and lights
+     each area once at a drawn moment inside its window. Timing within the window is drawing, not data. West of 30°W the
+     NOAA satellites are used instead, so nothing is drawn twice. */
+  const MTG_CAP = 'https://view.eumetsat.int/geoserver/mtg_fd/li_afa/ows?service=WMS&request=GetCapabilities&version=1.3.0';
+  const MTG_MAP = 'https://view.eumetsat.int/geoserver/ows?service=WMS&version=1.3.0&request=GetMap&layers=mtg_fd:li_afa&styles=&crs=CRS:84&bbox=-70,-70,70,70&width=1400&height=1400&format=image/png&transparent=true&time=';
+  const MTG_KEEP = 900, MTG_WEST = -30, MTG_C = [226, 214, 255];
   const W2W = (C.SceneTransforms.worldToWindowCoordinates || C.SceneTransforms.wgs84ToWindowCoordinates).bind(C.SceneTransforms);
   const spr = CLS.map(k => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32), [R, G, B] = k.c;
     r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(.12, `rgba(${R},${G},${B},.9)`); r.addColorStop(.4, `rgba(${R},${G},${B},.25)`); r.addColorStop(1, `rgba(${R},${G},${B},0)`); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return c; });
+  spr.push((() => { const c = document.createElement('canvas'); c.width = c.height = 64; const g = c.getContext('2d'), r = g.createRadialGradient(32, 32, 0, 32, 32, 32), [R, G, B] = MTG_C; r.addColorStop(0, 'rgba(255,255,255,1)'); r.addColorStop(.15, `rgba(${R},${G},${B},.9)`); r.addColorStop(.45, `rgba(${R},${G},${B},.22)`); r.addColorStop(1, `rgba(${R},${G},${B},0)`); g.fillStyle = r; g.fillRect(0, 0, 64, 64); return c; })()); /* spr[3]: EUMETSAT areas */
   const phone = matchMedia('(max-width:700px)').matches;
   const note = t => { const n = document.getElementById('imgNote'); if (n) n.innerHTML = t; };
   const pad = n => String(n).padStart(2, '0');
@@ -57,16 +66,33 @@
     f.par = G.map((x, i) => { let best = -1, bd = 1e9; for (let j = 0; j < i; j++) { const dx = (x[1] - G[j][1]) * k, dy = x[0] - G[j][0], d = dx * dx + dy * dy; if (d < bd) { bd = d; best = j; } } return best; }); }
   function backfill() { const p = play(); while (q.length && q[0].t <= p) { const f = q.shift(); glowDot(f); f.g = null; } }
   function glowDot(f) { const k = CLS[f.c].c; f.p = pts.add({ position: pos(f), pixelSize: 3 + f.c, color: C.Color.fromBytes(k[0], k[1], k[2], 230) }); }
+  async function mtgWindow(T) { const r = await fetch(MTG_MAP + encodeURIComponent(T)); if (!r.ok) throw new Error('map ' + r.status); const bm = await createImageBitmap(await r.blob());
+    const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; const g = c.getContext('2d', { willReadFrequently: true }); g.drawImage(bm, 0, 0); const d = g.getImageData(0, 0, c.width, c.height).data, W = c.width, H = c.height, sx = 140 / W, sy = 140 / H, bins = new Map();
+    for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) { if (d[(y * W + x) * 4 + 3] < 16) continue; const lon = -70 + (x + .5) * sx, lat = 70 - (y + .5) * sy; if (lon < MTG_WEST) continue; const k = Math.floor(lon / 0.3) + ',' + Math.floor(lat / 0.3), b = bins.get(k); if (b) { b.n++; b.lon += lon; b.lat += lat; } else bins.set(k, { n: 1, lon, lat }); }
+    const t0 = Date.parse(T), out = []; for (const b of bins.values()) out.push({ t: t0 + Math.random() * 300000, lat: b.lat / b.n, lon: b.lon / b.n, w: b.n, s: Math.random() * 6 }); return out.sort((a, b) => a.t - b.t); }
+  const esc2 = t => String(t).replace(/[<>&"]/g, '');
+  const isoT = ms => new Date(ms).toISOString().replace('.000', '');
+  async function mtgPoll(first) { if (!on) return;
+    try { const x = await (await fetch(MTG_CAP)).text(); const T = (x.match(/<Dimension[^>]*name="time"[^>]*default="([^"]*)"/) || [])[1]; if (!T) throw new Error('no time');
+      if (T !== mt.last) { const tT = Date.parse(T); if (mt.lag == null) mt.lag = Date.now() - tT; /* play each window over the next five minutes, in real rhythm */
+        if (first) for (const k of [10, 5]) { try { const s0 = await mtgWindow(isoT(tT - k * 60000)); if (!on) return; s0.forEach(mtDot); } catch (e) { } } /* the two windows before: already over, shown as fading dots */
+        const s1 = await mtgWindow(T); if (!on) return; mt.q.push(...s1); mt.q.sort((a, b) => a.t - b.t); mt.last = T; mt.win = s1.length; }
+      mt.fail = 0; } catch (e) { mt.fail++; console.warn('lightning MTG', e); }
+    mt.timer = setTimeout(() => mtgPoll(false), 60000); }
+  const mplay = () => Date.now() - (mt.lag || 0);
+  function mtDot(f) { if (!pts) return; f.p = pts.add({ position: pos(f), pixelSize: 2.5 + Math.min(3, Math.sqrt(f.w) / 3), color: C.Color.fromBytes(MTG_C[0], MTG_C[1], MTG_C[2], 220) }); mt.fin.push(f); }
   function status() { if (!on || failed) return; const p = play(), n = [0, 0, 0]; for (const f of fl) if (f.t <= p && f.t > p - 60000) n[f.c]++; const tot = n[0] + n[1] + n[2], sec = lag ? Math.round(lag / 1000) : null;
     const seen = SATS.filter(s => s.ok).map(s => s.id).join(' and ');
-    note(`<b>Live lightning</b>: ${tot.toLocaleString()} flashes in the last minute, as NOAA's ${seen || 'GOES'} lightning mappers detected them${sec ? `, replayed about ${sec} seconds behind real time` : ''}. Each flash is drawn from the patches of cloud it lit, in the order they lit up; colour shows its strength (the light energy the satellite measured). These satellites see light, not charge, so they cannot tell positive from negative strokes. Other map layers are set aside while lightning plays. The dashed lines mark roughly what the two satellites can see: outside them nothing is shown, which does not mean no lightning. For the rest of the world, see <a href="https://map.blitzortung.org/" target="_blank" rel="noopener">Blitzortung's volunteer map ↗</a>.`);
+    note(`<b>Live lightning</b>: ${tot.toLocaleString()} flashes in the last minute, as NOAA's ${seen || 'GOES'} lightning mappers detected them${sec ? `, replayed about ${sec} seconds behind real time` : ''}. Each flash is drawn from the patches of cloud it lit, in the order they lit up; colour shows its strength (the light energy the satellite measured). These satellites see light, not charge, so they cannot tell positive from negative strokes. Europe and Africa come from EUMETSAT's Meteosat-12 Lightning Imager: lilac areas where flashes were seen in each 5-minute window, about a quarter of an hour behind, lit one by one at drawn moments inside their window. Fresh dots twinkle for a few seconds; that flicker is drawing, not data. Other map layers are set aside while lightning plays. The dashed lines mark roughly what the satellites can see: outside them nothing is shown, which does not mean no lightning. Asia and Australia have no free live feed yet; see <a href="https://map.blitzortung.org/" target="_blank" rel="noopener">Blitzortung's volunteer map ↗</a>. Europe and Africa: Contains modified EUMETSAT Meteosat data 2026 (<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC BY 4.0</a>).`);
     if (key) { const pc = x => tot ? Math.round(100 * x / tot) : 0, K = draw.K || 1;
-      key.innerHTML = `<div class="lk-h"><b>⚡ Lightning, last minute</b><span>${tot.toLocaleString()} flashes</span></div><div class="lk-bar">${CLS.map((k, i) => `<i style="flex:${n[i] || 0.0001};background:${k.hex}"></i>`).join('')}</div><div class="lk-row">${CLS.map((k, i) => `<span title="Optical energy ${k.r}"><i style="background:${k.hex}"></i>${k.n} ${pc(n[i])}%</span>`).join('')}</div><p>Strength = light energy NOAA's satellites measured. Lines trace each flash through the cloud in the order it lit.${K > 1.3 ? ` Shapes drawn ${Math.round(K)}× larger at this zoom.` : ''} Positive vs negative charge: not measured by these satellites.</p>`; } }
+      key.innerHTML = `<div class="lk-h"><b>⚡ Lightning, last minute</b><span>${tot.toLocaleString()} flashes</span></div><div class="lk-bar">${CLS.map((k, i) => `<i style="flex:${n[i] || 0.0001};background:${k.hex}"></i>`).join('')}</div><div class="lk-row">${CLS.map((k, i) => `<span title="Optical energy ${k.r}"><i style="background:${k.hex}"></i>${k.n} ${pc(n[i])}%</span>`).join('')}</div><p>Americas (NOAA): strength = light energy measured; lines trace each flash through the cloud in the order it lit.${K > 1.3 ? ` Shapes drawn ${Math.round(K)}× larger at this zoom.` : ''} Positive vs negative charge: not measured.</p><div class="lk-mtg"><i></i>Europe &amp; Africa (EUMETSAT): ${mt.fail && !mt.last ? 'no data: the EUMETSAT map service did not answer' : mt.last ? `${mt.win.toLocaleString()} areas lit in the latest 5 minutes (${esc2(mt.last.slice(11, 16))} UTC)` : 'loading…'}</div><p class="lk-cr">Contains modified EUMETSAT Meteosat data 2026 (CC BY 4.0). Twinkling is drawing, not data.</p>`; } }
   function frame() { if (!on) return; const p = play(), now = performance.now();
     while (q.length && q[0].t <= p) { const f = q.shift(); if (!pts) return; glowDot(f); if (p - f.t < 3000 && act.length < 300) act.push(f); else f.g = null; }
     if (!frame.t || now - frame.t > 250) { frame.t = now; /* the dots cool and fade over three minutes */
       for (let i = 0; i < fl.length; i++) { const f = fl[i]; if (!f.p) continue; const age = (p - f.t) / 1000; if (age > KEEP) { pts.remove(f.p); f.p = null; continue; }
         const x = age / KEEP, k = CLS[f.c].c, w = age < 3 ? 1 : 0; f.p.color = C.Color.fromBytes(k[0], k[1], k[2], Math.round(255 * (0.9 * Math.pow(1 - x, 1.5) + 0.05))); f.p.pixelSize = (2.4 + f.c * 0.8) * (1 + w * 0.6) * (1 - 0.35 * x); } }
+    if (mt.lag != null) { const mp = mplay(); while (mt.q.length && mt.q[0].t <= mp) { const f = mt.q.shift(); mtDot(f); if (mp - f.t < 3000 && mt.act.length < 250) mt.act.push(f); }
+      if (!frame.m || now - frame.m > 400) { frame.m = now; let k = 0; for (const f of mt.fin) { const age = (mp - f.t) / 1000; if (age > MTG_KEEP) { if (f.p) pts.remove(f.p); f.p = null; k++; continue; } const x = Math.max(0, age) / MTG_KEEP; if (f.p) f.p.color = C.Color.fromBytes(MTG_C[0], MTG_C[1], MTG_C[2], Math.round(255 * (0.85 * Math.pow(1 - x, 1.5) + 0.05))); } if (k) mt.fin = mt.fin.filter(f => f.p); } }
     if (!frame.s || now - frame.s > 5000) { frame.s = now; status(); } }
   /* drawn on a canvas over the globe after every frame, in screen space, with additive light */
   const tmp = new C.Cartesian3(), nrm = new C.Cartesian3(), win = new C.Cartesian2();
@@ -92,8 +118,19 @@
           cx.globalAlpha = a * 0.35; cx.strokeStyle = `rgb(${R},${G},${B})`; cx.lineWidth = 3.2 + 3.5 * en; cx.beginPath(); cx.moveTo(x0, y0); cx.lineTo(x, y); cx.stroke();
           cx.globalAlpha = a; cx.strokeStyle = live > 0.5 ? '#fff' : `rgb(${Math.min(255, R + 60)},${Math.min(255, G + 40)},${Math.min(255, B + 20)})`; cx.lineWidth = 1 + 1.4 * en; cx.beginPath(); cx.moveTo(x0, y0); cx.lineTo(x, y); cx.stroke(); }
         if (live > 0.08) { const r = (j ? 1.6 + 3 * en : 3 + 5 * en) * (0.6 + live); /* the flash's first patch a little larger */ cx.globalAlpha = live * fade; cx.drawImage(spr[f.c], x - r, y - r, r * 2, r * 2); } } }
+    /* fresh dots twinkle for a few seconds, the way a storm keeps flickering (drawing, not data) */
+    const nowP = performance.now(), mp = mplay();
+    const twinkle = (f, age, span, sprI, base) => { if (age < 0 || age > span) return; if (!f.fn || nowP > f.fn) { f.fv = Math.random() < 0.32 ? 0.55 + 0.45 * Math.random() : 0.06; f.fn = nowP + 45 + Math.random() * 150; }
+      const P = pos(f); C.Cartesian3.normalize(P, nrm); if (C.Cartesian3.dot(nrm, C.Cartesian3.subtract(cam, P, tmp)) < 0) return; const q = W2W(sc, P, win); if (!q) return; const a = f.fv * (1 - age / span), r = base * (0.7 + 0.6 * f.fv);
+      cx.globalAlpha = a; cx.drawImage(spr[sprI], q.x - r, q.y - r, r * 2, r * 2); };
+    for (let i = fl.length - 1; i >= 0; i--) { const f = fl[i]; const age = (p - f.t) / 1000; if (age > 8) { if (f.t < p - 8000) break; continue; } if (f.p) twinkle(f, age, 8, f.c, 5 + 2 * f.c); }
+    if (mt.lag != null) { for (let i = mt.act.length - 1; i >= 0; i--) { const f = mt.act[i], k = mp - f.t; if (k > 3100) { mt.act.splice(i, 1); continue; }
+        const P = pos(f); C.Cartesian3.normalize(P, nrm); if (C.Cartesian3.dot(nrm, C.Cartesian3.subtract(cam, P, tmp)) < 0) continue; const q = W2W(sc, P, win); if (!q) continue;
+        const I = k < 600 ? 0.55 + 0.45 * Math.abs(Math.sin(k * 0.047 + f.s) * Math.sin(k * 0.013 + f.s * 2)) : Math.exp(-(k - 600) / 500), r = (7 + 12 * Math.min(1, Math.sqrt(f.w) / 8)) * (0.7 + 0.6 * I) * Math.min(2, Math.max(1, K / 3));
+        cx.globalAlpha = Math.min(1, I); cx.drawImage(spr[3], q.x - r, q.y - r, r * 2, r * 2); }
+      for (let i = mt.fin.length - 1; i >= 0; i--) { const f = mt.fin[i], age = (mp - f.t) / 1000; if (age > 20) { if (age > 40) break; continue; } if (f.p) twinkle(f, age, 20, 3, 6); } }
     cx.globalAlpha = 1; }
-  function circle(lon0) { const R = 54 * Math.PI / 180, la0 = 0, lo0 = lon0 * Math.PI / 180, out = []; /* ~54° of arc from the sub-satellite point: roughly the edge of GLM's view */
+  function circle(lon0, deg = 54) { const R = deg * Math.PI / 180, la0 = 0, lo0 = lon0 * Math.PI / 180, out = []; /* ~54° of arc from the sub-satellite point: roughly the edge of GLM's view */
     for (let i = 0; i <= 180; i++) { const az = i / 180 * 2 * Math.PI, lat = Math.asin(Math.sin(la0) * Math.cos(R) + Math.cos(la0) * Math.sin(R) * Math.cos(az)), lon = lo0 + Math.atan2(Math.sin(az) * Math.sin(R) * Math.cos(la0), Math.cos(R) - Math.sin(la0) * Math.sin(lat));
       out.push(lon * 180 / Math.PI, lat * 180 / Math.PI); } return out; }
   async function start() { if (on) return; const g = window.__obs3d; if (!g || !g.viewer) return; V = g.viewer; on = true;
@@ -108,10 +145,12 @@
     dyn = V.scene.globe.dynamicAtmosphereLighting; V.scene.globe.dynamicAtmosphereLighting = false; /* the night side would go black even with the globe lit evenly */
     hid = []; for (let i = 0; i < V.dataSources.length; i++) { const d = V.dataSources.get(i); if (d.show) { d.show = false; hid.push(d); } }
     post = [V.scene.preRender.addEventListener(() => { try { frame(); } catch (e) { console.warn('lightning frame', e); } }), V.scene.postRender.addEventListener(draw)]; tick = setInterval(() => { if (on) V.scene.requestRender(); }, 1000 / 30);
-    poll(true); }
+    edge.push(V.entities.add({ polyline: { positions: C.Cartesian3.fromDegreesArray(circle(0, 62)), width: 1.2, material: new C.PolylineDashMaterialProperty({ color: C.Color.fromBytes(MTG_C[0], MTG_C[1], MTG_C[2], 90), dashLength: 14 }), arcType: C.ArcType.GEODESIC } })); /* roughly the edge of MTG-LI's view */
+    poll(true); mtgPoll(true); }
   function stop() { if (!on) return; on = false; clearTimeout(timer); clearInterval(tick); if (post) post.forEach(x => x()); post = null; if (cv) cv.remove(); if (key) key.remove(); cv = cx = key = null;
     try { V.scene.primitives.remove(pts); edge.forEach(e => V.entities.remove(e)); } catch (e) { }
     hid.forEach(d => { try { d.show = true; } catch (e) { } }); hid = []; if (dyn != null) V.scene.globe.dynamicAtmosphereLighting = dyn; dyn = null;
+    clearTimeout(mt.timer); mt = { q: [], fin: [], act: [], last: null, lag: null, fail: 0, timer: null, win: 0 };
     pts = null; edge = []; act = []; fl = []; q = []; lag = null; last = {}; failed = 0; }
   window.OwlLightning = { start, stop, get on() { return on; }, state: () => ({ flashes: fl.length, active: act.length, waiting: q.length, lag, files: loaded }), mix: () => { if (!on || lag == null) return null; const p = play(), n = [0, 0, 0]; for (const f of fl) if (f.t <= p && f.t > p - 60000) n[f.c]++; return n; } }; /* last minute's faint / moderate / bright counts (the Classroom's live questions) */
 })();

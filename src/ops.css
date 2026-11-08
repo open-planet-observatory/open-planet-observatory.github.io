@@ -1136,3 +1136,16 @@ html.map2d .rail-light{display:none!important}
 .ln-score{font-size:2rem;color:var(--accent,#D9A441);letter-spacing:.15em;margin:6px 0 0}
 .ln-big{font-size:1.06rem}.ln-big .ln-say{font-size:1.18rem;line-height:1.5}.ln-big .ln-c{font-size:1.1rem;padding:14px 14px}.ln-big .ln-q{font-size:1.15rem}
 @media (max-width:640px){.ln-card{left:8px;right:8px;width:auto;bottom:calc(var(--botH,56px) + 8px);max-height:58vh}}
+/* Tech & Industry hidden for now: its map layer goes with it */
+#chip-econ{display:none!important}
+/* landing page: the 3D emblem turns in the lower right; the starting points read as buttons */
+#owlSplash .mark3d{position:absolute;right:max(28px,env(safe-area-inset-right,0px));bottom:max(30px,env(safe-area-inset-bottom,0px));width:clamp(170px,19vw,290px);aspect-ratio:1;filter:drop-shadow(0 8px 26px rgb(0 0 0 / .65)) drop-shadow(0 0 22px rgb(217 164 65 / .18));pointer-events:none;animation:owlSplashIn 1.2s .4s ease both}
+#owlSplash .mark3d canvas{display:block}
+#owlSplash .sp-links{gap:10px 10px;border-top:0;padding-top:4px}
+#owlSplash .sp-links button,#owlSplash .sp-links a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid rgb(217 164 65 / .55);border-radius:999px;background:rgb(11 9 6 / .45);text-decoration:none;backdrop-filter:blur(6px);font-size:.85rem;transition:background .2s,border-color .2s}
+#owlSplash .sp-links button:hover,#owlSplash .sp-links a:hover,#owlSplash .sp-links :focus-visible{background:rgb(217 164 65 / .22);border-color:#D9A441;color:#fff}
+#owlSplash .sp-links button::before{content:"▶";font-size:.7em;color:#D9A441}
+@media (max-width:640px){#owlSplash .mark3d{top:max(14px,env(safe-area-inset-top,0px));bottom:auto;right:max(10px,env(safe-area-inset-right,0px));width:118px}#owlSplash .sp-links button,#owlSplash .sp-links a{padding:6px 11px;font-size:.8rem}}
+@media (min-width:641px) and (max-width:1100px){#owlSplash .lock{max-width:min(760px,calc(100% - 230px))}}
+.ltg-key .lk-mtg{display:flex;align-items:center;gap:6px;margin-top:5px;font-variant-numeric:tabular-nums}.ltg-key .lk-mtg i{width:8px;height:8px;border-radius:50%;background:#e2d6ff;box-shadow:0 0 6px #e2d6ff}
+.ltg-key .lk-cr{font-size:.62rem!important}

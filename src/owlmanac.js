@@ -72,11 +72,12 @@ function moonLinks(){const c=document.getElementById('moonCard');if(!c||c.queryS
 moonLinks();const mh=document.getElementById('moonHost');if(mh)new MutationObserver(moonLinks).observe(mh,{childList:true});
 // Intro splash (markup is written by the build before any script). It stays until the visitor chooses: Enter, Esc, or one of the
 // starting points under it (Derik, 7 Nov 2026: no automatic switch to the home page; site tour, universe tour, fly-through and the YouTube channel from here).
-const sp=document.getElementById('owlSplash');
-if(sp){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>sp.remove(),rm?0:800);document.removeEventListener('keydown',key)};
+/* the turning emblem (a real 3D model: assets/emblem/emblem.js) lives in the splash's lower right */
+function emblem(sp){const box=sp.querySelector('.mark3d');if(!box)return null;let stop=null,dead=false;import('./assets/emblem/emblem.js').then(m=>{if(!dead)stop=m.mountEmblem(box)}).catch(e=>console.warn('emblem',e));return()=>{dead=true;if(stop)stop()}}
+function wire(sp,again){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;const em=emblem(sp);
+ const go=()=>{if(gone)return;gone=true;try{sessionStorage.setItem('owl-splash','1')}catch(e){}sp.classList.add('out');document.documentElement.classList.remove('owl-splash-on');sp.setAttribute('aria-hidden','true');setTimeout(()=>{sp.remove();if(em)em()},rm?0:800);document.removeEventListener('keydown',key)};
  const key=e=>{if(e.key==='Escape')go()};
- document.addEventListener('obs:globe-ready',()=>{sp.classList.add('ready')},{once:true});
+ if(again)sp.classList.add('ready');else document.addEventListener('obs:globe-ready',()=>{sp.classList.add('ready')},{once:true});
  sp.querySelector('.go')?.addEventListener('click',go);document.addEventListener('keydown',key);sp.querySelector('.go')?.focus({preventScroll:true});
  /* the starting points wait for the page behind to be ready enough, then run */
  const when=(ok,fn,t0=Date.now())=>{if(ok())fn();else if(Date.now()-t0<20000)setTimeout(()=>when(ok,fn,t0),200)};
@@ -84,4 +85,7 @@ if(sp){let gone=false;const rm=matchMedia('(prefers-reduced-motion: reduce)').ma
   if(k==='site')when(()=>window.OwlSiteTour,()=>window.OwlSiteTour.start());
   else{const M=window.OwlMusic;if(k==='fly'){if(M&&M.start&&!M.on){M.start(true);window.__owlTempMusic=true}}/* start the score inside the click, where browsers allow sound; the flight hands it back afterwards */else if(M&&M.autoOn)M.autoOn();
    when(()=>window.__obs&&window.__obs.openUniverse,()=>window.__obs.openUniverse(k==='fly'?'flight':'tour'))}}))}
+const sp=document.getElementById('owlSplash');if(sp)wire(sp,false);
+/* the wordmark in the header brings people back here (the maintainer, 8 Nov 2026: "the nicest looking, with the highest level options") */
+window.OwlSplash={show(){if(document.getElementById('owlSplash')||!window.__owlSplashHTML)return;const t=document.createElement('div');t.innerHTML=window.__owlSplashHTML;const el=t.firstElementChild;el.classList.add('again');document.body.appendChild(el);document.documentElement.classList.add('owl-splash-on');wire(el,true)}};
 })();

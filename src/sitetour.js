@@ -20,7 +20,7 @@
     { title: 'The globe', el: () => globeArea(),
       body: 'Drag to turn it, scroll or pinch to zoom. Each dot is something happening now: earthquakes, storms, fires, alerts, satellites. Click one to see what the source says and when. Touch the globe and the panels tuck away so it fills the screen; click the thin bar at the top to bring them back.' },
     { title: 'Five menus', el: () => $('.gnav .gn-scroll'), prep: () => { unslim(); const sc = $('.gnav .gn-scroll'); if (sc) sc.scrollLeft = 0; },
-      body: 'Everything is grouped here: People, Planet, Space, Tech & Industry, and Learn. Point at a name to see its sections.' },
+      body: 'Everything is grouped here: People, Planet, Space, Sky tonight, Learn and Play. Point at a name to see its sections.' },
     { title: 'A section panel', el: () => $('#ops-drawer'), prep: () => { unslim(); if (O.openPanel) O.openPanel('situations'); },
       body: 'Sections open on the right. Descriptions are the source’s own words, word for word, with a link. Where a source reports a change from the last period, it is shown exactly as reported. The site adds no scores, rankings or forecasts of its own.' },
     { title: 'Filter options', el: () => $('#ops-rail'), prep: () => { unslim(); html.classList.remove('rail-closed'); },

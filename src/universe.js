@@ -130,9 +130,8 @@ async function build() {
     const mat = new T.MeshStandardMaterial({ color: colour, roughness: 0.9, metalness: 0 }); const mesh = new T.Mesh(sphere, mat); S.groups.bodies.add(mesh);
     const o = add({ name, kind: name === 'Pluto' ? 'dwarf planet' : 'planet', mesh, rKm, minPx: name === 'Pluto' ? 3 : 5, prio: 1, colour, pos: [0, 0, 0] });
     // orbit line: one full period sampled from Astronomy Engine
-    const N = name === 'Pluto' || name === 'Neptune' ? 360 : 256, pts = [], t0 = Date.now();
-    for (let k = 0; k <= N; k++) { const p = helio(name, new Date(t0 + k / N * period * DAY)); pts.push(new T.Vector3(...p)); }
-    const line = new T.Line(new T.BufferGeometry().setFromPoints(pts), new T.LineBasicMaterial({ color: colour, transparent: true, opacity: 0.32 })); S.groups.orbits.add(line);
+    const line = new T.Line(new T.BufferGeometry().setFromPoints(orbitPts(name, period, Date.now())), new T.LineBasicMaterial({ color: colour, transparent: true, opacity: 0.32 })); S.groups.orbits.add(line);
+    o.orbit = { line, period, t: Date.now() };
     if (name === 'Saturn') { // rings in Saturn's equatorial plane (pole RA 40.589°, Dec 83.537°, IAU)
       const ra = 40.589 * Math.PI / 180, de = 83.537 * Math.PI / 180; const pole = toEcl(new A.Vector(Math.cos(de) * Math.cos(ra), Math.cos(de) * Math.sin(ra), Math.sin(de), new A.AstroTime(new Date())));
       const ring = new T.Mesh(new T.RingGeometry(74500 / rKm, 136780 / rKm, 128), new T.MeshBasicMaterial({ color: '#d9c99a', side: T.DoubleSide, transparent: true, opacity: 0.42 }));
@@ -215,8 +214,13 @@ function note() { const n = document.getElementById('uniNote'); if (!n) return; 
 
 // ---------- positions, sizes, labels ----------
 const V = () => new T.Vector3();
+/* An orbit line centred on the planet's position at time tc and sampled densely around it, so the line runs straight
+   through the planet seen close up. (Earth's own path wobbles ~4,700 km a month around the Earth-Moon barycentre, so a
+   line that starts and ends at the planet left two ends that missed each other beside Earth.) */
+function orbitPts(name, period, tc) { const N = 600, pts = []; for (let k = 0; k <= N; k++) { const u = -1 + 2 * k / N; pts.push(new T.Vector3(...helio(name, new Date(tc + Math.sign(u) * u * u * period / 2 * DAY)))); } return pts; }
 function update() {
   const d = new Date(simMs), jd = jdOf(simMs), cam = S.camera;
+  const nowT = performance.now(); if (!S._orbT || nowT - S._orbT > 1000) { S._orbT = nowT; for (const o of S.objs) if (o.orbit && Math.abs(simMs - o.orbit.t) > 2 * DAY) { o.orbit.t = simMs; o.orbit.line.geometry.dispose(); o.orbit.line.geometry = new T.BufferGeometry().setFromPoints(orbitPts(o.name, o.orbit.period, simMs)); } } /* re-centre as time moves, at most once a second */
   const tanF = Math.tan(cam.fov * Math.PI / 360), H = ui.root.clientHeight || innerHeight;
   const pxPerUnitAt = dist => H / 2 / (dist * tanF);
   for (const o of S.objs) {
