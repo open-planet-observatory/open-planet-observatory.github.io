@@ -305,7 +305,7 @@ The "Lightning" imagery choice streams NOAA's Geostationary Lightning Mapper (GL
 
 ## The fly-through (Solar System view and the landing page)
 
-A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it.
+A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it. At the end, The Owlmanac's 13-second owl clip plays full screen (the channel's own intro; AI-generated animation, labelled on screen); Esc, a click or Skip ends it.
 
 ## Classroom: interactive lessons
 

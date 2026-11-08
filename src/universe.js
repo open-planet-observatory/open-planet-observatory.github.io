@@ -554,10 +554,21 @@ async function flight() { if (!SM || !open) return; stopTour(); flyStop(); if (S
     else if (n === 'earth') put(ep, spin(dEarth, 0.1 * k), EAR);
     else if (n === 'back') { const e = io(k), d = Math.exp(L(EAR) + (L(DOUT) - L(EAR)) * e); const w = Math.min(1, Math.max(0, (L(d) - L(0.05)) / (L(20) - L(0.05)))); put(ep.clone().multiplyScalar(1 - sm(w)), slerp(spin(dEarth, 0.1), dBack, sm(k)), d); }
     else if (n === 'out1') put(V(), spin(dBack, 0.05 * k), DOUT);
-    else { S.anim = null; flightEnd(); } };
+    else { S.anim = null; flightEnd(); outro(); } };
   S.anim = F; tok.F = F; setTimeout(() => { if (S.flight === tok) flightFade(false); }, 350);
   tok.watch = setInterval(() => { if (S.flight !== tok) return clearInterval(tok.watch); if (S.anim !== F) flightEnd(); }, 200); /* a touch or scroll took the view */
   tok.total = total; }
+/* The Owlmanac outro after the fly-through (8 Nov 2026: "add the Owlmanac outro at the end"): the channel's owl clip
+   (13 s, AI-generated, labelled), full screen, then back to the edge view. Esc, a click or "Skip" ends it at once. */
+function outro() { if (!open || document.getElementById('uniOutro')) return; const w = document.createElement('div'); w.id = 'uniOutro'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-label', 'The Owlmanac');
+  w.innerHTML = '<video playsinline preload="auto" src="assets/video/owlmanac-outro.mp4"></video><span class="uo-ai">AI-generated animation</span><button type="button" class="uo-skip">Skip ›</button>'; document.body.appendChild(w);
+  const v = w.querySelector('video'); let done = false; const music = window.OwlMusic && OwlMusic.on;
+  const end = () => { if (done) return; done = true; removeEventListener('keydown', key, true); w.classList.remove('on'); try { v.pause(); } catch (e) { } if (music && window.OwlMusic && OwlMusic.duck) OwlMusic.duck(false); setTimeout(() => w.remove(), 700); };
+  const key = e => { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); end(); } }; addEventListener('keydown', key, true);
+  w.addEventListener('click', end); v.addEventListener('ended', () => setTimeout(end, 600)); v.addEventListener('error', end);
+  if (music && OwlMusic.duck) OwlMusic.duck(true);
+  requestAnimationFrame(() => w.classList.add('on'));
+  setTimeout(() => { v.play().catch(() => { v.muted = true; v.play().catch(end); }); }, 450); }
 function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; if (f.music && window.OwlMusic && OwlMusic.on) OwlMusic.stop(true); ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
 
 // ---------- loop, open, close ----------
