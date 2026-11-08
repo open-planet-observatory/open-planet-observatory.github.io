@@ -36,7 +36,7 @@
   /* expanding the slim header (click on the bar, ⤢, Esc) also leaves the page */
   new MutationObserver(() => { if (cur && !html.classList.contains('slim')) close(true); }).observe(html, { attributes: true, attributeFilter: ['class'] });
   /* the Moon, a game or the Solar System opening over (or under) a page leaves the page: the Moon globe and a game draw
-     beneath the page, so the visitor saw nothing change (Derik, 8 Nov 2026) */
+     beneath the page, so the visitor saw nothing change (the maintainer, 8 Nov 2026) */
   new MutationObserver(() => { if (cur && (html.classList.contains('moon-on') || html.classList.contains('game-on'))) close(true); }).observe(html, { attributes: true, attributeFilter: ['class'] });
   new MutationObserver(ms => { if (cur && ms.some(m => m.target.id === 'uni' && m.target.classList.contains('on'))) close(true); }).observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
   addEventListener('keydown', e => { if (e.key === 'Escape' && cur) { e.stopPropagation(); close(); } }, true);
@@ -46,7 +46,7 @@
   if (dh) { xb = document.createElement('button'); xb.className = 'iconbtn pg-x'; xb.id = 'drawerExpand'; xb.hidden = true; xb.textContent = '⤢'; xb.title = 'Open as a full page'; xb.setAttribute('aria-label', 'Open as a full page');
     const cl = dh.querySelector('#drawerClose'); dh.insertBefore(xb, cl); xb.onclick = () => { const p = document.querySelector('#drawerBody .panel[data-on="true"]'); if (p) open(p.dataset.k); }; }
   /* a page is open and another panel switches on (a header menu item, a rail button, a link): the page follows it instead of
-     leaving the new panel hidden behind the page (Derik, 8 Nov 2026: links between sections "get stuck") */
+     leaving the new panel hidden behind the page (the maintainer, 8 Nov 2026: links between sections "get stuck") */
   function sync() { const p = document.querySelector('#drawerBody .panel[data-on="true"]'); if (xb) { xb.hidden = !p; xb.style.display = p ? '' : 'none'; }
     if (cur && p && p.dataset.k !== cur) { open(p.dataset.k); html.classList.add('drawer-closed'); } }
   const body = document.getElementById('drawerBody'); if (body) new MutationObserver(sync).observe(body, { attributes: true, subtree: true, attributeFilter: ['data-on'] });
