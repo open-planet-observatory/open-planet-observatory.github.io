@@ -92,7 +92,7 @@ function openPanel(k,toggle){if(toggle&&cur===k&&!html.classList.contains('drawe
  $('#drawerTitle').textContent=PANELS.find(p=>p[0]===k)[1];body.scrollTop=0;
  if(innerWidth<=860)html.classList.add('rail-closed');
  try{const v=(location.hash.match(/view=\w+/)||[])[0];history.replaceState(null,'','#'+(v?v+'&':'')+'panel='+k)}catch(e){}}
-function closeDrawer(){html.classList.add('drawer-closed');document.querySelectorAll('#panelTabs button').forEach(b=>b.setAttribute('aria-pressed',false))}
+function closeDrawer(){if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();html.classList.add('drawer-closed');document.querySelectorAll('#panelTabs button').forEach(b=>b.setAttribute('aria-pressed',false))}
 window.__opsCloseDrawer=closeDrawer;
 $('#drawerClose').onclick=closeDrawer;
 // in-page links (#use, #free, #situations…) open the matching panel

@@ -1149,3 +1149,16 @@ html.map2d .rail-light{display:none!important}
 @media (min-width:641px) and (max-width:1100px){#owlSplash .lock{max-width:min(760px,calc(100% - 230px))}}
 .ltg-key .lk-mtg{display:flex;align-items:center;gap:6px;margin-top:5px;font-variant-numeric:tabular-nums}.ltg-key .lk-mtg i{width:8px;height:8px;border-radius:50%;background:#e2d6ff;box-shadow:0 0 6px #e2d6ff}
 .ltg-key .lk-cr{font-size:.62rem!important}
+
+/* a panel opened as a full page (8 Nov 2026) */
+#owlPage .pg-gen{flex:1;min-height:0;overflow:auto;padding:4px 4px 18px}
+#owlPage .pg-gen>.panel{display:flex;flex-direction:column;gap:14px;max-width:1180px;margin:0 auto}
+.iconbtn[hidden]{display:none}
+/* lightning key: compact by default, i for the explanation, – to shrink (8 Nov 2026) */
+.ltg-key .lk-h{align-items:center}.ltg-key .lk-h span{margin-left:auto}
+.ltg-key .lk-b{flex:none;width:20px;height:20px;border-radius:50%;border:1px solid var(--glass-line);background:var(--glass-2);color:var(--ink);font:600 .7rem/1 inherit;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.ltg-key .lk-b:hover,.ltg-key .lk-b[aria-pressed="true"]{border-color:var(--accent,#D9A441)}
+.ltg-key .lk-x{display:none}.ltg-key.info .lk-x{display:inline}.ltg-key.info p.lk-x{display:block}
+.ltg-key.min .lk-bar,.ltg-key.min .lk-row,.ltg-key.min .lk-mtg,.ltg-key.min p{display:none}
+.ltg-key.min{width:auto}
+#imgNote .ltg-more{margin-top:6px}#imgNote .ltg-more summary{cursor:pointer;color:var(--accent,#D9A441);font-weight:600}
