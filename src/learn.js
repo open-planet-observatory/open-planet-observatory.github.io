@@ -137,13 +137,13 @@
   async function whoa(h) { const box = h.querySelector('.ln-whoa'); if (!box) return; const Q = quakes(), b = biggest(), m = moon(), v = await voyager(); const W = [];
     if (Q.length) W.push({ n: Q.length, d: 0, u: '', t: 'earthquakes on the map this week', s: b ? `Biggest: magnitude ${fmt(b.mag, 1)}` : '', l: 'quakes' });
     if (m) W.push({ n: m.lit, d: 0, u: '%', t: 'of the Moon is lit by the Sun right now', s: m.name.charAt(0).toUpperCase() + m.name.slice(1), l: 'sky' });
-    if (v) W.push({ n: v.lh, d: 1, u: ' h', t: 'for a radio message to reach Voyager 1', s: 'The farthest spacecraft from Earth', l: null });
+    if (v) W.push({ n: v.lh, d: -1, u: '', t: 'for a radio message to reach Voyager 1', s: 'The farthest spacecraft from Earth', l: null });
     if (!W.length) { box.remove(); return; }
     box.innerHTML = W.map((w, i) => `<div class="ln-w" style="--i:${i}"><b data-n="${w.n}" data-d="${w.d}" data-u="${esc(w.u)}">0${esc(w.u)}</b><span>${esc(w.t)}</span><small>${esc(w.s)}</small>${w.l ? `<button type="button" class="ln-wgo" data-l="${w.l}">Explore ▸</button>` : ''}</div>`).join('');
     box.querySelectorAll('.ln-wgo').forEach(x => x.onclick = () => start(x.dataset.l, age()));
     const RMo = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    box.querySelectorAll('b[data-n]').forEach(el => { const N = +el.dataset.n, d = +el.dataset.d, u = el.dataset.u; if (RMo) { el.textContent = fmt(N, d) + u; return; } const t0 = performance.now(), T = 1400;
-      const f = now => { const k = Math.min(1, (now - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(N * e, d) + u; if (k < 1 && el.isConnected) requestAnimationFrame(f); }; requestAnimationFrame(f); }); }
+    box.querySelectorAll('b[data-n]').forEach(el => { const N = +el.dataset.n, d = +el.dataset.d, u = el.dataset.u; const F = x => d < 0 ? `${Math.floor(x)} h ${String(Math.floor(x % 1 * 60)).padStart(2, '0')} m` : fmt(x, d) + u; if (RMo) { el.textContent = F(N); return; } const t0 = performance.now(), T = 1400;
+      const f = now => { const k = Math.min(1, (now - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = F(N * e); if (k < 1 && el.isConnected) requestAnimationFrame(f); }; requestAnimationFrame(f); }); }
   function paintGrid() { const h = document.getElementById('learnHost'); if (!h || !L) return; const a = age(), st = store(), lvl = L.levels.find(l => l.id === a) || {};
     h.innerHTML = `<div class="ln-ages" role="group" aria-label="Who is learning?"><span>Who's exploring?</span>${L.levels.map(l => `<button type="button" data-age="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div>
      <div class="ln-whoa" aria-live="off"></div>

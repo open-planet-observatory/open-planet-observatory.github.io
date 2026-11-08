@@ -21,7 +21,7 @@
      signal, drawn sped up; the real one needs the light time printed underneath. */
   const LINES = [], SPAN = 186, X0 = 16, XW = 352, X = au => X0 + Math.min(au, SPAN) / SPAN * XW, C_KMS = 299792.458;
   /* "Fly to Voyager 1": a short captioned flight in the Solar System view to where Voyager 1 is today (universe.js) */
-  function fly() { const O = window.__obs; if (O && O.openUniverse) O.openUniverse('voyager'); }
+  function fly() { const O = window.__obs; if (window.__opsCloseDrawer) window.__opsCloseDrawer(); if (O && O.openUniverse) O.openUniverse('voyager'); }
   function makeLine(cls) { const el = document.createElement('div'); el.className = 'vy-line ' + (cls || ''); el.setAttribute('role', 'img');
     const n = X(30.07), h = X(121.6), d = X(V.lightDayAU);
     el.innerHTML = `<div class="vl-h"><b>Voyager 1, right now</b><span>to scale, from Earth</span></div><svg viewBox="0 0 430 70" aria-hidden="true"><defs><linearGradient id="vyg${LINES.length}" gradientUnits="userSpaceOnUse" x1="${X0}" y1="0" x2="${X0 + XW}" y2="0"><stop offset="0" stop-color="#7fb4ff"/><stop offset="1" stop-color="#F2C43C"/></linearGradient></defs>
@@ -69,7 +69,7 @@
       if (liveV) { if (cv.getAttribute('href') !== liveV.url) { cv.href = liveV.url; cv.textContent = '▶'; cv.title = `Watch on YouTube: ${liveV.title} (The Owlmanac)`; cv.setAttribute('aria-label', cv.title); cv.classList.remove('soon'); } }
       else if (nextV) { cv.removeAttribute('href'); const t = `The Owlmanac's Voyager video: ${nextV.title}. Coming ${nextV.when}`; if (cv.title !== t) { cv.textContent = '▶ ' + new Date(nextV.from).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); cv.title = t; cv.setAttribute('aria-label', t); cv.setAttribute('role', 'note'); cv.classList.add('soon'); } }
       cv.hidden = !(liveV || nextV) || chip.hidden;
-      if (!chip.onclick) chip.onclick = () => { delete host.dataset.closed; try { localStorage.removeItem('vyHide'); } catch (e) { } const O = window.__obs; if (O && O.setSlim) O.setSlim(false); if (O && O.openPanel) O.openPanel('situations'); if (host._sync) host._sync(); else host.hidden = false; const d = document.getElementById('drawerBody'); if (d) d.scrollTop = 0; fly(); }; chip.title = 'Fly to Voyager 1 and see the countdown'; }
+      if (!chip.onclick) chip.onclick = () => { delete host.dataset.closed; try { localStorage.removeItem('vyHide'); } catch (e) { } if (host._sync) host._sync(); fly(); }; /* the chip flies to Voyager 1; the countdown banner is back in Situations */ chip.title = 'Fly to Voyager 1 and see the countdown'; }
     /* the ticker carries a one-line version; rebuilt once a minute */
     const tick = after ? ['Voyager 1', 'now more than one light-day from Earth', VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'] : ['Voyager 1', `one light-day from Earth in ${p.d} d ${pad(p.h)} h ${pad(p.m)} min`, VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'];
     if (!window.VOYAGER_TICK || window.VOYAGER_TICK[1] !== tick[1]) { window.VOYAGER_TICK = tick; const O = window.__obs; if (O && O.buildTicker && (now - (render.tickT || 0) > 55000 || !render.tickT)) { render.tickT = now; O.buildTicker(); } }
