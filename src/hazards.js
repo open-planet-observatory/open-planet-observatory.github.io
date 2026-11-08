@@ -76,7 +76,7 @@ function placeName(lon,lat){const f=(O.countries||[]).find(c=>{try{return d3.geo
 async function forecast(lon,lat){if(!wxCard)return;wxLast=[lon,lat];if(wxCtl)wxCtl.abort();wxCtl=new AbortController();
  const la=lat.toFixed(2),lo=lon.toFixed(2),us=units==='us';
  wxCard.hidden=false;wxCard.innerHTML=`<div class="sc-h"><b>Forecast · ${Math.abs(la)}°${lat>=0?'N':'S'}, ${Math.abs(lo)}°${lon>=0?'E':'W'}</b><button class="sc-x" aria-label="Close">×</button></div><p class="sc-note">Loading from Open-Meteo…</p>`;
- wxCard.querySelector('.sc-x').onclick=()=>{wxCard.hidden=true};
+ wxCard.querySelector('.sc-x').onclick=()=>{wxCard.hidden=true};if(O.placeWx)O.placeWx();
  const q=`https://api.open-meteo.com/v1/forecast?latitude=${la}&longitude=${lo}&current=temperature_2m,weather_code,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_sum,wind_speed_10m_max&timezone=auto&forecast_days=7`+(us?'&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch':'');
  try{const r=await fetch(q,{signal:wxCtl.signal});if(!r.ok)throw new Error('HTTP '+r.status);const j=await r.json();const d=j.daily,c=j.current,U=j.daily_units||{},CU=j.current_units||{};
   const un=u=>String(u||'').replace('mp/h','mph').replace(/^inch$/,'in');const day=(s,i)=>i===0?'Today':new Date(s+'T12:00').toLocaleDateString('en-US',{weekday:'short'});
@@ -86,12 +86,20 @@ async function forecast(lon,lat){if(!wxCard)return;wxLast=[lon,lat];if(wxCtl)wxC
   <table class="wx-days"><tbody>${d.time.map((t,i)=>`<tr><th>${day(t,i)}</th><td>${esc(WMO[d.weather_code[i]]||'')}</td><td class="n"><b>${Math.round(d.temperature_2m_max[i])}°</b> / ${Math.round(d.temperature_2m_min[i])}°</td><td class="n">${d.precipitation_sum[i]?(+d.precipitation_sum[i]).toFixed(us?2:1)+' '+esc(un(U.precipitation_sum)):'–'}</td><td class="n">${Math.round(d.wind_speed_10m_max[i])} ${esc(un(U.wind_speed_10m_max))}</td></tr>`).join('')}</tbody></table>
   <p class="sc-note">Computer-model forecast, not an official warning: for warnings use your national weather service. Only this point, rounded to 0.01°, was sent to Open-Meteo. <a href="https://open-meteo.com/" target="_blank" rel="noopener">Weather data by Open-Meteo.com</a> (CC BY 4.0).</p>
   <div class="sc-act"><button class="chip" id="wxUnits">${us?'Show °C, km/h':'Show °F, mph'}</button></div>`;
-  wxCard.querySelector('.sc-x').onclick=()=>{wxCard.hidden=true};
+  wxCard.querySelector('.sc-x').onclick=()=>{wxCard.hidden=true};if(O.placeWx)O.placeWx();
   wxCard.querySelector('#wxUnits').onclick=()=>{units=us?'metric':'us';try{localStorage.setItem('obs-units',units)}catch(e){}forecast(...wxLast)};
  }catch(e){if(e.name==='AbortError')return;wxCard.innerHTML=`<div class="sc-h"><b>Forecast unavailable</b><button class="sc-x" aria-label="Close">×</button></div><p class="sc-note">Open-Meteo did not answer (${esc(e.message)}). Nothing is shown rather than an old forecast.</p>`;wxCard.querySelector('.sc-x').onclick=()=>{wxCard.hidden=true}}}
 O.forecastAt=forecast;
 function hook3d(){const g=window.__obs3d;if(!g||!window.Cesium)return false;G3=g;const C=window.Cesium,viewer=g.viewer;
  const host=document.getElementById('satCard')?.parentElement||viewer.container;wxCard=document.createElement('div');wxCard.id='wxCard';wxCard.className='sat-card wx-card';wxCard.hidden=true;host.appendChild(wxCard);
+ /* the same click often opens the Country brief, which covered the floating card (the maintainer, 8 Nov 2026): while that
+    brief is open the forecast sits at the top of the brief instead; on open ocean, or with the brief closed, it floats as before */
+ const placeWx=()=>{const html=document.documentElement;const on=document.querySelector('#drawerBody .panel[data-k="country"][data-on="true"]')&&!html.classList.contains('drawer-closed');
+  const sec=document.getElementById('country');let slot=document.getElementById('wxSlot');if(!slot&&sec){slot=document.createElement('div');slot.id='wxSlot';const sh=sec.querySelector('.sec-head');if(sh)sh.after(slot);else sec.prepend(slot)}
+  if(on&&slot){if(wxCard.parentElement!==slot){slot.appendChild(wxCard);wxCard.classList.add('in-panel')}}else if(wxCard.parentElement!==host){host.appendChild(wxCard);wxCard.classList.remove('in-panel')}};
+ O.placeWx=placeWx;placeWx();
+ new MutationObserver(placeWx).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
+ const db=document.getElementById('drawerBody');if(db)new MutationObserver(placeWx).observe(db,{attributes:true,subtree:true,attributeFilter:['data-on']});
  viewer.camera.changed.addEventListener(()=>{try{cullFar()}catch(e){}});
  const h=new C.ScreenSpaceEventHandler(viewer.scene.canvas);
  h.setInputAction(m=>{if(!chipOn('wx-fc')||document.documentElement.classList.contains('game-on'))return;const picked=viewer.scene.drillPick(m.position,4);if(picked.some(p=>p.id&&p.id.sat!=null))return;
