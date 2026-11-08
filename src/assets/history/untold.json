@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-06",
+ "built": "2026-11-07",
  "stories": [
   {
    "id": "cherokee",
@@ -5643,6 +5643,778 @@
     [
      "House of Commons, 'Affairs of Syria', 8 February 1861 (Hansard)",
      "https://api.parliament.uk/historic-hansard/commons/1861/feb/08/affairs-of-syria-question"
+    ]
+   ]
+  },
+  {
+   "id": "india1857",
+   "title": "The Indian rebellion of 1857",
+   "region": "Asia",
+   "where": "Northern and central India (pin: Delhi, India; also Meerut, Kanpur, Lucknow, Jhansi)",
+   "lat": 28.65,
+   "lon": 77.23,
+   "from": 1857,
+   "to": 1859,
+   "themes": [
+    "Uprising",
+    "Colonial rule",
+    "Massacre",
+    "War"
+   ],
+   "facts": [
+    [
+     "The rebellion of 1857–59 against British rule began in Meerut with an uprising of Indian troops (sepoys) in the service of the British East India Company and spread to Delhi, Agra, Kanpur and Lucknow; Western historians long called it the 'Indian Mutiny' or 'Sepoy Mutiny', and in India it is also called the 'First War of Independence'.",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "The pretext was the new Enfield rifle, whose cartridges were rumoured to be greased with pig and cow fat, an insult to both Muslims and Hindus; Britannica says there is no conclusive evidence that either was actually used, but the rumour fed a larger suspicion, sharpened by the annexation of Oudh (Awadh) in 1856, that the British were undermining Indian society.",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "On 10 May 1857 the Meerut troopers shot their British officers and marched to Delhi, where by nightfall the pensioned Mughal emperor Bahadur Shah II had been nominally restored to power; apart from the emperor and his sons and Nana Sahib, none of the important Indian princes joined the rebels.",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "The rebels commonly shot their British officers on rising and carried out massacres at Delhi, Kanpur and elsewhere; at Cawnpore (Kanpur), after the British garrison surrendered, Nana Sahib offered it safe passage, but his forces then killed about 400 British women and children.",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "Some British officers began severe measures before any such murders were known, and in the end, Britannica says, the reprisals far outweighed the original excesses: hundreds of sepoys were bayoneted or fired from cannons in a frenzy of British vengeance, though some British officers did protest the bloodshed.",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "When Delhi was retaken after a week of street fighting in September 1857, the troops of the besieging force looted and pillaged the city, and a large number of its citizens were killed in retaliation for the British and Indian civilians who had been killed by the rebels; the British arrested Bahadur Shah, and Major William Hodson had his sons Mirza Mughal and Mirza Khizr Sultan and his grandson Mirza Abu Bakr shot under his own authority.",
+     "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "It is well known to all, that in this age the people of Hindostan, both Hindoos and Mohammedans, are being ruined under the tyranny and oppression of the infidel and treacherous English. […] It is evident that the Europeans, by the introduction of English articles into India, have thrown the weavers, the cotton-dressers, the carpenters, the blacksmiths, and the shoemakers, &c., out of employ, and have engrossed their occupations, so that every description of native artisan has been reduced to beggary.",
+     "who": "A rebel proclamation (ishtahar) issued in the name of a grandson of the Mughal emperor Bahadur Shah, as translated in the Delhi Gazette and reprinted by the British historian Charles Ball, who calls it a manifesto of the king",
+     "date": "1857 (printed in the Delhi Gazette, 29 September 1857)",
+     "doc": "Charles Ball, The History of the Indian Mutiny, vol. 2, pp. 630–632",
+     "url": "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt",
+     "lic": "Public domain (Charles Ball, The History of the Indian Mutiny, London Printing and Publishing Co., 1858–59)"
+    },
+    {
+     "text": "It is not a secret thing, that under the British government, natives employed in the civil and military services, have little respect, low pay, and no manner of influence; and all the posts of dignity and emolument in both the departments, are exclusively bestowed on Englishmen […] Lastly, be it known to all, that whoever, out of the above-named classes, shall, after the circulation of this Ishtahar, still cling to the British government, all his estates shall be confiscated, and his property plundered, and he himself, with his whole family, shall be imprisoned, and ultimately put to death.",
+     "who": "The same rebel proclamation, on Indians in the Company's service and on those who stayed loyal to the British, as translated in the Delhi Gazette and reprinted by Charles Ball",
+     "date": "1857 (printed in the Delhi Gazette, 29 September 1857)",
+     "doc": "Charles Ball, The History of the Indian Mutiny, vol. 2, pp. 631–632",
+     "url": "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt",
+     "lic": "Public domain (Charles Ball, The History of the Indian Mutiny, London Printing and Publishing Co., 1858–59)"
+    },
+    {
+     "text": "To eat pigs and drink wine — to bite greased cartridges, and to mix pig's fat with flour and sweetmeats — to destroy Hindoo and Mussulman temples on pretence of making roads — to build churches — to send clergymen into the streets and alleys to preach the Christian religion — to institute English schools, and to pay a monthly stipend for learning the English sciences, while the places of worship of Hindoos and Mussulmans are to this day entirely neglected; with all this, how can the people believe that religion will not be interfered with?",
+     "who": "Begum Hazrat Mahal of Oudh (Awadh), regent for her young son Birjis Qadir and leader of the rebel government of Oudh, in her counter-proclamation answering Queen Victoria's proclamation; English 'Translation by Order' (made for the British authorities), reprinted by Charles Ball",
+     "date": "late 1858 (after the Queen's proclamation of 1 November 1858)",
+     "doc": "Proclamation by the Begum of Oude, in Charles Ball, The History of the Indian Mutiny, vol. 2, pp. 542–543",
+     "url": "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt",
+     "lic": "Public domain (Charles Ball, The History of the Indian Mutiny, London Printing and Publishing Co., 1858–59)"
+    },
+    {
+     "text": "If our people were discontented with our royal predecessor, Wajid Ali Shah, how comes it they are content with us? And no ruler ever experienced such loyalty and devotion of life and goods as we have done. What, then, is wanting that they do not restore our country? Further, it is written in the proclamation, that they want no increase of territory, but yet they cannot refrain from annexation. If the Queen has assumed the government, why does her majesty not restore our country to us when our people wish it? […] No one has ever seen in a dream that the English forgave an offence.",
+     "who": "Begum Hazrat Mahal of Oudh, ruler of the rebel government, in the same counter-proclamation (English 'Translation by Order', reprinted by Charles Ball)",
+     "date": "late 1858",
+     "doc": "Proclamation by the Begum of Oude, in Charles Ball, The History of the Indian Mutiny, vol. 2, p. 543",
+     "url": "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt",
+     "lic": "Public domain (Charles Ball, The History of the Indian Mutiny, London Printing and Publishing Co., 1858–59)"
+    },
+    {
+     "text": "All that has been done, was done by that rebellious army. I was in their power, what could I do? They came suddenly, and made me a prisoner. I was helpless, and constrained by my fears, I did whatever they required, otherwise they would immediately have killed me. This is universally known. I found myself in such a predicament that I was weary of my life, while my officials had no hopes of theirs being spared. In this state of things, I resolved to accept poverty, and adopted the garb, colored with red earth, of a religious mendicant",
+     "who": "Bahadur Shah II, the last Mughal emperor, in his written defence at his trial by a British military commission (the official English translation read in court)",
+     "date": "read in court on 9 March 1858",
+     "doc": "Translation of the written defence put in by Bahadur Shah, Ex-King of Delhi, in Proceedings on the Trial of Muhammad Bahadur Shah (Government of India printing, Calcutta, 1895), p. 133ff.",
+     "url": "https://archive.org/stream/dli.csl.7785/7785_djvu.txt",
+     "lic": "Public domain (Government of India record of 1858; printed by the Superintendent of Government Printing, Calcutta, 1895)"
+    },
+    {
+     "text": "In the city no one's life was safe. All able-bodied men who were seen were taken for rebels and shot. […] Many other well-known men of the city were killed, being mistaken for rebels. In this way God showed His anger: the green as well as the dry trees were consumed; the guiltless shared the same fate as the guilty. As innocent Christians fell victims on the 11th of May, so the same evil fate befel Mahommedans on the 20th September, 1857. The gallows slew those who had escaped the sword.",
+     "who": "Mainodin Hassan Khan, a Delhi police officer (in charge of the Paharganj police station) who threw in his lot with the rebels and later fled, on the British recapture of Delhi; his narrative as translated by Charles Theophilus Metcalfe",
+     "date": "written after 1857, on September 1857",
+     "doc": "Two Native Narratives of the Mutiny in Delhi, trans. C. T. Metcalfe (1898), pp. 71–73",
+     "url": "https://archive.org/stream/b28710812/b28710812_djvu.txt",
+     "lic": "Public domain (published London, Archibald Constable, 1898)"
+    },
+    {
+     "text": "I replied: “Hakimjee, your judgment is not good. The massacre of innocent women and children is not a good work in the eyes of the Most High God. When this insurrection is suppressed, and the English power re-established, the saving of these lives will stand you in good stead.",
+     "who": "Mainodin Hassan Khan, Delhi police officer, recalling how he pleaded with the emperor's physician Hakim Ahsanullah to stop the killing of Europeans on the day the rebels entered Delhi (his narrative as translated by C. T. Metcalfe)",
+     "date": "11 May 1857 (written later)",
+     "doc": "Two Native Narratives of the Mutiny in Delhi, trans. C. T. Metcalfe (1898), pp. 50–51",
+     "url": "https://archive.org/stream/b28710812/b28710812_djvu.txt",
+     "lic": "Public domain (published London, Archibald Constable, 1898)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "In fact, the peculiar aggravation of the Cawnpore massacres was this, that the deed was done by a subject race — by black men who dared to shed the blood of their masters, and that of poor helpless ladies and children. Here we had not only a servile war and a sort of Jacquerie combined, but we had a war of religion, a war of race, and a war of revenge, of hope, of some national promptings to shake off the yoke of a stranger, and to re-establish the full power of native chiefs, and the full sway of native religions.",
+     "who": "William Howard Russell, war correspondent of The Times, in India 1858–59 (My Diary in India, vol. 1, 1860, p. 164)",
+     "date": "1858 (published 1860)",
+     "url": "https://archive.org/stream/mydiaryinindiain01russuoft/mydiaryinindiain01russuoft_djvu.txt"
+    },
+    {
+     "text": "an officer who was attached to Renaud's column, when it moved out from Allahabad in advance of Havelock's force (Neill being at Allahabad), told me that the executions of natives in the line of march were indiscriminate to the last degree. The officer in command was emulous of Neill, and thought he could show equal vigour. In two days forty-two men were hanged on the road-side, and a batch of twelve men were executed because their faces were \"turned the wrong way\" when they were met on the march. All the villages in his front were burned when he halted.",
+     "who": "William Howard Russell, The Times correspondent, reporting what a British officer told him about a column marching on Cawnpore in June–July 1857 (My Diary in India, vol. 2, 1860, p. 402)",
+     "date": "23 February 1859 (published 1860)",
+     "url": "https://archive.org/stream/mydiaryinindiain02russuoft/mydiaryinindiain02russuoft_djvu.txt"
+    },
+    {
+     "text": "On their part, the Oudians were unquestionably in the position of men struggling for the independence of their country and the defence of their homes. On our side, it was undeniable that we were fiercely striving to tighten the grasp of recent aggression; while we eased our consciences by endeavouring to believe that the men who resisted us were rebels; the fact being, that they owed us no allegiance",
+     "who": "Charles Ball, British historian of the rising, writing in London (The History of the Indian Mutiny, vol. 2, pp. 632–633)",
+     "date": "1859",
+     "url": "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "We deeply lament the evils and misery which have been brought upon India by the acts of ambitious men, who have deceived their countrymen by false reports, and led them into open rebellion. Our power has been shown by the suppression of that rebellion in the field; we desire to show our mercy by pardoning the offences of those who have been thus misled, but who desire to return to the path of duty. […] Our clemency will be extended to all offenders, save and except those who have been, or shall be, convicted of having directly taken part in the murder of British subjects. With regard to such the demands of justice forbid the exercise of mercy. […] Firmly relying ourselves on the truth of Christianity, and acknowledging with gratitude the solace of religion, we disclaim alike the right and desire to impose our convictions on any of our subjects.",
+     "who": "Queen Victoria, Proclamation by the Queen in Council to the princes, chiefs, and people of India, which took over the government of India from the East India Company",
+     "date": "1 November 1858",
+     "url": "https://en.wikisource.org/wiki/Proclamation_by_the_Queen_in_Council,_to_the_princes,_chiefs,_and_people_of_India"
+    },
+    {
+     "text": "Whenever a rebel is caught he is immediately tried; and, unless he can prove a defence, he is sentenced to be hanged at once: but the chief rebels, or ringleaders, I make first clean up a certain portion of the pool of blood, still two inches deep, in the shed where the fearful murder and mutilation of women and children took place. To touch blood is most abhorrent to the high-caste natives; they think, by doing so, they doom their souls to perdition. Let them think so. My object is to inflict a fearful punishment for a revolting, cowardly, barbarous deed, and to strike terror into these rebels.",
+     "who": "Brigadier-General James Neill, British commander at Cawnpore after its recapture, in a letter quoted by Charles Ball (The History of the Indian Mutiny, vol. 1, pp. 389–390)",
+     "date": "late July 1857",
+     "url": "https://archive.org/stream/historyofindianm01ball/historyofindianm01ball_djvu.txt"
+    },
+    {
+     "text": "The entire defence indeed is a mere tissue of denials of guilt; assertion of his not having been a free-agent; and an endeavour to put the onus of his misconduct upon others.",
+     "who": "Major F. J. Harriott, Deputy Judge Advocate General and government prosecutor, replying to Bahadur Shah's defence before the military commission at Delhi",
+     "date": "9 March 1858",
+     "url": "https://archive.org/stream/dli.csl.7785/7785_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "On this day in 1857 began the historic First War of Independence, which ignited a spirit of patriotism among our fellow citizens and contributed to the weakening of colonial rule.",
+    "who": "Narendra Modi, Prime Minister of India, in a post on Twitter (now X) republished by the Government of India's Press Information Bureau",
+    "date": "10 May 2022",
+    "url": "https://www.pib.gov.in/Pressreleaseshare.aspx?PRID=1824040"
+   },
+   "note": "Research in progress: the first proclamation is often called the 'Azamgarh Proclamation' (issued in August 1857 by the Mughal prince Firoz Shah); Ball's printing does not give that name, date or author beyond 'the grandson of Bahadur Shah', and no encyclopaedia page confirming them was checked, so the card does not use the name. No words of an ordinary sepoy, peasant or villager are quoted yet; the Persian and Urdu writings of the Delhi poet Ghalib on the sack of Delhi (Dastanbuy, 1858; letters) were not found in a checkable public-domain transcription.",
+   "warn": "The Indian proclamations and Bahadur Shah's defence survive here only in English translations made by or for the British (the Begum's is marked 'Translation by Order'); Bahadur Shah wrote his defence to save his life, and Mainodin Hassan Khan wrote his narrative afterwards for a British patron, Metcalfe, having himself been accused of joining the rebels. Russell and Neill write in the racial language of their time. The texts describe mass killing and executions.",
+   "disputed": [
+    [
+     "Mutiny or war of independence? Britannica says the rising was long called the 'Indian Mutiny' or 'Sepoy Mutiny' by Western historians and is also called the 'First War of Independence' in India, and that treating it merely as a sepoy mutiny underestimates its political and social causes; Wikipedia notes that the 'First War of Independence' label also has critics in India, and that the name of the revolt remains contested.",
+     [
+      "https://www.britannica.com/event/Indian-Rebellion-of-1857",
+      "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+     ]
+    ],
+    [
+     "How many died? Wikipedia says approximately 6,000 of the 40,000 British living in India were killed, and that, on a rough comparison of dubious pre-1857 demographic data with the 1871 census, probably 800,000 Indians were killed, and very likely more, in the rebellion itself and in the famines and epidemics it caused; for Oudh alone it cites estimates of 150,000 Indians killed, 100,000 of them civilians. No exact count exists on either side.",
+     [
+      "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+     ]
+    ],
+    [
+     "Was Bahadur Shah a leader or a prisoner of the rebels? In his defence he said the soldiers made him a prisoner and used his seal without his knowledge; the prosecutor called the defence 'a mere tissue of denials of guilt', and on 9 March 1858 the commission found him guilty of all the charges of rebellion, treason and murder; he was sent into exile at Rangoon, arriving on 9 December 1858 (Ball). Britannica describes him as 'nominally restored to power by a tumultuous soldiery', while Wikipedia says that on 16 May up to 50 British prisoners were killed by some of the emperor's servants outside the palace.",
+     [
+      "https://archive.org/stream/dli.csl.7785/7785_djvu.txt",
+      "https://www.britannica.com/event/Indian-Rebellion-of-1857",
+      "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857",
+      "https://archive.org/stream/historyofindianm02ball/historyofindianm02ball_djvu.txt"
+     ]
+    ],
+    [
+     "Atrocity stories. Reports that British women had been 'dishonoured' at the Bibighar and elsewhere inflamed British opinion, but Wikipedia says the consensus of the detailed inquiries, one ordered by Lord Canning, was that there was no convincing evidence of such crimes, although British women and children had been killed outright.",
+     [
+      "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+     ]
+    ]
+   ],
+   "blind": "The rising is told here by those with power to write: an emperor pleading for his life, a queen-regent and a Mughal prince issuing proclamations, a Delhi police officer writing for a British patron, and British commanders, correspondents and historians. Every Indian text reached print through British translators. The tens of thousands of sepoys who rose, the villagers hanged along the roads or killed in famine and disease, and the British women, children and Indian servants killed at Delhi and Cawnpore left almost no words of their own.",
+   "reading": [
+    [
+     "Indian Rebellion of 1857 (Britannica)",
+     "https://www.britannica.com/event/Indian-Rebellion-of-1857"
+    ],
+    [
+     "Indian Rebellion of 1857 (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Indian_Rebellion_of_1857"
+    ],
+    [
+     "Charles Ball, The History of the Indian Mutiny, vol. 2 (1858–59, archive.org)",
+     "https://archive.org/details/historyofindianm02ball"
+    ],
+    [
+     "Proceedings on the Trial of Muhammad Bahadur Shah (Government of India, 1895, archive.org)",
+     "https://archive.org/details/dli.csl.7785"
+    ],
+    [
+     "Two Native Narratives of the Mutiny in Delhi, trans. C. T. Metcalfe (1898, archive.org)",
+     "https://archive.org/details/b28710812"
+    ],
+    [
+     "W. H. Russell, My Diary in India, vols. 1–2 (1860, archive.org)",
+     "https://archive.org/details/mydiaryinindiain01russuoft"
+    ],
+    [
+     "Queen Victoria's Proclamation of 1858 (Wikisource)",
+     "https://en.wikisource.org/wiki/Proclamation_by_the_Queen_in_Council,_to_the_princes,_chiefs,_and_people_of_India"
+    ]
+   ]
+  },
+  {
+   "id": "bangladesh1971",
+   "title": "The 1971 killings in East Pakistan (Bangladesh)",
+   "region": "Asia",
+   "where": "East Pakistan, now Bangladesh (pin: Dhaka)",
+   "lat": 23.81,
+   "lon": 90.41,
+   "from": 1971,
+   "to": 1971,
+   "themes": [
+    "Massacre",
+    "War",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "In the 1970 elections the Awami League, led by Mujibur Rahman, won 167 of the 169 seats allotted to East Pakistan and with them a majority in Pakistan's National Assembly; on 3 March 1971 President Yahya Khan, under pressure from West Pakistani leaders, particularly Zulfikar Ali Bhutto, prevented it from taking power, prompting widespread protests and calls for independence.",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ],
+    [
+     "On 25 March 1971 Pakistan launched Operation Searchlight, a massive military intervention intended to quash the independence movement by targeting intellectuals, activists and the Hindu minority; many students were among those killed, and Mujibur Rahman declared independence on 26 March shortly before he was arrested and taken to West Pakistan.",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ],
+    [
+     "From May to October 1971 the army and its local allies systematically destroyed villages, collectively punishing civilians for the guerrilla insurgency of the Mukti Bahini; Britannica estimates that 200,000 to 400,000 women were sexually assaulted, and that as many as 15 million refugees crossed into India.",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ],
+    [
+     "The violence ran both ways: in early March 1971, before the army struck, Bengali mobs killed non-Bengalis, 300 Biharis in rioting in Chittagong alone according to Wikipedia, and the Pakistani government used this 'Bihari massacre' to justify its crackdown; during the war some Biharis joined pro-army militias, and Wikipedia gives between 1,000 and 150,000 Biharis killed in reprisal attacks by Bengali militias and mobs.",
+     "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide"
+    ],
+    [
+     "India, which gave the rebels training and military support, went to war with Pakistan on 3 December 1971, and Pakistani forces in East Pakistan surrendered on 16 December, securing Bangladesh's independence; afterwards many Bihari muhajirs were persecuted as alleged collaborators, many were killed and hundreds of thousands were placed in camps.",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ],
+    [
+     "The United States under President Nixon kept supporting Pakistan for Cold War reasons, although the American diplomat Archer Blood in Dhaka warned of a 'reign of terror' by Pakistani troops; Britannica says the US went on sending weapons to Yahya Khan's government despite restrictions by Congress.",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "I have come before you today with a heart laden with sadness. You are aware of everything and know all. We have tried with our lives. And yet the sadness remains that today, in Dhaka, Chittagong, Khulna, Rajshahi and Rangpur the streets are soaked in the blood of my brothers. […] The weapons we have bought with our money to defend the country against foreign aggression are being used against the poor and downtrodden of my country today. It is their hearts the bullets pierce today.",
+     "who": "Sheikh Mujibur Rahman, leader of the Awami League, which had won the 1970 election in East Pakistan, speaking to a mass rally in Dhaka (official English translation, Government of Bangladesh)",
+     "date": "7 March 1971",
+     "doc": "Constitution of the People's Republic of Bangladesh, Fifth Schedule (speech of 7 March 1971, 'Translated'), Ministry of Law, bdlaws.minlaw.gov.bd",
+     "url": "http://bdlaws.minlaw.gov.bd/upload/act/2022-04-18-13-27-54-Scheudle__367.pdf",
+     "lic": "Government of Bangladesh legal text (Constitution, Fifth Schedule, official translation, added 2011); government edict, brief credited quotation"
+    },
+    {
+     "text": "Bear in mind that the enemy has infiltrated our ranks to cause confusion and sow discord among us. In our Bengal, everyone, be he Hindu or Muslim, Bangalee or non-Bangalee, is our brother. It is our responsibility to ensure their security. Our good name must not be sullied.",
+     "who": "Sheikh Mujibur Rahman, Awami League leader, in the same speech, as attacks on non-Bengalis were already taking place (official English translation, Government of Bangladesh)",
+     "date": "7 March 1971",
+     "doc": "Constitution of the People's Republic of Bangladesh, Fifth Schedule",
+     "url": "http://bdlaws.minlaw.gov.bd/upload/act/2022-04-18-13-27-54-Scheudle__367.pdf",
+     "lic": "Government of Bangladesh legal text (Constitution, Fifth Schedule, official translation, added 2011); government edict, brief credited quotation"
+    },
+    {
+     "text": "Why did they shoot innocent people-women, children, beggars in the street-firing at random into houses? If they were angry with the Awami League, why did they not punish the leaders instead of taking vengeance on anyone within range of their guns?",
+     "who": "A middle-aged refugee in a camp in India, unnamed, as recorded by the field team of the US Senate subcommittee on refugees",
+     "date": "August 1971",
+     "doc": "Edward M. Kennedy, Crisis in South Asia, report to the Senate Judiciary Subcommittee on Refugees (US Government Printing Office, 1971), section 'The night of March 25th and after'",
+     "url": "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA47&focus=viewport&output=text",
+     "lic": "Public domain (US government work: report to the US Senate Judiciary Subcommittee on Refugees, 1971)"
+    },
+    {
+     "text": "It is so senseless. You do not know who might shoot you. It might be a soldier who decides you were an Awami League supporter. It might be a young Mukti Bahini fighter who sees you are middle-aged and therefore assumes you are unwilling to oppose the army. Or it might simply be a miscreant who wants to loot your home or shop. We had to flee this madness.",
+     "who": "A well-educated middle-aged Bengali man in a refugee camp, unnamed, as recorded by the US Senate subcommittee's field team",
+     "date": "1971",
+     "doc": "Edward M. Kennedy, Crisis in South Asia, report to the Senate Judiciary Subcommittee on Refugees (US Government Printing Office, 1971)",
+     "url": "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA47&focus=viewport&output=text",
+     "lic": "Public domain (US government work: report to the US Senate Judiciary Subcommittee on Refugees, 1971)"
+    },
+    {
+     "text": "I do not know why they shot me-I don't belong to any political party-I was just a railway clerk.",
+     "who": "A 55-year-old railway employee, unnamed, wounded in the head when the Pakistani army attacked his railway station at noon, speaking in an Indian border hospital, as recorded by the US Senate subcommittee's field team",
+     "date": "August 1971",
+     "doc": "Edward M. Kennedy, Crisis in South Asia, report to the Senate Judiciary Subcommittee on Refugees (US Government Printing Office, 1971), section 'Civilian war casualties'",
+     "url": "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA32&focus=viewport&output=text",
+     "lic": "Public domain (US government work: report to the US Senate Judiciary Subcommittee on Refugees, 1971)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Here in Dacca we are mute and horrified witnesses to a reign of terror by the Pak military. Evidence continues to mount that the MLA authorities have a list of Awami League supporters whom they are systematically eliminating by seeking them out in their homes and shooting them down. […] Moreover, with support of Pak military, non-Bengali Muslims are systematically attacking poor people’s quarters and murdering Bengalis and Hindus.",
+     "who": "Archer K. Blood, US Consul General in Dacca, in a cable to the State Department headed 'Selective Genocide' (Foreign Relations of the United States, 1969–1976, vol. E–7, doc. 125)",
+     "date": "28 March 1971",
+     "url": "https://history.state.gov/historicaldocuments/frus1969-76ve07/d125"
+    },
+    {
+     "text": "Our government has failed to denounce the suppression of democracy. Our government has failed to denounce atrocities. Our government has failed to take forceful measures to protect its citizens while at the same time bending over backwards to placate the West Pak dominated government […] But we have chosen not to intervene, even morally, on the grounds that the Awami conflict, in which unfortunately the overworked term genocide is applicable, is purely internal matter of a sovereign state.",
+     "who": "Officers of the US Consulate General, USAID and USIS in Dacca, in the dissent cable sent with Consul General Archer Blood's endorsement (the 'Blood Telegram', FRUS 1969–1976, vol. XI, doc. 19)",
+     "date": "6 April 1971",
+     "url": "https://history.state.gov/historicaldocuments/frus1969-76v11/d19"
+    },
+    {
+     "text": "The same is true for the number of Bengalis or Bihari Muslims or West Pakistanis who were slaughtered during the holocaust of March-which preceded the outbreak of civil war-when Bengalis attacked Biharis in sporadic fits of terrorism. Certainly tens of thousands died during March--and since the outbreak of civil war on March 25, when the Pakistan army unleashed its massive power and began to implement a policy of indiscriminate terror, death estimates run in the hundreds of thousands.",
+     "who": "Senator Edward M. Kennedy, chairman of the US Senate subcommittee on refugees, in his report after visiting the refugee areas in India (Crisis in South Asia, 1971)",
+     "date": "1971",
+     "url": "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA32&focus=viewport&output=text"
+    },
+    {
+     "text": "Nothing is more clear, or more easily documented, than the systematic campaign of terror-and its genocidal consequences-launched by the Pakistan army on the night of March 25th. […] Hardest hit have been members of the Hindu community who have been robbed of their lands and shops, systematically slaughtered, and, in some places, painted with yellow patches marked \"H\".",
+     "who": "Senator Edward M. Kennedy, in the conclusions of the same report (Crisis in South Asia, 1971)",
+     "date": "1971",
+     "url": "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA66&output=text"
+    }
+   ],
+   "official": {
+    "text": "Meanwhile murder, arson and widespread disorder in defiance of governmental authority were let loose in the province. […] Eventually a point was reached where the Awami League put forward final proposals which virtually amounted to dismemberment of the country. Since they had no such mandate from the people and as unity of the country was at stake, firm action had to be taken to assert governmentʼs authority and to safeguard the integrity of Pakistan. There was no option but to take that decision. The situation in East Pakistan is well under control and normal life is being restored. Accounts to the contrary circulated by some outside sources especially from news media, do not reflect the correct position and are designed to mislead world public opinion.",
+    "who": "General Agha Mohammad Yahya Khan, President of Pakistan and chief martial law administrator, in a message to President Nixon delivered by the Pakistani ambassador (FRUS 1969–1976, vol. XI, doc. 16)",
+    "date": "31 March 1971",
+    "url": "https://history.state.gov/historicaldocuments/frus1969-76v11/d16"
+   },
+   "today": {
+    "text": "WHEREAS in the conduct of a ruthless and savage war the Pakistani authorities committed and are still continuously committing numerous acts of genocide and unprecedented tortures, amongst others on the civilian and unarmed people of Bangladesh,",
+    "who": "The Proclamation of Independence issued at Mujibnagar by the elected representatives of Bangladesh on 10 April 1971, which since the Fifteenth Amendment (2011) forms the Seventh Schedule of the Constitution of Bangladesh, as published on the Government of Bangladesh's laws site (checked November 2026). Pakistan's official position differs: see 'disputed'.",
+    "date": "10 April 1971; constitutional text since 2011",
+    "url": "http://bdlaws.minlaw.gov.bd/upload/act/2022-04-18-13-27-54-Scheudle__367.pdf"
+   },
+   "note": "Research in progress: no words of a Bihari / Urdu-speaking survivor of the killings of March or December 1971 were found in a public-domain or government source; Yahya Khan's radio broadcast of 26 March 1971 and the Hamoodur Rahman Commission report were not found in a checkable government copy, so the commission's figure is given only as Britannica reports it. Refugees are quoted only as recorded, unnamed, in the US Senate report. The 26 March declaration attributed to Mujibur Rahman (Sixth Schedule of the Constitution) is not quoted because its exact wording is debated.",
+   "warn": "Mujibur Rahman's speech is quoted from the Government of Bangladesh's official English translation; the refugees' words were recorded in English by a US Senate team, and Kennedy and the Dhaka consulate were openly critical of US policy. Yahya Khan's message is his government's justification at the time. The texts refer to mass killing, and the war involved mass sexual violence.",
+   "disputed": [
+    [
+     "How many died? Britannica puts the deaths from the liberation war and the India-Pakistan war together at between 300,000 and 3,000,000, and notes that Pakistan's Hamoodur Rahman Commission estimated close to 26,000 while Bangladesh has claimed about 3,000,000. Wikipedia adds that the CIA and State Department, midway through, conservatively estimated 200,000 killed, that independent researchers estimate around 300,000 to 500,000, that the 3 million estimate 'has come under strict scrutiny', and that Sarmila Bose's 50,000–100,000 figure has been strongly criticised.",
+     [
+      "https://www.britannica.com/event/Bangladesh-Liberation-War",
+      "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide"
+     ]
+    ],
+    [
+     "Was it genocide? Bangladesh's founding proclamation speaks of 'acts of genocide', the US consulate in Dacca used the word in 1971, and Senator Kennedy wrote of 'genocidal consequences'. Wikipedia's article describes the killings as genocide in its opening sentence, but also states that allegations of genocide were rejected by most UN member states at the time and rarely appear in textbooks and academic sources on genocide studies, and that the political scientists Richard Sisson and Leo E. Rose deny that a genocide occurred; Britannica's article does not use the word. Because the scholarly classification is still debated, this card does not apply the 'Genocide' theme.",
+     [
+      "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide",
+      "https://history.state.gov/historicaldocuments/frus1969-76v11/d19",
+      "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA66&output=text",
+      "http://bdlaws.minlaw.gov.bd/upload/act/2022-04-18-13-27-54-Scheudle__367.pdf"
+     ]
+    ],
+    [
+     "Who struck first, and who suffered most? Pakistan justified the crackdown by Bengali attacks on Biharis in early March. Wikipedia reports that, according to Sarmila Bose and the Pakistani journalist Anthony Mascarenhas, the army showed great restraint until 25 March, while Mascarenhas judged the army's actions from then on far worse and on a larger scale than the violence by Bengalis. Senator Kennedy's report also records the Bengali killings of Biharis in March.",
+     [
+      "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide",
+      "https://books.google.com/books?id=8NSe6XcXI0UC&pg=PA32&focus=viewport&output=text"
+     ]
+    ],
+    [
+     "Pakistan's position. Wikipedia says Pakistan 'deeply regretted any crimes that may have been committed' in 1974, President Musharraf expressed regret for the 'excesses' in 2002, and in 2015 the Foreign Ministry rejected any 'insinuation of complicity in committing crimes or war atrocities'; Britannica notes that Pakistan has not officially taken accountability for the war crimes of 1971.",
+     [
+      "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide",
+      "https://www.britannica.com/event/Bangladesh-Liberation-War"
+     ]
+    ]
+   ],
+   "blind": "The record of 1971 in English is dominated by outsiders: American diplomats, a US senator, and the Pakistani government justifying itself. Bengali villagers, Hindus driven out, and the women assaulted speak here only in a few unnamed lines taken down by a Senate team, and the Bihari and other Urdu-speaking civilians killed by Bengali mobs and fighters left almost nothing in public-domain sources. Both the Pakistani army's internal record (the Hamoodur Rahman Commission) and many Bangladeshi accounts were shaped by the politics of the two states that emerged from the war.",
+   "reading": [
+    [
+     "Bangladesh Liberation War (Britannica)",
+     "https://www.britannica.com/event/Bangladesh-Liberation-War"
+    ],
+    [
+     "Bangladesh genocide (Wikipedia)",
+     "https://en.wikipedia.org/wiki/1971_Bangladesh_genocide"
+    ],
+    [
+     "FRUS 1969–1976, vol. XI, South Asia Crisis, 1971 (Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1969-76v11"
+    ],
+    [
+     "FRUS 1969–1976, vol. E–7, Documents on South Asia, 1969–1972 (Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1969-76ve07"
+    ],
+    [
+     "E. M. Kennedy, Crisis in South Asia (1971, Google Books full view)",
+     "https://books.google.com/books?id=8NSe6XcXI0UC"
+    ],
+    [
+     "Constitution of Bangladesh, Schedules (Ministry of Law, PDF)",
+     "http://bdlaws.minlaw.gov.bd/upload/act/2022-04-18-13-27-54-Scheudle__367.pdf"
+    ]
+   ]
+  },
+  {
+   "id": "tenochtitlan1521",
+   "title": "The fall of Tenochtitlan",
+   "region": "Americas",
+   "where": "Tenochtitlan and Tlatelolco, now central Mexico City, Mexico",
+   "lat": 19.43,
+   "lon": -99.13,
+   "from": 1519,
+   "to": 1521,
+   "themes": [
+    "War",
+    "Colonial rule",
+    "Massacre",
+    "Slavery",
+    "Famine"
+   ],
+   "facts": [
+    [
+     "Tenochtitlan, the Aztec capital, was founded about 1325 on islands in Lake Texcoco and joined to the mainland by causeways; its population in 1519 has been estimated at about 400,000, the largest residential concentration in Mesoamerican history, and it was destroyed by the Spanish conquistadores under Hernán Cortés in 1521.",
+     "https://www.britannica.com/place/Tenochtitlan"
+    ],
+    [
+     "Aztec rule rested on tribute and war: its provinces paid tribute according to what each region produced, human sacrifice was commonly practised, war was ideologically a religious duty that supplied prisoners for sacrifice, and, as their power grew, the Aztecs ritually killed prisoners from all parts of what is now Mexico.",
+     "https://www.britannica.com/topic/Aztec"
+    ],
+    [
+     "Many subject peoples bitterly resented paying tribute to the Aztecs, and Cortés eventually gained more than 200,000 Indigenous allies; Tlaxcala, in chronic war with Montezuma II, first resisted Cortés and then became his most faithful ally, and in 1520 his captain Pedro de Alvarado massacred many leading Aztec chiefs during a festival in the city.",
+     "https://www.britannica.com/biography/Hernan-Cortes"
+    ],
+    [
+     "After the Spaniards were driven out of the city in 1520, a smallpox epidemic struck the Valley of Mexico, including Tenochtitlan, and killed much of the Indigenous leadership, while the Spaniards, among whom smallpox had long been endemic, were affected relatively little; Cuauhtémoc was made ruler in February 1521.",
+     "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan"
+    ],
+    [
+     "The siege lasted from 26 May to 13 August 1521; during the fighting the defenders sacrificed Spanish prisoners at the altar of Huitzilopochtli, and after the surrender, when Cortés demanded the gold lost in 1520, Cuauhtémoc and the lord of Tacuba were tortured.",
+     "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan"
+    ],
+    [
+     "Cortés later took Cuauhtémoc with him on his expedition to Honduras and, hearing of a plot against the Spaniards, ordered him hanged.",
+     "https://www.britannica.com/biography/Cuauhtemoc"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Auh in aiamo totech moquetza in Españoles: achtopamomanaco vei cocoliztli, totomonaliztli […] vel miequintin ic micque, aocvel nenemia, ça onoca in imonoian in incuchian, aoc vel moliniaia, aoc vel mocuechiniaia […] yoā miequintin çan apizmicque, apizmicoac, aocac motecuitlaviaia, aocac teca muchivaia.",
+     "who": "Nahua elders of Tenochtitlan-Tlatelolco, on the smallpox epidemic, as written down in Nahuatl by Sahagún's Nahua assistants (Florentine Codex, Book XII, chapter 29). Gloss: 'And before the Spaniards rose against us, first a great sickness came, a sickness of pustules […] Very many died of it. They could no longer walk; they just lay where they slept, in their beds; they could no longer move, could no longer stir […] And many died only of hunger; there was death from hunger, for no one looked after anyone any more, no one attended to anyone.'",
+     "date": "autumn 1520 (the month Tepeilhuitl); written down decades later",
+     "doc": "Florentine Codex, Book XII, ch. 29, fol. 53r–53v (Nahuatl column), transcription by James Lockhart, Early Nahuatl Library",
+     "url": "https://enl.wired-humanities.org/fcbk12ch29",
+     "lic": "Public domain (Nahuatl text of the Florentine Codex, c. 1575–77); checked against James Lockhart's transcription on the Early Nahuatl Library (site © Early Nahuatl Library; only the 16th-century Nahuatl words are reproduced, not Lockhart's translation or notes)"
+    },
+    {
+     "text": "nimā ie ic mochoquilia in ixquich macevalli quitoque. Ie iauh in tlacatl xocoiotl in Quauhtemoctzin ie iauh quinmomacaz in teteu in Españoles.",
+     "who": "The common people trapped in Tlatelolco, as their young ruler Cuauhtémoc was taken by canoe to surrender, as written down in Nahuatl by Sahagún's Nahua assistants (Florentine Codex, Book XII, chapter 39). Gloss: 'Then all the common people wept, and said: \"There goes the lord, the young Cuauhtemoc; he is going to give himself to the gods, the Spaniards.\"'",
+     "date": "13 August 1521; written down decades later",
+     "doc": "Florentine Codex, Book XII, ch. 39, fol. 80v–81r (Nahuatl column), transcription by James Lockhart, Early Nahuatl Library",
+     "url": "https://enl.wired-humanities.org/fcbk12ch39",
+     "lic": "Public domain (Nahuatl text of the Florentine Codex, c. 1575–77); checked against James Lockhart's transcription on the Early Nahuatl Library (site © Early Nahuatl Library; only the 16th-century Nahuatl words are reproduced, not Lockhart's translation or notes)"
+    },
+    {
+     "text": "Auh in ixquich acaltica onoca yoan in tlapechco catca, yoan in tolmaiecan çan atlan in iaque: in aca ixillan acitiuh in atl, in aca ielchiquipan, in aca iquechtlan acitiuh: auh in aca vel polaqui, in vncan vecatlan: in pipiltzitzinti temamamalo, tlachoquiztleoa",
+     "who": "Nahua elders of Tenochtitlan-Tlatelolco, on the people leaving the city after the surrender, as written down in Nahuatl by Sahagún's Nahua assistants (Florentine Codex, Book XII, chapter 40). Gloss: 'And all who had been in canoes, and on the platforms, and at Tolmayecan, went off through the water. On some the water reached the belly, on some the chest, on some the neck, and some went right under where it was deep. Little children were carried on people's backs; a cry of weeping went up.'",
+     "date": "August 1521; written down decades later",
+     "doc": "Florentine Codex, Book XII, ch. 40, fol. 82r (Nahuatl column), transcription by James Lockhart, Early Nahuatl Library",
+     "url": "https://enl.wired-humanities.org/fcbk12ch40",
+     "lic": "Public domain (Nahuatl text of the Florentine Codex, c. 1575–77); checked against James Lockhart's transcription on the Early Nahuatl Library (site © Early Nahuatl Library; only the 16th-century Nahuatl words are reproduced, not Lockhart's translation or notes)"
+    },
+    {
+     "text": "yoan quimanaia, quinpepenaia in Cioa in chipavaque, in Cuztic innacaio in cuztique. Auh in cequintin cioa inic motetlaçaltiaia, miçoquivique, yoan tatapatli in quimo cuetiq̄ tzotzomatli in quimovipiltique, çan moch tzotzomatli in intech quitlalique.",
+     "who": "Nahua elders of Tenochtitlan-Tlatelolco, on the Spaniards searching the people on the roads out of the city, as written down in Nahuatl by Sahagún's Nahua assistants (Florentine Codex, Book XII, chapter 40). Gloss: 'And they took and picked out the women, the fair ones, the ones with light-coloured bodies. And some of the women, to slip past them, smeared their faces with mud and dressed in rags, rags for skirts and tatters for blouses; they put nothing but rags on themselves.'",
+     "date": "August 1521; written down decades later",
+     "doc": "Florentine Codex, Book XII, ch. 40, fol. 82v (Nahuatl column), transcription by James Lockhart, Early Nahuatl Library",
+     "url": "https://enl.wired-humanities.org/fcbk12ch40",
+     "lic": "Public domain (Nahuatl text of the Florentine Codex, c. 1575–77); checked against James Lockhart's transcription on the Early Nahuatl Library (site © Early Nahuatl Library; only the 16th-century Nahuatl words are reproduced, not Lockhart's translation or notes)"
+    },
+    {
+     "text": "Then Guatemoc said to Cortés \"Señor Malinche, I have surely done my duty in defence of my City, and I can do no more and I come by force and a prisoner into your presence and into your power, take that dagger that you have in your belt and kill me at once with it\"! and when he said this he wept tears and sobbed and other great Lords whom he had brought with him also wept.",
+     "who": "Cuauhtémoc, the last Mexica ruler, at his surrender, as recorded decades later by the conquistador Bernal Díaz del Castillo (A. P. Maudslay's English translation); Cortés's own letter of 1522 reports the same request, in indirect speech",
+     "date": "13 August 1521",
+     "doc": "Bernal Díaz del Castillo, The True History of the Conquest of New Spain, trans. A. P. Maudslay, vol. 4 (Hakluyt Society, 1912), p. 182 (OCR corrected)",
+     "url": "https://archive.org/stream/truehistoryofcon0000alfr/truehistoryofcon0000alfr_djvu.txt",
+     "lic": "Public domain (translation published 1912)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Los Españoles y sus amigos pusiéronse en todos los caminos, y robaron á los que pasaban, tomándolos el oro que llevaban, y escudriñándolos todos sus hatos, y todas sus vestiduras, y ninguna otra cosa tomaban sino el oro, y las mugeres mozas hermosas, y algunas de las mugeres por escaparse disfrazábanse poniendo lodo en la cara, y vistiéndose de andrajos: también tomaban mancebos y hombres recios para esclavos, pusieron los nombres de tlamacazque, y á muchos de ellos herraron en la cara.",
+     "who": "Fray Bernardino de Sahagún, Franciscan missionary who compiled Book XII with Nahua informants, in his own Spanish version of their account, as printed by Carlos María de Bustamante (Historia de la conquista de México, Mexico, 1829, pp. 56–57). Gloss: 'The Spaniards and their allies posted themselves on all the roads and robbed those who passed, taking the gold they carried and searching all their bundles and clothes; they took nothing else but the gold, and the young, beautiful women; and some of the women, to escape, disguised themselves by putting mud on their faces and dressing in rags. They also took young men and strong men as slaves, called them tlamacazque, and branded many of them on the face.'",
+     "date": "written down decades later, on August 1521",
+     "url": "https://archive.org/stream/historiadelaconq00sahaiala/historiadelaconq00sahaiala_djvu.txt"
+    },
+    {
+     "text": "and his forebodings were realised, when, a few days later, upon his protesting that there was no treasure left in the city, Cortes consented to his torture to force him to speak. Bernal Diaz seeks to excuse Cortes's part in this unworthy proceeding.",
+     "who": "Francis Augustus MacNutt, American historian and translator of Cortés's letters, in an editor's note on Cuauhtémoc (Letters of Cortes, vol. 2, 1908, p. 127)",
+     "date": "1908, on August 1521",
+     "url": "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Our friends accompanied us, armed with swords and shields, and such was the slaughter done that day on water and on land, that with prisoners taken they numbered in all more than forty thousand men; and such were the shrieks and the weeping of the women and children that there was none whose heart did not break; and we had more trouble in preventing our allies from killing and inflicting tortures than we had in fighting with the Indians, for no such inhuman cruelty as the natives of these parts practice was ever seen amongst any people.",
+     "who": "Hernán Cortés, commander of the Spanish and allied forces, in his third letter of relation to the Emperor Charles V, in F. A. MacNutt's translation (Letters of Cortes, vol. 2, 1908, pp. 123–124)",
+     "date": "letter of 15 May 1522, on August 1521",
+     "url": "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt"
+    },
+    {
+     "text": "It appears they had perished to the number of more than fifty thousand, from the salt water which they drank, or from starvation, and pestilence. […] As the people of the city came towards us, I ordered Spaniards to be stationed in all the streets, to prevent our allies from killing those unhappy creatures, who were beyond number; and I also ordered the captains of our allies not to allow in any way those fugitives to be killed, but, as they were so many, it was not possible to prevent it that day, so more than fifteen thousand persons were massacred.",
+     "who": "Hernán Cortés, third letter to Charles V, on the last day of the siege (MacNutt's translation, 1908, p. 126)",
+     "date": "letter of 15 May 1522, on 13 August 1521",
+     "url": "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt"
+    },
+    {
+     "text": "I assert that during three days and nights they never ceased streaming out and all three causeways were crowded with men, women and children, so thin, yellow, dirty and stinking, that it was pitiful to see them.",
+     "who": "Bernal Díaz del Castillo, conquistador who fought in the siege, in his True History written decades later (Maudslay's translation, vol. 4, 1912, p. 187)",
+     "date": "written c. 1560s, on August 1521",
+     "url": "https://archive.org/stream/truehistoryofcon0000alfr/truehistoryofcon0000alfr_djvu.txt"
+    },
+    {
+     "text": "When proclamation was made that they were to be taken to a certain house to be branded, most of us soldiers took those slaves that we possessed to be marked with the brand of His Majesty, which was a G. which was meant to signify Guerra (war),",
+     "who": "Bernal Díaz del Castillo, on the branding of Indigenous captives as war slaves at Texcoco during the campaign (Maudslay's translation, vol. 4, 1912, p. 54)",
+     "date": "early 1521",
+     "url": "https://archive.org/stream/truehistoryofcon0000alfr/truehistoryofcon0000alfr_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "Canal 22, institución de la Secretaría de Cultura, dedica una programación especial en el marco de la conmemoración de los 500 años de resistencia indígena, 1521 toma de México-Tenochtitlán",
+    "who": "Mexico's federal Secretaría de Cultura, press release (Spanish). Gloss: 'Canal 22, an institution of the Ministry of Culture, is dedicating special programming to the commemoration of 500 years of Indigenous resistance, 1521, the taking of Mexico-Tenochtitlan.' The Mexican government marked the 500th anniversary in 2021 as '500 years of Indigenous resistance'.",
+    "date": "6 August 2021",
+    "url": "https://www.gob.mx/cultura/prensa/canal-22-presenta-500-anos-de-resistencia-indigena-1521-toma-de-mexico-tenochtitlan?idiom=es"
+   },
+   "note": "Research in progress: the Nahuatl lament of the Anales de Tlatelolco (the 'broken spears' passage) was not found in a public-domain printing and is not quoted; the modern English translations of it and of Book XII (Anderson and Dibble; León-Portilla, The Broken Spears; Lockhart, We People Here) are in copyright and are only described. No Tlaxcalan account (for example the Lienzo de Tlaxcala) has been added yet.",
+   "warn": "The Nahuatl is quoted from James Lockhart's transcription of the Florentine Codex manuscript (spelling and word division as on that page, including run-together words), with the site's own plain-English glosses, not a published translation; Sahagún's Spanish is quoted from the 1829 printing. The Florentine Codex was written down decades after 1521 from elderly informants, and Díaz wrote his True History decades later; Cortés wrote to the emperor about his own campaign. The texts describe epidemic, famine, mass killing, enslavement and branding.",
+   "disputed": [
+    [
+     "How many died? Wikipedia's summary gives estimates of 100,000 to 240,000 killed in the campaign overall, warriors and civilians, and at least 40,000 Aztec civilians killed and captured; Cortés himself wrote that more than 40,000 were killed or taken on one day, that more than 50,000 had perished from salt water, starvation and pestilence, and that more than 15,000 were massacred by his allies on the last day. Britannica puts the city's population in 1519 at about 400,000.",
+     [
+      "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan",
+      "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt",
+      "https://www.britannica.com/place/Tenochtitlan"
+     ]
+    ],
+    [
+     "Did Moctezuma think Cortés was a god? Britannica says historians long held that the Aztecs expected the return of Quetzalcóatl and that Cortés used this fear, but that some 21st-century historians questioned whether the Aztecs thought Cortés was a god at all, and suggested the well-known story was a Spanish creation later incorporated into Aztec lore; Wikipedia's article likewise calls it now believed to be a myth of the conquerors.",
+     [
+      "https://www.britannica.com/biography/Montezuma-II",
+      "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan"
+     ]
+    ],
+    [
+     "Who conquered Tenochtitlan? Britannica credits Cortés with more than 200,000 Indigenous allies, and Wikipedia says it is well accepted that these allies were indispensable to his success; Cortés's own letter blames the allies for the worst killing, while saying they were 'reproved and punished by us'. The Mexican government's 2021 commemoration framed the year as '500 years of Indigenous resistance'.",
+     [
+      "https://www.britannica.com/biography/Hernan-Cortes",
+      "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan",
+      "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt",
+      "https://www.gob.mx/cultura/prensa/canal-22-presenta-500-anos-de-resistencia-indigena-1521-toma-de-mexico-tenochtitlan?idiom=es"
+     ]
+    ],
+    [
+     "How far is the Nahua account a single 'Aztec' voice? Wikipedia describes Book XII as the conquest told from the point of view of the conquered of Tenochtitlan-Tlatelolco, and reports Lockhart's view that Sahagún collected statements from people of relatively advanced age and high status, written down in Nahuatl by aides he had trained; the friar's project ran from 1545 until his death in 1590.",
+     [
+      "https://en.wikipedia.org/wiki/Florentine_Codex"
+     ]
+    ]
+   ],
+   "blind": "The Mexica side survives mainly through elders of Tlatelolco and Tenochtitlan who spoke decades later to a Franciscan friar's trained assistants, so the view is that of a surviving nobility in one twin city. The tens of thousands who died of smallpox and hunger, the women taken on the roads, and the men branded as slaves appear only as numbers or in a line or two. The Tlaxcalan and other Indigenous allies who made up the great majority of Cortés's forces and were indispensable to his victory are barely heard in this card, while Cortés's own letters to the emperor and Díaz's memoir survive in full.",
+   "reading": [
+    [
+     "Tenochtitlán (Britannica)",
+     "https://www.britannica.com/place/Tenochtitlan"
+    ],
+    [
+     "Hernán Cortés (Britannica)",
+     "https://www.britannica.com/biography/Hernan-Cortes"
+    ],
+    [
+     "Montezuma II (Britannica)",
+     "https://www.britannica.com/biography/Montezuma-II"
+    ],
+    [
+     "Fall of Tenochtitlan (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Fall_of_Tenochtitlan"
+    ],
+    [
+     "Florentine Codex (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Florentine_Codex"
+    ],
+    [
+     "Florentine Codex, Book XII, Nahuatl and Spanish transcription (Early Nahuatl Library)",
+     "https://enl.wired-humanities.org/fcbk12ch01"
+    ],
+    [
+     "Sahagún, Historia de la conquista de México, ed. Bustamante (1829, archive.org)",
+     "https://archive.org/stream/historiadelaconq00sahaiala/historiadelaconq00sahaiala_djvu.txt"
+    ],
+    [
+     "Letters of Cortes, trans. F. A. MacNutt, vol. 2 (1908, archive.org)",
+     "https://archive.org/stream/lettersofcorts02cortuoft/lettersofcorts02cortuoft_djvu.txt"
+    ],
+    [
+     "Bernal Díaz del Castillo, The True History of the Conquest of New Spain, trans. A. P. Maudslay, vol. 4 (1912, archive.org)",
+     "https://archive.org/stream/truehistoryofcon0000alfr/truehistoryofcon0000alfr_djvu.txt"
+    ]
+   ]
+  },
+  {
+   "id": "khiva1873",
+   "title": "The Russian conquest of Khiva and the Yomud Turkmen",
+   "region": "Asia",
+   "where": "Yomud Turkmen lands west of Khiva, between Hazavat (Uzbekistan) and Ilyali (Yylanly, Turkmenistan); pin: Khiva, Uzbekistan (approximate)",
+   "lat": 41.38,
+   "lon": 60.36,
+   "from": 1873,
+   "to": 1873,
+   "themes": [
+    "Colonial rule",
+    "War",
+    "Massacre",
+    "Removal and dispossession",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "The khanate of Khiva, on the Amu Darya (Oxus) northwest of Bukhara, had repelled Russian invasions in 1717 and 1839, but in 1873 it was conquered and made a Russian protectorate.",
+     "https://www.britannica.com/place/khanate-of-Khiva"
+    ],
+    [
+     "The conquest was led by Konstantin Kaufmann, the first governor-general of Russian Turkistan, who had made Bukhara a Russian protectorate in 1868; in 1873 he occupied Khiva, and Russia gained all of the khanate's territory north of the Amu Darya.",
+     "https://www.britannica.com/biography/Konstantin-Petrovich-Kaufmann"
+    ],
+    [
+     "Russian columns crossed the deserts in the spring of 1873; on the way the Orenburg column burned the village of Mangit, where, Wikipedia says, the inhabitants were slaughtered because of some firing from the village; the Khan surrendered in June, and the treaty of August 1873 abolished the Khivan slave trade and slavery, opened the khanate to Russian merchants, and laid an indemnity of 2,200,000 rubles on Khiva, payable in instalments until 1893.",
+     "https://en.wikipedia.org/wiki/Khivan_campaign_of_1873"
+    ],
+    [
+     "Khiva was a slave market: the American reporter J. A. MacGahan, who rode with the Russians, wrote that Turkmen raiders caught Persians on the Persian frontier and sold them in Khiva and Bukhara, and that from all he could gather about 27,000 of the 30,000 Persians in Khiva were slaves, though the Khan's minister Mat-Murad put the number at only 3,000 or 4,000.",
+     "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    ],
+    [
+     "After the city fell, Kaufmann demanded 300,000 rubles from the Yomud Turkmen at short notice; according to the American diplomat Eugene Schuyler, who read the official orders, he kept twelve of the seventeen elders who came to Khiva as hostages and on 18 July ordered General Golovachev to march on the Yomud settlements if they were not collecting the money.",
+     "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    ],
+    [
+     "From 21 July Cossacks burned the Yomud farms, houses and grain along the march, and cavalry charges overtook families fleeing into the desert; by MacGahan's estimate the column ravaged nearly 100 square miles, and afterwards much of the indemnity laid on the Turkmen tribes was paid with the women's silver ornaments.",
+     "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "When asked what they wanted, they replied, that they wished to know why the Russians were invading their country. They had never made war on the Russians; why were the Russians making war on them? […] \"We are,\" they said, \"many thousands, and if the Russians overrun our country, severe shall be their punishment.\" And they were, they said, determined to fight.",
+     "who": "Yomud Turkmen horsemen who stopped to parley with the Russian advance guard while their families fled, as recorded by J. A. MacGahan, the American correspondent riding with the column",
+     "date": "21 July 1873",
+     "doc": "J. A. MacGahan, Campaigning on the Oxus, and the Fall of Khiva (London, 1874), pp. 359–360 (OCR corrected)",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt",
+     "lic": "Public domain (published 1874)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "\"We have sworn friendship with you, and consider ourselves your allies. Now the other tribe of Russians from Turkistan are making war upon us, and we think you ought to help us against them just as we would help you against your enemies.\"",
+     "who": "Yomud Turkmen who came to the officers of the Russian Orenburg column, which had passed through their country on friendly terms, as told to MacGahan afterwards by the Russian officer Count Shuvalov and recorded by MacGahan (reported second-hand: Yomuds to officers of the Orenburg column, then Count Shuvalov to MacGahan, who calls the request naive)",
+     "date": "late July 1873",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    },
+    {
+     "text": "They rarely dismounted, but simply rode up to the houses, applied their blazing torches to the projecting eaves of thatch, and the stacks of unthreshed grain, and then galloped on. Five minutes afterwards, sheets of seething flame and darkling smoke showed how well they had done their work. The entire country was on fire. […] This was war such as I had never before seen, and such as is rarely seen in modern days.",
+     "who": "J. A. MacGahan, American war correspondent of the New York Herald, riding with General Golovachev's column (Campaigning on the Oxus, 1874, p. 359)",
+     "date": "21 July 1873",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    },
+    {
+     "text": "In the marsh are twenty or thirty women and children, up to their necks in water, trying to hide among the weeds and grass, begging for their lives, and screaming in the most pitiful manner. […] As we withdrew, I looked in vain for the women and children I had seen in the water. They had all disappeared; and as I saw them nowhere in the vicinity, I am afraid that, frightened by the rockets, they threw themselves into the water, and were drowned.",
+     "who": "J. A. MacGahan, riding with the Cossacks who pursued the fleeing Yomud families (Campaigning on the Oxus, 1874, pp. 364–365)",
+     "date": "21 July 1873",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    },
+    {
+     "text": "The power of the Yomud Turcomans was broken; their ruin complete. The greater part of their live stock had been captured. All of their wheat, grain, and forage, upon which they depended for subsistence during the winter, had been burned, and their dwellings laid in ashes.",
+     "who": "J. A. MacGahan (Campaigning on the Oxus, 1874, p. 409)",
+     "date": "early August 1873",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    },
+    {
+     "text": "When we had gone about twenty-five miles from Khiva, General Golovatchef said before a large number of officers in my presence: \"I have received an order from the Commander-in-Chief - I hope you will remember it and give it to your soldiers. This expedition does not spare either sex or age. Kill all of them.\" After this the officers delivered this command to their several detachments.",
+     "who": "An unnamed eyewitness who marched with the Russian column, 'taken down from his own lips' by Eugene Schuyler, American diplomat in Russia (Turkistan, vol. 2, 1876, p. 359); Schuyler does not name him, and the words he reports from General Golovachev are not in any published order",
+     "date": "July 1873",
+     "url": "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    },
+    {
+     "text": "To help in raising this sum the Turkoman women had to strip themselves of all their ornaments, and bring them into the Russian camp for sale at whatever prices could be obtained. Every necklace and bracelet thus given up will leave a long legacy of hatred.",
+     "who": "Eugene Schuyler, American diplomat, on the 310,000 rubles Kaufmann demanded from the Turkmen tribes on 2 August 1873, after the campaign (Turkistan, vol. 2, 1876, p. 359)",
+     "date": "1876, on August 1873",
+     "url": "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "To follow more closely the payment of the contribution by the Yomuds, I ask your Excellency to start with your detachment for Hazavat on July 7 (19), and to encamp in a suitable place. If your Excellency sees that the Yomuds are not occupying themselves with getting together money, but are assembling for the purpose of opposing our troops, or perhaps even for leaving the country, I order you immediately to move upon the settlements of the Yomuds which are placed along the Hazavat canal and its branches, and to give over the settlements of the Yomuds and their families to complete destruction, and their herds and property to confiscation.",
+     "who": "General Konstantin Kaufmann, governor-general of Turkistan and commander of the expedition, written order No. 1167 to General Golovachev, in Eugene Schuyler's English translation (Turkistan, vol. 2, 1876, p. 357)",
+     "date": "18 July 1873 (6 July Old Style)",
+     "url": "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    },
+    {
+     "text": "If the Yomuds become submissive, stop ravaging them, but keep watch of what is being done among them, and at the least attempt to migrate, carry out my order for the final extermination of the disobedient tribe.",
+     "who": "General Kaufmann, order No. 1217 to General Golovachev, which also approved his conduct and advised him to keep the grain rather than burn it, in Schuyler's translation (Turkistan, vol. 2, 1876, p. 358)",
+     "date": "22 July 1873 (10 July Old Style)",
+     "url": "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    },
+    {
+     "text": "With these views General Kaufmann decided that, profiting by the presence of the Russian troops in the Khanate, it was necessary in some degree to change the order of things regarding the Turkomans, materially and morally, by subduing their pride and their license.",
+     "who": "The Russian official report of the campaign (Military Journal, December 1873), as quoted by Schuyler (Turkistan, vol. 2, 1876, p. 356); the report argued that the Turkmen had never obeyed the Khan and that peace was impossible unless they felt Russian power",
+     "date": "December 1873",
+     "url": "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    },
+    {
+     "text": "18. A war indemnity of 2,200,000 rubles is levied upon Khiva, to pay the expenses of the campaign, which was solely caused by the government and people of Khiva.",
+     "who": "Treaty of peace between Russia and the Khan of Khiva, article 18, in the English text printed by MacGahan (Campaigning on the Oxus, 1874, p. 419); article 17 confirms the emancipation of the slaves and the ban on slavery 'in all future time'",
+     "date": "24 August 1873 (12 August Old Style)",
+     "url": "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    }
+   ],
+   "note": "Research in progress: no Turkmen or Khivan account in their own languages has been found in a public-domain transcription. The Khivan court chronicles of the period (in Chagatai) and Turkmen oral tradition about the 1873 war were not found in a quotable copy, and no freed Persian or Russian slave's own words survived in the sources checked. Every Turkmen voice on this card was written down by a foreign reporter.",
+   "warn": "The Turkmen words survive only in English, as remembered and written down by J. A. MacGahan (1874), one of them passed on to him by a Russian officer. MacGahan admired the Turkmen and wrote vividly; Wikipedia's article notes that some of his writing seems fictionalized. Schuyler's eyewitness is anonymous. The sources use the period's spellings (Turcoman, Turkoman, Golovatchoff, Golovatchef) and the language of their time about Central Asian peoples. The texts describe the burning of homes and the killing of fleeing families.",
+   "disputed": [
+    [
+     "Were women and children killed? MacGahan, who rode with the Cossacks on 21 July, wrote that apart from one case he stopped there was no violence offered to women and children, and that General Golovachev seemed to want the Yomuds to escape; Schuyler's unnamed eyewitness says Golovachev passed on an order to spare neither sex nor age and that nearly everyone the troops met was killed, children included. Wikipedia's article notes that MacGahan seems to be its only source and that some of his writing seems fictionalized.",
+     [
+      "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt",
+      "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt",
+      "https://en.wikipedia.org/wiki/Khivan_campaign_of_1873"
+     ]
+    ],
+    [
+     "Why attack the Yomuds? The Russian official report says the Turkmen had to be subdued, materially and morally, because they had never obeyed the Khan and could turn him against Russia. Schuyler answers that the Yomud elders had already offered submission and been promised they would be left alone, calls the holding of hostages an evident breach of faith, and reports that officers wanted a real battle to earn the Cross of St George; MacGahan thought Kaufmann wrong but believed he acted on his own judgment, not as the Khan's tool.",
+     [
+      "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt",
+      "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+     ]
+    ],
+    [
+     "Were the Yomuds slave raiders? MacGahan wrote that capturing Persians for sale had been one of the Turkmen's principal resources, but that the Turkmen of Khiva owned fewer slaves than the Uzbeks and were not implicated in slave-dealing at all, which he blamed on the Tekke Turkmen near the Caspian. The violence also went both ways: MacGahan found a Persian left for dead in the sands by Yomuds, and Schuyler's eyewitness describes Turkmen killing a Russian picket of eight men during the campaign.",
+     [
+      "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt",
+      "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+     ]
+    ],
+    [
+     "How many died? Wikipedia's summary gives 33 Russians killed and 124 wounded for the campaign against Khiva and more than 5,000 killed on the Khivan side, without separating out the Yomud campaign; for the Yomud fighting of 28 July Schuyler's eyewitness speaks of several hundred bodies left on the ground. No count of Yomud civilians who died has been found.",
+     [
+      "https://en.wikipedia.org/wiki/Khivan_campaign_of_1873",
+      "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "The Yomud Turkmen left no written account of the burning of their country that has been found; they speak here only in two short speeches recorded by an American reporter, one of them second-hand. The women whose silver paid the indemnity, the families who fled into the desert, and the tens of thousands of Persian captives freed on paper in 1873 are described by Russian officers and foreign travellers but not heard, while Kaufmann's orders, the official report and the treaty survive in full.",
+   "reading": [
+    [
+     "J. A. MacGahan, Campaigning on the Oxus, and the Fall of Khiva (1874, archive.org)",
+     "https://archive.org/stream/cu31924028413486/cu31924028413486_djvu.txt"
+    ],
+    [
+     "Eugene Schuyler, Turkistan, vol. 2 (1876; 1877 printing, archive.org)",
+     "https://archive.org/stream/cu31924100211451/cu31924100211451_djvu.txt"
+    ],
+    [
+     "Konstantin Petrovich Kaufmann (Britannica)",
+     "https://www.britannica.com/biography/Konstantin-Petrovich-Kaufmann"
+    ],
+    [
+     "Khanate of Khiva (Britannica)",
+     "https://www.britannica.com/place/khanate-of-Khiva"
+    ],
+    [
+     "Khivan campaign of 1873 (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Khivan_campaign_of_1873"
+    ],
+    [
+     "Khivan slave trade (Wikipedia)",
+     "https://en.wikipedia.org/wiki/Khivan_slave_trade"
     ]
    ]
   }
