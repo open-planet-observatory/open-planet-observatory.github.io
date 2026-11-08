@@ -113,5 +113,5 @@
     try { V.scene.primitives.remove(pts); edge.forEach(e => V.entities.remove(e)); } catch (e) { }
     hid.forEach(d => { try { d.show = true; } catch (e) { } }); hid = []; if (dyn != null) V.scene.globe.dynamicAtmosphereLighting = dyn; dyn = null;
     pts = null; edge = []; act = []; fl = []; q = []; lag = null; last = {}; failed = 0; }
-  window.OwlLightning = { start, stop, get on() { return on; }, state: () => ({ flashes: fl.length, active: act.length, waiting: q.length, lag, files: loaded }) };
+  window.OwlLightning = { start, stop, get on() { return on; }, state: () => ({ flashes: fl.length, active: act.length, waiting: q.length, lag, files: loaded }), mix: () => { if (!on || lag == null) return null; const p = play(), n = [0, 0, 0]; for (const f of fl) if (f.t <= p && f.t > p - 60000) n[f.c]++; return n; } }; /* last minute's faint / moderate / bright counts (the Classroom's live questions) */
 })();

@@ -93,6 +93,7 @@ function openPanel(k,toggle){if(toggle&&cur===k&&!html.classList.contains('drawe
  if(innerWidth<=860)html.classList.add('rail-closed');
  try{const v=(location.hash.match(/view=\w+/)||[])[0];history.replaceState(null,'','#'+(v?v+'&':'')+'panel='+k)}catch(e){}}
 function closeDrawer(){html.classList.add('drawer-closed');document.querySelectorAll('#panelTabs button').forEach(b=>b.setAttribute('aria-pressed',false))}
+window.__opsCloseDrawer=closeDrawer;
 $('#drawerClose').onclick=closeDrawer;
 // in-page links (#use, #free, #situations…) open the matching panel
 document.addEventListener('click',e=>{if(e.target.closest('button[data-layer]')&&innerWidth<=860){closeDrawer();return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);const p=PANELS.find(([k,,s])=>k===id||s.includes('#'+id));if(p){e.preventDefault();openPanel(p[0])}else if(id==='map-sec'){e.preventDefault();if(innerWidth<=860)closeDrawer()}});

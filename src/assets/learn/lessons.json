@@ -1,0 +1,1644 @@
+{
+ "v": 1,
+ "about": "Interactive lessons for the Classroom. Lesson text is the site's own; every quiz answer that states a fact links to the source it was checked against. Questions marked live are built in the visitor's browser from the data on the page at that moment.",
+ "levels": [
+  {
+   "id": "k2",
+   "label": "Ages 6–8",
+   "short": "6–8",
+   "read": true
+  },
+  {
+   "id": "g35",
+   "label": "Ages 9–11",
+   "short": "9–11"
+  },
+  {
+   "id": "g68",
+   "label": "Ages 12–14",
+   "short": "12–14"
+  },
+  {
+   "id": "adult",
+   "label": "15 and up",
+   "short": "15+"
+  }
+ ],
+ "lessons": [
+  {
+   "id": "quakes",
+   "topic": "Earth",
+   "icon": "◎",
+   "teacher": {
+    "goals": [
+     "Earthquakes cluster along plate boundaries, above all around the Pacific.",
+     "Magnitude is the size of an earthquake at its source; each whole step means about 32 times more energy.",
+     "Older learners: depth tells you what kind of boundary it is, and the map's blind spots depend on where the seismometers are."
+    ],
+    "discuss": [
+     "Why are there almost no earthquakes in the middle of some continents?",
+     "What would you need to know before saying one country 'has more earthquakes' than another?"
+    ],
+    "uses": "Earthquakes layer (USGS, past week), See-through Earth (depths)."
+   },
+   "levels": {
+    "k2": {
+     "title": "Where does the ground shake?",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Hello, explorer! This is our Earth, right now. Each dot is an earthquake from this week. An earthquake is when the ground shakes.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -165,
+         10,
+         24000000
+        ]
+       ]
+      },
+      {
+       "say": "Look at the giant ocean in the middle. It is the Pacific Ocean. See all the dots around its edges? People call it the Ring of Fire.",
+       "act": [
+        [
+         "fly",
+         160,
+         15,
+         20000000
+        ]
+       ]
+      },
+      {
+       "say": "The outside of the Earth is cracked into giant pieces, like a cracked eggshell. The ground shakes where the pieces push and slide past each other.",
+       "act": [
+        [
+         "fly",
+         140,
+         35,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "This was the biggest earthquake this week, near {quake.place}.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      },
+      {
+       "say": "If the ground ever shakes where you are: Drop, Cover, and Hold On! Get down on your hands and knees, cover your head and neck, crawl under a strong table if one is close, and hold on until the shaking stops.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "An earthquake is when the ground shakes.",
+       "ok": true,
+       "why": "Yes! The ground shakes when big pieces of rock under it suddenly move.",
+       "src": [
+        "USGS: What is an earthquake?",
+        "https://www.usgs.gov/faqs/what-earthquake-and-what-causes-them-happen"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Where do lots of earthquakes happen?",
+       "a": [
+        "Around the edges of the Pacific Ocean",
+        "Only on the Moon",
+        "Only where it rains"
+       ],
+       "ok": 0,
+       "why": "Most big earthquakes happen around the Pacific Ocean, the Ring of Fire.",
+       "src": [
+        "USGS: Where do earthquakes occur?",
+        "https://www.usgs.gov/faqs/where-do-earthquakes-occur"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Tap the safety steps in the right order.",
+       "items": [
+        "Drop",
+        "Cover",
+        "Hold on"
+       ],
+       "why": "Drop down, cover your head, and hold on until the shaking stops.",
+       "src": [
+        "Ready.gov: Earthquakes",
+        "https://www.ready.gov/earthquakes"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "biggestPlace",
+       "src": [
+        "USGS earthquake feed (this week)",
+        "https://earthquake.usgs.gov/earthquakes/map/"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Why do earthquakes line up?",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "These dots are this week's earthquakes, from the U.S. Geological Survey. Bigger dots are bigger earthquakes. Notice they don't fall just anywhere: they make lines.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -165,
+         10,
+         24000000
+        ]
+       ]
+      },
+      {
+       "say": "Earth's hard outer shell is broken into huge pieces called plates. They move very slowly, a few centimetres a year. Where plates meet, rock gets stuck, then slips. That slip is an earthquake.",
+       "act": [
+        [
+         "fly",
+         160,
+         15,
+         20000000
+        ]
+       ]
+      },
+      {
+       "say": "The lines of dots trace the edges of the plates. Around the Pacific, the edges make a loop people call the Ring of Fire. It has volcanoes too.",
+       "act": [
+        [
+         "only",
+         [
+          "quake",
+          "volc"
+         ]
+        ],
+        [
+         "fly",
+         -150,
+         5,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Scientists rate an earthquake's size with a number called magnitude. Each step up the scale means far more energy: a magnitude 6 releases about 32 times as much energy as a magnitude 5.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ]
+       ]
+      },
+      {
+       "say": "Here is this week's biggest earthquake: magnitude {quake.mag}, near {quake.place}.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "What causes most earthquakes?",
+       "a": [
+        "Plates of Earth's outer shell slipping past each other",
+        "Heavy rain soaking the ground",
+        "Thunder shaking the air"
+       ],
+       "ok": 0,
+       "why": "Most earthquakes happen when rock on a fault suddenly slips, mostly along plate edges.",
+       "src": [
+        "USGS: What is an earthquake?",
+        "https://www.usgs.gov/faqs/what-earthquake-and-what-causes-them-happen"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how many of the world's biggest earthquakes happen around the Pacific Ring of Fire?",
+       "a": [
+        "About 1 in 10",
+        "About 8 in 10",
+        "None of them"
+       ],
+       "ok": 1,
+       "why": "The USGS says about 81 percent of the largest earthquakes happen in the belt around the Pacific.",
+       "src": [
+        "USGS: Where do earthquakes occur?",
+        "https://www.usgs.gov/faqs/where-do-earthquakes-occur"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "A magnitude 6 earthquake releases about the same energy as a magnitude 5.",
+       "ok": false,
+       "why": "No. Each whole step up releases about 32 times more energy.",
+       "src": [
+        "USGS: Magnitude, energy and shaking",
+        "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Tap these from weakest to strongest.",
+       "items": [
+        "Magnitude 3",
+        "Magnitude 5",
+        "Magnitude 7"
+       ],
+       "why": "Bigger magnitude numbers mean much stronger earthquakes.",
+       "src": [
+        "USGS: Magnitude, energy and shaking",
+        "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "countM5",
+       "src": [
+        "USGS earthquake feed (this week)",
+        "https://earthquake.usgs.gov/earthquakes/map/"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Plates, depth and the Ring of Fire",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "This week's earthquakes from the USGS. They outline the edges of Earth's tectonic plates, the rigid pieces of the lithosphere that move a few centimetres a year.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -165,
+         10,
+         24000000
+        ]
+       ]
+      },
+      {
+       "say": "Now we can see through the Earth. Each quake is drawn at its real depth, stretched 25 times so you can see it. Most are shallow, but some are hundreds of kilometres down.",
+       "act": [
+        [
+         "xray",
+         true
+        ],
+        [
+         "fly",
+         150,
+         -10,
+         16000000
+        ]
+       ]
+      },
+      {
+       "say": "Deep earthquakes happen where one plate sinks beneath another, called subduction. Follow the dots: they get deeper as you move away from the ocean trench, tracing the sinking slab.",
+       "act": [
+        [
+         "fly",
+         170,
+         -20,
+         12000000
+        ]
+       ]
+      },
+      {
+       "say": "This week's biggest: magnitude {quake.mag}, {quake.depth} km deep, near {quake.place}.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      },
+      {
+       "say": "Magnitude measures the size of the earthquake at its source. One whole step up means about 32 times more energy, so two steps is about 32 × 32 ≈ 1,000 times.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Where do most very deep earthquakes happen?",
+       "a": [
+        "Where one plate sinks beneath another (subduction zones)",
+        "Where plates pull apart in the middle of oceans",
+        "Under the middle of continents, far from any plate edge"
+       ],
+       "ok": 0,
+       "why": "Deep earthquakes occur within plates sinking into the mantle at subduction zones.",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Each whole step up in magnitude releases about how many times more energy?",
+       "a": [
+        "2",
+        "10",
+        "32",
+        "1,000"
+       ],
+       "ok": 2,
+       "why": "About 32 times per whole step; two steps is 32 × 32 ≈ 1,000 times.",
+       "src": [
+        "USGS: Magnitude, energy and shaking",
+        "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Scientists can predict the day and place of the next big earthquake.",
+       "ok": false,
+       "why": "No scientist has ever predicted a major earthquake. Scientists calculate the probability of one in an area over many years instead.",
+       "src": [
+        "USGS: Can you predict earthquakes?",
+        "https://www.usgs.gov/faqs/can-you-predict-earthquakes"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "deepest",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "biggestMag",
+       "src": [
+        "USGS earthquake feed (this week)",
+        "https://earthquake.usgs.gov/earthquakes/map/"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Reading an earthquake map honestly",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "This week's earthquakes from the USGS feed. Before reading patterns into a map, ask what it can and can't see.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -110,
+         40,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "Notice the many small quakes in the western U.S. and Alaska. That is partly because dense seismic networks there catch small quakes that go unrecorded in much of the world. Small dots here reflect detection, not only shaking.",
+       "act": [
+        [
+         "fly",
+         -150,
+         55,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "Seen through the Earth, depth tells the story of each boundary: shallow quakes along ridges and transform faults, deep ones only in sinking slabs.",
+       "act": [
+        [
+         "xray",
+         true
+        ],
+        [
+         "fly",
+         140,
+         30,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "Magnitude is the size at the source; damage depends on depth, distance, ground and buildings. A deep magnitude 7 can do less harm than a shallow 6 near a city.",
+       "act": [
+        [
+         "xray",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "This week's largest: magnitude {quake.mag} near {quake.place}, {quake.hrs} hours before the data was collected.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why does the map show many small earthquakes in the U.S. but few elsewhere?",
+       "a": [
+        "Denser seismic networks there detect smaller quakes",
+        "The U.S. has more earthquakes than Japan or Indonesia",
+        "Other countries' quakes are hidden on purpose"
+       ],
+       "ok": 0,
+       "why": "Earthquake catalogues grow with the number of seismic instruments: more instruments record more small quakes. Coverage is densest in parts of the U.S.",
+       "src": [
+        "USGS: Why are we having so many earthquakes?",
+        "https://www.usgs.gov/faqs/why-are-we-having-so-many-or-so-few-earthquakes-has-naturally-occurring-earthquake-activity"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What does magnitude measure?",
+       "a": [
+        "The size of the earthquake at its source",
+        "The damage it caused",
+        "How far away people felt it"
+       ],
+       "ok": 0,
+       "why": "Magnitude is the size at the source, and each step means about 32 times more energy; shaking and damage at a place are described by intensity.",
+       "src": [
+        "USGS: Magnitude, energy and shaking",
+        "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "A magnitude 7 releases about 1,000 times the energy of a magnitude 5.",
+       "ok": true,
+       "why": "About 32 × 32 ≈ 1,000.",
+       "src": [
+        "USGS: Magnitude, energy and shaking",
+        "https://www.usgs.gov/programs/earthquake-hazards/earthquake-magnitude-energy-release-and-shaking-intensity"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Scientists can predict the day and place of the next big earthquake.",
+       "ok": false,
+       "why": "No; forecasts are probabilities over years.",
+       "src": [
+        "USGS: Can you predict earthquakes?",
+        "https://www.usgs.gov/faqs/can-you-predict-earthquakes"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "shareDeep",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "sky",
+   "topic": "Space",
+   "icon": "☾",
+   "teacher": {
+    "goals": [
+     "The space station circles Earth about every 90 minutes; the Moon about once a month.",
+     "Moon phases are how much of the Moon's sunlit half we see, not Earth's shadow.",
+     "Light takes time to travel: about 1.3 seconds from the Moon, about 8 minutes from the Sun."
+    ],
+    "discuss": [
+     "If light takes 8 minutes from the Sun, what are you really seeing when you look at it?",
+     "Why do astronauts float if there is still gravity up there?"
+    ],
+    "uses": "Space stations layer (CelesTrak), Moon overhead, the Moon view, the Solar System view."
+   },
+   "levels": {
+    "k2": {
+     "title": "Who is up in the sky?",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Up above the Earth flies a giant space station. People live and work inside it! Let's find it.",
+       "act": [
+        [
+         "only",
+         [
+          "sat"
+         ]
+        ],
+        [
+         "iss"
+        ]
+       ]
+      },
+      {
+       "say": "The space station goes all the way around the Earth in about an hour and a half. That's so fast that the astronauts see 16 sunrises every day!",
+       "act": []
+      },
+      {
+       "say": "Now let's visit our Moon. The Moon goes around the Earth. It doesn't make its own light: the Sun lights it up.",
+       "act": [
+        [
+         "moon"
+        ]
+       ]
+      },
+      {
+       "say": "Tonight the Moon looks like this: {moon.kid}.",
+       "live": "moonPhase",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "People live on the space station.",
+       "ok": true,
+       "why": "Yes! Astronauts have lived on the International Space Station since the year 2000.",
+       "src": [
+        "NASA: Space station facts and figures",
+        "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How many sunrises do the astronauts see in one day?",
+       "a": [
+        "1",
+        "16",
+        "100"
+       ],
+       "ok": 1,
+       "why": "The station goes around Earth about 16 times a day, so they see about 16 sunrises.",
+       "src": [
+        "NASA: Space station facts and figures",
+        "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Moon makes its own light.",
+       "ok": false,
+       "why": "No. Moonlight is sunlight bouncing off the Moon.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLooks",
+       "src": [
+        "Moon position and phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Around the Earth in 90 minutes",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "This is the International Space Station, shown where it is right now. It flies about 400 km above us (about 250 miles).",
+       "act": [
+        [
+         "only",
+         [
+          "sat"
+         ]
+        ],
+        [
+         "iss"
+        ]
+       ]
+      },
+      {
+       "say": "It travels about 28,000 km an hour (17,500 miles an hour) and circles Earth in about 90 minutes, so the crew sees about 16 sunrises and sunsets a day.",
+       "act": []
+      },
+      {
+       "say": "The Moon is much farther away: about 384,400 km. Even light, the fastest thing there is, takes about 1.3 seconds to get here from the Moon.",
+       "act": [
+        [
+         "moon"
+        ]
+       ]
+      },
+      {
+       "say": "Tonight's Moon: {moon.name}, {moon.lit}% lit.",
+       "live": "moonPhase",
+       "act": []
+      },
+      {
+       "say": "The Sun is about 150 million km away. Its light takes about 8 minutes to reach us.",
+       "act": [
+        [
+         "closeMoon"
+        ],
+        [
+         "universe"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "About how long does the space station take to go once around Earth?",
+       "a": [
+        "90 seconds",
+        "About 90 minutes",
+        "90 days"
+       ],
+       "ok": 1,
+       "why": "About 90 minutes per orbit.",
+       "src": [
+        "NASA: Space station facts and figures",
+        "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Tap these from closest to Earth to farthest.",
+       "items": [
+        "The space station",
+        "The Moon",
+        "The Sun"
+       ],
+       "why": "About 400 km, about 384,400 km, about 150 million km.",
+       "src": [
+        "NASA: What is microgravity? (station 200–250 miles up)",
+        "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How long does sunlight take to reach Earth?",
+       "a": [
+        "About 8 seconds",
+        "About 8 minutes",
+        "About 8 days"
+       ],
+       "ok": 1,
+       "why": "About 8.3 minutes (8 minutes 20 seconds).",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Moon makes its own light.",
+       "ok": false,
+       "why": "Moonlight is reflected sunlight.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLit",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Orbits, phases and light-speed maths",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "The space station, live. It completes an orbit about every 90 minutes at about 28,000 km/h. Try the maths: how many orbits fit in 24 hours?",
+       "act": [
+        [
+         "only",
+         [
+          "sat"
+         ]
+        ],
+        [
+         "iss"
+        ]
+       ]
+      },
+      {
+       "say": "The Moon. Half of it is always lit by the Sun. Its phase is simply how much of that lit half faces us. The phases repeat about every 29.5 days.",
+       "act": [
+        [
+         "moon"
+        ]
+       ]
+      },
+      {
+       "say": "Tonight: {moon.name}, {moon.lit}% lit.",
+       "live": "moonPhase",
+       "act": []
+      },
+      {
+       "say": "A common mistake: phases are NOT Earth's shadow. Earth's shadow only touches the Moon during a lunar eclipse.",
+       "act": []
+      },
+      {
+       "say": "Light covers about 300,000 km every second. The Moon is about 384,400 km away, so its light reaches us in about 1.3 seconds. Sunlight takes about 8 minutes.",
+       "act": [
+        [
+         "closeMoon"
+        ],
+        [
+         "universe"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "If the station circles Earth every 90 minutes, about how many orbits does it make in a day?",
+       "a": [
+        "12",
+        "16",
+        "24"
+       ],
+       "ok": 1,
+       "why": "24 hours × 60 = 1,440 minutes; 1,440 ÷ 90 = 16.",
+       "src": [
+        "NASA: Space station facts and figures",
+        "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Why does the Moon have phases?",
+       "a": [
+        "We see different amounts of its sunlit half as it orbits",
+        "Earth's shadow covers part of it",
+        "Clouds on the Moon block parts of it"
+       ],
+       "ok": 0,
+       "why": "Half the Moon is always lit; how much of that half we see changes through the month.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how long does light from the Moon take to reach Earth?",
+       "a": [
+        "1.3 seconds",
+        "13 seconds",
+        "8 minutes"
+       ],
+       "ok": 0,
+       "why": "384,400 km ÷ about 300,000 km/s ≈ 1.3 seconds.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "A lunar eclipse happens when Earth's shadow falls on the Moon.",
+       "ok": true,
+       "why": "Yes, which is why it can only happen at full Moon.",
+       "src": [
+        "NASA: Types of eclipses",
+        "https://science.nasa.gov/eclipses/types/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLit",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Light-time: what 'now' means in the sky",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "The space station, as computed from its latest published orbital elements. Even 'live' positions are predictions from orbital data that can be hours to a day old: the site shows the age.",
+       "act": [
+        [
+         "only",
+         [
+          "sat"
+         ]
+        ],
+        [
+         "iss"
+        ]
+       ]
+      },
+      {
+       "say": "Astronauts float not because gravity is absent, but because they are in continuous free fall around Earth. Gravity at the station's height is still about 90% of what it is on the ground.",
+       "act": []
+      },
+      {
+       "say": "Everything you see in the sky, you see late. The Moon by about 1.3 seconds, the Sun by about 8 minutes 20 seconds.",
+       "act": [
+        [
+         "universe"
+        ]
+       ]
+      },
+      {
+       "say": "Voyager 1, launched in 1977, is now about {voyager.lh} light-hours away: a radio signal takes that long each way.",
+       "live": "voyager",
+       "act": []
+      },
+      {
+       "say": "In the Solar System view, the light streaks run at true speed. Zoom out and watch how slow 'the fastest thing' looks across the planets.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Astronauts on the space station float because there is no gravity there.",
+       "ok": false,
+       "why": "Gravity there is about 90% of Earth-surface gravity; they float because they are in free fall.",
+       "src": [
+        "NASA: What is microgravity?",
+        "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-microgravity-grades-5-8/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "When you see the Sun, you see light that left it about…",
+       "a": [
+        "8 seconds ago",
+        "8 minutes 20 seconds ago",
+        "8 hours ago"
+       ],
+       "ok": 1,
+       "why": "About 8.3 minutes (about 8 minutes 20 seconds).",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Why does the Moon have phases?",
+       "a": [
+        "We see different amounts of its sunlit half as it orbits",
+        "Earth's shadow covers part of it",
+        "It rotates to show a dark side"
+       ],
+       "ok": 0,
+       "why": "Phases are geometry; eclipses are shadow.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerLH",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLit",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "weather",
+   "topic": "Weather and climate",
+   "icon": "⚡",
+   "teacher": {
+    "goals": [
+     "Lightning is seen from space by NOAA's lightning mappers; thunder is its sound.",
+     "Thunder safety: when thunder roars, go indoors.",
+     "Older learners: read a climate number against the right baseline (same date, long average), and know what a layer can't see."
+    ],
+    "discuss": [
+     "Why is the lightning layer empty over Africa? What can and can't you conclude?",
+     "Why compare sea ice with the same date in earlier years, not with last month?"
+    ],
+    "uses": "Lightning imagery (NOAA GOES GLM), Signals: planet vital signs (NOAA CO2, NSIDC sea ice, NOAA global temperature)."
+   },
+   "levels": {
+    "k2": {
+     "title": "Flash! Lightning from space",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Each little spark you see is real lightning, spotted by weather satellites far up in space about a minute ago!",
+       "act": [
+        [
+         "imagery",
+         "lightning"
+        ],
+        [
+         "fly",
+         -80,
+         10,
+         19000000
+        ]
+       ]
+      },
+      {
+       "say": "Thunder is the sound that lightning makes. Lightning heats the air so fast that it booms.",
+       "act": []
+      },
+      {
+       "say": "Remember: When thunder roars, go indoors! A house or a car with a hard roof is a safe place.",
+       "act": []
+      },
+      {
+       "say": "Do you see faint purple sparks and bright white ones? The colour shows how much light each flash gave off.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "A satellite in space can see lightning.",
+       "ok": true,
+       "why": "Yes! NOAA's weather satellites have special cameras that see lightning flashes.",
+       "src": [
+        "NOAA NESDIS: Geostationary Lightning Mapper",
+        "https://www.nesdis.noaa.gov/our-satellites/currently-flying/goes-east-west/geostationary-lightning-mapper-glm"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "If you hear thunder, what should you do?",
+       "a": [
+        "Go indoors",
+        "Stand under a tall tree",
+        "Go swimming"
+       ],
+       "ok": 0,
+       "why": "When thunder roars, go indoors!",
+       "src": [
+        "National Weather Service: Lightning safety",
+        "https://www.weather.gov/safety/lightning-safety"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Thunder is the sound lightning makes.",
+       "ok": true,
+       "why": "Yes, lightning heats the air so fast that it makes a boom.",
+       "src": [
+        "National Weather Service: Thunder",
+        "https://www.weather.gov/safety/lightning-science-thunder"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "flashMix",
+       "src": [
+        "NOAA GOES-19 and GOES-18 lightning mappers",
+        "https://www.nesdis.noaa.gov/our-satellites/currently-flying/goes-east-west/geostationary-lightning-mapper-glm"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Counting lightning",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "Live lightning over the Americas, from NOAA satellites about 36,000 km up. Each flash appears when it happened, about a minute ago.",
+       "act": [
+        [
+         "imagery",
+         "lightning"
+        ],
+        [
+         "fly",
+         -80,
+         10,
+         19000000
+        ]
+       ]
+      },
+      {
+       "say": "Lightning heats the air around it to about 50,000 °F, around five times hotter than the surface of the Sun!",
+       "act": []
+      },
+      {
+       "say": "Light reaches you almost instantly, but sound is slower. Count the seconds from flash to thunder and divide by 5: that's about how many miles away it was. Only count from a safe place indoors: if you can hear thunder, lightning can reach you.",
+       "act": []
+      },
+      {
+       "say": "The key shows faint, moderate and bright flashes in the last minute. The satellites only see this part of the world, so empty places outside the dashed lines don't mean 'no lightning'.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "You see a flash and count 10 seconds before the thunder. About how far away was it?",
+       "a": [
+        "About 2 miles",
+        "About 10 miles",
+        "About 100 miles"
+       ],
+       "ok": 0,
+       "why": "Sound travels about a mile in 5 seconds, so 10 seconds ≈ 2 miles.",
+       "src": [
+        "National Weather Service: Thunder",
+        "https://www.weather.gov/safety/lightning-science-thunder"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how hot can lightning make the air?",
+       "a": [
+        "About as hot as a sunny day",
+        "About five times hotter than the Sun's surface",
+        "Exactly as hot as the Sun's surface"
+       ],
+       "ok": 1,
+       "why": "About 50,000 °F, roughly five times the Sun's surface.",
+       "src": [
+        "National Weather Service: Lightning facts",
+        "https://www.weather.gov/safety/lightning-science-overview"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Lightning never strikes the same place twice.",
+       "ok": false,
+       "why": "It often does: tall buildings like the Empire State Building are hit many times a year.",
+       "src": [
+        "National Weather Service: Lightning myths",
+        "https://www.weather.gov/safety/lightning-myths"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "flashCount",
+       "src": [
+        "NOAA GOES-19 and GOES-18 lightning mappers",
+        "https://www.nesdis.noaa.gov/our-satellites/currently-flying/goes-east-west/geostationary-lightning-mapper-glm"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Reading the planet's vital signs",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Signals: the planet's vital signs, each straight from the agency that measures it. Start with carbon dioxide, measured by NOAA at four baseline observatories.",
+       "act": [
+        [
+         "panel",
+         "signals"
+        ]
+       ]
+      },
+      {
+       "say": "NOAA's latest global carbon dioxide trend, averaged over four observatories with the seasonal swing removed, is {co2.ppm} parts per million (ppm), against {co2.yago} a year ago.",
+       "live": "co2",
+       "act": []
+      },
+      {
+       "say": "Arctic sea ice grows every winter and shrinks every summer, so the fair comparison is the same date in earlier years.",
+       "act": []
+      },
+      {
+       "say": "Latest Arctic sea ice: {ice.ext} million km², compared with an average of {ice.avg} million km² for this date in 1979–2025 (worked out by this site from NSIDC's daily data).",
+       "live": "ice",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "What does 'ppm' mean in a reading like '428 ppm of carbon dioxide'?",
+       "a": [
+        "Parts per million",
+        "Pounds per mile",
+        "Percent per month"
+       ],
+       "ok": 0,
+       "why": "Parts per million: 428 molecules of CO₂ for every million molecules of dry air.",
+       "src": [
+        "NOAA Global Monitoring Laboratory: CO₂ trends",
+        "https://gml.noaa.gov/ccgg/trends/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "co2Change",
+       "src": [
+        "NOAA GML: Daily global CO₂ trend",
+        "https://gml.noaa.gov/ccgg/trends/gl_trend.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Why compare today's sea ice with the same date in past years?",
+       "a": [
+        "Because sea ice grows and shrinks with the seasons",
+        "Because satellites only work once a year",
+        "Because the ice never changes"
+       ],
+       "ok": 0,
+       "why": "Arctic sea ice is usually smallest in September and largest in March, so only the same time of year is a fair comparison.",
+       "src": [
+        "NSIDC: Quick facts about sea ice",
+        "https://nsidc.org/learn/parts-cryosphere/sea-ice/quick-facts-about-sea-ice"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "iceVsAvg",
+       "src": [
+        "NSIDC Sea Ice Index (average computed by this site)",
+        "https://nsidc.org/data/g02135"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Signal, noise and blind spots",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Carbon dioxide rises and falls every year: Northern Hemisphere plants take it in as they grow in summer, and decaying plants release it in autumn and winter. The rise from year to year sits on top of that cycle.",
+       "act": [
+        [
+         "panel",
+         "signals"
+        ]
+       ]
+      },
+      {
+       "say": "NOAA's latest daily global trend (four baseline observatories, seasonal cycle removed): {co2.ppm} ppm, against {co2.yago} ppm a year ago.",
+       "live": "co2",
+       "act": []
+      },
+      {
+       "say": "Global temperature is reported as an 'anomaly': the difference from a baseline average (here 1901–2000) for the same month. In NOAA's record, {temp.when} ranks {temp.rank} warmest of {temp.n} years (ranked by this site from NOAA's numbers).",
+       "live": "temp",
+       "act": []
+      },
+      {
+       "say": "Now the lightning layer. It shows every flash two NOAA satellites detect, but they see only the Americas, the oceans on either side and the very edge of West Africa, and they miss some weak flashes. An empty area outside their view tells you nothing.",
+       "act": [
+        [
+         "imagery",
+         "lightning"
+        ],
+        [
+         "fly",
+         -40,
+         5,
+         22000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why does carbon dioxide at Mauna Loa rise and fall within each year?",
+       "a": [
+        "Plants in the Northern Hemisphere take in CO₂ as they grow in summer; decaying plants release it in autumn and winter",
+        "Volcanoes erupt every winter",
+        "The instrument is recalibrated each summer"
+       ],
+       "ok": 0,
+       "why": "The seasonal cycle follows Northern Hemisphere plant growth and decay.",
+       "src": [
+        "NOAA Climate.gov: Atmospheric carbon dioxide",
+        "https://www.climate.gov/news-features/understanding-climate/climate-change-atmospheric-carbon-dioxide"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "A month's global temperature anomaly is +1.3 °C. What does that mean?",
+       "a": [
+        "It was 1.3 °C warmer than the baseline average for that month",
+        "It was 1.3 °C everywhere on Earth",
+        "The temperature rose 1.3 °C during the month"
+       ],
+       "ok": 0,
+       "why": "An anomaly is a departure from a reference average.",
+       "src": [
+        "NOAA NCEI: Anomalies vs. temperature",
+        "https://www.ncei.noaa.gov/access/monitoring/dyk/anomalies-vs-temperature"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "The lightning layer shows no flashes over Africa. What can you conclude?",
+       "a": [
+        "Nothing: most of Africa is outside the two satellites' view",
+        "There was no lightning in Africa",
+        "African storms make no light"
+       ],
+       "ok": 0,
+       "why": "GOES-East and GOES-West watch from the west coast of Africa to New Zealand; most of Africa is beyond their view.",
+       "src": [
+        "NOAA NESDIS: Geostationary satellites",
+        "https://www.nesdis.noaa.gov/our-satellites/currently-flying/geostationary-satellites"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "tempRank",
+       "src": [
+        "NOAA NCEI Climate at a Glance",
+        "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "co2Change",
+       "src": [
+        "NOAA GML: Daily global CO₂ trend",
+        "https://gml.noaa.gov/ccgg/trends/gl_trend.html"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "sources",
+   "topic": "History and sources",
+   "icon": "❝",
+   "teacher": {
+    "goals": [
+     "A primary source was made at the time; a secondary source explains it later.",
+     "Ask who made a source, when, and why (purpose: an advertisement wants something from you).",
+     "Check an old claim against today's evidence (corroboration)."
+    ],
+    "discuss": [
+     "What would a weather diary from 1846 be good evidence for? What not?",
+     "The 1923 almanac carried an advertisement disguised as a weather forecast. Where do you see that today?"
+    ],
+    "uses": "From the old almanacs (1846 Farmer's Almanack, 1923 Old Farmer's Almanac, Internet Archive scans). The Untold history section uses the same rules for adults."
+   },
+   "levels": {
+    "k2": {
+     "title": "A very old book",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "This page comes from a real book made for the year 1846. That is {alm.ago} years ago!",
+       "live": "almAgo",
+       "alm": 0,
+       "act": []
+      },
+      {
+       "say": "Inside is a weather diary from the winter of 1845. Someone wrote down the weather each day, like 'very cold' and 'rain and hail'.",
+       "alm": 0,
+       "act": []
+      },
+      {
+       "say": "Something made at the time, like a diary, a letter or a photo, is called a primary source. It's like a clue left behind for history detectives.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "live",
+       "id": "almAgo",
+       "src": [
+        "The Farmer's Almanack for 1846 (Internet Archive)",
+        "https://archive.org/details/farmersalmanacc00thom"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "A weather diary written in 1845 is a clue about life in 1845.",
+       "ok": true,
+       "why": "Yes! It was made at the time, so it's a primary source.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which one is a clue made at your birthday party?",
+       "a": [
+        "A photo taken at the party",
+        "A story someone made up years later",
+        "A cartoon about a different party"
+       ],
+       "ok": 0,
+       "why": "The photo was made right there, at the time.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "History detective: an old almanac",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "An almanac is a yearly book of calendars, weather and advice. This one was made for the year 1846, {alm.ago} years ago.",
+       "live": "almAgo",
+       "alm": 0,
+       "act": []
+      },
+      {
+       "say": "Things made at the time are primary sources. A book written later to explain them is a secondary source.",
+       "act": []
+      },
+      {
+       "say": "Now a page from a 1923 almanac. It looks like a weather forecast. Read it carefully. Does anything seem strange?",
+       "alm": 13,
+       "act": []
+      },
+      {
+       "say": "In 1923 the almanac said the nearest star's light takes 4.4 years to reach us. A slightly closer star, Proxima Centauri, about 4.2 light-years away, had been found in 1915.",
+       "alm": 9,
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why is soap mentioned in this 1923 'forecast'?",
+       "a": [
+        "It's an advertisement",
+        "Soap changes the weather",
+        "It's a weather word"
+       ],
+       "ok": 0,
+       "why": "This page is an advertisement written to look like a weather forecast. Always ask: what does this want me to do?",
+       "src": [
+        "The Old Farmer's Almanac, 1923 (Internet Archive)",
+        "https://archive.org/details/oldfarmersalmana1923unse"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which is a primary source about the 1840s?",
+       "a": [
+        "A weather diary written in 1845",
+        "A website about the 1800s written this year",
+        "A school textbook about the past"
+       ],
+       "ok": 0,
+       "why": "It was made at the time.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Today we know the nearest star to the Sun is…",
+       "a": [
+        "Proxima Centauri, about 4.2 light-years away",
+        "The Moon",
+        "Betelgeuse"
+       ],
+       "ok": 0,
+       "why": "Proxima Centauri, about 4.2 light-years away.",
+       "src": [
+        "Britannica: Proxima Centauri",
+        "https://www.britannica.com/science/Proxima-Centauri"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "almAgo",
+       "src": [
+        "The Farmer's Almanack for 1846 (Internet Archive)",
+        "https://archive.org/details/farmersalmanacc00thom"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Who made this, when, and why?",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Historians ask three questions of any source: who made it, when, and why? Let's try them on two old almanacs.",
+       "alm": 0,
+       "act": []
+      },
+      {
+       "say": "1846: a list of banks marked 'fraud'. In the 1840s, many private banks printed their own paper money, and some notes became worthless. The almanac warned its readers.",
+       "alm": 4,
+       "act": []
+      },
+      {
+       "say": "1923: 'Colder, with probable snow flurries. Time to be stocking up…' Ask why: every month on this page names a Colgate product. It is an advertisement dressed up as a forecast; almanacs sold pages to advertisers.",
+       "alm": 13,
+       "act": []
+      },
+      {
+       "say": "Check old claims against new evidence. In 1846 the almanac said Russia was the only country in Europe still on the old calendar. Russia switched in 1918, but Greece also kept the old calendar until 1923: the almanac was not quite right even then.",
+       "alm": 3,
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "The 1846 almanac lists banks marked 'fraud'. What does that tell you about money then?",
+       "a": [
+        "Banks printed their own notes, and some were not worth their full value",
+        "Everyone used gold coins only",
+        "The U.S. government printed all paper money"
+       ],
+       "ok": 0,
+       "why": "Before the Civil War, U.S. paper money was mostly notes issued by state-chartered banks, often accepted only at a discount. The almanac's list warned readers which notes to refuse.",
+       "src": [
+        "Federal Reserve History: The National Banking Acts",
+        "https://www.federalreservehistory.org/essays/national-banking-acts"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which question does an advertisement inside a forecast most help you ask?",
+       "a": [
+        "Why was this made?",
+        "When was it printed?",
+        "Where was it printed?"
+       ],
+       "ok": 0,
+       "why": "Purpose: what the maker wants you to think or do.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "In 1846 Russia used a different calendar from most of Europe.",
+       "ok": true,
+       "why": "Russia kept the Julian calendar until 1918.",
+       "src": [
+        "Britannica: Gregorian calendar",
+        "https://www.britannica.com/topic/Gregorian-calendar"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "almAgo1923",
+       "src": [
+        "The Old Farmer's Almanac, 1923 (Internet Archive)",
+        "https://archive.org/details/oldfarmersalmana1923unse"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Sourcing, context and corroboration",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Every source on this site comes with three things: who published it, how it was checked, and its blind spot. Try that habit on two almanacs.",
+       "alm": 0,
+       "act": []
+      },
+      {
+       "say": "Context: a 1846 list of 'uncurrent' and fraudulent banks only makes sense in a world where private banks issued their own notes.",
+       "alm": 4,
+       "act": []
+      },
+      {
+       "say": "Purpose: in 1923 an advertiser wrote its ad to look like an almanac forecast. A source can be genuine and still be selling something.",
+       "alm": 13,
+       "act": []
+      },
+      {
+       "say": "Corroboration: the 1923 almanac's figure for the nearest star (4.4 years for light) was close to today's for Alpha Centauri, but Proxima Centauri, slightly nearer, had been found in 1915.",
+       "alm": 9,
+       "act": []
+      },
+      {
+       "say": "Untold history (Learn menu) applies the same rules to harder subjects: original words, who recorded them, the official account, and whose voices are missing.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "A source is genuine, from the time, and also an advertisement. What's the best way to use it?",
+       "a": [
+        "As evidence, while asking what its maker wanted",
+        "Throw it away: ads are never evidence",
+        "Trust it completely: it's old"
+       ],
+       "ok": 0,
+       "why": "Purpose shapes content, but a biased source is still evidence of something.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What is 'corroboration'?",
+       "a": [
+        "Checking a claim against other, independent sources",
+        "Finding who wrote a source",
+        "Copying a source exactly"
+       ],
+       "ok": 0,
+       "why": "Agreement between independent sources raises confidence.",
+       "src": [
+        "Library of Congress: Getting started with primary sources (archived copy)",
+        "https://web.archive.org/web/20260115220613/https://www.loc.gov/programs/teachers/getting-started-with-primary-sources"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Before the National Banking Acts of the 1860s, much U.S. paper money was issued by state-chartered banks.",
+       "ok": true,
+       "why": "State-chartered banks issued their own notes, often accepted only at a discount.",
+       "src": [
+        "Federal Reserve History: The National Banking Acts",
+        "https://www.federalreservehistory.org/essays/national-banking-acts"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "almAgo1923",
+       "src": [
+        "The Old Farmer's Almanac, 1923 (Internet Archive)",
+        "https://archive.org/details/oldfarmersalmana1923unse"
+       ]
+      }
+     ]
+    }
+   }
+  }
+ ]
+}

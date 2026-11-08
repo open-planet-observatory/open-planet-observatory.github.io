@@ -302,3 +302,12 @@ The "Lightning" imagery choice streams NOAA's Geostationary Lightning Mapper (GL
 ## The fly-through (Solar System view and the landing page)
 
 A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it.
+
+## Classroom: interactive lessons
+
+Short lessons that move the live globe for the learner, then ask a few questions, at four age levels (6–8, 9–11, 12–14, 15 and up). The lesson text is the site's own; every quiz answer that states a fact links to the page it was checked against (USGS, NASA, NOAA and the National Weather Service, NSIDC, NOAA Climate.gov, the Library of Congress (archived copy), Federal Reserve History, Britannica, and the public-domain almanac scans). Each lesson was fact-checked by an independent pass before release.
+
+- Questions marked live are built in the learner's browser from the data on the page at that moment (this week's USGS earthquakes, the Moon computed with Astronomy Engine, NOAA's CO₂ trend, NSIDC sea ice, NOAA's temperature series, the live lightning layer, Voyager 1's distance). If that data is missing, the question is skipped, never invented. Values the site works out itself (a rank, an average, a share) say so.
+- Stars and the chosen age are kept only in the browser's local storage (owl-learn-v1, owl-learn-age, owl-learn-read). No account, nothing sent anywhere.
+- "Read aloud" uses the browser's own speech, preferring voices on the device; some browsers may use an online voice for some languages.
+- Global temperature (Signals and lessons): from November 2026 the collector asks NOAA for the most recent month it has published, instead of a month that is not out yet.

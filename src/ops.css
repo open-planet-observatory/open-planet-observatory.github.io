@@ -1110,3 +1110,29 @@ html.map2d .rail-light{display:none!important}
 .ltg-key .lk-row{display:flex;gap:12px;flex-wrap:wrap;font-variant-numeric:tabular-nums}.ltg-key .lk-row i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px}
 .ltg-key p{margin:5px 0 0;color:var(--ink-3,#9A8B6D);font-size:.68rem}
 @media (max-width:640px){.ltg-key{top:auto;bottom:calc(var(--botH,60px) + 10px);width:min(300px,calc(100% - 80px));left:calc(50% + 20px)}.ltg-key p{display:none}}
+/* Classroom: interactive lessons */
+.ln-wrap{margin:4px 0 18px}.ln-head h3{margin:2px 0 4px}.ln-head2{margin-top:6px}
+.ln-ages{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:8px 0 12px}.ln-ages span{font-size:.8rem;color:var(--ink-3);margin-right:4px}
+.ln-ages button{font:inherit;font-size:.82rem;padding:6px 12px;border-radius:999px;border:1px solid var(--glass-line,rgb(255 255 255 / .15));background:transparent;color:var(--ink);cursor:pointer}
+.ln-ages button[aria-pressed="true"]{background:var(--accent,#D9A441);color:#16110a;border-color:transparent;font-weight:700}
+.ln-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.ln-tile{border:1px solid var(--glass-line,rgb(255 255 255 / .12));border-radius:14px;padding:12px 14px;background:rgb(255 255 255 / .03);display:flex;flex-direction:column;gap:4px}
+.ln-tile h4{margin:2px 0;font-size:1.02rem}.ln-tile .go{align-self:flex-start;margin-top:4px}.ln-stars{margin:0;color:var(--accent,#D9A441);letter-spacing:.12em}
+.ln-kind{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent,#D9A441)}
+.ln-teach{margin-top:6px;font-size:.82rem}.ln-teach summary{cursor:pointer;color:var(--ink-3)}.ln-teach ul{margin:6px 0;padding-left:18px}
+.ln-card{position:fixed;z-index:3002;left:16px;bottom:calc(var(--botH,56px) + 70px);width:min(400px,calc(100vw - 32px));max-height:min(70vh,640px);overflow:auto;padding:14px 16px 12px;border-radius:16px;background:var(--glass,#16110a);color:var(--ink,#EFE4CC);border:1px solid var(--glass-line,rgb(255 255 255 / .15));box-shadow:0 20px 50px rgb(0 0 0 / .5);font-size:.93rem;line-height:1.45;backdrop-filter:blur(10px)}
+.ln-card h3{margin:4px 0 0;font-size:1.05rem}.ln-sub{font-size:.75rem;color:var(--ink-3,#9A8B6D);margin-bottom:6px}
+.ln-top{display:flex;align-items:center;gap:8px}.ln-top .ln-kind{flex:1}
+.ln-read,.ln-x{font:inherit;font-size:.75rem;padding:4px 9px;border-radius:999px;border:1px solid var(--glass-line,rgb(255 255 255 / .15));background:transparent;color:var(--ink);cursor:pointer}.ln-x{padding:4px 8px}
+.ln-say{margin:6px 0 10px}.ln-live{margin:0 0 8px;font-size:.72rem;color:#7fd4a8}
+.ln-alm{margin:0 0 10px;padding:8px 10px;border-left:3px solid var(--accent,#D9A441);background:rgb(255 255 255 / .04);font-family:Georgia,serif;font-size:.9rem}.ln-alm cite{display:block;margin-top:4px;font-family:inherit;font-style:normal;font-size:.72rem;color:var(--ink-3)}
+.ln-row{display:flex;align-items:center;gap:8px;margin-top:8px}.ln-sp{flex:1}
+.ln-b{font:inherit;font-weight:700;font-size:.88rem;padding:8px 14px;border-radius:999px;border:1px solid rgb(217 164 65 / .6);background:rgb(217 164 65 / .16);color:var(--ink);cursor:pointer}.ln-b:disabled{opacity:.35;cursor:default}
+.ln-q{font-weight:700;margin:6px 0 8px}.ln-hint{font-size:.78rem;color:var(--ink-3);margin:-4px 0 6px}
+.ln-ch{display:flex;flex-direction:column;gap:6px}
+.ln-c{font:inherit;text-align:left;padding:10px 12px;border-radius:12px;border:1px solid var(--glass-line,rgb(255 255 255 / .18));background:rgb(255 255 255 / .04);color:var(--ink);cursor:pointer}
+.ln-c:hover:not(:disabled){border-color:var(--accent,#D9A441)}.ln-c:disabled{cursor:default}.ln-c.ok{border-color:#5fbf8a;background:rgb(95 191 138 / .18)}.ln-c.no{border-color:#e07070;background:rgb(224 112 112 / .16)}
+.ln-fb p{margin:6px 0}.ln-yes{color:#7fd4a8;font-weight:700}.ln-noo{color:#f0a0a0;font-weight:700}.ln-src,.ln-order{display:block;font-size:.75rem;color:var(--ink-3);margin-top:4px}
+.ln-score{font-size:2rem;color:var(--accent,#D9A441);letter-spacing:.15em;margin:6px 0 0}
+.ln-big{font-size:1.06rem}.ln-big .ln-say{font-size:1.18rem;line-height:1.5}.ln-big .ln-c{font-size:1.1rem;padding:14px 14px}.ln-big .ln-q{font-size:1.15rem}
+@media (max-width:640px){.ln-card{left:8px;right:8px;width:auto;bottom:calc(var(--botH,56px) + 8px);max-height:58vh}}
