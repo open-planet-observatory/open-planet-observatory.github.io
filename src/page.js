@@ -28,19 +28,26 @@
     el.querySelector('#pgTitle').textContent = R.title; el.hidden = false; place(); const body = el.querySelector('#pgBody'); body.scrollTop = 0; R.render(body, api);
     try { history.replaceState(null, '', '#page=' + key); } catch (e) { } el.querySelector('#pgBack').focus({ preventScroll: true }); }
   function close(keepSlim) { if (!cur || !el) return; const key = cur; cur = null; el.hidden = true; html.classList.remove('page-on');
-    const v = viewer(); if (v && saved && saved.loop !== undefined) v.useDefaultRenderLoop = saved.loop !== false;
+    const v = viewer(); if (v && saved && saved.loop !== undefined && !html.classList.contains('moon-on') && !document.querySelector('#uni.on')) v.useDefaultRenderLoop = saved.loop !== false;
     if (curR && curR.onClose) try { curR.onClose(); } catch (e) { } curR = null;
-    if (!keepSlim && saved) { if (!saved.slim && O.setSlim) O.setSlim(false); if (!saved.rail) html.classList.remove('rail-closed'); if (!saved.drawer && O.openPanel) O.openPanel(saved.panel); }
+    if (!keepSlim && saved) { if (!saved.slim && O.setSlim) O.setSlim(false); if (!saved.rail) html.classList.remove('rail-closed'); if (!saved.drawer && O.openPanel) O.openPanel(key); }
     try { history.replaceState(null, '', '#panel=' + key); } catch (e) { } saved = null; }
   /* expanding the slim header (click on the bar, ⤢, Esc) also leaves the page */
   new MutationObserver(() => { if (cur && !html.classList.contains('slim')) close(true); }).observe(html, { attributes: true, attributeFilter: ['class'] });
+  /* the Moon, a game or the Solar System opening over (or under) a page leaves the page: the Moon globe and a game draw
+     beneath the page, so the visitor saw nothing change (Derik, 8 Nov 2026) */
+  new MutationObserver(() => { if (cur && (html.classList.contains('moon-on') || html.classList.contains('game-on'))) close(true); }).observe(html, { attributes: true, attributeFilter: ['class'] });
+  new MutationObserver(ms => { if (cur && ms.some(m => m.target.id === 'uni' && m.target.classList.contains('on'))) close(true); }).observe(document.body, { attributes: true, subtree: true, attributeFilter: ['class'] });
   addEventListener('keydown', e => { if (e.key === 'Escape' && cur) { e.stopPropagation(); close(); } }, true);
   addEventListener('resize', place);
   /* the Expand button in the panel header, shown for panels that have a page */
   const dh = document.querySelector('#ops-drawer .dh'); let xb = null;
   if (dh) { xb = document.createElement('button'); xb.className = 'iconbtn pg-x'; xb.id = 'drawerExpand'; xb.hidden = true; xb.textContent = '⤢'; xb.title = 'Open as a full page'; xb.setAttribute('aria-label', 'Open as a full page');
     const cl = dh.querySelector('#drawerClose'); dh.insertBefore(xb, cl); xb.onclick = () => { const p = document.querySelector('#drawerBody .panel[data-on="true"]'); if (p) open(p.dataset.k); }; }
-  function sync() { if (!xb) return; const p = document.querySelector('#drawerBody .panel[data-on="true"]'); xb.hidden = !p; xb.style.display = p ? '' : 'none'; }
+  /* a page is open and another panel switches on (a header menu item, a rail button, a link): the page follows it instead of
+     leaving the new panel hidden behind the page (Derik, 8 Nov 2026: links between sections "get stuck") */
+  function sync() { const p = document.querySelector('#drawerBody .panel[data-on="true"]'); if (xb) { xb.hidden = !p; xb.style.display = p ? '' : 'none'; }
+    if (cur && p && p.dataset.k !== cur) { open(p.dataset.k); html.classList.add('drawer-closed'); } }
   const body = document.getElementById('drawerBody'); if (body) new MutationObserver(sync).observe(body, { attributes: true, subtree: true, attributeFilter: ['data-on'] });
   const api = { open, close, isOpen: () => !!cur, current: () => cur, register(key, R) { REG[key] = R; sync(); }, esc };
   /* links like theowlmanac.com/#page=untold open the page once the site and the page's module are ready */
