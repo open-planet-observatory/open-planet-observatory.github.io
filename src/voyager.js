@@ -20,6 +20,8 @@
      Voyager's is from Earth (Horizons): at this scale the difference (at most 1 AU) is under a pixel. The moving dot is a radio
      signal, drawn sped up; the real one needs the light time printed underneath. */
   const LINES = [], SPAN = 186, X0 = 16, XW = 352, X = au => X0 + Math.min(au, SPAN) / SPAN * XW, C_KMS = 299792.458;
+  /* "Fly to Voyager 1": a short captioned flight in the Solar System view to where Voyager 1 is today (universe.js) */
+  function fly() { const O = window.__obs; if (O && O.openUniverse) O.openUniverse('voyager'); }
   function makeLine(cls) { const el = document.createElement('div'); el.className = 'vy-line ' + (cls || ''); el.setAttribute('role', 'img');
     const n = X(30.07), h = X(121.6), d = X(V.lightDayAU);
     el.innerHTML = `<div class="vl-h"><b>Voyager 1, right now</b><span>to scale, from Earth</span></div><svg viewBox="0 0 430 70" aria-hidden="true"><defs><linearGradient id="vyg${LINES.length}" gradientUnits="userSpaceOnUse" x1="${X0}" y1="0" x2="${X0 + XW}" y2="0"><stop offset="0" stop-color="#7fb4ff"/><stop offset="1" stop-color="#F2C43C"/></linearGradient></defs>
@@ -32,11 +34,10 @@
       <circle cx="${X0}" cy="37" r="5.5" fill="#4f8fe0" stroke="#bcd6ff" stroke-width="1"/><text x="${X0 - 4}" y="62" class="vl-t">Earth</text>
       <circle class="vl-s" cx="${X0}" cy="37" r="2.6" fill="#fff6dc"/>
       <g class="vl-v"><circle cx="0" cy="37" r="4.2" fill="#F2C43C"/><circle cx="0" cy="37" r="9" fill="none" stroke="#F2C43C" stroke-opacity=".45"/><text x="6" y="19" text-anchor="end" class="vl-t vl-b">Voyager 1</text></g></svg>
-      <div class="vl-n"></div>`;
+      <div class="vl-n"></div><button type="button" class="vl-fly">▶ Fly to Voyager 1</button>`; el.querySelector('.vl-fly').onclick = fly;
     LINES.push(el); return el; }
   function updLines(au) { const lt = au * AU_KM / C_KMS, hh = Math.floor(lt / 3600), mm = Math.floor(lt % 3600 / 60), ss = Math.floor(lt % 60), x = X(au);
     const txt = `Light takes <b>${hh} h ${pad(mm)} m ${pad(ss)} s</b> to reach it · <b>${fmt(au * AU_KM / 1e9, 3)} billion km</b> · ${fmt(au, 3)} AU from Earth`;
-    const sv = document.querySelector('#owlSplash .sp-voy'); if (sv && !sv.querySelector('.vy-line')) { sv.appendChild(makeLine('on-art')); sv.hidden = false; }
     for (let i = LINES.length - 1; i >= 0; i--) { const el = LINES[i]; if (!el.isConnected && el._seen) { LINES.splice(i, 1); continue; } el._seen = el.isConnected || el._seen;
       el.querySelector('.vl-p').setAttribute('x2', x.toFixed(1)); el.querySelector('.vl-v').setAttribute('transform', `translate(${x.toFixed(1)} 0)`);
       el.style.setProperty('--vx', (x - X0).toFixed(1) + 'px'); const nn = el.querySelector('.vl-n'); if (nn.innerHTML !== txt) nn.innerHTML = txt;
@@ -68,7 +69,7 @@
       if (liveV) { if (cv.getAttribute('href') !== liveV.url) { cv.href = liveV.url; cv.textContent = '▶'; cv.title = `Watch on YouTube: ${liveV.title} (The Owlmanac)`; cv.setAttribute('aria-label', cv.title); cv.classList.remove('soon'); } }
       else if (nextV) { cv.removeAttribute('href'); const t = `The Owlmanac's Voyager video: ${nextV.title}. Coming ${nextV.when}`; if (cv.title !== t) { cv.textContent = '▶ ' + new Date(nextV.from).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); cv.title = t; cv.setAttribute('aria-label', t); cv.setAttribute('role', 'note'); cv.classList.add('soon'); } }
       cv.hidden = !(liveV || nextV) || chip.hidden;
-      if (!chip.onclick) chip.onclick = () => { delete host.dataset.closed; try { localStorage.removeItem('vyHide'); } catch (e) { } const O = window.__obs; if (O && O.setSlim) O.setSlim(false); if (O && O.openPanel) O.openPanel('situations'); if (host._sync) host._sync(); else host.hidden = false; const d = document.getElementById('drawerBody'); if (d) d.scrollTop = 0; }; }
+      if (!chip.onclick) chip.onclick = () => { delete host.dataset.closed; try { localStorage.removeItem('vyHide'); } catch (e) { } const O = window.__obs; if (O && O.setSlim) O.setSlim(false); if (O && O.openPanel) O.openPanel('situations'); if (host._sync) host._sync(); else host.hidden = false; const d = document.getElementById('drawerBody'); if (d) d.scrollTop = 0; fly(); }; chip.title = 'Fly to Voyager 1 and see the countdown'; }
     /* the ticker carries a one-line version; rebuilt once a minute */
     const tick = after ? ['Voyager 1', 'now more than one light-day from Earth', VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'] : ['Voyager 1', `one light-day from Earth in ${p.d} d ${pad(p.h)} h ${pad(p.m)} min`, VIDEOS.long || 'https://science.nasa.gov/mission/voyager/', 'NASA JPL Horizons'];
     if (!window.VOYAGER_TICK || window.VOYAGER_TICK[1] !== tick[1]) { window.VOYAGER_TICK = tick; const O = window.__obs; if (O && O.buildTicker && (now - (render.tickT || 0) > 55000 || !render.tickT)) { render.tickT = now; O.buildTicker(); } }

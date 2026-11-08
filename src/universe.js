@@ -449,7 +449,22 @@ function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.q
   ui.zoomThumb = document.getElementById('uniThumb'); ui.zoomV = toV; }
 
 // ---------- the guided tour ----------
-function tourSteps() { const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.stale && S.byName.Sun.sunSprite); return [
+/* "Fly to Voyager 1" (8 Nov 2026: "a mini tour of the solar system and its relation to it, like the universe tour but shorter,
+   to its relative location"). Positions are live: Voyager 1 from JPL Horizons (data/solar.json), the planets from Astronomy Engine. */
+function voyObj() { return S.byName['Voyager 1'] || S.objs.find(x => /^Voyager 1$/i.test(x.name)); }
+function voySteps() { const v = voyObj(), e = S.byName.Earth; const vp = v && V().fromArray(v.shown || v.pos); if (!vp) return null;
+  const dE = e ? vp.distanceTo(V().fromArray(e.pos)) : vp.length(), lt = dE * AU_KM / 299792.458, hh = Math.floor(lt / 3600), mm = Math.floor(lt % 3600 / 60);
+  const out = vp.clone().normalize(), side = V().crossVectors(out, new T.Vector3(0, 0, 1)).normalize(); if (!isFinite(side.x) || side.lengthSq() < .5) side.set(1, 0, 0);
+  const mid = vp.clone().multiplyScalar(0.5), sideDir = side.clone().add(new T.Vector3(0, 0, 0.25)).normalize();
+  return [
+  { earth: true, ms: 2500, hold: 4500, cap: 'Home: Earth. Voyager 1 left here on 5 September 1977.' },
+  { dist: 45, ms: 4500, hold: 5000, cap: 'The planets. Neptune, the farthest, is about 30 times as far from the Sun as Earth is.' },
+  { at: mid, dist: vp.length() * 1.25, dir: sideDir, ms: 6000, hold: 6500, cap: `Voyager 1 is ${fmtN(Math.round(vp.length()))} times as far from the Sun as Earth, heading up and out of the planets' plane. It crossed into interstellar space in August 2012.` },
+  { voy: true, ms: 5000, hold: 7000, cap: `Voyager 1 today: ${fmtN(Math.round(dE * AU_KM / 1e9 * 10) / 10)} billion km from Earth. A radio signal takes ${hh} h ${String(mm).padStart(2, '0')} min to reach it.` },
+  { at: new T.Vector3(0, 0, 0), dist: vp.length() * 1.002, dir: out, ms: 6000, hold: 7000, cap: 'Looking back from Voyager 1: the Sun is a bright star, and every planet is lost in its glare.' }]; }
+function startVoyTour() { const st = voySteps(); if (!st) { caption('JPL spacecraft data did not arrive, so Voyager 1 cannot be shown today.'); return; } stopTour(); S.tour = { i: -1, voy: st }; ui.root.classList.add('touring');
+  rate = 0; simMs = Date.now(); ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x.dataset.rate === '0')); S.focus = null; ui.card.hidden = true; nextStep(); }
+function tourSteps() { if (S.tour && S.tour.voy) return S.tour.voy; const sunOk = !!(S.sunInfo && S.sunInfo.ok && !S.sunInfo.stale && S.byName.Sun.sunSprite); return [
   { earth: true, ms: 2500, hold: 4000, cap: 'Home: Earth, lit by the Sun as it is right now. Hold on.' },
   { dist: 0.025, ms: 3000, hold: 4500, cap: sunOk ? "This is our Sun, as NASA's Solar Dynamics Observatory saw it today in ultraviolet light." : 'This is our Sun, an ordinary star.' },
   { dist: 45, ms: 5000, hold: 4500, cap: 'Eight planets circle it. Sunlight reaches Earth in about 8 minutes, and Neptune in about 4 hours.' },
@@ -467,9 +482,9 @@ function startTour() { stopTour(); S.tour = { i: -1 }; ui.root.classList.add('to
   rate = 0; simMs = Date.now(); ui.root.querySelectorAll('[data-rate]').forEach(x => x.setAttribute('aria-pressed', x.dataset.rate === '0'));
   S.focus = null; ui.card.hidden = true; document.getElementById('uniNeoCard').hidden = true; nextStep(); }
 function stopTour() { if (!S || !S.tour) return; clearTimeout(S.tour.timer); if (S.tour.drift) driftSet('', 1); S.tour = null; ui.root.classList.remove('touring'); document.getElementById('uniTour').textContent = '▶ Tour Universe'; caption(''); }
-function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { stopTour(); caption('That is the end of the tour. Drag to look around, click the edge to read about it, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } const st = steps[tr.i]; caption(st.cap);
+function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourSteps(); tr.i++; if (tr.i >= steps.length) { const wasVoy = !!tr.voy; stopTour(); if (wasVoy) { caption('That is where Voyager 1 is today. Drag to look around, click it to read more, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } caption('That is the end of the tour. Drag to look around, click the edge to read about it, or press Back to Earth.'); setTimeout(() => { if (!S.tour) caption(''); }, 7000); return; } const st = steps[tr.i]; caption(st.cap);
   if (tr.drift && !st.drift) { tr.drift = false; driftSet('', 1); } /* the tour's spiral step hands the view back as it was */
-  if (st.drift) { tr.drift = true; driftSet('gal', 100); flyStart(); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
+  if (st.drift) { tr.drift = true; driftSet('gal', 100); flyStart(); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.voy) { const v = voyObj(); if (v) { S.focus = v; animateTo(V().fromArray(v.shown || v.pos), 0.6, st.ms, V().fromArray(v.shown || v.pos).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).add(new T.Vector3(0, 0, 0.3)).normalize()); setTimeout(() => { if (S.tour && S.focus === v) card(v); }, st.ms); } } else if (st.at) { S.focus = null; animateTo(st.at.clone(), st.dist, st.ms, st.dir ? st.dir.clone() : null); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
 // ---------- the wordless fly-through (Derik, 7 Nov 2026: "no words, simply for effect") ----------
@@ -708,7 +723,7 @@ function frame(now) { if (!open) return; if (!REC.stepping) requestAnimationFram
 }
 async function openUniverse(dest) {
   const hostName = typeof dest === 'string' && dest.startsWith('host:') ? dest.slice(5) : null;
-  if (open) { if (dest === 'flight') { flight(); return; } if (dest === 'tour') { stopTour(); startTour(); return; } if (dest === 'galaxy') galaxyView(4000, true); else if (dest === 'web') webView(6000); else if (dest === 'edge') edgeView(7000); else if (hostName) flyToHost(hostName); else { S.focus = null; animateTo(new T.Vector3(0, 0, 0), 4.2, 3000); } return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
+  if (open) { if (dest === 'flight') { flight(); return; } if (dest === 'tour') { stopTour(); startTour(); return; } if (dest === 'voyager') { startVoyTour(); return; } if (dest === 'galaxy') galaxyView(4000, true); else if (dest === 'web') webView(6000); else if (dest === 'edge') edgeView(7000); else if (hostName) flyToHost(hostName); else { S.focus = null; animateTo(new T.Vector3(0, 0, 0), 4.2, 3000); } return; } if (!A) { console.warn('Astronomy Engine missing'); return; }
   const g = window.__obs3d;
   if (openUniverse.busy) return; openUniverse.busy = true; /* a double press opens once */
   if (dest === 'flight') flightFade(true); /* the fly-through starts from black, outside the universe */
@@ -734,6 +749,7 @@ async function openUniverse(dest) {
     else if (dest === 'web') { ensureCosmos(); journeyToWeb(); } /* one flight out through every scale, pausing at each */
     else if (dest === 'edge') { ensureCosmos(); journeyToWeb(true); }
     else if (dest === 'tour') { ensureCosmos(); startTour(); }
+    else if (dest === 'voyager') startVoyTour();
     else if (dest === 'flight') flight();
     else if (hostName) flyToHost(hostName); else animateTo(new T.Vector3(0, 0, 0), 4.2, 4200); };
   setTimeout(go, gcam ? 250 : 500);

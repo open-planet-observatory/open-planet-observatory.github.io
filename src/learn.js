@@ -125,17 +125,42 @@
 
   // ---------- the Classroom grid ----------
   function age() { try { return localStorage.getItem(AGE) || 'g35'; } catch (e) { return 'g35'; } }
-  function paintGrid() { const h = document.getElementById('learnHost'); if (!h || !L) return; const a = age(), st = store();
-    h.innerHTML = `<div class="ln-ages" role="group" aria-label="Who is learning?"><span>Who's learning?</span>${L.levels.map(l => `<button type="button" data-age="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div>
-     <div class="ln-grid">${L.lessons.map(les => { const D = les.levels[a]; if (!D) return ''; const s = (st[les.id] || {})[a] || 0;
-       return `<article class="ln-tile"><span class="ln-kind">${esc(les.icon)} ${esc(les.topic)}</span><h4>${esc(D.title)}</h4><p class="small muted">About ${D.mins} minutes · ${D.steps.length} steps · ${D.quiz.length} questions</p><p class="ln-stars" aria-label="${s} of 3 stars">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</p><button type="button" class="go ln-go" data-l="${les.id}">${s ? '↻ Play again' : '▶ Start'}</button>
-        <details class="ln-teach"><summary>For teachers</summary><ul>${les.teacher.goals.map(g => `<li>${esc(g)}</li>`).join('')}</ul><p class="small"><b>Talk about:</b> ${les.teacher.discuss.map(esc).join(' ')}</p><p class="small muted">Uses: ${esc(les.teacher.uses)}</p></details></article>`; }).join('')}</div>`;
+  /* The Classroom as a place to explore (8 Nov 2026: "Make them say 'whoa, what's that?' ... It feels like I'm reading an online
+     encyclopedia instead of interacting with an exciting teacher"): three live numbers that count up, then big animated mission
+     cards. Every number is today's data (USGS quakes on the map, the Moon from Astronomy Engine, Voyager 1 from JPL Horizons). */
+  const ART = {
+    quakes: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-arc" d="M10 104 Q100 18 190 104"/>' + [[40, 74], [62, 56], [86, 44], [112, 42], [138, 50], [160, 66]].map(([x, y], i) => `<g style="--d:${i * .45}s"><circle class="la-ring" cx="${x}" cy="${y}" r="3"/><circle class="la-dot" cx="${x}" cy="${y}" r="3.4"/></g>`).join('') + '</svg>',
+    sky: '<svg viewBox="0 0 200 120" aria-hidden="true"><defs><radialGradient id="lnE" cx=".35" cy=".35"><stop offset="0" stop-color="#7fc1ff"/><stop offset="1" stop-color="#1c4c8c"/></radialGradient></defs><circle cx="100" cy="60" r="30" fill="url(#lnE)"/><ellipse class="la-orb" cx="100" cy="60" rx="70" ry="22"/><g class="la-iss"><rect x="-7" y="-2" width="14" height="4" rx="1" fill="#F2C43C"/><rect x="-2" y="-6" width="4" height="12" fill="#EFE4CC"/></g></svg>',
+    weather: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-cloud" d="M48 58a22 22 0 0 1 40-14 26 26 0 0 1 48 6 18 18 0 0 1 4 36H54a16 16 0 0 1-6-28z"/><path class="la-bolt" d="M104 70l-16 26h14l-8 22 26-32h-14l10-16z"/><path class="la-bolt b2" d="M70 74l-8 14h8l-4 12 14-18h-8l6-8z"/></svg>',
+    sources: '<svg viewBox="0 0 200 120" aria-hidden="true"><rect class="la-page" x="46" y="16" width="70" height="92" rx="3" transform="rotate(-6 81 62)"/><rect class="la-page p2" x="84" y="14" width="70" height="92" rx="3" transform="rotate(5 119 60)"/>' + [30, 42, 54, 66, 78].map((y, i) => `<line class="la-ink" x1="96" y1="${y}" x2="${142 - (i % 2) * 14}" y2="${y}" style="--d:${i * .35}s" transform="rotate(5 119 60)"/>`).join('') + '<circle class="la-lens" cx="132" cy="80" r="16"/><line class="la-lens" x1="143" y1="92" x2="160" y2="108"/></svg>' };
+  const HOOK = { quakes: 'The ground is shaking somewhere right now. Find the pattern.', sky: 'Something is racing over your head at almost 8 km every second.', weather: 'Watch real storms flash, live from space.', sources: 'Read a real 180-year-old book. Can you spot the clues?' };
+  async function whoa(h) { const box = h.querySelector('.ln-whoa'); if (!box) return; const Q = quakes(), b = biggest(), m = moon(), v = await voyager(); const W = [];
+    if (Q.length) W.push({ n: Q.length, d: 0, u: '', t: 'earthquakes on the map this week', s: b ? `Biggest: magnitude ${fmt(b.mag, 1)}` : '', l: 'quakes' });
+    if (m) W.push({ n: m.lit, d: 0, u: '%', t: 'of the Moon is lit by the Sun right now', s: m.name.charAt(0).toUpperCase() + m.name.slice(1), l: 'sky' });
+    if (v) W.push({ n: v.lh, d: 1, u: ' h', t: 'for a radio message to reach Voyager 1', s: 'The farthest spacecraft from Earth', l: null });
+    if (!W.length) { box.remove(); return; }
+    box.innerHTML = W.map((w, i) => `<div class="ln-w" style="--i:${i}"><b data-n="${w.n}" data-d="${w.d}" data-u="${esc(w.u)}">0${esc(w.u)}</b><span>${esc(w.t)}</span><small>${esc(w.s)}</small>${w.l ? `<button type="button" class="ln-wgo" data-l="${w.l}">Explore ▸</button>` : ''}</div>`).join('');
+    box.querySelectorAll('.ln-wgo').forEach(x => x.onclick = () => start(x.dataset.l, age()));
+    const RMo = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    box.querySelectorAll('b[data-n]').forEach(el => { const N = +el.dataset.n, d = +el.dataset.d, u = el.dataset.u; if (RMo) { el.textContent = fmt(N, d) + u; return; } const t0 = performance.now(), T = 1400;
+      const f = now => { const k = Math.min(1, (now - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(N * e, d) + u; if (k < 1 && el.isConnected) requestAnimationFrame(f); }; requestAnimationFrame(f); }); }
+  function paintGrid() { const h = document.getElementById('learnHost'); if (!h || !L) return; const a = age(), st = store(), lvl = L.levels.find(l => l.id === a) || {};
+    h.innerHTML = `<div class="ln-ages" role="group" aria-label="Who is learning?"><span>Who's exploring?</span>${L.levels.map(l => `<button type="button" data-age="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div>
+     <div class="ln-whoa" aria-live="off"></div>
+     <h3 class="ln-pick">Pick a mission</h3>
+     <div class="ln-grid${lvl.read ? ' big' : ''}">${L.lessons.map(les => { const D = les.levels[a]; if (!D) return ''; const s = (st[les.id] || {})[a] || 0;
+       return `<article class="ln-tile ln-${esc(les.id)}"><button type="button" class="ln-art" data-l="${les.id}" aria-label="Start: ${esc(D.title)}">${ART[les.id] || ''}<span class="ln-kind">${esc(les.icon)} ${esc(les.topic)}</span></button>
+        <div class="ln-tb"><h4>${esc(D.title)}</h4>${HOOK[les.id] ? `<p class="ln-hook">${esc(HOOK[les.id])}</p>` : ''}<p class="ln-meta">${D.mins} min · ${D.steps.length} steps · ${D.quiz.length} questions <span class="ln-stars" aria-label="${s} of 3 stars">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></p>
+        <button type="button" class="go ln-go" data-l="${les.id}">${s ? '↻ Play again' : '▶ Start mission'}</button>
+        <details class="ln-teach"><summary>For teachers</summary><ul>${les.teacher.goals.map(g => `<li>${esc(g)}</li>`).join('')}</ul><p class="small"><b>Talk about:</b> ${les.teacher.discuss.map(esc).join(' ')}</p><p class="small muted">Uses: ${esc(les.teacher.uses)}</p></details></div></article>`; }).join('')}</div>`;
     h.querySelectorAll('[data-age]').forEach(b => b.onclick = () => { try { localStorage.setItem(AGE, b.dataset.age); } catch (e) { } paintGrid(); });
-    h.querySelectorAll('.ln-go').forEach(b => b.onclick = () => start(b.dataset.l, age())); }
+    h.querySelectorAll('.ln-go,.ln-art').forEach(b => b.onclick = () => start(b.dataset.l, age())); whoa(h); }
   async function load() { if (L) return L; const [a, b] = await Promise.all([fetch('assets/learn/lessons.json').then(r => r.json()), fetch('assets/almanac/almanac.json').then(r => r.ok ? r.json() : null).catch(() => null)]); L = a; ALM = b; return L; }
-  function mount() { const ls = document.getElementById('lessons'); if (!ls || document.getElementById('learnHost')) return; const box = document.createElement('div'); box.className = 'ln-wrap';
-    box.innerHTML = `<div class="sec-head ln-head"><div class="eyebrow">Interactive lessons · new</div><h3>Learn on the live globe</h3><p class="muted">Short missions that move the map for you, then a quick quiz. Pick an age: the same topics, told for each age. Some questions use today's real data, so they change every day. Nothing you do here leaves this device.</p></div><div id="learnHost"><p class="small muted">Loading the lessons…</p></div>`;
-    ls.before(box); const sub = document.createElement('div'); sub.className = 'sec-head ln-head2'; sub.innerHTML = '<div class="eyebrow">For teachers</div><h3>Sample lesson plans</h3>'; ls.before(sub);
+  function mount() { const ls = document.getElementById('lessons'), sec = document.getElementById('classroom'); if (!ls || !sec || document.getElementById('learnHost')) return;
+    const box = document.createElement('div'); box.className = 'ln-wrap';
+    box.innerHTML = `<div class="ln-hero"><div class="ln-hero-t"><div class="eyebrow">Classroom · missions on the live globe</div><h2>The whole planet is your classroom.</h2><p>Pick a mission. The globe flies you there, you explore today's real data, then try a quick quiz. Nothing you do here leaves this device.</p></div><img class="ln-owl" src="brand/owl-flying-512.png" alt="" aria-hidden="true"></div><div id="learnHost"><p class="small muted">Loading the missions…</p></div>`;
+    const first = sec.querySelector(':scope > .sec-head'); sec.insertBefore(box, sec.firstChild);
+    if (first) { const ey = first.querySelector('.eyebrow'); if (ey) ey.textContent = 'For teachers'; first.classList.add('ln-teachhead'); const h2 = first.querySelector('h2'); if (h2) h2.textContent = 'Lesson plans built on live data'; }
     load().then(paintGrid).catch(e => { document.getElementById('learnHost').innerHTML = '<p class="small muted">The lessons did not load. Try again later.</p>'; console.warn('lessons', e); }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
   window.OwlLearn = { start, end, get running() { return !!run; } };

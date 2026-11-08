@@ -26,7 +26,7 @@
     const head = rail.querySelector('.rh'); if (!head) return false;
     const ey = head.querySelector('.eyebrow'); if (ey && ey.textContent !== 'Filter options') ey.textContent = 'Filter options';
     const rc = head.querySelector('#railClose'); if (rc) { rc.setAttribute('aria-label', 'Hide filter options'); rc.title = 'Hide'; }
-    head.after(disp); disp.after(hint); hint.after(space); space.after(filt); filt.after(layers); built = true; return true;
+    { const ex = document.getElementById('railExplain'); (ex || head).after(disp); } disp.after(hint); hint.after(space); space.after(filt); filt.after(layers); built = true; return true;
   }
   function count(g) { const on = g.querySelectorAll('.chip[aria-pressed="true"]:not([hidden])').length, all = g.querySelectorAll('.chip:not([hidden])').length; return { on, all }; }
   function fold(g) { /* turn a layer group's label into a toggle */

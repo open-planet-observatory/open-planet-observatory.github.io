@@ -32,7 +32,7 @@
     else if (r.rows) body = rowsHTML(r); else if (r.list) body = listHTML(r);
     if (r.voyager) body = voyagerHTML();
     if (r.link) body = `<p><a class="btn" ${A(r.link.u)}>${esc(r.link.t)} ↗</a></p>`;
-    return `<article class="rc" id="rec-${esc(r.id)}"><h3>${esc(r.title)}</h3><p class="rc-def">${esc(r.def)}</p>${body}${r.voyager ? '' : srcHTML(r)}</article>`; }
+    return `<article class="rc" id="rec-${esc(r.id)}" data-g="${esc(r.g)}"><h3>${esc(r.title)}</h3><p class="rc-def">${esc(r.def)}</p><div class="rc-body">${body}${r.voyager ? '' : srcHTML(r)}</div></article>`; }
   function draw() {
     if (!R) { host.innerHTML = '<p class="small muted">Loading…</p>'; return; }
     if (!R.records) { host.innerHTML = '<p class="small muted">The records file did not load. Nothing older is shown in its place.</p>'; return; }
@@ -44,10 +44,35 @@
       <p class="small muted">Blind spot: Wikidata is edited by volunteers and can lag a new measurement or carry an old one; a record held by a person (the longest spaceflight, for instance) is not listed yet. For official weather extremes, the WMO archive is the authority.</p>`;
     host.querySelectorAll('[data-f]').forEach(b => b.onclick = () => { filter = b.dataset.f; draw(); });
     host.querySelectorAll('[data-rw]').forEach(b => b.onclick = () => { wOpen[b.dataset.rw] = !wOpen[b.dataset.rw]; draw(); });
+    wire(host); }
+  function wire(host) {
     host.querySelectorAll('[data-read]').forEach(b => b.onclick = () => { const q = b.closest('.rc-row').querySelector('.rc-read'); q.hidden = !q.hidden; b.setAttribute('aria-expanded', String(!q.hidden)); b.textContent = q.hidden ? 'Read' : 'Close'; });
     host.querySelectorAll('[data-geo]').forEach(b => b.onclick = () => { const [id, i] = b.dataset.geo.split(':'); const x = R.records.find(r => r.id === id).list[+i]; const g = window.__obs3d;
       try { if (O.setSlim) O.setSlim(true); g.viewer.camera.flyTo({ destination: window.Cesium.Cartesian3.fromDegrees(x.lon, x.lat, 2.5e6), duration: 2 }); } catch (e) { } });
   }
+  /* The full page (8 Nov 2026: "the records section is long; better filter options, especially in expanded view"): group tabs
+     with counts, a search box and a grid of compact cards that open on click. Nothing is reworded: the same cards, folded. */
+  let pf = 'all', pq = '';
+  function drawPage(h) {
+    if (!R || !R.records) { h.innerHTML = '<p class="small muted">The records file did not load. Nothing older is shown in its place.</p>'; return; }
+    const G = R.groups || [], n = k => R.records.filter(r => k === 'all' || r.g === k).length;
+    h.innerHTML = `<div class="rp-tools"><div class="rp-tabs" role="tablist" aria-label="Kinds of record">${[['all', 'All']].concat(G).map(([k, t]) => `<button role="tab" data-pf="${esc(k)}" aria-selected="${pf === k}">${esc(t)} <span>${n(k)}</span></button>`).join('')}</div>
+      <label class="rp-q"><span aria-hidden="true">⌕</span><input type="search" placeholder="Search records" aria-label="Search records" value="${esc(pq)}"></label></div>
+      <div class="rp-grid">${R.records.map(card).join('')}</div><p class="rp-none small muted" hidden>No record matches.</p>
+      ${W ? `<details class="rp-watch"><summary>Record watch: records the agencies themselves declared</summary>${watchHTML()}</details>` : ''}
+      <p class="small muted">Figures are each source’s own, in its own units; a bracketed conversion is the site’s arithmetic. Wikidata values are CC0; summaries are Wikipedia’s own words (CC BY-SA 4.0). Checked weekly; built ${esc((R.built || '').replace('T', ' '))} UTC.</p>`;
+    const apply = () => { const q = pq.trim().toLowerCase(); let shown = 0;
+      h.querySelectorAll('.rp-grid .rc').forEach(c => { const ok = (pf === 'all' || c.dataset.g === pf) && (!q || c.querySelector('h3').textContent.toLowerCase().includes(q) || c.querySelector('.rc-def').textContent.toLowerCase().includes(q)); c.hidden = !ok; if (ok) shown++; });
+      h.querySelector('.rp-none').hidden = shown > 0; h.querySelectorAll('[data-pf]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.pf === pf))); };
+    h.querySelectorAll('[data-pf]').forEach(b => b.onclick = () => { pf = b.dataset.pf; apply(); });
+    const inp = h.querySelector('.rp-q input'); inp.oninput = () => { pq = inp.value; apply(); };
+    h.querySelectorAll('.rp-grid .rc').forEach(c => { c.tabIndex = 0; c.setAttribute('aria-expanded', 'false');
+      const tg = e => { if (e.target.closest('a,button,input,.rc-body')) return; const o = c.classList.toggle('open'); c.setAttribute('aria-expanded', String(o)); };
+      c.addEventListener('click', tg); c.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tg(e); } }); });
+    h.querySelectorAll('[data-rw]').forEach(b => b.onclick = () => { wOpen[b.dataset.rw] = !wOpen[b.dataset.rw]; drawPage(h); h.querySelector('.rp-watch').open = true; });
+    wire(h); apply(); }
+  function regPage() { if (window.OwlPage) window.OwlPage.register('records', { title: 'Records', render: async h => { if (!R) { h.innerHTML = '<p class="small muted">Loading…</p>'; await loaded; } const w = document.createElement('div'); w.className = 'pg-gen rp'; h.innerHTML = ''; h.appendChild(w); drawPage(w); } }); else setTimeout(regPage, 500); }
+  let loadedRes; const loaded = new Promise(r => loadedRes = r); regPage();
   // ---------- Record watch: records the agencies themselves declare, word for word ----------
   function watchHTML() { if (!W) return ''; const S = W.sources || {}, failed = (W.failed || []).map(k => (S[k] || {}).name || k);
     if (!W.items || !W.items.length) return `<section class="rw"><h3 class="rc-g">Record watch</h3><p class="small muted">No new record declared by the agencies we watch in the last year${failed.length ? ` (not checked this time: ${esc(failed.join(', '))})` : ''}.</p></section>`;
@@ -63,7 +88,7 @@
     try { const r = await fetch('data/records.json?t=' + Math.floor(Date.now() / 36e5)); if (!r.ok) throw new Error('HTTP ' + r.status); R = await r.json(); } catch (e) { R = {}; }
     try { const r = await fetch('data/voyager.json?t=' + Math.floor(Date.now() / 36e5)); if (r.ok) vy = await r.json(); } catch (e) { }
     try { const r = await fetch('data/recordwatch.json?t=' + Math.floor(Date.now() / 36e5)); if (r.ok) W = await r.json(); } catch (e) { }
-    draw(); window.OwlRecords = { data: () => R }; featCard();
+    draw(); loadedRes(); window.OwlRecords = { data: () => R }; featCard();
     setInterval(() => { const el = document.getElementById('rcVy'), v = voyagerNow(); if (el && v) el.textContent = Math.round(v.km).toLocaleString('en-US') + ' km'; }, 1000);
   }
   // ---------- Record of the day: one record a day in the banner, the same for everyone on that date ----------

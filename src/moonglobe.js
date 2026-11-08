@@ -68,7 +68,7 @@
       <p class="mg-s" id="mgState"></p>
       <div class="mg-row"><button class="chip" id="mgEarth" aria-pressed="false"><span>Earth from the Moon</span></button></div>
       <div class="mg-row"><button class="chip" id="mgAll" aria-pressed="false" title="Advanced: every name the IAU has adopted on the Moon, about 9,000, including the lettered craters around the big ones. They appear as you zoom in."><span>All names (advanced)</span></button></div>
-      <div class="mg-row"><button class="chip" id="mgLit" aria-pressed="false" title="Light the whole Moon evenly, far side and night side included"><span>Whole Moon lit</span></button><button class="chip" id="mgNames" aria-pressed="true"><span>Names</span></button></div>
+      <div class="mg-row"><button class="chip" id="mgLit" aria-pressed="false" title="Light the whole Moon evenly, night side and far side included. Not how it looks right now: the real Sun lights only half."><span>☀ Light the dark side</span></button><button class="chip" id="mgNames" aria-pressed="true"><span>Names</span></button></div>
       <div class="mg-row"${window.OBS_ION_TOKEN ? '' : ' hidden'}><button class="chip" id="mgRelief" aria-pressed="false" title="Mountains and craters in 3D from Cesium Moon, a 3D model of the whole Moon built from NASA data, at true height"><span>3D relief</span></button></div>
       <p class="mg-k">${Object.entries(KIND).map(([k, [t, c]]) => `<span><i style="background:${c}"></i>${t}</span>`).join('')}</p>
       <div class="mg-card" id="mgCard" hidden></div>

@@ -20,9 +20,10 @@
     return { title: (t && t.textContent) || key, render(h) { h.innerHTML = ''; const w = document.createElement('div'); w.className = 'pg-gen'; ph = document.createComment('panel'); p.before(ph); w.appendChild(p); h.appendChild(w); },
       onClose() { if (ph) { ph.replaceWith(p); ph = null; } } }; }
   let curR = null;
-  function open(key) { if (cur && curR && curR.onClose) try { curR.onClose(); } catch (e) { }
+  function open(key, opt) { if (cur && curR && curR.onClose) try { curR.onClose(); } catch (e) { }
     const R = REG[key] || generic(key); if (!R) return; curR = R; build(); rpOff();
     if (!cur) saved = { slim: html.classList.contains('slim'), rail: html.classList.contains('rail-closed'), drawer: html.classList.contains('drawer-closed'), panel: key };
+    if (opt && opt.solo && saved && !saved.solo) saved.solo = true; /* opened straight from a menu (Classroom): Back goes to the globe, not to the panel */
     cur = key; html.classList.add('page-on'); if (O.setSlim) O.setSlim(true);
     const v = viewer(); if (v && !document.querySelector('#uni.on') && !html.classList.contains('moon-on')) { saved.loop = v.useDefaultRenderLoop; v.useDefaultRenderLoop = false; }
     el.querySelector('#pgTitle').textContent = R.title; el.hidden = false; place(); const body = el.querySelector('#pgBody'); body.scrollTop = 0; R.render(body, api);
@@ -30,7 +31,7 @@
   function close(keepSlim) { if (!cur || !el) return; const key = cur; cur = null; el.hidden = true; html.classList.remove('page-on');
     const v = viewer(); if (v && saved && saved.loop !== undefined && !html.classList.contains('moon-on') && !document.querySelector('#uni.on')) v.useDefaultRenderLoop = saved.loop !== false;
     if (curR && curR.onClose) try { curR.onClose(); } catch (e) { } curR = null;
-    if (!keepSlim && saved) { if (!saved.slim && O.setSlim) O.setSlim(false); if (!saved.rail) html.classList.remove('rail-closed'); if (!saved.drawer && O.openPanel) O.openPanel(key); }
+    if (!keepSlim && saved) { if (!saved.slim && O.setSlim) O.setSlim(false); if (!saved.rail) html.classList.remove('rail-closed'); if (saved.solo) { if (window.__opsCloseDrawer) window.__opsCloseDrawer(); } else if (!saved.drawer && O.openPanel) { window.__pgBack = true; try { O.openPanel(key); } finally { window.__pgBack = false; } } }
     try { history.replaceState(null, '', '#panel=' + key); } catch (e) { } saved = null; }
   /* expanding the slim header (click on the bar, ⤢, Esc) also leaves the page */
   new MutationObserver(() => { if (cur && !html.classList.contains('slim')) close(true); }).observe(html, { attributes: true, attributeFilter: ['class'] });

@@ -91,7 +91,10 @@ function openPanel(k,toggle){if(toggle&&cur===k&&!html.classList.contains('drawe
  document.querySelectorAll('#panelTabs button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
  $('#drawerTitle').textContent=PANELS.find(p=>p[0]===k)[1];body.scrollTop=0;
  if(innerWidth<=860)html.classList.add('rail-closed');
- try{const v=(location.hash.match(/view=\w+/)||[])[0];history.replaceState(null,'','#'+(v?v+'&':'')+'panel='+k)}catch(e){}}
+ try{const v=(location.hash.match(/view=\w+/)||[])[0];history.replaceState(null,'','#'+(v?v+'&':'')+'panel='+k)}catch(e){}if(!window.__pgBack)soloPage(k)}
+/* Classroom opens as a full page first (8 Nov 2026: "It feels like a screen within a screen within a screen") */
+const SOLO=new Set(['classroom']);
+function soloPage(k){if(SOLO.has(k)&&!window.__pgBack&&window.OwlPage&&!window.OwlPage.isOpen())setTimeout(()=>{if(cur===k)window.OwlPage.open(k,{solo:true})},0)}
 function closeDrawer(){if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();html.classList.add('drawer-closed');document.querySelectorAll('#panelTabs button').forEach(b=>b.setAttribute('aria-pressed',false))}
 window.__opsCloseDrawer=closeDrawer;
 $('#drawerClose').onclick=closeDrawer;
