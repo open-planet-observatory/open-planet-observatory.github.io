@@ -82,9 +82,16 @@ sscc.minimumZoomDistance=2500;sscc.maximumZoomDistance=6e7;
 sscc.zoomEventTypes=[C.CameraEventType.WHEEL,C.CameraEventType.PINCH,C.CameraEventType.RIGHT_DRAG,{eventType:C.CameraEventType.WHEEL,modifier:C.KeyboardEventModifier.CTRL}];
 el.addEventListener('wheel',e=>{if(e.ctrlKey)e.preventDefault()},{passive:false});
 let gScale=1;
-el.addEventListener('gesturestart',e=>{e.preventDefault();gScale=1},{passive:false});
-el.addEventListener('gesturechange',e=>{e.preventDefault();const f=e.scale/gScale;gScale=e.scale;if(!isFinite(f)||f<=0)return;const h=viewer.camera.positionCartographic.height;
- if(f>1)viewer.camera.zoomIn(Math.min(h*(1-1/f)*1.5,h*.6));else viewer.camera.zoomOut(Math.min(h*(1/f-1)*1.5,h))},{passive:false});
+el.addEventListener('gesturestart',e=>{e.preventDefault();gScale=1;gAt=null},{passive:false});
+/* Safari pinch zooms toward the spot under the fingers (else the globe point at the centre of the screen, else Earth's centre),
+   not along the camera's line of sight: when the view is tilted that line runs past the limb, so the zoom slid off toward the
+   edge of the planet (the maintainer, 9 Nov 2026, in Find the owl) */
+let gAt=null;const gTarget=(x,y)=>{const cam=viewer.camera,ell=scene.globe.ellipsoid,r=viewer.canvas.getBoundingClientRect();
+ for(const p of [x!=null?new C.Cartesian2(x-r.left,y-r.top):null,new C.Cartesian2(r.width/2,r.height/2)]){if(!p)continue;const q=cam.pickEllipsoid(p,ell);if(q)return q}return C.Cartesian3.ZERO};
+el.addEventListener('gesturechange',e=>{e.preventDefault();const f=e.scale/gScale;gScale=e.scale;if(!isFinite(f)||f<=0)return;const cam=viewer.camera,h=cam.positionCartographic.height;
+ if(!gAt)gAt=gTarget(e.clientX,e.clientY);const to=C.Cartesian3.subtract(gAt,cam.positionWC,new C.Cartesian3()),d=C.Cartesian3.magnitude(to);if(!(d>0))return;C.Cartesian3.normalize(to,to);
+ if(f>1)cam.move(to,Math.min(h*(1-1/f)*1.5,h*.6,d*.6));else if(h<6e7)cam.move(C.Cartesian3.negate(to,to),Math.min(h*(1/f-1)*1.5,h,6e7-h))},{passive:false});
+el.addEventListener('gestureend',()=>{gAt=null});
 el.addEventListener('gestureend',e=>e.preventDefault(),{passive:false});
 viewer.camera.setView({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7)});
 
@@ -436,7 +443,8 @@ O.flyTo=(lon,lat)=>{if(active){spin=false;viewer.camera.flyTo({destination:C.Car
 O.setSpin=v=>{spin=v;origSpin(v)};O.spinning=()=>spin;
 // zoom buttons drive the 3D camera while it is active
 const zc=document.getElementById('zoomctl')||document.querySelector('.zoomctl');if(zc){host.appendChild(zc);zc.style.zIndex=4;
- const Z={zin:()=>viewer.camera.zoomIn(viewer.camera.positionCartographic.height*.4),zout:()=>viewer.camera.zoomOut(viewer.camera.positionCartographic.height*.6),zreset:()=>{if(moonView){setMoonView(false);return}spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
+ const zTo=(k)=>{const cam=viewer.camera,h=cam.positionCartographic.height,t=gTarget(),to=C.Cartesian3.subtract(t,cam.positionWC,new C.Cartesian3()),d=C.Cartesian3.magnitude(to);if(!(d>0))return;C.Cartesian3.normalize(to,to);if(k>0)cam.move(to,Math.min(h*.4,d*.6));else if(h<5e7)cam.move(C.Cartesian3.negate(to,to),Math.min(h*.6,6e7-h))}; /* toward the globe point at the centre of the view, so a tilted view doesn't slide off the planet */
+const Z={zin:()=>zTo(1),zout:()=>zTo(-1),zreset:()=>{if(moonView){setMoonView(false);return}spin=true;viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(-75,25,2.3e7),duration:1.2})},zspin:()=>{spin=!spin;origSpin(spin)}};
  Object.entries(Z).forEach(([id,fn])=>{const b=document.getElementById(id);if(b)b.addEventListener('click',e=>{if(!active||(O.moonOpen&&O.moonOpen()))return;e.stopImmediatePropagation();fn()},true)})}
 let active=true;
 function setActive(v){active=v;document.documentElement.classList.toggle('map2d',!v);/* imagery and lighting only exist on the 3D globe: the rail swaps them for a note in Globe and Flat views */try{syncWx()}catch(e){}el.style.display=v?'block':'none';if(mapbox)mapbox.style.visibility=v?'hidden':'visible';if(!v&&origSpin)origSpin(spin);document.querySelectorAll('#viewseg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===(v?'3d':O.mode())));if(v)viewer.resize();const zs=document.getElementById('zspin');if(zs)zs.hidden=false}

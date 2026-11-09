@@ -86,6 +86,8 @@ function wire(sp,again){let gone=false;const rm=matchMedia('(prefers-reduced-mot
  const when=(ok,fn,t0=Date.now())=>{if(ok())fn();else if(Date.now()-t0<20000)setTimeout(()=>when(ok,fn,t0),200)};
  sp.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.sp;go();
   if(k==='site')when(()=>window.OwlSiteTour,()=>window.OwlSiteTour.start());
+  else if(k==='owl')when(()=>window.OwlFindOwl&&window.__obs3d&&window.__obs3d.viewer,()=>dispatchEvent(new Event('obs:findowl'))); /* 9 Nov 2026: Find the owl and the Classroom featured on the landing page */
+  else if(k==='class')when(()=>window.__obs&&window.__obs.openPanel&&window.OwlPage,()=>window.__obs.openPanel('classroom'));
   else{const M=window.OwlMusic;if(k==='fly'){if(M&&M.start&&!M.on){M.start(true);window.__owlTempMusic=true}}/* start the score inside the click, where browsers allow sound; the flight hands it back afterwards */else if(M&&M.autoOn)M.autoOn();
    when(()=>window.__obs&&window.__obs.openUniverse,()=>window.__obs.openUniverse(k==='fly'?'flight':'tour'))}}))}
 const sp=document.getElementById('owlSplash');if(sp)wire(sp,false);

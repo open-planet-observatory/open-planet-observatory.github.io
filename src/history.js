@@ -43,15 +43,15 @@
   /* the featured cards in the banner: today's game and a story from this date */
   function mountCards() { const top = document.getElementById('ops-top'), qs = top && top.querySelector('.qslot'); if (!top || document.getElementById('featRow')) return;
     const row = document.createElement('div'); row.id = 'featRow'; row.className = 'feat';
-    row.innerHTML = `<button class="feat-c feat-game" id="featGame" title="Where on Earth? Today's five-round guessing game, made from real data"><span class="fg-i" aria-hidden="true">◎</span><span class="fc-b"><b>Where on Earth?</b><small id="featGameSub">Today's game · 5 rounds</small></span></button>
+    row.innerHTML = `<button class="feat-c feat-game" id="featGame" title="Find the owl: five owls hidden on the real globe today, each one smaller"><span class="fg-i" aria-hidden="true">🦉</span><span class="fc-b"><b>Find the owl</b><small id="featGameSub">Today's game · 5 owls</small></span></button>
       <button class="feat-c feat-hist" id="featHist"><span class="fh-i" aria-hidden="true">☉</span><span class="fc-b"><b>On this day <span class="fh-y"></span></b><small class="fh-t">Loading…</small></span></button>`;
     if (qs) qs.after(row); else top.appendChild(row);
-    row.querySelector('#featGame').onclick = () => dispatchEvent(new Event('obs:play'));
+    row.querySelector('#featGame').onclick = () => dispatchEvent(new Event('obs:findowl')); /* 9 Nov 2026: Find the owl is the featured way in (Where on Earth? stays in the Play menu) */
     row.querySelector('#featHist').onclick = () => { if (O.setSlim) O.setSlim(false); if (O.openPanel) O.openPanel('history'); };
     gameSub(); }
-  function gameSub() { const s = document.getElementById('featGameSub'); if (!s) return; let st = null; try { st = JSON.parse(localStorage.getItem('owl-woe-v1') || '{}'); } catch (e) { }
-    const d = st && st.days && st.days[new Date().toISOString().slice(0, 10)]; const N = n => Number(n).toLocaleString('en-US');
-    s.textContent = d && (d.done || d.stage === 'done') ? `Played today · ${N((d.s || []).reduce((a, b) => a + (b || 0), 0))} pts` : d && d.stage ? `In progress · round ${Math.min((d.i || 0) + 1, 5)} of 5` : "Today's game · 5 rounds"; }
+  function gameSub() { const s = document.getElementById('featGameSub'); if (!s) return; let st = null; try { st = JSON.parse(localStorage.getItem('owl-findowl-v1') || '{}'); } catch (e) { }
+    const d = st && st.days && st.days[new Date().toISOString().slice(0, 10)], n = d ? Object.keys(d.found || {}).length : 0; const N = x => Number(x).toLocaleString('en-US'), pts = d ? (d.s || []).reduce((a, b) => a + (b || 0), 0) : 0;
+    s.textContent = d && (d.done || n >= 5) ? `All 5 caught today · ${N(pts)} pts` : n ? `${n} of 5 caught · keep looking` : "Today's game · 5 owls"; }
   addEventListener('storage', gameSub); addEventListener('focus', gameSub); setInterval(gameSub, 15000);
   mountCards(); load(); setInterval(() => { if (localKey() !== key) load(); }, 60000); /* midnight rolls the date over */
 })();
