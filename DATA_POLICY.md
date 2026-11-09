@@ -107,6 +107,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - The sphere at the edge carries ESA's Planck map of the cosmic microwave background (Planck Legacy release, 2018), credited "ESA and the Planck Collaboration" under the ESA Standard Licence, which allows education, editorial and information use and no commercial use. The site has no advertising or paid features, and will not add any while it uses this map without ESA's written permission.
 - collector/build-cmb.mjs reprojects ESA's published Mollweide image to a rectangular map in galactic coordinates; nothing in the pattern is changed. The colours are ESA's.
 - The radius, about 46 billion light-years, is today's distance to where that light left, from the Planck 2018 cosmology. It is not linked to the Hubble-constant switch of the cosmic web, and the card says so. The gap between the cosmic web (about a billion light-years) and the edge is shown empty because no survey maps galaxies across it in this view; it is not empty in reality.
+- From outside, the shell is drawn cut open (a round window facing the visitor on arrival) so the inside and the centre show: the light really surrounds us on every side, and the cut is a drawing device, not part of the map. The outside is shaded to read as a ball; "You are here" marks the centre.
 
 ## This date in history
 
@@ -313,7 +314,7 @@ The "Lightning" imagery choice streams NOAA's Geostationary Lightning Mapper (GL
 
 ## The fly-through (Solar System view and the landing page)
 
-A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it. At the end, The Owlmanac's 13-second owl clip plays full screen (the channel's own intro; AI-generated animation, labelled on screen); Esc, a click or Skip ends it.
+A wordless flight: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and the stars to today's Sun, across to Earth, and back out. It uses only what the Solar System view already draws, from the sources credited there. Labels and panels are hidden while it plays; any touch, scroll or Esc ends it. At the end, an Owlmanac end card: the turning 3D emblem, the name and the address, with Fly again, Back to Earth and the YouTube channel.
 
 ## Classroom: interactive lessons
 

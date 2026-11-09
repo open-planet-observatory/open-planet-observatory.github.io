@@ -101,6 +101,15 @@ async function build() {
    <p class="uni-cap" id="uniCap" aria-live="polite"></p>
    <button class="uni-model" id="uniModel" hidden>The galaxy's shape here is a model, not a photo <b>ⓘ</b></button>
    <button class="uni-model uni-webinfo" id="uniWebInfo" hidden>Each dot is a real galaxy · what am I seeing? <b>ⓘ</b></button>`;
+  /* the view buttons stay along the bottom in the space views too (9 Nov 2026: "make these views persistent through solar
+     system, galaxy and cosmic web views"): copies of the globe's pills, same look, acting inside this view */
+  { const bar = document.createElement('div'); bar.className = 'zoomctl uni-pills'; bar.setAttribute('role', 'group'); bar.setAttribute('aria-label', 'Views');
+    const P = [['zearth', 'Earth', '⊕', () => goEarth()], ['zmoon', 'Moon', '☾\uFE0E', () => { closeUniverse(); setTimeout(() => { const O = window.__obs; if (O && O.openMoon) O.openMoon(); }, 900); }],
+      ['zuni', 'Solar System', '☉', () => { stopTour(); flightEnd(); S.focus = null; ui.card.hidden = true; animateTo(new T.Vector3(0, 0, 0), 45, 3000); }],
+      ['zgal', 'Milky Way', '✺', () => { stopTour(); flightEnd(); ui.card.hidden = true; galaxyView(4000, true); }], ['zweb', 'Cosmic web', '❖', () => { stopTour(); flightEnd(); webView(6000); }]];
+    bar.innerHTML = P.map(([c, n, i]) => `<button type="button" class="zuni ${c}" data-pill="${c}" title="${n}"><span class="zi" aria-hidden="true">${i}</span><span class="zt">${n}</span></button>`).join('');
+    bar.querySelectorAll('[data-pill]').forEach((b, k) => b.onclick = e => { e.stopPropagation(); P[k][3](); }); root.appendChild(bar);
+    const src = id => document.getElementById(id); requestAnimationFrame(() => P.forEach(([c]) => { const o = src(c), b = bar.querySelector(`[data-pill="${c}"]`); if (o && b) { const i = o.querySelector('.zi'); if (i) b.querySelector('.zi').innerHTML = i.innerHTML; } })); }
   host.appendChild(root); ui.root = root; ui.labels = root.querySelector('#uniLabels'); ui.card = root.querySelector('#uniCard');
   const canvas = root.querySelector('#uniCanvas');
   const renderer = new T.WebGLRenderer({ canvas, antialias: true, logarithmicDepthBuffer: true });
@@ -558,17 +567,16 @@ async function flight() { if (!SM || !open) return; stopTour(); flyStop(); if (S
   S.anim = F; tok.F = F; setTimeout(() => { if (S.flight === tok) flightFade(false); }, 350);
   tok.watch = setInterval(() => { if (S.flight !== tok) return clearInterval(tok.watch); if (S.anim !== F) flightEnd(); }, 200); /* a touch or scroll took the view */
   tok.total = total; }
-/* The Owlmanac outro after the fly-through (8 Nov 2026: "add the Owlmanac outro at the end"): the channel's owl clip
-   (13 s, AI-generated, labelled), full screen, then back to the edge view. Esc, a click or "Skip" ends it at once. */
-function outro() { if (!open || document.getElementById('uniOutro')) return; const w = document.createElement('div'); w.id = 'uniOutro'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-label', 'The Owlmanac');
-  w.innerHTML = '<video playsinline preload="auto" src="assets/video/owlmanac-outro.mp4"></video><span class="uo-ai">AI-generated animation</span><button type="button" class="uo-skip">Skip ›</button>'; document.body.appendChild(w);
-  const v = w.querySelector('video'); let done = false; const music = window.OwlMusic && OwlMusic.on;
-  const end = () => { if (done) return; done = true; removeEventListener('keydown', key, true); w.classList.remove('on'); try { v.pause(); } catch (e) { } if (music && window.OwlMusic && OwlMusic.duck) OwlMusic.duck(false); setTimeout(() => w.remove(), 700); };
+/* The Owlmanac end card after the fly-through (9 Nov 2026: the channel's video outro was swapped for the site's own): fade to
+   black, the turning 3D emblem, the name and the address, then three ways on. Esc, a click outside the buttons or × closes it. */
+function outro() { if (!open || document.getElementById('uniOutro')) return; const w = document.createElement('div'); w.id = 'uniOutro'; w.setAttribute('role', 'dialog'); w.setAttribute('aria-label', 'The Owlmanac Observatory');
+  w.innerHTML = '<div class="uo-in"><div class="uo-em" aria-hidden="true"></div><div class="uo-t"><b>The Owlmanac<sup>™</sup> Observatory</b><span>theowlmanac.com</span></div><div class="uo-b"><button type="button" data-o="again">↻ Fly again</button><button type="button" data-o="earth">⊕ Back to Earth</button><a href="https://www.youtube.com/@TheOwlmanac" target="_blank" rel="noopener" data-o="yt">The Owlmanac on YouTube ↗</a></div></div><button type="button" class="uo-x" aria-label="Close">×</button>';
+  document.body.appendChild(w); let stopE = null, done = false;
+  import('./assets/emblem/emblem.js').then(m => { if (!done) stopE = m.mountEmblem(w.querySelector('.uo-em')); }).catch(e => console.warn('emblem', e));
+  const end = () => { if (done) return; done = true; removeEventListener('keydown', key, true); w.classList.remove('on'); setTimeout(() => { if (stopE) stopE(); w.remove(); }, 700); };
   const key = e => { if (e.key === 'Escape') { e.stopPropagation(); e.preventDefault(); end(); } }; addEventListener('keydown', key, true);
-  w.addEventListener('click', end); v.addEventListener('ended', () => setTimeout(end, 600)); v.addEventListener('error', end);
-  if (music && OwlMusic.duck) OwlMusic.duck(true);
-  requestAnimationFrame(() => w.classList.add('on'));
-  setTimeout(() => { v.play().catch(() => { v.muted = true; v.play().catch(end); }); }, 450); }
+  w.addEventListener('click', e => { const o = e.target.closest('[data-o]'); if (!o) { if (!e.target.closest('.uo-in')) end(); return; } if (o.dataset.o === 'yt') return; end(); if (o.dataset.o === 'again') setTimeout(() => flight(), 300); else if (o.dataset.o === 'earth') setTimeout(() => goEarth(), 300); });
+  w.querySelector('.uo-x').onclick = end; requestAnimationFrame(() => w.classList.add('on')); setTimeout(() => { const f = w.querySelector('[data-o="again"]'); if (f) f.focus({ preventScroll: true }); }, 700); }
 function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; if (f.music && window.OwlMusic && OwlMusic.on) OwlMusic.stop(true); ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
 
 // ---------- loop, open, close ----------

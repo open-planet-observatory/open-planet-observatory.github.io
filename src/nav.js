@@ -65,6 +65,20 @@
     if (!tuck.hinted) { tuck.hinted = true; let seen = false; try { seen = localStorage.getItem('slim-hint') === '1'; localStorage.setItem('slim-hint', '1'); } catch (x) { }
       if (!seen) { const h = document.createElement('div'); h.className = 'gn-hint glass'; h.textContent = 'Panels tucked away so the globe fills the screen. Tap ⤢ (top right) or press Esc to bring them back.'; document.body.appendChild(h); setTimeout(() => h.classList.add('out'), 4200); setTimeout(() => h.remove(), 5000); } } };
   if (map) { map.addEventListener('pointerdown', tuck, true); map.addEventListener('wheel', tuck, { capture: true, passive: true }); }
+
+  /* The scale slider on the globe (9 Nov 2026: "whenever the header and left side bar go away, include the slider for scale on
+     the right"): the same ladder as in the space views, with Earth at the top. Pick a step, or drag the handle down and let go,
+     to fly out to that scale. */
+  (function scale() { const STEPS = [['Earth', 0, null], ['The Moon', .1, () => O.openMoon && O.openMoon()], ['Solar System', .26, () => O.openUniverse && O.openUniverse()], ['Milky Way', .52, () => O.openUniverse && O.openUniverse('galaxy')], ['Cosmic web', .78, () => O.openUniverse && O.openUniverse('web')], ['Edge', 1, () => O.openUniverse && O.openUniverse('edge')]];
+    const el = document.createElement('div'); el.id = 'globeScale'; el.className = 'uni-zoom gs'; el.setAttribute('role', 'group'); el.setAttribute('aria-label', 'Scale: fly out from Earth');
+    el.innerHTML = `<div class="uz-track"><i class="uz-thumb"></i></div><div class="uz-ticks">${STEPS.map(([n, v], i) => `<button type="button" data-st="${i}" style="top:${v * 100}%"${i ? '' : ' aria-current="true"'}>${n}</button>`).join('')}</div>`;
+    document.body.appendChild(el); const tr = el.querySelector('.uz-track'), th = el.querySelector('.uz-thumb'); const go = i => { const f = STEPS[i][2]; if (f) { setSlim(false); f(); } };
+    el.querySelectorAll('[data-st]').forEach(b => b.onclick = () => go(+b.dataset.st));
+    let drag = false; const at = y => { const r = tr.getBoundingClientRect(); return Math.max(0, Math.min(1, (y - r.top) / r.height)); };
+    tr.addEventListener('pointerdown', e => { drag = true; tr.setPointerCapture(e.pointerId); th.style.top = at(e.clientY) * 100 + '%'; });
+    tr.addEventListener('pointermove', e => { if (drag) th.style.top = at(e.clientY) * 100 + '%'; });
+    tr.addEventListener('pointerup', e => { if (!drag) return; drag = false; const v = at(e.clientY); let k = 0; STEPS.forEach((s2, i) => { if (Math.abs(s2[1] - v) < Math.abs(STEPS[k][1] - v)) k = i; }); th.style.top = '0%'; go(k); });
+    tr.addEventListener('pointercancel', () => { drag = false; th.style.top = '0%'; }); th.style.top = '0%'; })();
   document.getElementById('gnExpand').onclick = () => { setSlim(false); O.openPanel && O.openPanel('situations'); };
   /* in the slim bar, a click on any empty part of it brings everything back (buttons, menus and search keep their own jobs) */
   top.addEventListener('click', e => { if (!html.classList.contains('slim') || html.classList.contains('search-open')) return; if (e.target.closest('button,a,input,select,label,form,.gn-m')) return; setSlim(false); O.openPanel && O.openPanel('situations'); });
