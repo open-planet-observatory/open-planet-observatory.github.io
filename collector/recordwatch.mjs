@@ -1,5 +1,5 @@
 // Record watch (data/recordwatch.json): new records only when an agency itself declares one, in its own words.
-// Sources (Derik's choice, 2026-11-02): NOAA NCEI's monthly Global Climate Report, Copernicus C3S monthly climate bulletins
+// Sources (the maintainer's choice, 2026-11-02): NOAA NCEI's monthly Global Climate Report, Copernicus C3S monthly climate bulletins
 // (surface air temperature and sea ice), NSIDC Sea Ice Today, NASA news releases and USGS news releases. From the climate
 // reports, a sentence is kept when it says a record was set, broken, tied or surpassed ("surpassing the previous 2024 record",
 // "the warmest August globally ... surpassing the previous joint records", "reached record highs"); rankings below first

@@ -1,7 +1,7 @@
 // ---------- Untold history ----------
 // src/assets/history/untold.json: history from below, built on primary sources. Each story carries the words of the people
 // it happened to (verbatim, public domain, linked to the copy they were checked against), the official account given at the
-// time (verbatim), what the record shows (the site's own sentences, each footnoted to its source; Derik approved this
+// time (verbatim), what the record shows (the site's own sentences, each footnoted to its source; the maintainer approved this
 // labelled note for this section on 3 Nov 2026), what historians still dispute (with both sides' sources) and the blind spot
 // in the record. Viewer discretion: the section covers killings, famine and forced removal. People named in the historical
 // record may be named; living private individuals never are.

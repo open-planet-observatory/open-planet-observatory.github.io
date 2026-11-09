@@ -313,7 +313,7 @@ function card(o) { if (o.glowModel) return modelCard();
   let src = '<a href="https://github.com/cosinekitty/astronomy" target="_blank" rel="noopener">Astronomy Engine</a>, computed in your browser';
   let extra = o.isSun ? sunBlock() : '';
   if (o.craft) { src = '<a href="https://ssd.jpl.nasa.gov/horizons/" target="_blank" rel="noopener">NASA JPL Horizons</a>, updated daily'; const last = o.craft.pts[o.craft.pts.length - 1][0]; extra = `<p class="sc-note">Line: its path over JPL's data window (about six months back and ahead${o.craft.stale ? '; JPL did not answer today, so this is the last good copy' : ''}). JPL's data for it ends ${new Date((last - 2440587.5) * DAY).toISOString().slice(0, 10)}.</p>`; }
-  if (o.craft && /^Voyager 1$/i.test(o.name) && window.voyagerVideoList) { /* The Owlmanac's Voyager videos: links once public, release times before (Derik, 4 Nov 2026) */
+  if (o.craft && /^Voyager 1$/i.test(o.name) && window.voyagerVideoList) { /* The Owlmanac's Voyager videos: links once public, release times before (the maintainer, 4 Nov 2026) */
     const VL = window.voyagerVideoList(); if (VL.length) extra += `<p class="sc-note uni-vy"><b>From The Owlmanac:</b> ${VL.map(v => v.live ? `<a href="${esc(v.url)}" target="_blank" rel="noopener" title="${esc(v.title)}">▶ ${esc(v.label.charAt(0).toUpperCase() + v.label.slice(1))} ↗</a>` : `<span title="${esc(v.title)}">${esc(v.label.charAt(0).toUpperCase() + v.label.slice(1))}: coming ${esc(v.when)}</span>`).join(' · ')}</p>`; }
   if (o.comet) { const c = o.comet; src = `<a href="https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=${encodeURIComponent(c.pdes)}" target="_blank" rel="noopener">NASA JPL Small-Body Database</a> orbit, positions computed in your browser (two-body, so off by up to a few million km from JPL’s full model)`;
     extra = `<div class="sc-row"><span>Closest to the Sun</span><b>${new Date((c.tp - 2440587.5) * DAY).toISOString().slice(0, 10)} · ${fmtN(c.q, 2)} AU</b></div>`; }
@@ -520,7 +520,7 @@ function nextStep() { const tr = S.tour; if (!tr) return; const steps = tourStep
   if (st.drift) { tr.drift = true; driftSet('gal', 100); flyStart(); } else if (st.earth) { S.focus = null; animateTo(V().fromArray(S.byName.Earth.pos), 6.6e-4, st.ms); } else if (st.voy) { const v = voyObj(); if (v) { S.focus = v; animateTo(V().fromArray(v.shown || v.pos), 0.6, st.ms, V().fromArray(v.shown || v.pos).normalize().applyAxisAngle(new T.Vector3(0, 0, 1), 0.6).add(new T.Vector3(0, 0, 0.3)).normalize()); setTimeout(() => { if (S.tour && S.focus === v) card(v); }, st.ms); } } else if (st.at) { S.focus = null; ui.card.hidden = true; if (st.craft) craftShow(true); animateTo(st.at.clone(), st.dist, st.ms, st.dir ? st.dir.clone() : null); } else if (st.edge) edgeView(st.ms); else if (st.web) webView(st.ms); else if (st.neighbours) neighboursView(st.ms); else if (st.galaxy) { if (st.ms > 100) galaxyView(st.ms, true); } else animateTo(new T.Vector3(0, 0, 0), st.dist, st.ms);
   tr.timer = setTimeout(nextStep, st.ms + st.hold); }
 
-// ---------- the wordless fly-through (Derik, 7 Nov 2026: "no words, simply for effect") ----------
+// ---------- the wordless fly-through (the maintainer, 7 Nov 2026: "no words, simply for effect") ----------
 /* One continuous camera move: from outside the edge of the observable universe, in through the cosmic web, the Milky Way and
    the stars to today's Sun (NASA SDO), across to Earth, then all the way back out. Distances fall and rise in log space, so
    every scale passes at the same pace. Nothing is labelled while it plays; any touch, scroll or Esc hands the view back. */
@@ -572,7 +572,7 @@ function outro() { if (!open || document.getElementById('uniOutro')) return; con
 function flightEnd(quiet) { const f = S && S.flight; if (!f) return; clearInterval(f.watch); if (S.anim === f.F) S.anim = null; S.flight = null; S.show.light = f.light; if (f.music && window.OwlMusic && OwlMusic.on) OwlMusic.stop(true); ui.root.classList.remove('flight'); const fd = document.getElementById('uniFade'); if (fd) fd.classList.remove('on'); if (!quiet) S._rotHold = performance.now() + 4000; }
 
 // ---------- loop, open, close ----------
-/* ---- Light travelling (Derik, 5 Nov 2026): streaks of sunlight move at ONE fixed speed the visitor picks — real speed
+/* ---- Light travelling (the maintainer, 5 Nov 2026): streaks of sunlight move at ONE fixed speed the visitor picks — real speed
    by default, or 10×, 100×, 1,000× — and that speed never changes with the zoom. So light visibly races past Earth and
    the Moon (1.3 s between them), creeps across the inner planets, and looks frozen across the whole Solar System: the
    point is to feel the scale. The streaks are drawn around whatever is in view, each pointing away from the Sun. Past
@@ -695,7 +695,7 @@ function lightUpdate(dt, camAU) { const Lt = S.light, el = document.getElementBy
   const key = rate + '|' + cross + '|' + (pxs < 4); if (el && Lt.key !== key) { Lt.key = key;
     el.textContent = `✦ Light ${rateTxt}: it needs ${cross} to cross this view${pxs < 4 ? ', so it looks still' : ''}. ${W < 100 * SUN_R_AU && t.length() < 50 * SUN_R_AU ? `Even at that speed it takes ${lightTime(2 * SUN_R_AU / rate)} to cross the Sun, which is 1.39 million km wide.` : 'Real sunlight takes 8 min 20 s to reach Earth.'}`; } }
 
-/* ---- Sounds of space (Derik, 5 Nov 2026): NASA and Chandra recordings, each labelled by what it really is. Clips are
+/* ---- Sounds of space (the maintainer, 5 Nov 2026): NASA and Chandra recordings, each labelled by what it really is. Clips are
    built by the "Build space sounds" workflow from src/assets/sounds/sounds.json; only clips listed in built.json are
    offered. The site's music fades down while a clip plays. ---- */
 const SND_KIND = { recorded: ['Recorded sound', 'a real microphone on another world'], waves: ['Real waves, made audible', 'measured by a spacecraft, then shifted or sped up into hearing range'], sonification: ['Data turned into sound', 'a translation of an image or data, not a sound in space'] };

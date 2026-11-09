@@ -1,5 +1,5 @@
 # Deploys the games server (worker/: Cloudflare Worker + D1) when its code changes, or by hand from the Actions tab.
-# Needs repository secrets CLOUDFLARE_API_TOKEN (Workers Scripts: Edit + D1: Edit on Derik's account only) and
+# Needs repository secrets CLOUDFLARE_API_TOKEN (Workers Scripts: Edit + D1: Edit on the maintainer's account only) and
 # CLOUDFLARE_ACCOUNT_ID; optional ADMIN_KEY (24+ characters) enables name removal. The D1 database "owlmanac-games" is
 # created on the first run if it doesn't exist, and its id is filled into wrangler.toml at deploy time.
 # Database migrations in worker/migrations are applied before each deploy.

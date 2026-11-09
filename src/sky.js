@@ -4,7 +4,7 @@
 // site's Hipparcos star file and d3-celestial's constellation figures, and eclipses with Astronomy Engine's own searches.
 // Meteor-shower dates are the International Meteor Organization's calendar, as published; only the names and dates are
 // shown, with a link to IMO for everything else.
-// Location: asked of the browser only when the visitor presses "Use my location" (never automatically; Derik, 3 Nov), rounded to 0.1° (about 10 km) and kept only in this browser (localStorage). A typed
+// Location: asked of the browser only when the visitor presses "Use my location" (never automatically; the maintainer, 3 Nov), rounded to 0.1° (about 10 km) and kept only in this browser (localStorage). A typed
 // place name is the only thing sent anywhere (Open-Meteo's place search). Nothing about the visitor is stored elsewhere.
 (function () {
   const html = document.documentElement; if (!html.classList.contains('ops')) return;

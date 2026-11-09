@@ -49,7 +49,7 @@ function drawCams(){const g=document.getElementById('camGrid');if(!g)return;
 }
 drawCams();
 
-// Stories from NASA: official channels only, paired with a map layer. Derik adds specific videos as [title, url, layer, note].
+// Stories from NASA: official channels only, paired with a map layer. The maintainer adds specific videos as [title, url, layer, note].
 const STORIES=[
  ['NASA on YouTube','https://www.youtube.com/@NASA','sat','Launches, station life and mission stories. Pair with the Space stations layer.'],
  ['NASA Jet Propulsion Laboratory','https://www.youtube.com/@NASAJPL','fb','Asteroids, planets and the robots that visit them. Pair with Fireballs and the asteroid card in Signals.'],

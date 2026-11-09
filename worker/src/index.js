@@ -28,7 +28,7 @@ const leetL = s => leet(String(s).replace(/1/g, 'l'));
 const norm = s => leet(s).replace(/[il]/g, 'l').replace(/rn/g, 'm').replace(/vv/g, 'w');
 const BAD_ANY = ['fuck', 'fuk', 'fvck', 'phuck', 'shit', 'cunt', 'bitch', 'nigg', 'faggot', 'hitler', 'porn', 'pussy', 'whore', 'slut', 'retard', 'rapist', 'nazis', 'kkk'];
 const BAD_WORD = ['fag', 'dick', 'cock', 'rape', 'nazi', 'heil', 'sex', 'tits', 'cum', 'anal', 'isis', 'klan']; // only as a whole word
-const RESERVED = ['owlmanac', 'theowlmanac', 'admin', 'administrator', 'moderator', 'mod', 'official', 'staff', 'claude', 'anthropic', 'derik', 'support', 'system', 'observatory'].map(norm);
+const RESERVED = ['owlmanac', 'theowlmanac', 'admin', 'administrator', 'moderator', 'mod', 'official', 'staff', 'claude', 'anthropic', 'support', 'system', 'observatory'].map(norm);
 const RESERVED_ANYWHERE = ['owlmanac', 'anthropic'].map(norm);
 
 const json = (body, status, req, extra) => new Response(JSON.stringify(body), { status: status || 200, headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store', ...cors(req), ...(extra || {}) } });
@@ -191,7 +191,7 @@ async function setName(req, env, b) { const p = await who(b.token, env, req); if
 async function forget(req, env, b) { if (!okToken(b.token)) return json({ error: 'bad token' }, 400, req); const p = await sha(b.token);
   await env.DB.batch([env.DB.prepare('DELETE FROM scores WHERE player = ?').bind(p), env.DB.prepare('DELETE FROM fd_guesses WHERE player = ?').bind(p), env.DB.prepare('DELETE FROM players WHERE player = ?').bind(p)]); return json({ ok: true, forgotten: true }, 200, req); }
 
-// Derik's moderation: needs the ADMIN_KEY secret. Removes a nickname, or a player and all their scores, by nickname.
+// The maintainer's moderation: needs the ADMIN_KEY secret. Removes a nickname, or a player and all their scores, by nickname.
 function same(a, b) { a = String(a || ''); b = String(b || ''); let d = a.length ^ b.length; for (let i = 0; i < Math.max(a.length, b.length); i++) d |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0); return d === 0; }
 async function admin(req, env, b) { if (!env.ADMIN_KEY || env.ADMIN_KEY.length < 24 || !same(b.key, env.ADMIN_KEY)) return json({ error: 'not allowed' }, 403, req);
   const pl = await env.DB.prepare('SELECT player FROM players WHERE name_key = ?').bind(norm(b.name || '')).first(); if (!pl) return json({ error: 'no such name' }, 404, req);

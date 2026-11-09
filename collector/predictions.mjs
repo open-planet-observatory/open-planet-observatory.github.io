@@ -1,5 +1,5 @@
 // Prediction-market odds (data/predictions.json) from Polymarket's public Gamma API, refreshed hourly.
-// Derik's scope (2026-11-02): science, space, climate and weather, Earth hazards, AI and tech. No politics, elections, sports,
+// The maintainer's scope (2026-11-02): science, space, climate and weather, Earth hazards, AI and tech. No politics, elections, sports,
 // crypto, finance or celebrity markets, and no market that names a person (the site names no individuals): events tagged with a
 // person, or whose title or questions read like a personal name, are left out. Each event's title, each market's question and
 // its outcomes are Polymarket's own words; the odds are the market's last prices as the API gives them, with its own 24-hour change.

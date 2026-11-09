@@ -1,4 +1,4 @@
-// ---------- Left rail layout (Derik, 5 Nov 2026) ----------
+// ---------- Left rail layout (the maintainer, 5 Nov 2026) ----------
 // "Filter options" heading; Map, Imagery and Lighting (and See-through Earth) together in a box at the top; the Moon,
 // Solar System, Milky Way and Cosmic web views kept off the rail (the bottom pills and Space menu have them); then the quick filters
 // (Everything, Space, …) and every layer group (Earth, Space, People & systems, Nature, Weather & ocean…), each of which
@@ -15,7 +15,7 @@
   // the fixed scaffolding, in order
   const disp = mk('rail-display', ''); disp.setAttribute('role', 'group'); disp.setAttribute('aria-label', 'Map display');
   /* the Moon / Solar System / Milky Way / Cosmic web buttons duplicate the bottom pills and the Space menu, so they are kept
-     out of sight (Derik, 5 Nov 2026), not deleted: other scripts still look them up by id. A one-line pointer replaces them. */
+     out of sight (the maintainer, 5 Nov 2026), not deleted: other scripts still look them up by id. A one-line pointer replaces them. */
   const space = mk('rail-space-hold'); space.hidden = true; space.setAttribute('aria-hidden', 'true');
   const hint = document.createElement('p'); hint.className = 'rail-hint'; hint.textContent = 'Fly to the Moon and out into space with the buttons below the globe.';
   const filt = mk('rail-filters', '<span class="rail-sub">Quick filters</span>');

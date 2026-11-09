@@ -51,7 +51,7 @@
     if (after && now - T > 7 * 864e5) { host.hidden = true; if (chip) chip.hidden = true; const cvv = document.getElementById('gnVoyagerVid'); if (cvv) cvv.hidden = true; clearInterval(timer); return; }
     const t0 = Date.parse(V.now.t); const auNow = Math.min(V.now.au + V.now.kms * ((now - t0) / 1000) / AU_KM, after ? Infinity : V.lightDayAU - 1e-4); const kmNow = auNow * AU_KM; /* counted forward from Horizons' last hourly value; never past the line before the moment */
     const p = parts(T - now); updLines(auNow);
-    /* The Owlmanac's videos: a link once each is public, before that a "coming" label with its release time (Derik, 4 Nov 2026) */
+    /* The Owlmanac's videos: a link once each is public, before that a "coming" label with its release time (the maintainer, 4 Nov 2026) */
     const VL = window.voyagerVideoList ? window.voyagerVideoList() : [], cap = t => t.charAt(0).toUpperCase() + t.slice(1);
     const links = VL.map(v => v.live ? `<a class="vy-btn${v.kind === 'film' ? ' vy-long' : ''}" href="${esc(v.url)}" target="_blank" rel="noopener" title="${esc(v.title)} (The Owlmanac on YouTube)">▶ Watch ${esc(v.label)}</a>` : `<span class="vy-soon" title="${esc(v.title)} (The Owlmanac on YouTube)">▶ ${esc(cap(v.label))} · coming ${esc(v.when)}</span>`).join('');
     const head = after ? `<b>Voyager 1 is now more than one light-day from Earth.</b> It passed the mark on ${esc(local(V.crossUTC))} (${esc(V.crossUTC.slice(0, 16).replace('T', ' '))} UTC).` : `<b>Voyager 1 reaches one light-day from Earth in</b>`;

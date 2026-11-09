@@ -2,7 +2,7 @@
 // A right-hand panel can register a full page (window.OwlPage.register(key, {title, render(host, page)})). The panel then
 // shows an "Expand" button; the page opens over the map with the header shrunk to the slim bar, the left layer rail and the
 // bottom bar folded away, and the globe frozen and dimmed behind it (its render loop is paused while the page is open: on
-// Derik's Mac the live globe redrew 54 times a second and caused ~360 ms of stutter every 4 s behind a reading panel; paused,
+// The maintainer's Mac the live globe redrew 54 times a second and caused ~360 ms of stutter every 4 s behind a reading panel; paused,
 // none). "Back to the globe", Esc or expanding the header closes the page and puts everything back as it was.
 (function () {
   const html = document.documentElement; if (!html.classList.contains('ops')) return; const O = window.__obs || {};
@@ -14,7 +14,7 @@
     document.body.appendChild(el); el.querySelector('#pgBack').onclick = () => close(); }
   function place() { if (!el) return; const t = document.getElementById('ops-top'); const r = t ? t.getBoundingClientRect() : { bottom: 56 }; el.style.top = Math.round(r.bottom + 6) + 'px'; }
   /* any other panel opens as a full page too: its own content is moved into the page and put back on close, so everything
-     inside it (lessons, filters, scroll position) keeps working (Derik, 8 Nov 2026: "Full page doesn't open" in Classroom) */
+     inside it (lessons, filters, scroll position) keeps working (the maintainer, 8 Nov 2026: "Full page doesn't open" in Classroom) */
   function generic(key) { const p = document.querySelector(`#drawerBody .panel[data-k="${key}"]`); if (!p) return null; let ph = null;
     const t = document.getElementById('drawerTitle');
     return { title: (t && t.textContent) || key, render(h) { h.innerHTML = ''; const w = document.createElement('div'); w.className = 'pg-gen'; ph = document.createComment('panel'); p.before(ph); w.appendChild(p); h.appendChild(w); },
@@ -53,7 +53,7 @@
   const api = { open, close, isOpen: () => !!cur, current: () => cur, register(key, R) { REG[key] = R; sync(); }, esc };
   /* links like theowlmanac.com/#page=untold open the page once the site and the page's module are ready */
   if (window.__wantPage) { const want = window.__wantPage; let n = 0; const t = setInterval(() => { if (REG[want] && (window.__obs3d || n > 20)) { clearInterval(t); setTimeout(() => open(want), 400); } else if (++n > 60) clearInterval(t); }, 500); }
-  /* Reading pause (Derik, 4 Nov 2026): while the pointer rests on a right-hand panel (or a finger scrolls it), the globe beside
+  /* Reading pause (the maintainer, 4 Nov 2026): while the pointer rests on a right-hand panel (or a finger scrolls it), the globe beside
      it stops redrawing; it starts again the moment the pointer leaves the panel, the map is touched or the panel closes. It
      never touches the loop while a full page, the Solar System, the Moon or a game owns it. */
   let rp = false, rpT = 0; const drawer = document.getElementById('ops-drawer'), map = document.getElementById('ops-map');

@@ -290,7 +290,7 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .zoomctl .zgal{border-color:#c9a3ff!important}
 .zoomctl .zweb{border-color:#8fd3ff!important}
 .zoomctl .zearth{border-color:#6fd39a!important}
-/* each destination pill has its own colour (Derik, 4 Nov 2026: the Moon and Solar System pills looked alike): border, icon and a faint tint */
+/* each destination pill has its own colour (the maintainer, 4 Nov 2026: the Moon and Solar System pills looked alike): border, icon and a faint tint */
 .zoomctl .zuni{--zc:#f2c43c}.zoomctl .zearth{--zc:#6fd39a}.zoomctl .zmoon{--zc:#c9d3e6}.zoomctl .zgal{--zc:#c9a3ff}.zoomctl .zweb{--zc:#8fd3ff}
 .zoomctl .zuni{border-color:var(--zc)!important;background:color-mix(in srgb,var(--zc) 16%,var(--glass,rgb(18 29 42 / .84)))!important}
 .zoomctl .zuni .zi{color:var(--zc)}
@@ -763,7 +763,7 @@ html.no-search #ops-top .qslot,html.no-search #gnSearch{display:none!important}
 .sea-legend i{position:absolute;left:0;right:0;top:0;height:8px;border-radius:4px;background:linear-gradient(90deg,rgb(37 57 175),rgb(40 127 251),rgb(50 190 255),rgb(106 235 255),rgb(138 236 174),rgb(205 255 162),rgb(240 236 121),rgb(255 189 87),rgb(255 161 68),rgb(255 186 133),#fff)}
 /* the header art fades in from its own left edge, wherever that falls (--artL is set by nav.js from the header size) */
 html[data-theme] #ops-top::before{-webkit-mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px));mask-image:linear-gradient(90deg,transparent 0,transparent max(var(--artL,0px),0px),rgb(0 0 0 / .3) calc(max(var(--artL,0px),0px) + 140px),#000 calc(max(var(--artL,0px),0px) + 420px))}
-/* Earth and Moon view parked (Derik, 2026-11-02); the code stays */
+/* Earth and Moon view parked (the maintainer, 2026-11-02); the code stays */
 #moonViewBtn,#moonSizeBtn{display:none!important}
 /* Sky tonight */
 .sky-loc{border:1px solid var(--glass-line);border-radius:12px;padding:10px 12px;margin:0 0 12px}
@@ -984,7 +984,7 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 @media (max-width:860px){.gn-vyv{padding:5px 7px;font-size:.72rem}html.ops.slim .gn-vyv{display:none}}
 @media (min-width:861px) and (max-width:1199px){html.ops.slim .gn-vyv{display:none}}
 .owl-soon{font-size:.82rem;font-weight:600;color:var(--ink-2);border:1px dashed var(--glass-line);border-radius:999px;padding:6px 12px}
-/* left rail layout (src/railfmt.js, Derik 5 Nov 2026): map display box, Space views, quick filters, folding layer groups */
+/* left rail layout (src/railfmt.js, the maintainer 5 Nov 2026): map display box, Space views, quick filters, folding layer groups */
 #ops-rail .rail-display{display:flex;flex-direction:column;gap:8px;padding:8px 9px 10px;border:1px solid var(--glass-line);border-radius:12px;background:color-mix(in srgb,var(--ink,#fff) 4%,transparent)}
 #ops-rail .rail-display .rail-group>.gl{padding-top:0}
 #ops-rail .rail-space-hold[hidden]{display:none!important}
@@ -1034,7 +1034,7 @@ html.page-on #ops-map{filter:brightness(.55) saturate(.7)}
 #uni .uni-lrate[hidden]{display:none!important}
 #uni .uni-lrate>span{align-self:center;font-size:.72rem;opacity:.75;padding:0 6px 0 4px}
 
-/* The Owlmanac channel button + card (src/owlmanac.js, Derik 6 Nov 2026): YouTube's red marks it as the channel, not the Observatory */
+/* The Owlmanac channel button + card (src/owlmanac.js, the maintainer 6 Nov 2026): YouTube's red marks it as the channel, not the Observatory */
 #ops-top .owl-yt{font-size:.86rem;padding:7px 14px 7px 11px;gap:8px;border:1px solid color-mix(in srgb,#ff0033 70%,transparent)!important;background:color-mix(in srgb,#ff0033 16%,var(--glass-2))!important;color:var(--ink)!important;font-weight:700}
 #ops-top .owl-yt:hover{background:color-mix(in srgb,#ff0033 30%,var(--glass-2))!important}
 #ops-top .owl-yt .yt{width:22px;height:22px;color:#ff0033}
