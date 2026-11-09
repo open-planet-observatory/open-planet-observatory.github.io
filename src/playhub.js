@@ -1,7 +1,7 @@
 // ---------- Play: one page for every game, and the field journal ----------
 // Lists the hunt and the daily games with today's state, and a field journal of stamps: one for each day a daily game was
 // finished, one for each hunt stop. It only reads what each game already keeps in this browser (owl-woe-v1,
-// owl-skyfind-v1, owl-space-v1, owl-fd-v1, owl-hunt-v1); nothing is sent anywhere and nothing is stored here of its own.
+// owl-skyfind-v1, owl-space-v1, owl-findowl-v1, owl-fd-v1, owl-hunt-v1); nothing is sent anywhere and nothing is stored here of its own.
 (function () {
   const html = document.documentElement; if (!html.classList.contains('ops')) return;
   const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -17,6 +17,8 @@
       day: (k) => { const st = get('owl-skyfind-v1'), d = (st.days || {})[k]; return d ? d.total * (st.scale === 5 ? 1 : 5) : null; }, max: 25000 }, /* days saved before the 5,000-point scale count ×5, as the game itself does */
     { id: 'space', name: 'Find it in space', icon: '✺', ev: 'obs:spacefind', note: 'Find five planets, probes, stars and galaxies in the 3D universe.', key: utc,
       day: (k) => { const d = (get('owl-space-v1').days || {})[k]; return d && d.done ? (d.s || []).reduce((a, b) => a + (b || 0), 0) : null; }, max: 5000 },
+    { id: 'owl', name: 'Find the owl', icon: '🦉', ev: 'obs:findowl', note: 'Five owls hidden on the globe, each one smaller.', key: utc,
+      day: (k) => { const d = (get('owl-findowl-v1').days || {})[k]; return d && d.done ? (d.s || []).reduce((a, b) => a + (b || 0), 0) : null; }, max: 5000 },
     { id: 'fd', name: 'The Forecast Desk', icon: '⌁', ev: 'obs:fdesk', note: 'Guess three numbers for tomorrow; the sources grade you.', key: utc,
       day: (k) => { const g = (get('owl-fd-v1').guess || {})[k]; return g && Object.keys(g).length ? -1 : null; }, max: 15000 } ];
   // walk back one game-day at a time: UTC games step in whole UTC days from UTC noon, local-date games by calendar day (daylight-saving safe)
@@ -40,20 +42,20 @@
     const hstamps = H ? H.STOPS.map(s => `<span class="ph-stamp${hs.done[s.id] ? ' on' : ''}" title="${esc(s.title)}${hs.done[s.id] ? ': found' : ''}">${s.icon}<small>${esc(s.title)}</small></span>`).join('')
       + H.BONUS.map(b => `<span class="ph-stamp${hs.bonus[b.id] ? ' on' : ''}" title="Saw ${esc(b.name)}">👁️<small>Saw ${esc(b.name)}</small></span>`).join('') : '';
     el.querySelector('.ph-body').innerHTML = `${weeklyCard}${showOld ? huntCard : ''}<h4>Daily games</h4><ul class="ph-list">${rows}</ul>
-      ${window.OwlBoards && window.OwlBoards.api ? '' : '<!--'}<h4>Leaderboards</h4><div class="ph-tabs" role="tablist">${[['woe', 'Where on Earth?'], ['sky', 'Find it in the sky'], ['space', 'Find it in space'], ['fd', 'Forecast Desk (yesterday)'], ...(H && Date.now() <= H.ends ? [['hunt', 'One Light-Day']] : []), ...(wlive ? [['week', 'Weekly hunt'], ['season', 'Hunt season']] : [])].map(([k, t], i) => `<button role="tab" data-b="${k}" aria-selected="${i === 0}">${esc(t)}</button>`).join('')}</div><div class="ob-host" id="phBoard"></div>${window.OwlBoards && window.OwlBoards.api ? '' : '-->'}
-      <h4>Field journal</h4><p class="ph-cap">The last 14 days. Where on Earth?, Find it in space and the Forecast Desk count days in UTC; Find it in the sky uses your own date.</p><div class="ph-wrap"><table class="ph-grid"><tbody>${grid}</tbody></table></div>
+      ${window.OwlBoards && window.OwlBoards.api ? '' : '<!--'}<h4>Leaderboards</h4><div class="ph-tabs" role="tablist">${[['woe', 'Where on Earth?'], ['sky', 'Find it in the sky'], ['space', 'Find it in space'], ['owl', 'Find the owl'], ['fd', 'Forecast Desk (yesterday)'], ...(H && Date.now() <= H.ends ? [['hunt', 'One Light-Day']] : []), ...(wlive ? [['week', 'Weekly hunt'], ['season', 'Hunt season']] : [])].map(([k, t], i) => `<button role="tab" data-b="${k}" aria-selected="${i === 0}">${esc(t)}</button>`).join('')}</div><div class="ob-host" id="phBoard"></div>${window.OwlBoards && window.OwlBoards.api ? '' : '-->'}
+      <h4>Field journal</h4><p class="ph-cap">The last 14 days. Where on Earth?, Find it in space, Find the owl and the Forecast Desk count days in UTC; Find it in the sky uses your own date.</p><div class="ph-wrap"><table class="ph-grid"><tbody>${grid}</tbody></table></div>
       ${wk ? `<p class="ph-sub">${esc(wk.theme.name)}: this week's stamps</p><div class="ph-stamps">${WK.stops().map(x => `<span class="ph-stamp${wst.done[x.id] ? ' on' : ''}" title="${esc(x.title)}${wst.done[x.id] ? ': found' : ''}">${x.icon}<small>${esc(x.title)}</small></span>`).join('')}</div>` : ''}
       ${H ? `<p class="ph-sub">One Light-Day stamps</p><div class="ph-stamps">${hstamps}</div>` : ''}
       <p class="ph-note">Know a free public data feed this site is missing? <a href="${BOUNTY}" target="_blank" rel="noopener">Send it to the Source Bounty</a>. Your scores and stamps are kept in this browser; finished games also go to the leaderboard anonymously (you choose whether a nickname shows, or keep everything on this device).</p>`;
     el.querySelectorAll('.ph-go').forEach(b => b.onclick = () => { close(); dispatchEvent(new Event(b.dataset.ev)); });
     // play counts (anonymous totals from the games server) and the boards
     const OB = window.OwlBoards; const host = el.querySelector('#phBoard');
-    const dayFor = k => k === 'woe' || k === 'space' ? utc(now) : k === 'sky' ? local(now) : k === 'fd' ? utc(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 12))) : k === 'week' ? wk.week : k === 'season' ? 'season:' + WK.seasonOf(wk.week) : 'one-light-day';
+    const dayFor = k => k === 'woe' || k === 'space' || k === 'owl' ? utc(now) : k === 'sky' ? local(now) : k === 'fd' ? utc(new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() - 1, 12))) : k === 'week' ? wk.week : k === 'season' ? 'season:' + WK.seasonOf(wk.week) : 'one-light-day';
     const gameFor = k => k === 'week' || k === 'season' ? 'hunt' : k;
     const tabs = [...el.querySelectorAll('.ph-tabs button')]; tabs.forEach(b => b.onclick = () => { tabs.forEach(x => x.setAttribute('aria-selected', String(x === b))); if (OB) OB.show(host, gameFor(b.dataset.b), dayFor(b.dataset.b)); });
     if (OB && host) { OB.show(host, 'woe', dayFor('woe'));
       if (OB.api) OB.counts(utc(now)).then(c => { const k = c.counts || {}; const put = (g, n, w) => { const x = el.querySelector(`[data-count="${g}"]`); if (x && n) x.textContent = ` · ${N(n)} ${w}`; };
-        put('woe', k.woe, 'played today'); put('fd', k.fd, 'guessing today'); put('sky', k.sky, 'played today'); put('space', k.space, 'played today'); put('hunt', (k.hunt || {})['one-light-day'], 'finished'); if (wlive) put('weekly', (k.hunt || {})[wk.week], 'finished'); }).catch(() => { }); }
+        put('woe', k.woe, 'played today'); put('fd', k.fd, 'guessing today'); put('sky', k.sky, 'played today'); put('space', k.space, 'played today'); put('owl', k.owl, 'played today'); put('hunt', (k.hunt || {})['one-light-day'], 'finished'); if (wlive) put('weekly', (k.hunt || {})[wk.week], 'finished'); }).catch(() => { }); }
     else if (host) host.innerHTML = '';
   }
   function open() {
@@ -63,6 +65,6 @@
     el.hidden = false; html.classList.add('sky-big-on'); render(); setTimeout(() => { const b = el.querySelector('.ph-go'); if (b) b.focus({ preventScroll: true }); }, 50);
   }
   function close() { if (el) el.hidden = true; if (!document.querySelector('.sky-big:not([hidden]):not(#playhub)')) html.classList.remove('sky-big-on'); }
-  addEventListener('obs:hub', open); addEventListener('owl-hunt', () => { if (el && !el.hidden) render(); }); addEventListener('owl-space', () => { if (el && !el.hidden) render(); });
+  addEventListener('obs:hub', open); addEventListener('owl-hunt', () => { if (el && !el.hidden) render(); }); addEventListener('owl-space', () => { if (el && !el.hidden) render(); }); addEventListener('owl-findowl', () => { if (el && !el.hidden) render(); });
   if (window.__wantHub) setTimeout(open, 2000);
 })();

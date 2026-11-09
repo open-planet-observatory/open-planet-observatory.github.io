@@ -26,6 +26,7 @@ import { collectRecordWatch } from './recordwatch.mjs';
 import { collectForecastDesk } from './forecastdesk.mjs';
 import { collectMoonFeatures } from './moon-features.mjs';
 import { collectWeeklyHunt } from './weeklyhunt.mjs';
+import { collectFindOwl } from './findowl.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -231,6 +232,14 @@ let game = { out: null, status: 'not run' };
   try { game = await collectGame({ prev: p, now }); } catch (e) { game = { out: { v: 1, date: now.toISOString().slice(0, 10), failed: true, rounds: [], errors: [e.message.slice(0, 160)] }, status: 'error: ' + e.message.slice(0, 160) }; }
   // a failed day is published as failed (the page says so); yesterday's puzzle is never passed off as today's
   if (game.out) await fs.writeFile(path.join(OUT, 'game.json'), JSON.stringify(game.out)); log('game', game.status); }
+// "Find the owl" (collector/findowl.mjs): data/findowl.json, the day's five hiding spots, built once per UTC day and then kept.
+// If the live copy can't be read (anything but a 404) nothing is rebuilt this run, so a day's owls never move once published.
+{ let p = null, none = false, fo;
+  if (PREV) for (let i = 0; i < 3 && !p && !none; i++) { try { const r = await fetch(`${PREV}/data/findowl.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); else if (r.status === 404) none = true; } catch (e) { } }
+  // as for game.json: if the live copy can't be read, stop without publishing, so the next deploy can't drop the file and let a later run hide the day's owls again somewhere else
+  if (PREV && !p && !none) { console.error('Could not read the last published findowl.json. Stopping without publishing.'); process.exit(1); }
+  else try { fo = await collectFindOwl({ prev: p, now }); } catch (e) { fo = { out: p && p.date === now.toISOString().slice(0, 10) && !p.failed ? p : { v: 1, date: now.toISOString().slice(0, 10), failed: true, rounds: [], errors: [e.message.slice(0, 160)], recent: (p && p.recent) || [] }, status: 'error: ' + e.message.slice(0, 160) }; }
+  if (fo.out) await fs.writeFile(path.join(OUT, 'findowl.json'), JSON.stringify(fo.out)); log('find the owl', fo.status); }
 // "This date in history" (collector/history.mjs): data/history.json for yesterday, today and tomorrow (UTC); each date fetched once, then kept.
 let history = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/history.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }

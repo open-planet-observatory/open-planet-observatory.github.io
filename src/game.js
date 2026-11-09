@@ -270,7 +270,7 @@
     if (location.hash === '#play') history.replaceState(null, '', location.pathname + location.search);
     if (opener && opener.focus && document.contains(opener)) opener.focus({ preventScroll: true }); opener = null;
   }
-  addEventListener('keydown', e => { if (e.key !== 'Escape' || !html.classList.contains('game-on')) return; const lb = document.querySelector('.woe-lb'); if (lb) { lb.remove(); return; } if (/input/i.test(e.target.tagName)) return; close(); });
+  addEventListener('keydown', e => { if (e.key !== 'Escape' || !html.classList.contains('game-on') || !ui) return; /* only this game's own Escape (Find the owl also uses 'game-on') */ const lb = document.querySelector('.woe-lb'); if (lb) { lb.remove(); return; } if (/input/i.test(e.target.tagName)) return; close(); });
   addEventListener('obs:play', open);
   addEventListener('hashchange', () => { if (location.hash === '#play') open(); });
   window.__obs && (window.__obs.openGame = open);
