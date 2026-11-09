@@ -117,20 +117,18 @@ export async function createCosmos({ T, S, SM, ui }) {
   // ---- the edge of the observable universe: the oldest light (the cosmic microwave background, ESA Planck) on a sphere
   // about 46 billion light-years out, the present-day distance of the matter that sent it. Loaded only when you head out there.
   const EDGE_AU = 46.5e9 * 63241.077; /* about 46.5 billion light-years (Planck 2018 cosmology), in AU */
-  const edge = new T.Group(); S.scene.add(edge); edge.visible = false; let edgeInfo = null, edgeLoading = null; const eUni = { map: { value: null }, uOp: { value: 0 }, uEG: { value: new T.Matrix3() }, uCut: { value: new T.Vector3(0, 0, 1) }, uCos: { value: 0.7 } }; let cutSet = false;
+  const edge = new T.Group(); S.scene.add(edge); edge.visible = false; let edgeInfo = null, edgeLoading = null; const eUni = { map: { value: null }, uOp: { value: 0 }, uEG: { value: new T.Matrix3() }, uL: { value: new T.Vector3(0, 0, 1) } };
   { const m = new T.Matrix3().setFromMatrix4(ROT).transpose(); eUni.uEG.value.copy(m); } /* ecliptic → galactic */
   const eVert = 'varying vec3 vDir; varying vec3 vN; varying vec3 vV; void main(){ vec4 wp = modelMatrix * vec4(position,1.0); vDir = wp.xyz; vN = normalize(mat3(modelMatrix) * normal); vV = normalize(cameraPosition - wp.xyz); gl_Position = projectionMatrix * viewMatrix * wp;\n#include <logdepthbuf_vertex>\n}';
-  /* Cut open (9 Nov 2026: "make it appear more 3D, as it is hypothesized"): the oldest light surrounds us on every side, so
-     the sphere is drawn as a shell with a round window cut in it, facing you when you first arrive. Through the window: the
-     inside wall and, at the centre, the cosmic web and "You are here". Outside: the same map, shaded so the ball reads as
-     round, and a bright lip where the shell is cut. The cut is a drawing device, not something in the data. */
-  const eFrag = (mode) => `uniform sampler2D map; uniform float uOp; uniform mat3 uEG; uniform vec3 uCut; uniform float uCos; varying vec3 vDir; varying vec3 vN; varying vec3 vV; const float PI = 3.14159265;
-    void main(){ vec3 d = normalize(vDir); float k = dot(d, uCut); if (k > uCos) discard;
-      vec3 g = uEG * d; float l = atan(g.y, g.x); float b = asin(clamp(g.z, -1.0, 1.0)); vec4 c = texture2D(map, vec2(0.5 - l / (2.0 * PI), 0.5 + b / PI));
-      float lip = smoothstep(uCos - 0.04, uCos, k); float nv = abs(dot(normalize(vN), vV));
-      ${mode === 'rim' ? 'float f = pow(1.0 - nv, 3.0); gl_FragColor = vec4(c.rgb * f * 0.9 * uOp, f * uOp);'
-        : mode === 'out' ? 'float sh = 0.18 + 0.62 * pow(nv, 0.8); vec3 grey = vec3(dot(c.rgb, vec3(0.3, 0.55, 0.15))); vec3 col = mix(mix(c.rgb, grey, 0.35) * sh * 0.7, vec3(1.0, 0.92, 0.76), lip); gl_FragColor = vec4(col * uOp, uOp);'
-        : 'vec3 col = mix(c.rgb, vec3(1.0, 0.93, 0.8), lip * 0.6); gl_FragColor = vec4(col * uOp, uOp);'}
+  /* A globe of the oldest light (9 Nov 2026: "start with a sphere, and then figure out how to wrap the graphics"): from outside,
+     the Planck map is wrapped on a solid ball and lit from one side, like a planet, with a soft glow at the limb, so it reads
+     as round. The light is a drawing device: the real background glows evenly. From inside, the same map lines the wall. */
+  const eFrag = (mode) => `uniform sampler2D map; uniform float uOp; uniform mat3 uEG; uniform vec3 uL; varying vec3 vDir; varying vec3 vN; varying vec3 vV; const float PI = 3.14159265;
+    void main(){ vec3 d = normalize(vDir); vec3 g = uEG * d; float l = atan(g.y, g.x); float b = asin(clamp(g.z, -1.0, 1.0)); vec4 c = texture2D(map, vec2(0.5 - l / (2.0 * PI), 0.5 + b / PI));
+      vec3 n = normalize(vN); float nv = max(dot(n, vV), 0.0);
+      ${mode === 'rim' ? 'float f = pow(1.0 - nv, 4.0); gl_FragColor = vec4(vec3(1.0, 0.82, 0.6) * f * 0.55 * uOp, f * uOp);'
+        : mode === 'out' ? 'float lam = max(dot(n, normalize(uL)), 0.0); float sh = 0.07 + 0.93 * pow(lam, 0.85); vec3 h = normalize(normalize(uL) + vV); float sp = pow(max(dot(n, h), 0.0), 40.0) * 0.25; float limb = 0.55 + 0.45 * pow(nv, 0.35); gl_FragColor = vec4((c.rgb * sh * limb + sp) * uOp, uOp);'
+        : 'gl_FragColor = vec4(c.rgb * uOp, uOp);'}
       #include <logdepthbuf_fragment>
     }`;
   function loadEdge() { if (edgeLoading) return edgeLoading; edgeLoading = (async () => { const r = await fetch('assets/universe/cmb.json'); if (!r.ok) throw new Error('cmb.json HTTP ' + r.status); edgeInfo = await r.json();
@@ -142,15 +140,15 @@ export async function createCosmos({ T, S, SM, ui }) {
       inner.frustumCulled = rim.frustumCulled = outer.frustumCulled = false; inner.renderOrder = -5; outer.renderOrder = -4; rim.renderOrder = -3; edge.add(inner, outer, rim); return edgeInfo; })().catch(e => { edgeLoading = null; S.edgeErr = String(e.message || e).slice(0, 120); throw e; }); return edgeLoading; }
   const edgeObj = { name: 'Edge of the observable universe', kind: 'the oldest light', pos: [0, 0, EDGE_AU], prio: 1, colour: '#ffb86b', minCam: 1.2e15, group: 'web', edge: true, custom: cardEdge };
   objs.push(edgeObj);
-  objs.push({ name: 'You are here', kind: 'the centre of what we can see', pos: [0, 0, 0], prio: 1, colour: '#ffffff', minCam: 1.2e15, group: 'web', custom: () => `<p class="sc-note">We are at the centre of the observable universe only because light reaches us from every direction for the same 13.8 billion years. Anyone in any galaxy sees their own sphere, centred on them. The bright speck here is the cosmic web you flew through.</p>` });
   function cardEdge(o, h) { const I = edgeInfo || {}; return `<p class="sc-note"><b>This is as far as anyone can see.</b> The pattern is the oldest light there is, the cosmic microwave background, mapped by ESA's Planck satellite. It left when the universe was about 380,000 years old, and has travelled for about 13.8 billion years to reach us.</p>
      <p class="sc-note">The matter that sent it is now about <b>46 billion light-years</b> away, farther than 13.8 billion because space has been expanding the whole time. That distance comes from the standard cosmological model fitted to Planck's data, with a Hubble constant of about 67; the 67/70/73 setting in the cosmic web does not change it.</p>
-     <p class="sc-note">Everything you flew through on the way, all 43,000 galaxies of the cosmic web, is the small glow at the centre. The shell is drawn cut open so you can see in: the light really surrounds us on every side. The opening is a drawing device, not part of the map.</p>
+     <p class="sc-note">Everything you flew through on the way, all 43,000 galaxies of the cosmic web, is the small glow at the centre. From outside it is drawn as a lit ball so its shape reads; the shading is a drawing device, not part of the map.</p>
      <p class="sc-note"><b>How to read it.</b> The real thing surrounds us in every direction: this is a map of the sky wrapped onto a sphere, so each spot shows what we see looking that way. The colours are tiny temperature differences, about 1 part in 100,000, made visible. The real light is microwaves, invisible to the eye. Our own galaxy's glow has been removed from the map.</p>
      <p class="sc-note">Image: <a href="https://www.esa.int/ESA_Multimedia/Images/2018/07/Planck_s_view_of_the_cosmic_microwave_background" target="_blank" rel="noopener">ESA and the Planck Collaboration</a> (ESA Standard Licence: education and information only), reprojected for the sphere by this site${I.built ? ' on ' + h.esc(I.built) : ''}. Age: <a href="https://doi.org/10.1051/0004-6361/201833910" target="_blank" rel="noopener">Planck 2018 results VI</a>.</p>`; }
   function updateEdge(camAU) { const f = Math.min(1, Math.max(0, (Math.log10(Math.max(camAU, 1)) - 14.6) / 0.6)); if (f > 0 && !edgeLoading) loadEdge().catch(e => console.warn('edge', e));
     eUni.uOp.value = S.show.web === false ? 0 : f; edge.visible = f > 0.002 && !!eUni.map.value;
-    if (!edge.visible) { if (camAU < 3e14) cutSet = false; } else if (!cutSet) { const c = S.camera.position.clone(); if (c.lengthSq() > 0) { eUni.uCut.value.copy(c.normalize()); cutSet = true; } } } /* the window faces the visitor on arrival, then stays put as they turn it */
+    if (edge.visible) { const m = S.camera.matrixWorld.elements; /* light from the viewer's upper left, a little in front: the ball turns under it as you look around */
+      eUni.uL.value.set(-0.62 * m[0] + 0.5 * m[4] + 0.6 * m[8], -0.62 * m[1] + 0.5 * m[5] + 0.6 * m[9], -0.62 * m[2] + 0.5 * m[6] + 0.6 * m[10]).normalize(); } }
   const upd0 = update; update = function (camAU) { upd0(camAU); updateEdge(camAU); };
   return { group, deco, objs, about, update, setH0, loadEdge, edgeAU: EDGE_AU, edgeInfo: () => edgeInfo, h0: () => state.h0, count: N, built: meta.built, source: meta.source };
 }

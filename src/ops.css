@@ -1296,3 +1296,5 @@ html.moon-on #globeScale,html.game-on #globeScale,html.page-on #globeScale,html.
 
 #globeScale .uz-ticks button[aria-current]{color:#fff;font-weight:700}
 @media (max-width:900px){#globeScale{display:none!important}}
+.ab-em{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:radial-gradient(80% 120% at 20% 50%,rgb(217 164 65 / .16),transparent 70%);border:1px solid rgb(217 164 65 / .3)}
+.ab-em-g{width:120px;height:120px;flex:none}.ab-em b{display:block;font-size:1.15rem}.ab-em b sup{font-size:.45em}.ab-em span{font-size:.85rem;color:var(--ink-3,#9A8B6D)}

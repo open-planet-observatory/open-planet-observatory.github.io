@@ -93,4 +93,20 @@ function wire(sp,again){let gone=false;const rm=matchMedia('(prefers-reduced-mot
 const sp=document.getElementById('owlSplash');if(sp)wire(sp,false);
 /* the wordmark in the header brings people back here (the maintainer, 8 Nov 2026: "the nicest looking, with the highest level options") */
 window.OwlSplash={show(){if(document.getElementById('owlSplash')||!window.__owlSplashHTML)return;const t=document.createElement('div');t.innerHTML=window.__owlSplashHTML;const el=t.firstElementChild;el.classList.add('again');document.body.appendChild(el);document.documentElement.classList.add('owl-splash-on');wire(el,true)}};
+/* The Owlmanac end card (9 Nov 2026: "end all tours with that"): fade to black, the turning 3D emblem, the name and the
+   address, then ways on. OwlEndCard.show({ again: [label, fn], home: [label, fn] }). Esc, ×, or a click outside the buttons closes it. */
+window.OwlEndCard={show(o){o=o||{};if(document.getElementById('uniOutro'))return;const w=document.createElement('div');w.id='uniOutro';w.setAttribute('role','dialog');w.setAttribute('aria-label','The Owlmanac Observatory');
+ const btn=(k,t)=>`<button type="button" data-o="${k}">${t}</button>`;
+ w.innerHTML='<div class="uo-in"><div class="uo-em" aria-hidden="true"></div><div class="uo-t"><b>The Owlmanac<sup>™</sup> Observatory</b><span>theowlmanac.com</span></div><div class="uo-b">'+(o.again?btn('again','↻ '+o.again[0]):'')+(o.home?btn('home',o.home[0]):'')+'<a href="https://www.youtube.com/@TheOwlmanac" target="_blank" rel="noopener" data-o="yt">The Owlmanac on YouTube ↗</a></div></div><button type="button" class="uo-x" aria-label="Close">×</button>';
+ document.body.appendChild(w);let stopE=null,done=false;import('./assets/emblem/emblem.js').then(m=>{if(!done)stopE=m.mountEmblem(w.querySelector('.uo-em'))}).catch(e=>console.warn('emblem',e));
+ const end=()=>{if(done)return;done=true;removeEventListener('keydown',key,true);w.classList.remove('on');setTimeout(()=>{if(stopE)stopE();w.remove()},700);if(o.onClose)try{o.onClose()}catch(e){}};
+ const key=e=>{if(e.key==='Escape'){e.stopPropagation();e.preventDefault();end()}};addEventListener('keydown',key,true);
+ w.addEventListener('click',e=>{const b=e.target.closest('[data-o]');if(!b){if(!e.target.closest('.uo-in'))end();return}if(b.dataset.o==='yt')return;end();const f=b.dataset.o==='again'?o.again&&o.again[1]:o.home&&o.home[1];if(f)setTimeout(f,300)});
+ w.querySelector('.uo-x').onclick=end;requestAnimationFrame(()=>w.classList.add('on'));setTimeout(()=>{const f=w.querySelector('[data-o]');if(f)f.focus({preventScroll:true})},700)}};
+
+/* the emblem at the top of About (9 Nov 2026: "look for other places to incorporate that image") */
+(function aboutEmblem(){const p=document.querySelector('#drawerBody .panel[data-k="about"]');if(!p){setTimeout(aboutEmblem,1500);return}
+ const box=document.createElement('div');box.className='ab-em';box.innerHTML='<div class="ab-em-g" aria-hidden="true"></div><div><b>The Owlmanac<sup>™</sup> Observatory</b><span>Free public data on one globe, for research and education.</span></div>';p.insertBefore(box,p.firstChild);
+ let stop=null;const sync=()=>{const on=p.dataset.on==='true'&&p.offsetParent;if(on&&!stop){stop='…';import('./assets/emblem/emblem.js').then(m=>{stop=m.mountEmblem(box.querySelector('.ab-em-g'))}).catch(()=>{stop=null})}else if(!on&&stop&&typeof stop==='function'){stop();stop=null}};
+ new MutationObserver(sync).observe(p,{attributes:true,attributeFilter:['data-on']});new MutationObserver(sync).observe(document.documentElement,{attributes:true,attributeFilter:['class']});sync()})();
 })();

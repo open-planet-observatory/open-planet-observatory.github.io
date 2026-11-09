@@ -52,7 +52,7 @@
       ${i ? '<button class="st-back">Back</button>' : '<button class="st-skip">Skip</button>'}<button class="st-next">${i === STEPS.length - 1 ? 'Done' : 'Next'}</button></div>`;
     const b = card.querySelector('.st-back'), s = card.querySelector('.st-skip'); if (b) b.onclick = () => go(-1); if (s) s.onclick = end; card.querySelector('.st-x').onclick = end; /* an × on every step, so the tour can be left at any time (the maintainer, 6 Nov 2026) */ card.querySelector('.st-next').onclick = () => go(1);
     setTimeout(() => { place(); card.querySelector('.st-next').focus({ preventScroll: true }); }, st.prep ? 380 : 30); /* let a panel finish opening before measuring it */ }
-  function go(d) { const n = i + d; if (n >= STEPS.length) return end(); if (n < 0) return; i = n; show(); }
+  function go(d) { const n = i + d; if (n >= STEPS.length) { end(); if (window.OwlEndCard) setTimeout(() => window.OwlEndCard.show({ again: ['Take the site tour again', start], home: ['Explore the globe', () => { }] }), 250); return; } if (n < 0) return; i = n; show(); }
   function end() { [shade, card, catcher].forEach(e => e && e.remove()); shade = card = catcher = null; removeEventListener('keydown', keyH, true); removeEventListener('resize', resH); if (prevFocus && prevFocus.focus) prevFocus.focus({ preventScroll: true }); }
   function start() { if (card) return; try { localStorage.setItem('site-tour-offer', '1'); } catch (e) { } const off = $('.st-offer'); if (off) off.remove();
     if (O.uniState && O.uniState() && document.querySelector('#uni.on') && O.closeUniverse) O.closeUniverse();
