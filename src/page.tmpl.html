@@ -717,8 +717,20 @@ window.voyagerVideoList=function(){var V=window.VOYAGER_VIDEOS||{},L=[].concat(V
     <div class="eyebrow">Classroom</div>
     <h2 id="h-class">Lessons built on live data</h2>
     <p class="muted">Sample lesson plans that use the layers above. Each one works with whatever the data shows on the day you teach it. Full packs with worksheets and answer guides are planned; see <a href="#free">Keep it free</a>.</p>
+    <p class="muted class-fb" id="classFeedback">Teaching with this page? Say what worked and what didn't: <a href="mailto:hello@theowlmanac.com?subject=Classroom%20feedback">hello@theowlmanac.com</a>, or <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/issues/new?title=Classroom%3A%20" target="_blank" rel="noopener">open a note on GitHub ↗</a> (public).</p>
   </div>
   <div class="lessons" id="lessons"></div>
+  <div class="letter" id="letter">
+    <h3>This week in the sky <span class="bounty-tag">weekly letter</span></h3>
+    <p>One short email a week: what is up in the sky, what the data on this page did, one thing to try in class. Free; no tracking; unsubscribe in one click. The first issue goes out on 22 November 2026.</p>
+    <form class="letter-form" action="https://buttondown.com/api/emails/embed-subscribe/theowlmanac" method="post" target="_blank">
+      <label for="letterEmail" class="sr-only">Email address</label>
+      <input type="email" name="email" id="letterEmail" placeholder="you@school.org" required autocomplete="email">
+      <input type="hidden" name="tag" value="site">
+      <button type="submit" class="bounty-go">Subscribe</button>
+    </form>
+    <p class="small muted">Pressing Subscribe sends your address to Buttondown, which runs the list for The Owlmanac; it emails you a confirmation link and nothing is sent until you click it. Nothing about you is stored on this site. Details: <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/blob/main/DATA_POLICY.md#email-list" target="_blank" rel="noopener">data policy ↗</a> · <a href="https://buttondown.com/legal/privacy" target="_blank" rel="noopener">Buttondown's privacy policy ↗</a>.</p>
+  </div>
   <div class="sec-head alm-head">
     <div class="eyebrow">From the old almanacs</div>
     <h3 id="h-alm">What the almanac said, in 1846 and 1923</h3>
@@ -767,7 +779,7 @@ window.voyagerVideoList=function(){var V=window.VOYAGER_VIDEOS||{},L=[].concat(V
   <div class="aup">
     <div><h3>You may</h3><ul><li>Study patterns, teach, write and research using what's shown here</li><li>Follow the links to the original sources and use their data under their own terms</li><li>Share the page for learning</li></ul></div>
     <div><h3>You may not</h3><ul><li>Use anything here to locate, follow, target or harass a person or group</li><li>Treat it as an emergency alert or a basis for tactical, military or safety decisions</li><li>Republish source data in ways its license forbids</li></ul></div>
-    <div><h3>How this page handles you</h3><ul><li>No sign-up, no cookies, no tracking scripts, no visitor logs kept by this page. Visits and the parts people open are counted in aggregate with GoatCounter (country level, nothing that identifies you); open the page with <code>?stats=off</code> and this browser is never counted</li><li>Notable deaths are listed only with a cited date, an English Wikipedia article and at least 48 hours' delay</li><li>Who is behind a cyber attack is stated only when a government advisory states it; breach lists name the breached organisation, never victims</li><li>Mass shootings are listed as the source lists them, without names of victims or shooters, with a note on how definitions differ</li><li>Spot an error? Follow the source link: corrections belong with the original publisher</li></ul></div>
+    <div><h3>How this page handles you</h3><ul><li>No sign-up, no cookies, no tracking scripts, no visitor logs kept by this page. Visits and the parts people open are counted in aggregate with GoatCounter (country level, nothing that identifies you); open the page with <code>?stats=off</code> and this browser is never counted</li><li>The weekly letter is opt-in with a confirmation click, run on Buttondown with open and click tracking off; the address is used for the letter alone and deleted on request (see the <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io/blob/main/DATA_POLICY.md#email-list" target="_blank" rel="noopener">data policy</a>)</li><li>Notable deaths are listed only with a cited date, an English Wikipedia article and at least 48 hours' delay</li><li>Who is behind a cyber attack is stated only when a government advisory states it; breach lists name the breached organisation, never victims</li><li>Mass shootings are listed as the source lists them, without names of victims or shooters, with a note on how definitions differ</li><li>Spot an error? Follow the source link: corrections belong with the original publisher</li></ul></div>
   </div>
 </section>
 
@@ -799,7 +811,7 @@ window.voyagerVideoList=function(){var V=window.VOYAGER_VIDEOS||{},L=[].concat(V
   </div>
 </section>
 </main>
-<footer>For research and education only. Data: USGS, NASA, NOAA, NSIDC, CelesTrak, The OpenSky Network, The GDELT Project, GDACS, WHO, Wikipedia and Wikimedia (CC BY-SA), Wikidata (CC0), Smithsonian GVP, JPL, The Space Devs, Federal Register, OpenSanctions, FDA, CPSC, EIA, WSPR Live, SatNOGS, GPSJAM. Use of these sources does not imply their endorsement. Snapshot times are UTC. Owlmanac™ and the owl logo are trademarks.</footer>
+<footer>For research and education only. Data: USGS, NASA, NOAA, NSIDC, CelesTrak, The OpenSky Network, The GDELT Project, GDACS, WHO, Wikipedia and Wikimedia (CC BY-SA), Wikidata (CC0), Smithsonian GVP, JPL, The Space Devs, Federal Register, OpenSanctions, FDA, CPSC, EIA, WSPR Live, SatNOGS, GPSJAM. Use of these sources does not imply their endorsement. Snapshot times are UTC. Owlmanac™ and the owl logo are trademarks. <span class="foot-links">Write to <a href="mailto:hello@theowlmanac.com">hello@theowlmanac.com</a> · <a rel="me" href="https://mastodon.social/@theowlmanac">Mastodon</a> · <a rel="me" href="https://bsky.app/profile/theowlmanac.com">Bluesky</a> · <a href="https://www.youtube.com/@TheOwlmanac">YouTube</a> · <a href="https://github.com/open-planet-observatory/open-planet-observatory.github.io">Source code</a> · <a href="#letter">Weekly letter</a></span></footer>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>

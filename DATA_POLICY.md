@@ -279,6 +279,15 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Libraries are served from the site itself rather than third-party CDNs.
 - Sponsors, if any, are clearly labeled, limited to science, education and public-data organizations, never receive visitor data and never influence content.
 
+## Email list
+
+- **What it is.** "This week in the sky" is a free weekly email from The Owlmanac: what is up in the sky, what the data on this page did that week, one thing to try in class. The sign-up form sits in the Classroom section (`#letter`) and in the footer.
+- **Who runs it.** The list is run on [Buttondown](https://buttondown.com) (privacy policy: https://buttondown.com/legal/privacy). Pressing Subscribe sends the address straight from the visitor's browser to Buttondown (`buttondown.com/api/emails/embed-subscribe/theowlmanac`) with the tag `site`; this site's own servers never see it and nothing is stored in the browser. Buttondown emails a confirmation link (double opt-in): an address that never clicks it gets nothing further.
+- **What is kept.** The address, the date it was confirmed and the `site` tag. No names are asked for. Open and click tracking is switched off in Buttondown, so the project does not know who opened or read an issue. The address is used for this letter only: never sold, shared, or used for anything else, and never combined with the aggregate visit counts above.
+- **Leaving.** Every issue carries a one-click unsubscribe link; writing to hello@theowlmanac.com also works, and the address is deleted from the list, not just marked.
+- **Content.** Each issue follows the same rules as the page: every figure linked to its source, sources' own words quoted verbatim, no forecasts of the site's own, no names of private individuals. Issues are archived publicly at https://buttondown.com/theowlmanac.
+- **Contact.** hello@theowlmanac.com is the project's address for feedback, corrections and permission questions. Mail sent there is read by the maintainer and is not shared.
+
 ## Not included, on purpose
 
 Public CCTV, street and traffic cameras, license-plate readers; tracking named people's aircraft; conflict data with non-commercial licenses (e.g. ACLED); network scanning or "recon" tools.

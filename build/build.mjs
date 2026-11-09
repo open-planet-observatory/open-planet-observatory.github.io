@@ -53,6 +53,7 @@ if (mode === 'hosted') {
 <meta name="twitter:image" content="https://theowlmanac.com/brand/owl-share-1200x630.jpg">
 <meta property="og:description" content="Free public data on one map. Every number sourced, blind spots shown, no tracking.">
 <meta name="theme-color" content="#0B0906">
+<link rel="me" href="https://mastodon.social/@theowlmanac">
 <link rel="preload" as="image" href="brand/owl-banner-1280.jpg" media="(min-width:641px) and (max-width:1400px)" fetchpriority="high">
 <link rel="preload" as="image" href="brand/owl-banner-2048.jpg" media="(min-width:1401px)" fetchpriority="high">
 <link rel="preload" as="image" href="brand/owl-phone-1080.jpg" media="(max-width:640px)" fetchpriority="high">

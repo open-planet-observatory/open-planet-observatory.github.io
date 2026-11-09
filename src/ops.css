@@ -1298,3 +1298,14 @@ html.moon-on #globeScale,html.game-on #globeScale,html.page-on #globeScale,html.
 @media (max-width:900px){#globeScale{display:none!important}}
 .ab-em{display:flex;align-items:center;gap:14px;padding:10px 12px;border-radius:16px;background:radial-gradient(80% 120% at 20% 50%,rgb(217 164 65 / .16),transparent 70%);border:1px solid rgb(217 164 65 / .3)}
 .ab-em-g{width:120px;height:120px;flex:none}.ab-em b{display:block;font-size:1.15rem}.ab-em b sup{font-size:.45em}.ab-em span{font-size:.85rem;color:var(--ink-3,#9A8B6D)}
+
+/* weekly letter block (Classroom) and footer links (the maintainer, 9 Nov 2026: newsletter sign-up for the 11 Nov launch) */
+.letter{margin:18px 0 6px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--panel-2)}
+.letter h3{margin:0 0 6px}
+.letter p{margin:6px 0}
+.letter-form{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:10px 0 4px}
+.letter-form input[type=email]{flex:1 1 220px;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:9px;background:var(--panel);color:var(--ink);font:inherit}
+.letter-form .bounty-go{border:0;cursor:pointer;font:inherit;margin:0}
+.class-fb{margin-top:4px}
+footer .foot-links{display:block;margin-top:6px}
+footer .foot-links a{color:inherit}
