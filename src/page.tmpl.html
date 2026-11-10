@@ -1175,7 +1175,7 @@ function buildSitLayers(){const sit=window.SIT||{wars:[],gdacs:[]};const by={};
  gdSel=G.gdacs.selectAll('path').data(sit.gdacs).join('path').attr('class','gd').attr('d',d3.symbol().type(d3.symbolDiamond).size(110)).attr('fill',d=>d[2]==='Red'?'var(--sev-red)':'var(--warn)');
  bindTip(gdSel,d=>`<b>${d[2]} alert · ${GD_NAMES[d[0]]||d[0]}</b>${d[1]}<br>${d[3]===d[4]?d[3]:d[3]+' to '+d[4]}${d[6]?'<br>'+d[6]:''}<br><span style="opacity:.75">GDACS</span>`);
 }
-buildSitLayers();
+try{buildSitLayers()}catch(e){console.warn('buildSitLayers',e)}
 let voSel=G.volc.selectAll('path'),gpSel=G.gps.selectAll('path'),gsSel=G.gs.selectAll('circle'),fbSel=G.fb.selectAll('circle');
 function buildSigLayers(){const S2=window.SIG||{};
  const vo=(S2.volcano?.items||[]).filter(v=>v[5]!=null);
@@ -1189,7 +1189,7 @@ function buildSigLayers(){const S2=window.SIG||{};
  fbSel=G.fb.selectAll('circle').data((S2.fireballs||[]).filter(f=>f[2]!=null)).join('circle').attr('class','fb').attr('r',d=>Math.max(4,Math.sqrt(d[1])*2.2));
  bindTip(fbSel,d=>`<b>Fireball · ${d[1]} kt of energy</b>${d[0]} UTC${d[4]?' · '+d[4]+' km/s':''}${d[5]?' · exploded at '+d[5]+' km altitude':''}<br><span style="opacity:.75">NASA JPL Fireball database (US government sensors)</span>`);
 }
-buildSigLayers();
+try{buildSigLayers()}catch(e){console.warn('buildSigLayers',e)}
 const trkG=G.sat.append('g'),satG=G.sat.append('g');
 let satPts=[],sun=[0,0],nightGeo=null;
 function sunPos(date){const d=(date-Date.UTC(2000,0,1,12))/864e5;const g=(357.529+.98560028*d)*Math.PI/180,q=280.459+.98564736*d;const L=(q+1.915*Math.sin(g)+.02*Math.sin(2*g))*Math.PI/180;const e=(23.439-.00000036*d)*Math.PI/180;const dec=Math.asin(Math.sin(e)*Math.sin(L));const ra=Math.atan2(Math.cos(e)*Math.sin(L),Math.cos(L));const gmst=((18.697374558+24.06570982441908*d)%24)*15;let lon=(ra*180/Math.PI-gmst)%360;if(lon>180)lon-=360;if(lon<-180)lon+=360;return [lon,dec*180/Math.PI]}
@@ -1199,7 +1199,7 @@ function tick(){const now=new Date();sun=sunPos(now);nightGeo=d3.geoCircle().cen
  const g=satG.selectAll('g').data(satPts).join(e=>{const g=e.append('g');g.append('circle').attr('class','sat').attr('r',6);g.append('text').attr('class','satl').attr('x',9).attr('y',4);return g});
  g.select('text').text(d=>d.name);
  bindTip(g,d=>`<b>${d.name}</b>${d.lat.toFixed(1)}°, ${d.lon.toFixed(1)}° · ${Math.round(d.alt)} km up<br>${(d.v*3600).toLocaleString(undefined,{maximumFractionDigits:0})} km/h · dashed line = ±45 min of orbit`);
- render();
+try{render()}catch(e){console.warn('render',e)}
 }
 function place(sel,ll){sel.attr('display',d=>visible(ll(d))?null:'none').attr('transform',d=>visible(ll(d))?`translate(${proj(ll(d))})`:null)}
 const RENDER_HOOKS=[];
@@ -1341,7 +1341,7 @@ function renderSit(){const T=window.SIT;if(!T)return;
  const body=document.getElementById('sitBody');body.innerHTML=html;
  body.querySelectorAll('.more').forEach(b=>b.onclick=()=>{const c=b.closest('.sit');const o=c.classList.toggle('open');b.textContent=o?'Show less':'Read more';b.setAttribute('aria-expanded',o)});
 }
-renderSit();
+try{renderSit()}catch(e){console.warn('renderSit',e)}
 // ---------- signals ----------
 const fmtN=n=>n==null?'–':n.toLocaleString('en-US');
 const spark=(vals,opts={})=>{const w=opts.w||300,h=opts.h||56,m=4;const v=vals.filter(x=>x!=null);if(v.length<2)return '';const x=d3.scaleLinear().domain([0,vals.length-1]).range([m,w-m]);const y=d3.scaleLinear().domain(opts.dom||d3.extent(v)).nice().range([h-m,m]);const line=d3.line().defined(d=>d!=null).x((d,i)=>x(i)).y(d=>y(d));const area=d3.area().defined(d=>d!=null).x((d,i)=>x(i)).y0(h-m).y1(d=>y(d));const c=opts.color||'var(--l-sat)';let extra='';if(opts.ref!=null){extra+=`<line x1="${m}" x2="${w-m}" y1="${y(opts.ref)}" y2="${y(opts.ref)}" stroke="var(--ink-3)" stroke-dasharray="3 3"/><text x="${w-m}" y="${y(opts.ref)-4}" text-anchor="end" class="ax">${opts.refLabel||''}</text>`}if(opts.second){extra+=`<path d="${line(opts.second)}" fill="none" stroke="var(--ink-3)" stroke-width="1.5" stroke-dasharray="2 3"/>`}const li=vals.length-1;return `<svg viewBox="0 0 ${w} ${h}" role="img" aria-label="${opts.label||'trend'}">${extra}<path d="${area(vals)}" fill="${c}" fill-opacity=".12"/><path d="${line(vals)}" fill="none" stroke="${c}" stroke-width="2"/><circle cx="${x(li)}" cy="${y(vals[li])}" r="3.5" fill="${c}"/></svg>`};
@@ -1375,7 +1375,7 @@ function renderSig(){const Z=window.SIG;if(!Z)return;const C=[];const yr=new Dat
  const grid=document.getElementById('sigGrid');grid.innerHTML=C.filter(c=>sigTab==='all'||c.includes(`data-theme="${sigTab}"`)).join('');
  grid.querySelectorAll('button[data-layer]').forEach(b=>b.onclick=()=>{const chip=document.getElementById('chip-'+b.dataset.layer);if(chip&&chip.getAttribute('aria-pressed')!=='true')chip.click();document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'})});
 }
-renderSig();
+try{renderSig()}catch(e){console.warn('renderSig',e)}
 // ---------- disruptions ----------
 let disTab='all';
 const LV={green:'No active incidents reported',yellow:'Minor incidents reported',red:'Major incident reported',grey:'No official feed'};
@@ -1420,7 +1420,7 @@ function renderDis(){const D=window.DIS;if(!D)return;const dom=[];const col=[];
 }
 function newsList(arr){if(!arr||!arr.length)return '<p class="small muted">No matching reports found.</p>';return `<div class="sg-list">${arr.map(a=>`<div class="news-row"><span><a href="${esc(a[3])}" target="_blank" rel="noopener">${esc(a[0])}</a><br><span class="src">${esc(a[1])}${a[4]?' · '+esc(a[4]):''}</span></span><span class="d">${gdDate(a[2])}</span></div>`).join('')}</div>`}
 const gdDate=s=>{if(!s)return '';const m=String(s).match(/^(\d{4})(\d{2})(\d{2})T?(\d{2})(\d{2})/);return m?dfmt(`${m[1]}-${m[2]}-${m[3]}`)+' '+m[4]+':'+m[5]+'Z':s};
-renderDis();
+try{renderDis()}catch(e){console.warn('renderDis',e)}
 // ---------- watch ----------
 let wTab='cyber';
 const WTABS=[['cyber','Cyber & leaks'],['med','Science & medicine'],['ai','AI & tech'],['space','Space'],['viol','Violence']];
@@ -1481,7 +1481,7 @@ function renderWatch(){const W=window.WATCH;if(!W)return;const ce=W.wikiCE||[];c
  const body=document.getElementById('wBody');body.innerHTML=C.join('');
  body.querySelectorAll('button[data-layer]').forEach(b=>b.onclick=()=>{const chip=document.getElementById('chip-'+b.dataset.layer);if(chip&&chip.getAttribute('aria-pressed')!=='true')chip.click();document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'})});
 }
-renderWatch();
+try{renderWatch()}catch(e){console.warn('renderWatch',e)}
 // ---------- economy ----------
 let ecInd='inflation',ecMode='change';
 const EC_IND={inflation:['Inflation','percentage points','%'],unemployment:['Unemployment','percentage points','%'],gdpGrowth:['GDP growth','percentage points','%'],gdpPerCap:['GDP per person','%','$'],poverty:['Extreme poverty','percentage points','%'],priceLevel:['Price level vs the U.S.','points','']};
@@ -1548,12 +1548,13 @@ function buildEconLayer(){const E=window.ECON;if(!E||!window.NUM2ISO)return;cons
  const ext=d3.extent(vals);const seq=d3.scaleSequential(ecInd==='gdpPerCap'?[Math.log10(Math.max(100,ext[0])),Math.log10(ext[1])]:ext,d3.interpolateYlGnBu);
  window.ecSel=G.econ.selectAll('path').data(CT).join('path').attr('class','ec').attr('fill',f=>{const iso=window.NUM2ISO[f.id];const r=iso&&ind.rows[iso];if(!r)return 'var(--panel-2)';if(ecMode==='change'){const c=ecInd==='gdpPerCap'?pct(r[2],r[3]):(r[3]!=null?r[2]-r[3]:null);return c==null?'var(--panel-2)':div(c)}return seq(ecInd==='gdpPerCap'?Math.log10(Math.max(100,r[2])):r[2])});
  bindTip(ecSel,f=>{const iso=window.NUM2ISO[f.id];const r=iso&&ind.rows[iso];const nm=f.properties.name;if(!r)return `<b>${nm}</b>No World Bank data for ${ind.label.toLowerCase()}`;const c=ecInd==='gdpPerCap'?pct(r[2],r[3]):(r[3]!=null?r[2]-r[3]:null);const fv=v=>ecInd==='gdpPerCap'?'$'+fmtN(Math.round(v)):ecInd==='priceLevel'?v+' (U.S. = 100)':v+'%';return `<b>${r[0]}</b>${ind.label}: ${fv(r[2])} in ${r[1]}${r[3]!=null?`<br>Previous year: ${fv(r[3])} · change ${c>0?'+':''}${c.toFixed(2)}${ecInd==='gdpPerCap'?'%':' pt'}`:''}<br><span style="opacity:.75">World Bank, CC BY 4.0</span>`});
- render();
+try{render()}catch(e){console.warn('render',e)}
 }
 document.getElementById('ecInd').addEventListener('change',e=>{ecInd=e.target.value;renderEcon();buildEconLayer()});
 document.querySelectorAll('#ecMode button').forEach(b=>b.onclick=()=>{ecMode=b.dataset.m;document.querySelectorAll('#ecMode button').forEach(x=>x.setAttribute('aria-pressed',x===b));renderEcon();buildEconLayer()});
 document.getElementById('ecShow').onclick=()=>{const chip=document.getElementById('chip-econ');if(chip&&chip.getAttribute('aria-pressed')!=='true')chip.click();buildEconLayer();document.getElementById('mapbox').scrollIntoView({behavior:'smooth',block:'center'})};
-renderEcon();buildEconLayer();
+/* a section's data must never stop the rest of the page from starting (10 Nov 2026: a null in the economy data broke the whole app layout) */
+try{renderEcon()}catch(e){console.warn('economy panel',e)}try{buildEconLayer()}catch(e){console.warn('economy layer',e)}
 // ---------- unexplained ----------
 const ODD_LABEL={'other event':'Unclassified event','not reported':'Type not reported','sonic boom':'Sonic boom','meteor':'Meteor','meteorite':'Meteorite','acoustic noise':'Acoustic noise','explosion':'Explosion','ice quake':'Ice quake','mine collapse':'Mine collapse','rock burst':'Rock burst','landslide':'Landslide','snow avalanche':'Snow avalanche','volcanic eruption':'Volcanic eruption','induced or triggered event':'Induced event','experimental explosion':'Experimental explosion','chemical explosion':'Chemical explosion','accidental explosion':'Accidental explosion','collapse':'Collapse','building collapse':'Building collapse','nuclear explosion':'Nuclear explosion'};
 const ODD_RARE=/other event|not reported|sonic boom|meteor|acoustic|nuclear|experimental|induced|rock burst|collapse/;
@@ -1592,9 +1593,9 @@ window.oddSel=null;
 function buildOddLayer(){const U=window.UNEXP;if(!U||!U.seismic)return;const pts=(U.seismic.odd||[]);
  window.oddSel=G.odd.selectAll('path').data(pts).join('path').attr('class',d=>'od'+(ODD_RARE.test(d[0])?' rare':'')).attr('d',d3.symbol().type(d3.symbolCross).size(d=>ODD_RARE.test(d[0])?110:55));
  bindTip(oddSel,d=>`<b>${esc(d[1])}</b>${esc(ODD_LABEL[d[0]]||d[0])} · ${dtfmt(d[3])}${d[7]?' · '+d[7]+' felt reports':''}<br><span style="opacity:.75">USGS ComCat, classified by the reporting network</span>`);
- render();
+try{render()}catch(e){console.warn('render',e)}
 }
-renderUnexp();buildOddLayer();
+try{renderUnexp()}catch(e){console.warn('renderUnexp',e)}try{buildOddLayer()}catch(e){console.warn('buildOddLayer',e)}
 // ---------- site-wide search ----------
 const REGIONS=[['United States',/\b(U\.?S\.?A?|United States|American|Alabama|Alaska|Arizona|Arkansas|California|Colorado|Connecticut|Delaware|Florida|Georgia|Hawaii|Idaho|Illinois|Indiana|Iowa|Kansas|Kentucky|Louisiana|Maine|Maryland|Massachusetts|Michigan|Minnesota|Mississippi|Missouri|Montana|Nebraska|Nevada|New Hampshire|New Jersey|New Mexico|New York|North Carolina|North Dakota|Ohio|Oklahoma|Oregon|Pennsylvania|Rhode Island|South Carolina|South Dakota|Tennessee|Texas|Utah|Vermont|Virginia|Washington|Wisconsin|Wyoming|Chicago|Los Angeles|Houston|Philadelphia|Boston|Miami|Dallas|Atlanta|Seattle|Denver|Detroit|Washington, D\.C\.|FDA|NIH|NASA|CISA|FBI|FAA|NWS)\b/],
 ['Ukraine / Russia',/\b(Ukrain|Russia|Kyiv|Moscow|Crimea|Donetsk|Kharkiv|Zaporizhzhia|Kherson|Odesa)/i],['Israel / Palestine / Lebanon',/\b(Israel|Gaza|West Bank|Palestin|Lebanon|Hezbollah|Hamas|Tel Aviv|Jerusalem|Beirut)/i],['Iran',/\b(Iran|Tehran)/i],['Syria / Iraq',/\b(Syria|Iraq|Damascus|Baghdad|Kurd)/i],['Yemen / Gulf',/\b(Yemen|Houthi|Saudi|UAE|Emirates|Qatar|Bahrain|Oman|Kuwait|Red Sea)/i],['Turkey',/\b(Turk|Ankara|Istanbul)/i],
@@ -1679,7 +1680,7 @@ function runSearch(){const q=document.getElementById('q').value.trim().toLowerCa
  R.querySelectorAll('button.sec').forEach(b=>b.onclick=e=>{const [v,fn,id]=TABVARS[b.dataset.sec];if(v&&b.dataset.tab){window[v]=b.dataset.tab;if(v==='sitTab')sitTab=b.dataset.tab;if(v==='wTab')wTab=b.dataset.tab;if(v==='disTab')disTab=b.dataset.tab;if(v==='sigTab')sigTab=b.dataset.tab;fn()}document.getElementById(id).scrollIntoView({behavior:'smooth',block:'start'})});
  const m=document.getElementById('resMore');if(m)m.onclick=()=>{resLimit+=20;runSearch()};
 }
-buildIndex();
+try{buildIndex()}catch(e){console.warn('buildIndex',e)}
 document.getElementById('qform').addEventListener('submit',e=>{e.preventDefault();resLimit=20;runSearch()});
 document.getElementById('q').addEventListener('input',()=>{resLimit=20;clearTimeout(window.__qt);window.__qt=setTimeout(runSearch,220)});
 ['fSec','fTopic','fRegion','fDate','fSrc','fSort'].forEach(id=>document.getElementById(id).addEventListener('change',()=>{resLimit=20;runSearch()}));
@@ -1715,7 +1716,7 @@ function buildSigLayers(){const S2=window.SIG||{};
  fbSel=G.fb.selectAll('circle').data((S2.fireballs||[]).filter(f=>f[2]!=null)).join('circle').attr('class','fb').attr('r',d=>Math.max(4,Math.sqrt(d[1])*2.2));
  bindTip(fbSel,d=>`<b>Fireball · ${d[1]} kt of energy</b>${d[0]} UTC${d[4]?' · '+d[4]+' km/s':''}${d[5]?' · exploded at '+d[5]+' km altitude':''}<br><span style="opacity:.75">NASA JPL Fireball database (US government sensors)</span>`);
 }
-buildSigLayers();render();
+try{buildSigLayers()}catch(e){console.warn('buildSigLayers',e)}try{render()}catch(e){console.warn('render',e)}
   const w=document.getElementById('chip-war');if(w)w.querySelector('.ct').textContent=d.wars.length+' wars';const g=document.getElementById('chip-gdacs');if(g)g.querySelector('.ct').textContent=d.gdacs.length+' red/orange'}}catch(e){}finally{try{if(typeof buildIndex==='function')buildIndex()}catch(e){}}})();
 })();
 </script>
