@@ -25,19 +25,34 @@
     return { lit, wax, name, look, kid: LOOKS[look].toLowerCase() }; }
   const LOOKS = ['Round and full', 'Half a circle', 'A thin curve (crescent)', 'Hard to see at all (new Moon)', 'Almost full'];
   let VOY = null; async function voyager() { if (VOY) return VOY; try { const r = await fetch('data/voyager.json?t=' + Math.floor(Date.now() / 36e5)); if (!r.ok) return null; const V = await r.json(); if (!V.now) return null;
-    const au = V.now.au + V.now.kms * ((Date.now() - Date.parse(V.now.t)) / 1000) / 149597870.7; VOY = { lh: au * 499.004784 / 3600 }; return VOY; } catch (e) { return null; } }
+    const au = V.now.au + V.now.kms * ((Date.now() - Date.parse(V.now.t)) / 1000) / 149597870.7; VOY = { lh: au * 499.004784 / 3600, au }; return VOY; } catch (e) { return null; } }
   const SIG = () => window.SIG || {};
   async function liveVars(id) { /* values for {x.y} placeholders in a step */
     if (id === 'biggestQuake') { const b = biggest(); return b && { quake: { place: b.place, mag: fmt(b.mag, 1), depth: fmt(b.depth), hrs: fmt(b.hrs) } }; }
     if (id === 'moonPhase') { const m = moon(); return m && { moon: m }; }
-    if (id === 'voyager') { const v = await voyager(); return v && { voyager: { lh: fmt(v.lh, 1) } }; }
+    if (id === 'voyager') { const v = await voyager(); return v && { voyager: { lh: fmt(v.lh, 1), au: fmt(v.au, 1) } }; }
+    if (id === 'volcano') { const v = SIG().volcano; return v && v.items && v.items.length ? { volc: { n: fmt(v.items.length), week: v.items[0][2] || '' } } : null; }
+    if (id === 'migration') { const m = mig('Monarch butterfly'); return m && { mig: m }; }
     if (id === 'co2') { const c = SIG().co2; return c && c.ppm && { co2: { ppm: fmt(c.ppm, 1), yago: fmt(c.ppmYearAgo, 1) } }; }
     if (id === 'ice') { const n = SIG().seaice && SIG().seaice.north; return n && n.extent && n.sameDay && { ice: { ext: fmt(n.extent, 2), avg: fmt(n.sameDay.avg1979to2025, 2) } }; }
     if (id === 'temp') { const t = SIG().temp; if (!t || !t.rank || !t.latest) return null; const m = /Global Land and Ocean (\w+)/.exec(t.title || ''); return { temp: { rank: ord(t.rank), n: fmt(t.n), when: (m ? m[1] + ' ' : '') + t.latest[0] } }; }
     if (id === 'almAgo') return { alm: { ago: new Date().getFullYear() - 1846 } };
     return null; }
   function choicesNum(right, others, f = x => fmt(x)) { const a = uniq([f(right), ...others.map(f)]).slice(0, 4); if (a.length < 3) return null; const s = shuffle(a.slice()); return { a: s, ok: s.indexOf(f(right)) }; }
+  const MON = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function migAll() { return ((window.NAT || {}).migration || []).filter(m => m.sci && !m.withheld).map(m => { const P = (m.months || []).filter(x => x[1] != null); return P.length > 1 ? { m, P } : null; }).filter(Boolean); }
+  function mig(name) { const x = migAll().find(o => o.m.name === name); if (!x) return null; const a = x.P[x.P.length - 2], b = x.P[x.P.length - 1]; const mo = +b[0].slice(5, 7) - 1;
+    return { name: x.m.name, month: MON[mo] + ' ' + b[0].slice(0, 4), lat: fmt(Math.abs(b[2]), 1) + '°' + (b[2] >= 0 ? 'N' : 'S'), dir: b[2] > a[2] ? 'north' : 'south', d: Math.abs(b[2] - a[2]) }; }
   async function liveQ(id) { /* returns {q, a, ok, why} or null */
+    if (id === 'volcCount') { const v = SIG().volcano; if (!v || !v.items || v.items.length < 2) return null; const n = v.items.length; const c = choicesNum(n, [n * 4 + 3, Math.max(1, Math.round(n / 4)), n + 30]); return c && { q: `How many volcanoes are in the latest Weekly Volcanic Activity Report (${v.items[0][2]})?`, ...c, why: `${fmt(n)} volcanoes are listed in that week's report from the Smithsonian and USGS. It lists volcanoes with notable activity that week, not every eruption going on.` }; }
+    if (id === 'volcPick') { const v = SIG().volcano, K = SIG().volcanoKnown; if (!v || !v.items || v.items.length < 1) return null; const inR = new Set(v.items.map(x => x[0])); const right = v.items[Math.floor(Math.random() * v.items.length)][0];
+      const pool = ['Mount Rainier', 'Mount Fuji', 'Vesuvius', 'Mount Hood', 'Kilimanjaro', 'Mount Shasta', 'Mauna Kea', 'Teide'].filter(x => !inR.has(x)); const wrong = shuffle(pool).slice(0, 2); const a = shuffle([right, ...wrong]);
+      return { q: 'Which of these volcanoes is in this week\'s volcano report?', a, ok: a.indexOf(right), why: `${right} is in the report for ${v.items[0][2]}. The others are not in it this week.` }; }
+    if (id === 'moonNextFull') { const A = window.Astronomy; if (!A) return null; const f = A.SearchMoonPhase(180, new Date(), 40); if (!f) return null; const d = Math.max(0, Math.round((f.date - new Date()) / 864e5)); const c = choicesNum(d, [(d + 15) % 30, d + 7 > 29 ? d - 7 : d + 7, Math.abs(d - 12)], x => x === 1 ? '1 day' : fmt(x) + ' days'); return c && { q: 'About how many days until the next full Moon?', ...c, why: `The next full Moon is on ${f.date.toLocaleDateString(undefined, { month: 'long', day: 'numeric' })}, computed in your browser with Astronomy Engine.` }; }
+    if (id === 'voyagerAU') { const v = await voyager(); if (!v) return null; const r = Math.round(v.au); const c = choicesNum(r, [Math.round(r / 6), r * 5, Math.round(r / 30)], x => fmt(x) + ' AU'); return c && { q: 'About how far is Voyager 1 from Earth? (1 AU is the distance from Earth to the Sun.)', ...c, why: `About ${fmt(v.au, 1)} AU, from NASA JPL Horizons, counted forward at its speed. Neptune is about 30 AU from the Sun.` }; }
+    if (id === 'migDir') { const m = mig('Monarch butterfly'); if (!m || m.d < 0.3) return null; const a = ['North', 'South']; return { q: `Last month, did the centre of monarch butterfly sightings in Eastern North America move north or south?`, a, ok: m.dir === 'north' ? 0 : 1, why: `It moved ${m.dir} (latest centre ${m.lat}, ${m.month}), from iNaturalist sightings. It shows where people saw monarchs, not a tracked butterfly.` }; }
+    if (id === 'migFarthest') { const L = migAll().map(o => ({ n: o.m.name, lat: o.P[o.P.length - 1][2] })); if (L.length < 3) return null; const best = L.reduce((a, b) => Math.abs(b.lat) > Math.abs(a.lat) ? b : a); const others = shuffle(L.filter(x => x !== best)).slice(0, 2); const a = shuffle([best.n, ...others.map(x => x.n)]);
+      return { q: 'Of these, whose latest centre of sightings is farthest from the equator?', a, ok: a.indexOf(best.n), why: `${best.n}: ${fmt(Math.abs(best.lat), 1)}°${best.lat >= 0 ? 'N' : 'S'} in the latest month, from iNaturalist sightings on the Seasonal movement layer.` }; }
     const Q = quakes(), b = biggest();
     if (id === 'biggestPlace') { if (!b) return null; const others = uniq(Q.filter(q => q.place && q.place !== b.place && q.mag < b.mag).sort((x, y) => y.mag - x.mag).map(q => q.place)).slice(0, 2); if (others.length < 2) return null; const a = shuffle([b.place, ...others]); return { q: 'Which place had the biggest earthquake on the map this week?', a, ok: a.indexOf(b.place), why: `The biggest this week was magnitude ${fmt(b.mag, 1)}, near ${b.place}.` }; }
     if (id === 'countM5') { const n = Q.filter(q => q.mag >= 5).length; if (!Q.length) return null; const c = choicesNum(n, [n * 3 + 4, Math.max(0, Math.round(n / 3) - 1), n + 25]); return c && { q: 'How many earthquakes of magnitude 5 or more are on the map this week?', ...c, why: `${fmt(n)} of the ${fmt(Q.length)} earthquakes on the map this week are magnitude 5 or more.` }; }
@@ -58,7 +73,7 @@
   // ---------- driving the page ----------
   const chips = () => [...document.querySelectorAll('.chip[id^="chip-"]')];
   function snapshot() { return { chips: chips().map(c => [c.id, c.getAttribute('aria-pressed') === 'true']), img: (document.querySelector('#imgSeg [aria-pressed="true"]') || {}).dataset?.k || null, map2d: document.documentElement.classList.contains('map2d') }; }
-  function restore(s) { if (!s) return; const g = G(); try { g.setXray && g.setXray(false); } catch (e) { } try { g.selectSat && g.SAT && g.SAT.sel >= 0 && g.selectSat(-1); } catch (e) { } try { const o = O(); if (o.moonOpen && o.moonOpen()) o.closeMoon(); if (o.uniState && o.uniState() && document.querySelector('#uni.on') && o.closeUniverse) o.closeUniverse(); } catch (e) { }
+  function restore(s) { if (!s) return; { const b = document.getElementById('mgLit'); if (b && b.getAttribute('aria-pressed') === 'true') b.click(); } /* a lesson that lit the Moon's dark side hands back the real lighting */ const g = G(); try { g.setXray && g.setXray(false); } catch (e) { } try { g.selectSat && g.SAT && g.SAT.sel >= 0 && g.selectSat(-1); } catch (e) { } try { const o = O(); if (o.moonOpen && o.moonOpen()) o.closeMoon(); if (o.uniState && o.uniState() && document.querySelector('#uni.on') && o.closeUniverse) o.closeUniverse(); } catch (e) { }
     for (const [id, on] of s.chips) { const c = document.getElementById(id); if (c && (c.getAttribute('aria-pressed') === 'true') !== on) c.click(); }
     const cur = (document.querySelector('#imgSeg [aria-pressed="true"]') || {}).dataset?.k; if (s.img && cur !== s.img && g.setImagery) g.setImagery(s.img, true); }
   function fly(lon, lat, h) { const g = G(), C = window.Cesium; try { const o = O(); o.setSpin && o.setSpin(false); if (g.viewer && C) g.viewer.camera.flyTo({ destination: C.Cartesian3.fromDegrees(lon, lat, h), duration: 2.2 }); else if (o.flyTo) o.flyTo(lon, lat); } catch (e) { } }
@@ -74,7 +89,9 @@
       else if (k === 'iss') { ensure3d(); const S = g.SAT; const i = S && S.list ? S.list.findIndex(s => /ISS|ZARYA/i.test(s.name)) : -1; if (i >= 0 && g.selectSat) { g.selectSat(i); const P = S.pts[i] && S.pts[i].position, C = window.Cesium; if (P && C) { const c = C.Cartographic.fromCartesian(P); fly(c.longitude * 180 / Math.PI, c.latitude * 180 / Math.PI, 9e6); } } }
       else if (k === 'moon') { if (o.openMoon) o.openMoon(); }
       else if (k === 'closeMoon') { if (o.moonOpen && o.moonOpen()) o.closeMoon(); }
-      else if (k === 'universe') { if (o.openUniverse) o.openUniverse(); }
+      else if (k === 'moonLit') { const b = document.getElementById('mgLit'); if (b && (b.getAttribute('aria-pressed') === 'true') !== !!p[0]) b.click(); }
+      else if (k === 'universe') { if (o.openUniverse) o.openUniverse(p[0] || undefined); }
+      else if (k === 'closeUniverse') { if (document.querySelector('#uni.on') && o.closeUniverse) o.closeUniverse(); }
     } catch (e) { console.warn('lesson step', k, e); } }
 
   // ---------- read aloud ----------
@@ -84,13 +101,15 @@
 
   // ---------- the player ----------
   function fill(t, vars) { return String(t).replace(/\{(\w+)\.(\w+)\}/g, (m, a, b) => vars && vars[a] && vars[a][b] != null ? vars[a][b] : '…'); }
-  async function start(lid, lv) { if (!L) await load(); const les = L.lessons.find(x => x.id === lid); if (!les) return; const D = les.levels[lv]; if (!D) return; end(true);
+  async function start(lid, lv, opt) { opt = opt || {}; if (!L) await load(); const les = L.lessons.find(x => x.id === lid); if (!les) return; const D = les.levels[lv]; if (!D) return; end(true);
     const lvl = L.levels.find(x => x.id === lv) || {}; let read = !!lvl.read; try { const r = localStorage.getItem(RA); if (r) read = r === '1'; } catch (e) { }
     run = { les, lv, D, i: -1, phase: 'steps', snap: snapshot(), score: 0, asked: 0, qi: -1, read: read && !!window.speechSynthesis, lvl };
     if (window.__opsCloseDrawer) window.__opsCloseDrawer(); /* the globe is the lesson: the drawer steps aside */
-    const card = document.createElement('div'); card.className = 'ln-card' + (lv === 'k2' ? ' ln-big' : ''); card.setAttribute('role', 'dialog'); card.setAttribute('aria-label', 'Lesson: ' + D.title); card.id = 'lnCard'; document.body.appendChild(card); run.card = card;
+    const card = document.createElement('div'); card.className = 'ln-card' + (lv === 'k2' ? ' ln-big' : '') + (opt.cls ? ' ln-class' : ''); run.cls = !!opt.cls; if (opt.cls) run.read = false; card.setAttribute('role', 'dialog'); card.setAttribute('aria-label', 'Lesson: ' + D.title); card.id = 'lnCard'; document.body.appendChild(card); run.card = card;
     document.addEventListener('keydown', key); next(); }
-  function key(e) { if (!run) return; if (e.key === 'Escape') { e.preventDefault(); end(); } }
+  function key(e) { if (!run) return; if (e.key === 'Escape') { e.preventDefault(); end(); return; }
+    if (run.cls && run.phase === 'steps' && (e.key === 'ArrowRight' || e.key === 'PageDown') && !/input|textarea/i.test((e.target || {}).tagName || '')) { e.preventDefault(); next(); }
+    else if (run.cls && run.phase === 'steps' && (e.key === 'ArrowLeft' || e.key === 'PageUp')) { e.preventDefault(); back(); } } /* class mode: a clicker or the arrow keys move the lesson on */
   function head(sub) { const r = run; return `<div class="ln-top"><span class="ln-kind">${esc(r.les.icon)} ${esc(r.les.topic)} · ${esc(r.lvl.label)}</span>${window.speechSynthesis ? `<button type="button" class="ln-read" aria-pressed="${r.read}" title="Read the text aloud with your device's voice">${r.read ? '■ Stop reading' : '▶ Read aloud'}</button>` : ''}<button type="button" class="ln-x" aria-label="Leave the lesson" title="Leave the lesson (Esc)">✕</button></div><h3>${esc(r.D.title)}</h3><div class="ln-sub">${esc(sub)}</div>`; }
   function wire(card) { card.querySelector('.ln-x').onclick = () => end(); const rb = card.querySelector('.ln-read'); if (rb) rb.onclick = () => { run.read = !run.read; try { localStorage.setItem(RA, run.read ? '1' : '0'); } catch (e) { } if (!run.read) hush(); render(); if (run.read && run.lastSay) speak(run.lastSay); }; }
   async function next() { const r = run; if (!r) return; if (r.phase === 'steps') { r.i++; if (r.i >= r.D.steps.length) { r.phase = 'quiz'; r.qi = -1; return nextQ(); } const st = r.D.steps[r.i]; r.vars = st.live ? await liveVars(st.live) : null; r.missing = !!(st.live && !r.vars); for (const a of st.act || []) { if (r.missing && a[0] === 'flyLive') continue; await act(a); } render(); speak(r.lastSay); } }
@@ -134,6 +153,13 @@
     weather: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-cloud" d="M48 58a22 22 0 0 1 40-14 26 26 0 0 1 48 6 18 18 0 0 1 4 36H54a16 16 0 0 1-6-28z"/><path class="la-bolt" d="M104 70l-16 26h14l-8 22 26-32h-14l10-16z"/><path class="la-bolt b2" d="M70 74l-8 14h8l-4 12 14-18h-8l6-8z"/></svg>',
     sources: '<svg viewBox="0 0 200 120" aria-hidden="true"><rect class="la-page" x="46" y="16" width="70" height="92" rx="3" transform="rotate(-6 81 62)"/><rect class="la-page p2" x="84" y="14" width="70" height="92" rx="3" transform="rotate(5 119 60)"/>' + [30, 42, 54, 66, 78].map((y, i) => `<line class="la-ink" x1="96" y1="${y}" x2="${142 - (i % 2) * 14}" y2="${y}" style="--d:${i * .35}s" transform="rotate(5 119 60)"/>`).join('') + '<circle class="la-lens" cx="132" cy="80" r="16"/><line class="la-lens" x1="143" y1="92" x2="160" y2="108"/></svg>' };
   const HOOK = { quakes: 'The ground is shaking somewhere right now. Find the pattern.', sky: 'Something is racing over your head at almost 8 km every second.', weather: 'Watch real storms flash, live from space.', sources: 'Read a real 180-year-old book. Can you spot the clues?' };
+  Object.assign(ART, {
+    volcanoes: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-mtn" d="M30 112 L88 46 L100 52 L112 46 L170 112 Z"/><path class="la-lava" d="M94 52 Q100 30 106 52 Z"/>' + [0, 1, 2].map(i => `<circle class="la-ash" cx="${96 + i * 5}" cy="40" r="${6 + i * 2}" style="--d:${i * 0.9}s"/>`).join('') + '</svg>',
+    moon: '<svg viewBox="0 0 200 120" aria-hidden="true"><circle cx="100" cy="60" r="38" fill="#2a2d36"/><circle class="la-moonlit" cx="100" cy="60" r="38"/><circle cx="88" cy="50" r="5" fill="rgb(0 0 0 / .18)"/><circle cx="110" cy="72" r="7" fill="rgb(0 0 0 / .15)"/><circle cx="114" cy="46" r="3" fill="rgb(0 0 0 / .18)"/></svg>',
+    scale: '<svg viewBox="0 0 200 120" aria-hidden="true"><line x1="14" y1="64" x2="190" y2="64" class="la-ruler"/><circle cx="20" cy="64" r="6" fill="#4f8fe0"/><circle cx="46" cy="64" r="2.5" fill="#cfd6e4"/><circle cx="86" cy="64" r="8" fill="#F2C43C"/><circle class="la-pulse" cx="20" cy="64" r="3"/><text x="186" y="52" text-anchor="end" class="la-lbl">light-day</text><text x="20" y="88" class="la-lbl">Earth</text></svg>',
+    climate: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-ice" d="M20 96 L60 70 L104 82 L150 64 L186 90 L186 112 L20 112 Z"/><path class="la-sea" d="M0 100 Q50 92 100 100 T200 100 V120 H0 Z"/><polyline class="la-co2" points="20,48 50,44 80,40 110,35 140,30 170,24"/></svg>',
+    migration: '<svg viewBox="0 0 200 120" aria-hidden="true"><path class="la-route" d="M24 30 C70 20 120 100 176 90"/><g class="la-bird"><path d="M-7 0 Q-3 -5 0 0 Q3 -5 7 0" fill="none" stroke="#EFE4CC" stroke-width="2"/></g></svg>' });
+  Object.assign(HOOK, { volcanoes: 'Some volcanoes are erupting this week. Where do they all live?', moon: 'Half the Moon is always in sunlight. So why does it change shape?', scale: 'A message to the farthest spacecraft takes almost a whole day. How big is space?', climate: 'Read the planet\u2019s vital signs straight from the scientists\u2019 own records.', migration: 'Follow butterflies, whales and birds across the planet, month by month.' });
   async function whoa(h) { const box = h.querySelector('.ln-whoa'); if (!box) return; const Q = quakes(), b = biggest(), m = moon(), v = await voyager(); const W = [];
     if (Q.length) W.push({ n: Q.length, d: 0, u: '', t: 'earthquakes on the map this week', s: b ? `Biggest: magnitude ${fmt(b.mag, 1)}` : '', l: 'quakes' });
     if (m) W.push({ n: m.lit, d: 0, u: '%', t: 'of the Moon is lit by the Sun right now', s: m.name.charAt(0).toUpperCase() + m.name.slice(1), l: 'sky' });
@@ -144,24 +170,91 @@
     const RMo = matchMedia('(prefers-reduced-motion: reduce)').matches;
     box.querySelectorAll('b[data-n]').forEach(el => { const N = +el.dataset.n, d = +el.dataset.d, u = el.dataset.u; const F = x => d < 0 ? `${Math.floor(x)} h ${String(Math.floor(x % 1 * 60)).padStart(2, '0')} m` : fmt(x, d) + u; if (RMo) { el.textContent = F(N); return; } const t0 = performance.now(), T = 1400;
       const f = now => { const k = Math.min(1, (now - t0) / T), e = 1 - Math.pow(1 - k, 3); el.textContent = F(N * e); if (k < 1 && el.isConnected) requestAnimationFrame(f); }; requestAnimationFrame(f); }); }
+  function tileHTML(les, a, st) { const D = les.levels[a]; if (!D) return ''; const s = (st[les.id] || {})[a] || 0;
+    return `<article class="ln-tile ln-${esc(les.id)}"><button type="button" class="ln-art" data-l="${les.id}" aria-label="Start: ${esc(D.title)}">${ART[les.id] || ''}<span class="ln-kind">${esc(les.icon)}︎ ${esc(les.topic)}</span></button>
+      <div class="ln-tb"><h4>${esc(D.title)}</h4>${HOOK[les.id] ? `<p class="ln-hook">${esc(HOOK[les.id])}</p>` : ''}<p class="ln-meta">${D.mins} min · ${D.steps.length} steps · ${D.quiz.length} questions <span class="ln-stars" aria-label="${s} of 3 stars">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></p>
+      <button type="button" class="go ln-go" data-l="${les.id}">${s ? '↻ Play again' : '▶ Start mission'}</button></div></article>`; }
   function paintGrid() { const h = document.getElementById('learnHost'); if (!h || !L) return; const a = age(), st = store(), lvl = L.levels.find(l => l.id === a) || {};
     h.innerHTML = `<div class="ln-ages" role="group" aria-label="Who is learning?"><span>Who's exploring?</span>${L.levels.map(l => `<button type="button" data-age="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div>
      <div class="ln-whoa" aria-live="off"></div>
      <h3 class="ln-pick">Pick a mission</h3>
-     <div class="ln-grid${lvl.read ? ' big' : ''}">${L.lessons.map(les => { const D = les.levels[a]; if (!D) return ''; const s = (st[les.id] || {})[a] || 0;
-       return `<article class="ln-tile ln-${esc(les.id)}"><button type="button" class="ln-art" data-l="${les.id}" aria-label="Start: ${esc(D.title)}">${ART[les.id] || ''}<span class="ln-kind">${esc(les.icon)} ${esc(les.topic)}</span></button>
-        <div class="ln-tb"><h4>${esc(D.title)}</h4>${HOOK[les.id] ? `<p class="ln-hook">${esc(HOOK[les.id])}</p>` : ''}<p class="ln-meta">${D.mins} min · ${D.steps.length} steps · ${D.quiz.length} questions <span class="ln-stars" aria-label="${s} of 3 stars">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></p>
-        <button type="button" class="go ln-go" data-l="${les.id}">${s ? '↻ Play again' : '▶ Start mission'}</button>
-        <details class="ln-teach"><summary>For teachers</summary><ul>${les.teacher.goals.map(g => `<li>${esc(g)}</li>`).join('')}</ul><p class="small"><b>Talk about:</b> ${les.teacher.discuss.map(esc).join(' ')}</p><p class="small muted">Uses: ${esc(les.teacher.uses)}</p></details></div></article>`; }).join('')}</div>`;
-    h.querySelectorAll('[data-age]').forEach(b => b.onclick = () => { try { localStorage.setItem(AGE, b.dataset.age); } catch (e) { } paintGrid(); });
+     <div class="ln-grid${lvl.read ? ' big' : ''}">${L.lessons.map(les => tileHTML(les, a, st)).join('')}</div>`;
+    h.querySelectorAll('[data-age]').forEach(b => b.onclick = () => { try { localStorage.setItem(AGE, b.dataset.age); } catch (e) { } paintGrid(); paintEdu(); });
     h.querySelectorAll('.ln-go,.ln-art').forEach(b => b.onclick = () => start(b.dataset.l, age())); whoa(h); }
+
+  // ---------- For educators (10 Nov 2026: "the site should mainly be tailored to educators … an educators section, separate from students") ----------
+  /* Today's question: one live-data warm-up a day, picked by the date (UTC), the same question for every class that day. */
+  const TODAY = ['countM5', 'moonLit', 'voyagerAU', 'co2Change', 'biggestMag', 'iceVsAvg', 'moonNextFull', 'volcCount', 'tempRank', 'migDir', 'deepest', 'voyagerLH', 'migFarthest'];
+  async function todayQ(box) { const d = new Date(), k = Math.floor(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()) / 864e5);
+    let q = null; for (let i = 0; i < TODAY.length && !q; i++) { try { q = await liveQ(TODAY[(k + i) % TODAY.length]); } catch (e) { q = null; } }
+    if (!q) { box.innerHTML = '<p class="small muted">Today’s question needs the live data, which has not loaded yet. Try again in a moment.</p>'; return; }
+    box.innerHTML = `<p class="tq-q">${esc(q.q)}</p><ol class="tq-a" type="A">${q.a.map((x, i) => `<li data-i="${i}">${esc(x)}</li>`).join('')}</ol><div class="tq-row"><button type="button" class="ln-b tq-show">Show the answer</button><button type="button" class="ln-b tq-big">⛶ Show on the big screen</button></div><div class="tq-why" hidden><p><b>Answer: ${'ABCD'[q.ok]}.</b> ${esc(q.why || '')}</p></div><p class="small muted">Built in your browser from the live data on this page, ${esc(d.toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' }))}. A new question every day.</p>`;
+    box.querySelector('.tq-show').onclick = () => { box.querySelector('.tq-why').hidden = false; box.querySelectorAll('.tq-a li').forEach(li => li.classList.toggle('ok', +li.dataset.i === q.ok)); };
+    box.querySelector('.tq-big').onclick = () => { const el = box.closest('.edu-today'); el.classList.toggle('tq-full'); if (el.classList.contains('tq-full')) { const x = () => { if (!el.classList.contains('tq-full')) return removeEventListener('keydown', h); }; const h = e => { if (e.key === 'Escape') { el.classList.remove('tq-full'); removeEventListener('keydown', h); } }; addEventListener('keydown', h); } }; }
+  const NGSS_NOTE = 'NGSS is a registered trademark of WestEd. Neither WestEd nor the lead states and partners that developed the Next Generation Science Standards were involved in the production of this site, and they do not endorse it.';
+  function paintEdu() { const h = document.getElementById('eduHost'); if (!h || !L) return; const a = age();
+    h.innerHTML = `<section class="edu-today"><div class="edu-h"><span class="eyebrow">Warm-up</span><h3>Today’s question</h3></div><div class="tq-box"><p class="small muted">Loading…</p></div></section>
+     <section class="edu-how"><div class="edu-h"><span class="eyebrow">How to use the missions in class</span></div><div class="edu-steps">
+       <div><b>1 · Class mode</b><span>For the projector: big text, no reading aloud, you move it on with a click, a clicker or the arrow keys. Students answer on paper or with a show of hands, then you pick the class’s answer.</span></div>
+       <div><b>2 · Worksheet</b><span>One printed page per student: what to look for at each step, then the quiz. The answer key prints on its own page. Live questions are built from the day you print.</span></div>
+       <div><b>3 · On their own</b><span>Students pick their age on the For students tab and play on any device. Stars stay in that browser; nothing is collected.</span></div></div></section>
+     <section class="edu-list"><div class="edu-h"><span class="eyebrow">Missions</span><h3>Every mission, every age</h3><div class="ln-ages edu-ages" role="group" aria-label="Age level">${L.levels.map(l => `<button type="button" data-eage="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div></div>
+       <div class="edu-grid">${L.lessons.map(les => { const D = les.levels[a]; if (!D) return ''; const T = les.teacher || {};
+         return `<article class="edu-m"><div class="edu-mh"><span class="edu-ic" aria-hidden="true">${esc(les.icon)}︎</span><div><span class="ln-kind">${esc(les.topic)}</span><h4>${esc(D.title)}</h4><span class="ln-meta">${D.mins} min · ${D.steps.length} steps · ${D.quiz.length} questions</span></div></div>
+           <div class="edu-btns"><button type="button" class="go" data-cls="${les.id}">▶ Class mode</button><button type="button" class="ln-b" data-sheet="${les.id}">⎙ Worksheet + key</button><button type="button" class="ln-b" data-try="${les.id}">Try it yourself</button></div>
+           <details class="edu-d"><summary>Goals, discussion and standards</summary><ul>${(T.goals || []).map(g => `<li>${esc(g)}</li>`).join('')}</ul>${(T.discuss || []).length ? `<p class="small"><b>Talk about:</b> ${T.discuss.map(esc).join(' ')}</p>` : ''}<p class="small muted">Uses: ${esc(T.uses || '')}</p>
+           ${(T.ngss || []).length ? `<p class="small"><b>NGSS performance expectations:</b></p><ul class="edu-ngss">${T.ngss.map(n => `<li><b>${esc(n[0])}</b> ${esc(n[1])}</li>`).join('')}</ul>` : '<p class="small muted">No NGSS performance expectation fits this one closely; it is about reading sources.</p>'}</details></article>`; }).join('')}</div>
+       <p class="small muted">${NGSS_NOTE}</p></section>`;
+    h.querySelectorAll('[data-eage]').forEach(b => b.onclick = () => { try { localStorage.setItem(AGE, b.dataset.eage); } catch (e) { } paintEdu(); paintGrid(); });
+    h.querySelectorAll('[data-cls]').forEach(b => b.onclick = () => start(b.dataset.cls, age(), { cls: true }));
+    h.querySelectorAll('[data-try]').forEach(b => b.onclick = () => start(b.dataset.try, age()));
+    h.querySelectorAll('[data-sheet]').forEach(b => b.onclick = () => sheet(b.dataset.sheet, age(), b));
+    todayQ(h.querySelector('.tq-box')); }
+
+  /* Worksheet + answer key: printed from the lesson itself (the browser's own print dialog; "Save as PDF" works too). */
+  async function sheet(lid, lv, btn) { const les = L.lessons.find(x => x.id === lid), D = les && les.levels[lv]; if (!D) return; const lvl = L.levels.find(x => x.id === lv) || {}; if (btn) { btn.disabled = true; btn.textContent = 'Preparing…'; }
+    const blank = t => esc(String(t).replace(/\{(\w+)\.(\w+)\}/g, '________'));
+    const Q = []; for (const q of D.quiz) { if (q.t === 'live') { try { const g = await liveQ(q.id); if (g) Q.push({ ...g, t: 'mc', live: true }); } catch (e) { } } else Q.push(q); }
+    const day = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
+    const qHTML = Q.map((q, i) => { const n = i + 1; if (q.t === 'tf') return `<li><p>${esc(q.q)}</p><p class="opt">☐ True &nbsp;&nbsp; ☐ False</p></li>`;
+      if (q.t === 'order') { const it = shuffle(q.items.map((x, k) => [x, k])); q._sh = it; return `<li><p>${esc(q.q)} <i>(write 1, 2, 3…)</i></p>${it.map(([x]) => `<p class="opt">____ ${esc(x)}</p>`).join('')}</li>`; }
+      return `<li><p>${esc(q.q)}${q.live ? ' <i>(today’s data)</i>' : ''}</p>${q.a.map((x, k) => `<p class="opt">☐ ${'ABCD'[k]}. ${esc(x)}</p>`).join('')}</li>`; }).join('');
+    const kHTML = Q.map((q, i) => { let ans = q.t === 'tf' ? (q.ok ? 'True' : 'False') : q.t === 'order' ? q.items.map((x, k) => `${k + 1}. ${esc(x)}`).join(' · ') : `${'ABCD'[q.ok]}. ${esc(q.a[q.ok])}`;
+      return `<li><p><b>${ans}</b></p><p>${esc(q.why || '')}</p>${q.src ? `<p class="src">Source: ${esc(q.src[0])} · ${esc(q.src[1])}</p>` : q.live ? `<p class="src">Built from the site's live data on ${esc(day)}.</p>` : ''}</li>`; }).join('');
+    const T = les.teacher || {};
+    const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(D.title)} · The Owlmanac Classroom</title><style>
+      body{font:12pt/1.45 Georgia,serif;color:#111;margin:18mm 16mm}h1{font:700 19pt/1.2 system-ui,sans-serif;margin:0 0 2px}h2{font:700 12.5pt system-ui,sans-serif;margin:16px 0 6px;border-bottom:1.5px solid #111;padding-bottom:3px}
+      .meta{font:9.5pt system-ui,sans-serif;color:#444;margin-bottom:10px}.name{font:10.5pt system-ui,sans-serif;margin:8px 0 12px}ol{padding-left:20px}li{margin:0 0 10px;page-break-inside:avoid}li p{margin:0 0 3px}
+      .opt{margin-left:8px}.line{border-bottom:1px solid #999;height:20px;margin:2px 0 6px}.src{font:8.5pt system-ui,sans-serif;color:#555;word-break:break-all}.key{page-break-before:always}
+      .foot{font:8.5pt system-ui,sans-serif;color:#555;margin-top:14px;border-top:1px solid #ccc;padding-top:6px}${lv === 'k2' ? 'body{font-size:15pt}' : ''}</style></head><body>
+      <h1>${esc(D.title)}</h1><div class="meta">The Owlmanac Observatory · Classroom · ${esc(les.topic)} · ${esc(lvl.label || '')} · about ${D.mins} minutes · printed ${esc(day)}</div>
+      <div class="name">Name: ______________________ &nbsp; Date: ____________</div>
+      <h2>As you explore (theowlmanac.com → Classroom → ${esc(D.title)})</h2><ol>${D.steps.map(st => `<li><p>${blank(st.say)}</p><div class="line"></div></li>`).join('')}</ol>
+      <h2>Quiz</h2><ol>${qHTML}</ol>
+      <div class="foot">Gaps marked ________ are filled from what the site shows on the day. Questions marked “today’s data” were built from the live data when this sheet was printed.</div>
+      <div class="key"><h1>Answer key</h1><div class="meta">${esc(D.title)} · ${esc(lvl.label || '')}</div><h2>Answers</h2><ol>${kHTML}</ol>
+      ${(T.goals || []).length ? `<h2>Goals</h2><ul>${T.goals.map(g => `<li>${esc(g)}</li>`).join('')}</ul>` : ''}${(T.discuss || []).length ? `<h2>Talk about</h2><ul>${T.discuss.map(g => `<li>${esc(g)}</li>`).join('')}</ul>` : ''}
+      ${(T.ngss || []).length ? `<h2>NGSS performance expectations</h2><ul>${T.ngss.map(n => `<li><b>${esc(n[0])}</b> ${esc(n[1])}</li>`).join('')}</ul><p class="src">${NGSS_NOTE}</p>` : ''}
+      <div class="foot">theowlmanac.com · free public data for research and education · every figure links to its source on the site.</div></div></body></html>`;
+    const f = document.createElement('iframe'); f.setAttribute('aria-hidden', 'true'); f.style.cssText = 'position:fixed;right:0;bottom:0;width:0;height:0;border:0'; document.body.appendChild(f);
+    const doc = f.contentWindow.document; doc.open(); doc.write(html); doc.close();
+    setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { console.warn('print', e); } if (btn) { btn.disabled = false; btn.textContent = '⎙ Worksheet + key'; } setTimeout(() => f.remove(), 60000); }, 400); }
   async function load() { if (L) return L; const [a, b] = await Promise.all([fetch('assets/learn/lessons.json').then(r => r.json()), fetch('assets/almanac/almanac.json').then(r => r.ok ? r.json() : null).catch(() => null)]); L = a; ALM = b; return L; }
   function mount() { const ls = document.getElementById('lessons'), sec = document.getElementById('classroom'); if (!ls || !sec || document.getElementById('learnHost')) return;
     const box = document.createElement('div'); box.className = 'ln-wrap';
-    box.innerHTML = `<div class="ln-hero"><div class="ln-hero-t"><div class="eyebrow">Classroom · missions on the live globe</div><h2>The whole planet is your classroom.</h2><p>Pick a mission. The globe flies you there, you explore today's real data, then try a quick quiz. Nothing you do here leaves this device.</p></div><img class="ln-owl" src="brand/owl-flying-512.png" alt="" aria-hidden="true"></div><div id="learnHost"><p class="small muted">Loading the missions…</p></div>`;
-    const first = sec.querySelector(':scope > .sec-head'); sec.insertBefore(box, sec.firstChild);
-    if (first) { const ey = first.querySelector('.eyebrow'); if (ey) ey.textContent = 'For teachers'; first.classList.add('ln-teachhead'); const h2 = first.querySelector('h2'); if (h2) h2.textContent = 'Lesson plans built on live data'; }
-    load().then(paintGrid).catch(e => { document.getElementById('learnHost').innerHTML = '<p class="small muted">The lessons did not load. Try again later.</p>'; console.warn('lessons', e); }); }
+    box.innerHTML = `<div class="ln-hero"><div class="ln-hero-t"><div class="eyebrow">Classroom · missions on the live globe</div><h2>The whole planet is your classroom.</h2><p>Missions that fly the real, live globe, for ages 6 to adult. Students explore today’s data and take a quick quiz; teachers get class mode, worksheets with answer keys, and a new warm-up question every day.</p></div><img class="ln-owl" src="brand/owl-flying-512.png" alt="" aria-hidden="true"></div>
+      <div class="cl-tabs" role="tablist" aria-label="Classroom"><button type="button" role="tab" id="clTabS" aria-controls="clStudents">For students</button><button type="button" role="tab" id="clTabE" aria-controls="clEducators">For educators</button></div>
+      <div id="clStudents" role="tabpanel" aria-labelledby="clTabS"><div id="learnHost"><p class="small muted">Loading the missions…</p></div></div>
+      <div id="clEducators" role="tabpanel" aria-labelledby="clTabE" hidden><div id="eduHost"><p class="small muted">Loading…</p></div><div class="edu-more"></div></div>`;
+    sec.insertBefore(box, sec.firstChild);
+    /* everything else in the section (sample lesson plans, the old almanacs, the letter and feedback) is for educators */
+    const more = box.querySelector('.edu-more'); [...sec.children].filter(c => c !== box).forEach(c => more.appendChild(c));
+    const first = more.querySelector(':scope > .sec-head'); if (first) { const ey = first.querySelector('.eyebrow'); if (ey) ey.textContent = 'Lesson plans'; first.classList.add('ln-teachhead'); const h2 = first.querySelector('h2'); if (h2) h2.textContent = 'Longer lesson plans built on live data'; }
+    const tabS = box.querySelector('#clTabS'), tabE = box.querySelector('#clTabE');
+    const show = t => { const e = t === 'e'; tabS.setAttribute('aria-selected', String(!e)); tabE.setAttribute('aria-selected', String(e)); box.querySelector('#clStudents').hidden = e; box.querySelector('#clEducators').hidden = !e; try { localStorage.setItem('owl-class-tab', t); } catch (x) { } };
+    tabS.onclick = () => show('s'); tabE.onclick = () => show('e'); let t0 = 's'; try { t0 = localStorage.getItem('owl-class-tab') || 's'; } catch (x) { } show(t0);
+    window.OwlClassroom = { show };
+    load().then(() => { paintGrid(); paintEdu(); }).catch(e => { document.getElementById('learnHost').innerHTML = '<p class="small muted">The lessons did not load. Try again later.</p>'; console.warn('lessons', e); }); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount); else mount();
   window.OwlLearn = { start, end, get running() { return !!run; } };
 })();

@@ -39,7 +39,21 @@
      "Why are there almost no earthquakes in the middle of some continents?",
      "What would you need to know before saying one country 'has more earthquakes' than another?"
     ],
-    "uses": "Earthquakes layer (USGS, past week), See-through Earth (depths)."
+    "uses": "Earthquakes layer (USGS, past week), See-through Earth (depths).",
+    "ngss": [
+     [
+      "4-ESS2-2",
+      "Analyze and interpret data from maps to describe patterns of Earth's features."
+     ],
+     [
+      "MS-ESS2-3",
+      "Analyze and interpret data on the distribution of fossils and rocks, continental shapes, and seafloor structures to provide evidence of the past plate motions."
+     ],
+     [
+      "MS-ESS3-2",
+      "Analyze and interpret data on natural hazards to forecast future catastrophic events and inform the development of technologies to mitigate their effects."
+     ]
+    ]
    },
    "levels": {
     "k2": {
@@ -544,6 +558,555 @@
    }
   },
   {
+   "id": "volcanoes",
+   "topic": "Earth",
+   "icon": "▲",
+   "teacher": {
+    "goals": [
+     "Most volcanoes and earthquakes mark the edges of tectonic plates; the Ring of Fire around the Pacific is the most active zone in the world.",
+     "Plates meet at three main kinds of boundary: divergent (moving apart, like Iceland), convergent (moving together, often one plate sinking under another), and transform (sliding past each other).",
+     "Some volcanoes, like Hawaii's, form far from any plate edge over a hotspot, and the weekly volcano report lists only volcanoes with notable activity that week."
+    ],
+    "discuss": [
+     "If the Hawaiian islands get older toward the northwest, what does that tell you about which way the Pacific Plate is moving?",
+     "Why might a volcano that has been erupting for years not show up in this week's volcano report?",
+     "Earthquakes along the San Andreas Fault are shallow, but some under the western Pacific are hundreds of kilometres deep. What is different about those two places?"
+    ],
+    "uses": "Volcanoes layer (Smithsonian / USGS Weekly Volcanic Activity Report) and Earthquakes layer (USGS); globe flights to the Pacific, Hawaii and Iceland; see-through Earth (x-ray) for quake depths; the Inside the Earth panel.",
+    "ngss": [
+     [
+      "4-ESS2-2",
+      "Analyze and interpret data from maps to describe patterns of Earth's features."
+     ],
+     [
+      "MS-ESS2-3",
+      "Analyze and interpret data on the distribution of fossils and rocks, continental shapes, and seafloor structures to provide evidence of the past plate motions."
+     ],
+     [
+      "HS-ESS1-5",
+      "Evaluate evidence of the past and current movements of continental and oceanic crust and the theory of plate tectonics to explain the ages of crustal rocks."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "Where do volcanoes live?",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Look at all the little triangles. Each one is a volcano that was busy this week!",
+       "act": [
+        [
+         "only",
+         [
+          "volc"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Deep under the ground, rock gets so hot it melts. When melted rock comes out of a volcano, we call it lava.",
+       "act": []
+      },
+      {
+       "say": "Now let's add earthquakes. Notice how the volcanoes and earthquakes make a big ring around this ocean. It is called the Ring of Fire.",
+       "act": [
+        [
+         "only",
+         [
+          "volc",
+          "quake"
+         ]
+        ]
+       ]
+      },
+      {
+       "say": "This week, {volc.n} volcanoes were in the volcano report. Can you find one near you?",
+       "live": "volcano",
+       "act": []
+      },
+      {
+       "say": "Here is Hawaii. These islands are volcanoes, right in the middle of the ocean!",
+       "act": [
+        [
+         "fly",
+         -155.5,
+         19.6,
+         3000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Lava is melted rock.",
+       "ok": true,
+       "why": "Yes! Lava is melted rock that comes out of a volcano.",
+       "src": [
+        "USGS: Volcano glossary",
+        "https://pubs.usgs.gov/gip/volcus/page42.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which ocean has a Ring of Fire around it?",
+       "a": [
+        "The Pacific Ocean",
+        "The Arctic Ocean",
+        "No ocean"
+       ],
+       "ok": 0,
+       "why": "The Ring of Fire goes around the Pacific Ocean. It has more volcanoes and earthquakes than anywhere else.",
+       "src": [
+        "USGS: What is the Ring of Fire?",
+        "https://www.usgs.gov/index.php/faqs/what-ring-fire"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The islands of Hawaii are volcanoes.",
+       "ok": true,
+       "why": "Yes. Hawaii's islands were made by volcanoes in the middle of the Pacific Ocean.",
+       "src": [
+        "USGS: Hotspots",
+        "https://pubs.usgs.gov/gip/dynamic/hotspots.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "volcCount",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "The Ring of Fire and other volcano homes",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "These are the volcanoes in this week's Smithsonian / USGS volcano report. Look at the Pacific Ocean: notice how many sit around its edges.",
+       "act": [
+        [
+         "only",
+         [
+          "volc"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Now add this week's earthquakes. Volcanoes and earthquakes line up along the same belts. These belts are the edges of the giant moving pieces of Earth's outer shell, called plates.",
+       "act": [
+        [
+         "only",
+         [
+          "volc",
+          "quake"
+         ]
+        ]
+       ]
+      },
+      {
+       "say": "Around the Pacific, the Pacific Plate meets many other plates. Scientists call this the Ring of Fire: the most active zone for earthquakes and volcanoes in the world.",
+       "act": []
+      },
+      {
+       "say": "Iceland sits right on top of a crack where two plates are pulling apart. Melted rock rises into the gap, so Iceland has many volcanoes. Melted rock underground is called magma.",
+       "act": [
+        [
+         "fly",
+         -19,
+         64.9,
+         2500000
+        ]
+       ]
+      },
+      {
+       "say": "Hawaii is different: it is more than 3,200 km from the nearest plate edge. Its volcanoes grow over a very hot spot deep under the plate.",
+       "act": [
+        [
+         "fly",
+         -155.5,
+         19.6,
+         3000000
+        ]
+       ]
+      },
+      {
+       "say": "This week's report lists {volc.n} volcanoes ({volc.week}). Tap a triangle to read what the scientists wrote about it.",
+       "live": "volcano",
+       "act": [
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why do volcanoes and earthquakes line up in long belts?",
+       "a": [
+        "They mark the edges of Earth's plates",
+        "They follow the equator",
+        "They happen where it rains most"
+       ],
+       "ok": 0,
+       "why": "Earthquakes and volcanoes mark the boundaries between moving plates.",
+       "src": [
+        "Smithsonian GVP: This Dynamic Planet map",
+        "https://volcano.si.edu/resource_dynamicplanet.cfm"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "In Iceland, two plates are pulling apart.",
+       "ok": true,
+       "why": "Iceland is splitting along the spreading line between the North American and Eurasian Plates.",
+       "src": [
+        "USGS: Understanding plate motions",
+        "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how far is Hawaii from the nearest plate edge?",
+       "a": [
+        "Less than 10 km",
+        "About 300 km",
+        "More than 3,200 km"
+       ],
+       "ok": 2,
+       "why": "Hawaii formed in the middle of the Pacific, more than 3,200 km from the nearest plate boundary.",
+       "src": [
+        "USGS: Hotspots",
+        "https://pubs.usgs.gov/gip/dynamic/hotspots.html"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Magma is melted rock that forms deep inside the Earth.",
+       "ok": true,
+       "why": "Magma is molten rock formed deep within the Earth. Once it erupts, it is called lava.",
+       "src": [
+        "USGS: Volcano glossary",
+        "https://pubs.usgs.gov/gip/volcus/page42.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "volcPick",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Three kinds of plate boundary",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Volcanoes from this week's report and the latest earthquakes. Notice how they trace lines across the globe. Those lines are plate boundaries.",
+       "act": [
+        [
+         "only",
+         [
+          "volc",
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Boundary type 1, divergent: plates move apart and new crust forms. Iceland straddles the Mid-Atlantic Ridge, where the North American and Eurasian Plates spread about 2.5 cm a year.",
+       "act": [
+        [
+         "fly",
+         -19,
+         64.9,
+         2500000
+        ]
+       ]
+      },
+      {
+       "say": "Boundary type 2, convergent: plates move toward each other and one can sink under the other. This is subduction. It makes deep ocean trenches, like the Mariana Trench here, and feeds volcanoes like those in the Andes and the Cascades.",
+       "act": [
+        [
+         "fly",
+         150,
+         20,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "Turn on x-ray to see quakes at their real depth. Under the subduction zones, notice quakes going down into the Earth along the sinking plate: the deepest reach about 700 km.",
+       "act": [
+        [
+         "xray",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "Boundary type 3, transform: plates slide past each other sideways, like the San Andreas Fault in California. These quakes are shallow, and there are few volcanoes.",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "fly",
+         -120,
+         36,
+         3000000
+        ]
+       ]
+      },
+      {
+       "say": "And Hawaii, far from any boundary, sits over a hotspot. This week's report: {volc.n} volcanoes, {volc.week}. Which boundary type is each one near?",
+       "live": "volcano",
+       "act": [
+        [
+         "fly",
+         -155.5,
+         19.6,
+         3000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "At which kind of boundary do plates move apart?",
+       "a": [
+        "Divergent",
+        "Convergent",
+        "Transform"
+       ],
+       "ok": 0,
+       "why": "Divergent boundaries are spreading centres where plates move apart and new crust forms.",
+       "src": [
+        "USGS: Understanding plate motions",
+        "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Where do the deepest earthquakes happen?",
+       "a": [
+        "Inside plates sinking at subduction zones",
+        "Along transform faults like the San Andreas",
+        "Under Iceland"
+       ],
+       "ok": 0,
+       "why": "The deepest quakes, to about 700 km, happen inside subducting slabs. Transform faults are active only to about 20 km.",
+       "src": [
+        "USGS: At what depth do earthquakes occur?",
+        "https://usgs.gov/faqs/what-depth-do-earthquakes-occur-what-significance-depth"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Kauai is far northwest of the hotspot; the Big Island sits over it. Which has older rocks?",
+       "a": [
+        "Kauai",
+        "The Big Island",
+        "They are the same age"
+       ],
+       "ok": 0,
+       "why": "Kauai's oldest rocks are about 5.5 million years old; the Big Island's oldest exposed rocks are less than 0.7 million years old. The Pacific Plate carries islands away from the hotspot.",
+       "src": [
+        "USGS: Hotspots",
+        "https://pubs.usgs.gov/gip/dynamic/hotspots.html"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Ocean trenches, the deepest parts of the ocean floor, are created by subduction.",
+       "ok": true,
+       "why": "Trenches form where one plate dives under another. The Challenger Deep in the Mariana Trench is nearly 11,000 m deep.",
+       "src": [
+        "USGS: Understanding plate motions",
+        "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "volcCount",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Reading the weekly volcano report",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Volcanoes from the Smithsonian / USGS Weekly Volcanic Activity Report, with recent USGS earthquakes. The Ring of Fire, where the Pacific Plate meets many surrounding plates, is the most seismically and volcanically active zone in the world.",
+       "act": [
+        [
+         "only",
+         [
+          "volc",
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "This week's report covers {volc.week} and lists {volc.n} volcanoes. Notice that is far fewer than the roughly 1,350 potentially active volcanoes worldwide. The report is not a census of everything erupting.",
+       "live": "volcano",
+       "act": []
+      },
+      {
+       "say": "GVP says the report does not necessarily include all volcanic activity that week. A volcano is typically included when an alert level changes, an ash advisory is issued, or a credible report describes new or changed activity. The report has two parts, New Activity/Unrest and Continuing Activity. Routine activity at the dozen or so volcanoes that have erupted almost nonstop for decades is typically not reported, and seafloor volcanism seldom is.",
+       "act": []
+      },
+      {
+       "say": "It is also compiled fast, with little time for fact-checking, so items may later prove wrong. Treat each entry as a pointer to the observatory's own reports, not the final word.",
+       "act": []
+      },
+      {
+       "say": "Depth tells the boundary story. With x-ray on, quakes under subduction zones reach about 700 km inside the sinking slab, while transform faults stay shallow, to about 20 km.",
+       "act": [
+        [
+         "xray",
+         true
+        ],
+        [
+         "fly",
+         150,
+         20,
+         14000000
+        ],
+        [
+         "panel",
+         "inside"
+        ]
+       ]
+      },
+      {
+       "say": "Divergent, convergent, transform: Iceland splits along the Mid-Atlantic Ridge between the North American and Eurasian Plates. Hawaii, over 3,200 km from any boundary, is classically explained by a hotspot, though USGS authors note hotspots may be neither deep nor fixed. Science still argues about it.",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "fly",
+         -19,
+         64.9,
+         2500000
+        ],
+        [
+         "fly",
+         -155.5,
+         19.6,
+         3000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "The Weekly Volcanic Activity Report lists every volcano that erupted that week.",
+       "ok": false,
+       "why": "It summarizes activity that meets set criteria. Routine activity at volcanoes that have erupted almost continuously for decades is typically not reported, and seafloor volcanism is seldom reported.",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which would put a volcano in that week's report?",
+       "a": [
+        "A volcano observatory changes its alert level",
+        "It last erupted thousands of years ago and shows no unrest",
+        "It is on the list of about 1,350 potentially active volcanoes"
+       ],
+       "ok": 0,
+       "why": "Alert-level changes, ash advisories, and credible reports of new or changed activity are among the criteria.",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how deep can earthquakes inside subducting slabs go?",
+       "a": [
+        "About 20 km",
+        "About 60 km",
+        "About 700 km"
+       ],
+       "ok": 2,
+       "why": "Brittle cores of subducting slabs can generate quakes to depths of as much as 700 km.",
+       "src": [
+        "USGS: At what depth do earthquakes occur?",
+        "https://usgs.gov/faqs/what-depth-do-earthquakes-occur-what-significance-depth"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "volcCount",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "volcPick",
+       "src": [
+        "Smithsonian / USGS Weekly Volcanic Activity Report",
+        "https://volcano.si.edu/reports_weekly.cfm"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
    "id": "sky",
    "topic": "Space",
    "icon": "☾",
@@ -557,7 +1120,21 @@
      "If light takes 8 minutes from the Sun, what are you really seeing when you look at it?",
      "Why do astronauts float if there is still gravity up there?"
     ],
-    "uses": "Space stations layer (CelesTrak), Moon overhead, the Moon view, the Solar System view."
+    "uses": "Space stations layer (CelesTrak), Moon overhead, the Moon view, the Solar System view.",
+    "ngss": [
+     [
+      "1-ESS1-1",
+      "Use observations of the sun, moon, and stars to describe patterns that can be predicted."
+     ],
+     [
+      "MS-ESS1-1",
+      "Develop and use a model of the Earth-sun-moon system to describe the cyclic patterns of lunar phases, eclipses of the sun and moon, and seasons."
+     ],
+     [
+      "HS-ESS1-4",
+      "Use mathematical or computational representations to predict the motion of orbiting objects in the solar system."
+     ]
+    ]
    },
    "levels": {
     "k2": {
@@ -969,6 +1546,1037 @@
    }
   },
   {
+   "id": "moon",
+   "topic": "Space",
+   "icon": "☽",
+   "teacher": {
+    "goals": [
+     "The Sun always lights half of the Moon; phases are how much of that lit half we can see from Earth, and the cycle repeats about every 29.5 days.",
+     "There is no permanently 'dark side': the far side gets sunlight too, and is fully lit at new Moon. We just never face it, because the Moon spins once for each orbit.",
+     "The dark 'seas' (maria) are old impact basins filled with lava; the bright highlands are covered in craters that last for billions of years with no wind or water to erase them."
+    ],
+    "discuss": [
+     "If half the Moon is always lit, where is the lit half during a new Moon, and who would see it?",
+     "Why might the Apollo astronauts all have landed on the side that faces Earth?",
+     "Craters on Earth get worn away. What on Earth does the wearing, and why doesn't that happen on the Moon?"
+    ],
+    "uses": "The Moon globe (LRO imagery, IAU feature names, landing sites) with its dark side lit and unlit, and the Sky tonight panel for the live phase.",
+    "ngss": [
+     [
+      "1-ESS1-1",
+      "Use observations of the sun, moon, and stars to describe patterns that can be predicted."
+     ],
+     [
+      "MS-ESS1-1",
+      "Develop and use a model of the Earth-sun-moon system to describe the cyclic patterns of lunar phases, eclipses of the sun and moon, and seasons."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "The Moon's changing shape",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Here is our Moon, up close! The dark patches are called seas. But they have no water!",
+       "act": [
+        [
+         "moon"
+        ],
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "The Moon does not make its own light. The Sun shines on it.",
+       "act": []
+      },
+      {
+       "say": "The Sun always lights half of the Moon. The other half is in the dark.",
+       "act": [
+        [
+         "moonLit",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "As the Moon goes around us, we see more or less of the bright half. That is why its shape seems to change.",
+       "act": []
+      },
+      {
+       "say": "Some people say the Moon has a dark side. But the Sun lights every side, just at different times! Drag the Moon to turn it.",
+       "act": [
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "Tonight the Moon is a {moon.name}. Look up and see if you can find it!",
+       "live": "moonPhase",
+       "act": [
+        [
+         "moonLit",
+         false
+        ],
+        [
+         "closeMoon"
+        ],
+        [
+         "panel",
+         "sky"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "The Moon makes its own light.",
+       "ok": false,
+       "why": "No. Moonlight is sunlight bouncing off the Moon.",
+       "src": [
+        "NASA: Moonlight",
+        "https://science.nasa.gov/moon/moonlight/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Sun always lights up half of the Moon.",
+       "ok": true,
+       "why": "Yes! We just see different amounts of that bright half.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "The dark patches on the Moon are called…",
+       "a": [
+        "Seas",
+        "Clouds",
+        "Puddles"
+       ],
+       "ok": 0,
+       "why": "They are called seas, but they have no water. They are old, flat lava.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLooks",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Why the Moon changes shape",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "This is the Moon, made from pictures taken by a spacecraft circling it. Notice the dark grey patches and the bright, bumpy areas.",
+       "act": [
+        [
+         "moon"
+        ],
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "The Moon makes no light of its own. The Sun always lights up half of it, like a ball held next to a lamp.",
+       "act": [
+        [
+         "moonLit",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "As the Moon travels around Earth, we see different amounts of that sunlit half. Going from new Moon to new Moon again takes about 29.5 days.",
+       "act": []
+      },
+      {
+       "say": "The Moon spins just once for each trip around Earth, so the same side always faces us. The side we never see is the far side, not a dark side. Here the whole Moon is lit evenly. Drag the globe around to see the far side.",
+       "act": [
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "The dark patches are called maria, Latin for seas. They are giant craters that filled with lava long ago. The bright areas are highlands, covered in craters.",
+       "act": []
+      },
+      {
+       "say": "Tonight's Moon: {moon.name}, {moon.lit}% lit. Check the sky panel to see when and where to look.",
+       "live": "moonPhase",
+       "act": [
+        [
+         "moonLit",
+         false
+        ],
+        [
+         "closeMoon"
+        ],
+        [
+         "panel",
+         "sky"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why does the Moon seem to change shape?",
+       "a": [
+        "We see different amounts of its sunlit half as it orbits Earth",
+        "Clouds cover parts of it",
+        "It shrinks and grows"
+       ],
+       "ok": 0,
+       "why": "Half the Moon is always lit by the Sun. How much of that half faces us changes through the month.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how long does it take to go from one new Moon to the next?",
+       "a": [
+        "About 7 days",
+        "About 29.5 days",
+        "About 365 days"
+       ],
+       "ok": 1,
+       "why": "The phase cycle repeats about every 29.5 days.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The far side of the Moon is always dark.",
+       "ok": false,
+       "why": "The far side gets sunlight too. At new Moon it is fully lit, while the side facing us is in night.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What are the Moon's dark 'seas' (maria) really made of?",
+       "a": [
+        "Water",
+        "Old lava that filled huge craters",
+        "Shadows"
+       ],
+       "ok": 1,
+       "why": "Maria are impact basins that were filled with lava.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonLit",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Phases, the far side and the seas",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "The Moon globe, built from Lunar Reconnaissance Orbiter imagery. Its radius is about 1,740 km; the whole Moon is less than a third as wide as Earth.",
+       "act": [
+        [
+         "moon"
+        ],
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "Model it: the Sun lights one half of the Moon at all times. The phases (new, waxing crescent, first quarter, waxing gibbous, full, waning gibbous, third quarter, waning crescent) are just how much of that lit half faces Earth.",
+       "act": [
+        [
+         "moonLit",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "Two different months: the Moon orbits Earth in about 27.3 days, but new Moon to new Moon takes about 29.5 days, because Earth is also moving around the Sun and the Moon has to catch up to the same Sun-Earth line.",
+       "act": []
+      },
+      {
+       "say": "Earth and Moon are tidally locked: the Moon spins once per orbit, so we only see one side. The far side is not dark; at new Moon it is in full sunlight. Here the whole globe is lit evenly; drag it round to see the far side, which we never see from Earth.",
+       "act": [
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "Find the dark maria: impact basins flooded with lava between about 4.2 and 1.2 billion years ago. The bright highlands are older and heavily cratered. With no liquid water or wind, craters stay for billions of years.",
+       "act": []
+      },
+      {
+       "say": "Tonight: {moon.name}, {moon.lit}% lit. Use the sky panel and predict: will tomorrow's Moon be more or less lit?",
+       "live": "moonPhase",
+       "act": [
+        [
+         "moonLit",
+         false
+        ],
+        [
+         "closeMoon"
+        ],
+        [
+         "panel",
+         "sky"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "order",
+       "q": "Put the phases in order, starting from new Moon.",
+       "items": [
+        "New Moon",
+        "Waxing crescent",
+        "First quarter",
+        "Waxing gibbous",
+        "Full Moon",
+        "Waning gibbous",
+        "Third quarter",
+        "Waning crescent"
+       ],
+       "why": "The lit part grows (waxes) to full, then shrinks (wanes) back to new.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "The Moon orbits Earth in about 27.3 days, but its phases repeat every 29.5 days. Why?",
+       "a": [
+        "Earth also moves around the Sun, so the Moon needs extra time to line up again",
+        "The Moon slows down near full Moon",
+        "Clouds hide the Moon for two days"
+       ],
+       "ok": 0,
+       "why": "As Earth moves along its orbit, the Moon has to travel a bit further to return to the same position relative to the Sun.",
+       "src": [
+        "NASA: Moon phases",
+        "https://science.nasa.gov/moon/moon-phases/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "At new Moon, the far side of the Moon is in full sunlight.",
+       "ok": true,
+       "why": "At new Moon the Sun is behind the Moon from our view, lighting the side we never see.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Why do craters last so long on the Moon?",
+       "a": [
+        "There is no liquid water or wind to erode them",
+        "The Moon is too cold for rocks to move",
+        "New lava keeps refreshing them"
+       ],
+       "ok": 0,
+       "why": "Without water and wind, the Moon's impact history has been preserved for billions of years.",
+       "src": [
+        "NASA: Moon craters",
+        "https://science.nasa.gov/moon/lunar-craters/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonNextFull",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "The Moon up close: light, rock and footprints",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "The Moon globe uses Lunar Reconnaissance Orbiter imagery and the IAU's official feature names. It is lit evenly here so you can see the whole surface: notice the dark maria and the bright, cratered highlands.",
+       "act": [
+        [
+         "moon"
+        ],
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "Phases are pure geometry: one hemisphere is always sunlit, and we see a changing share of it over a synodic month of about 29.5 days. It is not Earth's shadow. Moonlight itself is dim: only about one-tenth of the sunlight hitting the Moon is reflected. This is the real lighting for this moment.",
+       "act": [
+        [
+         "moonLit",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "The 'dark side' is a misnomer. The Moon is tidally locked, so the far side never faces Earth, but it gets the same sunlight; at new Moon it is fully lit. Small wobbles called libration let us glimpse a little past the edges.",
+       "act": [
+        [
+         "moonLit",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "The maria are impact basins filled with basaltic lava between about 4.2 and 1.2 billion years ago; the brighter highlands are older and densely cratered. NASA counts more than 40 impact basins on the Moon.",
+       "act": []
+      },
+      {
+       "say": "All six Apollo landings, 1969 to 1972, were near the equator on the near side, timed for shortly after local sunrise, when the surface was cool and long shadows showed the terrain. Apollo 11 touched down in the southwestern Sea of Tranquility on 20 July 1969; twelve astronauts in all walked on the Moon.",
+       "act": []
+      },
+      {
+       "say": "Tides, briefly: the Moon's gravity raises two bulges, so most shorelines get two highs and two lows a day; the Sun adds roughly half as much, giving bigger spring tides at new and full Moon. Tonight's Moon: {moon.name}, {moon.lit}% lit.",
+       "live": "moonPhase",
+       "act": [
+        [
+         "moonLit",
+         false
+        ],
+        [
+         "closeMoon"
+        ],
+        [
+         "panel",
+         "sky"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Which statement about the Moon's far side is accurate?",
+       "a": [
+        "It is permanently dark",
+        "It receives sunlight like the near side; we just never face it",
+        "It is lit only during lunar eclipses"
+       ],
+       "ok": 1,
+       "why": "Calling it the 'dark side' is misleading: different parts are in sunlight at different times, and at new Moon the far side is fully lit.",
+       "src": [
+        "NASA: Moon facts",
+        "https://science.nasa.gov/moon/facts/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Roughly what share of the sunlight hitting the Moon does it reflect?",
+       "a": [
+        "About one-tenth",
+        "About half",
+        "Almost all"
+       ],
+       "ok": 0,
+       "why": "Only about one-tenth; Earth reflects about three-tenths.",
+       "src": [
+        "NASA: Moonlight",
+        "https://science.nasa.gov/moon/moonlight/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Spring tides happen at new and full Moon, when the Sun and Moon line up with Earth.",
+       "ok": true,
+       "why": "NASA: spring tides always happen when the Moon is at the full or new phase.",
+       "src": [
+        "NASA: Tides",
+        "https://science.nasa.gov/moon/tides/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How many people walked on the Moon during the Apollo program (1969 to 1972)?",
+       "a": [
+        "2",
+        "6",
+        "12"
+       ],
+       "ok": 2,
+       "why": "Six landings, each with two astronauts on the surface: twelve in all.",
+       "src": [
+        "NASA: The Apollo Program",
+        "https://www.nasa.gov/the-apollo-program/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "moonNextFull",
+       "src": [
+        "Moon phase computed with Astronomy Engine",
+        "https://github.com/cosinekitty/astronomy"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "scale",
+   "topic": "Space",
+   "icon": "✦",
+   "teacher": {
+    "goals": [
+     "Light travel time makes a ruler for space: the Moon is about 1.3 light-seconds away, the Sun about 8 light-minutes.",
+     "Voyager 1, launched in 1977, was calculated by NASA to reach one light-day from Earth on 18 November 2026; the nearest star is about 4.25 light-years away.",
+     "The Milky Way is about 100,000 light-years across, Andromeda about 2.5 million light-years away, and the observable universe about 92 billion light-years across."
+    ],
+    "discuss": [
+     "If light from Andromeda left it 2.5 million years ago, are we seeing Andromeda as it is now?",
+     "Nobody has ever photographed the whole Milky Way from outside. How can we know its shape?",
+     "The universe is about 13.8 billion years old. How can the edge of what we can see be 46 billion light-years away?"
+    ],
+    "uses": "Moon overhead layer on the globe, the Solar System view, the short flight to Voyager 1's real position (JPL Horizons), the Milky Way view, the cosmic web view and the edge of the observable universe view.",
+    "ngss": [
+     [
+      "1-ESS1-1",
+      "Use observations of the sun, moon, and stars to describe patterns that can be predicted."
+     ],
+     [
+      "5-ESS1-1",
+      "Support an argument that the apparent brightness of the sun and stars is due to their relative distances from the Earth."
+     ],
+     [
+      "MS-ESS1-3",
+      "Analyze and interpret data to determine scale properties of objects in the solar system."
+     ],
+     [
+      "HS-ESS1-2",
+      "Construct an explanation of the Big Bang theory based on astronomical evidence of light spectra, motion of distant galaxies, and composition of matter in the universe."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "How far can light go?",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Light is the fastest thing there is. Let's use light to measure space! First, look at our Moon.",
+       "act": [
+        [
+         "closeUniverse"
+        ],
+        [
+         "only",
+         [
+          "moon"
+         ]
+        ],
+        [
+         "fly",
+         -40,
+         20,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Light from the Moon gets to us in about one second. Count it: one!",
+       "act": []
+      },
+      {
+       "say": "Now let's zoom out to the Sun and planets. Sunlight takes about 8 minutes to reach us.",
+       "act": [
+        [
+         "universe"
+        ]
+       ]
+      },
+      {
+       "say": "Here is Voyager 1, a space probe. It has been flying away since 1977. Its radio messages take about {voyager.lh} hours to get home!",
+       "live": "voyager",
+       "act": [
+        [
+         "universe",
+         "voyager"
+        ]
+       ]
+      },
+      {
+       "say": "This is our galaxy, the Milky Way. It has billions of stars. Light takes a very, very long time to cross it.",
+       "act": [
+        [
+         "universe",
+         "galaxy"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Light is the fastest thing there is.",
+       "ok": true,
+       "why": "Yes! Light goes about 300,000 km every second.",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Put these in order, closest to us first.",
+       "items": [
+        "The Moon",
+        "The Sun",
+        "Voyager 1"
+       ],
+       "why": "Moon light takes about 1 second. Sunlight takes about 8 minutes. Voyager 1 is about one light-day away.",
+       "src": [
+        "NASA: Voyager 1: What is a light-day?",
+        "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how long does sunlight take to get to us?",
+       "a": [
+        "About 8 seconds",
+        "About 8 minutes",
+        "About 8 years"
+       ],
+       "ok": 1,
+       "why": "About 8 minutes.",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerLH",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "A ruler made of light",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "Light travels about 300,000 km every second. Astronomers use the time light takes as a ruler. Look at the Moon: its light reaches us in about 1.3 seconds. That makes it 1.3 light-seconds away.",
+       "act": [
+        [
+         "closeUniverse"
+        ],
+        [
+         "only",
+         [
+          "moon"
+         ]
+        ],
+        [
+         "fly",
+         -40,
+         20,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "The Sun is about 150 million km away. Its light takes about 8 minutes 20 seconds to get here, so the Sun is about 8 light-minutes away.",
+       "act": [
+        [
+         "universe"
+        ]
+       ]
+      },
+      {
+       "say": "Voyager 1 launched in 1977 and is now in interstellar space. Right now it is about {voyager.lh} light-hours from Earth. NASA calculated that it would be one full light-day away on 18 November 2026.",
+       "live": "voyager",
+       "act": [
+        [
+         "universe",
+         "voyager"
+        ]
+       ]
+      },
+      {
+       "say": "A light-year is how far light goes in one year: about 9 trillion km. The nearest star after the Sun, Proxima Centauri, is about 4.25 light-years away.",
+       "act": []
+      },
+      {
+       "say": "Our galaxy, the Milky Way, is about 100,000 light-years across. Our nearest big neighbour galaxy, Andromeda, is about 2.5 million light-years away.",
+       "act": [
+        [
+         "universe",
+         "galaxy"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "What does a light-year measure?",
+       "a": [
+        "Time",
+        "Distance",
+        "Brightness"
+       ],
+       "ok": 1,
+       "why": "A light-year is a distance: how far light travels in one year, about 9 trillion km.",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Tap these from nearest to Earth to farthest.",
+       "items": [
+        "The Moon",
+        "The Sun",
+        "Voyager 1",
+        "Proxima Centauri",
+        "Andromeda Galaxy"
+       ],
+       "why": "About 1.3 light-seconds, about 8 light-minutes, about one light-day, about 4.25 light-years, about 2.5 million light-years.",
+       "src": [
+        "NASA: Voyager 1: What is a light-day?",
+        "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how long does light from the Moon take to reach Earth?",
+       "a": [
+        "About 1.3 seconds",
+        "About 8 minutes",
+        "About 1 day"
+       ],
+       "ok": 0,
+       "why": "About 1.3 seconds. Sunlight takes about 8 minutes 20 seconds.",
+       "src": [
+        "NASA: Voyager 1: What is a light-day?",
+        "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Milky Way is about 100,000 light-years across.",
+       "ok": true,
+       "why": "Yes. Its disk of stars is about 100,000 light-years across.",
+       "src": [
+        "NASA Imagine the Universe: Milky Way Galaxy",
+        "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerLH",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "From light-seconds to light-years",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Light covers about 300,000 km per second. The Moon is about 1.3 light-seconds away. Notice how a unit of time becomes a unit of distance.",
+       "act": [
+        [
+         "closeUniverse"
+        ],
+        [
+         "only",
+         [
+          "moon"
+         ]
+        ],
+        [
+         "fly",
+         -40,
+         20,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "One astronomical unit (AU) is the Sun–Earth distance, about 150 million km. Light crosses 1 AU in about 8 minutes 20 seconds.",
+       "act": [
+        [
+         "universe"
+        ]
+       ]
+      },
+      {
+       "say": "Voyager 1 today: about {voyager.au} AU from Earth, or {voyager.lh} light-hours. A command sent from Earth takes that long to arrive, and the reply takes just as long to come back.",
+       "live": "voyager",
+       "act": [
+        [
+         "universe",
+         "voyager"
+        ]
+       ]
+      },
+      {
+       "say": "NASA calculated that on 18 November 2026 Voyager 1 would be about 25.9 billion km away: one light-day. Proxima Centauri, the nearest star after the Sun, is about 4.25 light-years away. That is well over 1,000 times farther.",
+       "act": []
+      },
+      {
+       "say": "Zoom out to the Milky Way, about 100,000 light-years across.",
+       "act": [
+        [
+         "universe",
+         "galaxy"
+        ]
+       ]
+      },
+      {
+       "say": "Here is the cosmic web. Andromeda, our nearest large galaxy neighbour, is about 2.5 million light-years away, a tiny hop on this map.",
+       "act": [
+        [
+         "universe",
+         "web"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "order",
+       "q": "Order these from nearest to farthest.",
+       "items": [
+        "1 light-second",
+        "1 light-minute",
+        "1 AU",
+        "1 light-day",
+        "1 light-year"
+       ],
+       "why": "1 AU is about 8.3 light-minutes; a light-day is 24 light-hours; a light-year is 365 light-days.",
+       "src": [
+        "NASA: Cosmic distances",
+        "https://science.nasa.gov/solar-system/cosmic-distances/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Voyager 1 is about one light-day away. About how long does it take to send it a command and get the answer back?",
+       "a": [
+        "About 1 hour",
+        "About 1 day",
+        "About 2 days",
+        "About 1 year"
+       ],
+       "ok": 2,
+       "why": "One day for the command to get there, one day for the reply to come back.",
+       "src": [
+        "NASA: Voyager 1: What is a light-day?",
+        "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Order from nearest to farthest.",
+       "items": [
+        "Voyager 1",
+        "Proxima Centauri",
+        "Centre of the Milky Way",
+        "Andromeda Galaxy"
+       ],
+       "why": "About one light-day, about 4.25 light-years, about 25,000 light-years, about 2.5 million light-years.",
+       "src": [
+        "NASA Imagine the Universe: Milky Way Galaxy",
+        "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerAU",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerLH",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Light-time, lookback and the edge we can see",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Light-time is a ruler, and also a delay. You see the Moon about 1.3 seconds late and the Sun about 8 minutes 20 seconds late.",
+       "act": [
+        [
+         "closeUniverse"
+        ],
+        [
+         "only",
+         [
+          "moon"
+         ]
+        ],
+        [
+         "fly",
+         -40,
+         20,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Voyager 1, launched 5 September 1977, is now about {voyager.lh} light-hours ({voyager.au} AU) from Earth, computed from JPL ephemerides. NASA calculated it would reach one light-day, about 25.9 billion km, on 18 November 2026.",
+       "live": "voyager",
+       "act": [
+        [
+         "universe",
+         "voyager"
+        ]
+       ]
+      },
+      {
+       "say": "The Milky Way is about 100,000 light-years across, and we sit about 25,000 light-years from its centre. A caution: no one has photographed it from outside. This picture is a model, an artist's rendering built from measured distances of stars and gas clouds (for example, from ESA's Gaia mission).",
+       "act": [
+        [
+         "universe",
+         "galaxy"
+        ]
+       ]
+      },
+      {
+       "say": "Andromeda is about 2.5 million light-years away: you see it as it was 2.5 million years ago. On the cosmic web, galaxies and dark matter trace filaments; maps like this are inferred, not seen directly.",
+       "act": [
+        [
+         "universe",
+         "web"
+        ]
+       ]
+      },
+      {
+       "say": "The universe is about 13.8 billion years old, yet the observable universe is about 92 billion light-years across, a radius of about 46 billion. Why? Space kept expanding while the light travelled, so the most distant galaxies, whose light left them about 13.5 billion years ago, are now much farther than 13.5 billion light-years away.",
+       "act": [
+        [
+         "universe",
+         "edge"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "The universe is about 13.8 billion years old. Why is the edge of the observable universe about 46 billion light-years away, not 13.8 billion?",
+       "a": [
+        "Space has expanded while the light was travelling, carrying its sources farther away",
+        "Light travelled faster in the early universe",
+        "Telescopes add up the light from many galaxies",
+        "The 13.8 billion figure is out of date"
+       ],
+       "ok": 0,
+       "why": "The light has travelled for about 13.5–13.8 billion years, but expansion has carried its sources much farther since it left them.",
+       "src": [
+        "NASA: How big is space? We asked a NASA expert",
+        "https://www.nasa.gov/science-research/astrophysics/how-big-is-space-we-asked-a-nasa-expert-episode-61/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Images of the whole Milky Way spiral are photographs taken by a spacecraft outside the galaxy.",
+       "ok": false,
+       "why": "From inside the galaxy we can't photograph it as a whole. Such images are artist's impressions based on a model built from data such as Gaia's.",
+       "src": [
+        "ESA Gaia: Milky Way",
+        "https://www.cosmos.esa.int/web/gaia/milky-way"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Order from nearest to farthest.",
+       "items": [
+        "The Sun",
+        "Voyager 1",
+        "Proxima Centauri",
+        "Andromeda Galaxy",
+        "Edge of the observable universe"
+       ],
+       "why": "About 8 light-minutes, about one light-day, about 4.25 light-years, about 2.5 million light-years, about 46 billion light-years.",
+       "src": [
+        "NASA Space Place: What is a light-year?",
+        "https://spaceplace.nasa.gov/light-year/en/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "voyagerAU",
+       "src": [
+        "NASA JPL Horizons, via this site's Voyager countdown",
+        "https://ssd.jpl.nasa.gov/horizons/"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
    "id": "weather",
    "topic": "Weather and climate",
    "icon": "⚡",
@@ -982,7 +2590,21 @@
      "Why is the lightning layer empty over Africa? What can and can't you conclude?",
      "Why compare sea ice with the same date in earlier years, not with last month?"
     ],
-    "uses": "Lightning imagery (NOAA GOES GLM), Signals: planet vital signs (NOAA CO2, NSIDC sea ice, NOAA global temperature)."
+    "uses": "Lightning imagery (NOAA GOES GLM), Signals: planet vital signs (NOAA CO2, NSIDC sea ice, NOAA global temperature).",
+    "ngss": [
+     [
+      "K-ESS3-2",
+      "Ask questions to obtain information about the purpose of weather forecasting to prepare for, and respond to, severe weather.*"
+     ],
+     [
+      "MS-ESS3-5",
+      "Ask questions to clarify evidence of the factors that have caused the rise in global temperatures over the past century."
+     ],
+     [
+      "HS-ESS3-5",
+      "Analyze geoscience data and the results from global climate models to make an evidence-based forecast of the current rate of global or regional climate change and associated future impacts to Earth's systems."
+     ]
+    ]
    },
    "levels": {
     "k2": {
@@ -1329,6 +2951,1069 @@
    }
   },
   {
+   "id": "climate",
+   "topic": "Weather and climate",
+   "icon": "❄",
+   "teacher": {
+    "goals": [
+     "Weather is what happens over hours and days; climate is the average weather of a place over 30 years or more.",
+     "Sea ice floats on the ocean and does not raise sea level when it melts; land ice (the Greenland and Antarctic ice sheets) does when it flows or melts into the sea.",
+     "Read four of the planet's long-running records straight from the agencies that keep them: CO2 at Mauna Loa (NOAA), Arctic sea ice extent (NSIDC), global temperature rank (NOAA) and ice-sheet mass from gravity satellites (NASA GRACE/GRACE-FO), and know what each one can and cannot tell you."
+    ],
+    "discuss": [
+     "One cold week happens somewhere almost every winter. Why can't a single cold week tell you whether the climate is changing?",
+     "If all the floating sea ice in the Arctic melted, why would sea level barely change, while melting on Greenland would raise it?",
+     "Each record measures something different in a different way. Which one would you trust most for which question, and why?"
+    ],
+    "uses": "Climate panel (live CO2 from NOAA GML, Arctic sea ice extent from NSIDC, global temperature rank from NOAA NCEI), Signals panel, GRACE/GRACE-FO ice-mass layer with flights to Greenland and Antarctica.",
+    "ngss": [
+     [
+      "3-ESS2-2",
+      "Obtain and combine information to describe climates in different regions of the world."
+     ],
+     [
+      "MS-ESS3-5",
+      "Ask questions to clarify evidence of the factors that have caused the rise in global temperatures over the past century."
+     ],
+     [
+      "HS-ESS2-2",
+      "Analyze geoscience data to make the claim that one change to Earth's surface can create feedbacks that cause changes to other Earth systems."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "Ice that floats, ice that sits on land",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Weather is what the sky is doing today. Is it sunny, rainy or snowy?",
+       "act": [
+        [
+         "panel",
+         "climate"
+        ]
+       ]
+      },
+      {
+       "say": "Climate is the usual weather in a place, over many, many years.",
+       "act": []
+      },
+      {
+       "say": "Look at the top of the world. The Arctic Ocean has ice floating on it. When floating ice melts, the sea does not get higher. It is like ice in a glass.",
+       "act": [
+        [
+         "fly",
+         0,
+         85,
+         12000000
+        ]
+       ]
+      },
+      {
+       "say": "Today that floating ice covers {ice.ext} million square kilometres. That is a huge area!",
+       "live": "ice",
+       "act": []
+      },
+      {
+       "say": "Now look at Greenland. Its ice sits on land, like a giant frozen blanket.",
+       "act": [
+        [
+         "only",
+         [
+          "grace"
+         ]
+        ],
+        [
+         "fly",
+         -42,
+         72,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "Space satellites can weigh this ice! The colours show where ice was lost or gained.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Weather is what the sky is doing today.",
+       "ok": true,
+       "why": "Yes. Weather happens over a short time, like one rainy day.",
+       "src": [
+        "NOAA SciJinks: Weather vs climate",
+        "https://scijinks.gov/about/k-12-education/understanding-our-planet/whats-the-difference-between-weather-and-climate"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Ice cubes melt in a full glass of water. What happens?",
+       "a": [
+        "The glass overflows",
+        "The water level stays about the same",
+        "The glass becomes empty"
+       ],
+       "ok": 1,
+       "why": "Floating ice already takes up the room of its own water. Sea ice works the same way.",
+       "src": [
+        "NASA Earth Observatory: Sea ice",
+        "https://science.nasa.gov/earth/earth-observatory/sea-ice/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Greenland's ice sits on land.",
+       "ok": true,
+       "why": "Yes. It is an ice sheet on land, not floating sea ice.",
+       "src": [
+        "NASA/earth.gov: Greenland Ice Sheet vital sign",
+        "https://earth.gov/sealevel/vital-signs/greenland-ice-sheet/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "iceVsAvg",
+       "src": [
+        "NSIDC Sea Ice Index (Arctic daily extent)",
+        "https://nsidc.org/arcticseaicenews/faq/"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Weather, climate and the planet's check-up",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "Weather is a single event over a short time, like a rainstorm or a hot day. Climate is the average weather in a place over 30 years or more.",
+       "act": [
+        [
+         "panel",
+         "signals"
+        ]
+       ]
+      },
+      {
+       "say": "Scientists keep long records, like a doctor's check-up for the planet. Open the Climate panel. The first record is carbon dioxide in the air, measured on a mountain in Hawaii since 1958.",
+       "act": [
+        [
+         "panel",
+         "climate"
+        ]
+       ]
+      },
+      {
+       "say": "The latest monthly reading at Mauna Loa is {co2.ppm} parts per million. A year ago it was {co2.yago}.",
+       "live": "co2",
+       "act": []
+      },
+      {
+       "say": "Next, the Arctic. Sea ice is frozen seawater that floats. Today it covers {ice.ext} million square kilometres; the average for this date from 1979 to 2025 is {ice.avg}.",
+       "live": "ice",
+       "act": [
+        [
+         "fly",
+         0,
+         85,
+         12000000
+        ]
+       ]
+      },
+      {
+       "say": "Greenland is different: its ice sits on land. Twin satellites called GRACE and GRACE-FO measure tiny changes in gravity to weigh it. Look at the colours over Greenland.",
+       "act": [
+        [
+         "only",
+         [
+          "grace"
+         ]
+        ],
+        [
+         "fly",
+         -42,
+         72,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "Now Antarctica, the biggest ice sheet of all. Notice which coasts show change.",
+       "act": [
+        [
+         "fly",
+         0,
+         -80,
+         12000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Which one is climate, not weather?",
+       "a": [
+        "A thunderstorm this afternoon",
+        "The average weather of a place over 30 years",
+        "Tomorrow's snow"
+       ],
+       "ok": 1,
+       "why": "Climate is the average weather over a long period, 30 years or more.",
+       "src": [
+        "NOAA SciJinks: Weather vs climate",
+        "https://scijinks.gov/about/k-12-education/understanding-our-planet/whats-the-difference-between-weather-and-climate"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "When floating sea ice melts, it makes sea level rise a lot.",
+       "ok": false,
+       "why": "Sea ice already floats, so melting it does not change sea level, just like ice cubes in a glass.",
+       "src": [
+        "NASA Earth Observatory: Sea ice",
+        "https://science.nasa.gov/earth/earth-observatory/sea-ice/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How do GRACE and GRACE-FO 'weigh' ice from space?",
+       "a": [
+        "They take colour photos",
+        "They measure tiny changes in the distance between two satellites caused by gravity",
+        "They drop thermometers onto the ice"
+       ],
+       "ok": 1,
+       "why": "The two satellites send microwave signals to each other; stronger gravity pulls the lead one first and changes the distance.",
+       "src": [
+        "NASA JPL: GRACE-FO mission overview",
+        "https://gracefo.jpl.nasa.gov/mission/overview"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Where is CO2 measured in the famous record that began in 1958?",
+       "a": [
+        "Mauna Loa, Hawaii",
+        "Mount Everest",
+        "The South Pole only"
+       ],
+       "ok": 0,
+       "why": "The Mauna Loa record was started by C. David Keeling in March 1958.",
+       "src": [
+        "NOAA GML: Trends in atmospheric CO2 (Mauna Loa)",
+        "https://www.gml.noaa.gov/ccgg/trends"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "co2Change",
+       "src": [
+        "NOAA GML: Trends in atmospheric CO2 (Mauna Loa)",
+        "https://www.gml.noaa.gov/ccgg/trends"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Four vital signs, four ways of measuring",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Weather is a specific event over a short time; climate is the average over 30 years or more. One record-cold week is weather. To see climate you need long records, so let's read four of them.",
+       "act": [
+        [
+         "panel",
+         "signals"
+        ]
+       ]
+      },
+      {
+       "say": "Record 1: CO2 at Mauna Loa, Hawaii, sampled at about 3,400 m. Latest monthly mean: {co2.ppm} ppm. Same month last year: {co2.yago}. ppm means parts per million: 400 ppm is 0.000400 of the dry air.",
+       "live": "co2",
+       "act": [
+        [
+         "panel",
+         "climate"
+        ]
+       ]
+      },
+      {
+       "say": "Record 2: NOAA's global surface temperature. Its latest monthly ranking: {temp.when} ranks {temp.rank} warmest in {temp.n} years of records, compared with the 20th-century average.",
+       "live": "temp",
+       "act": []
+      },
+      {
+       "say": "Record 3: Arctic sea ice extent from satellites that sense microwaves, which pass through clouds and darkness. Today: {ice.ext} million km², against a 1979–2025 average of {ice.avg} for this date. The yearly maximum usually comes in March, the minimum in September.",
+       "live": "ice",
+       "act": [
+        [
+         "fly",
+         0,
+         85,
+         12000000
+        ]
+       ]
+      },
+      {
+       "say": "Record 4: land ice. GRACE (2002–2017) and GRACE-FO (since 2018) are pairs of satellites about 220 km apart. Extra mass below pulls the lead satellite first, changing the gap. NASA reports Greenland losing about 265 billion metric tons a year since 2002.",
+       "act": [
+        [
+         "only",
+         [
+          "grace"
+         ]
+        ],
+        [
+         "fly",
+         -42,
+         72,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "Antarctica: about 135 billion metric tons a year since 2002, by the same method. Because this ice is on land, its meltwater adds to the ocean. Compare the colours here with Greenland's.",
+       "act": [
+        [
+         "fly",
+         0,
+         -80,
+         12000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "order",
+       "q": "Put these records in order of when they started, earliest first.",
+       "items": [
+        "Mauna Loa CO2 (1958)",
+        "Satellite Arctic sea ice extent (1979)",
+        "GRACE ice-mass measurements (2002)"
+       ],
+       "why": "Keeling began Mauna Loa CO2 in March 1958; NSIDC's passive microwave record dates to 1979; GRACE flew from 2002 to 2017.",
+       "src": [
+        "NASA JPL: GRACE-FO mission overview",
+        "https://gracefo.jpl.nasa.gov/mission/overview"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which change would raise global sea level?",
+       "a": [
+        "Arctic sea ice melting",
+        "Ice on Greenland melting and flowing into the ocean",
+        "Icebergs floating in the ocean"
+       ],
+       "ok": 1,
+       "why": "Land ice adds new water to the ocean. Floating ice already displaces its own weight.",
+       "src": [
+        "NASA Earth Observatory: Sea ice",
+        "https://science.nasa.gov/earth/earth-observatory/sea-ice/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "NSIDC counts a grid cell as 'ice covered' when it has at least how much ice?",
+       "a": [
+        "5 percent",
+        "15 percent",
+        "50 percent"
+       ],
+       "ok": 1,
+       "why": "Extent counts any 25 by 25 km cell with an average of at least 15 percent ice.",
+       "src": [
+        "NSIDC: Arctic Sea Ice News FAQ",
+        "https://nsidc.org/arcticseaicenews/faq/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "According to NASA, about how much ice has Greenland lost per year since 2002?",
+       "a": [
+        "About 26 billion metric tons",
+        "About 265 billion metric tons",
+        "About 2,650 billion metric tons"
+       ],
+       "ok": 1,
+       "why": "NASA's GRACE/GRACE-FO record gives 265 billion metric tons per year since 2002.",
+       "src": [
+        "NASA/earth.gov: Greenland Ice Sheet vital sign",
+        "https://earth.gov/sealevel/vital-signs/greenland-ice-sheet/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "tempRank",
+       "src": [
+        "NOAA NCEI: Monthly global climate report",
+        "https://www.ncei.noaa.gov/access/monitoring/monthly-report/global/"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Reading the vital signs: what each record can and can't tell you",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "A useful rule from NOAA: weather is a specific event over a short time; climate is average conditions over 30 years or more. Single days, storms or seasons are weather. Each record below is a long series from one agency, with its own method and blind spots.",
+       "act": [
+        [
+         "panel",
+         "signals"
+        ]
+       ]
+      },
+      {
+       "say": "CO2 at Mauna Loa: latest monthly mean {co2.ppm} ppm, against {co2.yago} in the same month a year earlier. The series began in March 1958 (C. David Keeling, Scripps). Its limits: one high-altitude site in the northern subtropics, a seasonal cycle driven mostly by land plants, and recent values marked preliminary until reference gases are recalibrated.",
+       "live": "co2",
+       "act": [
+        [
+         "panel",
+         "climate"
+        ]
+       ]
+      },
+      {
+       "say": "Global temperature: NOAA ranks {temp.when} {temp.rank} warmest in {temp.n} years, measured as an anomaly against the 20th-century average. A ranking hides how close the gaps are: NOAA reported July 2026 as tying 2024, and September 2026 as 0.07 °C short of 2023's record.",
+       "live": "temp",
+       "act": []
+      },
+      {
+       "say": "Arctic sea ice extent today: {ice.ext} million km², against a 1979–2025 same-date average of {ice.avg}. Extent is a threshold measure (cells at least 15% ice), not volume or thickness. NSIDC notes thin new ice is underestimated, the edge can be off by 25 to 50 km, and open water can exist inside 'ice-covered' cells.",
+       "live": "ice",
+       "act": [
+        [
+         "fly",
+         0,
+         85,
+         12000000
+        ]
+       ]
+      },
+      {
+       "say": "Land ice by gravity: GRACE and GRACE-FO track the distance between twin satellites about 220 km apart to build monthly gravity maps. NASA gives Greenland about 265 billion metric tons lost per year since 2002. Limits: there is a gap from mid-2017 to mid-2018 between missions, data arrive up to two months late, and the method sees mass change, not which glacier caused it.",
+       "act": [
+        [
+         "only",
+         [
+          "grace"
+         ]
+        ],
+        [
+         "fly",
+         -42,
+         72,
+         9000000
+        ]
+       ]
+      },
+      {
+       "say": "Antarctica: about 135 billion metric tons a year since 2002. The two ice sheets hold about two-thirds of Earth's fresh water, and NASA attributes about one-third of global average sea level rise since 1993 to their meltwater. Look at where on the continent the change is concentrated.",
+       "act": [
+        [
+         "fly",
+         0,
+         -80,
+         12000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Arctic sea ice extent tells you how thick the ice is.",
+       "ok": false,
+       "why": "Extent counts area of cells with at least 15% ice; it says nothing about thickness, and thin new ice is underestimated.",
+       "src": [
+        "NSIDC: Arctic Sea Ice News FAQ",
+        "https://nsidc.org/arcticseaicenews/faq/"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Order these records by start year, earliest first.",
+       "items": [
+        "NOAA global surface temperature (1850)",
+        "Mauna Loa CO2 (1958)",
+        "Satellite Arctic sea ice extent (1979)",
+        "GRACE gravity measurements (2002)"
+       ],
+       "why": "NOAA's global record runs 1850–2026; Keeling began Mauna Loa in 1958; the passive microwave sea ice record dates to 1979; GRACE flew 2002–2017.",
+       "src": [
+        "NOAA NCEI: Global climate report, September 2026",
+        "https://www.ncei.noaa.gov/news/global-climate-202609"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "According to NASA, about what share of global average sea level rise since 1993 comes from Greenland and Antarctic ice-sheet meltwater?",
+       "a": [
+        "About one-tenth",
+        "About one-third",
+        "About nine-tenths"
+       ],
+       "ok": 1,
+       "why": "NASA: 'responsible for about one-third of the global average rise in sea level since 1993.'",
+       "src": [
+        "NASA/earth.gov: Antarctic Ice Sheet vital sign",
+        "https://earth.gov/sealevel/vital-signs/antarctic-ice-sheet/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What is a real limitation of the GRACE/GRACE-FO ice-mass record?",
+       "a": [
+        "It only works on cloudless days",
+        "There is a gap of about a year between the two missions (2017–2018)",
+        "It measures ice colour, not mass"
+       ],
+       "ok": 1,
+       "why": "GRACE ended in June 2017 and GRACE-FO began collecting data in June 2018.",
+       "src": [
+        "NASA/earth.gov: Greenland Ice Sheet vital sign",
+        "https://earth.gov/sealevel/vital-signs/greenland-ice-sheet/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "iceVsAvg",
+       "src": [
+        "NSIDC Sea Ice Index (Arctic daily extent)",
+        "https://nsidc.org/arcticseaicenews/faq/"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
+   "id": "migration",
+   "topic": "Nature",
+   "icon": "⇄",
+   "teacher": {
+    "goals": [
+     "Many animals make round trips every year, mainly to follow food, to breed or raise young, and to escape cold.",
+     "Migrations can be enormous: eastern monarchs fly up to 3,000 miles to mountain forests in Mexico, gray whales about 10,000 miles round trip, Arctic terns more than 70,000 km a year.",
+     "The site's lines join the monthly centre of people's iNaturalist sightings, not a tagged animal, so a line can move because observers moved; real tracking uses tags (Movebank) and weather radar (BirdCast)."
+    ],
+    "discuss": [
+     "If more people go to the beach in summer, how could that change where whale sightings are reported, even if the whales stayed put?",
+     "Why might it be worth flying thousands of miles instead of staying in one place all year?",
+     "A monarch that reaches Mexico has never been there before. What questions does that raise about how it finds the way?"
+    ],
+    "uses": "Seasonal movement layer (chip nat-mig: monthly centre of iNaturalist sightings for six populations), the Nature panel, live 'migration' value (monarch's latest monthly centre).",
+    "ngss": [
+     [
+      "K-ESS3-1",
+      "Use a model to represent the relationship between the needs of different plants and animals (including humans) and the places they live."
+     ],
+     [
+      "3-LS4-3",
+      "Construct an argument with evidence that in a particular habitat some organisms can survive well, some survive less well, and some cannot survive at all."
+     ],
+     [
+      "MS-LS2-1",
+      "Analyze and interpret data to provide evidence for the effects of resource availability on organisms and populations of organisms in an ecosystem."
+     ],
+     [
+      "HS-LS2-8",
+      "Evaluate evidence for the role of group behavior on individual and species' chances to survive and reproduce."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "Animals on a long trip",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Some animals take a long trip every year. Then they come back! This is called migration. Let's look.",
+       "act": [
+        [
+         "only",
+         [
+          "nat-mig"
+         ]
+        ],
+        [
+         "panel",
+         "nature"
+        ]
+       ]
+      },
+      {
+       "say": "Animals travel to find food, to have babies, and to stay warm.",
+       "act": []
+      },
+      {
+       "say": "Monarch butterflies fly south to Mexico for the winter. They rest in tall fir trees on mountains. Baby monarchs, called caterpillars, eat only one plant: milkweed.",
+       "act": [
+        [
+         "fly",
+         -100,
+         19.5,
+         4000000
+        ]
+       ]
+      },
+      {
+       "say": "People who spot monarchs share photos. This month, the middle of their sightings was {mig.dir} of last month.",
+       "act": [],
+       "live": "migration"
+      },
+      {
+       "say": "The Arctic tern is a small seabird. It flies from the far north to the far south and back. Every year!",
+       "act": [
+        [
+         "fly",
+         -30,
+         0,
+         26000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "tf",
+       "q": "Some animals travel a long way every year and then come back.",
+       "ok": true,
+       "why": "Yes! That round trip is called migration.",
+       "src": [
+        "NOAA Fisheries: Gray whale",
+        "https://www.fisheries.noaa.gov/species/gray-whale"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Where do eastern monarch butterflies go for the winter?",
+       "a": [
+        "Mexico",
+        "The North Pole",
+        "The Moon"
+       ],
+       "ok": 0,
+       "why": "They spend the winter in mountain forests in Mexico.",
+       "src": [
+        "USDA Forest Service: Monarch butterfly migration and overwintering",
+        "https://www.fs.usda.gov/wildflowers/pollinators/Monarch_Butterfly/migration/index.shtml"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What do monarch caterpillars eat?",
+       "a": [
+        "Grass",
+        "Milkweed",
+        "Fish"
+       ],
+       "ok": 1,
+       "why": "Milkweed is the only food monarch caterpillars can eat.",
+       "src": [
+        "U.S. Fish and Wildlife Service: Monarch (Danaus plexippus)",
+        "https://fws.gov/species/monarch-danaus-plexippus"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "migDir",
+       "src": [
+        "iNaturalist community sightings, monthly centre computed by this site",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Following the seasons",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "This layer shows six travellers: monarch butterflies, humpback whales, gray whales, Arctic terns, ruby-throated hummingbirds and barn swallows. Each line joins where people reported seeing them, month by month.",
+       "act": [
+        [
+         "only",
+         [
+          "nat-mig"
+         ]
+        ],
+        [
+         "panel",
+         "nature"
+        ]
+       ]
+      },
+      {
+       "say": "Why travel so far? Mostly for three reasons: food, a good place to have babies, and escaping the cold. Monarchs cannot survive the cold northern winter, so eastern monarchs fly up to 3,000 miles to mountain forests in Mexico.",
+       "act": [
+        [
+         "fly",
+         -100,
+         19.5,
+         4000000
+        ]
+       ]
+      },
+      {
+       "say": "Right now the monarchs' line ends in {mig.month}, centred near latitude {mig.lat}, which is {mig.dir} of the month before.",
+       "act": [],
+       "live": "migration"
+      },
+      {
+       "say": "Important: these lines show where PEOPLE looked and shared sightings on iNaturalist, not one tagged animal. If lots of people go whale watching in one bay, the line can move there even if the whales did not.",
+       "act": []
+      },
+      {
+       "say": "Gray whales feed in the cold Bering and Chukchi seas in summer, then swim down to warm lagoons in Baja California, Mexico, to have calves. That is about 10,000 miles (about 16,000 km) round trip.",
+       "act": [
+        [
+         "fly",
+         -150,
+         40,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "The Arctic tern beats them all. Tracked terns flew from Greenland to the Weddell Sea by Antarctica and back: more than 70,000 km (over 43,000 miles) in a year.",
+       "act": [
+        [
+         "fly",
+         -30,
+         0,
+         26000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Which of these is NOT one of the main reasons animals migrate?",
+       "a": [
+        "To find food",
+        "To have and raise young",
+        "To escape the cold",
+        "To visit people who watch them"
+       ],
+       "ok": 3,
+       "why": "Food, breeding and escaping cold weather drive migration. Watchers just follow along.",
+       "src": [
+        "NOAA Fisheries: Humpback whale",
+        "https://www.fisheries.noaa.gov/species/humpback-whale"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Each line on this layer follows one tagged animal.",
+       "ok": false,
+       "why": "No. It joins the monthly centre of many people's iNaturalist sightings, so it can move when the observers move.",
+       "src": [
+        "iNaturalist Help: How observations become Research Grade",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Where do gray whales have their calves in winter?",
+       "a": [
+        "Lagoons in Baja California, Mexico",
+        "The Arctic Ocean",
+        "Lakes in Canada"
+       ],
+       "ok": 0,
+       "why": "They spend summer feeding in the Bering and Chukchi seas and winter in Baja California, where calves are born.",
+       "src": [
+        "NOAA Fisheries: Gray whale",
+        "https://www.fisheries.noaa.gov/species/gray-whale"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which animal has the longest yearly migration known?",
+       "a": [
+        "Monarch butterfly",
+        "Arctic tern",
+        "Barn swallow"
+       ],
+       "ok": 1,
+       "why": "Tracking showed Arctic terns fly more than 70,000 km pole to pole each year.",
+       "src": [
+        "Aarhus University / Univ. of Copenhagen via Phys.org: Arctic terns confirmed to have the longest animal migration",
+        "https://phys.org/news/2010-01-arctic-terns-longest-animal-migration.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "migDir",
+       "src": [
+        "iNaturalist community sightings, monthly centre computed by this site",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "Migration as a response to resources",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Six populations, each drawn as a line joining the monthly centre of iNaturalist sightings over the past 12 months. Watch which ones swing north-south with the seasons.",
+       "act": [
+        [
+         "only",
+         [
+          "nat-mig"
+         ]
+        ],
+        [
+         "panel",
+         "nature"
+        ]
+       ]
+      },
+      {
+       "say": "Migration follows resources. Humpback whales spend warm months feeding in cold, food-rich high-latitude waters, building fat, then move to shallow, warm tropical waters to calve. Some swim from Alaska to Hawaii, about 3,000 miles, in as few as 28 days.",
+       "act": [
+        [
+         "fly",
+         -150,
+         40,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "Monarchs need two very different places: milkweed in summer (the only food their caterpillars eat) and cool, sheltered oyamel fir forests in Mexico in winter, at 2,400 to 3,600 metres. It takes 3 to 4 generations to get back north.",
+       "act": [
+        [
+         "fly",
+         -100,
+         19.5,
+         4000000
+        ]
+       ]
+      },
+      {
+       "say": "Live data: the monarch centre for {mig.month} sits near latitude {mig.lat}, {mig.dir} of the previous month. Is that the direction you'd predict for this time of year?",
+       "act": [],
+       "live": "migration"
+      },
+      {
+       "say": "Remember the blind spot: this is a centre of where people reported sightings. More observers in cities, by roads, or on holiday can pull the centre without any animal moving.",
+       "act": []
+      },
+      {
+       "say": "Birds too. Ruby-throated hummingbirds leave eastern North America to winter from Mexico to Costa Rica or Panama; many UK barn swallows winter in South Africa, chasing flying insects. Arctic terns go pole to pole.",
+       "act": [
+        [
+         "fly",
+         -30,
+         0,
+         26000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Why do humpback whales spend summer in cold high-latitude waters?",
+       "a": [
+        "The water is food-rich, so they can build fat reserves",
+        "It is too warm in the tropics to swim",
+        "To avoid people"
+       ],
+       "ok": 0,
+       "why": "Feeding grounds are cold and productive; whales build fat to last through winter.",
+       "src": [
+        "NOAA Fisheries: Humpback whale",
+        "https://www.fisheries.noaa.gov/species/humpback-whale"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how many generations does it take eastern monarchs to return north from Mexico to the northern U.S. and Canada?",
+       "a": [
+        "1",
+        "3 to 4",
+        "10"
+       ],
+       "ok": 1,
+       "why": "The USDA Forest Service says it takes 3 to 4 generations.",
+       "src": [
+        "USDA Forest Service: Monarch butterfly migration and overwintering",
+        "https://www.fs.usda.gov/wildflowers/pollinators/Monarch_Butterfly/migration/index.shtml"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "If the monarch line shifts, that proves the butterflies themselves moved that far.",
+       "ok": false,
+       "why": "The line is the centre of community sightings, so it also reflects where and when people looked.",
+       "src": [
+        "University of Victoria thesis: Examining spatial biases in iNaturalist (British Columbia case study)",
+        "https://dspace.library.uvic.ca/items/a376cbff-bb08-4909-857a-f721a8cbf01f"
+       ]
+      },
+      {
+       "t": "order",
+       "q": "Put these migrations in order, shortest yearly distance first.",
+       "items": [
+        "Humpback whale, Alaska to Hawaii (about 3,000 miles, or 4,800 km, each way)",
+        "Gray whale (about 10,000 miles, or 16,000 km, round trip)",
+        "Arctic tern (more than 70,000 km, or 43,000 miles, a year)"
+       ],
+       "why": "About 3,000 miles each way, about 10,000 miles round trip, more than 70,000 km (over 40,000 miles) a year.",
+       "src": [
+        "NOAA Fisheries: Gray whale",
+        "https://www.fisheries.noaa.gov/species/gray-whale"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "migFarthest",
+       "src": [
+        "iNaturalist community sightings, monthly centre computed by this site",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Sightings versus tracks: reading migration data",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "The Seasonal movement layer: for six populations, a line joining the monthly centre of iNaturalist community sightings over the past 12 months. It is a summary of observations, not a track.",
+       "act": [
+        [
+         "only",
+         [
+          "nat-mig"
+         ]
+        ],
+        [
+         "panel",
+         "nature"
+        ]
+       ]
+      },
+      {
+       "say": "Live: the eastern monarch centre for {mig.month} is near latitude {mig.lat}, {mig.dir} of the month before. Eastern monarchs spend October to late March in 11 to 12 mountain areas in the Mexican states of Mexico and Michoacán, in oyamel fir forest at 2,400 to 3,600 m. Overwintering adults in reproductive diapause can live six to nine months; breeding adults, two to five weeks.",
+       "act": [
+        [
+         "fly",
+         -100,
+         19.5,
+         4000000
+        ]
+       ],
+       "live": "migration"
+      },
+      {
+       "say": "The bias problem. Research Grade on iNaturalist means a dated, georeferenced, photo- or sound-backed wild observation with community agreement on the species. It does not mean even sampling. A British Columbia study found distance to roads was the strongest landscape factor explaining where observations are made. A centre computed from such data blends animal movement with human effort, holidays, and access, and it is presence-only: no record does not mean no animal.",
+       "act": []
+      },
+      {
+       "say": "The North Pacific: eastern North Pacific gray whales feed mainly in the northern Bering and Chukchi seas and winter off Baja California, about 10,000 miles round trip and in some cases upwards of 14,000, one of the longest annual migrations of any mammal. Humpbacks link Alaska with Hawaii and Mexico. Coastal whale-watching hot spots can dominate their sightings.",
+       "act": [
+        [
+         "fly",
+         -150,
+         40,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "Real tracking looks different. In a 2010 PNAS study, 11 Arctic terns carried 1.4 g geolocators: they revealed a previously unknown stopover in the North Atlantic and more than 80,000 km a year for some birds. Movebank, hosted by the Max Planck Institute of Animal Behavior, archives billions of tag locations; BirdCast (Cornell Lab, UMass Amherst, Oregon State) maps night migration from weather radar and forecasts it three days ahead.",
+       "act": [
+        [
+         "fly",
+         -30,
+         0,
+         26000000
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Which statement best describes what each line on this layer is?",
+       "a": [
+        "The path of one GPS-tagged animal",
+        "The monthly centre of community sightings, which also reflects where people looked",
+        "A forecast of where the population will go next"
+       ],
+       "ok": 1,
+       "why": "It summarises iNaturalist observations: animal movement mixed with observer effort.",
+       "src": [
+        "iNaturalist Help: How observations become Research Grade",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "A study of iNaturalist in British Columbia found distance to roads was the most important landscape variable explaining spatial bias.",
+       "ok": true,
+       "why": "That was its main finding; observation effort is not spread evenly.",
+       "src": [
+        "University of Victoria thesis: Examining spatial biases in iNaturalist (British Columbia case study)",
+        "https://dspace.library.uvic.ca/items/a376cbff-bb08-4909-857a-f721a8cbf01f"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What did miniature geolocators on Arctic terns reveal?",
+       "a": [
+        "A previously unknown stopover area in the North Atlantic",
+        "That terns never cross the equator",
+        "That terns winter in Mexico"
+       ],
+       "ok": 0,
+       "why": "A 2010 PNAS tracking study found an oceanic stopover in the North Atlantic and annual distances over 80,000 km for some birds.",
+       "src": [
+        "Egevang et al. 2010, PNAS (NERC Open Research Archive record)",
+        "https://nora.nerc.ac.uk/id/eprint/14091/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How does BirdCast observe bird migration?",
+       "a": [
+        "Weather radar",
+        "Leg bands only",
+        "Counting iNaturalist photos"
+       ],
+       "ok": 0,
+       "why": "It processes weather radar data into maps of nighttime migration and forecasts.",
+       "src": [
+        "Cornell CALS: New maps use radar to forecast bird migration (BirdCast)",
+        "https://cals.cornell.edu/news/new-maps-use-radar-forecast-bird-migration/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "migFarthest",
+       "src": [
+        "iNaturalist community sightings, monthly centre computed by this site",
+        "https://help.inaturalist.org/support/solutions/articles/151000169936"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
    "id": "sources",
    "topic": "History and sources",
    "icon": "❝",
@@ -1342,7 +4027,8 @@
      "What would a weather diary from 1846 be good evidence for? What not?",
      "The 1923 almanac carried an advertisement disguised as a weather forecast. Where do you see that today?"
     ],
-    "uses": "From the old almanacs (1846 Farmer's Almanack, 1923 Old Farmer's Almanac, Internet Archive scans). The Untold history section uses the same rules for adults."
+    "uses": "From the old almanacs (1846 Farmer's Almanack, 1923 Old Farmer's Almanac, Internet Archive scans). The Untold history section uses the same rules for adults.",
+    "ngss": []
    },
    "levels": {
     "k2": {

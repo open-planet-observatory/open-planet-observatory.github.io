@@ -59,8 +59,19 @@ export function mountEmblem(el, opt = {}) {
   let raf = 0, last = 0, t = 0, alive = true;
   const size = () => { const w = el.clientWidth || 200, h = el.clientHeight || w; r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); };
   function draw() { if (!alive) return; size(); r.render(scene, cam); }
+  /* Touch it (10 Nov 2026: "when you click it, something should happen"): drag to spin it by hand, it coasts and settles back
+     into its slow turn; a click (no drag) opens the emblem card (owlmanac.js OwlEmblemCard), or opt.onClick. */
+  let vy = 0, vx = 0, px = 0, held = false, moved = 0, lx = 0, ly = 0, lt = 0;
+  const cv = r.domElement; if (!opt.static) { cv.style.cursor = 'grab'; cv.style.touchAction = 'none'; cv.setAttribute('aria-hidden', 'false'); cv.setAttribute('role', 'button'); cv.setAttribute('aria-label', 'The Owlmanac emblem: drag to spin, click to learn about it'); cv.tabIndex = 0;
+    cv.addEventListener('pointerdown', e => { held = true; moved = 0; lx = e.clientX; ly = e.clientY; lt = performance.now(); cv.setPointerCapture(e.pointerId); cv.style.cursor = 'grabbing'; e.stopPropagation(); });
+    cv.addEventListener('pointermove', e => { if (!held) return; const dx = e.clientX - lx, dy = e.clientY - ly, now = performance.now(), dt = Math.max(8, now - lt); moved += Math.abs(dx) + Math.abs(dy); lx = e.clientX; ly = e.clientY; lt = now;
+      obj.rotation.y += dx * 0.012; px = Math.max(-0.9, Math.min(0.9, px + dy * 0.008)); vy = dx * 0.012 / (dt / 1000); vx = dy * 0.008 / (dt / 1000); if (still || rm) draw(); });
+    const up = e => { if (!held) return; held = false; cv.style.cursor = 'grab'; if (moved < 6) { vy = 0; const f = opt.onClick || (window.OwlEmblemCard && window.OwlEmblemCard.show); if (f) f(); } e.stopPropagation(); };
+    cv.addEventListener('pointerup', up); cv.addEventListener('pointercancel', () => { held = false; }); cv.addEventListener('click', e => e.stopPropagation());
+    cv.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); const f = opt.onClick || (window.OwlEmblemCard && window.OwlEmblemCard.show); if (f) f(); } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { vy += e.key === 'ArrowLeft' ? -4 : 4; } }); }
   function loop(now) { if (!alive) return; raf = requestAnimationFrame(loop); const dt = last ? Math.min(0.05, (now - last) / 1000) : 0; last = now; t += dt;
-    obj.rotation.y += dt * 0.32; obj.rotation.x = 0.42 + 0.1 * Math.sin(t * 0.37); draw(); }
+    if (!held) { obj.rotation.y += dt * (0.32 + vy); vy *= Math.pow(0.12, dt); px *= Math.pow(0.35, dt); }
+    obj.rotation.x = 0.42 + 0.1 * Math.sin(t * 0.37) + px; draw(); }
   const ro = new ResizeObserver(draw); ro.observe(el);
   if (still || rm) draw(); else raf = requestAnimationFrame(loop);
   const api = () => { alive = false; removeEventListener('resize', aim); cancelAnimationFrame(raf); ro.disconnect(); g.dispose(); mat.dispose(); tex.dispose(); r.dispose(); r.domElement.remove(); };

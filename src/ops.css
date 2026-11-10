@@ -416,7 +416,7 @@ html[data-theme="light"] .alm-year,body.light .alm-year{color:#8a6a00}
 html[data-theme="light"] .alm-top,html[data-theme="light"] .alm-src,html[data-theme="light"] .alm-q::before,html[data-theme="light"] .alm-q::after,body.light .alm-top,body.light .alm-src,body.light .alm-q::before,body.light .alm-q::after{color:#55606e}
 .alm-now{display:inline-block;font:700 .66rem/1 "Public Sans",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#9ad1ff;margin-right:6px;vertical-align:1px}
 .vy-mini{margin:0 0 12px;padding:8px 12px;border:1px solid rgba(242,196,60,.35);border-radius:999px;font-size:.82rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}.vy-mini b{color:var(--owl-yellow,#f2c43c);font-variant-numeric:tabular-nums}.vy-mini a{color:#9ad1ff}
-#uniLoading{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2001;padding:10px 18px;border-radius:999px;font-weight:600}
+#uniLoading{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2001;padding:10px 18px 10px 10px;border-radius:999px;font-weight:600;display:flex;align-items:center;gap:10px}#uniLoading .ul-em{width:44px;height:44px;flex:none}
 
 /* ---- Owl theme: the Owlmanac banner art as the site's default dark look (warm near-black paper, cream ink, ochre accent) ---- */
 :root[data-theme="owl"]{
@@ -1142,7 +1142,7 @@ html.map2d .rail-light{display:none!important}
 /* Tech & Industry hidden for now: its map layer goes with it */
 #chip-econ{display:none!important}
 /* landing page: the 3D emblem turns in the lower right; the starting points read as buttons */
-#owlSplash .mark3d{position:absolute;right:max(28px,env(safe-area-inset-right,0px));bottom:max(30px,env(safe-area-inset-bottom,0px));width:clamp(170px,19vw,290px);aspect-ratio:1;filter:drop-shadow(-8px 16px 24px rgb(0 0 0 / .7)) drop-shadow(0 0 22px rgb(217 164 65 / .14));pointer-events:none;animation:owlSplashIn 1.2s .4s ease both}
+#owlSplash .mark3d{position:absolute;right:max(28px,env(safe-area-inset-right,0px));bottom:max(30px,env(safe-area-inset-bottom,0px));width:clamp(170px,19vw,290px);aspect-ratio:1;filter:drop-shadow(-8px 16px 24px rgb(0 0 0 / .7)) drop-shadow(0 0 22px rgb(217 164 65 / .14));pointer-events:auto;animation:owlSplashIn 1.2s .4s ease both}
 #owlSplash .mark3d canvas{display:block}
 #owlSplash .sp-links{gap:10px 10px;border-top:0;padding-top:4px}
 #owlSplash .sp-links button,#owlSplash .sp-links a{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid rgb(217 164 65 / .55);border-radius:999px;background:rgb(11 9 6 / .45);text-decoration:none;backdrop-filter:blur(6px);font-size:.85rem;transition:background .2s,border-color .2s}
@@ -1309,3 +1309,47 @@ html.moon-on #globeScale,html.game-on #globeScale,html.page-on #globeScale,html.
 .class-fb{margin-top:4px}
 footer .foot-links{display:block;margin-top:6px}
 footer .foot-links a{color:inherit}
+/* the emblem card: what the shape is, and where to go (10 Nov 2026) */
+#owlEmCard{position:fixed;inset:0;z-index:9600;display:flex;align-items:center;justify-content:center;background:rgb(0 0 0 / .55);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+#owlEmCard .oec{width:min(440px,calc(100vw - 32px));padding:20px 22px;border-radius:20px;background:#120e08;border:1px solid rgb(217 164 65 / .5);color:#EFE4CC;box-shadow:0 20px 60px rgb(0 0 0 / .6);position:relative}
+#owlEmCard h3{margin:0 0 8px;font-size:1.2rem}#owlEmCard p{margin:0 0 10px;color:#C9B995;font-size:.92rem;line-height:1.45}#owlEmCard p b{color:#EFE4CC}
+#owlEmCard .oec-go{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}#owlEmCard .oec-go button{font:inherit;font-weight:700;font-size:.88rem;padding:7px 13px;border-radius:999px;border:1px solid rgb(217 164 65 / .7);background:rgb(217 164 65 / .12);color:#EFE4CC;cursor:pointer}
+#owlEmCard .oec-go button:hover{background:rgb(217 164 65 / .3)}#owlEmCard .oec-x{position:absolute;top:10px;right:12px;background:none;border:0;color:#EFE4CC;font-size:1.3rem;cursor:pointer}
+/* Classroom: students / educators (10 Nov 2026) */
+.cl-tabs{display:flex;gap:6px;margin:16px 0 4px;padding:4px;border-radius:999px;background:var(--glass-2);border:1px solid var(--glass-line);width:max-content;max-width:100%}
+.cl-tabs button{font:inherit;font-weight:700;font-size:1rem;padding:9px 20px;border-radius:999px;border:0;background:none;color:var(--ink);cursor:pointer}
+.cl-tabs button[aria-selected="true"]{background:var(--accent,#D9A441);color:#16110a}
+#clEducators[hidden],#clStudents[hidden]{display:none}
+.edu-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin:18px 0 10px}.edu-h h3{margin:0;font-size:1.25rem;flex:1 1 auto}.edu-h .eyebrow{flex-basis:100%}
+.edu-today{padding:16px 18px;border-radius:18px;border:1px solid rgb(217 164 65 / .45);background:radial-gradient(90% 140% at 100% 0%,rgb(217 164 65 / .14),transparent 60%),var(--glass-2);margin-top:12px}
+.edu-today .edu-h{margin-top:0}.tq-q{font-size:1.2rem;font-weight:700;margin:0 0 8px}.tq-a{margin:0 0 10px;padding-left:26px;font-size:1.05rem}.tq-a li{margin:3px 0;padding:2px 6px;border-radius:8px}.tq-a li.ok{background:rgb(127 212 168 / .2);font-weight:700}
+.tq-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}.tq-why p{margin:0 0 8px}
+.edu-today.tq-full{position:fixed;inset:0;z-index:9000;border-radius:0;display:flex;flex-direction:column;justify-content:center;padding:6vh 8vw;background:#0d0a06}
+.edu-today.tq-full .tq-q{font-size:clamp(1.6rem,4vw,3rem)}.edu-today.tq-full .tq-a{font-size:clamp(1.3rem,3vw,2.2rem)}.edu-today.tq-full .tq-why{font-size:clamp(1.1rem,2.2vw,1.6rem)}
+.edu-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.edu-steps>div{padding:12px 14px;border-radius:14px;border:1px solid var(--glass-line);background:var(--glass-2);display:flex;flex-direction:column;gap:4px}.edu-steps b{color:var(--accent,#D9A441)}.edu-steps span{font-size:.9rem}
+.edu-ages{margin:0;flex-basis:100%}
+.edu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;align-items:start}
+.edu-m{padding:14px 16px;border-radius:16px;border:1px solid var(--glass-line);background:var(--glass-2)}
+.edu-mh{display:flex;gap:12px;align-items:flex-start}.edu-ic{flex:none;width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgb(217 164 65 / .16);color:var(--accent,#D9A441)}
+.edu-mh h4{margin:2px 0;font-size:1.05rem}.edu-btns{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 6px}.edu-btns .go{font-size:.9rem;padding:7px 14px}
+.edu-d summary{cursor:pointer;color:var(--ink-3);font-size:.85rem}.edu-d ul{margin:6px 0;padding-left:18px;font-size:.88rem}.edu-ngss li{margin-bottom:4px}
+.edu-more{margin-top:20px}
+/* class mode: the lesson card for a projector */
+.ln-card.ln-class{left:50%;transform:translateX(-50%);width:min(980px,calc(100vw - 40px));max-height:min(62vh,700px);bottom:calc(var(--botH,56px) + 24px);padding:22px 28px;font-size:1.5rem}
+.ln-card.ln-class .ln-say{font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.35}.ln-card.ln-class .ln-b{font-size:1.15rem;padding:10px 20px}.ln-card.ln-class h3{font-size:1.6rem}
+.ln-card.ln-class button[data-i],.ln-card.ln-class .ln-opt{font-size:1.25rem}
+/* new mission art */
+.la-mtn{fill:#4a3a2c;stroke:#7d6248;stroke-width:1.5}.la-lava{fill:#ff7a3c;filter:drop-shadow(0 0 6px #ff7a3c)}
+.la-ash{fill:rgb(190 180 170 / .5);transform-box:fill-box;transform-origin:center;animation:laAsh 2.7s var(--d) ease-out infinite}
+@keyframes laAsh{0%{transform:translateY(0) scale(.6);opacity:.9}100%{transform:translateY(-30px) scale(1.6);opacity:0}}
+.la-moonlit{fill:#e9e4d6;animation:laPhase 8s ease-in-out infinite;clip-path:inset(0 0 0 0)}
+@keyframes laPhase{0%{clip-path:inset(0 0 0 100%)}50%{clip-path:inset(0 0 0 0)}100%{clip-path:inset(0 100% 0 0)}}
+.la-ruler{stroke:rgb(239 228 204 / .4);stroke-width:1.5;stroke-dasharray:3 4}.la-lbl{font:600 9px system-ui;fill:#C9B995}
+.la-pulse{fill:#fff6dc;animation:laPulse 3.5s linear infinite}@keyframes laPulse{0%{transform:translateX(0);opacity:0}8%{opacity:1}100%{transform:translateX(160px);opacity:0}}
+.la-ice{fill:#dfeefa;opacity:.85}.la-sea{fill:#2d5f8f;animation:laSea 4s ease-in-out infinite}@keyframes laSea{50%{transform:translateY(-3px)}}
+.la-co2{fill:none;stroke:#F2C43C;stroke-width:2.2;stroke-dasharray:200;stroke-dashoffset:200;animation:laInk 4s ease-in-out infinite}
+.la-route{fill:none;stroke:rgb(242 196 60 / .6);stroke-width:2;stroke-dasharray:4 5}
+.la-bird{offset-path:path('M24 30 C70 20 120 100 176 90');animation:laIss 5s linear infinite}
+.ln-volcanoes .ln-art{background:radial-gradient(100% 120% at 50% 100%,#3d1d0f,#0b0906 75%)}.ln-moon .ln-art{background:radial-gradient(100% 120% at 50% 50%,#1c2030,#06070b 75%)}.ln-climate .ln-art{background:radial-gradient(100% 120% at 50% 0%,#1d3046,#07090c 75%)}.ln-migration .ln-art{background:radial-gradient(100% 120% at 50% 100%,#24341f,#090b07 75%)}
+@media (prefers-reduced-motion:reduce){.la-ash,.la-moonlit,.la-pulse,.la-sea,.la-co2,.la-bird{animation:none!important}}
+@media (max-width:640px){.ln-card.ln-class{font-size:1.1rem;padding:14px}.cl-tabs button{padding:8px 14px;font-size:.92rem}}
