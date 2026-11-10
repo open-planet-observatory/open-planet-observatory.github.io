@@ -1,0 +1,497 @@
+[
+ {
+  "term": "Almanac",
+  "topic": "data",
+  "kid": "A book made for one year, with calendars, sky times, weather notes and advice.",
+  "more": "A yearly reference book of calendars, sunrise and sunset times, seasonal advice for farmers and other facts; old almanacs are clues about life back then.",
+  "pic": "book",
+  "src": [
+   "Britannica: Almanac",
+   "https://www.britannica.com/topic/almanac"
+  ]
+ },
+ {
+  "term": "Anomaly",
+  "topic": "weather",
+  "kid": "How much warmer or cooler something is than its usual average.",
+  "more": "The difference between a measurement and the long-term average for that place and date; scientists use anomalies to track change over time.",
+  "pic": "thermometer",
+  "src": [
+   "NOAA Climate.gov: Global temperature",
+   "https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature"
+  ]
+ },
+ {
+  "term": "Astronomical unit (AU)",
+  "topic": "space",
+  "kid": "A space ruler: one AU is how far Earth is from the Sun.",
+  "more": "The Sun-Earth distance, about 150 million km, used to measure the solar system; light crosses one AU in about 8 minutes 20 seconds.",
+  "pic": "ruler-light",
+  "src": [
+   "NASA: Cosmic distances",
+   "https://science.nasa.gov/solar-system/cosmic-distances/"
+  ]
+ },
+ {
+  "term": "Average",
+  "topic": "data",
+  "kid": "The middle-ish number you get by adding numbers up and sharing them out evenly.",
+  "more": "Add all the values, then divide by how many there are; climate averages and anomaly baselines are built this way from long records.",
+  "pic": "chart",
+  "src": [
+   "Britannica: Mean",
+   "https://www.britannica.com/science/mean"
+  ]
+ },
+ {
+  "term": "Blind spot",
+  "topic": "data",
+  "kid": "A place or thing a tool cannot see well, so missing dots do not mean nothing.",
+  "more": "The limits of a measurement: what it misses or gets wrong, like satellites underestimating thin new sea ice or having no view near the pole.",
+  "pic": "eye",
+  "src": [
+   "NSIDC: Arctic Sea Ice News FAQ",
+   "https://nsidc.org/arcticseaicenews/faq/"
+  ]
+ },
+ {
+  "term": "Carbon dioxide (CO2)",
+  "topic": "weather",
+  "kid": "An invisible gas in the air that plants take in and that burning fuel gives off.",
+  "more": "A gas measured at Mauna Loa, Hawaii, since 1958; its amount in the air rises and falls each year with plant growth, on top of a long rise.",
+  "pic": "cloud",
+  "src": [
+   "NOAA Global Monitoring Laboratory: CO2 trends",
+   "https://gml.noaa.gov/ccgg/trends/"
+  ]
+ },
+ {
+  "term": "Climate",
+  "topic": "weather",
+  "kid": "The usual weather of a place over many, many years.",
+  "more": "The average weather conditions of a place over a long time, usually 30 years or more; one storm or hot week is weather, not climate.",
+  "pic": "globe",
+  "src": [
+   "NOAA SciJinks: Weather vs climate",
+   "https://scijinks.gov/about/k-12-education/understanding-our-planet/whats-the-difference-between-weather-and-climate"
+  ]
+ },
+ {
+  "term": "Cosmic web",
+  "topic": "space",
+  "kid": "Giant threads of matter in space, with galaxies sitting along them like beads.",
+  "more": "The universe's largest pattern: filaments and sheets of mostly dark matter linking galaxies and clusters, mapped by inference rather than seen directly.",
+  "pic": "web",
+  "src": [
+   "NASA Hubble: Mapping the Cosmic Web",
+   "https://science.nasa.gov/mission/hubble/science/science-highlights/mapping-the-cosmic-web/"
+  ]
+ },
+ {
+  "term": "Crater",
+  "topic": "space",
+  "kid": "A bowl-shaped hole made when a space rock smashes into the ground.",
+  "more": "A pit blasted out by an impacting asteroid, meteoroid or comet; with no wind or liquid water, Moon craters last billions of years.",
+  "pic": "crater",
+  "src": [
+   "NASA: Lunar craters",
+   "https://science.nasa.gov/moon/lunar-craters/"
+  ]
+ },
+ {
+  "term": "Crescent",
+  "topic": "space",
+  "kid": "When we see just a thin curved sliver of the Moon lit up.",
+  "more": "A phase showing a thin sliver of the sunlit side: waxing crescent just after new Moon, waning crescent just before the next one.",
+  "pic": "moon-phase",
+  "src": [
+   "NASA: Moon phases",
+   "https://science.nasa.gov/moon/moon-phases/"
+  ]
+ },
+ {
+  "term": "Data",
+  "topic": "data",
+  "kid": "Facts and numbers people collect so they can learn something.",
+  "more": "Recorded information, often measurements in numbers, gathered to answer questions; every figure on this site comes from a named source's data.",
+  "pic": "chart",
+  "src": [
+   "National Geographic Education: Quantitative data",
+   "https://education.nationalgeographic.org/resource/quantitative-data/"
+  ]
+ },
+ {
+  "term": "Earthquake",
+  "topic": "earth",
+  "kid": "When the ground suddenly shakes because rocks underground move.",
+  "more": "Shaking of Earth's surface caused by a sudden slip of rock along a fault in the crust, most often near the edges of tectonic plates.",
+  "pic": "quake",
+  "src": [
+   "NASA Space Place: What Is an Earthquake?",
+   "https://spaceplace.nasa.gov/earthquakes/en/"
+  ]
+ },
+ {
+  "term": "Fault",
+  "topic": "earth",
+  "kid": "A crack in Earth's rocky outer layer where the rocks can slip.",
+  "more": "A break in the crust where blocks of rock move past each other; stress builds until the rock slips, causing an earthquake. California's San Andreas is one.",
+  "pic": "layers",
+  "src": [
+   "NASA Space Place: What Is an Earthquake?",
+   "https://spaceplace.nasa.gov/earthquakes/en/"
+  ]
+ },
+ {
+  "term": "Galaxy",
+  "topic": "space",
+  "kid": "A huge family of stars, gas and dust held together by gravity.",
+  "more": "A vast system of stars, gas and dust bound by gravity, holding millions to billions of stars; Andromeda is our nearest big neighbour.",
+  "pic": "galaxy",
+  "src": [
+   "NASA Imagine the Universe: Milky Way Galaxy",
+   "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html"
+  ]
+ },
+ {
+  "term": "Gibbous",
+  "topic": "space",
+  "kid": "When more than half of the Moon looks lit, but it is not full yet.",
+  "more": "A phase when more than half of the Moon's face is lit: waxing gibbous grows toward full Moon, waning gibbous shrinks after it.",
+  "pic": "moon-phase",
+  "src": [
+   "NASA: Moon phases",
+   "https://science.nasa.gov/moon/moon-phases/"
+  ]
+ },
+ {
+  "term": "Glacier",
+  "topic": "weather",
+  "kid": "A huge river of ice that moves very slowly over land.",
+  "more": "Ice built up from snow that survives year after year, packed down into dense ice that slowly flows downhill under its own weight.",
+  "pic": "ice",
+  "src": [
+   "NSIDC: Glacier quick facts",
+   "https://nsidc.org/learn/parts-cryosphere/glaciers/glacier-quick-facts"
+  ]
+ },
+ {
+  "term": "Gravity",
+  "topic": "space",
+  "kid": "The invisible pull that keeps us on the ground and the Moon near Earth.",
+  "more": "A force pulling objects with mass toward each other; it keeps the Moon orbiting Earth and causes ocean tides, and gives you your weight.",
+  "pic": "orbit",
+  "src": [
+   "NASA Space Place: What Is Gravity?",
+   "https://spaceplace.nasa.gov/what-is-gravity/en/"
+  ]
+ },
+ {
+  "term": "Hotspot",
+  "topic": "earth",
+  "kid": "A very hot place deep under Earth's plates that can make volcanoes.",
+  "more": "A small, long-lasting, extra-hot region below a plate; as the plate moves over it, a chain of volcanoes like the Hawaiian Islands forms.",
+  "pic": "volcano",
+  "src": [
+   "USGS: Hotspots",
+   "https://pubs.usgs.gov/gip/dynamic/hotspots.html"
+  ]
+ },
+ {
+  "term": "Ice sheet",
+  "topic": "weather",
+  "kid": "A giant blanket of ice covering a huge area of land.",
+  "more": "Land ice covering more than 50,000 square km; only Greenland and Antarctica have one today, and their meltwater raises sea level.",
+  "pic": "ice",
+  "src": [
+   "NSIDC: Ice sheet quick facts",
+   "https://nsidc.org/learn/parts-cryosphere/ice-sheets/ice-sheet-quick-facts"
+  ]
+ },
+ {
+  "term": "Lava",
+  "topic": "earth",
+  "kid": "Melted rock that comes out of a volcano.",
+  "more": "Molten rock that erupts onto the surface from a vent or crack; it is called magma while it is still underground.",
+  "pic": "volcano",
+  "src": [
+   "USGS: Volcano glossary",
+   "https://pubs.usgs.gov/gip/volcus/page42.html"
+  ]
+ },
+ {
+  "term": "Light-day",
+  "topic": "space",
+  "kid": "How far light travels in one whole day: billions of kilometres.",
+  "more": "The distance light covers in 24 hours, about 25.9 billion km; NASA calculated Voyager 1 would reach it on 18 November 2026.",
+  "pic": "ruler-light",
+  "src": [
+   "NASA: Voyager 1: What is a light-day?",
+   "https://science.nasa.gov/mission/voyager/voyager-1/voyager-1-what-is-a-light-day/"
+  ]
+ },
+ {
+  "term": "Light-year",
+  "topic": "space",
+  "kid": "How far light travels in one year. It measures distance, not time.",
+  "more": "The distance light travels in one year, about 9 trillion km; used for distances to stars and galaxies.",
+  "pic": "ruler-light",
+  "src": [
+   "NASA Space Place: What is a light-year?",
+   "https://spaceplace.nasa.gov/light-year/en/"
+  ]
+ },
+ {
+  "term": "Lightning",
+  "topic": "weather",
+  "kid": "A giant spark of electricity that flashes in a storm.",
+  "more": "A sudden electrical discharge inside a storm cloud or between cloud and ground, heating the air to about five times hotter than the Sun's surface.",
+  "pic": "bolt",
+  "src": [
+   "National Weather Service: Lightning overview",
+   "https://www.weather.gov/safety/lightning-science-overview"
+  ]
+ },
+ {
+  "term": "Magma",
+  "topic": "earth",
+  "kid": "Hot, melted rock deep inside the Earth.",
+  "more": "Molten rock with dissolved gas and crystals that forms deep underground; when it reaches the surface it is called lava.",
+  "pic": "magma",
+  "src": [
+   "USGS: Volcano glossary",
+   "https://pubs.usgs.gov/gip/volcus/page42.html"
+  ]
+ },
+ {
+  "term": "Magnitude",
+  "topic": "earth",
+  "kid": "A number that tells how big an earthquake is.",
+  "more": "The size of an earthquake at its source, measured with seismographs; each whole step up means about 32 times more energy released.",
+  "pic": "quake",
+  "src": [
+   "USGS: The Severity of an Earthquake",
+   "https://pubs.usgs.gov/gip/earthq4/severitygip.html"
+  ]
+ },
+ {
+  "term": "Maria",
+  "topic": "space",
+  "kid": "The dark patches on the Moon, called seas, but they hold no water.",
+  "more": "Latin for 'seas': huge impact basins on the Moon that filled with lava between about 4.2 and 1.2 billion years ago.",
+  "pic": "crater",
+  "src": [
+   "NASA: Moon facts",
+   "https://science.nasa.gov/moon/facts/"
+  ]
+ },
+ {
+  "term": "Migration",
+  "topic": "nature",
+  "kid": "When animals take a long trip each season and then come back.",
+  "more": "A seasonal round trip between habitats, made to find food, better conditions or a place to raise young, as monarchs and whales do.",
+  "pic": "bird",
+  "src": [
+   "National Geographic Education: Migration",
+   "https://education.nationalgeographic.org/resource/migration/"
+  ]
+ },
+ {
+  "term": "Milky Way",
+  "topic": "space",
+  "kid": "Our home galaxy, a giant spiral of billions of stars.",
+  "more": "Our barred spiral galaxy, about 100,000 light-years across, with the Sun about 25,000 light-years from its centre.",
+  "pic": "galaxy",
+  "src": [
+   "NASA Imagine the Universe: Milky Way Galaxy",
+   "https://imagine.gsfc.nasa.gov/science/objects/milkyway1.html"
+  ]
+ },
+ {
+  "term": "Moon phase",
+  "topic": "space",
+  "kid": "The shape of the lit part of the Moon that we see on a given night.",
+  "more": "How much of the Moon's sunlit half faces Earth; the eight phases repeat about every 29.5 days and are not caused by Earth's shadow.",
+  "pic": "moon-phase",
+  "src": [
+   "NASA: Moon phases",
+   "https://science.nasa.gov/moon/moon-phases/"
+  ]
+ },
+ {
+  "term": "Observation",
+  "topic": "data",
+  "kid": "Something you notice and write down, like a photo of an animal with when and where.",
+  "more": "A recorded sighting or measurement; on iNaturalist it needs a date, a location and a photo or sound as evidence.",
+  "pic": "eye",
+  "src": [
+   "iNaturalist Help: How observations become Research Grade",
+   "https://help.inaturalist.org/support/solutions/articles/151000169936"
+  ]
+ },
+ {
+  "term": "Ocean trench",
+  "topic": "earth",
+  "kid": "A very long, very deep valley in the ocean floor.",
+  "more": "A long, narrow, deep trough in the seafloor, often 8 to 10 km deep, formed where one plate sinks beneath another.",
+  "pic": "sea",
+  "src": [
+   "USGS: Understanding plate motions",
+   "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+  ]
+ },
+ {
+  "term": "Orbit",
+  "topic": "space",
+  "kid": "The path something takes as it goes around and around another thing in space.",
+  "more": "A regular, repeating path of one object around another, where forward speed and gravity's pull balance, like the space station around Earth.",
+  "pic": "orbit",
+  "src": [
+   "NASA Space Place: What Is an Orbit?",
+   "https://spaceplace.nasa.gov/orbits/en/"
+  ]
+ },
+ {
+  "term": "Parts per million (ppm)",
+  "topic": "weather",
+  "kid": "A way to count tiny amounts: how many bits out of one million.",
+  "more": "A unit for small amounts; 400 ppm of carbon dioxide means 400 CO2 molecules in every million molecules of dry air.",
+  "pic": "chart",
+  "src": [
+   "NOAA Global Monitoring Laboratory: CO2 trends",
+   "https://gml.noaa.gov/ccgg/trends/"
+  ]
+ },
+ {
+  "term": "Plate",
+  "topic": "earth",
+  "kid": "One of the giant pieces of Earth's hard outer shell, like a cracked eggshell.",
+  "more": "A huge slab of Earth's rigid outer layer that moves a few centimetres a year; most earthquakes and volcanoes happen where plates meet.",
+  "pic": "plates",
+  "src": [
+   "USGS: Understanding plate motions",
+   "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+  ]
+ },
+ {
+  "term": "Primary source",
+  "topic": "data",
+  "kid": "Something made at the time, like a diary, letter or photo.",
+  "more": "An original item created during the time studied; a secondary source is one made later that explains or interprets the past.",
+  "pic": "book",
+  "src": [
+   "Library of Congress: Getting started with primary sources",
+   "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/"
+  ]
+ },
+ {
+  "term": "Record",
+  "topic": "data",
+  "kid": "A long list of careful measurements kept over many years.",
+  "more": "A long series of measurements of the same thing; NOAA's global temperature record starts in 1850. A 'record high' is the top value in it.",
+  "pic": "chart",
+  "src": [
+   "NOAA Climate.gov: Global temperature",
+   "https://www.climate.gov/news-features/understanding-climate/climate-change-global-temperature"
+  ]
+ },
+ {
+  "term": "Ring of Fire",
+  "topic": "earth",
+  "kid": "A giant ring around the Pacific Ocean with many volcanoes and earthquakes.",
+  "more": "The belt of plate boundaries around the Pacific, where the Pacific Plate meets many others; it is the world's most active zone for earthquakes and volcanoes.",
+  "pic": "ring",
+  "src": [
+   "USGS: What is the Ring of Fire?",
+   "https://www.usgs.gov/index.php/faqs/what-ring-fire"
+  ]
+ },
+ {
+  "term": "Satellite",
+  "topic": "space",
+  "kid": "Anything that travels around a planet, moon or star, like the Moon or a space station.",
+  "more": "Any object that orbits a planet, star or moon; natural ones include the Moon, and human-made ones include weather satellites.",
+  "pic": "satellite",
+  "src": [
+   "NASA Space Place: What Is a Satellite?",
+   "https://spaceplace.nasa.gov/satellite/en/"
+  ]
+ },
+ {
+  "term": "Sea ice",
+  "topic": "weather",
+  "kid": "Frozen ocean water that floats on the sea.",
+  "more": "Ice that forms, grows and melts in the ocean itself; Arctic sea ice is usually largest in March and smallest in September.",
+  "pic": "ice",
+  "src": [
+   "NSIDC: Quick facts about sea ice",
+   "https://nsidc.org/learn/parts-cryosphere/sea-ice/quick-facts-about-sea-ice"
+  ]
+ },
+ {
+  "term": "Sea level",
+  "topic": "weather",
+  "kid": "How high the ocean's surface reaches along the land.",
+  "more": "The average height of the ocean surface at a place; it rises when land ice like glaciers and ice sheets melts into the ocean.",
+  "pic": "sea",
+  "src": [
+   "National Geographic Education: Sea level",
+   "https://education.nationalgeographic.org/resource/sea-level/"
+  ]
+ },
+ {
+  "term": "Source",
+  "topic": "data",
+  "kid": "Where a fact or picture comes from. Always ask who made it and why.",
+  "more": "The origin of information; check who made it, when, why and for whom, and whether it agrees with other independent sources.",
+  "pic": "magnifier",
+  "src": [
+   "Library of Congress: Getting started with primary sources",
+   "https://www.loc.gov/programs/teachers/getting-started-with-primary-sources/"
+  ]
+ },
+ {
+  "term": "Species",
+  "topic": "nature",
+  "kid": "A group of living things of the same kind that can have babies together.",
+  "more": "A group of similar organisms that can reproduce with each other; iNaturalist checks that people agree on an observation's species.",
+  "pic": "butterfly",
+  "src": [
+   "National Geographic Education: Biodiversity (glossary)",
+   "https://education.nationalgeographic.org/resource/biodiversity/"
+  ]
+ },
+ {
+  "term": "Subduction",
+  "topic": "earth",
+  "kid": "When one of Earth's giant plates slides down under another one.",
+  "more": "At a convergent boundary, one plate sinks beneath another into the mantle, forming trenches, deep earthquakes and volcanoes like the Andes.",
+  "pic": "layers",
+  "src": [
+   "USGS: Understanding plate motions",
+   "https://pubs.usgs.gov/gip/dynamic/understanding.html"
+  ]
+ },
+ {
+  "term": "Thunder",
+  "topic": "weather",
+  "kid": "The loud boom that lightning makes.",
+  "more": "The sound of air expanding explosively after lightning heats it; light arrives first, so counting seconds to the boom estimates distance.",
+  "pic": "bolt",
+  "src": [
+   "NOAA SciJinks: What causes lightning and thunder?",
+   "https://scijinks.gov/lightning/"
+  ]
+ },
+ {
+  "term": "Weather",
+  "topic": "weather",
+  "kid": "What the sky is doing today: sunny, rainy, windy or snowy.",
+  "more": "Conditions over a short time, from hours to days, like a rainstorm or a hot afternoon; climate is the long-term average.",
+  "pic": "cloud",
+  "src": [
+   "NOAA SciJinks: Weather vs climate",
+   "https://scijinks.gov/about/k-12-education/understanding-our-planet/whats-the-difference-between-weather-and-climate"
+  ]
+ }
+]

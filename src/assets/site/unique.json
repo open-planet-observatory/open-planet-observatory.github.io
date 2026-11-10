@@ -1,0 +1,45 @@
+{
+ "items": [
+  {
+   "i": "◉",
+   "t": "Live data, not pictures of data",
+   "p": "Earthquakes, storms, lightning, satellites and the Moon update while you teach, straight from USGS, NOAA, NASA, EUMETSAT and others."
+  },
+  {
+   "i": "§",
+   "t": "Every number has its source, and its blind spot",
+   "p": "Each figure links to the agency that measured it, with what that measurement can't show. Students learn to read data the way scientists do."
+  },
+  {
+   "i": "⇶",
+   "t": "One lesson, four ages",
+   "p": "Every mission is told four ways, for ages 6–8, 9–11, 12–14 and 15 and up, on the same live globe. Mixed-age classes and homeschool families can work side by side."
+  },
+  {
+   "i": "✺",
+   "t": "From the schoolyard to the edge of the universe",
+   "p": "One continuous zoom: Earth, the Moon, the planets, a million stars measured by ESA's Gaia, 43,000 real galaxies and the oldest light in the universe."
+  },
+  {
+   "i": "❝",
+   "t": "History in the words of the people it happened to",
+   "p": "Untold history puts primary sources first: the voices of those it happened to, beside the official account and what is still disputed."
+  },
+  {
+   "i": "⎙",
+   "t": "Worksheets that change with the news",
+   "p": "Print a worksheet and answer key for any mission; its live questions are built from that day's data, so no two weeks are the same."
+  },
+  {
+   "i": "♡",
+   "t": "Free, with nothing collected",
+   "p": "No accounts, no ads, no cookies, nothing about students stored or sold. Progress stays in each browser."
+  },
+  {
+   "i": "⌥",
+   "t": "Built in the open",
+   "p": "The code is public (AGPL) and the data policy explains how every layer is made, so you can check our work."
+  }
+ ],
+ "about": "The Owlmanac's own list; add to it as the site grows."
+}

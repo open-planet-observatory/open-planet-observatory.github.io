@@ -78,6 +78,8 @@ const PANELS=[
  ['library','Sources',['#library']],
  ['classroom','Classroom',['#classroom']],
  ['free','Keep it free',['#free']],
+ ['changes','What\u2019s new',['#changes']],
+ ['contact','Contact',['#contact']],
  ['about','About',['.notice','section[aria-labelledby="h-resp"]','#use','#terms','section[aria-labelledby="h-how"]','footer']],
 ];
 const body=$('#drawerBody');const tabs=$('#panelTabs');

@@ -9,7 +9,8 @@
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
   const KEY = 'owl-learn-v1', AGE = 'owl-learn-age', RA = 'owl-learn-read';
   const store = () => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } };
-  const save = (lid, lv, stars) => { try { const s = store(); s[lid] = s[lid] || {}; s[lid][lv] = Math.max(s[lid][lv] || 0, stars); localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { } };
+  const LOG = 'owl-learn-log', logs = () => { try { return JSON.parse(localStorage.getItem(LOG) || '[]'); } catch (e) { return []; } };
+  const save = (lid, lv, stars) => { try { const g = logs(); g.unshift({ l: lid, lv, s: stars, t: Date.now() }); localStorage.setItem(LOG, JSON.stringify(g.slice(0, 60))); } catch (e) { } try { const s = store(); s[lid] = s[lid] || {}; s[lid][lv] = Math.max(s[lid][lv] || 0, stars); localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) { } };
   let L = null, ALM = null, run = null;
   const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
   const uniq = a => [...new Set(a.map(String))];
@@ -177,11 +178,69 @@
   function paintGrid() { const h = document.getElementById('learnHost'); if (!h || !L) return; const a = age(), st = store(), lvl = L.levels.find(l => l.id === a) || {};
     h.innerHTML = `<div class="ln-ages" role="group" aria-label="Who is learning?"><span>Who's exploring?</span>${L.levels.map(l => `<button type="button" data-age="${l.id}" aria-pressed="${l.id === a}">${esc(l.label)}</button>`).join('')}</div>
      <div class="ln-whoa" aria-live="off"></div>
+     <section class="st-daily" id="stDaily"></section>
      <h3 class="ln-pick">Pick a mission</h3>
-     <div class="ln-grid${lvl.read ? ' big' : ''}">${L.lessons.map(les => tileHTML(les, a, st)).join('')}</div>`;
+     <div class="ln-grid${lvl.read ? ' big' : ''}">${L.lessons.map(les => tileHTML(les, a, st)).join('')}</div>
+     <section class="st-path" id="stPath"></section>
+     <section class="st-ask" id="stAsk"></section>
+     <section class="st-glo" id="stGlo"></section>`;
     h.querySelectorAll('[data-age]').forEach(b => b.onclick = () => { try { localStorage.setItem(AGE, b.dataset.age); } catch (e) { } paintGrid(); paintEdu(); });
-    h.querySelectorAll('.ln-go,.ln-art').forEach(b => b.onclick = () => start(b.dataset.l, age())); whoa(h); }
+    h.querySelectorAll('.ln-go,.ln-art').forEach(b => b.onclick = () => start(b.dataset.l, age())); whoa(h); daily(); path(); ask(); glossary(); }
 
+
+  // ---------- the students' side (10 Nov 2026: "the richest part of the site") ----------
+  /* Daily challenge: three questions from today's live data, the same three for everyone today (UTC); a streak of days kept in this browser */
+  const DKEY = 'owl-daily-v1', dstore = () => { try { return JSON.parse(localStorage.getItem(DKEY) || '{}'); } catch (e) { return {}; } };
+  const DPOOL = ['biggestMag', 'moonLooks', 'voyagerLH', 'countM5', 'volcPick', 'moonNextFull', 'migDir', 'iceVsAvg', 'deepest', 'co2Change', 'migFarthest', 'biggestPlace', 'tempRank', 'voyagerAU', 'moonLit', 'volcCount'];
+  const dayKey = () => new Date().toISOString().slice(0, 10), dayN = () => Math.floor(Date.parse(dayKey()) / 864e5);
+  function streak(S) { let n = 0, d = dayN(); if (!(S[dayKey()] && S[dayKey()].done)) d--; while (S[new Date(d * 864e5).toISOString().slice(0, 10)]?.done) { n++; d--; } return n; }
+  async function daily() { const box = document.getElementById('stDaily'); if (!box) return; const S = dstore(), today = S[dayKey()] || { a: [], done: false };
+    const Q = []; for (let i = 0; i < DPOOL.length && Q.length < 3; i++) { const id = DPOOL[(dayN() * 3 + i) % DPOOL.length]; try { const q = await liveQ(id); if (q) Q.push({ ...q, id }); } catch (e) { } }
+    if (!Q.length) { box.innerHTML = ''; return; }
+    const draw = () => { const k = today.a.length, sn = streak(S);
+      box.innerHTML = `<div class="sd-h"><span class="sd-i" aria-hidden="true">☀︎</span><div><span class="eyebrow">Daily challenge</span><h3>Three questions from today's real data</h3></div><span class="sd-streak" title="Days in a row">🔥︎ ${sn + (today.done ? 0 : 0)} day${sn === 1 ? '' : 's'} in a row</span></div>
+        <div class="sd-dots">${Q.map((_, i) => `<i class="${i < k ? (today.a[i] ? 'ok' : 'no') : i === k ? 'now' : ''}"></i>`).join('')}</div>
+        ${k < Q.length ? `<p class="sd-q">${esc(Q[k].q)}</p><div class="sd-a">${Q[k].a.map((x, i) => `<button type="button" data-i="${i}">${esc(x)}</button>`).join('')}</div><p class="sd-fb" aria-live="polite"></p>`
+          : `<p class="sd-q">${today.a.filter(Boolean).length} of ${Q.length} right today. ${today.a.every(Boolean) ? 'Perfect! ' : ''}Come back tomorrow for three new questions.</p>`}`;
+      box.querySelectorAll('.sd-a button').forEach(b => b.onclick = () => { const right = +b.dataset.i === Q[k].ok; box.querySelectorAll('.sd-a button').forEach(x => { x.disabled = true; x.classList.toggle('ok', +x.dataset.i === Q[k].ok); }); if (!right) b.classList.add('no');
+        box.querySelector('.sd-fb').innerHTML = `${right ? '<b>Yes!</b> ' : '<b>Not quite.</b> '}${esc(Q[k].why || '')} <button type="button" class="ln-b sd-next">${k + 1 < Q.length ? 'Next question' : 'Finish'}</button>`;
+        today.a.push(right); if (today.a.length >= Q.length) today.done = true; S[dayKey()] = today; try { localStorage.setItem(DKEY, JSON.stringify(S)); } catch (e) { }
+        box.querySelector('.sd-next').onclick = () => { draw(); if (today.done) path(); }; }); };
+    draw(); }
+
+  /* Explorer path: every mission in order, with stars at the chosen age, badges and a field journal of what you did (all in this browser) */
+  const BADGES = [['first', '★', 'First mission', 'Finish any mission', st => Object.keys(st).length > 0],
+    ['earth', '◎', 'Earth explorer', 'Earthquakes and volcanoes', st => st.quakes && st.volcanoes],
+    ['sky', '☾', 'Sky watcher', 'The sky and the Moon', st => st.sky && st.moon],
+    ['space', '✦', 'Space traveller', 'The scale of space', st => st.scale],
+    ['planet', '❄', 'Planet doctor', 'Lightning and climate', st => st.weather && st.climate],
+    ['nature', '⇄', 'Animal tracker', 'Migration', st => st.migration],
+    ['history', '❝', 'History detective', 'Reading sources', st => st.sources],
+    ['three', '✪', 'Three-star scientist', 'Three stars on any mission', st => Object.values(st).some(o => Object.values(o).some(v => v >= 3))],
+    ['streak', '🔥', 'Daily habit', 'Daily challenge 3 days in a row', () => streak(dstore()) >= 3],
+    ['all', '🦉', 'Owl of the Observatory', 'Every mission', st => L && L.lessons.every(l => st[l.id])]];
+  function path() { const box = document.getElementById('stPath'); if (!box || !L) return; const st = store(), a = age(), G = logs();
+    const got = BADGES.filter(b => { try { return !!b[4](st); } catch (e) { return false; } }).map(b => b[0]);
+    box.innerHTML = `<div class="edu-h"><span class="eyebrow">Your explorer path</span><h3>${got.length} of ${BADGES.length} badges</h3></div>
+      <ol class="sp-path">${L.lessons.map((l, i) => { const s = (st[l.id] || {})[a] || 0; return `<li class="${s ? 'done' : ''}"><button type="button" data-l="${l.id}" title="${esc(l.levels[a] ? l.levels[a].title : l.topic)}"><span class="sp-n">${s ? '✓' : i + 1}</span><span class="sp-t">${esc(l.levels[a] ? l.levels[a].title : l.topic)}</span><span class="sp-s">${'★'.repeat(s)}${'☆'.repeat(3 - s)}</span></button></li>`; }).join('')}</ol>
+      <div class="sp-badges">${BADGES.map(b => `<div class="sp-b${got.includes(b[0]) ? ' on' : ''}" title="${esc(b[3])}"><span aria-hidden="true">${b[1]}︎</span><b>${esc(b[2])}</b><small>${esc(b[3])}</small></div>`).join('')}</div>
+      <details class="sp-journal"${G.length ? '' : ' hidden'}><summary>Field journal (${G.length})</summary><ul>${G.slice(0, 20).map(g => { const l = L.lessons.find(x => x.id === g.l), lv = L.levels.find(x => x.id === g.lv); return l ? `<li><time>${esc(new Date(g.t).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }))}</time> ${esc(l.levels[g.lv] ? l.levels[g.lv].title : l.topic)} <span class="small muted">(${esc(lv ? lv.label : '')})</span> ${'★'.repeat(g.s)}</li>` : ''; }).join('')}</ul><p class="small muted">Kept only in this browser.</p></details>`;
+    box.querySelectorAll('[data-l]').forEach(b => b.onclick = () => start(b.dataset.l, age())); }
+
+  /* Ask the Owl: short answers to big questions, each checked against a NASA, NOAA, USGS or similar page, with a button to see it live */
+  let ASK = null, GLO = null;
+  async function ask() { const box = document.getElementById('stAsk'); if (!box) return; try { ASK = ASK || await fetch('assets/learn/askowl.json?h=' + Math.floor(Date.now() / 36e5)).then(r => r.json()); } catch (e) { box.innerHTML = ''; return; }
+    box.innerHTML = `<div class="edu-h"><span class="eyebrow">Ask the Owl</span><h3>Big questions, short answers</h3></div><div class="ao-grid">${ASK.map((x, i) => `<details class="ao" data-t="${esc(x.topic)}"><summary><span class="ao-q">${esc(x.q)}</span></summary><p class="ao-s">${esc(x.short)}</p>${(x.more || []).map(m => `<p>${esc(m)}</p>`).join('')}<div class="ao-row">${x.try ? `<button type="button" class="go ao-try" data-i="${i}">${esc(x.try.label || 'See it live')}</button>` : ''}${x.src ? `<a class="small" href="${esc(x.src[1])}" target="_blank" rel="noopener">${esc(x.src[0])} ↗</a>` : ''}</div></details>`).join('')}</div>`;
+    box.querySelectorAll('.ao-try').forEach(b => b.onclick = async () => { const x = ASK[+b.dataset.i]; if (window.OwlPage && window.OwlPage.isOpen()) window.OwlPage.close(); if (window.__opsCloseDrawer) window.__opsCloseDrawer(); for (const a of x.try.act || []) { await act(a); await new Promise(r => setTimeout(r, 300)); } }); }
+
+  /* Picture glossary: the science words in the missions, each with a small drawing */
+  const PIC = (k) => { const P = { quake: '<path d="M2 14h5l2-6 3 12 3-9 2 3h5"/>', plates: '<path d="M2 8h9l2 3h9M2 16h7l3-3h10"/>', volcano: '<path d="M3 20 10 8h4l7 12z"/><path d="M11 6q1-3 2 0"/>', magma: '<path d="M3 20 10 8h4l7 12z"/><path d="M12 9v10" stroke-dasharray="2 2"/>', ring: '<circle cx="12" cy="12" r="8" stroke-dasharray="2 2.5"/>', layers: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="2"/>', 'moon-phase': '<circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 1 0 16a5 8 0 0 0 0-16z" fill="currentColor"/>', crater: '<circle cx="12" cy="12" r="9"/><circle cx="9" cy="10" r="2.5"/><circle cx="15" cy="15" r="1.6"/>', orbit: '<circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5"/>', sun: '<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>', star: '<path d="m12 3 2.6 6 6.4.6-4.8 4.2 1.4 6.2L12 16.8 6.4 20l1.4-6.2L3 9.6 9.4 9z"/>', galaxy: '<path d="M12 12c4-6 9-2 6 2s-11 3-10-3 9-6 11 0"/>', web: '<circle cx="5" cy="6" r="1.4"/><circle cx="18" cy="5" r="1.4"/><circle cx="12" cy="13" r="1.4"/><circle cx="6" cy="19" r="1.4"/><circle cx="19" cy="18" r="1.4"/><path d="M5 6l7 7 6-8M12 13l-6 6M12 13l7 5"/>', 'ruler-light': '<path d="M2 12h20M5 9v6M9 10v4M13 9v6M17 10v4M21 9v6"/>', satellite: '<rect x="9" y="9" width="6" height="6"/><path d="M3 4l6 5M21 20l-6-5M4 12h5M15 12h5"/>', rocket: '<path d="M12 2c4 3 4 10 0 16-4-6-4-13 0-16z"/><path d="M9 16l-3 4M15 16l3 4"/>', cloud: '<path d="M6 18h11a4 4 0 0 0 0-8 6 6 0 0 0-11 1 3.5 3.5 0 0 0 0 7z"/>', bolt: '<path d="M13 2 5 14h6l-2 8 8-12h-6z"/>', thermometer: '<path d="M10 4a2 2 0 0 1 4 0v10a4 4 0 1 1-4 0z"/>', ice: '<path d="M3 16l5-6 4 3 4-5 5 8z"/><path d="M2 20h20"/>', sea: '<path d="M2 10q5-4 10 0t10 0M2 16q5-4 10 0t10 0"/>', globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/>', bird: '<path d="M3 11q4-5 9 0 5-5 9 0"/>', whale: '<path d="M2 13c3-5 13-5 17 0l3-3v8l-3-3c-4 5-14 5-17-2z"/>', butterfly: '<path d="M12 6v12M12 10C8 3 3 6 6 12c-3 4 3 7 6 1 3 6 9 3 6-1 3-6-2-9-6-2z"/>', map: '<path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/>', chart: '<path d="M3 21h18M5 17l4-5 4 3 6-8"/>', book: '<path d="M4 4h7a2 2 0 0 1 2 2v14a2 2 0 0 0-2-2H4zM20 4h-7v16a2 2 0 0 1 2-2h5z"/>', eye: '<path d="M2 12q10-10 20 0-10 10-20 0z"/><circle cx="12" cy="12" r="3"/>', magnifier: '<circle cx="10" cy="10" r="6"/><path d="M15 15l6 6"/>' };
+    return `<svg viewBox="0 0 24 24" aria-hidden="true">${P[k] || P.globe}</svg>`; };
+  async function glossary() { const box = document.getElementById('stGlo'); if (!box) return; try { GLO = GLO || await fetch('assets/learn/glossary.json?h=' + Math.floor(Date.now() / 36e5)).then(r => r.json()); } catch (e) { box.innerHTML = ''; return; }
+    const T = [['all', 'All'], ['earth', 'Earth'], ['space', 'Space'], ['weather', 'Weather'], ['nature', 'Nature'], ['data', 'Data']]; let f = 'all', q = '';
+    box.innerHTML = `<div class="edu-h"><span class="eyebrow">Picture glossary</span><h3>Words scientists use</h3></div><div class="gl-tools"><div class="rp-tabs">${T.map(([k, t]) => `<button type="button" data-gf="${k}" aria-selected="${k === f}">${t}</button>`).join('')}</div><label class="rp-q"><span aria-hidden="true">⌕</span><input type="search" placeholder="Find a word" aria-label="Find a word"></label></div><div class="gl-grid"></div>`;
+    const grid = box.querySelector('.gl-grid'); const draw = () => { const Q = q.toLowerCase(); grid.innerHTML = GLO.filter(x => (f === 'all' || x.topic === f) && (!Q || x.term.toLowerCase().includes(Q))).map(x => `<div class="gl" data-t="${esc(x.topic)}"><span class="gl-p">${PIC(x.pic)}</span><div><b>${esc(x.term)}</b><p>${esc(x.kid)}</p><details><summary>More</summary><p>${esc(x.more)}</p>${x.src ? `<a class="small" href="${esc(x.src[1])}" target="_blank" rel="noopener">${esc(x.src[0])} ↗</a>` : ''}</details></div></div>`).join('') || '<p class="small muted">No word matches.</p>'; box.querySelectorAll('[data-gf]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.gf === f))); };
+    box.querySelectorAll('[data-gf]').forEach(b => b.onclick = () => { f = b.dataset.gf; draw(); }); const inp = box.querySelector('input'); inp.oninput = () => { q = inp.value; draw(); }; draw(); }
   // ---------- For educators (10 Nov 2026: "the site should mainly be tailored to educators … an educators section, separate from students") ----------
   /* Today's question: one live-data warm-up a day, picked by the date (UTC), the same question for every class that day. */
   const TODAY = ['countM5', 'moonLit', 'voyagerAU', 'co2Change', 'biggestMag', 'iceVsAvg', 'moonNextFull', 'volcCount', 'tempRank', 'migDir', 'deepest', 'voyagerLH', 'migFarthest'];
@@ -193,7 +252,11 @@
     box.querySelector('.tq-big').onclick = () => { const el = box.closest('.edu-today'); el.classList.toggle('tq-full'); if (el.classList.contains('tq-full')) { const x = () => { if (!el.classList.contains('tq-full')) return removeEventListener('keydown', h); }; const h = e => { if (e.key === 'Escape') { el.classList.remove('tq-full'); removeEventListener('keydown', h); } }; addEventListener('keydown', h); } }; }
   const NGSS_NOTE = 'NGSS is a registered trademark of WestEd. Neither WestEd nor the lead states and partners that developed the Next Generation Science Standards were involved in the production of this site, and they do not endorse it.';
   function paintEdu() { const h = document.getElementById('eduHost'); if (!h || !L) return; const a = age();
-    h.innerHTML = `<section class="edu-today"><div class="edu-h"><span class="eyebrow">Warm-up</span><h3>Today’s question</h3></div><div class="tq-box"><p class="small muted">Loading…</p></div></section>
+    h.innerHTML = `<section class="edu-promo"><div class="ep-t"><span class="eyebrow">For teachers, homeschool families and clubs · preview</span><h3>Teach with the whole planet, live.</h3><p>The Owlmanac Observatory turns the real, live Earth and sky into lessons: earthquakes from this week, tonight's Moon, the storms on the map right now, out to the edge of the observable universe. Nine missions for ages 6 to adult, worksheets that change with the day's data, and a warm-up question every morning. Free, with no accounts and nothing collected about your students.</p>
+       <div class="ep-cta"><button type="button" class="go" data-cls-first="1">▶ Try a mission in class mode</button><a class="ln-b" href="#contact">Join the letter for teachers</a><a class="ln-b" href="mailto:hello@theowlmanac.com?subject=I%20teach%20...">Tell us what you teach</a></div>
+       <p class="small muted">We are building this with teachers. The Classroom is in preview: everything here works today, and more is on the way.</p></div></section>
+     <section class="edu-unique"><div class="edu-h"><span class="eyebrow">Why this site</span><h3>What you won't find anywhere else, in one place</h3></div><div class="eu-grid"><p class="small muted">Loading…</p></div></section>
+     <section class="edu-today"><div class="edu-h"><span class="eyebrow">Warm-up</span><h3>Today’s question</h3></div><div class="tq-box"><p class="small muted">Loading…</p></div></section>
      <section class="edu-how"><div class="edu-h"><span class="eyebrow">How to use the missions in class</span></div><div class="edu-steps">
        <div><b>1 · Class mode</b><span>For the projector: big text, no reading aloud, you move it on with a click, a clicker or the arrow keys. Students answer on paper or with a show of hands, then you pick the class’s answer.</span></div>
        <div><b>2 · Worksheet</b><span>One printed page per student: what to look for at each step, then the quiz. The answer key prints on its own page. Live questions are built from the day you print.</span></div>
@@ -209,6 +272,8 @@
     h.querySelectorAll('[data-cls]').forEach(b => b.onclick = () => start(b.dataset.cls, age(), { cls: true }));
     h.querySelectorAll('[data-try]').forEach(b => b.onclick = () => start(b.dataset.try, age()));
     h.querySelectorAll('[data-sheet]').forEach(b => b.onclick = () => sheet(b.dataset.sheet, age(), b));
+    const f1 = h.querySelector('[data-cls-first]'); if (f1) f1.onclick = () => start('quakes', age(), { cls: true });
+    fetch('assets/site/unique.json?h=' + Math.floor(Date.now() / 36e5)).then(r => r.json()).then(U => { const g = h.querySelector('.eu-grid'); if (g) g.innerHTML = (U.items || []).map(x => `<div class="eu"><span class="eu-i" aria-hidden="true">${esc(x.i)}\uFE0E</span><div><b>${esc(x.t)}</b><p>${esc(x.p)}</p></div></div>`).join(''); }).catch(() => { });
     todayQ(h.querySelector('.tq-box')); }
 
   /* Worksheet + answer key: printed from the lesson itself (the browser's own print dialog; "Save as PDF" works too). */

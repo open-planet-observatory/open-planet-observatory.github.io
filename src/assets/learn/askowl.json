@@ -1,0 +1,461 @@
+[
+ {
+  "id": "what-makes-an-earthquake",
+  "topic": "earth",
+  "q": "What makes an earthquake?",
+  "short": "An earthquake is strong shaking of the ground when rocks suddenly slip along a crack.",
+  "more": [
+   "Earth's outer layer is broken into giant puzzle pieces called tectonic plates.",
+   "The plates drift very slowly, and that pushing builds up stress in the rock.",
+   "When the stress gets too big, the rock cracks along lines called faults.",
+   "A sudden slip at a fault sends shaking waves out, and that shaking is the earthquake."
+  ],
+  "try": {
+   "label": "See it live: fly to the biggest earthquake today",
+   "act": [
+    [
+     "only",
+     [
+      "quake"
+     ]
+    ],
+    [
+     "flyLive",
+     "biggestQuake"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Is an Earthquake?",
+   "https://spaceplace.nasa.gov/earthquakes/en/"
+  ]
+ },
+ {
+  "id": "can-we-predict-earthquakes",
+  "topic": "earth",
+  "q": "Can scientists tell when an earthquake is coming?",
+  "short": "Not yet. No scientist has ever predicted a major earthquake.",
+  "more": [
+   "Scientists use instruments called seismometers to measure the shaking waves.",
+   "That tells them when and where a quake happened, and how strong it was.",
+   "They can't name the day, but they can work out the chances of a big quake over years."
+  ],
+  "try": {
+   "label": "See it live: today's earthquakes, and a peek inside Earth",
+   "act": [
+    [
+     "only",
+     [
+      "quake"
+     ]
+    ],
+    [
+     "xray",
+     true
+    ]
+   ]
+  },
+  "src": [
+   "USGS: Can you predict earthquakes?",
+   "https://www.usgs.gov/faqs/can-you-predict-earthquakes",
+   "NASA Space Place: What Is an Earthquake?",
+   "https://spaceplace.nasa.gov/earthquakes/en/"
+  ]
+ },
+ {
+  "id": "what-is-a-volcano",
+  "topic": "earth",
+  "q": "What is a volcano, and why does it erupt?",
+  "short": "A volcano is an opening where hot melted rock from deep inside escapes to the surface.",
+  "more": [
+   "Underground, melted rock is called magma. Once it reaches the surface, we call it lava.",
+   "Magma can rise where the plates of Earth's crust slowly pull apart.",
+   "It can also rise at hot spots, where heated magma is lighter and floats upward.",
+   "Earth is not alone: Venus and Mars are covered with old volcanoes that no longer erupt."
+  ],
+  "try": {
+   "label": "See it live: volcanoes around the world",
+   "act": [
+    [
+     "only",
+     [
+      "volc"
+     ]
+    ],
+    [
+     "fly",
+     -155.29,
+     19.41,
+     400000
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Is a Volcano?",
+   "https://spaceplace.nasa.gov/volcanoes2/en/"
+  ]
+ },
+ {
+  "id": "how-many-volcanoes",
+  "topic": "earth",
+  "q": "How many volcanoes are there?",
+  "short": "There are about 1,350 potentially active volcanoes on land around the world.",
+  "more": [
+   "About 500 of them have erupted since people began writing history down.",
+   "Many more volcanoes sit hidden along the ocean floor.",
+   "More than 80 percent of Earth's surface, above and below the sea, was made by volcanoes."
+  ],
+  "try": {
+   "label": "See it live: every volcano on the globe",
+   "act": [
+    [
+     "only",
+     [
+      "volc"
+     ]
+    ]
+   ]
+  },
+  "src": [
+   "USGS: How many active volcanoes are there on Earth?",
+   "https://www.usgs.gov/faqs/how-many-active-volcanoes-are-there-earth"
+  ]
+ },
+ {
+  "id": "why-moon-changes-shape",
+  "topic": "space",
+  "q": "Why does the Moon change shape?",
+  "short": "The Moon doesn't really change shape; we just see different amounts of its sunny side.",
+  "more": [
+   "The Moon makes no light of its own. Moonlight is really sunlight bouncing off it.",
+   "As the Moon circles Earth, we see more or less of its lit-up half.",
+   "It takes about 29.5 days to go from one new moon to the next."
+  ],
+  "try": {
+   "label": "See it live: tonight's Moon, lit by the Sun",
+   "act": [
+    [
+     "moon"
+    ],
+    [
+     "moonLit",
+     true
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Are the Moon's Phases?",
+   "https://spaceplace.nasa.gov/moon-phases/en/"
+  ]
+ },
+ {
+  "id": "why-moon-has-craters",
+  "topic": "space",
+  "q": "Why is the Moon covered in holes?",
+  "short": "Those holes are craters, made when space rocks crashed into the Moon long ago.",
+  "more": [
+   "The Moon has no air, so it has no wind or weather to wear craters away.",
+   "Once something hits the Moon, the mark stays, frozen in time.",
+   "Earth gets hit too, but weather, water, plants and volcanoes slowly erase or bury our craters."
+  ],
+  "try": {
+   "label": "See it live: visit the Moon",
+   "act": [
+    [
+     "moon"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: Why Does the Moon Have Craters?",
+   "https://spaceplace.nasa.gov/craters/en/"
+  ]
+ },
+ {
+  "id": "what-is-the-space-station",
+  "topic": "space",
+  "q": "What is the space station, and how fast does it go?",
+  "short": "It's a home for astronauts that circles Earth 16 times every day.",
+  "more": [
+   "The space station zooms along at five miles every second.",
+   "It is almost as long as an American football field, end zones included.",
+   "People have lived on board, nonstop, since November 2000."
+  ],
+  "try": {
+   "label": "See it live: where the space station is right now",
+   "act": [
+    [
+     "iss"
+    ]
+   ]
+  },
+  "src": [
+   "NASA: International Space Station Facts and Figures",
+   "https://www.nasa.gov/international-space-station/space-station-facts-and-figures/"
+  ]
+ },
+ {
+  "id": "can-i-see-the-space-station",
+  "topic": "space",
+  "q": "Can I see the space station from my backyard?",
+  "short": "Yes! It looks like a very bright star gliding across the night sky.",
+  "more": [
+   "It has no flashing lights and does not change direction, so it's not an airplane.",
+   "It moves much faster than a plane.",
+   "Look within a few hours of sunrise or sunset, when sunlight shines on it against a dark sky."
+  ],
+  "try": {
+   "label": "See it live: satellites overhead and tonight's sky",
+   "act": [
+    [
+     "only",
+     [
+      "sat"
+     ]
+    ],
+    [
+     "panel",
+     "sky"
+    ]
+   ]
+  },
+  "src": [
+   "NASA: Spot the Station",
+   "https://www.nasa.gov/spot-the-station/"
+  ]
+ },
+ {
+  "id": "nearest-star",
+  "topic": "space",
+  "q": "How far away is the nearest star?",
+  "short": "Our nearest star is the Sun! The next closest is about 4.3 light-years away.",
+  "more": [
+   "A light-year is how far light travels in one Earth year.",
+   "Light zips along at 186,000 miles every second.",
+   "Even so, sunlight takes about 8.3 minutes to reach us.",
+   "One light-year is about 6 trillion miles."
+  ],
+  "try": {
+   "label": "See it live: zoom out to our galaxy",
+   "act": [
+    [
+     "universe",
+     "galaxy"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Is a Light-Year?",
+   "https://spaceplace.nasa.gov/light-year/en/",
+   "NASA Space Place: What Is a Galaxy?",
+   "https://spaceplace.nasa.gov/galaxy/en/"
+  ]
+ },
+ {
+  "id": "voyager-1-how-far",
+  "topic": "space",
+  "q": "What is the farthest thing people ever sent into space?",
+  "short": "NASA's Voyager 1, launched in 1977, is the most distant human-made object.",
+  "more": [
+   "It was sent to fly past the giant planets Jupiter and Saturn.",
+   "In August 2012, it crossed into interstellar space, the space between the stars.",
+   "In November 2026, it reaches one light-day from Earth: as far as light travels in a day."
+  ],
+  "try": {
+   "label": "See it live: follow Voyager 1 out into space",
+   "act": [
+    [
+     "universe",
+     "voyager"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Science: Voyager 1",
+   "https://science.nasa.gov/mission/voyager/voyager-1/",
+   "NASA Space Place: What Is a Light-Year?",
+   "https://spaceplace.nasa.gov/light-year/en/"
+  ]
+ },
+ {
+  "id": "what-is-lightning",
+  "topic": "weather",
+  "q": "What is lightning?",
+  "short": "Lightning is a giant spark of electricity that builds up inside a storm cloud.",
+  "more": [
+   "Strong winds in the cloud lift water drops up and push ice down.",
+   "Where they bump past each other, electric charges get stripped off and build up.",
+   "When the charge gets strong enough, it jumps out as a flash of lightning.",
+   "Lightning can be about five times hotter than the surface of the Sun."
+  ],
+  "try": {
+   "label": "See it live: lightning flashes seen from space",
+   "act": [
+    [
+     "imagery",
+     "lightning"
+    ]
+   ]
+  },
+  "src": [
+   "NOAA SciJinks: What Causes Lightning and Thunder?",
+   "https://scijinks.gov/lightning/"
+  ]
+ },
+ {
+  "id": "how-hurricanes-form",
+  "topic": "weather",
+  "q": "How does a hurricane start?",
+  "short": "Hurricanes grow over warm ocean water near the equator, fed by warm, wet rising air.",
+  "more": [
+   "The rising air lowers the pressure below, which pulls in even more air.",
+   "The middle of the storm, called the eye, is calm and clear.",
+   "In some places, people call these storms typhoons or cyclones instead.",
+   "Weather satellites about 22,300 miles up watch them to help warn people."
+  ],
+  "try": {
+   "label": "See it live: storms on the globe right now",
+   "act": [
+    [
+     "only",
+     [
+      "storm"
+     ]
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: How Do Hurricanes Form?",
+   "https://spaceplace.nasa.gov/hurricanes/en/"
+  ]
+ },
+ {
+  "id": "why-ice-at-the-poles",
+  "topic": "earth",
+  "q": "Why is there ice at the poles?",
+  "short": "The poles stay so cold that snow piles up year after year instead of melting.",
+  "more": [
+   "Because Earth is tilted, each pole spends part of the year in darkness.",
+   "Snow that doesn't melt builds up over thousands of years into thick ice sheets.",
+   "Sea ice is frozen ocean water. It grows in winter and shrinks in summer.",
+   "Snowy sea ice bounces most sunlight back to space, which helps it stay cold."
+  ],
+  "try": {
+   "label": "See it live: fly over Antarctica",
+   "act": [
+    [
+     "fly",
+     0,
+     -90,
+     12000000
+    ],
+    [
+     "panel",
+     "climate"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Is Antarctica?",
+   "https://spaceplace.nasa.gov/antarctica/en/",
+   "NSIDC: Quick Facts About Sea Ice",
+   "https://nsidc.org/learn/parts-cryosphere/sea-ice/quick-facts-about-sea-ice"
+  ]
+ },
+ {
+  "id": "why-is-ice-melting",
+  "topic": "earth",
+  "q": "Why is ice at the poles melting?",
+  "short": "Earth is getting warmer because the air is trapping too much heat, like a greenhouse.",
+  "more": [
+   "At night, the atmosphere holds onto heat instead of letting it escape to space.",
+   "Over tens of years, a few degrees of warming starts causing changes.",
+   "Ice melts near the North and South Poles, and the water raises the sea level."
+  ],
+  "try": {
+   "label": "See it live: how ice and water are shifting",
+   "act": [
+    [
+     "only",
+     [
+      "grace"
+     ]
+    ],
+    [
+     "panel",
+     "climate"
+    ]
+   ]
+  },
+  "src": [
+   "NASA Space Place: What Is the Greenhouse Effect?",
+   "https://spaceplace.nasa.gov/greenhouse/en/"
+  ]
+ },
+ {
+  "id": "why-birds-fly-south",
+  "topic": "nature",
+  "q": "Why do birds fly south?",
+  "short": "Many birds fly south to find food, then fly back north to raise their babies.",
+  "more": [
+   "As fall turns to winter, plants and insects get harder to find.",
+   "So birds travel to warmer places where food stays plentiful.",
+   "In spring, they return to find a mate, build a nest and raise their young.",
+   "The arctic tern flies more than 55,000 miles a year, from pole to pole!"
+  ],
+  "try": {
+   "label": "See it live: animals on the move",
+   "act": [
+    [
+     "only",
+     [
+      "nat-mig"
+     ]
+    ],
+    [
+     "panel",
+     "nature"
+    ]
+   ]
+  },
+  "src": [
+   "U.S. Fish and Wildlife Service: Migration: It's a Risky Journey!",
+   "https://www.fws.gov/story/migration-its-risky-journey",
+   "NASA Space Place: Tired Travelers",
+   "https://spaceplace.nasa.gov/birds/en/"
+  ]
+ },
+ {
+  "id": "whale-migration",
+  "topic": "nature",
+  "q": "Do whales go on long trips too?",
+  "short": "Yes! Humpback whales have one of the longest migrations of any mammal.",
+  "more": [
+   "They feed in cold oceans that are full of food.",
+   "Then they swim to warm, shallow waters to have their babies.",
+   "Some swim 5,000 miles between those places.",
+   "Humpbacks can swim from Alaska to Hawaii, 3,000 miles, in as few as 28 days."
+  ],
+  "try": {
+   "label": "See it live: migration routes near Hawaii",
+   "act": [
+    [
+     "only",
+     [
+      "nat-mig"
+     ]
+    ],
+    [
+     "fly",
+     -157,
+     21,
+     4000000
+    ]
+   ]
+  },
+  "src": [
+   "NOAA Fisheries: Humpback Whale",
+   "https://www.fisheries.noaa.gov/species/humpback-whale"
+  ]
+ }
+]

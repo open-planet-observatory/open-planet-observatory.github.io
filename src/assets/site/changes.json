@@ -1,0 +1,16 @@
+{"about":"Curated by The Owlmanac: one plain entry per addition, newest first. Add an entry whenever something visitors can see ships.",
+"items":[
+ {"d":"2026-11-10","t":"Classroom: a students' side and an educators' side","p":"Nine missions on the live globe, each told four ways for ages 6 to adult, now with an educators' tab: class mode for the projector, a printable worksheet and answer key for every mission, today's warm-up question and the matching science standards.","try":["panel","classroom"]},
+ {"d":"2026-11-10","t":"Five new missions","p":"Volcanoes and plates, the Moon and its phases, the scale of space, climate and ice, and animal migration. Every fact was checked against the source it cites, twice.","try":["panel","classroom"]},
+ {"d":"2026-11-10","t":"Contact, the weekly letter, and this page","p":"Write to us, report a problem, or sign up for the weekly letter before its first issue.","try":["panel","contact"]},
+ {"d":"2026-11-09","t":"The edge of the observable universe as a globe","p":"The oldest light, mapped by ESA's Planck satellite, now wraps a lit sphere you can turn. Every tour ends on the Owlmanac emblem; drag it to spin it.","try":["universe","edge"]},
+ {"d":"2026-11-09","t":"Find the owl","p":"A daily game: five owls hidden on the real globe, each smaller than the last, with clues from real places and one live event.","try":["event","obs:findowl"]},
+ {"d":"2026-11-09","t":"New menus","p":"Learn became Classroom, with the Classroom itself first. Sources, Keep it free and About moved to their own About menu. Pinch-zoom now heads for the spot under your fingers.","try":null},
+ {"d":"2026-11-08","t":"Fly to Voyager 1","p":"A short flight from Earth past the planets to where Voyager 1 is today, ending over its shoulder looking back at the Sun. Start it from the Voyager countdown.","try":["universe","voyager"]},
+ {"d":"2026-11-08","t":"A scale slider, and view buttons everywhere","p":"With the panels tucked away, a slider on the right flies you from Earth to the edge. The Earth, Moon, Solar System, Milky Way and Cosmic web buttons now stay in the space views.","try":null},
+ {"d":"2026-11-08","t":"Records as a searchable grid","p":"Open Records full page for tabs, counts and a search box; every record folds into a card.","try":["panel","records"]},
+ {"d":"2026-11-08","t":"Lightning over Europe and Africa","p":"Live lightning now adds EUMETSAT's Meteosat-12 Lightning Imager to NOAA's GOES satellites over the Americas.","try":null},
+ {"d":"2026-11-08","t":"Explain options, and the Moon's dark side","p":"A switch at the top of Filter options turns on short explanations. In the Moon view, Light the dark side shows the whole surface.","try":null},
+ {"d":"2026-11-07","t":"Untold history: 45 stories","p":"History from below, in the words of the people it happened to, now from 416 BC to the 1970s.","try":["panel","untold"]},
+ {"d":"2026-11-07","t":"Fly through the universe","p":"A wordless flight from outside the observable universe in to Earth and back out, with its own score.","try":["universe","flight"]}
+]}
