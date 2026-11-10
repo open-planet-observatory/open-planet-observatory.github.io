@@ -1393,3 +1393,10 @@ footer .foot-links a{color:inherit}
 .ln-pop{position:fixed;z-index:3100;display:flex;gap:10px;max-width:min(340px,calc(100vw - 16px));padding:12px 34px 12px 12px;border-radius:14px;background:#120e08;border:1px solid rgb(217 164 65 / .6);color:#EFE4CC;box-shadow:0 10px 30px rgb(0 0 0 / .5)}
 .ln-pop b{display:block}.ln-pop p{margin:3px 0 0;font-size:.9rem}.ln-pop .ln-x{position:absolute;top:6px;right:6px}
 .ln-pop .gl-p{flex:none;width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgb(127 180 255 / .12);color:#9fc3ff}.ln-pop .gl-p svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+/* educators: standards, weeks, FAQ */
+.es-b{margin-bottom:12px}.es-b>b{display:block;color:var(--accent,#D9A441);margin-bottom:4px}.es-b ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.es-b li{padding:8px 12px;border-radius:12px;border:1px solid var(--glass-line);background:var(--glass-2);font-size:.88rem}.es-c{font-family:var(--mono,ui-monospace,monospace);font-weight:700;margin-right:6px}.es-t{color:var(--ink-2,#C9B995)}
+.es-l{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.es-m{font:inherit;font-size:.8rem;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--accent,#D9A441);background:none;color:var(--ink);cursor:pointer}.es-m:hover{background:rgb(217 164 65 / .18)}
+.ew-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}.ew{padding:12px 14px;border-radius:14px;border:1px solid var(--glass-line);background:var(--glass-2)}.ew ol{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-direction:column;gap:6px}.ew li span{display:inline-block;width:34px;font-family:var(--mono,ui-monospace,monospace);font-size:.75rem;color:var(--accent,#D9A441)}
+.edu-faq details{padding:10px 14px;border-radius:12px;border:1px solid var(--glass-line);background:var(--glass-2);margin-bottom:6px}.edu-faq summary{cursor:pointer;font-weight:700}.edu-faq p{margin:8px 0 0}
+.edu-std,.edu-week,.edu-faq{margin-top:22px}
