@@ -7,7 +7,7 @@
   "more": [
    "Earth's outer layer is broken into giant puzzle pieces called tectonic plates.",
    "The plates drift very slowly, and that pushing builds up stress in the rock.",
-   "When the stress gets too big, the rock cracks along lines called faults.",
+   "When the stress gets too big, the rock suddenly slips along cracks called faults.",
    "A sudden slip at a fault sends shaking waves out, and that shaking is the earthquake."
   ],
   "try": {
@@ -70,11 +70,12 @@
   "more": [
    "Underground, melted rock is called magma. Once it reaches the surface, we call it lava.",
    "Magma can rise where the plates of Earth's crust slowly pull apart.",
+   "It also rises where plates push together and one slides under the other, deep into the hot Earth, where it melts.",
    "It can also rise at hot spots, where heated magma is lighter and floats upward.",
-   "Earth is not alone: Venus and Mars are covered with old volcanoes that no longer erupt."
+   "Earth is not alone: Venus and Mars are covered with volcanoes too, and scientists are still checking whether any on Venus are active."
   ],
   "try": {
-   "label": "See it live: volcanoes around the world",
+   "label": "See it live: Kilauea, a hot-spot volcano in Hawaii",
    "act": [
     [
      "only",
@@ -86,7 +87,7 @@
      "fly",
      -155.29,
      19.41,
-     400000
+     2500000
     ]
    ]
   },
@@ -99,7 +100,7 @@
   "id": "how-many-volcanoes",
   "topic": "earth",
   "q": "How many volcanoes are there?",
-  "short": "There are about 1,350 potentially active volcanoes on land around the world.",
+  "short": "There are about 1,350 volcanoes around the world that could erupt again, not counting long volcano chains on the ocean floor.",
   "more": [
    "About 500 of them have erupted since people began writing history down.",
    "Many more volcanoes sit hidden along the ocean floor.",
@@ -228,12 +229,12 @@
   "id": "nearest-star",
   "topic": "space",
   "q": "How far away is the nearest star?",
-  "short": "Our nearest star is the Sun! The next closest is about 4.3 light-years away.",
+  "short": "Our nearest star is the Sun! The next closest, Proxima Centauri, is about 4.25 light-years away.",
   "more": [
    "A light-year is how far light travels in one Earth year.",
-   "Light zips along at 186,000 miles every second.",
+   "Light zips along at about 186,000 miles (300,000 kilometres) every second.",
    "Even so, sunlight takes about 8.3 minutes to reach us.",
-   "One light-year is about 6 trillion miles."
+   "One light-year is about 6 trillion miles (9 trillion kilometres)."
   ],
   "try": {
    "label": "See it live: zoom out to our galaxy",
@@ -259,7 +260,7 @@
   "more": [
    "It was sent to fly past the giant planets Jupiter and Saturn.",
    "In August 2012, it crossed into interstellar space, the space between the stars.",
-   "In November 2026, it reaches one light-day from Earth: as far as light travels in a day."
+   "NASA worked out that it would reach one light-day from Earth on November 18, 2026: as far as light travels in a whole day, about 16 billion miles (26 billion km)."
   ],
   "try": {
    "label": "See it live: follow Voyager 1 out into space",
@@ -336,6 +337,7 @@
   "short": "The poles stay so cold that snow piles up year after year instead of melting.",
   "more": [
    "Because Earth is tilted, each pole spends part of the year in darkness.",
+   "Even in summer, sunlight hits the poles at a low slant, so it is spread thin and warms the ground less.",
    "Snow that doesn't melt builds up over thousands of years into thick ice sheets.",
    "Sea ice is frozen ocean water. It grows in winter and shrinks in summer.",
    "Snowy sea ice bounces most sunlight back to space, which helps it stay cold."
@@ -370,7 +372,8 @@
   "more": [
    "At night, the atmosphere holds onto heat instead of letting it escape to space.",
    "Over tens of years, a few degrees of warming starts causing changes.",
-   "Ice melts near the North and South Poles, and the water raises the sea level."
+   "Ice is melting near the North and South Poles. When ice on land, like the giant ice sheets of Greenland and Antarctica, melts into the ocean, the sea level rises.",
+   "Sea ice is already floating, so when it melts it does not raise the sea level much at all."
   ],
   "try": {
    "label": "See it live: how ice and water are shifting",
@@ -401,7 +404,7 @@
    "As fall turns to winter, plants and insects get harder to find.",
    "So birds travel to warmer places where food stays plentiful.",
    "In spring, they return to find a mate, build a nest and raise their young.",
-   "The arctic tern flies more than 55,000 miles a year, from pole to pole!"
+   "The Arctic tern flies more than 70,000 kilometres (about 44,000 miles) a year, from pole to pole!"
   ],
   "try": {
    "label": "See it live: animals on the move",
@@ -433,11 +436,11 @@
   "more": [
    "They feed in cold oceans that are full of food.",
    "Then they swim to warm, shallow waters to have their babies.",
-   "Some swim 5,000 miles between those places.",
-   "Humpbacks can swim from Alaska to Hawaii, 3,000 miles, in as few as 28 days."
+   "Some swim 5,000 miles (8,000 km) between those places.",
+   "Humpbacks can swim from Alaska to Hawaii, 3,000 miles (4,800 km), in as few as 28 days."
   ],
   "try": {
-   "label": "See it live: migration routes near Hawaii",
+   "label": "See it live: where people spotted humpbacks, month by month",
    "act": [
     [
      "only",
@@ -447,9 +450,9 @@
     ],
     [
      "fly",
-     -157,
-     21,
-     4000000
+     -152,
+     40,
+     9000000
     ]
    ]
   },

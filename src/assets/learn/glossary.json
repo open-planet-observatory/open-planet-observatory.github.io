@@ -35,7 +35,7 @@
  {
   "term": "Average",
   "topic": "data",
-  "kid": "The middle-ish number you get by adding numbers up and sharing them out evenly.",
+  "kid": "The number you get when you add a group of numbers together and then share the total out equally.",
   "more": "Add all the values, then divide by how many there are; climate averages and anomaly baselines are built this way from long records.",
   "pic": "chart",
   "src": [
@@ -179,7 +179,7 @@
   "term": "Gravity",
   "topic": "space",
   "kid": "The invisible pull that keeps us on the ground and the Moon near Earth.",
-  "more": "A force pulling objects with mass toward each other; it keeps the Moon orbiting Earth and causes ocean tides, and gives you your weight.",
+  "more": "A force pulling objects with mass toward each other; it gives you your weight, keeps the Moon orbiting Earth and causes ocean tides.",
   "pic": "orbit",
   "src": [
    "NASA Space Place: What Is Gravity?",
@@ -234,7 +234,7 @@
   "term": "Light-year",
   "topic": "space",
   "kid": "How far light travels in one year. It measures distance, not time.",
-  "more": "The distance light travels in one year, about 9 trillion km; used for distances to stars and galaxies.",
+  "more": "The distance light travels in one year, about 9 trillion km (6 trillion miles); used for distances to stars and galaxies.",
   "pic": "ruler-light",
   "src": [
    "NASA Space Place: What is a light-year?",
@@ -322,7 +322,7 @@
   "term": "Observation",
   "topic": "data",
   "kid": "Something you notice and write down, like a photo of an animal with when and where.",
-  "more": "A recorded sighting or measurement; on iNaturalist it needs a date, a location and a photo or sound as evidence.",
+  "more": "A recorded sighting or measurement; on iNaturalist it needs a date, a location and a photo or sound to become Research Grade.",
   "pic": "eye",
   "src": [
    "iNaturalist Help: How observations become Research Grade",
@@ -432,7 +432,7 @@
   "term": "Sea level",
   "topic": "weather",
   "kid": "How high the ocean's surface reaches along the land.",
-  "more": "The average height of the ocean surface at a place; it rises when land ice like glaciers and ice sheets melts into the ocean.",
+  "more": "The average height of the ocean surface at a place; it rises when land ice such as glaciers and ice sheets melts into the ocean, and when seawater warms and expands.",
   "pic": "sea",
   "src": [
    "National Geographic Education: Sea level",
