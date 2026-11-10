@@ -78,7 +78,7 @@ const PANELS=[
  ['library','Sources',['#library']],
  ['classroom','Classroom',['#classroom']],
  ['free','Keep it free',['#free']],
- ['about','About',['.notice','section[aria-labelledby="h-resp"]','#use','section[aria-labelledby="h-how"]','footer']],
+ ['about','About',['.notice','section[aria-labelledby="h-resp"]','#use','#terms','section[aria-labelledby="h-how"]','footer']],
 ];
 const body=$('#drawerBody');const tabs=$('#panelTabs');
 const lede=$('header.top .lede');
@@ -99,7 +99,7 @@ function closeDrawer(){if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage
 window.__opsCloseDrawer=closeDrawer;
 $('#drawerClose').onclick=closeDrawer;
 // in-page links (#use, #free, #situations…) open the matching panel
-document.addEventListener('click',e=>{if(e.target.closest('button[data-layer]')&&innerWidth<=860){closeDrawer();return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);const p=PANELS.find(([k,,s])=>k===id||s.includes('#'+id));if(p){e.preventDefault();openPanel(p[0])}else if(id==='map-sec'){e.preventDefault();if(innerWidth<=860)closeDrawer()}});
+document.addEventListener('click',e=>{if(e.target.closest('button[data-layer]')&&innerWidth<=860){closeDrawer();return}const a=e.target.closest('a[href^="#"]');if(!a)return;const id=a.getAttribute('href').slice(1);const p=PANELS.find(([k,,s])=>k===id||s.includes('#'+id));if(p){e.preventDefault();openPanel(p[0]);if(id!==p[0]){const t=document.getElementById(id);if(t)setTimeout(()=>t.scrollIntoView({block:'start'}),0)}}else if(id==='map-sec'){e.preventDefault();if(innerWidth<=860)closeDrawer()}});
 // "Show on map" buttons scroll to #map-sec in the logbook; here they should close the drawer on phones only
 const hp=(location.hash.match(/panel=(\w+)/)||[])[1];
 if(hp&&PANELS.some(p=>p[0]===hp))openPanel(hp);else if(innerWidth>860)openPanel('situations');else closeDrawer();
