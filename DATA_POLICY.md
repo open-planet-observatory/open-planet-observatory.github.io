@@ -279,6 +279,7 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 - Code libraries are served from the site itself rather than third-party CDNs. Two things still load from other servers: the fonts (Google Fonts) and some live data and imagery that the browser fetches straight from its source (for example USGS earthquakes and NASA imagery). Those servers see an ordinary web request (IP address and browser) under their own privacy policies; the project receives nothing from them.
 - **Terms.** The site's terms and privacy summary are on the page (About, "Terms & privacy", `#terms`).
 - Sponsors, if any, are clearly labeled, limited to science, education and public-data organizations, never receive visitor data and never influence content.
+- **The data is never for sale.** Every layer, figure, chart and download on the site is free for everyone, with no account, and stays so: no dataset, current or historical, will move behind a price or a login. If paid options are ever offered (the "Planned" tiers on the page are placeholders, and nothing is sold while ESA data are on the site without ESA's written permission), they will be features built around the data (alerts, saved views, higher request volumes, classroom packs), never the data itself. The weekly letter is free. Decided by the maintainer, 10 November 2026.
 
 ## Email list
 
