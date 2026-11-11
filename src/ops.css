@@ -1491,3 +1491,5 @@ html.slim .brand-em{display:none}
 .hub-art{height:118px}
 @media (max-width:760px){.hub-art{height:96px}}
 .owl-hid{position:absolute;z-index:2;display:none;background:url(brand/emblem-spin.webp) 0 0 no-repeat;filter:drop-shadow(0 0 3px rgb(0 0 0 / .7));cursor:pointer;pointer-events:auto}
+
+.ut-grow{margin:0 0 10px;padding:7px 10px;border-left:3px solid rgb(217 164 65 / .7);background:rgb(255 255 255 / .03);border-radius:0 8px 8px 0} /* 11 Nov 2026: the Untold collection is small and growing, said up front */
