@@ -147,10 +147,31 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
  b.addEventListener('mouseenter',()=>{clearTimeout(t);b.classList.add('em-on');if(!halt)halt=window.OwlEmblemMount(e,{static:true})});
  b.addEventListener('mouseleave',()=>{b.classList.remove('em-on');t=setTimeout(()=>{if(halt){halt();halt=null;e.innerHTML=''}},400)})})();
 
+/* Hidden emblems (11 Nov 2026, the maintainer: "hide smaller versions of the rotating image inside images generated from
+   Atlabs, to keep reinforcing that logo"): a small turning copy of the emblem is tucked into every illustration, at a spot
+   picked for each picture (a star, a planet, the Earth's inner core...). It is a sprite of 120 frames rendered from the real
+   3D model (brand/emblem-spin.webp), so it costs no WebGL context however many are on screen. Positions are in the picture's
+   own coordinates (x, y, size as fractions of its width/height) and follow its object-fit crop, so it sits on the same spot
+   in a wide banner, a side panel or a card; if the crop cuts that spot off, it is simply not shown. Clicking one opens the
+   emblem card. The Play banner is left as it is. */
+(function(){const EM={'hub-about':[.93,.36],'hub-classroom':[.88,.46],'hub-people':[.93,.30],'hub-planet':[.60,.55],'hub-sky':[.62,.30],'hub-space':[.58,.45],
+  'sec-cams':[.53,.46],'sec-changes':[.50,.42],'sec-climate':[.64,.38],'sec-contact':[.55,.42],'sec-disruptions':[.62,.38],'sec-free':[.78,.40],'sec-history':[.705,.47],'sec-inside':[.725,.50],'sec-layers':[.80,.45],'sec-library':[.62,.40],'sec-nature':[.68,.45],'sec-records':[.80,.38],'sec-relief':[.60,.40],'sec-signals':[.632,.42,.022],'sec-situations':[.62,.42],'sec-sky':[.64,.40],'sec-unexplained':[.66,.33],'sec-untold':[.90,.38],'sec-watchlist':[.62,.42],'sec-worlds':[.66,.50],
+  'card-about':[.62,.36],'card-edge':[.55,.45],'card-galaxy':[.35,.45],'card-moon':[.40,.45],'card-skychart':[.765,.52,.024],'card-skyevents':[.62,.42],'card-skyiss':[.55,.40],'card-skymoon':[.60,.44],'card-solar':[.36,.46],'card-web':[.88,.40]};
+ const SZ=.034,MIN=20,MAX=48;
+ function place(box){const img=box.querySelector('img'),e=box.querySelector(':scope > .owl-hid');if(!img||!e)return;const p=e._p,W=box.clientWidth,H=box.clientHeight;if(!W||!H){e.style.display='none';return;}
+  const ir=img.getBoundingClientRect(),br=box.getBoundingClientRect(),cs=getComputedStyle(img),iw0=img.naturalWidth||1280,ih0=img.naturalHeight||720,fw=ir.width,fh=ir.height;
+  let sc=cs.objectFit==='cover'?Math.max(fw/iw0,fh/ih0):Math.min(fw/iw0,fh/ih0);const iw=iw0*sc,ih=ih0*sc;const op=cs.objectPosition.split(' ').map(v=>parseFloat(v)/100);const ox=(ir.left-br.left)+(fw-iw)*(isNaN(op[0])?.5:op[0]),oy=(ir.top-br.top)+(fh-ih)*(isNaN(op[1])?.5:op[1]);
+  const s=Math.max(MIN,Math.min(MAX,(p[2]||SZ)*iw)),x=ox+p[0]*iw,y=oy+p[1]*ih,inside=x-s/2>=ir.left-br.left&&x+s/2<=ir.right-br.left&&y-s/2>=ir.top-br.top&&y+s/2<=ir.bottom-br.top;
+  e.style.cssText=`width:${s}px;height:${s}px;left:${x-s/2}px;top:${y-s/2}px;display:${inside?'block':'none'};animation-delay:${e._d}`;}
+ const ro=new ResizeObserver(es=>es.forEach(x=>place(x.target)));
+ window.OwlHideEm=function(box){if(!box||box._hid)return;const img=box.querySelector('img');if(!img)return;const m=(img.getAttribute('src')||'').match(/owl-((?:hub|sec|card)-[a-z]+)\.webp/);const p=m&&EM[m[1]];if(!p)return;box._hid=1;
+  const e=document.createElement('span');e.className='owl-hid';e._p=p;e.title='You found the Owlmanac emblem';e.setAttribute('aria-hidden','true');e._d=(-Math.random()*20).toFixed(2)+'s';
+  e.addEventListener('click',ev=>{ev.stopPropagation();ev.preventDefault();if(window.OwlEmblemCard&&window.OwlEmblemCard.show)window.OwlEmblemCard.show();});
+  box.appendChild(e);const go=()=>place(box);if(img.complete)go();else img.addEventListener('load',go,{once:true});ro.observe(box);};})();
 /* Section banners (11 Nov 2026, "blanket the site with imagery that reinforces the owl brand"): an Atlabs illustration in the
    house engraving style at the top of each section, in the side panel and on its full page; tagged as an illustration, loaded
    only when the section is opened. */
 (function(){const ART={situations:'situations',disruptions:'disruptions',relief:'relief',watchlist:'watchlist',climate:'climate',signals:'signals',nature:'nature',inside:'inside',cams:'cams',worlds:'worlds',unexplained:'unexplained',history:'history',records:'records',untold:'untold',sky:'sky',contact:'contact',library:'library',layers:'layers',free:'free',changes:'changes',about:'../hub/owl-hub-about'};
  function add(){document.querySelectorAll('#drawerBody .panel[data-k], #owlPage .panel[data-k]').forEach(p=>{const k=p.dataset.k,a=ART[k];if(!a||p.querySelector(':scope > .sec-art'))return;const f=document.createElement('figure');f.className='sec-art';f.setAttribute('aria-hidden','true');
-  f.innerHTML=`<img src="brand/sec/${a.startsWith('..')?a:'owl-sec-'+a}.webp" alt="" loading="lazy" decoding="async" width="1280" height="720"><figcaption class="hub-ill">Illustration · The Owlmanac</figcaption>`;p.insertBefore(f,p.firstChild)});}
+  f.innerHTML=`<img src="brand/sec/${a.startsWith('..')?a:'owl-sec-'+a}.webp" alt="" loading="lazy" decoding="async" width="1280" height="720"><figcaption class="hub-ill">Illustration · The Owlmanac</figcaption>`;p.insertBefore(f,p.firstChild);if(window.OwlHideEm)OwlHideEm(f)});}
  let t=0;const go=()=>{clearTimeout(t);t=setTimeout(add,120)};add();const b=document.getElementById('drawerBody');if(b)new MutationObserver(go).observe(b,{childList:true});document.addEventListener('click',go,true)})();
