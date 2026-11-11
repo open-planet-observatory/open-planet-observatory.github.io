@@ -78,17 +78,19 @@
   const api = {
     get on() { return on || !!this.armed; }, /* armed (waiting for the first click) counts as on, so ♪ shows it will play */
     toggle() { if (on || this.armed) { if (this._disarm) this._disarm(); this.stop(); } else this.start(); },
-    start(temp) { try { if (!ctx) build(); ctx.resume(); on = true; ramp(master.gain, 0.55, 1.5); mix(); clearTimeout(melT); clearTimeout(pulseT); melody(); pulse(); if (!temp) try { localStorage.setItem('owl-music', 'on'); } catch (e) { } } catch (e) { console.warn('music', e); } dispatchEvent(new Event('owlmusic')); },
+    start(temp) { try { if (!ctx) build(); ctx.resume(); on = true; ramp(master.gain, 0.55, 1.5); mix(); clearTimeout(melT); clearTimeout(pulseT); melody(); pulse(); if (!temp) try { sessionStorage.setItem('owl-music', 'on'); } catch (e) { } } catch (e) { console.warn('music', e); } dispatchEvent(new Event('owlmusic')); },
     duck(d) { if (!ctx || !on) return; ramp(master.gain, d ? 0.05 : 0.55, d ? 0.5 : 1.5); }, /* fade the score under a space-sound clip, and back */
-    stop(temp) { on = false; if (ctx) { ramp(master.gain, 0, 0.6); setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 2500); } clearTimeout(melT); clearTimeout(pulseT); if (!temp) try { localStorage.setItem('owl-music', 'off'); } catch (e) { } dispatchEvent(new Event('owlmusic')); },
-    autoOn() { let pref = null; try { pref = localStorage.getItem('owl-music'); } catch (e) { } if (!on && pref !== 'off') this.start(); }, /* the tour starts the music unless the visitor has turned it off before */
+    stop(temp) { on = false; if (ctx) { ramp(master.gain, 0, 0.6); setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 2500); } clearTimeout(melT); clearTimeout(pulseT); if (!temp) try { sessionStorage.setItem('owl-music', 'off'); } catch (e) { } dispatchEvent(new Event('owlmusic')); },
+    autoOn() { let pref = null; try { pref = sessionStorage.getItem('owl-music'); } catch (e) { } if (!on && pref !== 'off') this.start(); }, /* the tour starts the music unless the visitor has turned it off before */
     setScale(s, force) { scale = Math.max(0, Math.min(1, s)); const now = performance.now(); if (on && (force || now - lastMix > 400)) { lastMix = now; mix(); } }, /* the audio ramps do the smoothing */
     get scale() { return scale; }
   };
   window.OwlMusic = api;
   /* on by default: start at the first click, tap or key (browsers block sound before one), unless the visitor stopped it before.
      A press on a ♪ button is left to that button, so stopping the music never plays a note first. */
-  { let pref = null; try { pref = localStorage.getItem('owl-music'); } catch (e) { } api.armed = pref !== 'off';
+  /* 11 Nov 2026: music is on at the start of every visit; stopping it lasts for this visit only (it used to be remembered for good) */
+  try { localStorage.removeItem('owl-music'); } catch (e) { }
+  { let pref = null; try { pref = sessionStorage.getItem('owl-music'); } catch (e) { } api.armed = pref !== 'off';
     const first = e => { const t = e.target; if (t && t.closest && t.closest('#gnMusic,#uniMusic')) return; /* the button's own toggle sees it armed and stops it */ disarm(); if (!on) api.start(); };
     const evs = ['pointerdown', 'keydown', 'touchend'];
     const disarm = () => { api.armed = false; evs.forEach(k => removeEventListener(k, first, true)); };

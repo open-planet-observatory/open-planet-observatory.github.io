@@ -134,3 +134,15 @@ window.OwlEmblemCard={show(){if(document.getElementById('owlEmCard'))return;cons
 function chgBack(){let b=document.getElementById('chgBack');if(b)b.remove();b=document.createElement('button');b.type='button';b.id='chgBack';b.className='chg-back glass';b.textContent='← Back to What\u2019s new';document.body.appendChild(b);
  const go=()=>{b.remove();clearTimeout(tm);const O=window.__obs||{};if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();const u=document.getElementById('uniBack');if(document.querySelector('#uni.on')&&u)u.click();if(document.documentElement.classList.contains('moon-on')&&O.closeMoon)O.closeMoon();setTimeout(()=>{const it=document.querySelector('.gn-m button[data-k="changes"]');if(it&&it.onclick)it.onclick();else{if(O.openPanel)O.openPanel('changes');if(window.OwlPage)window.OwlPage.open('changes',{solo:true})}},300)};
  b.onclick=go;const tm=setTimeout(()=>b.remove(),120000);const t0=Date.now();const iv=setInterval(()=>{if(!b.isConnected){clearInterval(iv);return}const P=window.OwlPage;if(P&&P.isOpen()&&P.current()==='changes'){b.remove();clearInterval(iv)}},800)}
+
+/* One way to put the turning emblem anywhere (11 Nov 2026: "the more places you can include the rotating image, the better"):
+   OwlEmblemMount(box, opt) loads the 3D emblem into box and stops it (freeing its WebGL context) when the box leaves the page
+   or is hidden, so only the copies on screen cost anything. */
+window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=false,busy=false;
+ const vis=()=>box.isConnected&&!!box.offsetParent&&!document.hidden;
+ const tick=()=>{if(dead)return;if(!box.isConnected){halt();return}if(vis()&&!stop&&!busy){busy=true;import('./assets/emblem/emblem.js').then(m=>{busy=false;if(!dead&&vis())stop=m.mountEmblem(box,opt||{})}).catch(()=>{busy=false})}else if(!vis()&&typeof stop==='function'){stop();stop=null}};
+ const iv=setInterval(tick,900);const halt=()=>{dead=true;clearInterval(iv);if(typeof stop==='function')stop();stop=null};tick();return halt};
+/* the header logo: a small emblem turns beside the wordmark while the pointer rests on it */
+(function(){const b=document.querySelector('#ops-top .brand');const w=b&&b.querySelector('.brand-wm');if(!w||!matchMedia('(hover: hover)').matches)return;const e=document.createElement('span');e.className='brand-em';e.setAttribute('aria-hidden','true');w.appendChild(e);let halt=null,t=0;
+ b.addEventListener('mouseenter',()=>{clearTimeout(t);b.classList.add('em-on');if(!halt)halt=window.OwlEmblemMount(e,{static:true})});
+ b.addEventListener('mouseleave',()=>{b.classList.remove('em-on');t=setTimeout(()=>{if(halt){halt();halt=null;e.innerHTML=''}},400)})})();

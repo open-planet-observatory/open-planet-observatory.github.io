@@ -23,7 +23,7 @@
  },
  {
   "term": "Astronomical unit (AU)",
-  "topic": "space",
+  "topic": "sky",
   "kid": "A space ruler: one AU is how far Earth is from the Sun.",
   "more": "The Sun-Earth distance, about 150 million km, used to measure the solar system; light crosses one AU in about 8 minutes 20 seconds.",
   "pic": "ruler-light",
@@ -35,7 +35,7 @@
  {
   "term": "Average",
   "topic": "data",
-  "kid": "The number you get when you add a group of numbers together and then share the total out equally.",
+  "kid": "Add a group of numbers, then share the total out equally.",
   "more": "Add all the values, then divide by how many there are; climate averages and anomaly baselines are built this way from long records.",
   "pic": "chart",
   "src": [
@@ -46,7 +46,7 @@
  {
   "term": "Blind spot",
   "topic": "data",
-  "kid": "A place or thing a tool cannot see well, so missing dots do not mean nothing.",
+  "kid": "Something a tool can't see well. Missing dots don't mean nothing.",
   "more": "The limits of a measurement: what it misses or gets wrong, like satellites underestimating thin new sea ice or having no view near the pole.",
   "pic": "eye",
   "src": [
@@ -57,7 +57,7 @@
  {
   "term": "Carbon dioxide (CO2)",
   "topic": "weather",
-  "kid": "An invisible gas in the air that plants take in and that burning fuel gives off.",
+  "kid": "An invisible gas plants take in and burning fuel gives off.",
   "more": "A gas measured at Mauna Loa, Hawaii, since 1958; its amount in the air rises and falls each year with plant growth, on top of a long rise.",
   "pic": "cloud",
   "src": [
@@ -100,13 +100,24 @@
  },
  {
   "term": "Crescent",
-  "topic": "space",
+  "topic": "sky",
   "kid": "When we see just a thin curved sliver of the Moon lit up.",
   "more": "A phase showing a thin sliver of the sunlit side: waxing crescent just after new Moon, waning crescent just before the next one.",
   "pic": "moon-phase",
   "src": [
    "NASA: Moon phases",
    "https://science.nasa.gov/moon/moon-phases/"
+  ]
+ },
+ {
+  "term": "Crust",
+  "topic": "inside",
+  "kid": "The thin, rocky outside layer of the Earth. We live on it.",
+  "more": "Rigid and very thin compared with the layers below: about 5 km under the oceans and about 30 km on average under continents, up to 100 km under big mountain ranges.",
+  "pic": "layers",
+  "src": [
+   "USGS: Inside the Earth",
+   "https://pubs.usgs.gov/gip/dynamic/inside.html"
   ]
  },
  {
@@ -129,6 +140,17 @@
   "src": [
    "NASA Space Place: What Is an Earthquake?",
    "https://spaceplace.nasa.gov/earthquakes/en/"
+  ]
+ },
+ {
+  "term": "Eclipse",
+  "topic": "sky",
+  "kid": "When one object in space passes through another one's shadow.",
+  "more": "A solar eclipse is when the Moon blocks the Sun's light; a lunar eclipse is when the Earth's shadow falls on the Moon.",
+  "pic": "eclipse",
+  "src": [
+   "NASA: What is an eclipse? (K-4)",
+   "https://www.nasa.gov/learning-resources/for-kids-and-students/what-is-an-eclipse-grades-k-4"
   ]
  },
  {
@@ -155,8 +177,8 @@
  },
  {
   "term": "Gibbous",
-  "topic": "space",
-  "kid": "When more than half of the Moon looks lit, but it is not full yet.",
+  "topic": "sky",
+  "kid": "More than half of the Moon looks lit, but it isn't full.",
   "more": "A phase when more than half of the Moon's face is lit: waxing gibbous grows toward full Moon, waning gibbous shrinks after it.",
   "pic": "moon-phase",
   "src": [
@@ -209,6 +231,17 @@
   ]
  },
  {
+  "term": "Inner core",
+  "topic": "inside",
+  "kid": "The solid metal ball at the very centre of the Earth.",
+  "more": "A solid iron-nickel inner core about 1,250 km thick. Its existence was worked out from earthquake waves in 1936.",
+  "pic": "layers",
+  "src": [
+   "USGS: Inside the Earth",
+   "https://pubs.usgs.gov/gip/dynamic/inside.html"
+  ]
+ },
+ {
   "term": "Lava",
   "topic": "earth",
   "kid": "Melted rock that comes out of a volcano.",
@@ -221,7 +254,7 @@
  },
  {
   "term": "Light-day",
-  "topic": "space",
+  "topic": "sky",
   "kid": "How far light travels in one whole day: billions of kilometres.",
   "more": "The distance light covers in 24 hours, about 25.9 billion km; NASA calculated Voyager 1 would reach it on 18 November 2026.",
   "pic": "ruler-light",
@@ -232,7 +265,7 @@
  },
  {
   "term": "Light-year",
-  "topic": "space",
+  "topic": "sky",
   "kid": "How far light travels in one year. It measures distance, not time.",
   "more": "The distance light travels in one year, about 9 trillion km (6 trillion miles); used for distances to stars and galaxies.",
   "pic": "ruler-light",
@@ -250,6 +283,17 @@
   "src": [
    "National Weather Service: Lightning overview",
    "https://www.weather.gov/safety/lightning-science-overview"
+  ]
+ },
+ {
+  "term": "Lithosphere",
+  "topic": "inside",
+  "kid": "The rigid outer shell: the crust plus the top of the mantle.",
+  "more": "Averaging at least 80 km thick over much of the Earth, it is broken into the moving plates that carry the continents and oceans.",
+  "pic": "plates",
+  "src": [
+   "USGS: Inside the Earth",
+   "https://pubs.usgs.gov/gip/dynamic/inside.html"
   ]
  },
  {
@@ -275,14 +319,58 @@
   ]
  },
  {
+  "term": "Mantle",
+  "topic": "inside",
+  "kid": "The thick layer of hot rock under the crust.",
+  "more": "A dense, hot layer of semi-solid rock about 2,900 km thick, hotter and denser with depth.",
+  "pic": "layers",
+  "src": [
+   "USGS: Inside the Earth",
+   "https://pubs.usgs.gov/gip/dynamic/inside.html"
+  ]
+ },
+ {
   "term": "Maria",
-  "topic": "space",
+  "topic": "sky",
   "kid": "The dark patches on the Moon, called seas, but they hold no water.",
   "more": "Latin for 'seas': huge impact basins on the Moon that filled with lava between about 4.2 and 1.2 billion years ago.",
   "pic": "crater",
   "src": [
    "NASA: Moon facts",
    "https://science.nasa.gov/moon/facts/"
+  ]
+ },
+ {
+  "term": "Meteor",
+  "topic": "sky",
+  "kid": "A space rock burning up in our sky: a shooting star.",
+  "more": "Meteoroids, space rocks from dust grains to small asteroids, are called meteors when they enter the atmosphere at high speed and burn up.",
+  "pic": "meteor",
+  "src": [
+   "NASA: Meteors and meteorites, facts",
+   "https://science.nasa.gov/solar-system/meteors-meteorites/facts/"
+  ]
+ },
+ {
+  "term": "Meteor shower",
+  "topic": "sky",
+  "kid": "Many meteors in one night, when Earth meets lots of space dust.",
+  "more": "When Earth meets many meteoroids at once. Showers are named for the constellation the meteors appear to come from.",
+  "pic": "meteor",
+  "src": [
+   "NASA Space Place: What is a meteor shower?",
+   "https://spaceplace.nasa.gov/en/meteor-shower"
+  ]
+ },
+ {
+  "term": "Meteorite",
+  "topic": "sky",
+  "kid": "A space rock that made it all the way to the ground.",
+  "more": "A meteoroid that survives its trip through the atmosphere and hits the ground.",
+  "pic": "meteor",
+  "src": [
+   "NASA: Meteors and meteorites, facts",
+   "https://science.nasa.gov/solar-system/meteors-meteorites/facts/"
   ]
  },
  {
@@ -309,8 +397,8 @@
  },
  {
   "term": "Moon phase",
-  "topic": "space",
-  "kid": "The shape of the lit part of the Moon that we see on a given night.",
+  "topic": "sky",
+  "kid": "The shape of the Moon's lit part on a given night.",
   "more": "How much of the Moon's sunlit half faces Earth; the eight phases repeat about every 29.5 days and are not caused by Earth's shadow.",
   "pic": "moon-phase",
   "src": [
@@ -321,7 +409,7 @@
  {
   "term": "Observation",
   "topic": "data",
-  "kid": "Something you notice and write down, like a photo of an animal with when and where.",
+  "kid": "Something you notice and record, with when and where.",
   "more": "A recorded sighting or measurement; on iNaturalist it needs a date, a location and a photo or sound to become Research Grade.",
   "pic": "eye",
   "src": [
@@ -349,6 +437,28 @@
   "src": [
    "NASA Space Place: What Is an Orbit?",
    "https://spaceplace.nasa.gov/orbits/en/"
+  ]
+ },
+ {
+  "term": "Outer core",
+  "topic": "inside",
+  "kid": "A layer of melted metal deep inside the Earth.",
+  "more": "About 2,200 km of liquid iron-nickel alloy; as the Earth rotates, its motion creates the Earth's magnetic field.",
+  "pic": "layers",
+  "src": [
+   "USGS: Inside the Earth",
+   "https://pubs.usgs.gov/gip/dynamic/inside.html"
+  ]
+ },
+ {
+  "term": "P wave",
+  "topic": "inside",
+  "kid": "A fast earthquake wave that pushes and pulls. It can cross liquid.",
+  "more": "Compressional waves; faster than S waves and able to travel through both solids and liquids.",
+  "pic": "quake",
+  "src": [
+   "EARTH Magazine: notes on Earth's inner core",
+   "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
   ]
  },
  {
@@ -407,9 +517,20 @@
   ]
  },
  {
+  "term": "S wave",
+  "topic": "inside",
+  "kid": "A slower earthquake wave that shakes side to side. It cannot cross liquid.",
+  "more": "Shear waves; they cannot travel through liquid, so they stop at the liquid outer core.",
+  "pic": "quake",
+  "src": [
+   "EARTH Magazine: notes on Earth's inner core",
+   "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
+  ]
+ },
+ {
   "term": "Satellite",
   "topic": "space",
-  "kid": "Anything that travels around a planet, moon or star, like the Moon or a space station.",
+  "kid": "Anything that travels around a planet, moon or star.",
   "more": "Any object that orbits a planet, star or moon; natural ones include the Moon, and human-made ones include weather satellites.",
   "pic": "satellite",
   "src": [

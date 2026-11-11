@@ -16,21 +16,23 @@
   const unslim = () => { if (O.setSlim && html.classList.contains('slim')) O.setSlim(false); };
   const STEPS = [
     { title: 'Welcome to The Owlmanac Observatory', el: null,
-      body: 'Free public data about the planet, gathered on one page for research and learning. Every number comes from a named source and links back to it. Nothing here tracks a person. This tour takes about a minute.' },
+      body: 'Free public data about the planet and the universe, gathered on one page for research and learning. Every number comes from a named source and links back to it. Nothing here tracks a person. The site is in beta, so things are still changing: tell us what you find (About, then Contact). This tour takes about a minute.' },
     { title: 'The globe', el: () => globeArea(),
       body: 'Drag to turn it, scroll or pinch to zoom. Each dot is something happening now: earthquakes, storms, fires, alerts, satellites. Click one to see what the source says and when. Touch the globe and the panels tuck away so it fills the screen; click the thin bar at the top to bring them back.' },
-    { title: 'Five menus', el: () => $('.gnav .gn-scroll'), prep: () => { unslim(); const sc = $('.gnav .gn-scroll'); if (sc) sc.scrollLeft = 0; },
-      body: 'Everything is grouped here: People, Planet, Space, Sky tonight, Classroom, Play and About. Point at a name to see its sections.' },
+    { title: 'Seven menus', el: () => $('.gnav .gn-scroll'), prep: () => { unslim(); const sc = $('.gnav .gn-scroll'); if (sc) sc.scrollLeft = 0; },
+      body: 'Everything is grouped here: People, Planet, Space, Sky tonight, Classroom, Play and About. Point at a name to see its sections, or click the name for a page with every section in it and what each holds right now. Press a section again to close its panel.' },
     { title: 'A section panel', el: () => $('#ops-drawer'), prep: () => { unslim(); if (O.openPanel) O.openPanel('situations'); },
       body: 'Sections open on the right. Descriptions are the source’s own words, word for word, with a link. Where a source reports a change from the last period, it is shown exactly as reported. The site adds no scores, rankings or forecasts of its own.' },
     { title: 'Filter options', el: () => $('#ops-rail'), prep: () => { unslim(); html.classList.remove('rail-closed'); },
-      body: 'Choose how the map looks (3D globe or flat map, the imagery, real sunlight or a fully lit globe) and filter what it shows: a quick filter (everything, space, hazards, disruptions, conflict), or open a group to switch single layers on and off.' },
-    { title: 'Sources and blind spots', el: () => $('.gn-g[data-g="learn"] .gn-b'), prep: () => { unslim(); if (phone()) { html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); } const b = $('.gn-g[data-g="learn"] .gn-b'), sc = $('.gnav .gn-scroll'); if (b && sc) sc.scrollLeft = Math.max(0, b.offsetLeft + b.offsetWidth - sc.clientWidth + 8); },
-      body: 'Under About, “Sources” lists every feed with its licence and how often it updates, and “Layers & readings” explains each layer and what it can’t show. When a feed fails, the page says so instead of showing old numbers.' },
+      body: 'Choose how the map looks (3D globe or flat map, the imagery, real sunlight or a fully lit globe) and filter what it shows: a quick filter (everything, space, hazards, disruptions, conflict), or open a group to switch single layers on and off. With Explain options on, resting the pointer on a choice says what it does.' },
+    { title: 'Classroom', el: () => $('.gn-g[data-g="learn"] .gn-b'), prep: () => { unslim(); const b = $('.gn-g[data-g="learn"] .gn-b'), sc = $('.gnav .gn-scroll'); if (b && sc) sc.scrollLeft = Math.max(0, b.offsetLeft + b.offsetWidth - sc.clientWidth + 8); },
+      body: 'Ten missions that fly the live globe and out into space, each told four ways for ages 6 to adult, with a quiz built partly from today’s data. Educators get class mode, worksheets with answer keys and a warm-up question every day. All free, with no accounts.' },
+    { title: 'Sources and blind spots', el: () => $('.gn-g[data-g="site"] .gn-b'), prep: () => { unslim(); if (phone()) { html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); } const b = $('.gn-g[data-g="site"] .gn-b'), sc = $('.gnav .gn-scroll'); if (b && sc) sc.scrollLeft = Math.max(0, b.offsetLeft + b.offsetWidth - sc.clientWidth + 8); },
+      body: 'Under About, “Sources” lists every feed with its licence and how often it updates, “Layers & readings” explains each layer and what it can’t show, and “What’s new” lists every change. When a feed fails, the page says so instead of showing old numbers.' },
     { title: 'Leave Earth', el: () => $('#ops-map .zoomctl') || $('.zoomctl'), prep: () => { unslim(); if (phone()) html.classList.add('rail-closed'); const x = $('#drawerClose'); if (x && !html.classList.contains('drawer-closed')) x.click(); }, /* the panel would hide half the row */
       body: 'Fly out from here: the Solar System as it is right now, a million real stars, the Milky Way, 43,000 galaxies in the cosmic web, and the oldest light in the universe. ⊕ Earth brings you home. “Tour Universe” flies the whole way with a guide.' },
     { title: 'Music and Voyager', el: () => $('.gn-act'), prep: unslim,
-      body: 'The music follows you: bright near Earth, darker the farther you go. ♪ turns it off or on. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. That’s the tour: enjoy exploring.' }
+      body: 'The music follows you: bright near Earth, darker the farther you go. It starts with your first click on every visit; ♪ stops it for this visit. The Voyager chip counts down to Voyager 1 reaching one light-day from Earth. That’s the tour: enjoy exploring.' }
   ];
   let i = 0, shade = null, card = null, catcher = null, keyH = null, resH = null, prevFocus = null;
   function place() { const st = STEPS[i]; let el = st.el ? st.el() : null; if (el && !vis(el)) el = null;

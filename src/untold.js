@@ -97,6 +97,6 @@
     host.querySelectorAll('.pg-row').forEach(b => b.onclick = () => { pg.sel = b.dataset.id; renderPage(host); const r = host.querySelector('.pg-read'); if (r) { r.scrollTop = 0; if (innerWidth <= 860) r.scrollIntoView({ block: 'start' }); } host.querySelector(`.pg-row[data-id="${pg.sel}"]`)?.focus({ preventScroll: true }); });
     const tl = host.querySelector('.pg-tolist'); if (tl) tl.onclick = () => host.querySelector('.pg-list').scrollIntoView({ block: 'start' });
     host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => { if (window.OwlPage) window.OwlPage.close(true); go(b.dataset.utGo); }); }
-  if (window.OwlPage) window.OwlPage.register('untold', { title: 'Untold history', render: async h => { if (!D) { h.innerHTML = '<p class="small muted">Loading…</p>'; await load(); } renderPage(h); } });
+  if (window.OwlPage) window.OwlPage.register('untold', { title: 'Untold history', render: async h => { if (!D) { h.innerHTML = '<p class="small muted ld-em"><span class="ld-em-g" aria-hidden="true"></span>Loading the stories…</p>'; if (window.OwlEmblemMount) window.OwlEmblemMount(h.querySelector('.ld-em-g'), { static: true }); await load(); } renderPage(h); } });
   window.OwlUntold = { load, go, page: () => window.OwlPage && window.OwlPage.open('untold') };
 })();
