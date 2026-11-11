@@ -20,6 +20,8 @@ async function horizons(id, start, stop, step) {
   if (!body.trim()) throw new Error((j.error || r.match(/No ephemeris[^\n]*/)?.[0] || 'no ephemeris').slice(0, 120));
   const name = ((r.match(/Target body name:\s*([^{\n]+)/) || [])[1] || id).replace(/\s*\((spacecraft|Spacecraft)\)\s*\(-?\d+\)\s*$/, '').trim();
   const pts = body.trim().split('\n').map(l => l.split(',').map(s => s.trim())).map(c => [+(+c[0]).toFixed(4), +(+c[2]).toFixed(5), +(+c[3]).toFixed(5), +(+c[4]).toFixed(5)]).filter(p => p.every(Number.isFinite));
+  /* 10 Nov 2026: every spacecraft came back with no positions and nothing logged; a reply with rows but none readable is now an error that names the first row */
+  if (!pts.length) throw new Error('no readable rows: ' + (body.trim().split('\n')[0] || '').slice(0, 90));
   return { name, pts };
 }
 
@@ -39,7 +41,7 @@ export async function collectSolar({ prev = {}, now = new Date() }) {
       await sleep(500);
     }
     if (got) out.craft.push({ id, ...got });
-    else { const p = (prev.craft || []).find(c => c.id === id); if (p) out.craft.push({ ...p, stale: true }); }
+    else { const p = (prev.craft || []).find(c => c.id === id); if (p && p.pts && p.pts.length) out.craft.push({ ...p, stale: true }); }
     await sleep(500);
   }
   // comets: perihelion within ±182 days of today, perihelion distance under 5 AU

@@ -1214,6 +1214,7 @@ html.owl-splash-on .hint-bubble{display:none}
 .ln-hero h2{margin:4px 0 6px;font-family:var(--display);font-stretch:118%;font-weight:800;font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1.05;color:#EFE4CC}
 .ln-hero p{margin:0;max-width:56ch;color:#C9B995;font-size:clamp(.92rem,1.4vw,1.05rem)}
 .ln-owl{width:clamp(110px,16vw,210px);flex:none;filter:drop-shadow(0 10px 22px rgb(0 0 0 / .6));animation:lnBob 5s ease-in-out infinite}
+.ln-em{width:clamp(120px,22%,200px);aspect-ratio:1;flex:none;position:relative;z-index:1;filter:drop-shadow(0 10px 22px rgb(0 0 0 / .55))}.ln-em canvas{display:block}
 @keyframes lnBob{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-10px) rotate(2deg)}}
 #learnHost .ln-ages{margin:16px 0 12px}#learnHost .ln-ages span{font-size:.95rem;font-weight:700;color:var(--ink)}
 #learnHost .ln-ages button{font-size:.95rem;padding:8px 16px}
@@ -1256,7 +1257,7 @@ html.owl-splash-on .hint-bubble{display:none}
 #owlPage .pg-gen>.panel[data-k="classroom"]{max-width:1320px}
 @media (max-width:640px){.ln-hero{padding:16px}.ln-owl{width:84px;position:absolute;right:8px;top:8px;opacity:.85}.ln-hero h2{padding-right:70px}}
 html #owlPage .pg-gen>.panel[data-k="classroom"]{background:none;padding:4px 0;margin:0 auto;border-radius:0}
-@media (max-width:640px){.ln-owl{display:none}.ln-hero h2{padding-right:0}.ln-whoa{grid-template-columns:1fr 1fr}.ln-w{padding:10px 12px}.ln-w b{font-size:1.7rem}.ln-w span{font-size:.82rem}.ln-w:nth-child(3){grid-column:1/-1}}
+@media (max-width:640px){.ln-owl{display:none}.ln-em{position:absolute;right:8px;top:8px;width:78px}.ln-hero h2,.ln-hero .eyebrow{padding-right:80px}.ln-whoa{grid-template-columns:1fr 1fr}.ln-w{padding:10px 12px}.ln-w b{font-size:1.7rem}.ln-w span{font-size:.82rem}.ln-w:nth-child(3){grid-column:1/-1}}
 
 /* the click forecast shown inside the Country brief (hazards.js placeWx) */
 .wx-card.in-panel{position:static!important;left:auto;right:auto;top:auto;bottom:auto;width:auto;max-width:none;margin:0 0 12px;box-shadow:none}

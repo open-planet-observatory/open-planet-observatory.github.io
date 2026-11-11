@@ -326,11 +326,18 @@
   async function load() { if (L) return L; const [a, b] = await Promise.all([fetch('assets/learn/lessons.json?h=' + Math.floor(Date.now() / 36e5)).then(r => r.json()), fetch('assets/almanac/almanac.json').then(r => r.ok ? r.json() : null).catch(() => null)]); L = a; ALM = b; return L; }
   function mount() { const ls = document.getElementById('lessons'), sec = document.getElementById('classroom'); if (!ls || !sec || document.getElementById('learnHost')) return;
     const box = document.createElement('div'); box.className = 'ln-wrap';
-    box.innerHTML = `<div class="ln-hero"><div class="ln-hero-t"><div class="eyebrow">Classroom · missions on the live globe</div><h2>The whole planet is your classroom.</h2><p>Missions that fly the real, live globe, for ages 6 to adult. Students explore today’s data and take a quick quiz; teachers get class mode, worksheets with answer keys, and a new warm-up question every day.</p></div><img class="ln-owl" src="brand/owl-flying-512.png" alt="" aria-hidden="true"></div>
+    box.innerHTML = `<div class="ln-hero"><div class="ln-hero-t"><div class="eyebrow">Classroom · missions on the live globe</div><h2>The whole planet is your classroom.</h2><p>Missions that fly the real, live globe, for ages 6 to adult. Students explore today’s data and take a quick quiz; teachers get class mode, worksheets with answer keys, and a new warm-up question every day.</p></div><div class="ln-em" title="The Owlmanac emblem: drag to spin it, click to read what it means"></div></div>
       <div class="cl-tabs" role="tablist" aria-label="Classroom"><button type="button" role="tab" id="clTabS" aria-controls="clStudents">For students</button><button type="button" role="tab" id="clTabE" aria-controls="clEducators">For educators</button></div>
       <div id="clStudents" role="tabpanel" aria-labelledby="clTabS"><div id="learnHost"><p class="small muted">Loading the missions…</p></div></div>
       <div id="clEducators" role="tabpanel" aria-labelledby="clTabE" hidden><div id="eduHost"><p class="small muted">Loading…</p></div><div class="edu-more"></div></div>`;
     sec.insertBefore(box, sec.firstChild);
+    /* the turning 3D emblem in the banner (10 Nov 2026: the maintainer asked for it in place of the flying-owl picture, whole and uncropped);
+       it runs only while the banner is on screen, here or in the side panel, and stops when it isn't */
+    (function heroEmblem() { const el = box.querySelector('.ln-em'); if (!el) return; let stop = null, busy = false;
+      const tick = () => { const on = el.isConnected && !!el.offsetParent && !document.hidden;
+        if (on && !stop && !busy) { busy = true; import('./assets/emblem/emblem.js').then(m => { busy = false; if (el.isConnected) stop = m.mountEmblem(el); }).catch(() => { busy = false; el.remove(); clearInterval(iv); }); }
+        else if (!on && typeof stop === 'function') { stop(); stop = null; } };
+      const iv = setInterval(tick, 800); document.addEventListener('visibilitychange', tick); tick(); })();
     /* everything else in the section (sample lesson plans, the old almanacs, the letter and feedback) is for educators */
     const more = box.querySelector('.edu-more'); [...sec.children].filter(c => c !== box).forEach(c => more.appendChild(c));
     const first = more.querySelector(':scope > .sec-head'); if (first) { const ey = first.querySelector('.eyebrow'); if (ey) ey.textContent = 'Lesson plans'; first.classList.add('ln-teachhead'); const h2 = first.querySelector('h2'); if (h2) h2.textContent = 'Longer lesson plans built on live data'; }

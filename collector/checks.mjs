@@ -140,8 +140,8 @@ export function runChecks({ snap = {}, nature = {}, orbits = {}, grace = null, s
 
   // ----- Solar System view (JPL Horizons, SBDB, CNEOS) -----
   if (solar) {
-    const C = solar.craft || [], jd = now / 864e5 + 2440587.5;
-    ok(C.length >= 10, 'Space', 'solar-craft', 'At least 10 deep-space spacecraft have JPL positions', `${C.length} spacecraft${C.some(c => c.stale) ? ', some from the last good copy' : ''}`, 'warn');
+    const C = (solar.craft || []).filter(c => c.pts && c.pts.length), jd = now / 864e5 + 2440587.5;
+    ok(C.length >= 10, 'Space', 'solar-craft', 'At least 10 deep-space spacecraft have JPL positions', `${C.length} of ${(solar.craft || []).length} spacecraft with positions${C.some(c => c.stale) ? ', some from the last good copy' : ''}`, 'warn');
     const near = (c, t) => { const p = c.pts; let best = p[0]; for (const x of p) if (Math.abs(x[0] - t) < Math.abs(best[0] - t)) best = x; return best; };
     const v1 = C.find(c => c.id === '-31'); if (v1) { const p = near(v1, jd), r = Math.hypot(p[1], p[2], p[3]); ok(r > 160 && r < 200, 'Space', 'solar-voyager1', 'Voyager 1 is 160–200 AU from the Sun (it gains about 3.6 AU a year)', `${r.toFixed(1)} AU`); }
     const jw = C.find(c => c.id === '-170'); if (jw) { const p = near(jw, jd), r = Math.hypot(p[1], p[2], p[3]); ok(r > 0.98 && r < 1.03, 'Space', 'solar-jwst', 'JWST stays about 1.01 AU from the Sun (it sits beyond Earth at L2)', `${r.toFixed(3)} AU`); }
