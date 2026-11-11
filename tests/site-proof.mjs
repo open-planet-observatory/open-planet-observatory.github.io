@@ -134,8 +134,8 @@ for (const bname of BROWSERS) {
       const ctx = await browser.newContext({ ...opts, locale: 'en-US', timezoneId: 'America/New_York', permissions: bname === 'chromium' ? ['geolocation'] : [], geolocation: { latitude: 40.7, longitude: -74 } });
       await ctx.addInitScript(() => { try { localStorage.setItem('obs-notice', '1'); localStorage.setItem('site-tour-offer', '1'); localStorage.setItem('owl-music', 'off'); sessionStorage.setItem('owl-splash', '1'); } catch (e) { } });
       const page = await ctx.newPage(); page.__base = base + '?nosplash'; const allErrors = [];
-      page.on('pageerror', e => allErrors.push(String(e.message || e).slice(0, 300)));
       const glWarn = []; // WebGL driver chatter (software GL on the runners): counted, shown, never a failure
+      page.on('pageerror', e => { const t = String(e.message || e); if (/^WebGL: |THREE\.WebGLRenderer|WebGL context|GL_INVALID|INVALID_OPERATION|INVALID_VALUE/.test(t)) { glWarn.push(t.slice(0, 120)); return; } allErrors.push(t.slice(0, 300)); });
       page.on('console', m => { if (m.type() !== 'error' || /net::|Failed to load resource|404|ERR_/.test(m.text())) return; if (/^WebGL: |THREE\.WebGLRenderer|WebGL context|GL_INVALID|INVALID_OPERATION|INVALID_VALUE/.test(m.text())) { glWarn.push(m.text().slice(0, 120)); return; } allErrors.push('console: ' + m.text().slice(0, 300)); });
       const load = async () => { await page.goto(page.__base, { waitUntil: 'load', timeout: 90000 }); await page.waitForSelector('.gn-g', { timeout: 60000 });
         await page.waitForFunction(() => document.getElementById('zearth') || document.querySelector('#ops-map canvas'), null, { timeout: 90000 * SLOW }).catch(() => { }); await w(2500); };
