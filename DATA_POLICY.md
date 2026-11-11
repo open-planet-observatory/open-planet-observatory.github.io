@@ -341,3 +341,5 @@ Short lessons that move the live globe for the learner, then ask a few questions
 - Stars and the chosen age are kept only in the browser's local storage (owl-learn-v1, owl-learn-age, owl-learn-read). No account, nothing sent anywhere.
 - "Read aloud" uses the browser's own speech, preferring voices on the device; some browsers may use an online voice for some languages.
 - Global temperature (Signals and lessons): from November 2026 the collector asks NOAA for the most recent month it has published, instead of a month that is not out yet.
+
+- Illustrations (11 Nov 2026): the engraving-style banner and card pictures are AI-made illustrations (Atlabs), decoration only, never data. Each carries a small, faint "Illustration" mark, and About > How this works says so in words. A small turning copy of the site's emblem is hidden in each picture.
