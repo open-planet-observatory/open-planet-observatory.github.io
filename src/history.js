@@ -47,7 +47,7 @@
       <button class="feat-c feat-hist" id="featHist"><span class="fh-i" aria-hidden="true">☉</span><span class="fc-b"><b>On this day <span class="fh-y"></span></b><small class="fh-t">Loading…</small></span></button>`;
     if (qs) qs.after(row); else top.appendChild(row);
     row.querySelector('#featGame').onclick = () => dispatchEvent(new Event('obs:findowl')); /* 9 Nov 2026: Find the owl is the featured way in (Where on Earth? stays in the Play menu) */
-    row.querySelector('#featHist').onclick = () => { if (O.setSlim) O.setSlim(false); if (O.openPanel) O.openPanel('history'); };
+    row.querySelector('#featHist').onclick = () => { if (O.setSlim) O.setSlim(false); if (O.togglePanel) O.togglePanel('history'); else if (O.openPanel) O.openPanel('history'); };
     gameSub(); }
   function gameSub() { const s = document.getElementById('featGameSub'); if (!s) return; let st = null; try { st = JSON.parse(localStorage.getItem('owl-findowl-v1') || '{}'); } catch (e) { }
     const d = st && st.days && st.days[new Date().toISOString().slice(0, 10)], n = d ? Object.keys(d.found || {}).length : 0; const N = x => Number(x).toLocaleString('en-US'), pts = d ? (d.s || []).reduce((a, b) => a + (b || 0), 0) : 0;

@@ -133,7 +133,7 @@ buildTicker();O.buildTicker=buildTicker;
 let seen=false;try{seen=localStorage.getItem('obs-notice')==='1'}catch(e){}
 if(!seen){const t=document.createElement('div');t.id='ops-toast';t.className='glass';t.innerHTML='<span><b>For research and education only.</b> Public data, shown as published. Not for tracking anyone or for emergency decisions.</span><button>OK</button>';document.body.appendChild(t);t.querySelector('button').onclick=()=>{t.remove();try{localStorage.setItem('obs-notice','1')}catch(e){}}}
 
-window.__obs.openPanel=k=>openPanel(k);
+window.__obs.openPanel=k=>openPanel(k);window.__obs.togglePanel=k=>openPanel(k,true);/* 11 Nov 2026: the same menu item or banner card pressed again closes its side panel, like × */
 // the map svg now fills the window; re-render once so the projection fits
 requestAnimationFrame(()=>O.render());
 })();

@@ -102,7 +102,7 @@
     if (!b) { b = document.createElement('button'); b.className = 'feat-c feat-rec'; b.id = 'featRec'; row.appendChild(b); }
     b.title = 'Record of the day: ' + r.title + '. Open it in Records, with every rival definition and its source';
     b.innerHTML = `<span class="fh-i" aria-hidden="true">▲</span><span class="fc-b"><b>Record of the day</b><small>${esc(r.title)}: ${esc(lineOf(r))}</small></span>`;
-    b.onclick = () => { if (O.setSlim) O.setSlim(false); if (O.openPanel) O.openPanel('records'); filter = 'all'; draw();
+    b.onclick = () => { if (O.setSlim) O.setSlim(false); const was = document.querySelector('#drawerBody .panel[data-k="records"][data-on="true"]') && !document.documentElement.classList.contains('drawer-closed'); if (was && O.togglePanel) { O.togglePanel('records'); return; } if (O.openPanel) O.openPanel('records'); filter = 'all'; draw();
       setTimeout(() => { const el = document.getElementById('rec-' + r.id); if (el) { el.scrollIntoView({ block: 'start', behavior: 'smooth' }); el.classList.add('rc-hi'); setTimeout(() => el.classList.remove('rc-hi'), 2400); } }, 120); }; }
   load();
 })();

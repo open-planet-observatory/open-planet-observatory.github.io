@@ -1107,6 +1107,573 @@
    }
   },
   {
+   "id": "inside",
+   "topic": "Earth",
+   "icon": "◒",
+   "teacher": {
+    "goals": [
+     "The Earth has layers: a thin rigid crust, about 2,900 km of hot, slowly flowing mantle, a liquid outer core and a solid inner core of iron and nickel.",
+     "No one has ever drilled below about 12 km. What we know of the deep Earth comes mainly from earthquake waves: P waves cross solids and liquids, S waves cannot cross liquid.",
+     "Reference models such as PREM, IASP91 and ak135 are fitted to seismic travel times. They agree on the big picture and differ by kilometres on the details; some questions (the innermost inner core, how the inner core turns) are still debated."
+    ],
+    "discuss": [
+     "If S waves cannot travel through liquid, what would seismometers on the far side of the Earth record after a big earthquake? What would that tell you?",
+     "The crust is about 5 km thick under the oceans and about 30 km under continents. Why might thin, young ocean crust be where new plate is made?",
+     "Three reference models put the core-mantle boundary at 2,889, 2,891 and 2,891.5 km. Is that disagreement a problem, or a sign of how well the boundary is known?"
+    ],
+    "uses": "Earthquakes layer (USGS, this week's quakes and their depths); see-through Earth (x-ray, quakes drawn at their real depth ×25); the Inside the Earth panel (true-scale cutaway and wave-speed profiles from PREM, IASP91 and ak135, with consensus and debated questions).",
+    "ngss": [
+     [
+      "4-ESS2-2",
+      "Analyze and interpret data from maps to describe patterns of Earth's features."
+     ],
+     [
+      "MS-ESS2-1",
+      "Develop a model to describe the cycling of Earth's materials and the flow of energy that drives this process."
+     ],
+     [
+      "HS-ESS2-3",
+      "Develop a model based on evidence of Earth’s interior to describe the cycling of matter by thermal convection."
+     ]
+    ]
+   },
+   "levels": {
+    "k2": {
+     "title": "What is inside the Earth?",
+     "mins": 8,
+     "steps": [
+      {
+       "say": "Look at our planet. We live on the very outside of it.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         0,
+         20,
+         22000000
+        ]
+       ]
+      },
+      {
+       "say": "The Earth has layers inside, a bit like a boiled egg.",
+       "act": []
+      },
+      {
+       "say": "The outside layer is the crust. It is thin, like an eggshell. We live on the crust.",
+       "act": [
+        [
+         "fly",
+         -30,
+         10,
+         16000000
+        ]
+       ]
+      },
+      {
+       "say": "Under the crust is the mantle. It is very hot rock that moves very, very slowly.",
+       "act": [
+        [
+         "xray",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "In the middle is the core. It is mostly metal: iron and nickel.",
+       "act": [
+        [
+         "xray",
+         false
+        ]
+       ]
+      },
+      {
+       "say": "Nobody can dig that deep. Scientists listen to earthquake waves to learn what is inside. Look at the layers here.",
+       "act": [
+        [
+         "panel",
+         "inside"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "What is the thin outside layer of the Earth called?",
+       "a": [
+        "The crust",
+        "The core",
+        "The mantle"
+       ],
+       "ok": 0,
+       "why": "The crust is the thin outer layer, like the shell of an egg.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What is the Earth's core mostly made of?",
+       "a": [
+        "Metal: iron and nickel",
+        "Ice",
+        "Sand"
+       ],
+       "ok": 0,
+       "why": "The core is made of metal, an iron and nickel mix.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Which part of a boiled egg is like the Earth's crust?",
+       "a": [
+        "The shell",
+        "The yolk",
+        "The white"
+       ],
+       "ok": 0,
+       "why": "The crust is thin and can break, like an eggshell.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "People have dug all the way to the middle of the Earth.",
+       "ok": false,
+       "why": "No. The middle is more than 6,000 km down. Scientists learn about it from earthquake waves instead.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      }
+     ]
+    },
+    "g35": {
+     "title": "Layers you can't see",
+     "mins": 12,
+     "steps": [
+      {
+       "say": "These are this week's earthquakes. Each one sends waves through the inside of the Earth, and instruments all over the world record them.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "The biggest one this week was magnitude {quake.mag}, {quake.place}. It started {quake.depth} km underground.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      },
+      {
+       "say": "Even the deepest hole ever drilled reaches only about 12 km. To learn what is deeper, scientists study how earthquake waves travel.",
+       "act": [
+        [
+         "fly",
+         -30,
+         10,
+         22000000
+        ]
+       ]
+      },
+      {
+       "say": "The crust is thin: about 5 km under the oceans and about 30 km under the continents, on average.",
+       "act": []
+      },
+      {
+       "say": "Turn on x-ray to see quakes at their real depth. Below the crust is the mantle, about 2,900 km of hot rock that can slowly flow.",
+       "act": [
+        [
+         "xray",
+         true
+        ]
+       ]
+      },
+      {
+       "say": "At the centre is the core: a liquid outer core and a solid inner core, made of iron and nickel. Open the cutaway, drawn to true scale. Notice how thin the crust looks.",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "panel",
+         "inside"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "order",
+       "q": "Put the layers in order, from the surface down to the centre.",
+       "items": [
+        "Crust",
+        "Mantle",
+        "Outer core",
+        "Inner core"
+       ],
+       "why": "Crust, then mantle, then the liquid outer core, then the solid inner core at the centre.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how thick is the crust under the oceans?",
+       "a": [
+        "About 5 km",
+        "About 500 km",
+        "About 3,000 km"
+       ],
+       "ok": 0,
+       "why": "The USGS: beneath the oceans the crust generally extends only to about 5 km.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Earth's outer core is liquid.",
+       "ok": true,
+       "why": "The outer core is liquid metal, about 2,200 km thick. The inner core is solid.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What do scientists use to find out what is deep inside the Earth?",
+       "a": [
+        "Waves from earthquakes",
+        "Tunnels dug to the core",
+        "Cameras lowered on cables"
+       ],
+       "ok": 0,
+       "why": "Earthquake waves travel through the planet. Some kinds can cross liquid and some cannot, so the waves show where each layer is.",
+       "src": [
+        "EARTH Magazine: March 29, 1936, notes on Earth's inner core",
+        "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "deepest",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      }
+     ]
+    },
+    "g68": {
+     "title": "How earthquakes X-ray the planet",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "Every dot is an earthquake from this week. Seismometers around the world record the waves each one sends through the planet.",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "fly",
+         -160,
+         10,
+         26000000
+        ]
+       ]
+      },
+      {
+       "say": "Two kinds of wave travel through the inside. P waves push and pull, and can cross both solids and liquids. S waves shake side to side, and cannot travel through liquid.",
+       "act": []
+      },
+      {
+       "say": "Turn on x-ray to see each quake at its real depth. The deepest reach about 700 km, inside plates sinking at subduction zones like this one in the western Pacific.",
+       "act": [
+        [
+         "xray",
+         true
+        ],
+        [
+         "fly",
+         150,
+         20,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "S waves cannot cross the outer core, because it is liquid: about 2,200 km of molten iron and nickel. The solid inner core below it is about 1,250 km thick.",
+       "act": [
+        [
+         "fly",
+         -30,
+         10,
+         22000000
+        ]
+       ]
+      },
+      {
+       "say": "In 1936 the Danish seismologist Inge Lehmann noticed P waves arriving in the 'shadow zone', where none were expected. She explained them with a solid inner core.",
+       "act": []
+      },
+      {
+       "say": "Open the cutaway. Find where the S-wave speed drops to zero: that is the boundary between the mantle and the core, 2,891 km down in the PREM model.",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "panel",
+         "inside"
+        ]
+       ]
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "Which waves cannot travel through liquid?",
+       "a": [
+        "S waves",
+        "P waves",
+        "Both kinds"
+       ],
+       "ok": 0,
+       "why": "S waves, the side-to-side shear waves, cannot travel through liquid. P waves can cross solids and liquids.",
+       "src": [
+        "EARTH Magazine: March 29, 1936, notes on Earth's inner core",
+        "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "Who explained P waves in the 'shadow zone' with a solid inner core, in 1936?",
+       "a": [
+        "Inge Lehmann",
+        "Isaac Newton",
+        "Charles Darwin"
+       ],
+       "ok": 0,
+       "why": "The Danish seismologist Inge Lehmann proposed the solid inner core in 1936.",
+       "src": [
+        "EARTH Magazine: March 29, 1936, notes on Earth's inner core",
+        "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "The Earth's core is nearly twice as dense as the mantle.",
+       "ok": true,
+       "why": "The core is metal (an iron-nickel alloy), not stone, which makes it nearly twice as dense as the mantle.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "About how deep do the deepest earthquakes happen?",
+       "a": [
+        "About 700 km",
+        "About 70 km",
+        "About 2,900 km"
+       ],
+       "ok": 0,
+       "why": "Inside plates sinking at subduction zones, earthquakes happen down to about 700 km.",
+       "src": [
+        "USGS: At what depth do earthquakes occur?",
+        "https://www.usgs.gov/faqs/what-depth-do-earthquakes-occur-what-significance-depth"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "shareDeep",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      }
+     ]
+    },
+    "adult": {
+     "title": "Reading the core from seismic waves",
+     "mins": 15,
+     "steps": [
+      {
+       "say": "This week's biggest earthquake, M{quake.mag} {quake.place}, began {quake.depth} km down. The travel times of waves from quakes like this, recorded worldwide, are the main evidence for everything below the deepest drill hole, at about 12 km.",
+       "live": "biggestQuake",
+       "act": [
+        [
+         "only",
+         [
+          "quake"
+         ]
+        ],
+        [
+         "flyLive",
+         "biggestQuake"
+        ]
+       ]
+      },
+      {
+       "say": "In 1909 Andrija Mohorovičić showed that a thin crust sits on the mantle. The USGS gives the crust about 5 km under the oceans and about 30 km on average under the continents, up to 100 km under big mountain ranges.",
+       "act": [
+        [
+         "fly",
+         -30,
+         10,
+         22000000
+        ]
+       ]
+      },
+      {
+       "say": "X-ray on: quakes at their real depth (drawn 25 times deeper). They stop at about 700 km, but the mantle goes on to about 2,900 km. Why they stop there is a question worth asking.",
+       "act": [
+        [
+         "xray",
+         true
+        ],
+        [
+         "fly",
+         150,
+         20,
+         14000000
+        ]
+       ]
+      },
+      {
+       "say": "S waves cannot cross liquid; P waves can. In the PREM model the S-wave speed falls to zero at 2,891 km and P waves slow from 13.7 to 8.1 km/s: a liquid outer core. Inge Lehmann's 1936 reading of P waves arriving in the shadow zone added a solid inner core.",
+       "act": [
+        [
+         "xray",
+         false
+        ],
+        [
+         "fly",
+         -30,
+         10,
+         22000000
+        ]
+       ]
+      },
+      {
+       "say": "Open Inside the Earth and switch to Compare. PREM, IASP91 and ak135 are reference models fitted to travel times, not samples. They put the core-mantle boundary at 2,891, 2,889 and 2,891.5 km.",
+       "act": [
+        [
+         "panel",
+         "inside"
+        ]
+       ]
+      },
+      {
+       "say": "What the data can't show directly: the composition of the deep layers is inferred from wave speeds, density and high-pressure laboratory experiments. Whether there is an innermost inner core, and how the inner core turns, are still debated; the panel's cards give both sides with their papers.",
+       "act": []
+      }
+     ],
+     "quiz": [
+      {
+       "t": "mc",
+       "q": "In PREM the S-wave speed is zero from 2,891 to 5,149.5 km depth. What does that tell you?",
+       "a": [
+        "That layer is liquid",
+        "That layer is empty",
+        "No seismometers recorded it"
+       ],
+       "ok": 0,
+       "why": "S waves cannot travel through liquid, so a zero S-wave speed marks the liquid outer core.",
+       "src": [
+        "Dziewonski & Anderson (1981), Preliminary reference Earth model",
+        "https://doi.org/10.1016/0031-9201(81)90046-7"
+       ]
+      },
+      {
+       "t": "tf",
+       "q": "Reference models like PREM are built from samples drilled out of the deep Earth.",
+       "ok": false,
+       "why": "They are fitted to the travel times of seismic waves recorded around the world (and other observations), not to samples.",
+       "src": [
+        "Dziewonski & Anderson (1981), Preliminary reference Earth model",
+        "https://doi.org/10.1016/0031-9201(81)90046-7"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "What evidence led Inge Lehmann to propose a solid inner core in 1936?",
+       "a": [
+        "P waves arriving inside the shadow zone",
+        "Rock samples from a deep borehole",
+        "A change in Earth's magnetic field"
+       ],
+       "ok": 0,
+       "why": "P waves found within the shadow zone were explained by their interaction with a solid inner core.",
+       "src": [
+        "EARTH Magazine: March 29, 1936, notes on Earth's inner core",
+        "https://www.earthmagazine.org/article/march-29-1936-notes-earths-inner-core/"
+       ]
+      },
+      {
+       "t": "mc",
+       "q": "How thick is the liquid outer core, according to the USGS?",
+       "a": [
+        "About 2,200 km",
+        "About 220 km",
+        "About 6,400 km"
+       ],
+       "ok": 0,
+       "why": "The USGS: a 2,200 km-thick liquid outer core and a 1,250 km-thick solid inner core.",
+       "src": [
+        "USGS: Inside the Earth (This Dynamic Earth)",
+        "https://pubs.usgs.gov/gip/dynamic/inside.html"
+       ]
+      },
+      {
+       "t": "live",
+       "id": "deepest",
+       "src": [
+        "USGS: Determining the depth of an earthquake",
+        "https://www.usgs.gov/programs/earthquake-hazards/determining-depth-earthquake"
+       ]
+      }
+     ]
+    }
+   }
+  },
+  {
    "id": "sky",
    "topic": "Space",
    "icon": "☾",

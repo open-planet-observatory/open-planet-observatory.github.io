@@ -54,10 +54,10 @@ async function dailyProvider(){const d=yesterday();for(const L of ['VIIRS_NOAA21
 const IMAGERY={
  bluemarble:{name:'Clear sky: NASA Blue Marble, sharpening to Sentinel-2 (10 m) as you zoom in',label:'Clear',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),detail:true},
  daily:{name:'Yesterday’s satellite view (NASA VIIRS on NOAA-21, or NOAA-20 if that day is missing; 250 m, with that day’s clouds)',label:'Yesterday',make:dailyProvider},
- bing:{name:'Close-up aerial photos from Bing Maps (Microsoft, via Cesium ion): sharp enough to see buildings and fields, but a mosaic of photos taken over past years, not today’s view',label:'Close-up',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
+ bing:{name:'Orthoimagery: aerial and satellite photos corrected so every point sits in its true map position (Bing Maps, Microsoft, via Cesium ion). Sharp enough to see buildings and fields, but a mosaic of photos taken over past years, not today’s view',label:'Orthoimagery',make:()=>C.IonImageryProvider.fromAssetId(2),needsToken:true},
  seafloor:{name:'Relief: ocean depths coloured from deep (purple) to shallow (yellow), with the sea floor and the land’s mountains shaded by slope, from NOAA ETOPO1; or GEBCO 2026 grey shading (not for navigation)',label:'Relief',make:()=>seaStyle==='gebco'?gebco('GEBCO_LATEST'):depthProvider(),seafloor:true},
  lightning:{name:'Lightning, live: every flash NOAA’s GOES-19 and GOES-18 lightning mappers detect over the Americas and nearby oceans, replayed about a minute behind real time, over a darkened globe (NASA Blue Marble)',label:'Lightning ⚡',make:()=>gibs('BlueMarble_ShadedRelief_Bathymetry',8,'jpeg'),lightning:true},
- basic:{name:'Basic (offline)',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
+ basic:{name:'Basic: a simple natural-colour map of the land and sea (Natural Earth II) that ships with the globe, so it works even when the imagery servers do not',make:()=>C.TileMapServiceImageryProvider.fromUrl(C.buildModuleUrl('Assets/Textures/NaturalEarthII'))},
 };
 let imageryChoice='bluemarble';try{imageryChoice=localStorage.getItem('obs-imagery2')||imageryChoice}catch(e){}
 if(window.OBS_ION_TOKEN)C.Ion.defaultAccessToken=window.OBS_ION_TOKEN;
@@ -451,7 +451,7 @@ function setActive(v){active=v;document.documentElement.classList.toggle('map2d'
 /* "Where on Earth?" plays on the 3D globe: if it starts while the Globe or Flat map is showing, switch to 3D for the game and back afterwards (in Flat view the page went black) */
 {let gameFrom=null;new MutationObserver(()=>{const on=document.documentElement.classList.contains('game-on');if(on&&!active&&!gameFrom){gameFrom=O.mode();setActive(true)}else if(!on&&gameFrom){const m=gameFrom;gameFrom=null;const b=document.querySelector('#viewseg button[data-mode="'+m+'"]');if(b)b.click()}}).observe(document.documentElement,{attributes:true,attributeFilter:['class']})}
 const seg=document.getElementById('viewseg');
-if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textContent='3D';b.setAttribute('aria-pressed','true');b.onclick=()=>setActive(true);seg.insertBefore(b,seg.firstChild);
+if(seg){const b=document.createElement('button');b.dataset.mode='3d';b.textContent='3D';b.title='3D: the Earth as a globe you can turn, tilt and zoom, with imagery, lighting and every layer in three dimensions (CesiumJS)';{const T={globe:'Globe: a lighter drawing of the Earth as a ball (orthographic projection), quicker on older computers and phones',flat:'Flat: the whole world at once on one flat map (Natural Earth projection), so nothing hides on the far side'};seg.querySelectorAll('button[data-mode]').forEach(x=>{if(T[x.dataset.mode]&&!x.title)x.title=T[x.dataset.mode]})}b.setAttribute('aria-pressed','true');b.onclick=()=>setActive(true);seg.insertBefore(b,seg.firstChild);
  seg.querySelectorAll('button:not([data-mode="3d"])').forEach(x=>x.addEventListener('click',()=>setActive(false)))}
 // imagery + see-through controls in the rail
 const rail=document.getElementById('ops-rail');

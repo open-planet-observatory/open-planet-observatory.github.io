@@ -1402,12 +1402,24 @@ footer .foot-links a{color:inherit}
 .edu-faq details{padding:10px 14px;border-radius:12px;border:1px solid var(--glass-line);background:var(--glass-2);margin-bottom:6px}.edu-faq summary{cursor:pointer;font-weight:700}.edu-faq p{margin:8px 0 0}
 .edu-std,.edu-week,.edu-faq{margin-top:22px}
 
-/* group pages (nav.js openHub): one card per section */
-.hub{max-width:1100px;margin:0 auto;padding:4px 2px 24px}.hub-lead{font-size:clamp(1rem,1.6vw,1.15rem);max-width:70ch;margin:0 0 18px;opacity:.9}
-.hub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
-.hub-c{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;padding:16px 16px 18px;border-radius:16px;border:1px solid rgb(217 164 65 / .28);background:var(--glass-2,rgb(255 255 255 / .04));color:inherit;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
-.hub-c:hover,.hub-c:focus-visible{border-color:#D9A441;transform:translateY(-2px)}.hub-i{font-size:1.6rem;line-height:1;color:#D9A441}.hub-c b{font-size:1.05rem}.hub-c small{opacity:.78;line-height:1.35}
+/* group pages (nav.js openHub): a right-now line, then two wide cards per row, each with a drawn header and a live figure */
+.hub{max-width:1180px;margin:0 auto;padding:4px 2px 28px}.hub-lead{font-size:clamp(1rem,1.6vw,1.2rem);max-width:72ch;margin:0 0 14px;opacity:.92}
+.hub-now{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 8px;margin:0 0 18px;padding:12px 16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--hub) 55%,transparent);background:color-mix(in srgb,var(--hub) 12%,transparent);line-height:1.4}
+.hub-now b{color:var(--hub);filter:brightness(1.5);text-transform:uppercase;letter-spacing:.08em;font-size:.78rem}.hub-now small{opacity:.7}
+.hub-dot{width:8px;height:8px;border-radius:50%;background:var(--hub);filter:brightness(1.6);align-self:center;animation:hubPulse 2s ease-in-out infinite}@keyframes hubPulse{50%{opacity:.35}}
+.hub-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.hub-c{display:flex;flex-direction:column;align-items:stretch;text-align:left;padding:0;overflow:hidden;border-radius:18px;border:1px solid color-mix(in srgb,var(--hub) 40%,transparent);background:var(--glass-2,rgb(255 255 255 / .04));color:inherit;font:inherit;cursor:pointer;transition:border-color .15s,transform .15s}
+.hub-c:hover,.hub-c:focus-visible{border-color:var(--hub);transform:translateY(-2px)}
+.hub-art{position:relative;display:block;height:92px;background:radial-gradient(120% 160% at 85% 50%,color-mix(in srgb,var(--hub) 55%,#000),#07080c 70%)}
+.hub-art svg{position:absolute;inset:0;width:100%;height:100%}.ha-r1,.ha-r2,.ha-r3{fill:none;stroke:rgb(255 255 255 / .12)}.ha-r2{stroke:rgb(255 255 255 / .18)}.ha-r3{fill:color-mix(in srgb,var(--hub) 50%,transparent);stroke:rgb(255 255 255 / .3)}.ha-s{fill:rgb(255 255 255 / .55)}
+.hub-i{position:absolute;right:calc(18% - 14px);top:50%;transform:translateY(-50%);font-size:2rem;line-height:1;color:#fff;text-shadow:0 0 18px var(--hub)}
+.hub-tx{display:flex;flex-direction:column;gap:6px;padding:14px 18px 18px}.hub-tx b{font-size:1.15rem}.hub-tx small{opacity:.82;line-height:1.45;font-size:.92rem}
+.hub-live{align-self:flex-start;margin-top:4px;padding:4px 10px;border-radius:999px;font-size:.82rem;font-variant-numeric:tabular-nums;background:color-mix(in srgb,var(--hub) 22%,transparent);border:1px solid color-mix(in srgb,var(--hub) 50%,transparent)}
+@media (max-width:760px){.hub-grid{grid-template-columns:1fr;gap:10px}.hub-art{height:70px}.hub-tx{padding:12px 14px 14px}}
+@media (prefers-reduced-motion:reduce){.hub-dot{animation:none}}
 .gn-m .gn-ov{border-bottom:1px solid rgb(217 164 65 / .25)}
 @media (max-width:640px){.hub-grid{grid-template-columns:1fr 1fr;gap:8px}.hub-c{padding:12px}.hub-i{font-size:1.3rem}}
 .ln-hero .ln-freeline{margin-top:10px;font-size:.85rem;letter-spacing:.02em;color:#D9A441}
 .edu-free{margin-top:14px;padding:16px 18px;border-radius:16px;border:1px solid rgb(217 164 65 / .35)}.edu-free p{max-width:75ch}.edu-free .letter-form{margin:10px 0 4px}
+.ln-inside .ln-art{background:radial-gradient(100% 120% at 50% 100%,#2b1a0e,#0b0906 75%)}
+.ln-hero h2{font-size:clamp(1.4rem,2.9vw,2.3rem)}

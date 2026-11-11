@@ -25,7 +25,7 @@
     if (!cur) saved = { slim: html.classList.contains('slim'), rail: html.classList.contains('rail-closed'), drawer: html.classList.contains('drawer-closed'), panel: key };
     if (opt && opt.solo && saved && !saved.solo) saved.solo = true; /* opened straight from a menu (Classroom): Back goes to the globe, not to the panel */
     cur = key; html.classList.add('page-on'); if (O.setSlim) O.setSlim(true);
-    const v = viewer(); if (v && !document.querySelector('#uni.on') && !html.classList.contains('moon-on')) { saved.loop = v.useDefaultRenderLoop; v.useDefaultRenderLoop = false; }
+    const v = viewer(); if (v && !document.querySelector('#uni.on') && !html.classList.contains('moon-on')) { if (saved.loop === undefined) saved.loop = v.useDefaultRenderLoop; v.useDefaultRenderLoop = false; } /* 11 Nov 2026: going from one page to another (a menu page to Classroom, Classroom to Records) recorded the already-paused loop, so Back left the globe frozen */
     el.querySelector('#pgTitle').textContent = R.title; el.hidden = false; place(); const body = el.querySelector('#pgBody'); body.scrollTop = 0; R.render(body, api);
     try { history.replaceState(null, '', '#page=' + key); } catch (e) { } el.querySelector('#pgBack').focus({ preventScroll: true }); }
   function close(keepSlim) { if (!cur || !el) return; const key = cur; cur = null; el.hidden = true; html.classList.remove('page-on');

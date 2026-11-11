@@ -74,7 +74,7 @@ export function mountEmblem(el, opt = {}) {
     obj.rotation.x = 0.42 + 0.1 * Math.sin(t * 0.37) + px; draw(); }
   const ro = new ResizeObserver(draw); ro.observe(el);
   if (still || rm) draw(); else raf = requestAnimationFrame(loop);
-  const api = () => { alive = false; removeEventListener('resize', aim); cancelAnimationFrame(raf); ro.disconnect(); g.dispose(); mat.dispose(); tex.dispose(); r.dispose(); r.domElement.remove(); };
+  const api = () => { alive = false; removeEventListener('resize', aim); cancelAnimationFrame(raf); ro.disconnect(); g.dispose(); mat.dispose(); tex.dispose(); r.dispose(); try { r.forceContextLoss(); } catch (e) { } r.domElement.remove(); }; /* free the WebGL context too: browsers keep only ~16, and the globe's is the one they drop first */
   api.at = (yaw, pitch) => { obj.rotation.y = yaw; if (pitch != null) obj.rotation.x = pitch; draw(); }; /* for stills and recordings */
   api.ready = new Promise(res => { const chk = () => tex.image ? res() : setTimeout(chk, 50); chk(); });
   return api;
