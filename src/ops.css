@@ -15,8 +15,10 @@ html.ops .wrap{display:none}
 #cesiumCredits .cesium-credit-logoContainer{display:none!important}
 #cesiumCredits a{color:var(--ink-3)}
 #cesium .cesium-performanceDisplay-defaultContainer{display:none}
-#ops-map .zoomctl{right:auto;left:calc(var(--rail-w) + 14px);top:auto;bottom:calc(var(--botH,66px) + 8px);flex-direction:row}
-html.ops.rail-closed #ops-map .zoomctl{left:14px}
+#ops-map .zoomctl{right:auto;left:calc(var(--rail-w) + 14px);top:auto;bottom:calc(var(--botH,66px) + 8px);flex-direction:row;flex-wrap:wrap;max-width:calc(100% - var(--rail-w) - var(--drawer-w) - 48px)} /* the row wraps inside the strip between the panels: at 1280 px the last pills used to run under the side panel (the maintainer's test, 11 Nov 2026) */
+html.ops.rail-closed #ops-map .zoomctl{left:14px;right:auto;max-width:calc(100% - var(--drawer-w) - 48px)} /* right:auto, else the phone rule's right:10px joins it and the box stretches across the globe, swallowing touches */
+html.ops.drawer-closed #ops-map .zoomctl{max-width:calc(100% - var(--rail-w) - 48px)}
+html.ops.rail-closed.drawer-closed #ops-map .zoomctl{max-width:calc(100% - 28px)} /* right:auto, else the phone rule's right:10px joins it and the box stretches across the globe, swallowing touches (the maintainer's test, 11 Nov 2026) */
 .glass{background:var(--glass);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px) saturate(1.2);border:1px solid var(--glass-line);border-radius:12px;box-shadow:0 10px 30px rgb(0 0 0 / .18)}
 #ops-top{position:relative;z-index:3;margin:10px 10px 0;padding:8px 12px;min-width:0;display:flex;align-items:center;gap:8px 14px;flex-wrap:wrap}
 #ops-top .brand{display:flex;align-items:center;gap:10px;min-width:0}
@@ -109,7 +111,7 @@ html.ops.drawer-closed #ops-drawer{display:none}
  #ops-rail,#ops-drawer{grid-column:1;grid-row:1;max-height:62vh;align-self:end}
  html.ops:not(.rail-closed) #ops-drawer{display:none}
  #ops-center{grid-column:1;grid-row:1}
- #ops-map .zoomctl{left:auto;right:10px;top:auto;bottom:calc(var(--botH,52px) + 8px);flex-direction:column}
+ #ops-map .zoomctl{left:auto;right:10px;top:auto;bottom:calc(var(--botH,52px) + 8px);flex-direction:column;flex-wrap:nowrap;max-width:none}
  #ops-top{margin:8px 8px 0;padding:6px 10px}
  #ops-top .tabs{margin-left:0;width:100%;overflow:auto;flex-wrap:nowrap;scrollbar-width:none}
  #ops-top .stamp{display:none}
@@ -1424,11 +1426,11 @@ footer .foot-links a{color:inherit}
 .ln-inside .ln-art{background:radial-gradient(100% 120% at 50% 100%,#2b1a0e,#0b0906 75%)}
 .ln-hero h2{font-size:clamp(1.4rem,2.9vw,2.3rem)}
 /* the Moon reading sits just above the zoom pills, at their left edge (11 Nov 2026: at the top right it hid behind the side panel) */
-#ops-map .moon-note{position:absolute;left:calc(var(--rail-w,0px) + 14px);bottom:calc(var(--botH,66px) + 58px);z-index:4;font:inherit;font-size:.8rem;color:var(--ink);padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;opacity:.92}
+#ops-map .moon-note{position:absolute;left:calc(var(--rail-w,0px) + 14px);bottom:calc(var(--botH,66px) + var(--pillsH,36px) + 22px);z-index:4;font:inherit;font-size:.8rem;color:var(--ink);padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;opacity:.92}
 #ops-map .moon-note:hover{opacity:1;border-color:#c9d3e6}#ops-map .moon-note[hidden]{display:none}
 html.ops.rail-closed #ops-map .moon-note{left:14px}
 html.game-on #ops-map .moon-note,html.moon-on #ops-map .moon-note,html.map2d #ops-map .moon-note,html.page-on #ops-map .moon-note{display:none}
-@media (max-width:860px){#ops-map .moon-note{left:10px;bottom:calc(var(--botH,52px) + 10px);font-size:.72rem;max-width:calc(100% - 80px)}}
+@media (max-width:860px){#ops-map .moon-note,html.ops.rail-closed #ops-map .moon-note{left:56px;bottom:calc(var(--botH,52px) + 10px);font-size:.72rem;max-width:calc(100% - 70px)} /* beside the bottom pill, not on top of it (it covered the Cosmic web pill on phones) */ #ops-map:has(.ltg-key) .moon-note{display:none}}
 .beta-tag{display:inline-block;vertical-align:top;margin-left:6px;padding:1px 7px;border-radius:999px;border:1px solid #D9A441;color:#D9A441;font:700 .62rem/1.5 var(--mono,ui-monospace,monospace);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 html.slim .beta-tag{font-size:.55rem;padding:0 5px;margin-left:4px}
 /* Classroom stands out in the header as it does inside its menu (11 Nov 2026) */

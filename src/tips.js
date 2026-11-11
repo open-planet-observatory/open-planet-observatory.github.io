@@ -36,7 +36,7 @@ addEventListener('scroll',()=>{tip.hidden=true},true);
 // one-time pointer to the Solar System view
 function hint(){let seen=false;try{seen=localStorage.getItem('obs-hint-solar')==='1'}catch(e){}if(seen)return;const b=document.getElementById('zuni');if(!b||!b.offsetParent)return;
  const h=document.createElement('div');h.className='hint-bubble';h.innerHTML='<b>New:</b> fly out to the Solar System, live. <button aria-label="Dismiss">×</button>';document.body.appendChild(h);
- const place=()=>{const r=b.getBoundingClientRect();h.style.left=Math.max(8,Math.min(innerWidth-h.offsetWidth-8,r.left+r.width/2-h.offsetWidth/2))+'px';h.style.top=Math.max(8,r.top-h.offsetHeight-10)+'px'};place();
+ const place=()=>{const r=b.getBoundingClientRect();const z=b.closest('.zoomctl');const top=(z?z.getBoundingClientRect():r).top;/* above the whole pill row: when it wraps, the bubble covered the other pills */h.style.left=Math.max(8,Math.min(innerWidth-h.offsetWidth-8,r.left+r.width/2-h.offsetWidth/2))+'px';h.style.top=Math.max(8,top-h.offsetHeight-10)+'px'};place();
  const done=()=>{h.remove();try{localStorage.setItem('obs-hint-solar','1')}catch(e){}};h.querySelector('button').onclick=done;b.addEventListener('click',done,{once:true});setTimeout(done,12000);addEventListener('resize',place)}
 setTimeout(hint,6000);
 })();

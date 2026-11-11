@@ -12,7 +12,8 @@
     "build": "node build/build.mjs hosted dist/data dist",
     "build:seed": "node build/build.mjs hosted data-seed dist",
     "build:claude": "node build/build.mjs claude data-seed dist-claude/index.html",
-    "proof": "node tests/site-proof.mjs"
+    "proof": "node tests/site-proof.mjs",
+    "stress": "node tests/site-stress.mjs"
   },
   "dependencies": {
     "astronomy-engine": "^2.1.19",
