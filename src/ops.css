@@ -1419,7 +1419,6 @@ footer .foot-links a{color:inherit}
 @media (max-width:760px){.hub-grid{grid-template-columns:1fr;gap:10px}.hub-art{height:70px}.hub-tx{padding:12px 14px 14px}}
 @media (prefers-reduced-motion:reduce){.hub-dot{animation:none}}
 .gn-m .gn-ov{border-bottom:1px solid rgb(217 164 65 / .25)}
-@media (max-width:640px){.hub-grid{grid-template-columns:1fr 1fr;gap:8px}.hub-c{padding:12px}.hub-i{font-size:1.3rem}}
 .ln-hero .ln-freeline{margin-top:10px;font-size:.85rem;letter-spacing:.02em;color:#D9A441}
 .edu-free{margin-top:14px;padding:16px 18px;border-radius:16px;border:1px solid rgb(217 164 65 / .35)}.edu-free p{max-width:75ch}.edu-free .letter-form{margin:10px 0 4px}
 .ln-inside .ln-art{background:radial-gradient(100% 120% at 50% 100%,#2b1a0e,#0b0906 75%)}
@@ -1444,3 +1443,10 @@ html.slim .beta-tag{font-size:.55rem;padding:0 5px;margin-left:4px}
 /* Beta, centred under the wordmark */
 #ops-top .brand-wm .beta-tag{display:block;width:max-content;margin:4px auto 0}
 #owlSplash .sp-beta{display:inline-block;margin:6px 0 10px;padding:2px 10px;border-radius:999px;border:1px solid #D9A441;color:#D9A441;font:700 .72rem/1.5 var(--mono,ui-monospace,monospace);letter-spacing:.14em;text-transform:uppercase}
+/* menu-page banners (Atlabs illustrations in the house engraving style, 11 Nov 2026); the lead sits on the art's open dark left side */
+.hub-banner{position:relative;margin:0 0 16px;border-radius:18px;overflow:hidden;border:1px solid color-mix(in srgb,var(--hub) 40%,transparent);aspect-ratio:1280/360;min-height:170px;background:#07080c}
+.hub-banner img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right 42%}
+.hub-banner::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgb(5 6 9 / .92) 0%,rgb(5 6 9 / .7) 38%,transparent 66%);pointer-events:none}
+.hub-banner .hub-lead{position:absolute;left:clamp(16px,3vw,32px);top:50%;transform:translateY(-50%);z-index:1;margin:0;max-width:min(52ch,52%);color:#EFE4CC;text-shadow:0 1px 10px rgb(0 0 0 / .8)}
+.hub-ill{position:absolute;right:10px;bottom:8px;z-index:1;font:600 .66rem/1.4 var(--mono,ui-monospace,monospace);letter-spacing:.06em;color:rgb(239 228 204 / .75);background:rgb(0 0 0 / .45);padding:2px 8px;border-radius:999px}
+@media (max-width:760px){.hub-banner{aspect-ratio:auto;min-height:0;display:flex;flex-direction:column}.hub-banner img{position:relative;height:150px}.hub-banner::after{display:none}.hub-banner .hub-lead{position:static;transform:none;max-width:none;padding:12px 14px;text-shadow:none}.hub-ill{top:118px;bottom:auto}}
