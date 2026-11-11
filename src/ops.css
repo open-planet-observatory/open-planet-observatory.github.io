@@ -1154,7 +1154,8 @@ html.map2d .rail-light{display:none!important}
 .ltg-key .lk-cr{font-size:.62rem!important}
 
 /* a panel opened as a full page (8 Nov 2026) */
-#owlPage .pg-gen{flex:1;min-height:0;overflow:auto;padding:4px 4px 18px}
+#owlPage .pg-gen,#owlPage .pg-body>.hub{flex:1;min-height:0;overflow:auto;padding:4px 4px 18px}
+#owlPage .pg-body>.hub{width:100%;max-width:none;padding-left:max(4px,calc((100% - 1180px)/2));padding-right:max(4px,calc((100% - 1180px)/2))}
 #owlPage .pg-gen>.panel{display:flex;flex-direction:column;gap:14px;max-width:1180px;margin:0 auto}
 .iconbtn[hidden]{display:none}
 /* lightning key: compact by default, i for the explanation, – to shrink (8 Nov 2026) */
@@ -1423,3 +1424,14 @@ footer .foot-links a{color:inherit}
 .edu-free{margin-top:14px;padding:16px 18px;border-radius:16px;border:1px solid rgb(217 164 65 / .35)}.edu-free p{max-width:75ch}.edu-free .letter-form{margin:10px 0 4px}
 .ln-inside .ln-art{background:radial-gradient(100% 120% at 50% 100%,#2b1a0e,#0b0906 75%)}
 .ln-hero h2{font-size:clamp(1.4rem,2.9vw,2.3rem)}
+#ops-map .moon-note{position:absolute;top:10px;right:12px;z-index:4;font:inherit;font-size:.8rem;color:var(--ink);padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;opacity:.9}#ops-map .moon-note:hover{opacity:1;border-color:#c9d3e6}#ops-map .moon-note[hidden]{display:none}
+html.slim #ops-map .moon-note,html.game-on #ops-map .moon-note,html.moon-on #ops-map .moon-note,html.map2d #ops-map .moon-note{display:none}
+@media (max-width:640px){#ops-map .moon-note{top:auto;bottom:calc(var(--botH,60px) + 52px);right:8px;font-size:.72rem}}
+.beta-tag{display:inline-block;vertical-align:top;margin-left:6px;padding:1px 7px;border-radius:999px;border:1px solid #D9A441;color:#D9A441;font:700 .62rem/1.5 var(--mono,ui-monospace,monospace);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+html.slim .beta-tag{font-size:.55rem;padding:0 5px;margin-left:4px}
+/* Classroom stands out in the header as it does inside its menu (11 Nov 2026) */
+.gn-g[data-g="learn"]>.gn-b{border:1px solid rgb(217 164 65 / .7);border-radius:999px;box-shadow:0 0 0 1px rgb(217 164 65 / .15)}
+.gn-g[data-g="learn"]>.gn-b:hover,.gn-g[data-g="learn"].on>.gn-b{border-color:#D9A441}
+.ln-voice{max-width:150px;font:inherit;font-size:.78rem;padding:3px 6px;border-radius:8px;border:1px solid var(--glass-line);background:var(--panel,#111);color:inherit}
+.ln-agenote{margin:6px 0 0}
+.chg-back{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--botH,60px) + 70px);z-index:3500;font:inherit;font-size:.9rem;padding:8px 16px;border-radius:999px;border:1px solid #D9A441;color:var(--ink);cursor:pointer;box-shadow:0 8px 24px rgb(0 0 0 / .4)}.chg-back:hover{background:rgb(217 164 65 / .2)}

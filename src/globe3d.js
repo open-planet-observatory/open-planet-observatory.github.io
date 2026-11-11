@@ -321,7 +321,10 @@ const LABEL=(text)=>({text,font:'600 12px Public Sans, sans-serif',fillColor:col
 // ----- the Moon: marker where it is overhead, and an Earth-and-Moon view (CesiumJS draws the real Moon) -----
 function buildMoon(){if(!O.moonNow)return;const m=O.moonNow();const e=clear('moon');
  e.add({position:deg(m.lon,m.lat,0),point:{pixelSize:12,color:C.Color.fromCssColorString('#f2efe4'),outlineColor:C.Color.fromCssColorString('#2b2f36'),outlineWidth:2,disableDepthTestDistance:Number.POSITIVE_INFINITY},
-  label:LABEL('Moon overhead · '+Math.round(m.frac*100)+'% lit'),description:`<b>The Moon is straight overhead here</b>${m.name}, ${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km up<br><span style="opacity:.75">Astronomy Engine, computed in your browser</span>`})}
+  description:`<b>The Moon is straight overhead here</b>${m.name}, ${Math.round(m.frac*100)}% lit, ${fmtN(Math.round(m.dist))} km up<br><span style="opacity:.75">Astronomy Engine, computed in your browser</span>`});
+ /* 11 Nov 2026: the reading moved off the globe (it sat over the map) into a small note at the map's top right; the dot stays, and the note flies to it */
+ let n=document.getElementById('moonNote');const map=document.getElementById('ops-map');if(!n&&map){n=document.createElement('button');n.type='button';n.id='moonNote';n.className='moon-note glass';map.appendChild(n);n.onclick=()=>{const k=O.moonNow&&O.moonNow();if(k)viewer.camera.flyTo({destination:C.Cartesian3.fromDegrees(k.lon,k.lat,14e6),duration:1.6})}}
+ if(n){const ns=m.lat>=0?'N':'S',ew=m.lon>=0?'E':'W';n.innerHTML=`<span aria-hidden="true">☾\uFE0E</span> Moon ${Math.round(m.frac*100)}% lit · overhead at ${Math.abs(m.lat).toFixed(0)}°${ns}, ${Math.abs(m.lon).toFixed(0)}°${ew}`;n.title='The point on Earth where the Moon is straight overhead right now (Astronomy Engine, computed in your browser). Click to fly there.';const ch=document.getElementById('chip-moon'),sync=()=>{n.hidden=!!ch&&ch.getAttribute('aria-pressed')==='false'};sync();if(ch&&!ch._mn){ch._mn=1;new MutationObserver(sync).observe(ch,{attributes:true,attributeFilter:['aria-pressed']})}}}
 scene.moon=new C.Moon({onlySunLighting:true});
 let moonView=false;const homeMax=sscc.maximumZoomDistance;
 // The Moon in the Earth and Moon view: a sphere wearing NASA's LRO WAC mosaic (Moon Trek tiles, level 1), near side

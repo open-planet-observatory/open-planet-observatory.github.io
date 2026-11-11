@@ -60,9 +60,12 @@
       label: { text: s.title, font: '13px sans-serif', fillColor: C.Color.WHITE, outlineColor: C.Color.BLACK, outlineWidth: 3, style: C.LabelStyle.FILL_AND_OUTLINE, pixelOffset: new C.Cartesian2(10, -10), horizontalOrigin: C.HorizontalOrigin.LEFT, distanceDisplayCondition: new C.DistanceDisplayCondition(0, 1.2e7), disableDepthTestDistance: Number.POSITIVE_INFINITY },
       description: `<b>${esc(s.title)}</b>${esc(s.region)} · ${esc(yrs(s))}<br><span style="opacity:.75">Untold history · click to read</span>` });
     ds.show = true; }
-  async function load() { if (loaded) { pins(); return; } loaded = true;
-    try { const r = await fetch('assets/history/untold.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); } catch (e) { D = null; }
-    render(); pins(); }
+  /* one shared load: opening the full page while the panel's own load is still in flight waited for nothing and showed
+     "did not load" (11 Nov 2026); everyone now waits on the same request, and a failed one can be retried */
+  let loading = null;
+  async function load() { if (loaded && D) { pins(); return; } if (loading) return loading; loaded = true;
+    loading = (async () => { try { const r = await fetch('assets/history/untold.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); } catch (e) { D = null; loaded = false; }
+      render(); pins(); })(); try { await loading; } finally { loading = null; } }
   const panel = host.closest('.panel'); const vis = () => panel && panel.dataset.on === 'true';
   if (panel) new MutationObserver(() => { if (vis()) load(); else if (ds) ds.show = false; }).observe(panel, { attributes: true, attributeFilter: ['data-on'] });
   if (vis()) load();
@@ -94,6 +97,6 @@
     host.querySelectorAll('.pg-row').forEach(b => b.onclick = () => { pg.sel = b.dataset.id; renderPage(host); const r = host.querySelector('.pg-read'); if (r) { r.scrollTop = 0; if (innerWidth <= 860) r.scrollIntoView({ block: 'start' }); } host.querySelector(`.pg-row[data-id="${pg.sel}"]`)?.focus({ preventScroll: true }); });
     const tl = host.querySelector('.pg-tolist'); if (tl) tl.onclick = () => host.querySelector('.pg-list').scrollIntoView({ block: 'start' });
     host.querySelectorAll('[data-ut-go]').forEach(b => b.onclick = () => { if (window.OwlPage) window.OwlPage.close(true); go(b.dataset.utGo); }); }
-  if (window.OwlPage) window.OwlPage.register('untold', { title: 'Untold history', render: async h => { if (!loaded) { h.innerHTML = '<p class="small muted">Loading…</p>'; await load(); } renderPage(h); } });
+  if (window.OwlPage) window.OwlPage.register('untold', { title: 'Untold history', render: async h => { if (!D) { h.innerHTML = '<p class="small muted">Loading…</p>'; await load(); } renderPage(h); } });
   window.OwlUntold = { load, go, page: () => window.OwlPage && window.OwlPage.open('untold') };
 })();

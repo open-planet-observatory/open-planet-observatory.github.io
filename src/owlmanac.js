@@ -124,7 +124,13 @@ window.OwlEmblemCard={show(){if(document.getElementById('owlEmCard'))return;cons
 (function changes(){const h=document.getElementById('changesHost');if(!h)return;const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
  fetch('assets/site/changes.json?h='+Math.floor(Date.now()/36e5)).then(r=>r.json()).then(J=>{const it=J.items||[];
   h.innerHTML='<div class="chg-list">'+it.map((x,i)=>`<article class="chg"><time datetime="${esc(x.d)}">${esc(new Date(x.d+'T12:00Z').toLocaleDateString(undefined,{day:'numeric',month:'short',year:'numeric'}))}</time><div><h4>${esc(x.t)}</h4><p>${esc(x.p)}</p>${x.try?`<button type="button" class="chg-try" data-i="${i}">Try it ›</button>`:''}</div></article>`).join('')+'</div>';
-  h.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const t=it[+b.dataset.i].try,O=window.__obs||{};if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();
+  h.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>{const t=it[+b.dataset.i].try,O=window.__obs||{};if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();setTimeout(chgBack,400);
    if(t[0]==='panel'){if(O.openPanel)O.openPanel(t[1])}else if(t[0]==='universe'){if(window.__opsCloseDrawer)window.__opsCloseDrawer();if(O.openUniverse)O.openUniverse(t[1])}else if(t[0]==='hub'){setTimeout(()=>{if(window.__owlHub)window.__owlHub(t[1])},0)}else if(t[0]==='event'){if(window.__opsCloseDrawer)window.__opsCloseDrawer();dispatchEvent(new Event(t[1]))}});
   const n=document.getElementById('chgNew');if(n&&it[0])n.textContent=it[0].t;}).catch(()=>{h.innerHTML='<p class="small muted">The list of changes did not load. Try again later.</p>'})})();
 })();
+
+/* "Try it" from What's new leaves a way back (11 Nov 2026: "you are only able to get back to Earth"): a small pill under the
+   header returns to the list; it goes away when used, when another page opens, or after two minutes */
+function chgBack(){let b=document.getElementById('chgBack');if(b)b.remove();b=document.createElement('button');b.type='button';b.id='chgBack';b.className='chg-back glass';b.textContent='← Back to What\u2019s new';document.body.appendChild(b);
+ const go=()=>{b.remove();clearTimeout(tm);const O=window.__obs||{};if(window.OwlPage&&window.OwlPage.isOpen())window.OwlPage.close();const u=document.getElementById('uniBack');if(document.querySelector('#uni.on')&&u)u.click();if(document.documentElement.classList.contains('moon-on')&&O.closeMoon)O.closeMoon();setTimeout(()=>{const it=document.querySelector('.gn-m button[data-k="changes"]');if(it&&it.onclick)it.onclick();else{if(O.openPanel)O.openPanel('changes');if(window.OwlPage)window.OwlPage.open('changes',{solo:true})}},300)};
+ b.onclick=go;const tm=setTimeout(()=>b.remove(),120000);const t0=Date.now();const iv=setInterval(()=>{if(!b.isConnected){clearInterval(iv);return}const P=window.OwlPage;if(P&&P.isOpen()&&P.current()==='changes'){b.remove();clearInterval(iv)}},800)}
