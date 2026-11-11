@@ -47,12 +47,26 @@ jobs:
           # The live site, so a failed source keeps its last good data.
           PREV_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: node collector/collect.mjs dist/data
+      - name: Data checks
+        # removes any series whose latest value is missing (shown as "no data"), fails on a file that doesn't parse
+        run: node collector/sanitize.mjs dist/data
       - name: Build page
         env:
           CESIUM_ION_TOKEN: ${{ secrets.CESIUM_ION_TOKEN }}
           # Address of the games server (worker/), a repository variable; empty = boards switched off
           OWL_API: ${{ vars.OWL_API }}
         run: node build/build.mjs hosted dist/data dist
+      - name: Cache the test browser
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: pw-chromium-1.63.0
+      - name: Start-up gate
+        # opens the built site in a real browser; if the app layout doesn't start, nothing is published and the last good site stays up
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+          node tests/smoke.mjs dist
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

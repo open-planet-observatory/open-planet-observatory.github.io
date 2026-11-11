@@ -7,6 +7,10 @@ name: Site proof
 on:
   schedule:
     - cron: '23 9 * * *'   # 09:23 UTC = 4:23 AM ET, after the overnight data runs
+  # also after every publish that came from a code change (not the 10-minute data runs, which the start-up gate covers)
+  workflow_run:
+    workflows: ['Collect and publish']
+    types: [completed]
   workflow_dispatch:
     inputs:
       url:
@@ -28,6 +32,7 @@ concurrency:
 
 jobs:
   proof:
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 60
     strategy:
