@@ -71,8 +71,39 @@ jobs:
         if: steps.sweep.outcome == 'failure'
         run: exit 1
 
+  stress:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Playwright (chromium)
+        run: |
+          npm install --no-save --no-audit --no-fund playwright@1.63.0
+          npx playwright install --with-deps chromium
+      - name: Run the stress sweep (resize, drag, zoom, every button, every menu item)
+        id: stress
+        continue-on-error: true
+        env:
+          PROOF_SLOW: '1'
+        run: node tests/site-stress.mjs --url "${{ inputs.url || 'https://theowlmanac.com/' }}" --browsers chromium --sizes desktop,phone --out proof-results/stress-chromium
+      - name: Add the report to the run summary
+        if: always()
+        run: cat proof-results/stress-chromium/report.md >> "$GITHUB_STEP_SUMMARY" || echo "no stress report written" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: proof-stress-chromium
+          path: proof-results
+          retention-days: 14
+      - name: Fail the job when the sweep failed
+        if: steps.stress.outcome == 'failure'
+        run: exit 1
+
   report:
-    needs: proof
+    needs: [proof, stress]
     # skipped proofs (the 10-minute data runs) must not file a report: it would say "no reports" every 10 minutes
     if: always() && needs.proof.result != 'skipped'
     runs-on: ubuntu-latest
@@ -90,9 +121,9 @@ jobs:
             const fs = require('fs'), path = require('path');
             const runs = []; const dir = 'all';
             for (const d of fs.existsSync(dir) ? fs.readdirSync(dir) : []) { const f = path.join(dir, d, 'report.json'); if (fs.existsSync(f)) runs.push({ name: d, ...JSON.parse(fs.readFileSync(f, 'utf8')) }); }
-            const all = runs.flatMap(r => r.results.map(x => ({ ...x, run: r.name })));
+            const all = runs.flatMap(r => r.results.map(x => ({ ...x, scenario: x.scenario || x.group, exit: x.exit || x.name, run: r.name })));
             const fails = all.filter(r => !r.ok), skipped = all.filter(r => r.skipped);
-            const expected = 6, missing = expected - runs.length;
+            const expected = 7, missing = expected - runs.length;
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             const date = new Date().toISOString().slice(0, 10);
             const head = `**${date}** — ${all.length - fails.length} passed · ${fails.length} failed · ${skipped.length} skipped across ${runs.length} browser/size runs${missing > 0 ? ` (${missing} run(s) produced no report — see the run)` : ''}. [Run, screenshots and reports](${runUrl})`;
