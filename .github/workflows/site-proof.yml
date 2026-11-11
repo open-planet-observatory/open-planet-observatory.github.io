@@ -73,7 +73,8 @@ jobs:
 
   report:
     needs: proof
-    if: always()
+    # skipped proofs (the 10-minute data runs) must not file a report: it would say "no reports" every 10 minutes
+    if: always() && needs.proof.result != 'skipped'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
