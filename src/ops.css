@@ -1424,9 +1424,12 @@ footer .foot-links a{color:inherit}
 .edu-free{margin-top:14px;padding:16px 18px;border-radius:16px;border:1px solid rgb(217 164 65 / .35)}.edu-free p{max-width:75ch}.edu-free .letter-form{margin:10px 0 4px}
 .ln-inside .ln-art{background:radial-gradient(100% 120% at 50% 100%,#2b1a0e,#0b0906 75%)}
 .ln-hero h2{font-size:clamp(1.4rem,2.9vw,2.3rem)}
-#ops-map .moon-note{position:absolute;top:10px;right:12px;z-index:4;font:inherit;font-size:.8rem;color:var(--ink);padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;opacity:.9}#ops-map .moon-note:hover{opacity:1;border-color:#c9d3e6}#ops-map .moon-note[hidden]{display:none}
-html.slim #ops-map .moon-note,html.game-on #ops-map .moon-note,html.moon-on #ops-map .moon-note,html.map2d #ops-map .moon-note{display:none}
-@media (max-width:640px){#ops-map .moon-note{top:auto;bottom:calc(var(--botH,60px) + 52px);right:8px;font-size:.72rem}}
+/* the Moon reading sits just above the zoom pills, at their left edge (11 Nov 2026: at the top right it hid behind the side panel) */
+#ops-map .moon-note{position:absolute;left:calc(var(--rail-w,0px) + 14px);bottom:calc(var(--botH,66px) + 58px);z-index:4;font:inherit;font-size:.8rem;color:var(--ink);padding:5px 11px;border-radius:999px;border:1px solid var(--glass-line);cursor:pointer;opacity:.92}
+#ops-map .moon-note:hover{opacity:1;border-color:#c9d3e6}#ops-map .moon-note[hidden]{display:none}
+html.ops.rail-closed #ops-map .moon-note{left:14px}
+html.game-on #ops-map .moon-note,html.moon-on #ops-map .moon-note,html.map2d #ops-map .moon-note,html.page-on #ops-map .moon-note{display:none}
+@media (max-width:860px){#ops-map .moon-note{left:10px;bottom:calc(var(--botH,52px) + 10px);font-size:.72rem;max-width:calc(100% - 80px)}}
 .beta-tag{display:inline-block;vertical-align:top;margin-left:6px;padding:1px 7px;border-radius:999px;border:1px solid #D9A441;color:#D9A441;font:700 .62rem/1.5 var(--mono,ui-monospace,monospace);letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
 html.slim .beta-tag{font-size:.55rem;padding:0 5px;margin-left:4px}
 /* Classroom stands out in the header as it does inside its menu (11 Nov 2026) */
@@ -1435,3 +1438,9 @@ html.slim .beta-tag{font-size:.55rem;padding:0 5px;margin-left:4px}
 .ln-voice{max-width:150px;font:inherit;font-size:.78rem;padding:3px 6px;border-radius:8px;border:1px solid var(--glass-line);background:var(--panel,#111);color:inherit}
 .ln-agenote{margin:6px 0 0}
 .chg-back{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(var(--botH,60px) + 70px);z-index:3500;font:inherit;font-size:.9rem;padding:8px 16px;border-radius:999px;border:1px solid #D9A441;color:var(--ink);cursor:pointer;box-shadow:0 8px 24px rgb(0 0 0 / .4)}.chg-back:hover{background:rgb(217 164 65 / .2)}
+/* the emblem in the Classroom banner sits at the top right whenever the banner is narrow (the side panel, phones) */
+.ln-hero{container-type:inline-size}
+@container (max-width:720px){.ln-hero .ln-em{position:absolute;right:10px;top:10px;width:clamp(72px,22cqw,110px)}.ln-hero .eyebrow,.ln-hero h2{padding-right:clamp(78px,24cqw,118px)}}
+/* Beta, centred under the wordmark */
+#ops-top .brand-wm .beta-tag{display:block;width:max-content;margin:4px auto 0}
+#owlSplash .sp-beta{display:inline-block;margin:6px 0 10px;padding:2px 10px;border-radius:999px;border:1px solid #D9A441;color:#D9A441;font:700 .72rem/1.5 var(--mono,ui-monospace,monospace);letter-spacing:.14em;text-transform:uppercase}
