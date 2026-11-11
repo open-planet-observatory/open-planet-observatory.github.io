@@ -146,3 +146,11 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
 (function(){const b=document.querySelector('#ops-top .brand');const w=b&&b.querySelector('.brand-wm');if(!w||!matchMedia('(hover: hover)').matches)return;const e=document.createElement('span');e.className='brand-em';e.setAttribute('aria-hidden','true');w.appendChild(e);let halt=null,t=0;
  b.addEventListener('mouseenter',()=>{clearTimeout(t);b.classList.add('em-on');if(!halt)halt=window.OwlEmblemMount(e,{static:true})});
  b.addEventListener('mouseleave',()=>{b.classList.remove('em-on');t=setTimeout(()=>{if(halt){halt();halt=null;e.innerHTML=''}},400)})})();
+
+/* Section banners (11 Nov 2026, "blanket the site with imagery that reinforces the owl brand"): an Atlabs illustration in the
+   house engraving style at the top of each section, in the side panel and on its full page; tagged as an illustration, loaded
+   only when the section is opened. */
+(function(){const ART={situations:'situations',disruptions:'disruptions',relief:'relief',watchlist:'watchlist',climate:'climate',signals:'signals',nature:'nature',inside:'inside',cams:'cams',worlds:'worlds',unexplained:'unexplained',history:'history',records:'records',untold:'untold',sky:'sky',contact:'contact',library:'library',layers:'layers',free:'free',changes:'changes',about:'../hub/owl-hub-about'};
+ function add(){document.querySelectorAll('#drawerBody .panel[data-k], #owlPage .panel[data-k]').forEach(p=>{const k=p.dataset.k,a=ART[k];if(!a||p.querySelector(':scope > .sec-art'))return;const f=document.createElement('figure');f.className='sec-art';f.setAttribute('aria-hidden','true');
+  f.innerHTML=`<img src="brand/sec/${a.startsWith('..')?a:'owl-sec-'+a}.webp" alt="" loading="lazy" decoding="async" width="1280" height="720"><figcaption class="hub-ill">Illustration · The Owlmanac</figcaption>`;p.insertBefore(f,p.firstChild)});}
+ let t=0;const go=()=>{clearTimeout(t);t=setTimeout(add,120)};add();const b=document.getElementById('drawerBody');if(b)new MutationObserver(go).observe(b,{childList:true});document.addEventListener('click',go,true)})();

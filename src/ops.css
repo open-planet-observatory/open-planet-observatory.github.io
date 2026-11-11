@@ -1475,3 +1475,9 @@ html:not(.drawer-closed) .ltg-key{right:calc(var(--drawer-w,460px) + 30px)}
 html.slim .brand-em{display:none}
 #ops-top .brand .eyebrow{transition:transform .25s}#ops-top .brand.em-on .eyebrow{transform:translateX(46px)}
 @media (max-width:760px){.hub-em{top:8px;width:52px}}
+/* section banners */
+.sec-art{position:relative;margin:0 0 12px;border-radius:14px;overflow:hidden;height:clamp(108px,16vw,150px);border:1px solid rgb(217 164 65 / .28);background:#07080c}
+.sec-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:right 42%}
+.sec-art::after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,rgb(5 6 9 / .55),transparent 55%);pointer-events:none}
+#owlPage .sec-art{height:clamp(140px,20vw,230px);max-width:1180px;margin:0 auto 16px}
+:root[data-theme="light"] .sec-art{border-color:rgb(0 0 0 / .15)}
