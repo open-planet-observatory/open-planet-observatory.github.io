@@ -70,6 +70,8 @@ for (const [sname, vp] of [['desktop', { width: 1280, height: 800 }], ['phone', 
     const dataPresent = !file || has(file);
     await page.evaluate(k => { window.__pgBack = true; try { window.__obs.openPanel(k); } finally { window.__pgBack = false; } }, k); await page.waitForTimeout(900);
     if (await page.evaluate(() => { const p = document.querySelector('#owlPage'); return p && !p.hidden; })) { await page.keyboard.press('Escape'); await page.waitForTimeout(500); }
+    /* a panel may render its content a moment after it opens (Untold builds 45 cards from a 400 KB file): wait up to 15 s for the count */
+    await page.waitForFunction(([k, sel, min]) => { const p = document.querySelector(`#drawerBody .panel[data-k="${k}"]`); return p && p.querySelectorAll(sel).length >= min; }, [k, sel, dataPresent ? min : 0], { timeout: 15000, polling: 500 }).catch(() => { });
     const r = await page.evaluate(([k, sel]) => { const p = document.querySelector(`#drawerBody .panel[data-k="${k}"]`); if (!p) return null; const txt = p.textContent.replace(/\s+/g, ' '); return { n: p.querySelectorAll(sel).length, len: txt.length, loadFail: (txt.match(/[^.]{0,60}(did not load|failed to load|could not load|could not be loaded)[^.]{0,40}/i) || [''])[0].trim() }; }, [k, sel]);
     if (!r) { rec(`${sname} ${k}`, false, 'panel element not found'); continue; }
     if (!dataPresent) { rec(`${sname} ${k}`, true, `skipped: ${file} is not in this build (${r.n} ${label}${r.loadFail ? '; says "' + r.loadFail + '"' : ''})`); continue; }
