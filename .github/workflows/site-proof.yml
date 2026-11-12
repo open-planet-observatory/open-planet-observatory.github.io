@@ -72,6 +72,8 @@ jobs:
         run: exit 1
 
   stress:
+    # same rule as the proof: not after the 10-minute data runs (12 Nov: it ran after every one and emailed a failure each time)
+    if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
