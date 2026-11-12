@@ -22,7 +22,9 @@ const OUT = arg('out', 'proof-results');
 const BROWSERS = arg('browsers', 'chromium,firefox,webkit').split(',');
 const SIZES = arg('sizes', 'desktop,phone').split(',');
 const ONLY = arg('only', '') ? arg('only', '').split(',') : null;
-const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1; // multiply waits (software GL is slow)
+const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1;
+const OFFLINE = process.argv.includes('--offline'); // frozen lane: every host but the served build is stubbed (images → 1×1 PNG, the rest → 204), so a failure means our code changed
+const PNG1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64'); // multiply waits (software GL is slow)
 const w = ms => new Promise(r => setTimeout(r, ms * SLOW));
 fs.mkdirSync(path.join(OUT, 'shots'), { recursive: true });
 
@@ -132,6 +134,7 @@ for (const bname of BROWSERS) {
     if (bname !== 'chromium' && opts.isMobile) opts.isMobile = bname === 'webkit'; // Firefox has no mobile emulation
     for (const sc of SCENARIOS) { if (ONLY && !ONLY.includes(sc.key)) continue;
       const ctx = await browser.newContext({ ...opts, locale: 'en-US', timezoneId: 'America/New_York', permissions: bname === 'chromium' ? ['geolocation'] : [], geolocation: { latitude: 40.7, longitude: -74 } });
+      if (OFFLINE) await ctx.route(u => !u.href.startsWith(base), r => r.request().resourceType() === 'image' ? r.fulfill({ status: 200, contentType: 'image/png', body: PNG1 }) : r.fulfill({ status: 204, body: '' }));
       await ctx.addInitScript(() => { try { localStorage.setItem('obs-notice', '1'); localStorage.setItem('site-tour-offer', '1'); localStorage.setItem('owl-music', 'off'); sessionStorage.setItem('owl-splash', '1'); } catch (e) { } });
       const page = await ctx.newPage(); page.__base = base + '?nosplash'; const allErrors = [];
       const glWarn = []; // WebGL driver chatter (software GL on the runners): counted, shown, never a failure

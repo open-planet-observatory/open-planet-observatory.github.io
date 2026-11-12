@@ -20,6 +20,8 @@ const BROWSERS = arg('browsers', 'chromium').split(',');
 const SIZES = arg('sizes', 'desktop,phone').split(',');
 const ONLY = arg('only', '') ? arg('only', '').split(',') : null;
 const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1;
+const OFFLINE = process.argv.includes('--offline'); // frozen lane: every host but the served build is stubbed (images → 1×1 PNG, the rest → 204), so a failure means our code changed
+const PNG1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
 const w = ms => new Promise(r => setTimeout(r, ms * SLOW));
 fs.mkdirSync(path.join(OUT, 'shots'), { recursive: true });
 
@@ -64,6 +66,7 @@ async function run() {
     const browser = await engine.launch({ args: bname === 'chromium' ? ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] : [] });
     for (const sname of SIZES) {
       const ctx = await browser.newContext({ ...SIZE[sname], locale: 'en-US', reducedMotion: 'no-preference' });
+      if (OFFLINE) await ctx.route(u => !u.href.startsWith(base), r => r.request().resourceType() === 'image' ? r.fulfill({ status: 200, contentType: 'image/png', body: PNG1 }) : r.fulfill({ status: 204, body: '' }));
       await ctx.addInitScript(() => { try { localStorage.setItem('obs-notice', '1'); localStorage.setItem('site-tour-offer', '1'); localStorage.setItem('owl-music', 'off'); sessionStorage.setItem('owl-splash', '1'); } catch (e) { } });
       const page = await ctx.newPage(); const errs = [];
       page.on('pageerror', e => errs.push(String(e.message || e).slice(0, 240)));
