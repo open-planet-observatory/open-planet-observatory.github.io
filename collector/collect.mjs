@@ -27,6 +27,7 @@ import { collectForecastDesk } from './forecastdesk.mjs';
 import { collectMoonFeatures } from './moon-features.mjs';
 import { collectWeeklyHunt } from './weeklyhunt.mjs';
 import { collectFindOwl } from './findowl.mjs';
+import { collectAirliners } from './airliners.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -273,6 +274,15 @@ let fdesk = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/forecastdesk.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   try { fdesk = await collectForecastDesk({ prev: p, now }); } catch (e) { fdesk = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (fdesk.out) await fs.writeFile(path.join(OUT, 'forecastdesk.json'), JSON.stringify(fdesk.out)); log('forecastdesk', fdesk.status); }
+// Scheduled airliners (collector/airliners.mjs): data/airliners.json, one snapshot an hour from adsb.lol (ODbL).
+// SWITCHED OFF unless the workflow sets AIRLINERS=1: until then nothing is fetched and no file is written.
+let airl = { status: 'off' };
+if (process.env.AIRLINERS === '1') { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/airliners.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  meta.airliners = meta.airliners || {};
+  // within the hour the published snapshot is kept as it is (its own time is shown); after that a new one is taken or the file says it failed
+  if (p && !p.failed && !due(meta.airliners, 'all', 60)) airl = { out: p, status: 'kept' };
+  else { try { airl = await collectAirliners({ now }); meta.airliners.all = now.toISOString(); } catch (e) { airl = { out: { v: 1, failed: true, asOf: stamp, error: e.message.slice(0, 160), planes: [] }, status: 'error: ' + e.message.slice(0, 160) }; } }
+  if (airl.out) await fs.writeFile(path.join(OUT, 'airliners.json'), JSON.stringify(airl.out)); log('airliners', airl.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
   const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
@@ -317,7 +327,7 @@ let whunt = { status: 'not run' };
   else try { whunt = await collectWeeklyHunt(OUT, p, now.getTime()); } catch (e) { whunt = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (whunt.out) await fs.writeFile(path.join(OUT, 'hunt.json'), JSON.stringify(whunt.out)); log('weekly hunt', whunt.status); }
 meta.updated = now.toISOString();
-meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;

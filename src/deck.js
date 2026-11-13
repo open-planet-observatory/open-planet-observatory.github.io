@@ -22,12 +22,17 @@ const PLACES=[['Tokyo',35.7,139.7],['Jakarta',-6.2,106.8],['Manila',14.6,121.0],
 const quakes=()=>{const s=(window.SNAP||{}).quakes||'';return s?s.split(';').map(r=>{const[a,place]=r.split('|');const[lon,lat,mag,dep,hrs]=a.split(',').map(Number);return{lon,lat,mag,dep,hrs,place:place||''}}).filter(q=>isFinite(q.lat)&&isFinite(q.lon)):[]};
 const cells=s=>(s||'').split(';').filter(Boolean).map(r=>r.split(',').map(Number));
 const SRC={usgs:'USGS Earthquake Hazards · public domain',firms:'NASA FIRMS · VIIRS NOAA-20',eonet:'NASA EONET',gdacs:'GDACS (UN / European Commission)',swpc:'NOAA SWPC · public domain',
- opensky:'The OpenSky Network · 10° cells, no single aircraft',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)'};
+ opensky:'The OpenSky Network · 10° cells, no single aircraft',adsblol:'adsb.lol · Open Database License (ODbL 1.0)',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)'};
+// Scheduled airliners (data/airliners.json, collector/airliners.mjs): hourly, positions rounded to 0.1°, operator and type only.
+const AIR={data:null,err:'',t:0,busy:false};
+function loadAir(){if(AIR.busy||Date.now()-AIR.t<3e5)return;AIR.busy=true;fetch('data/airliners.json?t='+Math.floor(Date.now()/3e5),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(new Error(r.status===404?'not collected yet':'HTTP '+r.status)))
+ .then(j=>{AIR.data=j;AIR.err=''},e=>{AIR.data=null;AIR.err=e.message}).finally(()=>{AIR.busy=false;AIR.t=Date.now();if(opened)render()})}
 // ---------- the panels (widgets) ----------
 const W={
  map:{title:'World map',w:8,h:8,src:()=>SRC.usgs+' · '+SRC.firms+' · '+SRC.eonet,asof:()=>(window.SNAP||{}).asOf,draw:drawMap},
  qscope:{title:'Quake scope',w:4,h:8,src:()=>SRC.usgs,asof:()=>(window.SNAP||{}).asOf,draw:(el,st)=>scope(el,st,'q')},
  ascope:{title:'Air traffic scope',w:4,h:8,src:()=>SRC.opensky,asof:()=>{const t=((window.SNAP||{}).air||{}).time;return t?new Date(t*1e3).toISOString().slice(0,16)+'Z':''},draw:(el,st)=>scope(el,st,'a')},
+ lscope:{title:'Airliner scope',w:4,h:8,src:()=>SRC.adsblol,asof:()=>AIR.data&&!AIR.data.failed?AIR.data.asOf:'',draw:(el,st)=>scope(el,st,'l')},
  quakes:{title:'Earthquakes, past 7 days',w:4,h:6,src:()=>SRC.usgs,asof:()=>(window.SNAP||{}).asOf,draw:drawQuakes},
  disasters:{title:'Disaster alerts',w:4,h:6,src:()=>SRC.gdacs,asof:()=>(window.SIT||{}).asOf,draw:drawGdacs},
  space:{title:'Space weather',w:4,h:4,src:()=>SRC.swpc,asof:()=>(window.SNAP||{}).asOf,draw:drawSpace},
@@ -69,15 +74,21 @@ function drawMap(el){const d3=window.d3,O=window.__obs;if(!d3||!O||!O.countries)
  (S.eonet||[]).forEach(e=>{const p=pr([e[2],e[3]]);if(!p)return;g.strokeStyle=css('--dk-accent');g.beginPath();g.moveTo(p[0]-4,p[1]);g.lineTo(p[0]+4,p[1]);g.moveTo(p[0],p[1]-4);g.lineTo(p[0],p[1]+4);g.stroke()});
  quakes().forEach(q=>{const p=pr([q.lon,q.lat]);if(!p)return;g.fillStyle=css('--dk-quake');g.globalAlpha=Math.max(.25,1-q.hrs/170);g.beginPath();g.arc(p[0],p[1],Math.max(1.2,(q.mag-2)*1.6),0,7);g.fill()});g.globalAlpha=1;
  g.fillStyle=css('--dk-dim');g.font='11px "Owl Plex Mono",monospace';g.fillText('● quakes (fade with age)   ■ fire detections   + natural events',10,h-10)}
-function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind==='q'?2000:3000;
+function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind==='q'?2000:kind==='l'?600:3000;if(kind==='l')loadAir();
  el.innerHTML=`<div class="dk-scope-top"><select aria-label="Scope centre">${PLACES.map((x,i)=>`<option value="${i}"${i===st.place?' selected':''}>${esc(x[0])}</option>`).join('')}</select><span>${max.toLocaleString()} km range</span></div><div class="dk-scope-row"><div class="dk-scope"></div><div class="dk-list"></div></div>`;
  // a wide panel puts the list beside the scope, so the scope can use the full height
  if(el.clientWidth>=400)el.querySelector('.dk-scope-row').classList.add('wide');
  el.querySelector('select').onchange=e=>{st.place=+e.target.value;save(st);render()};
- const pts=kind==='q'?quakes().map(q=>({...q,d:dist(pl[1],pl[2],q.lat,q.lon)})).filter(q=>q.d<=max):cells(((window.SNAP||{}).air||{}).cells).map(([lo,la,n])=>({lon:lo,lat:la,n,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max);
+ const planes=kind==='l'&&AIR.data&&!AIR.data.failed?AIR.data.planes||[]:[];
+ const pts=kind==='l'?planes.map(([la,lo,alt,trk,gs,op,ty])=>({lat:la,lon:lo,alt,trk,gs,op,ty,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max):kind==='q'?quakes().map(q=>({...q,d:dist(pl[1],pl[2],q.lat,q.lon)})).filter(q=>q.d<=max):cells(((window.SNAP||{}).air||{}).cells).map(([lo,la,n])=>({lon:lo,lat:la,n,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max);
  pts.forEach(q=>q.b=bear(pl[1],pl[2],q.lat,q.lon));
  const list=el.querySelector('.dk-list');
  if(kind==='q'){const near=pts.slice().sort((a,b)=>b.mag-a.mag).slice(0,3);list.innerHTML=near.length?near.map(q=>`<div><span>M${q.mag.toFixed(1)}</span><span>${Math.round(q.d).toLocaleString()} km ${dir(q.b)}</span><span>${ago(q.hrs)}</span></div>`).join(''):'<p class="dk-dim">No M2.5+ quakes within range this week.</p>'}
+ else if(kind==='l'){const D=AIR.data,regs=D&&D.regions?D.regions.filter(r=>r.ok).map(r=>r.name):[];
+  if(!D)list.innerHTML=`<p class="dk-dim">${AIR.t?'No airliner snapshot: '+esc(AIR.err)+'.':'Loading the airliner snapshot…'}</p>`;
+  else if(D.failed)list.innerHTML=`<p class="dk-dim">The ${esc(D.asOf)} airliner snapshot failed: adsb.lol did not answer. Nothing older is shown.</p>`;
+  else{const ops={};pts.forEach(q=>ops[q.op]=(ops[q.op]||0)+1);const top=Object.entries(ops).sort((a,b)=>b[1]-a[1]).slice(0,4);
+   list.innerHTML=`<div><span>${pts.length.toLocaleString()} airliners</span><span>within ${max} km</span><span>snapshot ${esc(D.asOf)}</span></div>${top.length?`<div class="dk-dim">${top.map(([o,n])=>esc(o)+' '+n).join(' · ')}</div>`:''}<p class="dk-dim">${pts.length?'':'None in range: snapshots are taken near '+esc(regs.join(', '))+' only. '}Airline flights only, one snapshot an hour, positions rounded to about 10 km; operator code and type, no flight numbers or registrations. Private, business, government and military aircraft are left out. Data: <a href="https://www.adsb.lol/" target="_blank" rel="noopener">adsb.lol</a> volunteers, ODbL 1.0.</p>`}}
  else{const tot=pts.reduce((s,q)=>s+q.n,0);list.innerHTML=`<div><span>${tot.toLocaleString()} aircraft</span><span>in ${pts.length} cells (10°)</span><span>in range</span></div><p class="dk-dim">Counts per 10° cell from OpenSky; no single aircraft is shown or kept.</p>`}
  const box=el.querySelector('.dk-scope'),{c,g,W:w,H:h}=canvasIn(box),cx=w/2,cy=h/2,rad=Math.max(30,Math.min(w/2-14,h/2-14,(w/2-58)/0.7071))/* room for the range labels on the diagonal */;
  const sc=css('--dk-scope'),t0=performance.now();
@@ -86,7 +97,7 @@ function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind===
   g.globalAlpha=.8;g.fillStyle=sc;g.font='10px "Owl Plex Mono",monospace';g.fillText('N',cx-3,cy-rad-3);[2,4].forEach(k=>{const r=rad*k/4*.7071;g.fillText(Math.round(max*k/4).toLocaleString()+' km',cx+r+3,cy-r-3)});
   const sw=((t-t0)/4000*2*Math.PI)%(2*Math.PI);if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const gr=g.createConicGradient?g.createConicGradient(sw-Math.PI/2-.6,cx,cy):null;if(gr){gr.addColorStop(0,'transparent');gr.addColorStop(.095,sc);gr.addColorStop(.1,'transparent');g.globalAlpha=.18;g.fillStyle=gr;g.beginPath();g.arc(cx,cy,rad,0,7);g.fill()}}
   pts.forEach(q=>{const r=rad*q.d/max,a=(q.b-90)*R,x=cx+r*Math.cos(a),y=cy+r*Math.sin(a);g.fillStyle=sc;
-   if(kind==='q'){g.globalAlpha=Math.max(.3,1-q.hrs/170);g.beginPath();g.arc(x,y,Math.max(1.5,(q.mag-2)*2),0,7);g.fill()}else{g.globalAlpha=.25+Math.min(.75,Math.log10(q.n+1)/3);g.fillRect(x-3,y-3,6,6)}});
+   if(kind==='q'){g.globalAlpha=Math.max(.3,1-q.hrs/170);g.beginPath();g.arc(x,y,Math.max(1.5,(q.mag-2)*2),0,7);g.fill()}else if(kind==='l'){g.globalAlpha=.85;const h=((q.trk??0)-90)*R;g.beginPath();g.moveTo(x+5*Math.cos(h),y+5*Math.sin(h));g.lineTo(x+2.5*Math.cos(h+2.4),y+2.5*Math.sin(h+2.4));g.lineTo(x+2.5*Math.cos(h-2.4),y+2.5*Math.sin(h-2.4));g.closePath();g.fill()}else{g.globalAlpha=.25+Math.min(.75,Math.log10(q.n+1)/3);g.fillRect(x-3,y-3,6,6)}});
   g.globalAlpha=1;g.fillStyle=css('--dk-accent');g.beginPath();g.arc(cx,cy,3,0,7);g.fill();g.fillText(pl[0],cx+6,cy+12);c._raf=requestAnimationFrame(frameDraw)}
  c._raf=requestAnimationFrame(frameDraw)}
 function drawQuakes(el){const q=quakes().filter(x=>x.mag>=4.5).sort((a,b)=>a.hrs-b.hrs);el.innerHTML=q.length?`<div class="dk-tab">${q.slice(0,60).map(x=>`<div><span class="dk-k">M${x.mag.toFixed(1)}</span><span>${esc(x.place||(x.lat.toFixed(1)+', '+x.lon.toFixed(1)))}</span><span class="dk-dim">${x.dep} km deep · ${ago(x.hrs)}</span></div>`).join('')}</div><p class="dk-dim">${q.length} quakes of M4.5 or more; places are USGS’s own words (named for M5+).</p>`:'<p class="dk-dim">No data from USGS yet.</p>'}
