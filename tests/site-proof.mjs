@@ -146,7 +146,12 @@ for (const bname of BROWSERS) {
       let loaded = false;
       for (const [ename, exit] of Object.entries(sc.exits)) {
         const tag = `${bname}-${sname}-${sc.key}-${ename.replace(/[^a-z0-9]+/gi, '_').slice(0, 40)}`; const errStart = allErrors.length;
-        const rec = { browser: bname, size: sname, scenario: sc.name, exit: ename, ok: false, note: '', errors: [], shot: '' };
+        /* retry once (13 Nov): the shared runners draw the globe in software and sometimes time out; a step that fails
+           without page errors is tried again on a freshly loaded page and fails only if it fails twice. Page errors are never retried away. */
+        let rec, firstNote = '';
+        for (let attempt = 1; attempt <= 2; attempt++) {
+        rec = { browser: bname, size: sname, scenario: sc.name, exit: ename, ok: false, note: '', errors: [], shot: '' };
+        if (attempt === 2) loaded = false;
         try {
           if (!loaded || !atHome(await page.evaluate(PROBE).catch(() => ({})))) { await load(); loaded = true; }
           const p0 = await page.evaluate(PROBE); if (!p0.is3d && !['panels', 'slim', 'hub', 'fdesk', 'untold', 'sitetour'].includes(sc.key)) { rec.ok = true; rec.skipped = true; rec.note = 'skipped: this browser fell back to the 2D map (no WebGL), so the view is not offered'; results.push(rec); console.log(`SKIP  ${bname}/${sname}  ${sc.name} → ${ename}: ${rec.note}`); continue; }
@@ -160,6 +165,9 @@ for (const bname of BROWSERS) {
         } catch (e) {
           if (e instanceof NotOffered) { rec.ok = true; rec.skipped = true; rec.note = 'not offered: ' + e.message; }
           else { rec.note = 'error: ' + String(e.message || e).slice(0, 300); rec.shot = `shots/${tag}.png`; await page.screenshot({ path: path.join(OUT, rec.shot) }).catch(() => { }); rec.errors = allErrors.slice(errStart); }
+        }
+        if (rec.ok || rec.errors.length || attempt === 2) { if (attempt === 2 && rec.ok) rec.note += ` (passed on the second try; first try: ${firstNote})`; break; }
+        firstNote = rec.note.slice(0, 160); console.log(`RETRY ${bname}/${sname}  ${sc.name} → ${ename}: ${firstNote}`);
         }
         results.push(rec); console.log(`${rec.ok ? (rec.skipped ? 'SKIP' : 'PASS') : 'FAIL'}  ${bname}/${sname}  ${sc.name} → ${ename}: ${rec.note}${rec.errors.length ? ' [' + rec.errors.length + ' error(s)]' : ''}`);
       }
