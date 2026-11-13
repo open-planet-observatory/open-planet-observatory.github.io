@@ -9,6 +9,7 @@
 //            altitude rounded to 1,000 ft, track to 10° and speed to 10 kt.
 // Cadence: one snapshot an hour (about 6 requests; adsb.lol allows 500 a day per address without a key).
 // If adsb.lol does not answer, the file says the snapshot failed; an earlier hour's aircraft are never passed off as current.
+// Every snapshot is held privately for at least 15 minutes and checked before publishing (holdAndRelease, below).
 // SWITCH: the collector only calls adsb.lol when the workflow sets AIRLINERS=1. Without it nothing is fetched or written.
 // Library row to add when it is switched on (src/page.tmpl.html, Air & sea):
 //   ["Air & sea","adsb.lol","Scheduled airliners near busy hubs, hourly, positions rounded to about 10 km, no registrations",
@@ -52,3 +53,53 @@ export async function collectAirliners({ now = new Date(), fetchImpl = fetch } =
   if (!ok) { out.failed = true; out.planes = []; }
   return { out, status: ok ? `ok ${planes.length} airliners from ${ok}/${REGIONS.length} regions` : 'error: adsb.lol did not answer (' + (regions[0].error || '') + ')' };
 }
+
+// ---------- Private holding place: every snapshot waits at least 15 minutes and passes quality checks before it is published ----------
+// A new snapshot is encrypted (AES-256-GCM) with the repository secret AIRLINERS_HOLD_KEY and kept in the workflow's cache
+// (.hold/airliners.enc, never in dist/). GitHub caches of a public repository can be restored by other workflows, so the
+// file is useless without the key; secrets are not given to pull requests from forks. A later run (every 10 minutes)
+// decrypts it once it is 15 minutes old, checks it and publishes it, then takes the next snapshot when one is due.
+// Without the key nothing is fetched (fail closed).
+import crypto from 'node:crypto';
+import fsp from 'node:fs/promises';
+import pathm from 'node:path';
+export const HOLD_MIN = 15, HOLD_MAX = 90, EVERY_MIN = 60, STALE_MIN = 150;
+const keyOf = k => { const b = Buffer.from(String(k || '').trim(), 'base64'); if (b.length !== 32) throw new Error('AIRLINERS_HOLD_KEY must be 32 bytes, base64'); return b; };
+export function seal(obj, key) { const iv = crypto.randomBytes(12), c = crypto.createCipheriv('aes-256-gcm', keyOf(key), iv);
+  const body = Buffer.concat([c.update(JSON.stringify(obj), 'utf8'), c.final()]); return Buffer.concat([Buffer.from('OWLH1'), iv, c.getAuthTag(), body]); }
+export function unseal(buf, key) { if (buf.subarray(0, 5).toString() !== 'OWLH1') throw new Error('not a held snapshot');
+  const iv = buf.subarray(5, 17), tag = buf.subarray(17, 33), d = crypto.createDecipheriv('aes-256-gcm', keyOf(key), iv); d.setAuthTag(tag);
+  return JSON.parse(Buffer.concat([d.update(buf.subarray(33)), d.final()]).toString('utf8')); }
+// Quality checks on a held snapshot before it may be published. Returns a list of problems (empty = passes).
+export function qa(o) { const p = [];
+  if (!o || o.v !== 1 || !Array.isArray(o.planes) || !Array.isArray(o.regions)) return ['not a snapshot file'];
+  if (o.failed) return ['snapshot itself failed'];
+  const okR = o.regions.filter(r => r.ok).length; if (okR < Math.ceil(o.regions.length / 2)) p.push(`only ${okR}/${o.regions.length} regions answered`);
+  if (o.planes.length < 10 * okR) p.push(`too few airliners (${o.planes.length}) for ${okR} regions`); if (o.planes.length > 4000) p.push(`too many airliners (${o.planes.length})`);
+  const bad = o.planes.filter(x => !Array.isArray(x) || x.length !== 7 || Math.abs(x[0] * 10 - Math.round(x[0] * 10)) > 1e-6 || Math.abs(x[1] * 10 - Math.round(x[1] * 10)) > 1e-6
+    || !(Math.abs(x[0]) <= 90 && Math.abs(x[1]) <= 180) || !/^[A-Z]{3}$/.test(x[5]) || NOT_AIRLINE.has(x[5]) || !/^([A-Z0-9]{2,4})?$/.test(x[6]) || !(x[2] >= 1000 && x[2] <= 50000));
+  if (bad.length) p.push(`${bad.length} entries break the publishing rules (e.g. ${JSON.stringify(bad[0])})`);
+  const s = JSON.stringify(o.planes); if (/"(N\d|G-|D-|F-|C-[A-Z]|VH-)/.test(s) || /"[0-9a-f]{6}"/.test(s)) p.push('something that looks like a registration or transponder address');
+  return p; }
+// One workflow run. held = Buffer or null (from the cache), prev = the published file or null. Returns what to publish and what to hold next.
+// released = takenAt of the last snapshot published: the cache hands back the newest saved file, which may be one already released.
+export async function holdAndRelease({ now = new Date(), held = null, prev = null, key, lastTake = null, released = null, fetchImpl = fetch }) {
+  if (!key) return { publish: null, hold: held, status: 'off: no AIRLINERS_HOLD_KEY secret, nothing fetched' };
+  const age = t => (now - new Date(t)) / 6e4; let publish = null, status = [], hold = held, took = lastTake, rel = released;
+  if (held) { let h = null; try { h = unseal(held, key); } catch (e) { status.push('held snapshot unreadable (' + e.message.slice(0, 60) + '), discarded'); hold = null; }
+    if (h && rel && h.takenAt <= rel) { hold = null; h = null; }
+    if (h) { const a = age(h.takenAt);
+      if (a > HOLD_MAX) { status.push(`held snapshot ${Math.round(a)} min old, discarded`); hold = null; }
+      else if (a >= HOLD_MIN) { const probs = qa(h.out); hold = null; rel = h.takenAt;
+        if (probs.length) { publish = { v: 1, failed: true, asOf: h.out.asOf, error: 'Held back by quality checks: ' + probs.join('; '), source: h.out.source, planes: [] }; status.push('held snapshot failed checks: ' + probs.join('; ')); }
+        else { publish = { ...h.out, releasedAt: now.toISOString().slice(0, 16) + 'Z', heldMin: Math.round(a) }; status.push(`released ${h.out.planes.length} airliners after ${Math.round(a)} min`); } }
+      else status.push(`holding a snapshot (${Math.round(a)} of ${HOLD_MIN} min)`); } }
+  if (!hold && (!took || age(took) >= EVERY_MIN - 2)) { const r = await collectAirliners({ now, fetchImpl }); took = now.toISOString();
+    if (r.out.failed) { if (!publish) publish = r.out; status.push('new snapshot failed: ' + r.status); }
+    else { hold = seal({ takenAt: now.toISOString(), out: r.out }, key); status.push('new snapshot held: ' + r.status); } }
+  // nothing new to publish: keep the published file while it is recent; past that, say no checked snapshot is available
+  if (!publish && prev) publish = !prev.failed && age(String(prev.asOf).replace(/Z$/, ':00Z')) > STALE_MIN ? { v: 1, failed: true, asOf: now.toISOString().slice(0, 16) + 'Z', error: 'No checked snapshot in the last ' + STALE_MIN / 60 + ' hours', source: SOURCE, planes: [] } : prev;
+  return { publish, hold, took, released: rel, status: (status.join('; ') || 'nothing due') };
+}
+export async function readHold(dir) { try { return await fsp.readFile(pathm.join(dir, 'airliners.enc')); } catch { return null; } }
+export async function writeHold(dir, buf) { await fsp.mkdir(dir, { recursive: true }); const f = pathm.join(dir, 'airliners.enc'); if (buf) await fsp.writeFile(f, buf); else await fsp.rm(f, { force: true }); }

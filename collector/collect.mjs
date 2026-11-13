@@ -27,7 +27,7 @@ import { collectForecastDesk } from './forecastdesk.mjs';
 import { collectMoonFeatures } from './moon-features.mjs';
 import { collectWeeklyHunt } from './weeklyhunt.mjs';
 import { collectFindOwl } from './findowl.mjs';
-import { collectAirliners } from './airliners.mjs';
+import { holdAndRelease, readHold, writeHold } from './airliners.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -274,14 +274,15 @@ let fdesk = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/forecastdesk.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   try { fdesk = await collectForecastDesk({ prev: p, now }); } catch (e) { fdesk = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (fdesk.out) await fs.writeFile(path.join(OUT, 'forecastdesk.json'), JSON.stringify(fdesk.out)); log('forecastdesk', fdesk.status); }
-// Scheduled airliners (collector/airliners.mjs): data/airliners.json, one snapshot an hour from adsb.lol (ODbL).
-// SWITCHED OFF unless the workflow sets AIRLINERS=1: until then nothing is fetched and no file is written.
+// Scheduled airliners (collector/airliners.mjs): data/airliners.json from adsb.lol (ODbL), one snapshot an hour.
+// Each snapshot is held privately (encrypted, in the workflow cache at .hold/) for at least 15 minutes and published only
+// after quality checks. SWITCHED OFF unless the workflow sets AIRLINERS=1: until then nothing is fetched and no file is written.
 let airl = { status: 'off' };
 if (process.env.AIRLINERS === '1') { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/airliners.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
-  meta.airliners = meta.airliners || {};
-  // within the hour the published snapshot is kept as it is (its own time is shown); after that a new one is taken or the file says it failed
-  if (p && !p.failed && !due(meta.airliners, 'all', 60)) airl = { out: p, status: 'kept' };
-  else { try { airl = await collectAirliners({ now }); meta.airliners.all = now.toISOString(); } catch (e) { airl = { out: { v: 1, failed: true, asOf: stamp, error: e.message.slice(0, 160), planes: [] }, status: 'error: ' + e.message.slice(0, 160) }; } }
+  meta.airliners = meta.airliners || {}; const HOLD = process.env.AIRLINERS_HOLD_DIR || '.hold';
+  try { const r = await holdAndRelease({ now, held: await readHold(HOLD), prev: p, key: process.env.AIRLINERS_HOLD_KEY, lastTake: meta.airliners.took, released: meta.airliners.released });
+    await writeHold(HOLD, r.hold); if (r.took) meta.airliners.took = r.took; if (r.released) meta.airliners.released = r.released; airl = { out: r.publish, status: r.status }; }
+  catch (e) { airl = { out: { v: 1, failed: true, asOf: stamp, error: e.message.slice(0, 160), planes: [] }, status: 'error: ' + e.message.slice(0, 160) }; }
   if (airl.out) await fs.writeFile(path.join(OUT, 'airliners.json'), JSON.stringify(airl.out)); log('airliners', airl.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
