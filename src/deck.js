@@ -34,12 +34,12 @@ const W={
  planet:{title:'Planet signals',w:4,h:4,src:()=>SRC.noaa,asof:()=>(window.SIG||{}).asOf,draw:drawSignals},
  launches:{title:'Launches',w:4,h:5,src:()=>SRC.ll,asof:()=>(window.SIG||{}).asOf,draw:drawLaunches},
  clocks:{title:'Clocks',w:4,h:3,src:()=>'Your device clock',asof:()=>'',draw:drawClocks}};
-const DEFAULT={look:'control',place:0,panels:['map','qscope','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
+const DEFAULT={look:'mix',place:0,panels:['map','qscope','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
 let st=Object.assign({},DEFAULT,load()||{}),root,grid,timer,anim,prevLoop=null,opened=false;
 if(!Array.isArray(st.panels))st.panels=DEFAULT.panels.slice();st.panels=st.panels.filter(p=>W[p.t]);
 const size=p=>{const w=W[p.t];const k=p.s==='s'?.75:p.s==='l'?1.5:1;return{w:Math.min(12,Math.max(3,Math.round(w.w*k))),h:Math.max(3,Math.round(w.h*k))}};
 function frame(){root.innerHTML=`<div class="dk-bar"><b class="dk-title">OBSERVATION DECK</b><span class="dk-wip">work in progress</span><span class="dk-utc" id="dkUtc"></span>
- <label>Look <select id="dkLook"><option value="control">Control</option><option value="phosphor">Phosphor</option><option value="mix">Mix</option></select></label>
+ <label>Look <select id="dkLook"><option value="mix">Mix</option><option value="control">Control</option><option value="phosphor">Phosphor</option></select></label>
  <div class="dk-add"><button type="button" id="dkAddBtn" aria-haspopup="true" aria-expanded="false">＋ Add panel</button><div class="dk-menu" id="dkMenu" hidden></div></div>
  <button type="button" id="dkReset">Reset layout</button><button type="button" id="dkClose" aria-label="Close the Observation Deck">✕</button></div><div class="dk-grid" id="dkGrid"></div>
  <p class="dk-foot">Panels show the site’s own data, as each source publishes it. Every scope centre is a city, never your own location. Your layout stays in this browser.</p>`;
