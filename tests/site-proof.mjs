@@ -22,7 +22,9 @@ const OUT = arg('out', 'proof-results');
 const BROWSERS = arg('browsers', 'chromium,firefox,webkit').split(',');
 const SIZES = arg('sizes', 'desktop,phone').split(',');
 const ONLY = arg('only', '') ? arg('only', '').split(',') : null;
-const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1; // multiply waits (software GL is slow)
+const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1;
+const OFFLINE = process.argv.includes('--offline'); // frozen lane: every host but the served build is stubbed (images → 1×1 PNG, the rest → 204), so a failure means our code changed
+const PNG1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64'); // multiply waits (software GL is slow)
 const w = ms => new Promise(r => setTimeout(r, ms * SLOW));
 fs.mkdirSync(path.join(OUT, 'shots'), { recursive: true });
 
@@ -106,8 +108,9 @@ const SCENARIOS = [
   { key: 'woe', name: 'Where on Earth? (game overlay)', open: async p => { await p.evaluate(() => dispatchEvent(new Event('obs:play'))); await p.waitForFunction(() => document.documentElement.classList.contains('game-on'), null, { timeout: 30000 }); await w(1500); }, exits: { '× leave the game': p => click(p, '#woe .woe-x'), 'logo (back to the start)': p => click(p, '.brand h1') } },
   { key: 'fdesk', name: 'The Forecast Desk', open: async p => { await p.evaluate(() => dispatchEvent(new Event('obs:fdesk'))); await w(1200); }, exits: { 'Esc': esc, '× close': p => click(p, '#fdX') } },
   { key: 'sitetour', name: 'Tour Site', open: async p => { await click(p, '#gnSiteTour'); await p.waitForSelector('.st-card', { timeout: 20000 }); await w(600); }, exits: { 'Esc': esc, 'Skip': async p => { const b = await p.$('.st-card button.st-skip, .st-card button:has-text("Skip")'); if (!b) throw new Error('no Skip button'); await b.evaluate(el => el.click()); } } },
-  { key: 'slim', name: 'Slim header (after touching the globe)', open: async p => { const pt = await p.evaluate(() => { const m = document.getElementById('ops-map'); if (!m) return null; const r = m.getBoundingClientRect(); for (let y = r.top + 20; y < r.bottom - 20; y += 40) for (let x = r.left + 20; x < r.right - 20; x += 40) { const el = document.elementFromPoint(x, y); if (el && m.contains(el) && !el.closest('button,a,input,select,.zoomctl,.wx-card,.sat-card,#tip,.leaflet-control')) return { x, y }; } return null; }); if (!pt) throw new Error('no open patch of globe to touch');
-      if (p.context()._options.hasTouch) await p.touchscreen.tap(pt.x, pt.y); else { await p.mouse.move(pt.x, pt.y); await p.mouse.down(); await w(100); await p.mouse.up(); } await w(800); if (!(await p.evaluate(() => document.documentElement.classList.contains('slim')))) throw new Error('slim mode did not engage'); }, exits: { 'Esc': esc, '⤢ expand header': p => click(p, '#gnExpand') } },
+  { key: 'slim', name: 'Slim header (after touching the globe)', open: async p => { const pt = await p.evaluate(() => { const m = document.getElementById('ops-map'); if (!m) return null; const r = m.getBoundingClientRect(); const cx = (r.left + r.right) / 2, cy = (r.top + r.bottom) / 2; const ok = (x, y) => { const el = document.elementFromPoint(x, y); return el && m.contains(el) && !el.closest('button,a,input,select,.zoomctl,.wx-card,.sat-card,#tip,.leaflet-control'); }; /* nearest open patch to the centre of the globe, not a corner (11 Nov: a corner tap on the phone runner did not count) */ for (let d = 0; d < Math.max(r.width, r.height) / 2; d += 20) for (const [x, y] of [[cx + d, cy], [cx - d, cy], [cx, cy + d], [cx, cy - d], [cx + d, cy + d], [cx - d, cy - d]]) if (ok(x, y)) return { x, y }; return null; }); if (!pt) throw new Error('no open patch of globe to touch');
+      const touch = async () => { if (p.context()._options.hasTouch) await p.touchscreen.tap(pt.x, pt.y); else { await p.mouse.move(pt.x, pt.y); await p.mouse.down(); await w(100); await p.mouse.up(); } await w(1200); return p.evaluate(() => document.documentElement.classList.contains('slim')); };
+      if (!(await touch()) && !(await touch())) throw new Error('slim mode did not engage (two touches)'); }, exits: { 'Esc': esc, '⤢ expand header': p => click(p, '#gnExpand') } },
   { key: 'panels', name: 'Every menu item opens its panel', open: async () => { }, exits: { 'open each item, then close': async p => {
     const items = await p.$$eval('.gn-m button[data-k]', bs => bs.map(b => [b.closest('.gn-m').dataset.g, b.dataset.k]));
     for (const [g, k] of items) { await menuItem(p, g, 'data-k', k); await w(400);
@@ -132,6 +135,7 @@ for (const bname of BROWSERS) {
     if (bname !== 'chromium' && opts.isMobile) opts.isMobile = bname === 'webkit'; // Firefox has no mobile emulation
     for (const sc of SCENARIOS) { if (ONLY && !ONLY.includes(sc.key)) continue;
       const ctx = await browser.newContext({ ...opts, locale: 'en-US', timezoneId: 'America/New_York', permissions: bname === 'chromium' ? ['geolocation'] : [], geolocation: { latitude: 40.7, longitude: -74 } });
+      if (OFFLINE) await ctx.route(u => !u.href.startsWith(base), r => r.request().resourceType() === 'image' ? r.fulfill({ status: 200, contentType: 'image/png', body: PNG1 }) : r.fulfill({ status: 204, body: '' }));
       await ctx.addInitScript(() => { try { localStorage.setItem('obs-notice', '1'); localStorage.setItem('site-tour-offer', '1'); localStorage.setItem('owl-music', 'off'); sessionStorage.setItem('owl-splash', '1'); } catch (e) { } });
       const page = await ctx.newPage(); page.__base = base + '?nosplash'; const allErrors = [];
       const glWarn = []; // WebGL driver chatter (software GL on the runners): counted, shown, never a failure

@@ -1,0 +1,91 @@
+# PR check — the frozen test lane (11 Nov 2026). Runs on every pull request (and by hand from the Actions tab): builds the site from the seed data, stubs every outside host, and runs the start-up gate,
+# the invariants (what each view must contain), the navigation proof and the stress sweep in Chromium at a
+# desktop and a phone size. Nothing here touches the live site. With branch protection on main, a red run
+# here is what keeps a change off theowlmanac.com; the nightly "Site proof" still checks the live site.
+name: PR check
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gate:
+    name: Start-up gate + invariants
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund && npm install --no-save --no-audit --no-fund playwright@1.63.0
+      - run: npx playwright install --with-deps chromium
+      - name: Build from the seed data
+        run: npm run build:seed
+      - name: Start-up gate
+        run: node tests/smoke.mjs dist
+      - name: Invariants (every view has what it must)
+        id: inv
+        continue-on-error: true
+        run: node tests/invariants.mjs dist
+      - name: Add the report to the run summary
+        if: always()
+        run: cat invariants-results/report.md >> "$GITHUB_STEP_SUMMARY" || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr-invariants
+          path: invariants-results
+          retention-days: 7
+      - if: steps.inv.outcome == 'failure'
+        run: exit 1
+
+  sweep:
+    name: ${{ matrix.kind }} (frozen, ${{ matrix.size }})
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    strategy:
+      fail-fast: false
+      matrix:
+        size: [desktop, phone]
+        kind: [Proof, Stress]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund && npm install --no-save --no-audit --no-fund playwright@1.63.0
+      - run: npx playwright install --with-deps chromium
+      - name: Build from the seed data
+        run: npm run build:seed
+      - name: ${{ matrix.kind }} sweep (offline)
+        id: run
+        continue-on-error: true
+        env:
+          PROOF_SLOW: '1'
+        run: |
+          if [ "${{ matrix.kind }}" = "Proof" ]; then
+            node tests/site-proof.mjs --offline --browsers chromium --sizes ${{ matrix.size }} --out pr-results/${{ matrix.kind }}-${{ matrix.size }}
+          else
+            node tests/site-stress.mjs --offline --browsers chromium --sizes ${{ matrix.size }} --out pr-results/${{ matrix.kind }}-${{ matrix.size }}
+          fi
+      - name: Add the report to the run summary
+        if: always()
+        run: cat pr-results/${{ matrix.kind }}-${{ matrix.size }}/report.md >> "$GITHUB_STEP_SUMMARY" || echo "no report" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr-${{ matrix.kind }}-${{ matrix.size }}
+          path: pr-results
+          retention-days: 7
+      - if: steps.run.outcome == 'failure'
+        run: exit 1

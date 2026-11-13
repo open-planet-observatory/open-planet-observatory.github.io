@@ -1,0 +1,545 @@
+{
+ "at": "2026-11-11T23:58:09.116Z",
+ "results": [
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop start-up",
+   "ok": true,
+   "note": "ops=true menus=7 pills=9 overflow=false",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop situations",
+   "ok": true,
+   "note": "13 situation cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop disruptions",
+   "ok": true,
+   "note": "7 disruption groups (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop signals",
+   "ok": true,
+   "note": "19 signal cards (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop climate",
+   "ok": true,
+   "note": "9 climate cards (need ≥ 3)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop relief",
+   "ok": true,
+   "note": "6 relief cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop watch",
+   "ok": true,
+   "note": "4 watch cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop unexplained",
+   "ok": true,
+   "note": "10 unexplained cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop economy",
+   "ok": false,
+   "note": "22 economy cards (need ≥ 5); load failure shown: \"Pay vs pricesThe ILO earnings figures did not load this time\"",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop nature",
+   "ok": true,
+   "note": "6 nature cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop cams",
+   "ok": true,
+   "note": "36 live-cam entries (need ≥ 10)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop inside",
+   "ok": true,
+   "note": "5 Inside the Earth cards (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop library",
+   "ok": true,
+   "note": "201 Library rows (need ≥ 150)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop classroom",
+   "ok": true,
+   "note": "10 Classroom missions (lessons.json has 10) (need ≥ 10)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop untold",
+   "ok": true,
+   "note": "45 Untold stories (untold.json has 45) (need ≥ 45)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop changes",
+   "ok": true,
+   "note": "20 change-log entries (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop about",
+   "ok": true,
+   "note": "19 About headings (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop free",
+   "ok": true,
+   "note": "10 Keep-it-free points (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop layers",
+   "ok": true,
+   "note": "8 Layers & readings entries (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop records",
+   "ok": true,
+   "note": "skipped: data/records.json is not in this build (0 record cards; says \"The records file did not load\")",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop history",
+   "ok": true,
+   "note": "skipped: data/history.json is not in this build (0 On-this-day stories)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop worlds",
+   "ok": true,
+   "note": "skipped: data/worlds.json is not in this build (0 Other-worlds cards)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop predictions",
+   "ok": true,
+   "note": "skipped: data/predictions.json is not in this build (0 prediction cards)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page world",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page planet",
+   "ok": true,
+   "note": "5 cards for 5 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page space",
+   "ok": true,
+   "note": "7 cards for 7 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page skyt",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page learn",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop group page site",
+   "ok": true,
+   "note": "6 cards for 6 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "desktop",
+   "group": "invariants",
+   "name": "desktop page errors",
+   "ok": true,
+   "note": "none",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone start-up",
+   "ok": true,
+   "note": "ops=true menus=7 pills=9 overflow=false",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone situations",
+   "ok": true,
+   "note": "13 situation cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone disruptions",
+   "ok": true,
+   "note": "7 disruption groups (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone signals",
+   "ok": true,
+   "note": "19 signal cards (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone climate",
+   "ok": true,
+   "note": "9 climate cards (need ≥ 3)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone relief",
+   "ok": true,
+   "note": "6 relief cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone watch",
+   "ok": true,
+   "note": "4 watch cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone unexplained",
+   "ok": true,
+   "note": "10 unexplained cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone economy",
+   "ok": false,
+   "note": "22 economy cards (need ≥ 5); load failure shown: \"Pay vs pricesThe ILO earnings figures did not load this time\"",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone nature",
+   "ok": true,
+   "note": "6 nature cards (need ≥ 1)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone cams",
+   "ok": true,
+   "note": "36 live-cam entries (need ≥ 10)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone inside",
+   "ok": true,
+   "note": "5 Inside the Earth cards (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone library",
+   "ok": true,
+   "note": "201 Library rows (need ≥ 150)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone classroom",
+   "ok": true,
+   "note": "10 Classroom missions (lessons.json has 10) (need ≥ 10)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone untold",
+   "ok": true,
+   "note": "45 Untold stories (untold.json has 45) (need ≥ 45)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone changes",
+   "ok": true,
+   "note": "20 change-log entries (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone about",
+   "ok": true,
+   "note": "19 About headings (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone free",
+   "ok": true,
+   "note": "10 Keep-it-free points (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone layers",
+   "ok": true,
+   "note": "8 Layers & readings entries (need ≥ 5)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone records",
+   "ok": true,
+   "note": "skipped: data/records.json is not in this build (0 record cards; says \"The records file did not load\")",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone history",
+   "ok": true,
+   "note": "skipped: data/history.json is not in this build (0 On-this-day stories)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone worlds",
+   "ok": true,
+   "note": "skipped: data/worlds.json is not in this build (0 Other-worlds cards)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone predictions",
+   "ok": true,
+   "note": "skipped: data/predictions.json is not in this build (0 prediction cards)",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page world",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page planet",
+   "ok": true,
+   "note": "5 cards for 5 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page space",
+   "ok": true,
+   "note": "7 cards for 7 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page skyt",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page learn",
+   "ok": true,
+   "note": "4 cards for 4 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone group page site",
+   "ok": true,
+   "note": "6 cards for 6 items",
+   "errors": []
+  },
+  {
+   "browser": "chromium",
+   "size": "phone",
+   "group": "invariants",
+   "name": "phone page errors",
+   "ok": true,
+   "note": "none",
+   "errors": []
+  }
+ ]
+}
