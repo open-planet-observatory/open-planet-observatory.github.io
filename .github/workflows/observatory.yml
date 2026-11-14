@@ -1,4 +1,4 @@
-# Collects every feed, builds the page and publishes it to GitHub Pages.
+# Collects every feed, builds the page and publishes it to Cloudflare Pages (once set up) and GitHub Pages.
 # Runs every 10 minutes. Each source has its own refresh interval (collector/snap.mjs, collector/collect.mjs);
 # anything not due, or anything that fails, keeps its last good value from the live site.
 name: Collect and publish
@@ -23,6 +23,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    env:
+      # 'true' when the Cloudflare Pages token secret exists (a step's `if` can't read secrets; the token itself stays out of the other steps)
+      HAS_CF_PAGES: ${{ secrets.CF_PAGES_TOKEN != '' }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -67,6 +70,32 @@ jobs:
           npm install --no-save --no-audit --no-fund playwright@1.63.0
           npx playwright install --with-deps chromium
           node tests/smoke.mjs dist
+      - name: Publish to Cloudflare Pages
+        # Cloudflare Pages (project "theowlmanac", Direct Upload) becomes the main host once the domain's nameservers move to
+        # Cloudflare; GitHub Pages (below) keeps publishing the same gated build as the fallback, so a Cloudflare failure
+        # never stops the GitHub copy. Skipped until the CF_PAGES_TOKEN secret (Account > Cloudflare Pages: Edit only) exists.
+        # The games server's CLOUDFLARE_API_TOKEN is a different token and is not used here.
+        # Cadence: every run (10 min). Direct Upload deploys are not Git builds, so they don't use the free plan's
+        # 500 builds a month. If Cloudflare ever limits deploys, set the repository variable CF_PAGES_CADENCE=hourly:
+        # scheduled runs then publish to Cloudflare only in the first 10 minutes of each hour; pushes and manual runs always do.
+        if: ${{ env.HAS_CF_PAGES == 'true' }}
+        continue-on-error: true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_PAGES_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID || secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CADENCE: ${{ vars.CF_PAGES_CADENCE }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          if [ "$CADENCE" = "hourly" ] && [ "$EVENT" = "schedule" ] && [ "$(date -u +%M)" -ge 10 ]; then
+            echo "CF_PAGES_CADENCE=hourly: not this run"; exit 0
+          fi
+          if npx --yes wrangler@3 pages deploy dist --project-name=theowlmanac --branch=main --commit-dirty=true; then
+            echo "Published to Cloudflare Pages" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "::warning title=Cloudflare Pages::Publishing to Cloudflare Pages failed; GitHub Pages still publishes this build."
+            echo "Cloudflare Pages publish FAILED (GitHub Pages still publishes)" >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
