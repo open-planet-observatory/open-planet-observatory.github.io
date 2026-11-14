@@ -51,7 +51,8 @@ jobs:
   sweep:
     name: ${{ matrix.kind }} (frozen, ${{ matrix.size }})
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    # 75: a failed step is now tried twice, and the desktop proof took ~50 min on a slow runner (13 Nov)
+    timeout-minutes: 75
     strategy:
       fail-fast: false
       matrix:

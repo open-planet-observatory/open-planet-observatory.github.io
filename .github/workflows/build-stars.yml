@@ -8,6 +8,8 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
+  actions: write
 
 jobs:
   stars:
@@ -22,10 +24,8 @@ jobs:
         run: node collector/build-stars.mjs src/assets/stars
       - name: Match stars to Wikipedia articles (Wikidata, CC0)
         run: node collector/build-starwiki.mjs src/assets/stars
-      - name: Commit
+      - name: Propose the rebuilt files as a pull request (main is protected)
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
-          git config user.name "observatory-bot"
-          git config user.email "observatory-bot@users.noreply.github.com"
-          git add src/assets/stars
-          git commit -m "Star catalogue rebuilt from ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC)" || echo "no change"
-          git push
+          .github/scripts/open-pr.sh "Star catalogue rebuilt from ESA Gaia DR3 and Hipparcos (credit: ESA, Gaia DPAC)" src/assets/stars
