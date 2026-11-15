@@ -72,8 +72,8 @@ jobs:
         run: exit 1
 
   stress:
-    # same rule as the proof: not after the 10-minute data runs (12 Nov: it ran after every one and emailed a failure each time)
-    if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
+    # nightly and by hand only (15 Nov 2026): not after publishes. For a run on real graphics hardware: npm run stress:mac
+    if: github.event_name != 'workflow_run'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
