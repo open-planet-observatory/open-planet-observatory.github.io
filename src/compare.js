@@ -2,11 +2,11 @@
 // Uses Cesium's split screen (ImageryLayer.splitDirection + scene.splitPosition) on the 3D globe. Each side is one day's
 // NASA GIBS "corrected reflectance" picture, clouds included; each side is labelled with its date and satellite.
 // The site does not measure or score what changed: the visitor looks and decides.
-// SWITCH: while LIVE is false the "Compare two dates" button appears only when the address carries ?compare=1, so merging
-// this file changes nothing a visitor sees. Set LIVE to true to show it to everyone. Undo: remove this file from build/build.mjs.
+// SWITCH: LIVE is true (switched on 15 Nov 2026), so every visitor sees the "Compare two dates" button. Set LIVE to false
+// to hide it again (it then appears only with ?compare=1). Undo completely: remove this file from build/build.mjs.
 (function(){
 if(!window.OBS_HOSTED)return;
-const LIVE=false;
+const LIVE=true;
 if(!LIVE&&!/[?&]compare=1\b/.test(location.search))return;
 const GIBS='https://gibs.earthdata.nasa.gov/wmts/epsg3857/best/';
 // Satellites offered, oldest record first. min = first day NASA GIBS serves for that layer (checked 12 Nov 2026).
@@ -25,7 +25,7 @@ function drop(side){if(L[side]){try{viewer.imageryLayers.remove(L[side],true)}ca
 async function show(side){const date=dates[side];drop(side);const msg=card.querySelector('#cmpMsg');
  const S=SATS[sat];if(!date||date<S.min||date>yesterday()){setTag(side,'No picture: '+S.name+' covers '+S.min+' to yesterday');return}
  setTag(side,date+' · '+S.name+' · loading…');const ok=await hasDay(sat,date);if(!open||dates[side]!==date)return;
- if(ok===false){setTag(side,'NASA has no '+S.name+' picture for '+date);return}
+ if(ok===false){setTag(side,'No '+S.name+' picture for '+date+' in NASA GIBS');return}
  const lay=new C.ImageryLayer(provider(sat,date));lay.splitDirection=side==='left'?C.SplitDirection.LEFT:C.SplitDirection.RIGHT;
  viewer.imageryLayers.add(lay);L[side]=lay;setTag(side,date+' · '+S.name);if(msg)msg.textContent='';viewer.scene.requestRender&&viewer.scene.requestRender()}
 function setTag(side,t){if(tags[side])tags[side].textContent=(side==='left'?'◀ ':'')+t+(side==='right'?' ▶':'')}
