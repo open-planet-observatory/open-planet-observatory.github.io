@@ -6,7 +6,7 @@
   how much of the globe actually accepts a touch, and whether the globe keeps drawing afterwards.
 
   Usage:  node tests/site-stress.mjs [--url https://theowlmanac.com] [--browsers chromium] [--sizes desktop,phone,tablet,laptop]
-                                     [--out stress-results] [--only coverage,drag,resize,buttons,menus,rail,keys]
+                                     [--out stress-results] [--only coverage,drag,resize,buttons,menus,rail,keys] [--offline] [--gpu]
   Without --url it serves ./dist (run `npm run build:seed` first). Exit code 1 when any check fails.
 */
 import { chromium, firefox, webkit, devices } from 'playwright';
@@ -20,6 +20,7 @@ const BROWSERS = arg('browsers', 'chromium').split(',');
 const SIZES = arg('sizes', 'desktop,phone').split(',');
 const ONLY = arg('only', '') ? arg('only', '').split(',') : null;
 const SLOW = process.env.PROOF_SLOW ? Number(process.env.PROOF_SLOW) : 1;
+const GPU = process.argv.includes('--gpu'); // use the machine's graphics card (the maintainer's Mac) instead of software drawing
 const OFFLINE = process.argv.includes('--offline'); // frozen lane: every host but the served build is stubbed (images → 1×1 PNG, the rest → 204), so a failure means our code changed
 const PNG1 = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=', 'base64');
 const w = ms => new Promise(r => setTimeout(r, ms * SLOW));
@@ -63,7 +64,7 @@ async function run() {
   let base = arg('url', ''); let srv = null; if (!base) { srv = await serve('dist'); base = srv.url; }
   for (const bname of BROWSERS) {
     const engine = ENGINE[bname]; if (!engine) continue;
-    const browser = await engine.launch({ args: bname === 'chromium' ? ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] : [] });
+    const browser = await engine.launch({ args: bname !== 'chromium' ? [] : GPU ? ['--ignore-gpu-blocklist', '--enable-gpu', ...(process.platform === 'darwin' ? ['--use-angle=metal'] : [])] : ['--use-gl=angle', '--use-angle=swiftshader', '--enable-unsafe-swiftshader', '--ignore-gpu-blocklist'] });
     for (const sname of SIZES) {
       const ctx = await browser.newContext({ ...SIZE[sname], locale: 'en-US', reducedMotion: 'no-preference' });
       if (OFFLINE) await ctx.route(u => !u.href.startsWith(base), r => r.request().resourceType() === 'image' ? r.fulfill({ status: 200, contentType: 'image/png', body: PNG1 }) : r.fulfill({ status: 204, body: '' }));

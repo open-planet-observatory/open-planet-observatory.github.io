@@ -14,6 +14,7 @@
     "build:claude": "node build/build.mjs claude data-seed dist-claude/index.html",
     "proof": "node tests/site-proof.mjs",
     "stress": "node tests/site-stress.mjs",
+    "stress:mac": "npm run build:seed && node tests/site-stress.mjs --offline --gpu --browsers chromium --sizes desktop,phone",
     "invariants": "node tests/invariants.mjs dist"
   },
   "dependencies": {

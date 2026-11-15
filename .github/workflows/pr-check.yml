@@ -1,6 +1,8 @@
 # PR check — the frozen test lane (11 Nov 2026). Runs on every pull request (and by hand from the Actions tab): builds the site from the seed data, stubs every outside host, and runs the start-up gate,
-# the invariants (what each view must contain), the navigation proof and the stress sweep in Chromium at a
-# desktop and a phone size. Nothing here touches the live site. With branch protection on main, a red run
+# the invariants (what each view must contain) and the navigation proof in Chromium at a desktop and a phone size.
+# The stress sweep no longer runs on pull requests (15 Nov 2026: GitHub's runners have no graphics card and it failed
+# at random); it runs nightly in "Site proof", by hand from the Actions tab here, and on the maintainer's Mac
+# (npm run stress:mac). Nothing here touches the live site. With branch protection on main, a red run
 # here is what keeps a change off theowlmanac.com; the nightly "Site proof" still checks the live site.
 name: PR check
 
@@ -57,7 +59,8 @@ jobs:
       fail-fast: false
       matrix:
         size: [desktop, phone]
-        kind: [Proof, Stress]
+        # Stress only when started by hand (Actions tab), never on a pull request
+        kind: ${{ fromJSON(github.event_name == 'workflow_dispatch' && '["Proof","Stress"]' || '["Proof"]') }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
