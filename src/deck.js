@@ -3,11 +3,11 @@
 // Every headline and description is the source's own text; numbers are shown as the source gives them.
 // Three looks to choose from while it is a mock-up: Control (the site's colours), Phosphor (green on black) and Mix.
 // The layout, look and scope centre are kept in this browser only (localStorage), never sent anywhere.
-// SWITCH: while LIVE is false the "Observation Deck" button appears only when the address carries ?deck=1, so merging this
-// file changes nothing a visitor sees. Set LIVE to true to show it to everyone. Undo: remove this file from build/build.mjs.
+// SWITCH: LIVE is true (switched on 15 Nov 2026), so every visitor sees the "Observation Deck" button. Set LIVE to false
+// to hide it again (it then appears only with ?deck=1). Undo completely: remove this file from build/build.mjs.
 (function(){
 if(!window.OBS_HOSTED)return;
-const LIVE=false;
+const LIVE=true;
 if(!LIVE&&!/[?&]deck=1\b/.test(location.search))return;
 const KEY='owl-deck-v1',esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){return null}},save=s=>{try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}};
@@ -70,14 +70,16 @@ function drawMap(el){const d3=window.d3,O=window.__obs;if(!d3||!O||!O.countries)
  quakes().forEach(q=>{const p=pr([q.lon,q.lat]);if(!p)return;g.fillStyle=css('--dk-quake');g.globalAlpha=Math.max(.25,1-q.hrs/170);g.beginPath();g.arc(p[0],p[1],Math.max(1.2,(q.mag-2)*1.6),0,7);g.fill()});g.globalAlpha=1;
  g.fillStyle=css('--dk-dim');g.font='11px "Owl Plex Mono",monospace';g.fillText('● quakes (fade with age)   ■ fire detections   + natural events',10,h-10)}
 function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind==='q'?2000:3000;
- el.innerHTML=`<div class="dk-scope-top"><select aria-label="Scope centre">${PLACES.map((x,i)=>`<option value="${i}"${i===st.place?' selected':''}>${esc(x[0])}</option>`).join('')}</select><span>${max.toLocaleString()} km range</span></div><div class="dk-scope"></div><div class="dk-list"></div>`;
+ el.innerHTML=`<div class="dk-scope-top"><select aria-label="Scope centre">${PLACES.map((x,i)=>`<option value="${i}"${i===st.place?' selected':''}>${esc(x[0])}</option>`).join('')}</select><span>${max.toLocaleString()} km range</span></div><div class="dk-scope-row"><div class="dk-scope"></div><div class="dk-list"></div></div>`;
+ // a wide panel puts the list beside the scope, so the scope can use the full height
+ if(el.clientWidth>=400)el.querySelector('.dk-scope-row').classList.add('wide');
  el.querySelector('select').onchange=e=>{st.place=+e.target.value;save(st);render()};
  const pts=kind==='q'?quakes().map(q=>({...q,d:dist(pl[1],pl[2],q.lat,q.lon)})).filter(q=>q.d<=max):cells(((window.SNAP||{}).air||{}).cells).map(([lo,la,n])=>({lon:lo,lat:la,n,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max);
  pts.forEach(q=>q.b=bear(pl[1],pl[2],q.lat,q.lon));
  const list=el.querySelector('.dk-list');
  if(kind==='q'){const near=pts.slice().sort((a,b)=>b.mag-a.mag).slice(0,3);list.innerHTML=near.length?near.map(q=>`<div><span>M${q.mag.toFixed(1)}</span><span>${Math.round(q.d).toLocaleString()} km ${dir(q.b)}</span><span>${ago(q.hrs)}</span></div>`).join(''):'<p class="dk-dim">No M2.5+ quakes within range this week.</p>'}
  else{const tot=pts.reduce((s,q)=>s+q.n,0);list.innerHTML=`<div><span>${tot.toLocaleString()} aircraft</span><span>in ${pts.length} cells (10°)</span><span>in range</span></div><p class="dk-dim">Counts per 10° cell from OpenSky; no single aircraft is shown or kept.</p>`}
- const box=el.querySelector('.dk-scope'),{c,g,W:w,H:h}=canvasIn(box),cx=w/2,cy=h/2,rad=Math.min(w,h)/2-14;
+ const box=el.querySelector('.dk-scope'),{c,g,W:w,H:h}=canvasIn(box),cx=w/2,cy=h/2,rad=Math.max(30,Math.min(w/2-14,h/2-14,(w/2-58)/0.7071))/* room for the range labels on the diagonal */;
  const sc=css('--dk-scope'),t0=performance.now();
  function frameDraw(t){g.clearRect(0,0,w,h);g.strokeStyle=sc;g.globalAlpha=.35;g.lineWidth=1;
   for(let k=1;k<=4;k++){g.beginPath();g.arc(cx,cy,rad*k/4,0,7);g.stroke()}g.beginPath();g.moveTo(cx-rad,cy);g.lineTo(cx+rad,cy);g.moveTo(cx,cy-rad);g.lineTo(cx,cy+rad);g.stroke();
@@ -139,7 +141,7 @@ html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
 #owlDeck .dk-tab>div{display:grid;grid-template-columns:auto 1fr;column-gap:10px;padding:3px 0;border-bottom:1px dotted var(--dk-line)}#owlDeck .dk-tab>div>span:nth-child(3){grid-column:2;font-size:10.5px}
 #owlDeck .dk-k{color:var(--dk-accent);font-weight:400;white-space:nowrap}#owlDeck .dk-k.lv-red{color:#ff6b5b}#owlDeck .dk-k.lv-orange{color:#ffa23a}#owlDeck .dk-k.lv-green{color:#5fd38a}
 #owlDeck .dk-scope-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px;color:var(--dk-dim)}
-#owlDeck .dk-scope{flex:1;min-height:160px;position:relative}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
+#owlDeck .dk-scope{flex:1;min-height:160px;position:relative}.dk-scope-row{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px}.dk-scope-row.wide{flex-direction:row;align-items:stretch}.dk-scope-row.wide .dk-scope{min-width:0}.dk-scope-row.wide .dk-list{width:42%;flex:none;overflow:auto;align-self:center;max-height:100%}#owlDeck [hidden]{display:none!important}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
 #owlDeck .dk-p[data-t=map] .dk-body{position:relative}
 #owlDeck .dk-list>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-top:1px dotted var(--dk-line)}
 #owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
