@@ -2,11 +2,11 @@
 // Reads data/meta.json (written by collector/collect.mjs on every run: lastRun = this run's result per group,
 // snap/nature/steps/solar/orbits = the time of each group's last successful fetch). Nothing new is collected for this card.
 // Shown as a card in Sources, under "Automatic data checks". Only on the public site.
-// SWITCH: while LIVE is false the card is drawn only when the address carries ?status=1, so merging this file
-// changes nothing a visitor sees. Set LIVE to true to show it to everyone. Remove this file's line in build/build.mjs to undo.
+// SWITCH: LIVE is true (switched on 15 Nov 2026), so every visitor sees the card. Set LIVE to false to hide it again (it then
+// appears only with ?status=1). Remove this file's line in build/build.mjs to undo completely.
 (function(){
 if(!window.OBS_HOSTED)return;
-const LIVE=false;
+const LIVE=true;
 if(!LIVE&&!/[?&]status=1\b/.test(location.search))return;
 const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 // The site's own names for the collector's groups (the collector's keys are short code names).
@@ -38,13 +38,21 @@ const OTHER=[['orbits','Satellite catalogue · CelesTrak','Space',m=>m.orbits?.c
  ['recordWatch','Record watch · NOAA, Copernicus, NSIDC, NASA, USGS','Sections built from sources',null],['predictions','Predictions · Polymarket','Sections built from sources',null],
  ['game','Where on Earth? daily puzzle','Sections built from sources',null],['forecastDesk','The Forecast Desk questions','Sections built from sources',null],['weeklyHunt','The weekly hunt','Sections built from sources',null]];
 const AREAS=['Map layers','Nature','Situations, signals and disruptions','Unexplained','Space','Sections built from sources','Tech & Industry (section hidden for now)','Other'];
-// One result string from the collector -> [css class, word shown, detail shown]. The detail is the collector's own message, unedited.
+// Collector messages are written for the maintainer; plain() turns the known ones into words for visitors and removes
+// internal names (environment variables, the maintainer, Claude's refresh task). Anything else is shown as the collector wrote it.
+function plain(d){d=String(d||'');
+ if(/needs the .*connector|refresh task only/i.test(d))return'Collected only by the daily refresh, not by the public site';
+ if(/\b[A-Z][A-Z0-9_]*_(KEY|TOKEN|SECRET|ID)\b.*not set/.test(d))return'Needs a free access key that has not been set up yet';
+ if(/HTTP 429/.test(d))return'The source asked for fewer requests (HTTP 429); trying again on the next run';
+ d=d.replace(/;?\s*waiting for the maintainer/i,'').replace(/\b[A-Z][A-Z0-9_]*_(KEY|TOKEN|SECRET|ID)\b/g,'an access key');
+ return d.replace(/^paused:\s*/i,'')}
+// One result string from the collector -> [css class, word shown, detail shown]. The detail is the collector's message in plain words (plain()).
 // A web address inside a message keeps its host and path but loses its query string (a query string can carry a key).
 // loose = the result is a free-form note from a section builder, not a plain ok/kept/error.
 function state(s,loose){s=String(s??'');
  if(/^error/.test(s)){const d=s.replace(/^error:\s*/,'').replace(/(https?:\/\/[^\s?]+)\?\S*/g,'$1?…');
-  if(/^(paused|skipped)|not set|no new data/i.test(d))return['warn',/no new data/i.test(d)?'No new data':/not set/i.test(d)?'Needs a key':'Paused',d];
-  return['fail','Failed',d]}
+  if(/^(paused|skipped)|not set|no new data/i.test(d))return['warn',/no new data/i.test(d)?'No new data':/not set/i.test(d)?'Needs a key':'Paused',plain(d)];
+  return['fail','Failed',plain(d)]}
  if(/^kept/.test(s))return['skip','Not due',''];
  if(s==='not run'||!s)return['skip','Not run',''];
  if(/^ok/.test(s))return['pass','Fetched',/^ok \(/.test(s)?s.replace(/^ok \(|\)$/g,''):''];
@@ -58,7 +66,8 @@ function rows(m){const lr=m.lastRun||{},out=[];
  for(const [k,v] of Object.entries(lr.nature||{}))out.push({area:'Nature',name:NAT[k]||k,s:v,t:m.nature?.[k]});
  for(const [k,v] of Object.entries(lr.steps||{})){const nm=k.replace(/^\d+:/,'');const hit=STEPS.find(x=>x[0].test(nm));out.push({area:hit?hit[2]:'Other',name:hit?hit[1]:nm,s:v,t:m.steps?.[k]})}
  for(const [k,name,area,at] of OTHER)if(k in lr&&typeof lr[k]==='string')out.push({area,name,s:lr[k],t:at?at(m):null,loose:true});
- return out}
+ // the Tech & Industry section is hidden from visitors, so its sources are left out of the card too
+ return out.filter(r=>!/section hidden/.test(r.area))}
 async function load(){let m;try{m=await (await fetch('data/meta.json?t='+Date.now(),{cache:'no-store'})).json()}catch(e){return}
  try{const lib=document.getElementById('library');if(!lib||!m||!m.lastRun)return;
   let card=document.getElementById('statusCard');
@@ -66,7 +75,7 @@ async function load(){let m;try{m=await (await fetch('data/meta.json?t='+Date.no
   const R=rows(m).map(r=>({...r,st:state(r.s,r.loose)}));const n=c=>R.filter(r=>r.st[0]===c).length;
   const late=(Date.now()-new Date(m.updated))/6e4>45;const attn=R.filter(r=>r.st[0]==='warn'||r.st[0]==='fail');const open=!!card.querySelector('#statusAll[open]');
   const ROW=r=>`<div class="sg-row chk ${r.st[0]}"><span class="t"><span class="ic" title="${esc(r.st[1])}">${{pass:'✓',fail:'✕',warn:'!',skip:'–'}[r.st[0]]}</span> ${esc(r.name)}${r.st[2]&&r.st[2].toLowerCase()!==r.st[1].toLowerCase()?`<span class="sub">${esc(r.st[2])}</span>`:''}</span><span class="v">${esc(r.st[1])}${r.t?' · '+when(r.t):''}</span></div>`;
-  card.innerHTML=`<h3>Collection status</h3><p class="small muted">What the collector did on its last run, group by group. <b>Fetched</b>: the source answered on this run. <b>Not due</b>: the source is on a slower schedule, so the last copy is in use. <b>Paused</b>, <b>Needs a key</b>, <b>No new data</b> and <b>Failed</b> show the collector’s own message. The time on the right is that group’s last successful fetch. Last run ${when(m.updated)}.</p>`+
+  card.innerHTML=`<h3>Collection status</h3><p class="small muted">What the collector did on its last run, group by group. <b>Fetched</b>: the source answered on this run. <b>Not due</b>: the source is on a slower schedule, so the last copy is in use. <b>Paused</b>, <b>Needs a key</b>, <b>No new data</b> and <b>Failed</b> say why, in plain words. The time on the right is that group’s last successful fetch. Last run ${when(m.updated)}.</p>`+
    (late?`<p class="small"><b>The collector has not finished a run in the last 45 minutes.</b> What the site shows is from the last run above.</p>`:'')+
    `<p class="small" id="statusSum"><b>${n('pass')}</b> fetched · <b>${n('skip')}</b> not due · <b>${n('warn')}</b> paused or waiting · <b>${n('fail')}</b> failed · ${R.length} groups</p>`+
    (attn.length?`<p class="small" style="margin:10px 0 4px"><b>Not collecting right now</b></p><div class="sg-list" id="statusAttn">${attn.map(ROW).join('')}</div>`:'')+
