@@ -4,7 +4,7 @@ The Owlmanac Observatory (formerly Open Planet Observatory) is built to inform, 
 
 ## What the page shows
 
-- **Places, not people.** No data about identifiable individuals. Aircraft are counted per map cell; individual tracks, callsigns and registrations are never stored or shown.
+- **Places, not people.** No data about identifiable individuals. Aircraft are counted per map cell, with one exception: the Observation Deck's Airliner scope shows scheduled airline flights near six busy hubs, each as an airline code and aircraft type at a position rounded to about 10 km, published at least 15 minutes after it was recorded. Registrations, flight numbers and transponder codes are never stored or shown, and private, business, government and military aircraft are left out.
 - **Source words only.** Situation descriptions, incident text and headlines are the source's own words. The site does not write, summarize or rephrase them, and no AI-written summaries appear in data panels.
 - **Every number has a source.** Each layer and card names its provider and links to the original.
 - **Blind spots shown.** Coverage gaps, delays and sensor limits are stated where they shape what you see.

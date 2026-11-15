@@ -35,8 +35,19 @@ jobs:
       - run: npm ci
       - id: pages
         uses: actions/configure-pages@v5
+      # Airliners (collector/airliners.mjs): switched on by the repository variable AIRLINERS=1. The snapshot waiting its
+      # 15 minutes is kept encrypted (key: secret AIRLINERS_HOLD_KEY) in this workflow's cache, never in the published files.
+      - name: Restore held airliner snapshot
+        if: vars.AIRLINERS == '1'
+        uses: actions/cache/restore@v4
+        with:
+          path: .hold
+          key: airliners-hold-${{ github.run_id }}
+          restore-keys: airliners-hold-
       - name: Collect data
         env:
+          AIRLINERS: ${{ vars.AIRLINERS }}
+          AIRLINERS_HOLD_KEY: ${{ secrets.AIRLINERS_HOLD_KEY }}
           # Optional repository secrets. Without them the collector uses the shared demo keys.
           NASA_API_KEY: ${{ secrets.NASA_API_KEY }}
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
@@ -50,6 +61,12 @@ jobs:
           # The live site, so a failed source keeps its last good data.
           PREV_BASE_URL: ${{ steps.pages.outputs.base_url }}
         run: node collector/collect.mjs dist/data
+      - name: Save held airliner snapshot
+        if: always() && vars.AIRLINERS == '1' && hashFiles('.hold/airliners.enc') != ''
+        uses: actions/cache/save@v4
+        with:
+          path: .hold
+          key: airliners-hold-${{ github.run_id }}
       - name: Data checks
         # removes any series whose latest value is missing (shown as "no data"), fails on a file that doesn't parse
         run: node collector/sanitize.mjs dist/data
