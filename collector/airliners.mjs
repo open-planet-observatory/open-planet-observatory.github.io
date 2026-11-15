@@ -11,9 +11,7 @@
 // If adsb.lol does not answer, the file says the snapshot failed; an earlier hour's aircraft are never passed off as current.
 // Every snapshot is held privately for at least 15 minutes and checked before publishing (holdAndRelease, below).
 // SWITCH: the collector only calls adsb.lol when the workflow sets AIRLINERS=1. Without it nothing is fetched or written.
-// Library row to add when it is switched on (src/page.tmpl.html, Air & sea):
-//   ["Air & sea","adsb.lol","Scheduled airliners near busy hubs, hourly, positions rounded to about 10 km, no registrations",
-//    "Hourly","go","Open Database License (ODbL 1.0), attribution","https://www.adsb.lol/docs/open-data/api/","map"]
+// Credited in the Library (src/page.tmpl.html, Air & sea: adsb.lol) and described in DATA_POLICY.md ("Places, not people").
 const UA = { 'User-Agent': 'OpenPlanetObservatory/1.0 (open-source research and education dashboard; hello@theowlmanac.com)' };
 export const SOURCE = { name: 'adsb.lol', url: 'https://www.adsb.lol/', api: 'https://api.adsb.lol/', licence: 'Open Database License (ODbL 1.0)', licenceUrl: 'https://opendatacommons.org/licenses/odbl/1-0/' };
 // centre, radius in nautical miles (adsb.lol's limit is 250)
