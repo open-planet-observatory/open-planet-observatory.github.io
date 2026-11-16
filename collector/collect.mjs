@@ -28,6 +28,7 @@ import { collectMoonFeatures } from './moon-features.mjs';
 import { collectWeeklyHunt } from './weeklyhunt.mjs';
 import { collectFindOwl } from './findowl.mjs';
 import { holdAndRelease, readHold, writeHold } from './airliners.mjs';
+import { runForecast } from './forecast.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -284,6 +285,17 @@ if (process.env.AIRLINERS === '1') { let p = null; if (PREV) { try { const r = a
     await writeHold(HOLD, r.hold); if (r.took) meta.airliners.took = r.took; if (r.released) meta.airliners.released = r.released; airl = { out: r.publish, status: r.status }; }
   catch (e) { airl = { out: { v: 1, failed: true, asOf: stamp, error: e.message.slice(0, 160), planes: [] }, status: 'error: ' + e.message.slice(0, 160) }; }
   if (airl.out) await fs.writeFile(path.join(OUT, 'airliners.json'), JSON.stringify(airl.out)); log('airliners', airl.status); }
+// Wind and temperature forecast (collector/forecast.mjs): data/fcst/index.json + f0..f8.bin, NOAA GFS via PacIOOS ERDDAP.
+// Fetched once per 6-hour step; in between, the published files are carried over. Feeds the globe's moving wind.
+let fcst = { status: 'not run' };
+{ let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/fcst/index.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  const prevFile = async n => { try { const r = await fetch(`${PREV}/data/fcst/${n}?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); return r.ok ? new Uint8Array(await r.arrayBuffer()) : null; } catch { return null; } };
+  try { const r = await runForecast({ now, prev: p, prevFile: PREV ? prevFile : async () => null });
+    await fs.mkdir(path.join(OUT, 'fcst'), { recursive: true });
+    for (const [n, b] of r.files) await fs.writeFile(path.join(OUT, 'fcst', n), b);
+    await fs.writeFile(path.join(OUT, 'fcst', 'index.json'), JSON.stringify(r.index)); fcst = { status: r.status }; }
+  catch (e) { fcst = { status: 'error: ' + e.message.slice(0, 160) }; }
+  log('forecast', fcst.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
   const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
@@ -328,7 +340,7 @@ let whunt = { status: 'not run' };
   else try { whunt = await collectWeeklyHunt(OUT, p, now.getTime()); } catch (e) { whunt = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (whunt.out) await fs.writeFile(path.join(OUT, 'hunt.json'), JSON.stringify(whunt.out)); log('weekly hunt', whunt.status); }
 meta.updated = now.toISOString();
-meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, forecast: fcst.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;

@@ -383,13 +383,23 @@ const WX={
   make:()=>['GOES-East_ABI_Band13_Clean_Infrared','GOES-West_ABI_Band13_Clean_Infrared','Himawari_AHI_Band13_Clean_Infrared'].map(l=>{const L=new C.ImageryLayer(gibs3857(l,6),{alpha:.75});L.colorToAlpha=C.Color.BLACK;L.colorToAlphaThreshold=.38;return L})},
  'wx-rain':{name:'Rain & snow, last 30 min',color:'#4cc9f0',legend:'https://gibs.earthdata.nasa.gov/legends/GPM_Precipitation_Rate_H.svg',
   note:'NASA IMERG satellite estimate, about 4–6 hours behind real time.',make:()=>[new C.ImageryLayer(gibs3857('IMERG_Precipitation_Rate_30min',6),{alpha:.85})]},
+ // NOAA GFS model forecast (src/wind.js, data from collector/forecast.mjs): moving wind and a temperature image, now to +48 h
+ 'wx-wind':{name:'Wind forecast, moving (model)',color:'#f1f3f5',custom:'wind',note:'NOAA GFS computer-model forecast of the wind 10 m above the ground, on a 1° grid; not measurements.'},
+ 'wx-temp':{name:'Temperature forecast (model)',color:'#f59f00',custom:'temp',note:'NOAA GFS computer-model forecast of the air temperature 2 m above the ground, on a 1° grid; not measurements.'},
  'wx-sst':{name:'Sea temperature vs normal',color:'#ff6b6b',legend:'https://gibs.earthdata.nasa.gov/legends/GHRSST_Sea_Surface_Temperature_Anomalies_H.svg',
   note:'Daily difference from the long-term average (GHRSST MUR, 0.25°). The warm tongue along the equator in the Pacific is El Niño.',make:()=>[new C.ImageryLayer(gibs4326('GHRSST_L4_MUR25_Sea_Surface_Temperature_Anomalies','2km',5),{alpha:.8})]},
 };
 const wxLayers={};
 Object.entries(WX).forEach(([id,w])=>{document.documentElement.style.setProperty('--c-'+id,w.color);O.addLayer({id,name:w.name,color:'--c-'+id,shape:'square',count:'3D only',on:false,group:'Weather & ocean'});
  const b=document.getElementById('chip-'+id);if(b)b.title=w.note});
-function syncWx(){Object.entries(WX).forEach(([id,w])=>{const on=chipOn(id)&&active;if(on&&!wxLayers[id]){wxLayers[id]=w.make();wxLayers[id].forEach(L=>viewer.imageryLayers.add(L));if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer)}
+if(window.OwlWind)window.OwlWind.attach(viewer,C);
+function syncWx(){Object.entries(WX).forEach(([id,w])=>{const on=chipOn(id)&&active;
+ if(w.custom){const OW=window.OwlWind;if(!OW)return;OW.set(w.custom,on).then(()=>{if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer)}).catch(()=>{});
+  let lg=document.getElementById('lg-'+id);const chip=document.getElementById('chip-'+id);
+  if(on&&!lg&&chip){lg=document.createElement('div');lg.id='lg-'+id;lg.className='wx-legend fc-legend';chip.after(lg)}
+  if(lg){lg.hidden=!on;if(on){lg.innerHTML=OW.legend(w.custom);OW.ready().then(()=>{lg.innerHTML=OW.legend(w.custom)})}}
+  return}
+ if(on&&!wxLayers[id]){wxLayers[id]=w.make();wxLayers[id].forEach(L=>viewer.imageryLayers.add(L));if(nightLayer)viewer.imageryLayers.raiseToTop(nightLayer)}
  if(wxLayers[id])wxLayers[id].forEach(L=>L.show=on);
  let lg=document.getElementById('lg-'+id);const chip=document.getElementById('chip-'+id);
  if(on&&!lg&&chip){lg=document.createElement('div');lg.id='lg-'+id;lg.className='wx-legend';lg.innerHTML=`<img src="${w.legend}" alt="Legend: ${esc(w.name)}" loading="lazy"><span>${esc(w.note)}</span>`;chip.after(lg)}

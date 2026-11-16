@@ -1494,3 +1494,9 @@ html.slim .brand-em{display:none}
 .owl-hid{position:absolute;z-index:2;display:none;background:url(brand/emblem-spin.webp) 0 0 no-repeat;filter:drop-shadow(0 0 3px rgb(0 0 0 / .7));cursor:pointer;pointer-events:auto}
 
 .ut-grow{margin:0 0 10px;padding:7px 10px;border-left:3px solid rgb(217 164 65 / .7);background:rgb(255 255 255 / .03);border-radius:0 8px 8px 0} /* 11 Nov 2026: the Untold collection is small and growing, said up front */
+
+/* forecast legend (src/wind.js): colour bar, ticks, time slider */
+#ops-rail .fc-legend .fc-bar,#owlDeck .fc-bar{height:10px;border-radius:3px}
+#ops-rail .fc-legend .fc-ticks,#owlDeck .fc-ticks{display:flex;justify-content:space-between;font-size:.66rem;font-variant-numeric:tabular-nums}
+.fc-step{display:flex;flex-direction:column;gap:3px}.fc-step .fc-time{color:var(--ink-2)}.fc-step input{width:100%;accent-color:var(--accent,#4cc9f0)}
+#ops-rail .fc-legend .db{margin-top:2px;padding-top:4px;font-size:.66rem}
