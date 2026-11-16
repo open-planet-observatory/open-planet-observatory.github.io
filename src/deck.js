@@ -139,16 +139,16 @@ function drawWind(el){const OW=window.OwlWind,d3=window.d3,O=window.__obs;
   g.strokeStyle=css('--dk-line');g.lineWidth=1;g.beginPath();path({type:'Sphere'});g.stroke();g.fillStyle=css('--dk-land');g.strokeStyle=css('--dk-coast');g.lineWidth=.5;O.countries.forEach(f=>{g.beginPath();path(f);g.fill();g.stroke()});
   const pp=pr([pl[2],pl[1]]);if(pp){g.fillStyle=css('--dk-accent');g.beginPath();g.arc(pp[0],pp[1],3,0,7);g.fill()}
   const sc=css('--dk-scope'),t=top.g,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,N=Math.round(Math.min(2500,w*h/120));let F=null,P=[];
-  const spawn=q=>{q.lon=Math.random()*360-180;q.lat=Math.asin(2*Math.random()-1)/R;q.age=0;q.life=reduce?12:60+Math.random()*80;return q};
+  const spawn=q=>{q.lon=Math.random()*360-180;q.lat=Math.asin(2*Math.random()-1)/R;q.age=0;q.life=reduce?12:140+Math.random()*180;return q};
   const sideLine=()=>{el.querySelector('.dk-wpt').innerHTML=wpt(F)};
   const set=()=>OW.field().then(f=>{if(!f||!el.isConnected)return;F=f;P=[];for(let i=0;i<N;i++)P.push(spawn({}));t.clearRect(0,0,w,h);sideLine();
    el.querySelector('.fc-time').textContent=f.label;el.querySelector('.fc-slider').value=f.i;if(reduce)still()});
   const mv=(q,k)=>{const s=F.sample(q.lon,q.lat);if(!isFinite(s[0])){q.age=q.life;return 0}q.lon+=s[0]*k/Math.max(.2,Math.cos(q.lat*R));q.lat+=s[1]*k;if(q.lon>180)q.lon-=360;if(q.lon<-180)q.lon+=360;if(Math.abs(q.lat)>89)q.age=q.life;return Math.hypot(s[0],s[1])};
   function still(){t.clearRect(0,0,w,h);t.strokeStyle=sc;t.lineWidth=1;P.forEach(q=>{let a=pr([q.lon,q.lat]);t.globalAlpha=.6;t.beginPath();for(let i=0;i<10;i++){mv(q,.06);const b=pr([q.lon,q.lat]);if(a&&b&&Math.abs(b[0]-a[0])<20){t.moveTo(a[0],a[1]);t.lineTo(b[0],b[1])}a=b}t.stroke()});t.globalAlpha=1}
   function loop(){if(!top.c.isConnected){off();return}top.c._raf=requestAnimationFrame(loop);if(!F||reduce)return;
-   t.globalCompositeOperation='destination-in';t.fillStyle='rgba(0,0,0,.92)';t.fillRect(0,0,w,h);t.globalCompositeOperation='source-over';t.strokeStyle=sc;t.lineWidth=1;
+   t.globalCompositeOperation='destination-in';t.fillStyle='rgba(0,0,0,.965)';t.fillRect(0,0,w,h);t.globalCompositeOperation='source-over';t.strokeStyle=sc;t.lineWidth=1;
    const B=[new Path2D(),new Path2D(),new Path2D()];
-   P.forEach(q=>{if(q.age++>q.life){spawn(q);return}const a=pr([q.lon,q.lat]),sp=mv(q,.012),b=pr([q.lon,q.lat]);if(a&&b&&Math.abs(b[0]-a[0])<20){const k=Math.min(2,Math.floor(sp/6));B[k].moveTo(a[0],a[1]);B[k].lineTo(b[0],b[1])}});
+   P.forEach(q=>{if(q.age++>q.life){spawn(q);return}const a=pr([q.lon,q.lat]),sp=mv(q,.005),b=pr([q.lon,q.lat]);if(a&&b&&Math.abs(b[0]-a[0])<20){const k=Math.min(2,Math.floor(sp/6));B[k].moveTo(a[0],a[1]);B[k].lineTo(b[0],b[1])}});
    [.35,.6,.95].forEach((al,i)=>{t.globalAlpha=al;t.stroke(B[i])});t.globalAlpha=1}
   const off=OW.onChange(()=>{if(el.isConnected)set();else off()});set();loop();
   // the panel can still change size after fonts load or the deck settles: redraw at the new size
