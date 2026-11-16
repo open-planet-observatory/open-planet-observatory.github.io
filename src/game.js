@@ -240,7 +240,9 @@
   }
   let opener = null;
   async function open() {
+    if (window.OwlFindOwl && document.getElementById('findowl')) window.OwlFindOwl.close(); /* choosing this game leaves Find the owl (its progress is kept) */
     if (html.classList.contains('game-on')) return; opener = document.activeElement;
+    for (const x of ['#fdX', '#phX']) { const b = document.querySelector(x); if (b && b.offsetParent) b.click(); } /* the Forecast Desk or Play page would otherwise cover the game */
     if (document.querySelector('#uni.on') && window.__obs.closeUniverse) window.__obs.closeUniverse();
     shell(); message('Loading today\'s puzzle…', 'Five rounds from today\'s real data.');
     if (!window.__obs3d) { message('The game needs the 3D globe', 'Your browser has not started the 3D globe (it needs WebGL). Try reloading, or another browser.'); return; }
@@ -273,7 +275,7 @@
   addEventListener('keydown', e => { if (e.key !== 'Escape' || !html.classList.contains('game-on') || !ui) return; /* only this game's own Escape (Find the owl also uses 'game-on') */ const lb = document.querySelector('.woe-lb'); if (lb) { lb.remove(); return; } if (/input/i.test(e.target.tagName)) return; close(); });
   addEventListener('obs:play', open);
   addEventListener('hashchange', () => { if (location.hash === '#play') open(); });
-  window.__obs && (window.__obs.openGame = open);
+  window.__obs && (window.__obs.openGame = open, window.__obs.closeGame = () => { if (ui) close(); });
   // a #play link opens the game once the globe is ready
   if (window.__wantPlay || location.hash === '#play') { let n = 0; const t = setInterval(() => { if (window.__obs3d || ++n > 60) { clearInterval(t); setTimeout(open, 600); } }, 500); }
 })();
