@@ -52,7 +52,12 @@ const W={
  status:{title:'Internet & cloud status',w:4,h:6,src:()=>SRC.status,asof:()=>(window.DIS||{}).asOf,draw:drawStatus},
  stations:{title:'Space stations now',w:4,h:4,src:()=>SRC.celes,asof:()=>'',draw:drawStations},
  skynow:{title:'Sun and Moon now',w:4,h:4,src:()=>SRC.astro,asof:()=>'',draw:drawSkyNow},
- voyager:{title:'Voyager 1',w:4,h:3,src:()=>SRC.jpl,asof:()=>'',draw:drawVoyager}};
+ voyager:{title:'Voyager 1',w:4,h:3,src:()=>SRC.jpl,asof:()=>'',draw:drawVoyager},
+ /* four new feeds (16 Nov 2026): collector/snap.mjs nhc, tsunami, aurora, volcanoes; U.S. government, public domain */
+ hurricanes:{title:'Hurricane Center',w:4,h:4,src:()=>'NOAA National Hurricane Center · public domain',asof:()=>((window.SNAP||{}).nhc||{}).asOf,draw:drawNhc},
+ tsunami:{title:'Tsunami messages',w:4,h:5,src:()=>'NOAA Tsunami Warning Centers · public domain',asof:()=>((window.SNAP||{}).tsunami||{}).asOf,draw:drawTsunami},
+ aurora:{title:'Aurora forecast',w:4,h:5,src:()=>'NOAA SWPC OVATION · public domain',asof:()=>((window.SNAP||{}).aurora||{}).asOf,draw:drawAurora},
+ volcanoes:{title:'U.S. volcano alerts',w:4,h:6,src:()=>'USGS Volcano Hazards Program · public domain',asof:()=>((window.SNAP||{}).volcanoes||{}).asOf,draw:drawVolcanoes}};
 const DEFAULT={look:'mix',place:0,panels:['map','qscope','wind','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
 let st=Object.assign({},DEFAULT,load()||{}),root,grid,timer,anim,prevLoop=null,opened=false;
 if(!Array.isArray(st.panels))st.panels=DEFAULT.panels.slice();st.panels=st.panels.filter(p=>W[p.t]);
@@ -177,6 +182,16 @@ function skyTick(el){const A=window.Astronomy,box=el.querySelector('.dk-sky');if
  const s=sub('Sun'),m=sub('Moon'),ill=A.Illumination('Moon',d),ph=A.MoonPhase(d);
  box.innerHTML=row('Sun',ll(s[0],s[1]),'overhead now')+row('Moon',ll(m[0],m[1]),`${Math.round(ill.phase_fraction*100)}% lit, ${ph<180?'waxing':'waning'}`)}
 function drawVoyager(el){const v=window.VOYAGER_TICK;el.innerHTML=v?`<div class="dk-big">${esc(v[1])}</div><p class="dk-dim">${esc(v[0])}, counted from its distance as NASA JPL Horizons gives it. <a href="${esc(v[2])}" target="_blank" rel="noopener">Mission page</a></p>`:none('Voyager distance not loaded.')}
+function drawNhc(el){const N=(window.SNAP||{}).nhc;if(!N){el.innerHTML=none('Hurricane Center data not collected yet.');return}const I=N.items||[];
+ el.innerHTML=I.length?`<div class="dk-tab">${I.map(x=>row(x.cls,x.name,`${x.kt!=null?x.kt+' kt':''}${x.mb?' · '+x.mb+' mb':''}${x.lat!=null?' · '+ll(x.lat,x.lon):''}${x.move?' · moving '+x.move:''}`,x.url)).join('')}</div>`:none('No active storms in the Atlantic, East or Central Pacific, as the National Hurricane Center reports it.')}
+function drawTsunami(el){const T=(window.SNAP||{}).tsunami;if(!T){el.innerHTML=none('Tsunami bulletins not collected yet.');return}
+ el.innerHTML=`<div class="dk-tab">${(T.items||[]).map(x=>`<div><span class="dk-k">${esc(x.cat||'')}</span><span><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)}</a></span><span class="dk-dim">${esc(x.center)} · ${esc(x.place)}${x.mag?' · '+esc(x.mag):''} · ${esc(String(x.updated).slice(0,16).replace('T',' '))} UTC${x.note?'<br>'+esc(x.note):''}</span></div>`).join('')}</div><p class="dk-dim">The latest message from each center, which may be days old. In an emergency, follow local officials.</p>`}
+function drawAurora(el){const A=(window.SNAP||{}).aurora;if(!A||!(A.last||[]).length){el.innerHTML=none('Aurora forecast not collected yet.');return}const L=A.last,n=L[L.length-1];
+ el.innerHTML=`<div class="dk-row"><span><b>${n[2]} GW</b> north</span><span><b>${n[3]} GW</b> south</span>${A.lowN10!=null?`<span>10%+ chance overhead as far south as <b>${A.lowN10}°N</b></span>`:''}</div><div class="dk-spark"></div><p class="dk-dim">Hemispheric power from NOAA's OVATION model, past 2 hours; forecast for ${esc(String(A.fc).slice(11,16))} UTC.</p>`;
+ const {g,W:w,H:h}=canvasIn(el.querySelector('.dk-spark')),mx=Math.max(20,...L.map(r=>Math.max(r[2],r[3])));
+ [[2,css('--dk-scope')],[3,css('--dk-dim')]].forEach(([k,c])=>{g.strokeStyle=c;g.lineWidth=1.5;g.beginPath();L.forEach((r,i)=>{const x=i*(w-4)/Math.max(1,L.length-1)+2,y=h-4-(h-14)*r[k]/mx;i?g.lineTo(x,y):g.moveTo(x,y)});g.stroke()})}
+function drawVolcanoes(el){const V=(window.SNAP||{}).volcanoes;if(!V){el.innerHTML=none('Volcano alerts not collected yet.');return}const I=V.items||[];
+ el.innerHTML=I.length?`<div class="dk-tab">${I.map(x=>`<div><span class="dk-k vc-${esc(String(x.color).toLowerCase())}">${esc(x.color)}</span><span><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a> <span class="dk-dim">${esc(x.level)}${x.prevLevel&&x.prevLevel!==x.level?' (was '+esc(x.prevLevel)+')':''}</span></span><span class="dk-dim">${esc(x.syn)}</span></div>`).join('')}</div><p class="dk-dim">U.S. volcanoes only; the rest are normal (green).</p>`:none('No U.S. volcano is at an elevated alert level, as USGS reports it.')}
 function drawClocks(el){el.innerHTML='<div class="dk-clocks"></div>';el._clock=true}
 function tick(){if(root){root.querySelectorAll('.dk-p[data-t="stations"] .dk-body').forEach(stationsTick);root.querySelectorAll('.dk-p[data-t="skynow"] .dk-body').forEach(skyTick);root.querySelectorAll('.dk-p[data-t="voyager"] .dk-body').forEach(drawVoyager)}const now=new Date(),u=root&&root.querySelector('#dkUtc');if(u)u.textContent=now.toISOString().slice(0,19).replace('T',' ')+' UTC';
  root&&root.querySelectorAll('.dk-clocks').forEach(c=>{c.innerHTML=[['UTC','UTC'],['Your time',undefined],['Tokyo','Asia/Tokyo'],['London','Europe/London'],['New York','America/New_York'],['Los Angeles','America/Los_Angeles']].map(([n,z])=>{let s='';try{s=now.toLocaleTimeString('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){}return`<div><span class="dk-dim">${n}</span><b>${s}</b></div>`}).join('')})}
@@ -227,7 +242,7 @@ html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
 #owlDeck .dk-wmap{flex:1;min-height:140px;position:relative;overflow:hidden}#owlDeck .dk-wpt{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.78rem;margin-bottom:4px}#owlDeck .dk-wstep{margin-top:6px;font-size:.72rem}#owlDeck .dk-wstep input{accent-color:var(--dk-accent)}.dk-scope-row.wide .dk-scope{min-width:0}.dk-scope-row.wide .dk-list{width:42%;flex:none;overflow:auto;align-self:center;max-height:100%}#owlDeck [hidden]{display:none!important}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
 #owlDeck .dk-p[data-t=map] .dk-body{position:relative}
 #owlDeck .dk-list>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-top:1px dotted var(--dk-line)}
-#owlDeck .dk-big{font-size:1.15rem;color:var(--dk-accent);margin:6px 0 8px;line-height:1.35}#owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
+#owlDeck .vc-red{color:#e5534b}#owlDeck .vc-orange{color:#e8913a}#owlDeck .vc-yellow{color:#d9c441}#owlDeck .dk-big{font-size:1.15rem;color:var(--dk-accent);margin:6px 0 8px;line-height:1.35}#owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
 #owlDeck .dk-clocks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}#owlDeck .dk-clocks div{display:flex;flex-direction:column}#owlDeck .dk-clocks b{font-weight:400;font-size:15px;color:var(--dk-accent)}
 #owlDeck .dk-foot{margin:10px 2px 0;color:var(--dk-dim);font-size:10.5px}
 @media (max-width:900px){#owlDeck .dk-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#owlDeck .dk-p{grid-column:span 4!important}}`;

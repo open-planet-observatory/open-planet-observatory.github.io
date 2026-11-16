@@ -304,8 +304,52 @@ export const GROUPS = {
     }
     return { news: { days: days.map(k => k.slice(4, 6) + '-' + k.slice(6, 8)), series } };
   },
+  // ----- Four feeds for the Observation Deck (16 Nov 2026, the maintainer chose "new feeds"); all U.S. government, public domain -----
+  // NOAA National Hurricane Center: active Atlantic, East and Central Pacific storms with NHC's own classification and advisory link.
+  async nhc() {
+    const j = await J('https://www.nhc.noaa.gov/CurrentStorms.json');
+    const items = (j.activeStorms || []).map(s => ({ id: s.id, name: s.name, cls: s.classification || '', kt: s.intensity == null ? null : +s.intensity, mb: s.pressure == null ? null : +s.pressure,
+      lat: s.latitudeNumeric == null ? null : r1(+s.latitudeNumeric), lon: s.longitudeNumeric == null ? null : r1(+s.longitudeNumeric), move: [s.movementDir, s.movementSpeed].filter(x => x != null && x !== '').join(' '),
+      upd: s.lastUpdate || '', url: (s.publicAdvisory && s.publicAdvisory.url) || 'https://www.nhc.noaa.gov/' }));
+    return { nhc: { asOf: new Date().toISOString().slice(0, 16) + 'Z', items } };
+  },
+  // NOAA tsunami warning centers (Palmer AK and Honolulu): the latest bulletin of each, in the centers' own words.
+  async tsunami() {
+    const one = async (code, center) => {
+      const x = await T(`https://www.tsunami.gov/events/xml/${code}Atom.xml`);
+      const tag = (s, t) => { const m = s.match(new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`)); return m ? m[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim() : ''; };
+      const head = x.split('<entry>')[0], e = (x.split('<entry>')[1] || '');
+      const field = n => { const m = e.match(new RegExp(`<strong>${n}:\\s*</strong>([\\s\\S]*?)<br`)); return m ? m[1].replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim() : ''; };
+      const note = (e.match(/<b>Note:<\/b>([\s\S]*?)<br/) || [])[1] || '';
+      const link = (e.match(/rel="alternate"[^>]*href="([^"]+)"/) || [])[1] || 'https://www.tsunami.gov/';
+      return { center, title: tag(head, 'title'), updated: tag(head, 'updated'), place: tag(e, 'title'), cat: field('Category'), mag: field('Preliminary Magnitude'),
+        lat: +tag(e, 'geo:lat') || null, lon: +tag(e, 'geo:long') || null, note: note.replace(/<[^>]+>/g, '').replace(/^\s*\*\s*/, '').replace(/\s+/g, ' ').trim(), url: link };
+    };
+    const items = [];
+    for (const [c, n] of [['PAAQ', 'National Tsunami Warning Center (Palmer, Alaska)'], ['PHEB', 'Pacific Tsunami Warning Center (Honolulu)']]) { try { items.push(await one(c, n)); } catch (e) { /* one center failing keeps the other */ } }
+    if (!items.length) throw new Error('tsunami.gov feeds unreadable');
+    return { tsunami: { asOf: new Date().toISOString().slice(0, 16) + 'Z', items } };
+  },
+  // NOAA SWPC OVATION aurora: hemispheric power (gigawatts, past 2 h at 5-minute steps) and, in the northern hemisphere, the lowest
+  // latitude where OVATION gives a 10% or higher chance of aurora overhead (a reading of the model's own grid, not a score).
+  async aurora() {
+    const t = await T('https://services.swpc.noaa.gov/text/aurora-nowcast-hemi-power.txt');
+    const rows = t.split('\n').filter(l => /^\d{4}-\d\d-\d\d_/.test(l)).map(l => l.trim().split(/\s+/)).map(a => [a[0].replace('_', 'T') + 'Z', a[1].replace('_', 'T') + 'Z', +a[2], +a[3]]).filter(r => Number.isFinite(r[2]));
+    if (!rows.length) throw new Error('SWPC hemispheric power empty');
+    const o = await J('https://services.swpc.noaa.gov/json/ovation_aurora_latest.json');
+    let low = null, max = 0; for (const [, la, p] of o.coordinates || []) { if (p > max) max = p; if (la > 0 && p >= 10 && (low == null || la < low)) low = la; }
+    return { aurora: { asOf: new Date().toISOString().slice(0, 16) + 'Z', obs: o['Observation Time'] || '', fc: o['Forecast Time'] || '', last: rows.slice(-24), lowN10: low, maxP: max } };
+  },
+  // USGS Volcano Hazards Program: U.S. volcanoes at an elevated alert level, with the observatory's own synopsis.
+  async volcanoes() {
+    const a = await J('https://volcanoes.usgs.gov/vsc/api/volcanoApi/elevated');
+    const items = (Array.isArray(a) ? a : []).map(v => ({ name: v.vName, lat: r1(+v.lat), lon: r1(+v.long), level: v.alertLevel, color: v.colorCode, prevLevel: v.alertLevelPrev || '', prevColor: v.colorCodePrev || '',
+      changed: v.codeChangeDate || '', sent: v.sentUtc || '', obs: String(v.obs || '').toUpperCase(), syn: v.noticeSynopsis || '', url: v.noticeUrl || 'https://www.usgs.gov/programs/VHP' }));
+    return { volcanoes: { asOf: new Date().toISOString().slice(0, 16) + 'Z', items } };
+  },
 };
 
 // How often each group is refreshed, in minutes. The workflow runs every 10 minutes.
 export const EVERY = { quakes: 10, alerts: 10, eonet: 30, air: process.env.OPENSKY_CLIENT_ID ? 10 : 30, // anonymous OpenSky access has a small daily allowance
-  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10, storms: 30, groundRad: 30, relief: 360, lora: 1440 };
+  space: 30, tle: 360, fires: 60, satGroups: 1440, news: 360, aiModels: 360, enso: 360, radiation: 10, storms: 30, groundRad: 30, relief: 360, lora: 1440,
+  nhc: 30, tsunami: 10, aurora: 10, volcanoes: 30 };
