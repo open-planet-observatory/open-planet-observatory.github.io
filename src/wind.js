@@ -51,7 +51,9 @@ document.addEventListener('input',e=>{if(e.target.classList&&e.target.classList.
 function particles(viewer,C){const scene=viewer.scene,host=viewer.container;const cv=document.createElement('canvas');cv.className='fc-wind';
  cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';host.appendChild(cv);const ctx=cv.getContext('2d');
  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
- const HL=12,EVERY=4,RAD=Math.PI/180,A=6378137,E2=0.00669437999014;
+ // SPEED: degrees moved per frame for 1 m/s at full-globe height (16 Nov: slowed from .012 to .005 at the maintainer's request);
+ // a trail point is kept every EVERY frames, so trail length stays about the same when SPEED changes (SPEED x EVERY ~ .05)
+ const SPEED=.005,HL=12,EVERY=10,RAD=Math.PI/180,A=6378137,E2=0.00669437999014;
  let on=false,field=null,P=[],dpr=1,tick=0;const VP=new C.Matrix4();let m=VP,cx=0,cy=0,cz=0;
  const count=()=>innerWidth<700?1000:3500;
  const ecef=(lon,lat,o)=>{const la=lat*RAD,lo=lon*RAD,sl=Math.sin(la),cl=Math.cos(la),n=A/Math.sqrt(1-E2*sl*sl);o[0]=n*cl*Math.cos(lo);o[1]=n*cl*Math.sin(lo);o[2]=n*(1-E2)*sl;return o};
@@ -62,7 +64,7 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
   if(nx<-1.2||nx>1.2||ny<-1.2||ny>1.2)return null;o[0]=(nx+1)/2*cv.width;o[1]=(1-ny)/2*cv.height;return o}
  function spawn(p){let lon,lat;const r=Math.random()<.85?scene.camera.pickEllipsoid(new C.Cartesian2(Math.random()*cv.clientWidth,Math.random()*cv.clientHeight)):null;
   if(r){const g=C.Cartographic.fromCartesian(r);lon=C.Math.toDegrees(g.longitude);lat=C.Math.toDegrees(g.latitude)}else{lon=Math.random()*360-180;lat=Math.asin(2*Math.random()-1)/RAD}
-  p.h=[lon,lat];p.lon=lon;p.lat=lat;p.age=0;p.life=(reduce?1:120+Math.random()*120);p.spd=0;return p}
+  p.h=[lon,lat];p.lon=lon;p.lat=lat;p.age=0;p.life=(reduce?1:240+Math.random()*240);p.spd=0;return p}
  function step(p,f){const s=sample(field,p.lon,p.lat);if(!isFinite(s[0])){p.age=p.life;return}const c=Math.max(.15,Math.cos(p.lat*RAD));
   p.lon+=s[0]*f/c;p.lat+=s[1]*f;p.spd=Math.hypot(s[0],s[1]);if(p.lat>89.5||p.lat<-89.5)p.age=p.life}
  const push=p=>{p.h.push(p.lon,p.lat);if(p.h.length>2*HL)p.h.splice(0,2)};
@@ -70,7 +72,7 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
  const BUCKETS=[.25,.45,.7,.95];const a=[0,0],b=[0,0];
  function draw(){if(!on||!field||document.hidden||document.documentElement.classList.contains('map2d')){if(on)ctx.clearRect(0,0,cv.width,cv.height);return}size();
   const c=scene.camera;C.Matrix4.multiply(c.frustum.projectionMatrix,c.viewMatrix,VP);m=VP;cx=c.positionWC.x;cy=c.positionWC.y;cz=c.positionWC.z;
-  const hgt=Math.max(1e5,c.positionCartographic.height),f=.012*Math.min(1.4,Math.max(.01,hgt/1.6e7));tick++;
+  const hgt=Math.max(1e5,c.positionCartographic.height),f=SPEED*Math.min(1.4,Math.max(.01,hgt/1.6e7));tick++;
   while(P.length<count()){const p=spawn({});if(reduce){for(let i=0;i<HL;i++){step(p,f*EVERY);push(p)}}P.push(p)}if(P.length>count())P.length=count();
   ctx.clearRect(0,0,cv.width,cv.height);
   const head=BUCKETS.map(()=>new Path2D()),tail=BUCKETS.map(()=>new Path2D());
