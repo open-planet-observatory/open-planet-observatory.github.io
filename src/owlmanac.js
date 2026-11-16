@@ -155,12 +155,18 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
    in a wide banner, a side panel or a card; if the crop cuts that spot off, it is simply not shown. Clicking one opens the
    emblem card. The Play banner is left as it is. */
 (function(){const EM={'hub-about':[.93,.44,.93,.44],'hub-classroom':[.93,.32,.89,.42],'hub-people':[.59,.43,.59,.43],'hub-planet':[.5,.28,.6,.45],'hub-sky':[.69,.4,.69,.39],'hub-space':[.76,.61,.68,.42],'sec-cams':[.11,.48,.09,.48],'sec-changes':[.48,.42,.28,.38],'sec-climate':[.16,.42,.16,.42],'sec-contact':[.31,.47,.31,.47],'sec-disruptions':[.44,.3,.25,.38],'sec-free':[.08,.3,.2,.43],'sec-history':[.2,.3,.37,.38],'sec-inside':[.41,.4,.1,.44],'sec-layers':[.93,.47,.1,.45],'sec-library':[.33,.51,.34,.49],'sec-nature':[.41,.31,.12,.39],'sec-records':[.7,.59,.11,.45],'sec-relief':[.25,.56,.1,.41],'sec-signals':[.37,.55,.21,.41],'sec-situations':[.17,.52,.14,.43],'sec-sky':[.13,.39,.13,.39],'sec-unexplained':[.39,.33,.14,.38],'sec-untold':[.24,.52,.24,.49],'sec-watchlist':[.21,.59,.18,.46],'sec-worlds':[.37,.35,.12,.48],'card-about':[.62,.52,.25,.49],'card-edge':[.17,.58,.13,.39],'card-galaxy':[.36,.3,.19,.38],'card-moon':[.26,.3,.19,.47],'card-skychart':[.25,.59,.13,.39],'card-skyevents':[.37,.59,.12,.49],'card-skyiss':[.66,.36,.25,.42],'card-skymoon':[.1,.35,.08,.38],'card-solar':[.43,.44,.16,.38],'card-web':[.62,.39,.1,.47]};
+ /* Pictures with an empty dark left side (the house style leaves room there): the emblem sits centred in that space, across
+    and down the part on screen (11-15 Nov 2026, the maintainer: "center the rotating image in the negative space"). Value =
+    where the artwork starts, as a fraction of the picture's width, measured from the pictures. Menu-page banners are left out:
+    their text sits in that space. */
+ const VOID={'sec-cams':.31,'sec-changes':.35,'sec-contact':.59,'sec-free':.48,'sec-inside':.43,'sec-layers':.42,'sec-library':.39,'sec-nature':.32,'sec-records':.45,'sec-relief':.39,'sec-signals':.42,'sec-situations':.36,'sec-sky':.52,'sec-unexplained':.32,'sec-untold':.37,'sec-watchlist':.35,'sec-worlds':.51,'card-about':.59,'card-edge':.42,'card-galaxy':.37,'card-skychart':.63,'card-skyevents':.72,'card-skyiss':.67,'card-skymoon':.58,'card-solar':.43,'card-web':.46};
  const SZ=.032,MIN=20,MAX=46;
  function place(box){const img=box.querySelector('img'),e=box.querySelector(':scope > .owl-hid');if(!img||!e)return;const p=e._p,W=box.clientWidth,H=box.clientHeight;if(!W||!H){e.style.display='none';return;}
   const ir=img.getBoundingClientRect(),br=box.getBoundingClientRect(),cs=getComputedStyle(img),iw0=img.naturalWidth||1280,ih0=img.naturalHeight||720,fw=ir.width,fh=ir.height;
   let sc=cs.objectFit==='cover'?Math.max(fw/iw0,fh/ih0):Math.min(fw/iw0,fh/ih0);const iw=iw0*sc,ih=ih0*sc;const op=cs.objectPosition.split(' ').map(v=>parseFloat(v)/100);const ox=(ir.left-br.left)+(fw-iw)*(isNaN(op[0])?.5:op[0]),oy=(ir.top-br.top)+(fh-ih)*(isNaN(op[1])?.5:op[1]);
   const s=Math.round(Math.max(MIN,Math.min(MAX,SZ*iw)));let at=null;
-  for(const [px,py] of [[p[0],p[1]],[p[2],p[3]]]){const x=Math.round(ox+px*iw-s/2),y=Math.round(oy+py*ih-s/2);if(x>=ir.left-br.left&&x+s<=ir.right-br.left&&y>=ir.top-br.top&&y+s<=ir.bottom-br.top){at=[x,y];break;}} /* the chosen spot, or a second one that survives a tight crop (cards) */
+  const vd=e._v;if(vd){const vx=ox+vd/2*iw,top=Math.max(oy,ir.top-br.top),bot=Math.min(oy+ih,ir.bottom-br.top);at=[Math.round(vx-s/2),Math.round((top+bot)/2-s/2)];}
+  if(!at)for(const [px,py] of [[p[0],p[1]],[p[2],p[3]]]){const x=Math.round(ox+px*iw-s/2),y=Math.round(oy+py*ih-s/2);if(x>=ir.left-br.left&&x+s<=ir.right-br.left&&y>=ir.top-br.top&&y+s<=ir.bottom-br.top){at=[x,y];break;}} /* the chosen spot, or a second one that survives a tight crop (cards) */
   e._s=s;e.style.cssText=at?`width:${s}px;height:${s}px;left:${at[0]}px;top:${at[1]}px;display:block;background-size:${s*N}px ${s}px;background-position:${-e._f*s}px 0`:'display:none';}
  /* one shared clock turns every emblem a frame at a time, on whole pixels, so a frame never shows a sliver of its neighbour
     (11 Nov 2026: CSS stepping on a percentage-sized sprite drifted and split in Safari) */
@@ -168,7 +174,7 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
  if(!still)setInterval(()=>{if(document.hidden)return;for(const e of live){if(!e.isConnected){live.delete(e);continue;}if(e.style.display!=='block')continue;e._f=(e._f+1)%N;e.style.backgroundPosition=`${-e._f*e._s}px 0`;}},125);
  const ro=new ResizeObserver(es=>es.forEach(x=>place(x.target)));
  window.OwlHideEm=function(box){if(!box||box._hid)return;const img=box.querySelector('img');if(!img)return;const m=(img.getAttribute('src')||'').match(/owl-((?:hub|sec|card)-[a-z]+)\.webp/);const p=m&&EM[m[1]];if(!p)return;box._hid=1;
-  const e=document.createElement('span');e.className='owl-hid';e._p=p;e.title='You found the Owlmanac emblem';e.setAttribute('aria-hidden','true');e._f=Math.floor(Math.random()*N);live.add(e);
+  const e=document.createElement('span');e.className='owl-hid';e._p=p;e._v=VOID[m[1]]||0;e.title='You found the Owlmanac emblem';e.setAttribute('aria-hidden','true');e._f=Math.floor(Math.random()*N);live.add(e);
   e.addEventListener('click',ev=>{ev.stopPropagation();ev.preventDefault();if(window.OwlEmblemCard&&window.OwlEmblemCard.show)window.OwlEmblemCard.show();});
   box.appendChild(e);const go=()=>place(box);if(img.complete)go();else img.addEventListener('load',go,{once:true});ro.observe(box);};})();
 /* Section banners (11 Nov 2026, "blanket the site with imagery that reinforces the owl brand"): an Atlabs illustration in the
