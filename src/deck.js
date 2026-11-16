@@ -124,20 +124,23 @@ function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind===
 function drawWind(el){const OW=window.OwlWind,d3=window.d3,O=window.__obs;
  if(!OW||!d3||!O||!O.countries){el.innerHTML='<p class="dk-dim">The wind panel needs the 3D globe’s forecast data and the page’s country shapes, which have not loaded.</p>';return}
  el.innerHTML='<p class="dk-dim">Loading the forecast…</p>';
- OW.ready().then(j=>{if(!el.isConnected)return;
+ const pl=PLACES[st.place]||PLACES[0];
+ // the city line, written before the map is measured: if it wraps to a second line later, the map box would shrink and redraw
+ const wpt=f=>{if(!f)return'&nbsp;';const s=f.sample(pl[2],pl[1]),sp=Math.hypot(s[0],s[1]),from=(Math.atan2(-s[0],-s[1])/R+360)%360;
+  return isFinite(sp)?`<b>${esc(pl[0])}</b> <span>${Math.round(sp*3.6)} km/h (${Math.round(sp*2.237)} mph) from the ${dir(from)}</span> <span>${isFinite(s[2])?Math.round(s[2])+' °C ('+Math.round(s[2]*9/5+32)+' °F)':''}</span> <span class="dk-dim">model forecast; scope centre city</span>`:'&nbsp;'};
+ Promise.all([OW.ready(),OW.field()]).then(([j,f0])=>{if(!el.isConnected)return;
   if(j.failed||!j.frames||!j.frames.length){el.innerHTML=`<p class="dk-dim">The wind forecast could not be collected on the last run (${esc(j.error||'no data')}). Nothing older is shown.</p>`;return}
-  el.innerHTML=`<div class="dk-wpt">&nbsp;</div><div class="dk-wmap"></div><label class="fc-step dk-wstep"><span class="fc-time">${esc(OW.label())}</span><input type="range" class="fc-slider" min="0" max="${j.frames.length-1}" step="1" aria-label="Forecast time, 6-hour steps"></label>`;
+  el.innerHTML=`<div class="dk-wpt">${wpt(f0)}</div><div class="dk-wmap"></div><label class="fc-step dk-wstep"><span class="fc-time">${esc(OW.label())}</span><input type="range" class="fc-slider" min="0" max="${j.frames.length-1}" step="1" aria-label="Forecast time, 6-hour steps"></label>`;
   const mapEl=el.querySelector('.dk-wmap'),mr=mapEl.getBoundingClientRect(),dp=devicePixelRatio||1;
   // both canvases sit on top of each other, sized once from the map box (so they cannot push the slider down)
   const mk=()=>{const c=document.createElement('canvas');c.width=Math.max(10,mr.width*dp);c.height=Math.max(10,mr.height*dp);c.style.cssText=`position:absolute;left:0;top:0;width:${mr.width}px;height:${mr.height}px`;mapEl.appendChild(c);const g=c.getContext('2d');g.scale(dp,dp);return{c,g,W:mr.width,H:mr.height}};
   const base=mk(),top=mk();
   const w=base.W,h=base.H,pr=d3.geoEqualEarth().fitExtent([[6,6],[w-6,h-6]],{type:'Sphere'}),path=d3.geoPath(pr,base.g),g=base.g;
   g.strokeStyle=css('--dk-line');g.lineWidth=1;g.beginPath();path({type:'Sphere'});g.stroke();g.fillStyle=css('--dk-land');g.strokeStyle=css('--dk-coast');g.lineWidth=.5;O.countries.forEach(f=>{g.beginPath();path(f);g.fill();g.stroke()});
-  const pl=PLACES[st.place]||PLACES[0],pp=pr([pl[2],pl[1]]);if(pp){g.fillStyle=css('--dk-accent');g.beginPath();g.arc(pp[0],pp[1],3,0,7);g.fill()}
+  const pp=pr([pl[2],pl[1]]);if(pp){g.fillStyle=css('--dk-accent');g.beginPath();g.arc(pp[0],pp[1],3,0,7);g.fill()}
   const sc=css('--dk-scope'),t=top.g,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,N=Math.round(Math.min(2500,w*h/120));let F=null,P=[];
   const spawn=q=>{q.lon=Math.random()*360-180;q.lat=Math.asin(2*Math.random()-1)/R;q.age=0;q.life=reduce?12:60+Math.random()*80;return q};
-  const sideLine=()=>{const s=F.sample(pl[2],pl[1]),sp=Math.hypot(s[0],s[1]),from=(Math.atan2(-s[0],-s[1])/R+360)%360;
-   el.querySelector('.dk-wpt').innerHTML=isFinite(sp)?`<b>${esc(pl[0])}</b> <span>${Math.round(sp*3.6)} km/h (${Math.round(sp*2.237)} mph) from the ${dir(from)}</span> <span>${isFinite(s[2])?Math.round(s[2])+' °C ('+Math.round(s[2]*9/5+32)+' °F)':''}</span> <span class="dk-dim">model forecast; scope centre city</span>`:''};
+  const sideLine=()=>{el.querySelector('.dk-wpt').innerHTML=wpt(F)};
   const set=()=>OW.field().then(f=>{if(!f||!el.isConnected)return;F=f;P=[];for(let i=0;i<N;i++)P.push(spawn({}));t.clearRect(0,0,w,h);sideLine();
    el.querySelector('.fc-time').textContent=f.label;el.querySelector('.fc-slider').value=f.i;if(reduce)still()});
   const mv=(q,k)=>{const s=F.sample(q.lon,q.lat);if(!isFinite(s[0])){q.age=q.life;return 0}q.lon+=s[0]*k/Math.max(.2,Math.cos(q.lat*R));q.lat+=s[1]*k;if(q.lon>180)q.lon-=360;if(q.lon<-180)q.lon+=360;if(Math.abs(q.lat)>89)q.age=q.life;return Math.hypot(s[0],s[1])};
@@ -150,7 +153,7 @@ function drawWind(el){const OW=window.OwlWind,d3=window.d3,O=window.__obs;
   const off=OW.onChange(()=>{if(el.isConnected)set();else off()});set();loop();
   // the panel can still change size after fonts load or the deck settles: redraw at the new size
   if(window.ResizeObserver){const ro=new ResizeObserver(()=>{const r=mapEl.getBoundingClientRect();if(!el.isConnected){ro.disconnect();return}
-   if(Math.abs(r.height-mr.height)>2||Math.abs(r.width-mr.width)>2){ro.disconnect();off();cancelAnimationFrame(top.c._raf);drawWind(el)}});ro.observe(mapEl)}})}
+   if((Math.abs(r.height-mr.height)>2||Math.abs(r.width-mr.width)>2)&&(el._wr=(el._wr||0)+1)<=2){ro.disconnect();off();cancelAnimationFrame(top.c._raf);drawWind(el)}});ro.observe(mapEl)}})}
 function drawQuakes(el){const q=quakes().filter(x=>x.mag>=4.5).sort((a,b)=>a.hrs-b.hrs);el.innerHTML=q.length?`<div class="dk-tab">${q.slice(0,60).map(x=>`<div><span class="dk-k">M${x.mag.toFixed(1)}</span><span>${esc(x.place||(x.lat.toFixed(1)+', '+x.lon.toFixed(1)))}</span><span class="dk-dim">${x.dep} km deep · ${ago(x.hrs)}</span></div>`).join('')}</div><p class="dk-dim">${q.length} quakes of M4.5 or more; places are USGS’s own words (named for M5+).</p>`:'<p class="dk-dim">No data from USGS yet.</p>'}
 function drawGdacs(el){const a=(window.SIT||{}).gdacs||[];el.innerHTML=a.length?`<div class="dk-tab">${a.map(x=>`<div><span class="dk-k lv-${esc(String(x[2]).toLowerCase())}">${esc(x[2])}</span><span>${x[7]?`<a href="${esc(x[7])}" target="_blank" rel="noopener">${esc(x[1])}</a>`:esc(x[1])}</span><span class="dk-dim">${esc(x[6]||'')} · ${esc(x[3])} to ${esc(x[4])}</span></div>`).join('')}</div>`:'<p class="dk-dim">No GDACS alerts loaded.</p>'}
 function drawSpace(el){const S=window.SNAP||{},kp=S.kp||[],sc=S.scales||{};const{g,W:w,H:h}=(()=>{el.innerHTML='<div class="dk-row"></div><div class="dk-spark"></div>';el.querySelector('.dk-row').innerHTML=['R','S','G'].map(k=>`<span><b>${k}${sc[k]??'–'}</b> ${({R:'radio blackouts',S:'solar radiation storms',G:'geomagnetic storms'})[k]}</span>`).join('');return canvasIn(el.querySelector('.dk-spark'))})();
