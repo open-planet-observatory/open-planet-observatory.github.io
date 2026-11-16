@@ -135,7 +135,10 @@
 
   let opening = false;
   async function open() {
-    if (el || opening || html.classList.contains('game-on')) return; opening = true; try { await open2(); } finally { opening = false; } }
+    if (!el && !opening && document.getElementById('woe') && window.__obs && window.__obs.closeGame) window.__obs.closeGame(); /* choosing this game leaves Where on Earth? (its progress is kept) */
+    if (el || opening || html.classList.contains('game-on')) return;
+    for (const x of ['#fdX', '#phX']) { const b = document.querySelector(x); if (b && b.offsetParent) b.click(); } /* the Forecast Desk or Play page would otherwise cover the game */
+    opening = true; try { await open2(); } finally { opening = false; } }
   async function open2() { opener = document.activeElement;
     if (document.querySelector('#uni.on') && window.__obs && window.__obs.closeUniverse) window.__obs.closeUniverse();
     if (!V_()) { let n = 0; while (!V_() && n++ < 40) await new Promise(r => setTimeout(r, 500)); }
