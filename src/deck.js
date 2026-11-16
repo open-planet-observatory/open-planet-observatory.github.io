@@ -22,7 +22,9 @@ const PLACES=[['Tokyo',35.7,139.7],['Jakarta',-6.2,106.8],['Manila',14.6,121.0],
 const quakes=()=>{const s=(window.SNAP||{}).quakes||'';return s?s.split(';').map(r=>{const[a,place]=r.split('|');const[lon,lat,mag,dep,hrs]=a.split(',').map(Number);return{lon,lat,mag,dep,hrs,place:place||''}}).filter(q=>isFinite(q.lat)&&isFinite(q.lon)):[]};
 const cells=s=>(s||'').split(';').filter(Boolean).map(r=>r.split(',').map(Number));
 const SRC={usgs:'USGS Earthquake Hazards · public domain',firms:'NASA FIRMS · VIIRS NOAA-20',eonet:'NASA EONET',gdacs:'GDACS (UN / European Commission)',swpc:'NOAA SWPC · public domain',
- opensky:'The OpenSky Network · 10° cells, no single aircraft',adsblol:'adsb.lol · Open Database License (ODbL 1.0)',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)',gfs:'NOAA GFS model forecast via PacIOOS ERDDAP · public domain'};
+ opensky:'The OpenSky Network · 10° cells, no single aircraft',adsblol:'adsb.lol · Open Database License (ODbL 1.0)',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)',
+ nws:'U.S. National Weather Service · public domain',who:'WHO Disease Outbreak News',ifrc:'IFRC GO · open to the public',status:'Each service\u2019s own status page',gdacsTc:'GDACS tropical cyclones',
+ celes:'Orbits: CelesTrak elements, positions computed in your browser',astro:'Computed in your browser with Astronomy Engine',jpl:'NASA JPL Horizons',gfs:'NOAA GFS model forecast via PacIOOS ERDDAP · public domain'};
 // Scheduled airliners (data/airliners.json, collector/airliners.mjs): hourly, positions rounded to 0.1°, operator and type only.
 const AIR={data:null,err:'',t:0,busy:false};
 function loadAir(){if(AIR.busy||Date.now()-AIR.t<3e5)return;AIR.busy=true;fetch('data/airliners.json?t='+Math.floor(Date.now()/3e5),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(new Error(r.status===404?'not collected yet':'HTTP '+r.status)))
@@ -39,7 +41,18 @@ const W={
  planet:{title:'Planet signals',w:4,h:4,src:()=>SRC.noaa,asof:()=>(window.SIG||{}).asOf,draw:drawSignals},
  launches:{title:'Launches',w:4,h:5,src:()=>SRC.ll,asof:()=>(window.SIG||{}).asOf,draw:drawLaunches},
  wind:{title:'Wind forecast',w:8,h:7,src:()=>SRC.gfs,asof:()=>{const j=window.OwlWind&&window.OwlWind.index&&window.OwlWind.index();return j&&!j.failed?j.built:''},draw:drawWind},
- clocks:{title:'Clocks',w:4,h:3,src:()=>'Your device clock',asof:()=>'',draw:drawClocks}};
+ clocks:{title:'Clocks',w:4,h:3,src:()=>'Your device clock',asof:()=>'',draw:drawClocks},
+ /* more panels (15 Nov 2026, the maintainer chose hazards, people & services, and sky & space): all from data the page already has */
+ fires:{title:'Active fires',w:4,h:5,src:()=>SRC.firms,asof:()=>(window.SNAP||{}).asOf,draw:drawFires},
+ events:{title:'Natural events',w:4,h:6,src:()=>SRC.eonet,asof:()=>(window.SNAP||{}).asOf,draw:drawEvents},
+ storms:{title:'Tropical storms',w:4,h:5,src:()=>SRC.gdacsTc,asof:()=>((window.SNAP||{}).storms||{}).asOf,draw:drawStorms},
+ warnings:{title:'U.S. weather warnings',w:4,h:5,src:()=>SRC.nws,asof:()=>(window.DIS||{}).asOf,draw:drawWarnings},
+ outbreaks:{title:'Disease outbreak news',w:4,h:6,src:()=>SRC.who,asof:()=>(window.SIT||{}).asOf,draw:drawWho},
+ relief:{title:'Red Cross appeals',w:4,h:6,src:()=>SRC.ifrc,asof:()=>((window.SNAP||{}).relief||{}).asOf,draw:drawRelief},
+ status:{title:'Internet & cloud status',w:4,h:6,src:()=>SRC.status,asof:()=>(window.DIS||{}).asOf,draw:drawStatus},
+ stations:{title:'Space stations now',w:4,h:4,src:()=>SRC.celes,asof:()=>'',draw:drawStations},
+ skynow:{title:'Sun and Moon now',w:4,h:4,src:()=>SRC.astro,asof:()=>'',draw:drawSkyNow},
+ voyager:{title:'Voyager 1',w:4,h:3,src:()=>SRC.jpl,asof:()=>'',draw:drawVoyager}};
 const DEFAULT={look:'mix',place:0,panels:['map','qscope','wind','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
 let st=Object.assign({},DEFAULT,load()||{}),root,grid,timer,anim,prevLoop=null,opened=false;
 if(!Array.isArray(st.panels))st.panels=DEFAULT.panels.slice();st.panels=st.panels.filter(p=>W[p.t]);
@@ -140,8 +153,32 @@ function drawSpace(el){const S=window.SNAP||{},kp=S.kp||[],sc=S.scales||{};const
 function drawSignals(el){const G=window.SIG||{},co2=G.co2||{},t=G.temp||{},si=(G.seaice||{}).north||{};
  el.innerHTML=`<div class="dk-tab">${co2.ppm?`<div><span class="dk-k">${co2.ppm} ppm</span><span>CO₂ at Mauna Loa, ${esc(co2.date)}</span><span class="dk-dim">a year earlier ${co2.ppmYearAgo} ppm</span></div>`:''}${t.latest?`<div><span class="dk-k">+${t.latest[1]} °C</span><span>${esc(t.title)}</span><span class="dk-dim">vs ${esc(t.base)} average</span></div>`:''}${si.extent?`<div><span class="dk-k">${si.extent} M km²</span><span>Arctic sea ice extent, ${esc(si.date)}</span><span class="dk-dim">NSIDC</span></div>`:''}</div>`}
 function drawLaunches(el){const a=(window.SIG||{}).launches||[];el.innerHTML=a.length?`<div class="dk-tab">${a.slice(0,12).map(x=>`<div><span class="dk-k">${esc(String(x[1]).slice(0,16).replace('T',' '))}</span><span>${x[6]?`<a href="${esc(x[6])}" target="_blank" rel="noopener">${esc(x[0])}</a>`:esc(x[0])}</span><span class="dk-dim">${esc(x[2])} · ${esc(x[4]||'')}</span></div>`).join('')}</div>`:'<p class="dk-dim">No launches loaded.</p>'}
+const ll=(la,lo)=>`${Math.abs(la).toFixed(1)}°${la<0?'S':'N'} ${Math.abs(lo).toFixed(1)}°${lo<0?'W':'E'}`,fmt=n=>Number(n).toLocaleString('en-US');
+const row=(k,t,d,u)=>`<div><span class="dk-k">${esc(k)}</span><span>${u?`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`:esc(t)}</span><span class="dk-dim">${esc(d||'')}</span></div>`;
+const none=t=>`<p class="dk-dim">${esc(t)}</p>`;
+function drawFires(el){const F=(window.SNAP||{}).fires;if(!F||!F.cells){el.innerHTML=none('No fire detections loaded.');return}const c=cells(F.cells).sort((a,b)=>b[2]-a[2]);
+ el.innerHTML=`<div class="dk-row"><span><b>${fmt(F.total)}</b> detections, past 24 h</span></div><div class="dk-tab">${c.slice(0,12).map(x=>row(fmt(x[2]),ll(x[1],x[0]),`${F.cell}° area`)).join('')}</div><p class="dk-dim">Busiest ${F.cell}° areas. A detection is a hot spot seen from orbit, not a separate fire; farm burning and gas flares count too.</p>`}
+function drawEvents(el){const S=window.SNAP||{},E=S.eonet||[];el.innerHTML=E.length?`<div class="dk-tab">${E.slice(0,40).map(x=>row(x[0],x[1],ll(x[3],x[2]))).join('')}</div><p class="dk-dim">${E.length} open events${S.eonetPrescribed?`, plus ${S.eonetPrescribed} prescribed burns not listed`:''}.</p>`:none('No EONET events loaded.')}
+function drawStorms(el){const I=(((window.SNAP||{}).storms)||{}).items||[];el.innerHTML=I.length?`<div class="dk-tab">${I.map(x=>{const p=x.pts[x.pts.length-1];return`<div><span class="dk-k lv-${esc(String(x.alert).toLowerCase())}">${esc(x.alert)}</span><span><a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a></span><span class="dk-dim">${esc(x.sev||'')}${p?' · '+ll(p[1],p[0]):''} · update ${esc(String(x.adv||'').slice(0,16).replace('T',' '))} UTC</span></div>`}).join('')}</div>`:none('No tropical storms active, or the storm list did not load.')}
+function drawWarnings(el){const w=(window.DIS||{}).weather;if(!w||!w.byEvent){el.innerHTML=none('No National Weather Service alerts loaded.');return}
+ el.innerHTML=`<div class="dk-row"><span><b>${fmt(w.total)}</b> active alerts</span><span><b>${w.severe}</b> severe</span><span><b>${w.extreme}</b> extreme</span></div><div class="dk-tab">${w.byEvent.slice(0,12).map(x=>row(fmt(x[1]),x[0],'')).join('')}</div><p class="dk-dim">United States only; event names as the NWS issues them.</p>`}
+function drawWho(el){const a=(window.SIT||{}).who||[];el.innerHTML=a.length?`<div class="dk-tab">${a.slice(0,12).map(x=>row(String(x[1]).slice(5),x[0],'',x[3]&&/^https?:/.test(x[3])?x[3]:'https://www.who.int/emergencies/disease-outbreak-news')).join('')}</div>`:none('No WHO outbreak news loaded.')}
+function drawRelief(el){const R=((window.SNAP||{}).relief)||{},A=(R.appeals||[]).slice().sort((a,b)=>String(b[9]).localeCompare(String(a[9])));
+ el.innerHTML=A.length?`<div class="dk-row"><span><b>${A.length}</b> active appeals and DREF operations</span></div><div class="dk-tab">${A.slice(0,25).map(x=>row(x[1]||'',x[0],`${x[3]||''}${x[7]?` · requested ${fmt(x[7])} ${R.currency||'CHF'}`:''} · from ${x[9]}`,x[11])).join('')}</div>`:none('No IFRC appeals loaded.')}
+function drawStatus(el){const D=window.DIS||{},S=D.services||[],bad=S.filter(x=>x[1]&&x[1]!=='none'),err=D.errors||[];
+ el.innerHTML=S.length?`<div class="dk-row"><span><b>${bad.length}</b> reporting a problem</span><span><b>${S.length-bad.length}</b> all clear</span>${err.length?`<span><b>${err.length}</b> not read</span>`:''}</div><div class="dk-tab">${bad.map(x=>row(x[1],x[0],x[2],x[5])).join('')||'<p class="dk-dim">Every status page read says all systems are working.</p>'}</div>${err.length?`<p class="dk-dim">Not read this time: ${esc(err.map(e=>String(e).replace(/ Failed to fetch$/,'')).join(', '))}.</p>`:''}`:none('No status pages loaded.')}
+function drawStations(el){const T=(window.SNAP||{}).tle||[];if(!T.length||!window.satellite){el.innerHTML=none('Orbital elements not loaded.');return}el.innerHTML='<div class="dk-tab dk-st"></div><p class="dk-dim">The point on the ground under each station, worked out from its orbit; updates every second.</p>';el._st=T.filter(x=>/ISS|Tiangong/i.test(x[0]));stationsTick(el)}
+function stationsTick(el){const S=window.satellite,box=el.querySelector('.dk-st');if(!box||!S||!el._st)return;const now=new Date(),g=S.gstime(now);
+ box.innerHTML=el._st.map(([n,a,b])=>{try{const r=S.twoline2satrec(a,b),pv=S.propagate(r,now),d=S.eciToGeodetic(pv.position,g),la=S.degreesLat(d.latitude),lo=S.degreesLong(d.longitude),v=pv.velocity,sp=Math.hypot(v.x,v.y,v.z)*3600;
+  return row(n,ll(la,lo),`${Math.round(d.height)} km up · ${fmt(Math.round(sp))} km/h`)}catch(e){return row(n,'position unavailable','')}}).join('')}
+function drawSkyNow(el){if(!window.Astronomy){el.innerHTML=none('Astronomy Engine not loaded.');return}el.innerHTML='<div class="dk-tab dk-sky"></div><p class="dk-dim">Where the Sun and Moon are straight overhead right now, and the Moon’s phase.</p>';skyTick(el)}
+function skyTick(el){const A=window.Astronomy,box=el.querySelector('.dk-sky');if(!box||!A)return;const d=new Date();
+ const sub=b=>{const eq=A.Equator(b,d,new A.Observer(0,0,0),true,true),gst=A.SiderealTime(d);const lo=((eq.ra-gst)*15+540)%360-180;return[eq.dec,lo]};
+ const s=sub('Sun'),m=sub('Moon'),ill=A.Illumination('Moon',d),ph=A.MoonPhase(d);
+ box.innerHTML=row('Sun',ll(s[0],s[1]),'overhead now')+row('Moon',ll(m[0],m[1]),`${Math.round(ill.phase_fraction*100)}% lit, ${ph<180?'waxing':'waning'}`)}
+function drawVoyager(el){const v=window.VOYAGER_TICK;el.innerHTML=v?`<div class="dk-big">${esc(v[1])}</div><p class="dk-dim">${esc(v[0])}, counted from its distance as NASA JPL Horizons gives it. <a href="${esc(v[2])}" target="_blank" rel="noopener">Mission page</a></p>`:none('Voyager distance not loaded.')}
 function drawClocks(el){el.innerHTML='<div class="dk-clocks"></div>';el._clock=true}
-function tick(){const now=new Date(),u=root&&root.querySelector('#dkUtc');if(u)u.textContent=now.toISOString().slice(0,19).replace('T',' ')+' UTC';
+function tick(){if(root){root.querySelectorAll('.dk-p[data-t="stations"] .dk-body').forEach(stationsTick);root.querySelectorAll('.dk-p[data-t="skynow"] .dk-body').forEach(skyTick);root.querySelectorAll('.dk-p[data-t="voyager"] .dk-body').forEach(drawVoyager)}const now=new Date(),u=root&&root.querySelector('#dkUtc');if(u)u.textContent=now.toISOString().slice(0,19).replace('T',' ')+' UTC';
  root&&root.querySelectorAll('.dk-clocks').forEach(c=>{c.innerHTML=[['UTC','UTC'],['Your time',undefined],['Tokyo','Asia/Tokyo'],['London','Europe/London'],['New York','America/New_York'],['Los Angeles','America/Los_Angeles']].map(([n,z])=>{let s='';try{s=now.toLocaleTimeString('en-GB',{timeZone:z,hour:'2-digit',minute:'2-digit',second:'2-digit'})}catch(e){}return`<div><span class="dk-dim">${n}</span><b>${s}</b></div>`}).join('')})}
 function topPx(){const t=document.getElementById('ops-top');const r=t&&t.getBoundingClientRect();return r&&r.height?Math.round(r.bottom+6):0}
 function open(){if(opened)return;opened=true;const O=window.__obs;try{if(O&&O.setSlim)O.setSlim(true)}catch(e){}
@@ -156,6 +193,7 @@ function close(){if(!opened)return;opened=false;clearInterval(timer);if(root){cl
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened){const m=root.querySelector('#dkMenu');if(m&&!m.hidden){m.hidden=true;return}close()}});
 let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resizeT);resizeT=setTimeout(render,250)});
 // Header button, beside the site tour.
+addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
  b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.textContent='▦ Observation Deck';b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);
@@ -189,7 +227,7 @@ html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
 #owlDeck .dk-wmap{flex:1;min-height:140px;position:relative;overflow:hidden}#owlDeck .dk-wpt{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.78rem;margin-bottom:4px}#owlDeck .dk-wstep{margin-top:6px;font-size:.72rem}#owlDeck .dk-wstep input{accent-color:var(--dk-accent)}.dk-scope-row.wide .dk-scope{min-width:0}.dk-scope-row.wide .dk-list{width:42%;flex:none;overflow:auto;align-self:center;max-height:100%}#owlDeck [hidden]{display:none!important}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
 #owlDeck .dk-p[data-t=map] .dk-body{position:relative}
 #owlDeck .dk-list>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-top:1px dotted var(--dk-line)}
-#owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
+#owlDeck .dk-big{font-size:1.15rem;color:var(--dk-accent);margin:6px 0 8px;line-height:1.35}#owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
 #owlDeck .dk-clocks{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}#owlDeck .dk-clocks div{display:flex;flex-direction:column}#owlDeck .dk-clocks b{font-weight:400;font-size:15px;color:var(--dk-accent)}
 #owlDeck .dk-foot{margin:10px 2px 0;color:var(--dk-dim);font-size:10.5px}
 @media (max-width:900px){#owlDeck .dk-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#owlDeck .dk-p{grid-column:span 4!important}}`;

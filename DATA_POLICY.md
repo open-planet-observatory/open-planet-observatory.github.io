@@ -343,3 +343,5 @@ Short lessons that move the live globe for the learner, then ask a few questions
 - Global temperature (Signals and lessons): from November 2026 the collector asks NOAA for the most recent month it has published, instead of a month that is not out yet.
 
 - Illustrations (11 Nov 2026): the engraving-style banner and card pictures are AI-made illustrations (Atlabs), decoration only, never data. Each carries a small, faint "Illustration" mark, and About > How this works says so in words. A small turning copy of the site's emblem is hidden in each picture.
+
+- Observation Deck extra panels (16 Nov 2026): fires, natural events, tropical storms, U.S. weather warnings, WHO outbreak news, IFRC appeals, service status, space stations now, Sun and Moon now, Voyager 1. They reuse data the page already collects (no new sources); station positions are computed in the browser from CelesTrak elements, Sun and Moon with Astronomy Engine. Headlines and event names are the sources' own.
