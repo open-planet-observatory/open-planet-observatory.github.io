@@ -13,7 +13,7 @@ const VENDORS = [
   ['https://cdn.jsdelivr.net/npm/satellite.js@5.0.0/dist/satellite.min.js', 'satellite.js/dist/satellite.min.js', 'satellite.min.js'],
   ['https://unpkg.com/h3-js@4.1.0/dist/h3-js.umd.js', 'h3-js/dist/h3-js.umd.js', 'h3-js.umd.js'],
 ];
-const await_hooks = await read('src/hooks.js'); const opsCss = await read('src/ops.css');
+const await_hooks = await read('src/hooks.js'); const datablock = await read('src/datablock.js'); const opsCss = await read('src/ops.css');
 const NAMES = { snap: 'SNAP', nature: 'NAT', watch: 'WATCH', economy: 'ECON', unexplained: 'UNEXP', situations: 'SIT', signals: 'SIG', disruptions: 'DIS' };
 const extras = await read('src/extras.js'), live = await read('src/live.js'), nature = await read('src/nature.js'), country = await read('src/country.js'), ops = await read('src/ops.js'), globe3d = (await read('src/globe3d.js')) + '\n;' + (await read('src/lightning.js')) + '\n;' + (await read('src/compare.js')), moon = await read('src/moon.js'), ai = await read('src/ai.js'), owl = (await read('src/owlmanac.js')) + '\n;' + (await read('src/deck.js')), chk = (await read('src/checks.js')) + '\n;' + (await read('src/status.js')), clim = await read('src/climate.js'), haz = (await read('src/hazards.js')) + '\n;' + (await read('src/lora.js')), grav = await read('src/gravity.js'), uni = await read('src/universe.js'), tips = await read('src/tips.js'), worlds = await read('src/worlds.js'), voyager = await read('src/voyager.js'), almanac = await read('src/almanac.js'), navjs = await read('src/nav.js'), gamejs = await read('src/game.js'), sitetour = (await read('src/sitetour.js')) + '\n;' + (await read('src/learn.js')), histjs = await read('src/history.js'), recjs = await read('src/records.js'), untoldjs = await read('src/untold.js'), pagejs = await read('src/page.js'), skyjs = await read('src/sky.js'), skyfind = await read('src/skyfind.js'), insidejs = await read('src/inside.js'), predjs = await read('src/predictions.js'), fdjs = await read('src/forecastdesk.js'), boardsjs = await read('src/boards.js'), huntjs = await read('src/hunt.js'), themesjs = await read('src/huntthemes.js'), weeklyjs = await read('src/weekly.js'), spacejs = await read('src/spacefind.js'), owljs = await read('src/owlhunt.js'), hubjs = await read('src/playhub.js'), moonjs = await read('src/moonglobe.js'), music = await read('src/music.js');
 // version stamp for the star module, so a new release isn't hidden behind the browser's cached copy
@@ -30,6 +30,9 @@ const SPLASH = `<script>(function(){var H='<div id="owlSplash" role="dialog" ari
 
 const widgetsCss = (await read('node_modules/cesium/Build/Cesium/Widgets/widgets.css')).replace(/url\((['"]?)(?!https?:|data:)/g, (m, q) => `url(${q}https://cdn.jsdelivr.net/npm/cesium@${CESIUM_VERSION}/Build/Cesium/Widgets/`);
 s = s.replace('/*HOOKS_JS*/', () => (await_hooks));
+// the shared data block (source, licence, when collected, blind spot) used by the main panels
+s = s.replace('/*DATABLOCK_JS*/', () => datablock);
+
 
 if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script src="data/${n}.js"></script>`);
