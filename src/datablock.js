@@ -58,6 +58,9 @@ const R={
   b:'U.S. only; alerts follow forecasters’ judgement and do not measure damage.'},
  kev:{n:'CISA Known Exploited Vulnerabilities',u:'https://www.cisa.gov/known-exploited-vulnerabilities-catalog',lic:'Public domain',cad:'Daily'},
  nvd:{n:'NVD (NIST)',u:'https://nvd.nist.gov/',lic:'Public domain',cad:'Live'},
+ // Map layers: model forecast (src/wind.js)
+ gfs:{n:'NOAA GFS forecast via PacIOOS',u:'https://pae-paha.pacioos.hawaii.edu/erddap/griddap/ncep_global.html',lic:'NOAA public domain; PacIOOS: free to use and redistribute, not for legal use',cad:'Every 6 h',
+  b:'A computer model’s forecast, not measurements. On a 1° grid (about 110 km) it smooths out local winds, mountains, coasts and thunderstorms, and it is less certain the further ahead it looks.'},
  // Situations
  wars:{n:'Wikipedia: ongoing armed conflicts',u:'https://en.wikipedia.org/wiki/List_of_ongoing_armed_conflicts',lic:'CC BY-SA, attribution',cad:'Edited daily',
   b:'Death figures are Wikipedia editors’ cited estimates, often disputed and months behind events; smaller conflicts get less coverage.'},

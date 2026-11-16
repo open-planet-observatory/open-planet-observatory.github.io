@@ -31,7 +31,7 @@ const STEPS=[[/^situations/,'Situations · GDACS, WHO, Wikipedia, Wikidata','Sit
  [/^unexplained, open/,'Unexplained · USGS, CelesTrak, Minor Planet Center','Unexplained'],[/GraceDB/,'Gravitational-wave candidates · GraceDB','Unexplained'],
  [/static figures/,'Fixed figures · AARO report, CHIME catalogue','Unexplained']];
 // [key in lastRun, name, area, where its last-fetch time is kept in meta.json (or null)]
-const OTHER=[['orbits','Satellite catalogue · CelesTrak','Space',m=>m.orbits?.catalog],['solar','Spacecraft, comets and close approaches · NASA JPL','Space',m=>m.solar?.all],
+const OTHER=[['forecast','Wind and temperature forecast · NOAA GFS via PacIOOS','Map layers',null],['orbits','Satellite catalogue · CelesTrak','Space',m=>m.orbits?.catalog],['solar','Spacecraft, comets and close approaches · NASA JPL','Space',m=>m.solar?.all],
  ['exoplanets','Exoplanets · NASA Exoplanet Archive','Space',m=>m.solar?.exo2],['sun','Today’s Sun image · NASA SDO','Space',null],['moonFeatures','Moon place names · IAU gazetteer','Space',null],
  ['grace','Ice and water mass · NASA GRACE-FO','Space',null],
  ['history','This date in history · Wikipedia, USGS','Sections built from sources',null],['records','Records · Wikidata and agencies','Sections built from sources',null],

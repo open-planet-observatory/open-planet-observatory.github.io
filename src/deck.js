@@ -22,7 +22,7 @@ const PLACES=[['Tokyo',35.7,139.7],['Jakarta',-6.2,106.8],['Manila',14.6,121.0],
 const quakes=()=>{const s=(window.SNAP||{}).quakes||'';return s?s.split(';').map(r=>{const[a,place]=r.split('|');const[lon,lat,mag,dep,hrs]=a.split(',').map(Number);return{lon,lat,mag,dep,hrs,place:place||''}}).filter(q=>isFinite(q.lat)&&isFinite(q.lon)):[]};
 const cells=s=>(s||'').split(';').filter(Boolean).map(r=>r.split(',').map(Number));
 const SRC={usgs:'USGS Earthquake Hazards · public domain',firms:'NASA FIRMS · VIIRS NOAA-20',eonet:'NASA EONET',gdacs:'GDACS (UN / European Commission)',swpc:'NOAA SWPC · public domain',
- opensky:'The OpenSky Network · 10° cells, no single aircraft',adsblol:'adsb.lol · Open Database License (ODbL 1.0)',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)'};
+ opensky:'The OpenSky Network · 10° cells, no single aircraft',adsblol:'adsb.lol · Open Database License (ODbL 1.0)',noaa:'NOAA GML, NOAA NCEI, NSIDC',ll:'Launch Library 2 (The Space Devs)',gfs:'NOAA GFS model forecast via PacIOOS ERDDAP · public domain'};
 // Scheduled airliners (data/airliners.json, collector/airliners.mjs): hourly, positions rounded to 0.1°, operator and type only.
 const AIR={data:null,err:'',t:0,busy:false};
 function loadAir(){if(AIR.busy||Date.now()-AIR.t<3e5)return;AIR.busy=true;fetch('data/airliners.json?t='+Math.floor(Date.now()/3e5),{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject(new Error(r.status===404?'not collected yet':'HTTP '+r.status)))
@@ -38,8 +38,9 @@ const W={
  space:{title:'Space weather',w:4,h:4,src:()=>SRC.swpc,asof:()=>(window.SNAP||{}).asOf,draw:drawSpace},
  planet:{title:'Planet signals',w:4,h:4,src:()=>SRC.noaa,asof:()=>(window.SIG||{}).asOf,draw:drawSignals},
  launches:{title:'Launches',w:4,h:5,src:()=>SRC.ll,asof:()=>(window.SIG||{}).asOf,draw:drawLaunches},
+ wind:{title:'Wind forecast',w:8,h:7,src:()=>SRC.gfs,asof:()=>{const j=window.OwlWind&&window.OwlWind.index&&window.OwlWind.index();return j&&!j.failed?j.built:''},draw:drawWind},
  clocks:{title:'Clocks',w:4,h:3,src:()=>'Your device clock',asof:()=>'',draw:drawClocks}};
-const DEFAULT={look:'mix',place:0,panels:['map','qscope','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
+const DEFAULT={look:'mix',place:0,panels:['map','qscope','wind','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
 let st=Object.assign({},DEFAULT,load()||{}),root,grid,timer,anim,prevLoop=null,opened=false;
 if(!Array.isArray(st.panels))st.panels=DEFAULT.panels.slice();st.panels=st.panels.filter(p=>W[p.t]);
 const size=p=>{const w=W[p.t];const k=p.s==='s'?.75:p.s==='l'?1.5:1;return{w:Math.min(12,Math.max(3,Math.round(w.w*k))),h:Math.max(3,Math.round(w.h*k))}};
@@ -100,6 +101,38 @@ function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind===
    if(kind==='q'){g.globalAlpha=Math.max(.3,1-q.hrs/170);g.beginPath();g.arc(x,y,Math.max(1.5,(q.mag-2)*2),0,7);g.fill()}else if(kind==='l'){g.globalAlpha=.85;const h=((q.trk??0)-90)*R;g.beginPath();g.moveTo(x+5*Math.cos(h),y+5*Math.sin(h));g.lineTo(x+2.5*Math.cos(h+2.4),y+2.5*Math.sin(h+2.4));g.lineTo(x+2.5*Math.cos(h-2.4),y+2.5*Math.sin(h-2.4));g.closePath();g.fill()}else{g.globalAlpha=.25+Math.min(.75,Math.log10(q.n+1)/3);g.fillRect(x-3,y-3,6,6)}});
   g.globalAlpha=1;g.fillStyle=css('--dk-accent');g.beginPath();g.arc(cx,cy,3,0,7);g.fill();g.fillText(pl[0],cx+6,cy+12);c._raf=requestAnimationFrame(frameDraw)}
  c._raf=requestAnimationFrame(frameDraw)}
+// Wind forecast (src/wind.js, NOAA GFS via PacIOOS): streaks drift with the model's wind on a flat map; the time slider
+// is shared with the globe. The line on top gives the model's wind and temperature at the scope centre city.
+function drawWind(el){const OW=window.OwlWind,d3=window.d3,O=window.__obs;
+ if(!OW||!d3||!O||!O.countries){el.innerHTML='<p class="dk-dim">The wind panel needs the 3D globe’s forecast data and the page’s country shapes, which have not loaded.</p>';return}
+ el.innerHTML='<p class="dk-dim">Loading the forecast…</p>';
+ OW.ready().then(j=>{if(!el.isConnected)return;
+  if(j.failed||!j.frames||!j.frames.length){el.innerHTML=`<p class="dk-dim">The wind forecast could not be collected on the last run (${esc(j.error||'no data')}). Nothing older is shown.</p>`;return}
+  el.innerHTML=`<div class="dk-wpt">&nbsp;</div><div class="dk-wmap"></div><label class="fc-step dk-wstep"><span class="fc-time">${esc(OW.label())}</span><input type="range" class="fc-slider" min="0" max="${j.frames.length-1}" step="1" aria-label="Forecast time, 6-hour steps"></label>`;
+  const mapEl=el.querySelector('.dk-wmap'),mr=mapEl.getBoundingClientRect(),dp=devicePixelRatio||1;
+  // both canvases sit on top of each other, sized once from the map box (so they cannot push the slider down)
+  const mk=()=>{const c=document.createElement('canvas');c.width=Math.max(10,mr.width*dp);c.height=Math.max(10,mr.height*dp);c.style.cssText=`position:absolute;left:0;top:0;width:${mr.width}px;height:${mr.height}px`;mapEl.appendChild(c);const g=c.getContext('2d');g.scale(dp,dp);return{c,g,W:mr.width,H:mr.height}};
+  const base=mk(),top=mk();
+  const w=base.W,h=base.H,pr=d3.geoEqualEarth().fitExtent([[6,6],[w-6,h-6]],{type:'Sphere'}),path=d3.geoPath(pr,base.g),g=base.g;
+  g.strokeStyle=css('--dk-line');g.lineWidth=1;g.beginPath();path({type:'Sphere'});g.stroke();g.fillStyle=css('--dk-land');g.strokeStyle=css('--dk-coast');g.lineWidth=.5;O.countries.forEach(f=>{g.beginPath();path(f);g.fill();g.stroke()});
+  const pl=PLACES[st.place]||PLACES[0],pp=pr([pl[2],pl[1]]);if(pp){g.fillStyle=css('--dk-accent');g.beginPath();g.arc(pp[0],pp[1],3,0,7);g.fill()}
+  const sc=css('--dk-scope'),t=top.g,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,N=Math.round(Math.min(2500,w*h/120));let F=null,P=[];
+  const spawn=q=>{q.lon=Math.random()*360-180;q.lat=Math.asin(2*Math.random()-1)/R;q.age=0;q.life=reduce?12:60+Math.random()*80;return q};
+  const sideLine=()=>{const s=F.sample(pl[2],pl[1]),sp=Math.hypot(s[0],s[1]),from=(Math.atan2(-s[0],-s[1])/R+360)%360;
+   el.querySelector('.dk-wpt').innerHTML=isFinite(sp)?`<b>${esc(pl[0])}</b> <span>${Math.round(sp*3.6)} km/h (${Math.round(sp*2.237)} mph) from the ${dir(from)}</span> <span>${isFinite(s[2])?Math.round(s[2])+' °C ('+Math.round(s[2]*9/5+32)+' °F)':''}</span> <span class="dk-dim">model forecast; scope centre city</span>`:''};
+  const set=()=>OW.field().then(f=>{if(!f||!el.isConnected)return;F=f;P=[];for(let i=0;i<N;i++)P.push(spawn({}));t.clearRect(0,0,w,h);sideLine();
+   el.querySelector('.fc-time').textContent=f.label;el.querySelector('.fc-slider').value=f.i;if(reduce)still()});
+  const mv=(q,k)=>{const s=F.sample(q.lon,q.lat);if(!isFinite(s[0])){q.age=q.life;return 0}q.lon+=s[0]*k/Math.max(.2,Math.cos(q.lat*R));q.lat+=s[1]*k;if(q.lon>180)q.lon-=360;if(q.lon<-180)q.lon+=360;if(Math.abs(q.lat)>89)q.age=q.life;return Math.hypot(s[0],s[1])};
+  function still(){t.clearRect(0,0,w,h);t.strokeStyle=sc;t.lineWidth=1;P.forEach(q=>{let a=pr([q.lon,q.lat]);t.globalAlpha=.6;t.beginPath();for(let i=0;i<10;i++){mv(q,.06);const b=pr([q.lon,q.lat]);if(a&&b&&Math.abs(b[0]-a[0])<20){t.moveTo(a[0],a[1]);t.lineTo(b[0],b[1])}a=b}t.stroke()});t.globalAlpha=1}
+  function loop(){if(!top.c.isConnected){off();return}top.c._raf=requestAnimationFrame(loop);if(!F||reduce)return;
+   t.globalCompositeOperation='destination-in';t.fillStyle='rgba(0,0,0,.92)';t.fillRect(0,0,w,h);t.globalCompositeOperation='source-over';t.strokeStyle=sc;t.lineWidth=1;
+   const B=[new Path2D(),new Path2D(),new Path2D()];
+   P.forEach(q=>{if(q.age++>q.life){spawn(q);return}const a=pr([q.lon,q.lat]),sp=mv(q,.012),b=pr([q.lon,q.lat]);if(a&&b&&Math.abs(b[0]-a[0])<20){const k=Math.min(2,Math.floor(sp/6));B[k].moveTo(a[0],a[1]);B[k].lineTo(b[0],b[1])}});
+   [.35,.6,.95].forEach((al,i)=>{t.globalAlpha=al;t.stroke(B[i])});t.globalAlpha=1}
+  const off=OW.onChange(()=>{if(el.isConnected)set();else off()});set();loop();
+  // the panel can still change size after fonts load or the deck settles: redraw at the new size
+  if(window.ResizeObserver){const ro=new ResizeObserver(()=>{const r=mapEl.getBoundingClientRect();if(!el.isConnected){ro.disconnect();return}
+   if(Math.abs(r.height-mr.height)>2||Math.abs(r.width-mr.width)>2){ro.disconnect();off();cancelAnimationFrame(top.c._raf);drawWind(el)}});ro.observe(mapEl)}})}
 function drawQuakes(el){const q=quakes().filter(x=>x.mag>=4.5).sort((a,b)=>a.hrs-b.hrs);el.innerHTML=q.length?`<div class="dk-tab">${q.slice(0,60).map(x=>`<div><span class="dk-k">M${x.mag.toFixed(1)}</span><span>${esc(x.place||(x.lat.toFixed(1)+', '+x.lon.toFixed(1)))}</span><span class="dk-dim">${x.dep} km deep · ${ago(x.hrs)}</span></div>`).join('')}</div><p class="dk-dim">${q.length} quakes of M4.5 or more; places are USGS’s own words (named for M5+).</p>`:'<p class="dk-dim">No data from USGS yet.</p>'}
 function drawGdacs(el){const a=(window.SIT||{}).gdacs||[];el.innerHTML=a.length?`<div class="dk-tab">${a.map(x=>`<div><span class="dk-k lv-${esc(String(x[2]).toLowerCase())}">${esc(x[2])}</span><span>${x[7]?`<a href="${esc(x[7])}" target="_blank" rel="noopener">${esc(x[1])}</a>`:esc(x[1])}</span><span class="dk-dim">${esc(x[6]||'')} · ${esc(x[3])} to ${esc(x[4])}</span></div>`).join('')}</div>`:'<p class="dk-dim">No GDACS alerts loaded.</p>'}
 function drawSpace(el){const S=window.SNAP||{},kp=S.kp||[],sc=S.scales||{};const{g,W:w,H:h}=(()=>{el.innerHTML='<div class="dk-row"></div><div class="dk-spark"></div>';el.querySelector('.dk-row').innerHTML=['R','S','G'].map(k=>`<span><b>${k}${sc[k]??'–'}</b> ${({R:'radio blackouts',S:'solar radiation storms',G:'geomagnetic storms'})[k]}</span>`).join('');return canvasIn(el.querySelector('.dk-spark'))})();
@@ -152,7 +185,8 @@ html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
 #owlDeck .dk-tab>div{display:grid;grid-template-columns:auto 1fr;column-gap:10px;padding:3px 0;border-bottom:1px dotted var(--dk-line)}#owlDeck .dk-tab>div>span:nth-child(3){grid-column:2;font-size:10.5px}
 #owlDeck .dk-k{color:var(--dk-accent);font-weight:400;white-space:nowrap}#owlDeck .dk-k.lv-red{color:#ff6b5b}#owlDeck .dk-k.lv-orange{color:#ffa23a}#owlDeck .dk-k.lv-green{color:#5fd38a}
 #owlDeck .dk-scope-top{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-bottom:4px;color:var(--dk-dim)}
-#owlDeck .dk-scope{flex:1;min-height:160px;position:relative}.dk-scope-row{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px}.dk-scope-row.wide{flex-direction:row;align-items:stretch}.dk-scope-row.wide .dk-scope{min-width:0}.dk-scope-row.wide .dk-list{width:42%;flex:none;overflow:auto;align-self:center;max-height:100%}#owlDeck [hidden]{display:none!important}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
+#owlDeck .dk-scope{flex:1;min-height:160px;position:relative}.dk-scope-row{flex:1;min-height:0;display:flex;flex-direction:column;gap:6px}.dk-scope-row.wide{flex-direction:row;align-items:stretch}
+#owlDeck .dk-wmap{flex:1;min-height:140px;position:relative;overflow:hidden}#owlDeck .dk-wpt{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.78rem;margin-bottom:4px}#owlDeck .dk-wstep{margin-top:6px;font-size:.72rem}#owlDeck .dk-wstep input{accent-color:var(--dk-accent)}.dk-scope-row.wide .dk-scope{min-width:0}.dk-scope-row.wide .dk-list{width:42%;flex:none;overflow:auto;align-self:center;max-height:100%}#owlDeck [hidden]{display:none!important}#owlDeck .dk-scope canvas,#owlDeck .dk-spark canvas,#owlDeck .dk-p[data-t=map] canvas{position:absolute;inset:0}
 #owlDeck .dk-p[data-t=map] .dk-body{position:relative}
 #owlDeck .dk-list>div{display:flex;justify-content:space-between;gap:8px;padding:2px 0;border-top:1px dotted var(--dk-line)}
 #owlDeck .dk-row{display:flex;flex-wrap:wrap;gap:4px 14px;margin-bottom:4px}#owlDeck .dk-row b{color:var(--dk-accent)}#owlDeck .dk-spark{flex:1;position:relative;min-height:50px}
