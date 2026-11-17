@@ -52,22 +52,27 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
  cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';host.appendChild(cv);const ctx=cv.getContext('2d');
  const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
  // SPEED: degrees moved per frame for 1 m/s at full-globe height (16 Nov: slowed from .012 to .005 at the maintainer's request);
- // a trail point is kept every EVERY frames, so trail length stays about the same when SPEED changes (SPEED x EVERY ~ .05)
- const SPEED=.005,HL=12,EVERY=10,RAD=Math.PI/180,A=6378137,E2=0.00669437999014;
+ // a trail point is kept every EVERY frames, so trail length is SPEED x EVERY x HL: keep that product when changing one of them
+ // Smoother trails (17 Nov): a point every 5 frames (was 10) with twice as many points, so the length is unchanged; each
+ // streak keeps its own rhythm (p.ph), its oldest piece shrinks gradually instead of dropping off at once, and the trail
+ // fades in five steps from tail to head (FADE) instead of two.
+ const SPEED=.005,HL=24,EVERY=5,FADE=[.12,.3,.5,.75,1],RAD=Math.PI/180,A=6378137,E2=0.00669437999014;
  let on=false,field=null,P=[],dpr=1,tick=0;const VP=new C.Matrix4();let m=VP,cx=0,cy=0,cz=0;
  const count=()=>innerWidth<700?1000:3500;
  const ecef=(lon,lat,o)=>{const la=lat*RAD,lo=lon*RAD,sl=Math.sin(la),cl=Math.cos(la),n=A/Math.sqrt(1-E2*sl*sl);o[0]=n*cl*Math.cos(lo);o[1]=n*cl*Math.sin(lo);o[2]=n*(1-E2)*sl;return o};
  const q=[0,0,0];
  // -> [x,y] in canvas pixels, or null when behind the globe or outside the view
- function proj(lon,lat,o){ecef(lon,lat,q);const x=q[0],y=q[1],z=q[2];if((cx-x)*x+(cy-y)*y+(cz-z)*z/(1-E2)<=0)return null;
+ function proj(lon,lat,o){ecef(lon,lat,q);return projX(q[0],q[1],q[2],o)}
+ // the same from Earth-centred x, y, z (trail points are kept this way, so only the head of a streak needs trigonometry)
+ function projX(x,y,z,o){if((cx-x)*x+(cy-y)*y+(cz-z)*z/(1-E2)<=0)return null;
   const w=m[3]*x+m[7]*y+m[11]*z+m[15];if(w<=0)return null;const nx=(m[0]*x+m[4]*y+m[8]*z+m[12])/w,ny=(m[1]*x+m[5]*y+m[9]*z+m[13])/w;
   if(nx<-1.2||nx>1.2||ny<-1.2||ny>1.2)return null;o[0]=(nx+1)/2*cv.width;o[1]=(1-ny)/2*cv.height;return o}
  function spawn(p){let lon,lat;const r=Math.random()<.85?scene.camera.pickEllipsoid(new C.Cartesian2(Math.random()*cv.clientWidth,Math.random()*cv.clientHeight)):null;
   if(r){const g=C.Cartographic.fromCartesian(r);lon=C.Math.toDegrees(g.longitude);lat=C.Math.toDegrees(g.latitude)}else{lon=Math.random()*360-180;lat=Math.asin(2*Math.random()-1)/RAD}
-  p.h=[lon,lat];p.lon=lon;p.lat=lat;p.age=0;p.life=(reduce?1:240+Math.random()*240);p.spd=0;return p}
+  p.lon=lon;p.lat=lat;p.age=0;p.life=(reduce?1:240+Math.random()*240);p.spd=0;p.ph=Math.floor(Math.random()*EVERY);p.h=[];push(p);return p}
  function step(p,f){const s=sample(field,p.lon,p.lat);if(!isFinite(s[0])){p.age=p.life;return}const c=Math.max(.15,Math.cos(p.lat*RAD));
   p.lon+=s[0]*f/c;p.lat+=s[1]*f;p.spd=Math.hypot(s[0],s[1]);if(p.lat>89.5||p.lat<-89.5)p.age=p.life}
- const push=p=>{p.h.push(p.lon,p.lat);if(p.h.length>2*HL)p.h.splice(0,2)};
+ const push=p=>{ecef(p.lon,p.lat,q);p.h.push(q[0],q[1],q[2]);if(p.h.length>3*HL)p.h.splice(0,3)};
  function size(){const d=Math.min(2,devicePixelRatio||1),w=Math.round(cv.clientWidth*d),h=Math.round(cv.clientHeight*d);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}dpr=d}
  const BUCKETS=[.25,.45,.7,.95];const a=[0,0],b=[0,0];
  function draw(){if(!on||!field||document.hidden||document.documentElement.classList.contains('map2d')){if(on)ctx.clearRect(0,0,cv.width,cv.height);return}size();
@@ -75,14 +80,18 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
   const hgt=Math.max(1e5,c.positionCartographic.height),f=SPEED*Math.min(1.4,Math.max(.01,hgt/1.6e7));tick++;
   while(P.length<count()){const p=spawn({});if(reduce){for(let i=0;i<HL;i++){step(p,f*EVERY);push(p)}}P.push(p)}if(P.length>count())P.length=count();
   ctx.clearRect(0,0,cv.width,cv.height);
-  const head=BUCKETS.map(()=>new Path2D()),tail=BUCKETS.map(()=>new Path2D());
-  for(const p of P){if(!reduce){if(p.age++>=p.life){spawn(p);continue}step(p,f);if(tick%EVERY===0)push(p)}
-   const h=p.h,n=h.length/2,bi=Math.min(3,Math.floor(p.spd/5));let have=false;
-   for(let i=0;i<=n;i++){const lon=i<n?h[2*i]:p.lon,lat=i<n?h[2*i+1]:p.lat;const r=proj(lon,lat,b);
-    if(r&&have&&Math.abs(b[0]-a[0])<60*dpr&&Math.abs(b[1]-a[1])<60*dpr){const pa=i<n/2?tail[bi]:head[bi];pa.moveTo(a[0],a[1]);pa.lineTo(b[0],b[1])}
+  const NF=FADE.length,paths=[];for(let i=0;i<BUCKETS.length*NF;i++)paths.push(new Path2D());
+  for(const p of P){if(!reduce){if(p.age++>=p.life){spawn(p);continue}step(p,f);if((tick+p.ph)%EVERY===0)push(p)}
+   const h=p.h,n=h.length/3,bi=Math.min(3,Math.floor(p.spd/5))*NF,full=n>=HL&&!reduce,fr=full?((tick+p.ph)%EVERY)/EVERY:0;let have=false;
+   for(let i=0;i<=n;i++){let r;
+    if(i===n)r=proj(p.lon,p.lat,b);
+    // a full trail's oldest point slides toward the next one, so the tail shortens a little every frame
+    else if(i===0&&fr&&n>1)r=projX(h[0]+(h[3]-h[0])*fr,h[1]+(h[4]-h[1])*fr,h[2]+(h[5]-h[2])*fr,b);
+    else r=projX(h[3*i],h[3*i+1],h[3*i+2],b);
+    if(r&&have&&Math.abs(b[0]-a[0])<60*dpr&&Math.abs(b[1]-a[1])<60*dpr){const pa=paths[bi+Math.min(NF-1,Math.floor((i-1)*NF/n))];pa.moveTo(a[0],a[1]);pa.lineTo(b[0],b[1])}
     if(r){a[0]=b[0];a[1]=b[1];have=true}else have=false}}
   ctx.lineCap='round';ctx.lineWidth=1.5*dpr;
-  BUCKETS.forEach((al,i)=>{ctx.strokeStyle=`rgba(255,255,255,${al*.4})`;ctx.stroke(tail[i]);ctx.strokeStyle=`rgba(255,255,255,${al})`;ctx.stroke(head[i])})}
+  BUCKETS.forEach((al,i)=>FADE.forEach((fa,j)=>{ctx.strokeStyle=`rgba(255,255,255,${(al*fa).toFixed(3)})`;ctx.stroke(paths[i*NF+j])}))}
  scene.postRender.addEventListener(draw);
  return{set(v){on=v;cv.hidden=!v;if(!v)ctx.clearRect(0,0,cv.width,cv.height)},field(b){field=b;P.length=0},stats:()=>({n:P.length,on,field:!!field,w:cv.width,h:cv.height,cw:scene.canvas.width,ch:scene.canvas.height}),_proj:(lon,lat)=>proj(lon,lat,[0,0])}}
 
