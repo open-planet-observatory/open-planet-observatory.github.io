@@ -92,7 +92,7 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
     if(r){a[0]=b[0];a[1]=b[1];have=true}else have=false}}
   ctx.lineCap='round';ctx.lineWidth=1.5*dpr;
   BUCKETS.forEach((al,i)=>FADE.forEach((fa,j)=>{ctx.strokeStyle=`rgba(255,255,255,${(al*fa).toFixed(3)})`;ctx.stroke(paths[i*NF+j])}))}
- scene.postRender.addEventListener(draw);
+ scene.postRender.addEventListener(()=>{try{draw()}catch(e){/* a drawing error here must never stop the globe's own render loop */}});
  return{set(v){on=v;cv.hidden=!v;if(!v)ctx.clearRect(0,0,cv.width,cv.height)},field(b){field=b;P.length=0},stats:()=>({n:P.length,on,field:!!field,w:cv.width,h:cv.height,cw:scene.canvas.width,ch:scene.canvas.height}),_proj:(lon,lat)=>proj(lon,lat,[0,0])}}
 
 // ----- what globe3d.js calls -----

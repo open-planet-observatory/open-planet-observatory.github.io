@@ -506,5 +506,16 @@ const probe=setInterval(()=>{try{const n=(globe._surface&&globe._surface._tilesT
 let startFrames=0;const countF=()=>{startFrames++;if(startFrames>400)scene.postRender.removeEventListener(countF)};scene.postRender.addEventListener(countF);
 const startCheck=()=>{try{if(document.hidden||startFrames<240){setTimeout(startCheck,4000);return}const n=(globe._surface&&globe._surface._tilesToRender||[]).length;if(!n)giveUp('The 3D globe could not start here (no map tiles arrived). It works on the public site; showing the 2D globe instead.')}catch(e){}};setTimeout(startCheck,12000);
 new MutationObserver(()=>{buildSnap();buildSit();buildSig();buildNat();buildEcon();buildOdd();buildMoon();buildAi()}).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+/* Coming back to the tab (17 Nov 2026, the maintainer: "I went away from Safari and back and the wind stopped; play did
+   nothing until I refreshed"). Two ways the globe can be dead on return: Cesium stopped its own render loop after an error
+   in a frame, or the browser took the graphics context away while the tab was in the background. On return a loop stopped by an
+   error is switched back on (never one a full page, the Moon, the Solar System or a game paused on purpose), and a lost
+   context reloads the page at the same view. The third way, the reading pause left on, is handled in page.js. */
+(function(){let lost=false;const cv=viewer.scene.canvas;cv.addEventListener('webglcontextlost',()=>{lost=true},false);
+ let errored=false;const owned=()=>(window.OwlPage&&window.OwlPage.isOpen())||document.querySelector('#uni.on')||document.documentElement.classList.contains('moon-on')||document.documentElement.classList.contains('game-on');
+ try{viewer.scene.renderError.addEventListener(()=>{errored=true;setTimeout(()=>{if(!document.hidden&&!owned()){viewer.useDefaultRenderLoop=true;errored=false}},500)})}catch(e){}
+ const back=()=>{if(document.hidden)return;if(lost||(cv.getContext&&viewer.scene.context&&viewer.scene.context._gl&&viewer.scene.context._gl.isContextLost&&viewer.scene.context._gl.isContextLost())){location.reload();return}
+  if(errored&&!viewer.useDefaultRenderLoop&&!owned()){viewer.useDefaultRenderLoop=true;errored=false}try{viewer.scene.requestRender()}catch(e){}};
+ document.addEventListener('visibilitychange',back);addEventListener('pageshow',back);addEventListener('focus',back)})();
 window.__obs3d={viewer,setImagery,setXray,DS,SAT,selectSat,setMoonView};
 })();
