@@ -61,7 +61,10 @@ export async function collectAirliners({ now = new Date(), fetchImpl = fetch } =
 import crypto from 'node:crypto';
 import fsp from 'node:fs/promises';
 import pathm from 'node:path';
-export const HOLD_MIN = 15, HOLD_MAX = 90, EVERY_MIN = 60, STALE_MIN = 150;
+// HOLD_MAX raised from 90 to 180 min and STALE_MIN from 150 to 240 on 17 Nov 2026 (maintainer's decision): GitHub often runs the
+// collector late, and 5 of 20 good snapshots in 31 hours were thrown away for passing 90 min. A released snapshot always shows
+// its own time (asOf), so an older one is never presented as current. STALE_MIN must stay above HOLD_MAX.
+export const HOLD_MIN = 15, HOLD_MAX = 180, EVERY_MIN = 60, STALE_MIN = 240;
 const keyOf = k => { const b = Buffer.from(String(k || '').trim(), 'base64'); if (b.length !== 32) throw new Error('AIRLINERS_HOLD_KEY must be 32 bytes, base64'); return b; };
 export function seal(obj, key) { const iv = crypto.randomBytes(12), c = crypto.createCipheriv('aes-256-gcm', keyOf(key), iv);
   const body = Buffer.concat([c.update(JSON.stringify(obj), 'utf8'), c.final()]); return Buffer.concat([Buffer.from('OWLH1'), iv, c.getAuthTag(), body]); }
