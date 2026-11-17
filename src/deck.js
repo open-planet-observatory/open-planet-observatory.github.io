@@ -73,7 +73,8 @@ function frame(){root.innerHTML=`<div class="dk-bar"><b class="dk-title">OBSERVA
   menu.hidden=!menu.hidden;ab.setAttribute('aria-expanded',String(!menu.hidden));menu.querySelectorAll('button').forEach(b=>b.onclick=()=>{st.panels.push({t:b.dataset.t,s:'m'});save(st);menu.hidden=true;render()})};
  root.querySelector('#dkReset').onclick=()=>{st=JSON.parse(JSON.stringify(DEFAULT));save(st);look.value=st.look;root.dataset.look=st.look;render()};
  root.querySelector('#dkClose').onclick=close}
-function render(){if(!grid)return;cancelAnimationFrame(anim);grid.innerHTML='';
+// stop every running panel animation before the panels are rebuilt (render runs again every minute and on each change)
+function render(){if(!grid)return;cancelAnimationFrame(anim);grid.querySelectorAll('canvas').forEach(c=>cancelAnimationFrame(c._raf));grid.innerHTML='';
  st.panels.forEach((p,i)=>{const w=W[p.t],z=size(p);const el=document.createElement('section');el.className='dk-p';el.dataset.t=p.t;el.style.gridColumn='span '+z.w;el.style.gridRow='span '+z.h;
   const a=w.asof();el.innerHTML=`<header><b>${esc(w.title.toUpperCase())}</b><span class="dk-ctl"><button type="button" data-a="left" title="Move earlier" aria-label="Move ${esc(w.title)} earlier">◀</button><button type="button" data-a="right" title="Move later" aria-label="Move ${esc(w.title)} later">▶</button><button type="button" data-a="size" title="Panel size: ${p.s==='s'?'small':p.s==='l'?'large':'medium'}" aria-label="Change size of ${esc(w.title)}">${p.s==='s'?'S':p.s==='l'?'L':'M'}</button><button type="button" data-a="x" title="Remove panel" aria-label="Remove ${esc(w.title)}">✕</button></span></header>
   <div class="dk-body"></div><footer>${esc(w.src())}${a?' · as of '+esc(String(a).replace('T',' ')):''}</footer>`;
@@ -83,7 +84,7 @@ function render(){if(!grid)return;cancelAnimationFrame(anim);grid.innerHTML='';
   grid.appendChild(el);try{w.draw(el.querySelector('.dk-body'),p)}catch(e){el.querySelector('.dk-body').innerHTML='<p class="dk-dim">This panel could not be drawn.</p>'}});
  if(!st.panels.length)grid.innerHTML='<p class="dk-dim" style="grid-column:span 12">No panels. Use ＋ Add panel.</p>';
  tick()}
-const css=v=>getComputedStyle(root).getPropertyValue(v).trim();
+const css=v=>root?getComputedStyle(root).getPropertyValue(v).trim():'';
 function canvasIn(el){const c=document.createElement('canvas');el.appendChild(c);const r=el.getBoundingClientRect(),d=devicePixelRatio||1;c.width=Math.max(10,r.width*d);c.height=Math.max(10,r.height*d);c.style.width=r.width+'px';c.style.height=r.height+'px';const g=c.getContext('2d');g.scale(d,d);return{c,g,W:r.width,H:r.height}}
 function drawMap(el){const d3=window.d3,O=window.__obs;if(!d3||!O||!O.countries){el.innerHTML='<p class="dk-dim">The map needs the page’s country shapes, which have not loaded.</p>';return}
  const{g,W:w,H:h}=canvasIn(el);const pr=d3.geoEqualEarth().fitExtent([[6,6],[w-6,h-6]],{type:'Sphere'}),path=d3.geoPath(pr,g);
@@ -111,7 +112,8 @@ function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind===
  else{const tot=pts.reduce((s,q)=>s+q.n,0);list.innerHTML=`<div><span>${tot.toLocaleString()} aircraft</span><span>in ${pts.length} cells (10°)</span><span>in range</span></div><p class="dk-dim">Counts per 10° cell from OpenSky; no single aircraft is shown or kept.</p>`}
  const box=el.querySelector('.dk-scope'),{c,g,W:w,H:h}=canvasIn(box),cx=w/2,cy=h/2,rad=Math.max(30,Math.min(w/2-14,h/2-14,(w/2-58)/0.7071))/* room for the range labels on the diagonal */;
  const sc=css('--dk-scope'),t0=performance.now();
- function frameDraw(t){g.clearRect(0,0,w,h);g.strokeStyle=sc;g.globalAlpha=.35;g.lineWidth=1;
+ // a scope that is no longer on the page (deck closed or panels rebuilt) stops drawing
+ function frameDraw(t){if(!root||!c.isConnected)return;g.clearRect(0,0,w,h);g.strokeStyle=sc;g.globalAlpha=.35;g.lineWidth=1;
   for(let k=1;k<=4;k++){g.beginPath();g.arc(cx,cy,rad*k/4,0,7);g.stroke()}g.beginPath();g.moveTo(cx-rad,cy);g.lineTo(cx+rad,cy);g.moveTo(cx,cy-rad);g.lineTo(cx,cy+rad);g.stroke();
   g.globalAlpha=.8;g.fillStyle=sc;g.font='10px "Owl Plex Mono",monospace';g.fillText('N',cx-3,cy-rad-3);[2,4].forEach(k=>{const r=rad*k/4*.7071;g.fillText(Math.round(max*k/4).toLocaleString()+' km',cx+r+3,cy-r-3)});
   const sw=((t-t0)/4000*2*Math.PI)%(2*Math.PI);if(!matchMedia('(prefers-reduced-motion: reduce)').matches){const gr=g.createConicGradient?g.createConicGradient(sw-Math.PI/2-.6,cx,cy):null;if(gr){gr.addColorStop(0,'transparent');gr.addColorStop(.095,sc);gr.addColorStop(.1,'transparent');g.globalAlpha=.18;g.fillStyle=gr;g.beginPath();g.arc(cx,cy,rad,0,7);g.fill()}}
