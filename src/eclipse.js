@@ -193,6 +193,24 @@
     if (!c) { host.querySelector('#eclNext').innerHTML = '<p class="small muted">The eclipse calculator needs Astronomy Engine, which has not loaded. Try again in a moment.</p>'; return; }
     nextSection(host); }
   function openPage() { const P = window.OwlPage; if (!P) return; P.register('eclipses', { title: 'Eclipses', render: page }); P.open('eclipses', { solo: true }); }
+  /* A layer in the left rail (17 Nov 2026, the maintainer: "a layer that shows eclipse paths across the globe"): every total,
+     annular and hybrid solar eclipse of the next 20 years, each path in its own colour with its year. Click a path to read
+     its date and kind. The paths are worked out a few at a time after the layer is switched on, so the globe never freezes. */
+  (function layer() { const O = window.__obs; if (!O || !O.addLayer) return; O.addLayer({ id: 'eclpaths', name: 'Eclipse paths, next 20 years', color: '--c-ecl', shape: 'circle', count: '', on: false, group: 'Space' });
+    html.style.setProperty('--c-ecl', '#ffd38a'); const chip = () => document.getElementById('chip-eclpaths'); { const b = chip(); if (b) b.title = 'Where the Sun will be fully covered (total) or become a ring (annular) in each solar eclipse of the next 20 years. Computed in your browser; see Sky tonight > Eclipses.'; }
+    const COL = ['#ffd38a', '#ff9f6b', '#8fd3ff', '#c39bff', '#9be59b', '#ff7aa2', '#f2f27a', '#7ae0d0']; let ds = null, built = false, run = 0;
+    const on = () => { const c = chip(); return !!c && c.getAttribute('aria-pressed') === 'true'; };
+    async function sync() { await ready(); const v = viewer(), Cs = window.Cesium; if (!v || !Cs || !core()) return; if (!ds) { ds = new Cs.CustomDataSource('eclpaths'); v.dataSources.add(ds); }
+      ds.show = on() && !html.classList.contains('game-on'); if (!on() || built) return; built = true; const my = ++run;
+      const L = list(new Date(), 30, ['solar']).filter(e => e.type !== 'partial' && +e.t < Date.now() + 20 * 365.25 * 864e5); const ct = document.querySelector('#chip-eclpaths .ct');
+      let i = 0; const step = () => { if (my !== run || i >= L.length) { if (ct) ct.textContent = String(L.length); return; } const e = L[i], col = Cs.Color.fromCssColorString(COL[i % COL.length]); i++;
+        try { const P = detail(e).path; if (P && P.centre.length > 1) { const when = e.t.toLocaleDateString('en-GB', { timeZone: 'UTC', day: 'numeric', month: 'long', year: 'numeric' });
+          const desc = `<b>${KIND[e.type] || e.type} solar eclipse, ${when}</b>The band is where the Sun is ${e.type === 'annular' ? 'reduced to a ring' : 'completely covered'}; outside it the eclipse is partial. Saros ${e.saros}.<br><span style="opacity:.75">Computed with Astronomy Engine; checked against NASA's eclipse tables. Open Sky tonight \u203a Eclipses for the full map.</span>`;
+          if (P.left.length > 1 && P.right.length > 1) ds.entities.add({ polygon: { hierarchy: new Cs.PolygonHierarchy(cart(Cs, [...P.left, ...P.right.slice().reverse()])), material: col.withAlpha(.3), arcType: Cs.ArcType.GEODESIC }, description: desc });
+          ds.entities.add({ polyline: { positions: cart(Cs, P.centre), width: 2.5, material: col, arcType: Cs.ArcType.GEODESIC, clampToGround: true }, description: desc });
+          const m = P.centre[Math.floor(P.centre.length / 2)]; ds.entities.add({ position: Cs.Cartesian3.fromDegrees(m[1], m[0], 2e4), label: { text: String(e.t.getUTCFullYear()), font: '600 13px system-ui', fillColor: col, outlineColor: Cs.Color.BLACK, outlineWidth: 3, style: Cs.LabelStyle.FILL_AND_OUTLINE, scaleByDistance: new Cs.NearFarScalar(2e6, 1, 3e7, .6) }, description: desc }); } } catch (x) { }
+        setTimeout(step, 40); }; step(); }
+    new MutationObserver(ms => { if (ms.some(m => m.target.id === 'chip-eclpaths')) sync(); }).observe(document.body, { attributes: true, subtree: true, attributeFilter: ['aria-pressed'] }); if (on()) sync(); })();
   window.OwlEclipse = { open: openPage, list, showOne, showAtlas, showSaros, clear: clearGlobe };
   addEventListener('obs:eclipses', openPage);
   if (/^#page=eclipses/.test(location.hash)) setTimeout(openPage, 1500);
