@@ -61,6 +61,8 @@ const R={
  // Map layers: model forecast (src/wind.js)
  gfs:{n:'NOAA GFS forecast via PacIOOS',u:'https://pae-paha.pacioos.hawaii.edu/erddap/griddap/ncep_global.html',lic:'NOAA public domain; PacIOOS: free to use and redistribute, not for legal use',cad:'Every 6 h',
   b:'A computer model’s forecast, not measurements. On a 1° grid (about 110 km) it smooths out local winds, mountains, coasts and thunderstorms, and it is less certain the further ahead it looks.'},
+ cams:{n:'Copernicus CAMS global forecast via Open-Meteo',u:'https://open-meteo.com/en/docs/air-quality-api',lic:'CAMS: free with attribution; Open-Meteo data: CC BY 4.0, free service for non-commercial use',cad:'Twice a day',
+  b:'A computer model\u2019s forecast, not measurements. On a 4\u00b0 grid (about 440 km) a city\u2019s own pollution is smoothed into its region, and the model can miss fires and dust storms that began after it ran. The dots show how much haze the model has in each area; they are not individual plumes or sources.'},
  // Situations
  wars:{n:'Wikipedia: ongoing armed conflicts',u:'https://en.wikipedia.org/wiki/List_of_ongoing_armed_conflicts',lic:'CC BY-SA, attribution',cad:'Edited daily',
   b:'Death figures are Wikipedia editors’ cited estimates, often disputed and months behind events; smaller conflicts get less coverage.'},
