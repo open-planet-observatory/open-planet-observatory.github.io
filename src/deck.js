@@ -214,6 +214,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened){const m=roo
 let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resizeT);resizeT=setTimeout(render,250)});
 // Header button, beside the site tour.
 addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
+addEventListener('obs:home',()=>close());
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
  b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.textContent='▦ Observation Deck';b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);

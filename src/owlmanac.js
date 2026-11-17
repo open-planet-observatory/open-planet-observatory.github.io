@@ -160,6 +160,9 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
     where the artwork starts, as a fraction of the picture's width, measured from the pictures. Menu-page banners are left out:
     their text sits in that space. */
  const VOID={'sec-cams':.31,'sec-changes':.35,'sec-contact':.59,'sec-free':.48,'sec-inside':.43,'sec-layers':.42,'sec-library':.39,'sec-nature':.32,'sec-records':.45,'sec-relief':.39,'sec-signals':.42,'sec-situations':.36,'sec-sky':.52,'sec-unexplained':.32,'sec-untold':.37,'sec-watchlist':.35,'sec-worlds':.51,'card-about':.59,'card-edge':.42,'card-galaxy':.37,'card-skychart':.63,'card-skyevents':.72,'card-skyiss':.67,'card-skymoon':.58,'card-solar':.43,'card-web':.46};
+ /* Where the ochre owl's head sits in each picture (fraction of its height, measured from the pictures). The crop keeps that
+    height in view, so a wide, short banner never cuts the owl's head off (17 Nov 2026: Sky tonight's owl was beheaded). */
+ const FOCUS={'card-about':.3,'card-edge':.48,'card-galaxy':.35,'card-moon':.4,'card-skychart':.13,'card-skyevents':.42,'card-skyiss':.35,'card-skymoon':.36,'card-solar':.4,'card-web':.36,'sec-cams':.4,'sec-changes':.37,'sec-climate':.39,'sec-contact':.13,'sec-disruptions':.15,'sec-free':.13,'sec-history':.14,'sec-inside':.08,'sec-layers':.07,'sec-library':.38,'sec-nature':.26,'sec-relief':.08,'sec-signals':.16,'sec-situations':.35,'sec-sky':.27,'sec-unexplained':.4,'sec-untold':.31,'sec-watchlist':.11,'sec-worlds':.32};
  const SZ=.032,MIN=20,MAX=46;
  function place(box){const img=box.querySelector('img'),e=box.querySelector(':scope > .owl-hid');if(!img||!e)return;const p=e._p,W=box.clientWidth,H=box.clientHeight;if(!W||!H){e.style.display='none';return;}
   const ir=img.getBoundingClientRect(),br=box.getBoundingClientRect(),cs=getComputedStyle(img),iw0=img.naturalWidth||1280,ih0=img.naturalHeight||720,fw=ir.width,fh=ir.height;
@@ -173,7 +176,7 @@ window.OwlEmblemMount=function(box,opt){if(!box)return()=>{};let stop=null,dead=
  const N=120,live=new Set(),still=matchMedia('(prefers-reduced-motion: reduce)').matches;
  if(!still)setInterval(()=>{if(document.hidden)return;for(const e of live){if(!e.isConnected){live.delete(e);continue;}if(e.style.display!=='block')continue;e._f=(e._f+1)%N;e.style.backgroundPosition=`${-e._f*e._s}px 0`;}},125);
  const ro=new ResizeObserver(es=>es.forEach(x=>place(x.target)));
- window.OwlHideEm=function(box){if(!box||box._hid)return;const img=box.querySelector('img');if(!img)return;const m=(img.getAttribute('src')||'').match(/owl-((?:hub|sec|card)-[a-z]+)\.webp/);const p=m&&EM[m[1]];if(!p)return;box._hid=1;
+ window.OwlHideEm=function(box){if(!box||box._hid)return;const img=box.querySelector('img');if(!img)return;const m=(img.getAttribute('src')||'').match(/owl-((?:hub|sec|card)-[a-z]+)\.webp/);const p=m&&EM[m[1]];if(!p)return;box._hid=1;if(FOCUS[m[1]]!=null)img.style.objectPosition='right '+Math.round(FOCUS[m[1]]*100)+'%';
   const e=document.createElement('span');e.className='owl-hid';e._p=p;e._v=VOID[m[1]]||0;e.title='You found the Owlmanac emblem';e.setAttribute('aria-hidden','true');e._f=Math.floor(Math.random()*N);live.add(e);
   e.addEventListener('click',ev=>{ev.stopPropagation();ev.preventDefault();if(window.OwlEmblemCard&&window.OwlEmblemCard.show)window.OwlEmblemCard.show();});
   box.appendChild(e);const go=()=>place(box);if(img.complete)go();else img.addEventListener('load',go,{once:true});ro.observe(box);};})();

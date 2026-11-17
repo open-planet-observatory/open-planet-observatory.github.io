@@ -64,6 +64,12 @@
     drawer.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') rpOff(); });
     drawer.addEventListener('touchstart', () => rpOn(), { passive: true }); drawer.addEventListener('wheel', () => rpOn(), { passive: true }); }
   if (map) map.addEventListener('pointerdown', rpOff, true);
+  /* The pause must never outlive the reading (17 Nov 2026: switching away from the browser with the pointer over a panel gave no
+     "pointer left" event, so the globe and the wind stayed frozen on return and Play did nothing). It now also ends when the
+     tab is hidden or shown, the window loses or gains focus, the pointer is anywhere outside the panel, or a globe control is pressed. */
+  document.addEventListener('visibilitychange', rpOff); addEventListener('blur', rpOff); addEventListener('focus', rpOff); addEventListener('pageshow', rpOff);
+  document.addEventListener('pointermove', e => { if (rp && drawer && !drawer.contains(e.target)) rpOff(); }, { passive: true });
+  document.addEventListener('click', e => { if (rp && e.target.closest && e.target.closest('.zoomctl,#ops-rail,.gnav')) rpOff(); }, true);
   new MutationObserver(() => { if (rp && busy()) rpOff(); }).observe(html, { attributes: true, attributeFilter: ['class'] });
   api.readingPaused = () => rp;
   window.OwlPage = api;
