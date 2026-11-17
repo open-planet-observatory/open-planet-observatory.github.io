@@ -29,6 +29,7 @@ import { collectWeeklyHunt } from './weeklyhunt.mjs';
 import { collectFindOwl } from './findowl.mjs';
 import { holdAndRelease, readHold, writeHold } from './airliners.mjs';
 import { runForecast } from './forecast.mjs';
+import { runAir } from './airquality.mjs';
 
 const OUT = process.argv[2] || 'dist/data';
 const PREV = (process.argv[3] || process.env.PREV_BASE_URL || '').replace(/\/$/, '');
@@ -296,6 +297,13 @@ let fcst = { status: 'not run' };
     await fs.writeFile(path.join(OUT, 'fcst', 'index.json'), JSON.stringify(r.index)); fcst = { status: r.status }; }
   catch (e) { fcst = { status: 'error: ' + e.message.slice(0, 160) }; }
   log('forecast', fcst.status); }
+// Air quality (collector/airquality.mjs): data/air.json, PM2.5 from the CAMS global forecast via Open-Meteo, a ninth of the
+// 4° grid per run, twice a day. Feeds the globe's drifting haze layer.
+let airq = { status: 'not run' };
+{ let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/air.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  try { const r = await runAir({ now, prev: p }); await fs.writeFile(path.join(OUT, 'air.json'), JSON.stringify(r.out)); airq = { status: r.status }; }
+  catch (e) { airq = { status: 'error: ' + e.message.slice(0, 160) }; }
+  log('air quality', airq.status); }
 // Star catalogue built once by collector/build-stars.mjs (ESA Gaia + Hipparcos); only its sanity is checked here.
 let stars = null; try { const B = JSON.parse(await fs.readFile(path.join(HERE, '..', 'src', 'assets', 'stars', 'bright.json'), 'utf8')); const g = await fs.stat(path.join(HERE, '..', 'src', 'assets', 'stars', 'gaia.bin'));
   const f = h => B.stars.find(x => x[0] === h); stars = { gaia: Math.floor(g.size / 8), bright: B.stars.length, sirius: f(32349)?.[3], proxima: f(70890)?.[3], vega: f(91262)?.[3], built: B.built };
