@@ -47,7 +47,16 @@ const badHeld = seal({ takenAt: '2026-11-13T12:00:00Z', out: { ...good, asOf: '2
 r = await holdAndRelease({ now: new Date('2026-11-13T12:20:00Z'), held: badHeld, key: KEY, lastTake: '2026-11-13T12:00:00Z', fetchImpl: fake });
 ok('snapshot failing QA is not published; the page says it was held back', r.publish.failed && /Held back by quality checks/.test(r.publish.error) && r.publish.planes.length === 0, JSON.stringify(r.publish).slice(0, 200));
 // a held snapshot that is too old is discarded
-const oldHeld = seal({ takenAt: '2026-11-13T09:00:00Z', out: good }, KEY);
+const oldHeld = seal({ takenAt: '2026-11-13T08:50:00Z', out: good }, KEY);
 r = await holdAndRelease({ now: new Date('2026-11-13T12:00:00Z'), held: oldHeld, key: KEY, lastTake: '2026-11-13T11:30:00Z', fetchImpl: fake });
-ok('held snapshot older than 90 min is discarded, not published', !r.publish && /discarded/.test(r.status), r.status);
+ok('held snapshot older than 3 hours is discarded, not published', !r.publish && /discarded/.test(r.status), r.status);
+// a late run (GitHub often runs the collector late): a 2-hour-old snapshot is still released, with its own time
+const lateHeld = seal({ takenAt: '2026-11-13T10:00:00Z', out: { ...good, asOf: '2026-11-13T10:00Z' } }, KEY);
+r = await holdAndRelease({ now: new Date('2026-11-13T12:00:00Z'), held: lateHeld, key: KEY, lastTake: '2026-11-13T11:30:00Z', fetchImpl: fake });
+ok('held snapshot 2 hours old is released with its own time', r.publish && !r.publish.failed && r.publish.asOf === '2026-11-13T10:00Z' && r.publish.heldMin === 120, JSON.stringify(r.publish).slice(0, 160));
+// the published file is kept while under 4 hours old, then replaced by a plain 'no checked snapshot' notice
+r = await holdAndRelease({ now: new Date('2026-11-13T13:30:00Z'), held: null, prev: { ...good, asOf: '2026-11-13T10:00Z' }, key: KEY, lastTake: '2026-11-13T13:00:00Z', fetchImpl: fake });
+ok('published snapshot 3.5 hours old is kept', r.publish && !r.publish.failed && r.publish.asOf === '2026-11-13T10:00Z', JSON.stringify(r.publish).slice(0, 120));
+r = await holdAndRelease({ now: new Date('2026-11-13T14:10:00Z'), held: null, prev: { ...good, asOf: '2026-11-13T10:00Z' }, key: KEY, lastTake: '2026-11-13T13:40:00Z', fetchImpl: fake });
+ok('published snapshot over 4 hours old gives way to a notice', r.publish.failed && /No checked snapshot in the last 4 hours/.test(r.publish.error), JSON.stringify(r.publish).slice(0, 160));
 console.log(`\n${pass} passed, ${fail} failed`); process.exit(fail ? 1 : 0);
