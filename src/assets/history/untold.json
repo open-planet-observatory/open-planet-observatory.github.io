@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-07",
+ "built": "2026-11-16",
  "stories": [
   {
    "id": "cherokee",
@@ -6415,6 +6415,613 @@
     [
      "Khivan slave trade (Wikipedia)",
      "https://en.wikipedia.org/wiki/Khivan_slave_trade"
+    ]
+   ]
+  },
+  {
+   "id": "circassia1864",
+   "title": "The Circassian expulsion",
+   "region": "Europe",
+   "where": "Black Sea coast and mountains of the North-West Caucasus between Anapa and Sochi, Russia; refugee camps at Trebizond (Trabzon) and Samsun, Turkey; pin: Sochi (approximate)",
+   "lat": 43.59,
+   "lon": 39.72,
+   "from": 1862,
+   "to": 1864,
+   "themes": [
+    "War",
+    "Removal and dispossession",
+    "Colonial rule",
+    "Massacre",
+    "Famine"
+   ],
+   "facts": [
+    [
+     "Russia claimed Circassia under the Treaty of Adrianople, by which Turkey had ceded it, while Britain told Russia in 1856 that it had never recognised that right, the Circassians being independent tribes who did not acknowledge the Sultan.",
+     "https://archive.org/stream/accountspapers0075grea_j6k1/accountspapers0075grea_j6k1_djvu.txt"
+    ],
+    [
+     "In early 1864 Russian columns under Count Evdokimov crossed the main Caucasus ridge; the official Journal de St-Pétersbourg reported that the Abadzekh had left their villages for assigned points on the Kuban plain or for Turkey, that the Ubykh were defeated in mid-March, that the troops reached the mouth of the Sochi on 25 March, and that on 2 April (dates as given in the report) Grand Duke Michael received the elders' submission and ordered them to the coast.",
+     "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    ],
+    [
+     "The same report said that 30,000 people had left from the mouth of the Tuapse in March and about 50,000 more were waiting at Anapa, Novorossiisk, the Dzhubga and the Tuapse, with at least as many to come from the Ubykh and Jiget lands; the British consul at Trebizond reported in May that Russia insisted on their leaving by the end of May (old style).",
+     "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    ],
+    [
+     "At Trebizond the British consul counted more than 3,500 deaths from December 1863 to mid-February 1864, 3,000 of them emigrants, as typhus spread; by May the mortality in the camps averaged 120 to 150 a day, and 500 deaths had occurred at Samsun in forty-eight hours.",
+     "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    ],
+    [
+     "Britannica states that Russia in 1860 began a campaign to forcibly resettle the Circassians in the valley of the Kuban, and that by 1864 almost the entire Circassian population, some 400,000 people, had instead emigrated to the Ottoman Empire, many thousands dying of starvation and disease on the way.",
+     "https://www.britannica.com/topic/Circassian"
+    ],
+    [
+     "A slave trade ran from the Circassian coast to Turkey before the conquest: Russia said that suppressing it had been the principal object of its coastal forts, and Britain said it had pressed the Porte to prevent slaves being carried from Circassia to Turkey.",
+     "https://archive.org/stream/accountspapers0075grea_j6k1/accountspapers0075grea_j6k1_djvu.txt"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "It is now more than eighty years since the Russian Government is unlawfully striving to subdue and annex to its dominions Circassia, which since the creation of the world has been our home and our country. It slaughters like sheep the children, helpless women, and old men that fall into its hands. […] But during the last year or two it has taken advantage of a famine caused by a drought with which the Almighty visited us, as well as by its own ravages, and it has occasioned us great distress by its severe attacks by sea and land. Many are the lives which have been lost in battle, from hunger in the mountains, from destitution on the sea-coast, and from want of skill at sea.",
+     "who": "Petition 'signed by the people of Circassia' to Queen Victoria, sent to the British ambassador at Constantinople, in the English translation printed by the British government",
+     "date": "29 Shawwal 1280 (9 April 1864)",
+     "doc": "Papers respecting the Settlement of Circassian Emigrants in Turkey (presented to the House of Commons, 1864), in Accounts and Papers 1864, vol. LXIII, Inclosure in No. 3, pp. 2–3",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt",
+     "lic": "Public domain (UK government publication, 1864; also reprinted in Burnaby, 1877)"
+    },
+    {
+     "text": "But if it is not possible to afford this help for the preservation of our country and race, then we pray to be afforded facilities for removing to a place of safety our helpless and miserable children and women that are perishing by the brutal attacks of the enemy as well as by the effects of famine; and if neither of these two requests are taken into consideration, and if in our helpless condition we are utterly annihilated notwithstanding our appeals to the mercy and grace of the Governments, then we shall not cease to invoke our right in the presence of the Lord of the Universe […]",
+     "who": "The same petition of the people of Circassia, after asking Britain to stop the Russian attacks",
+     "date": "29 Shawwal 1280 (9 April 1864)",
+     "doc": "Papers respecting the Settlement of Circassian Emigrants in Turkey (presented to the House of Commons, 1864), in Accounts and Papers 1864, vol. LXIII, Inclosure in No. 3, p. 3",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt",
+     "lic": "Public domain (UK government publication, 1864)"
+    },
+    {
+     "text": "The Circassians are a very small and weak people; they have no money, they pay no taxes, they have no government, they have no newspapers, they are ignorant; but this they do know, that many years Russia has been fighting against them […] From Europe or from England no help has come to us. We have heard that if there was justice to be found it was in England; we came then to England, weak and poor, expecting to find justice from you.",
+     "who": "Hadji Hayden Hassan and Kustar Ogli Ismael, deputies sent by the Circassian tribes to plead their case in Britain, in their statement to the British public (English text as reprinted by Frederick Burnaby)",
+     "date": "1862–63 (undated; the statement says the Crimean War ended 'seven years ago')",
+     "doc": "Statement of the Circassian Deputies in reference to the Crimean War, in F. Burnaby, On Horseback through Asia Minor, vol. 2 (London, 1877), Appendix X, pp. 354–360",
+     "url": "https://archive.org/stream/onhorsebackthrou02burn/onhorsebackthrou02burn_djvu.txt",
+     "lic": "Public domain (published 1877)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "A Russian detachment having captured the village of Toobeh on the Soobashi River, inhabited by about 100 Abadzekh, and after these had surrendered themselves prisoners, they were all massacred by the Russian troops. […] As the Russian troops gain ground on the coast, the natives are not allowed to remain there on any terms, but are compelled either to transfer themselves to the plains of the Kouban or emigrate to Turkey.",
+     "who": "Consul Dickson, British consul at Soukoum-Kalé (Sukhumi), reporting a deed that 'has come to my knowledge' (not seen himself), to Earl Russell (Papers respecting the Settlement of Circassian Emigrants in Turkey (presented to the House of Commons, 1864), in Accounts and Papers 1864, vol. LXIII, No. 4, p. 3)",
+     "date": "17 March 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "The probable immediate result of the present cruel war cannot be better illustrated than by a local saying, that \"even a woman might now-a-days travel from Soudjouk-Kalé to Anapa without fear of meeting a single human being.\"",
+     "who": "Consul Dickson at Soukoum-Kalé, to Earl Russell (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 2, p. 2)",
+     "date": "22 February 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "Amongst those who have reached, hundreds are labouring under disease, superinduced by famine and misery which they suffered previous to embarkation. […] From the best information obtainable, the mortality must have exceeded 3,500 between December and this date, of which, emigrants 3,000, Turks 470, Greeks 36, Armenians 17, Catholics 9, and Europeans 6.",
+     "who": "Consul Stevens, British consul at Trebizond, to Earl Russell (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 1, p. 1)",
+     "date": "17 February 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "The mortality amongst them averages from 120 to 150 per diem: 35,000 to 40,000 have been landed at Samsoon, and have infected that place to an alarming extent; as many as 500 deaths have recently occurred there in forty-eight hours. […] As many as 200,000 more are reported ready to quit their country, and Russia insists upon their leaving by the end of May, old style.",
+     "who": "Consul Stevens at Trebizond, to Earl Russell (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 15, p. 11); the same despatch blames the emigrants' own habits for the spread of disease",
+     "date": "19 May 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "The continued advances of the Russians in Circassia, and the ill-treatment experienced by the natives from the Russian troops, have led to an almost complete emigration from the country: 25,000 have already reached Trebizond, and others are endeavouring to escape in small boats at every risk. […] the loss of life which is occasioned by their hazardous attempts to escape from their conquerors is shocking to humanity.",
+     "who": "Sir Henry Bulwer, British ambassador at Constantinople, to Earl Russell, forwarding the Circassian petition (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 3, p. 2)",
+     "date": "12 April 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "It is apparent that the Russian Government have long taken an absolute resolution at any risk to remove the whole of the mountaineers still in arms from their native places. […] The policy of Russia, though unrelenting, has not been deliberately sanguinary. There was no desire to exterminate the people; the object was to remove them.",
+     "who": "Lord Napier, British ambassador at St Petersburg, giving his own view to Earl Russell, largely from Russian official information (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 13, p. 9)",
+     "date": "23 May 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "The Vice-Chancellor replied that the tribes had insisted on leaving the country; that the Imperial Government regretted it; that it was absolutely necessary to remove these people from their mountain fastnesses, where their predatory and martial habits would be incurable; but that a fair offer had been made to all to settle on lands in the plain, which they had rejected.",
+     "who": "Prince Gorchakov, Russian foreign minister (Vice-Chancellor), as reported by the British ambassador Lord Napier to Earl Russell (Papers respecting the Settlement of Circassian Emigrants, 1864, No. 10, p. 6)",
+     "date": "16 May 1864 (reported 17 May)",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "tous les versants septentrionaux de la chaîne, depuis la Laba jusqu'à la mer, et les versants méridionaux, depuis l'embouchure du Kouban jusqu'à l'ancien fort Véliaminow, étaient nettoyés des populations hostiles. […] Quoique l'on ne puisse pas affirmer que la guerre du Caucase soit complètement terminée avant que nos soldats aient parcouru tous les défilés des montagnes et en aient expulsé les derniers habitants, il est à espérer du moins que nous ne rencontrerons plus de résistance opiniâtre nulle part […]",
+     "who": "The Russian official Journal de St-Pétersbourg, reporting the spring campaign (in French; in plain English: by early spring all the northern slopes of the range from the Laba to the sea, and the southern slopes from the mouth of the Kuban to the old fort Veliaminov, 'were cleared of hostile populations'; and although the Caucasian war could not be called completely over until the soldiers had gone through every mountain pass and 'expelled the last inhabitants', it was hoped there would be no more stubborn resistance anywhere). Printed as Inclosure in No. 12 (pp. 7–9) of the British Papers",
+     "date": "19 May 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    },
+    {
+     "text": "L'autorité supérieure du Caucase propose spontanément aux montagnards qui se soumettent, de deux choses l'une; ou de s'établir sur les points qui leur sont assignés sur les bords du Kouban, ou bien émigrer en Turquie, alternative dans laquelle elle leur laisse une entière liberté de choix.",
+     "who": "Official correction ('rectification communiquée') published in the Messager d'Odessa and reprinted in the Journal de St-Pétersbourg (in French; in plain English: the supreme authority of the Caucasus freely offers the mountaineers who submit one of two things, to settle at the points assigned to them on the banks of the Kuban or to emigrate to Turkey, leaving them entire freedom of choice). Inclosure in No. 14, p. 10",
+     "date": "24 May 1864",
+     "url": "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    }
+   ],
+   "note": "Research in progress: Russia's present official position and the 21 May diaspora commemoration have not yet been checked against an official page. The Grand Duke Michael's order of the day ending the war was found only in an 1864 magazine article (Once a Week) whose archive.org copy carries an uploader's CC BY-NC-ND label, so it was not used. No text of the 1861 Circassian Mejlis declarations was found in a public-domain printing.",
+   "warn": "The Circassian words survive only in English translations made or printed by the British (translator not named), and the deputies' statement was written for a British audience. The French quotations are the Russian government's own published wording. Consular reports include hearsay (Dickson's Toobeh report) and the prejudices of the time (Stevens calls the emigrants indolent and blames them for the disease). The texts describe massacre, epidemic and death on a large scale. The 'today' quotation is in Georgian with a plain-English gloss.",
+   "disputed": [
+    [
+     "How many left and how many died? In May 1864 the Russian Minister of War spoke of 100,000 emigrants and foreign newspapers of 300,000; Lord Napier thought it might exceed 150,000; Consul Stevens reported 200,000 more ready to leave. Britannica today gives some 400,000 emigrants, with many thousands dying of starvation and disease on the way. The Grand Duke Michael, as Napier reported, said the distress on the Russian side had been exaggerated and that no epidemic prevailed there, the suffering coming on the voyage and at Trebizond. The Ottoman government had already spent £200,000 on the refugees, the British ambassador reported.",
+     [
+      "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt",
+      "https://www.britannica.com/topic/Circassian"
+     ]
+    ],
+    [
+     "Choice, expulsion or extermination? Russian official statements say the mountaineers who submitted were given entire freedom to choose between the Kuban plain and Turkey, and Gorchakov said the tribes insisted on leaving; Consul Dickson reported that on the coast they were not allowed to remain on any terms, and the petition speaks of slaughter. Lord Napier judged that Russia had resolved to remove all the mountaineers still in arms but did not wish to exterminate them. In 2011 the Parliament of Georgia recognised the mass destruction and expulsion as genocide. Whether the term applies is not settled here and the Genocide theme is left off.",
+     [
+      "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt",
+      "https://matsne.gov.ge/ka/document/view/1333945"
+     ]
+    ],
+    [
+     "Who bears the blame for the deaths? Bulwer blamed Russian ill-treatment; Napier reported that the Turks had greatly encouraged the emigration and then asked Russia to slow it, and that the Grand Duke blamed Turkish mismanagement at Trebizond; Stevens blamed the emigrants' own habits; Dickson pointed also to famine, cattle plague and the blood feuds that kept the tribes divided.",
+     [
+      "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "The Circassians speak here only through a petition and a deputies' statement translated into English for British readers; no account by the refugees in the Trebizond and Samsun camps, by the women and children sold there, or by the Ubykh, whose language later died out, was found in a public-domain copy. The Russian government's version survives in its own official newspaper, and British consuls and ambassadors wrote the rest.",
+   "reading": [
+    [
+     "Papers respecting the Settlement of Circassian Emigrants in Turkey (1864), in Accounts and Papers vol. LXIII (archive.org)",
+     "https://archive.org/stream/accountspapersof0063grea_f5p4/accountspapersof0063grea_f5p4_djvu.txt"
+    ],
+    [
+     "Correspondence respecting trade with the eastern coast of the Black Sea, in Accounts and Papers vol. LXXV (1863, archive.org)",
+     "https://archive.org/stream/accountspapers0075grea_j6k1/accountspapers0075grea_j6k1_djvu.txt"
+    ],
+    [
+     "F. Burnaby, On Horseback through Asia Minor, vol. 2 (1877), Appendices IX–X (archive.org)",
+     "https://archive.org/stream/onhorsebackthrou02burn/onhorsebackthrou02burn_djvu.txt"
+    ]
+   ],
+   "today": {
+    "text": "აღიარებულ იქნეს რუსეთ-კავკასიის ომის პერიოდში ჩერქეზების (ადიღელების) მასობრივი განადგურება და ისტორიული სამშობლოდან განდევნა გენოციდის აქტად",
+    "who": "Parliament of Georgia, Resolution No. 4701-Iს 'On the recognition of the genocide of the Circassians by the Russian Empire' (in Georgian; in plain English: the mass destruction of the Circassians (Adyghe) during the Russian–Caucasian War and their expulsion from their historical homeland are to be recognised as an act of genocide). Official text on the Legislative Herald of Georgia",
+    "date": "20 May 2011",
+    "url": "https://matsne.gov.ge/ka/document/view/1333945"
+   }
+  },
+  {
+   "id": "pequot1637",
+   "title": "The Pequot War",
+   "region": "Americas",
+   "where": "Pequot country between the Connecticut and Pawcatuck rivers; pin: the Pequot fort at Mystic (Mistick), Connecticut, USA (approximate)",
+   "lat": 41.37,
+   "lon": -71.98,
+   "from": 1636,
+   "to": 1638,
+   "themes": [
+    "War",
+    "Massacre",
+    "Colonial rule",
+    "Removal and dispossession",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "The Pequot War was fought in 1636–37 by the Pequot against English settlers from the Massachusetts Bay, Connecticut and Saybrook colonies and their Native allies, including the Narragansett and Mohegan, and it eliminated the Pequot as an impediment to English colonization of southern New England.",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "The Pequot had themselves subjugated dozens of other tribes in the 1620s and early 1630s in an attempt to control the region's fur and wampum trade, and by 1635 they controlled modern-day Connecticut and eastern Long Island; resentment among those tribes led them to seek alliance with the newly arrived English.",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "The Pequot killed the trader John Stone and his crew in early 1634, giving explanations that suggested they saw the killing as justified; after another trader, John Oldham, was found murdered off Block Island in July 1636, a killing assumed to be the work of Manisses Indians, Massachusetts Bay sent about 90 soldiers under John Endecott, who burned villages and cornfields on Block Island and in Pequot territory, and the Pequot answered by besieging the English fort at Saybrook.",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "Connecticut declared war on 1 May 1637 after a Pequot attack on Wethersfield, the first time women and children were killed in the war; during the Mistick campaign of 10–26 May 1637 an English force of 77 Connecticut soldiers with as many as 250 Native allies attacked and burned the fortified Pequot village at Mistick, where some 400 Pequot, including an estimated 175 women and children, were killed in less than an hour, half of them burned to death.",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "In the following months the English pursued the fleeing Pequot communities, executing leaders and fighting men and enslaving women and children, until the Swamp Fight at Fairfield ended the war.",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "Under the treaty made at Hartford in 1638 between Connecticut, the Narragansett and the Mohegan, the surviving Pequots were divided between the Narragansett and Mohegan sachems, were not to live in their ancient country nor be called by their ancient name, and their land was to be the property of the English of Connecticut.",
+     "https://archive.org/stream/historyofindians00defo/historyofindians00defo_djvu.txt"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Could ye blame us for revenging so cruel a murder? for we distinguish not between the Dutch and English, but took them to be one nation, and therefore we do not conceive that we wronged you, for they slew our king; and thinking these captains to be of the same nation and people as those that slew him, made us set upon this course of revenge. […] We know no difference between the Dutch and the English; they are both strangers to us, we took them to be all one; therefore we crave pardon; we have not wilfully wronged the English.",
+     "who": "A Pequot ambassador, 'a grave senior', sent aboard Endecott's ships to explain the killing of Captain Stone (the Pequot said Dutch traders had killed their sachem after taking his ransom), as recorded by Captain John Underhill, an officer of the English force; a marginal note in Underhill's book calls the story a 'devised excuse'",
+     "date": "late August 1636",
+     "doc": "John Underhill, Newes from America (London, 1638), reprinted in C. Orr (ed.), History of the Pequot War (Cleveland, 1897), pp. 57–58",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt",
+     "lic": "Public domain (written 1638; this printing 1897)"
+    },
+    {
+     "text": "Then they said, Have you fought enough? We said we knew not yet. Then they asked if we did use to kill women and children? We said they should see that hereafter. So they were silent a small space, and then they said, We are Pequits, and have killed Englishmen, and can kill them as mosquetoes, and we will go to Conectecott and kill men, women, and children, and we will take away the horses, cows and hogs.",
+     "who": "Pequot warriors parleying outside the besieged English fort at Saybrook, as recorded by its commander, Lieutenant Lion Gardener, through the interpreter Thomas Stanton ('we' is Gardener and Stanton)",
+     "date": "early 1637, during the siege of Saybrook fort",
+     "doc": "Lion Gardener, Relation of the Pequot Warres (written 1660), in Orr (ed.), History of the Pequot War (1897), pp. 131–132",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt",
+     "lic": "Public domain (written 1660; this printing 1897)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Our Indians came to us, and much rejoiced at our victories, and greatly admired the manner of Englishmen's fight, but cried Mach it, mach it; that is, It is naught, it is naught, because it is too furious, and slays too many men.",
+     "who": "The Native allies of the English (Narragansett and Mohegan warriors; Underhill calls them 'our Indians') after the burning of the Mystic fort, as recorded by Captain John Underhill (Newes from America, 1638; Orr ed. 1897, p. 84)",
+     "date": "May 1637",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt"
+    },
+    {
+     "text": "5. That the assault would be in the night, when they are commonly more secure and at home, by which advantage the English, being armed, may enter the houses and do what execution they please. 6. That before the assault be given, an ambush be laid behind them, between them and the swamp, to prevent their flight, &c. […] 8. That it would be pleasing to all natives, that women and children be spared, &c.",
+     "who": "Advice of the Narragansett to the English (their sachem Miantonomo had lately held council at Williams's house) before the Mystic attack, as gathered and written down by Roger Williams, the Providence minister who mediated with them, in a letter to Governor John Winthrop (Letters of Roger Williams, Narragansett Club, 1874, pp. 18–19; the long s of that printing is transcribed as s)",
+     "date": "May 1637 (the 1874 editor dates the letter to about 22 May)",
+     "url": "https://archive.org/stream/lettersofrogerwi00will/lettersofrogerwi00will_djvu.txt"
+    },
+    {
+     "text": "for so are we all Indians as the English are, and say brother to one another; so must we be one as they are, otherwise we shall be all gone shortly, for you know our fathers had plenty of deer and skins, our plains were full of deer, as also our woods, and of turkies, and our coves full of fish and fowl. But these English having gotten our land, they with scythes cut down the grass, and with axes fell the trees; their cows and horses eat the grass, and their hogs spoil our clam banks, and we shall all be starved",
+     "who": "Miantonomo, Narragansett sachem and former English ally, urging the Montauk of Long Island to join a general rising against the English; spoken to the Montauk elders while their sachem Wyandanch was away, passed on to Wyandanch and by him to Lion Gardener, who wrote it down and opposed the rising (Relation, written 1660; Orr ed. 1897, pp. 142–143); the speech continues with a call to attack the English",
+     "date": "1642",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "But God was above them, who laughed his Enemies and the Enemies of his People to Scorn, making them as a fiery Oven: Thus were the Stout Hearted spoiled, having slept their last Sleep, and none of their Men could find their Hands: Thus did the Lord judge among the Heathen, filling the Place with dead Bodies!",
+     "who": "Captain John Mason, commander of the Connecticut force at Mystic, A Brief History of the Pequot War (written about 1670, first printed 1736; Orr ed. 1897, p. 30)",
+     "date": "written about 1670, on May 1637",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt"
+    },
+    {
+     "text": "It may be demanded, Why should you be so furious? (as some have said). Should not Christians have more mercy and compassion? But I would refer you to David's war. When a people is grown to such a height of blood, and sin against God and man, and all confederates in the action, there he hath no respect to persons, but harrows them, and saws them, and puts them to the sword, and the most terriblest death that may be. Sometimes the Scripture declareth women and children must perish with their parents. Sometimes the case alters; but we will not dispute it now. We had sufficient light from the word of God for our proceedings.",
+     "who": "Captain John Underhill, commander of the Massachusetts Bay men at Mystic, answering critics of the killing (Newes from America, 1638; Orr ed. 1897, pp. 81–82)",
+     "date": "1638, on May 1637",
+     "url": "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt"
+    },
+    {
+     "text": "It was a fearfull sight to see them thus frying in the fyer, and the streams of blood quenching the same, and horrible was the stinck and sente ther of; but the victory seemed a sweete sacrifice, and they gave the prays therof to God, who had wrought so wonderfuly for them, thus to inclose their enimise in their hands, and give them so speedy a victory over so proud and insulting an enimie.",
+     "who": "William Bradford, governor of Plymouth Colony, Of Plymouth Plantation, in W. T. Davis's edition (1908), pp. 339–340",
+     "date": "written about 1645, on May 1637",
+     "url": "https://archive.org/stream/bradfords00brad/bradfords00brad_djvu.txt"
+    }
+   ],
+   "note": "Research in progress: no Connecticut or US government acknowledgement was found. The 1638 Treaty of Hartford is summarised from De Forest (1851); its original text was not found in a public-domain printing.",
+   "warn": "Every Native word on this card was written down by English colonists, two of them commanders who fought the Pequot, and some came through an interpreter; Underhill's own margin dismisses the Pequot ambassador's account. The texts keep 17th-century spelling (Pequits, Conectecott, fyer) and the colonists' religious language, and they describe people burned to death.",
+   "disputed": [
+    [
+     "How many died at Mystic? Mason wrote six or seven hundred, 'as some of themselves confessed', with seven captured and about seven escaped; Underhill wrote that by the Pequots' own report about four hundred were in the fort and not above five escaped; Bradford wrote about 400. Britannica gives some 400, including an estimated 175 women and children.",
+     [
+      "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt",
+      "https://archive.org/stream/bradfords00brad/bradfords00brad_djvu.txt",
+      "https://www.britannica.com/topic/Pequot-War"
+     ]
+    ],
+    [
+     "Massacre or just war? Mason and Underhill presented the burning as God's judgment and Underhill cited Scripture for killing women and children; the Narragansett allies, by Underhill's own account, cried that it was too furious and slew too many, and their leaders had asked through Roger Williams that women and children be spared. Britannica calls it the Mistick Massacre.",
+     [
+      "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt",
+      "https://archive.org/stream/lettersofrogerwi00will/lettersofrogerwi00will_djvu.txt",
+      "https://www.britannica.com/topic/Pequot-War"
+     ]
+    ],
+    [
+     "Who started it? Britannica says the immediate cause is often given as the killing of English traders, but that those deaths were the culmination of decades of conflict between Native peoples made worse by the Dutch and English; the Pequot explained Stone's death as revenge for a Dutch killing of their sachem, while Underhill called that a devised excuse. Allies were not only victims: the Narragansett advised a night assault and an ambush to cut off flight, and Bradford says they stood aloof and stopped any who broke away.",
+     [
+      "https://www.britannica.com/topic/Pequot-War",
+      "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt",
+      "https://archive.org/stream/lettersofrogerwi00will/lettersofrogerwi00will_djvu.txt",
+      "https://archive.org/stream/bradfords00brad/bradfords00brad_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "No Pequot account of the war in their own hand survives in these sources; Pequot words reach us only as written by the men who besieged and burned them, Underhill and Gardener, and Narragansett counsel only through Roger Williams and Gardener. The women and children killed at Mystic and those enslaved afterwards are counted, not heard, while the English commanders and Plymouth's governor wrote full narratives and the 1638 treaty even forbade the survivors their name.",
+   "reading": [
+    [
+     "Charles Orr (ed.), History of the Pequot War: the contemporary accounts of Mason, Underhill, Vincent and Gardener (1897, archive.org)",
+     "https://archive.org/stream/historypequotwa00orrgoog/historypequotwa00orrgoog_djvu.txt"
+    ],
+    [
+     "Pequot War (Britannica)",
+     "https://www.britannica.com/topic/Pequot-War"
+    ],
+    [
+     "William Bradford, Of Plymouth Plantation, ed. W. T. Davis (1908, archive.org)",
+     "https://archive.org/stream/bradfords00brad/bradfords00brad_djvu.txt"
+    ],
+    [
+     "Letters of Roger Williams, 1632–1682 (Narragansett Club, 1874, archive.org)",
+     "https://archive.org/stream/lettersofrogerwi00will/lettersofrogerwi00will_djvu.txt"
+    ],
+    [
+     "J. W. De Forest, History of the Indians of Connecticut (1851, archive.org)",
+     "https://archive.org/stream/historyofindians00defo/historyofindians00defo_djvu.txt"
+    ]
+   ],
+   "today": {
+    "text": "Framed against the sky, the lone tree on a knoll represents Mashantucket, the “much wooded land” where the Pequots hunted and kept alive their identity as an independent people. Displayed on the knoll is the signature of Robin Cassasinnamon, the Pequots’ first leader following the 1637 massacre at Mystick Fort.",
+    "who": "Mashantucket Pequot Museum and Research Center (tribally owned), describing the seal of the Mashantucket Pequot Tribal Nation",
+    "date": "page accessed 16 November 2026",
+    "url": "https://www.pequotmuseum.org/our-story/"
+   }
+  },
+  {
+   "id": "potosi-mita",
+   "title": "The Potosí mita",
+   "region": "Americas",
+   "where": "Potosí and the Cerro Rico silver mountain, Bolivia (with the Huancavelica mercury mines, Peru)",
+   "lat": -19.59,
+   "lon": -65.75,
+   "from": 1573,
+   "to": 1812,
+   "themes": [
+    "Forced labour",
+    "Colonial rule"
+   ],
+   "facts": [
+    [
+     "Silver was discovered at Potosí in 1545 and the city quickly became famous for its wealth: within three decades its population passed 150,000, making it the largest city in the New World, and it peaked at 160,000 about 1650.",
+     "https://www.britannica.com/place/Potosi-Bolivia"
+    ],
+    [
+     "Viceroy Francisco de Toledo (1569–81) made Indigenous chieftains responsible for collecting tribute and providing forced labour, and the Huancavelica mines, opened in 1563, produced the mercury essential to processing Potosí's silver efficiently.",
+     "https://www.britannica.com/place/Peru/Discovery-and-exploration-by-Europeans"
+    ],
+    [
+     "Under the Inca, most people performed their mit'a (labour turn) in or near their home communities, often in agriculture, and service in mines was extremely rare; under Toledo, communities had to provide one seventh of their male labour force at any one time for public works, mines and agriculture.",
+     "https://en.wikipedia.org/wiki/Mita_(Inca)"
+    ],
+    [
+     "Toledo turned the mita into an annual forced migration to Potosí: in 1578 it was decided that more than 14,000 natives and their families would be required to work in the mines for a wage set below the market rate, and the families' earnings went mostly to pay the men's tribute.",
+     "https://www.cambridge.org/core/journals/international-review-of-social-history/article/free-and-unfree-labour-in-the-colonial-andes-in-the-sixteenth-and-seventeenth-centuries/B00B9D39F97F968E9F6655462D8FB723"
+    ],
+    [
+     "Mitayos were never the whole workforce: a description of 1603 counts around 58,800 Indians working in Potosí, of whom 5,100 were mitayos, 10,500 contracted workers (mingas) and 43,200 free wage earners, but the mitayos had to do tasks others did not want, such as carrying ore up ladders, for a lower wage; by the end of the colonial period nearly half the labourers were mitayos.",
+     "https://www.cambridge.org/core/journals/international-review-of-social-history/article/free-and-unfree-labour-in-the-colonial-andes-in-the-sixteenth-and-seventeenth-centuries/B00B9D39F97F968E9F6655462D8FB723"
+    ],
+    [
+     "The economist Melissa Dell describes the mita as an extensive forced mining labour system in effect in Peru and Bolivia between 1573 and 1812, and her study finds that districts once subjected to it have lower household consumption and more stunted growth in children today.",
+     "https://www.econometricsociety.org/publications/econometrica/2010/11/01/persistent-effects-perus-mining"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "En las dichas minas de Guancabilca de azogue es adonde tiene tanto castigo los yndios pobres y rreciuen tormentos y mucho muerte de yndios. Adonde se acaua y pasa tormentos los caciques prencipales deste rreyno, acimismo en todas las demás minas de Potocí de plata y de Chocllo Cocha de plata y de Carauaya de oro y minas de otras partes destos rreynos.",
+     "who": "Felipe Guaman Poma de Ayala, an Andean (Indigenous) nobleman, in his chronicle addressed to King Philip III. Plain gloss: in the mercury mines of Huancavelica the poor Indians are punished, tormented and many die; there the principal chiefs of this kingdom are worn down and tormented, and so too in the silver mines of Potosí and Choclococha, the gold mines of Carabaya and the other mines of these kingdoms",
+     "date": "about 1615",
+     "doc": "El primer nueva corónica y buen gobierno (autograph manuscript, Royal Library of Denmark, GKS 2232 4º), 'Capítulo de los mineros', p. 526 [530]",
+     "url": "https://poma.kb.dk/permalink/2006/poma/530/es/text/",
+     "lic": "Public domain (autograph manuscript, about 1615, Royal Library of Denmark). Wording checked against the manuscript page image (https://poma.kb.dk/permalink/2006/poma/530/es/image/); spelling is Guaman Poma's, while expanded abbreviations (yñs = yndios), word division and punctuation follow the library's online transcription"
+    },
+    {
+     "text": "Y otros se huyen de las dichas minas, otros de los caminos por no llegar a las dichas minas y por no murir muerte supitania. Antes quieren yr a murir que a biuir y dizen que le acauen una ues porque, en cogiendo el mal de azogado, se seca como palo y tiene asma y no puede de día ni de noche beuir. Y dura un año o dos desta manera y se muere.",
+     "who": "Felipe Guaman Poma de Ayala, Andean nobleman and chronicler, on why people flee the mine draft. Plain gloss: others run away from the mines, or from the road, so as not to reach the mines and die a sudden death; they say they would rather it finished them at once, because whoever catches the mercury sickness dries up like a stick, has asthma and cannot live by day or night; it lasts a year or two and he dies",
+     "date": "about 1615",
+     "doc": "El primer nueva corónica y buen gobierno (autograph manuscript, Royal Library of Denmark, GKS 2232 4º), 'Mineros', p. 527 [531]",
+     "url": "https://poma.kb.dk/permalink/2006/poma/531/es/text/",
+     "lic": "Public domain (autograph manuscript, about 1615, Royal Library of Denmark). Wording checked against the manuscript page image (https://poma.kb.dk/permalink/2006/poma/531/es/image/); spelling is Guaman Poma's, while expanded abbreviations (dhas = dichas, q = que), word division and punctuation follow the library's online transcription"
+    }
+   ],
+   "witness": [
+    {
+     "text": "They labour in these mines in continuall darknes and obscuritie, without knowledge of day or night. And forasmuch as those places are never visited with the Sunne, there is not onely a continual darkness, but also an extreme colde, with so grosse an aire contrary to the disposition of man, so as such as newly enter are sicke as they at sea. […] A man carries ordinarily the weight of two arrobas of mettall vpon his shoulders, tied together in a cloth in maner of a skippe, and so mount they three and three. He that goes before carries a candle tied to his thumb, for, as it is said, they have no light from heaven, and so go they vp the ladder holding it with both their handes",
+     "who": "José de Acosta, a Spanish Jesuit who lived in Peru and went down one of the Potosí mines himself, Natural and Moral History of the Indies (Seville, 1590), book IV, chapter 8, in Edward Grimston's English translation of 1604 (Hakluyt Society edition, 1880, pp. 207–208; an arroba is about 25 lb)",
+     "date": "published 1590 (English 1604)",
+     "url": "https://archive.org/stream/india.history.resource.85878/85878_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "De los indios que van á labrar las minas de Potosí, la orden que se tuvo en repartirlos y la que se dio en su manera de servicio y trabajo, acrecentamiento de doctrinas, pagos de sus jornales y como y en que moneda se los habian de pagar y que cantidad cada dia y ante que justicia para que no pudiesen ser maltratados ni dejados de pagar, está dada al real Consejo una muy larga relación […] y que antes reciban los naturales provecho en lo espiritual y temporal que no daño",
+     "who": "Viceroy Francisco de Toledo, who organised the Potosí mita, in the memorial he gave King Philip II on the state in which he left Peru (Relaciones de los vireyes y audiencias que han gobernado el Perú, vol. 1, Lima 1867, section XXIII, p. 24). Plain gloss: the order for assigning the Indians who go to work the Potosí mines, their service and work, more religious teaching, the payment of their day-wages, in what coin and how much a day and before which judge, so that they could not be ill-treated or left unpaid, has been sent to the Royal Council in a long report; [in the omitted words Toledo asks the king to have it reviewed and not to let more Indians be added to the Potosí draft, though some press for it,] so that the natives receive benefit, spiritual and material, rather than harm",
+     "date": "about 1582 (written after his 13 years as viceroy from 1569)",
+     "url": "https://archive.org/stream/relacionesdelos02vicgoog/relacionesdelos02vicgoog_djvu.txt"
+    },
+    {
+     "text": "Quedan abolidas las mitas, ó mandamientos, ó repartimientos de Indios, y todo servicio personal, que bajo de aquellos ú otros nombres presten á los particulares, sin que por motivo ó pretexto alguno puedan los Jueces ó Gobernadores destinar ó compeler á aquellos naturales al expresado servicio.",
+     "who": "The Spanish Cortes (parliament) at Cádiz, Decree CCVII 'Abolición de las mitas', article I (Colección de los decretos y órdenes ... de las Cortes, vol. 3, Madrid 1820). Plain gloss: the mitas, mandamientos or repartimientos of Indians and all personal service rendered to private persons under those or other names are abolished, and no judge or governor may assign or force the natives into that service for any reason",
+     "date": "9 November 1812",
+     "url": "https://archive.org/stream/bub_gb_QPvp8CiDjnIC/bub_gb_QPvp8CiDjnIC_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "By the 17th century there were 160,000 colonists living in Potosí along with 13,500 Indians who were forced to work in the mines under the system of mita (mandatory labour).",
+    "who": "UNESCO World Heritage Centre, 'City of Potosí', site description (inscribed 1987; on the List of World Heritage in Danger since 2014). © UNESCO; description licensed under CC BY-SA 3.0 IGO (https://creativecommons.org/licenses/by-sa/3.0/igo/)",
+    "date": "current page, read 2026-11-10",
+    "url": "https://whc.unesco.org/en/list/420/"
+   },
+   "note": "Research in progress: no petition or complaint by mitayos or their kurakas (chiefs) was found in a public-domain printing within the time allowed; Guaman Poma is the only Andean voice here. The Dominican friar Domingo de Santo Tomás's letter of 1 July 1550, which called Potosí a 'boca del infierno' (mouth of hell) before the mita began, is printed only in J. M. Vargas (Quito, 1937) and in a 2018 draft English translation by Kris Lane on Tulane's Friends of Potosí site (no licence stated), so it is linked in reading, not quoted. Both Guaman Poma passages were checked word for word against the manuscript page images on the Royal Library's site (GKS 2232 4º, pp. 526 [530] and 527 [531]); only the editors' expansions of abbreviations, word division and punctuation come from the library's transcription.",
+   "warn": "The Spanish quotations keep their original spelling (Guaman Poma writes rreyno, yndios, trauajo, azogue = mercury; the 1812 decree uses ó and ú). The glosses in 'who' are the site's plain summaries, not translations. Acosta's English is Grimston's of 1604. Toledo's memorial is his own defence of his government, written for the king.",
+   "disputed": [
+    [
+     "How many died? Wikipedia's Cerro Rico article reports the belief that around eight million miners died in total; it adds that other sources estimate 'hundreds of thousands', and that eight million was the total number of deaths in the whole Viceroyalty of Peru, not just the Potosí mines, and that historians such as Peter Bakewell, Noble David Cook, Enrique Tandeter and Raquel Gil Montero give completely different estimates. Gil Montero gives no death toll, though she lists 'a significant increase in mortality rates' among the main facts affecting the native population; Carpio and Guerrero (2021), using surname data, argue that the mita 'caused the decimation of the native-born male population'.",
+     [
+      "https://en.wikipedia.org/wiki/Cerro_Rico",
+      "https://www.cambridge.org/core/journals/international-review-of-social-history/article/free-and-unfree-labour-in-the-colonial-andes-in-the-sixteenth-and-seventeenth-centuries/B00B9D39F97F968E9F6655462D8FB723",
+      "https://ideas.repec.org/a/cup/jechis/v81y2021i4p1015-1051_2.html"
+     ]
+    ],
+    [
+     "Did people flee the mita? Guaman Poma wrote that people abandoned their towns and ran away on the road to escape it, and Gil Montero notes that this was the traditional explanation for the growing number of migrants (forasteros); she writes that recent research shows many migrants were working in other mines and paying tribute and the cost of their replacement under the mita, and that during the seventeenth century people migrated chiefly because of colonial obligations.",
+     [
+      "https://poma.kb.dk/permalink/2006/poma/531/es/text/",
+      "https://www.cambridge.org/core/journals/international-review-of-social-history/article/free-and-unfree-labour-in-the-colonial-andes-in-the-sixteenth-and-seventeenth-centuries/B00B9D39F97F968E9F6655462D8FB723"
+     ]
+    ],
+    [
+     "Does the mita still shape the region? Dell (2010) finds lower household consumption and more child stunting today in districts once subject to the mita; Abad and Maurer (2025), using data on 500 Indigenous settlements, find that forced labour severely harmed the communities but that the effects nearly disappeared by the end of the colonial period, with no significant later 'reversal of fortune'.",
+     [
+      "https://www.econometricsociety.org/publications/econometrica/2010/11/01/persistent-effects-perus-mining",
+      "https://ideas.repec.org/a/kap/jecgro/v30y2025i4d10.1007_s10887-024-09249-9.html"
+     ]
+    ]
+   ],
+   "blind": "The viceroy who built the system, the Cortes that ended it, Jesuit and Dominican clerics and UNESCO all speak in this record; the only Andean voice found in print is Guaman Poma, a nobleman writing to the king, not a mitayo. The men who climbed the ladders, and the wives and children who travelled with them to Potosí, appear as counts (14,000, 13,500, 5,100), not in their own words; petitions by their kurakas survive mainly in Spanish archives, unpublished or in modern copyrighted editions.",
+   "reading": [
+    [
+     "Guaman Poma, Nueva corónica y buen gobierno (Royal Library of Denmark, facsimile and transcription)",
+     "https://poma.kb.dk/permalink/2006/poma/info/en/frontpage.htm"
+    ],
+    [
+     "Raquel Gil Montero, 'Free and Unfree Labour in the Colonial Andes in the Sixteenth and Seventeenth Centuries' (International Review of Social History, 2011)",
+     "https://www.cambridge.org/core/journals/international-review-of-social-history/article/free-and-unfree-labour-in-the-colonial-andes-in-the-sixteenth-and-seventeenth-centuries/B00B9D39F97F968E9F6655462D8FB723"
+    ],
+    [
+     "City of Potosí (UNESCO World Heritage Centre)",
+     "https://whc.unesco.org/en/list/420/"
+    ],
+    [
+     "José de Acosta, The Natural and Moral History of the Indies, vol. 1 (Hakluyt Society, 1880, archive.org)",
+     "https://archive.org/stream/india.history.resource.85878/85878_djvu.txt"
+    ],
+    [
+     "Relaciones de los vireyes y audiencias que han gobernado el Perú, vol. 1 (1867, archive.org)",
+     "https://archive.org/stream/relacionesdelos02vicgoog/relacionesdelos02vicgoog_djvu.txt"
+    ],
+    [
+     "Translated documents on Potosí, incl. Domingo de Santo Tomás's 1550 letter (Friends of Potosí, Tulane University)",
+     "https://friendsofpotosi.tulane.edu/?p=236"
+    ]
+   ]
+  },
+  {
+   "id": "stolen-generations",
+   "title": "The Stolen Generations",
+   "region": "Oceania",
+   "where": "Australia, every state and territory; pin: the Cootamundra Training Home for Aboriginal girls, New South Wales (approximate)",
+   "lat": -34.64,
+   "lon": 148.03,
+   "from": 1905,
+   "to": 1970,
+   "themes": [
+    "Removal and dispossession",
+    "Colonial rule",
+    "Forced labour"
+   ],
+   "facts": [
+    [
+     "Western Australia's Aborigines Act 1905 made the Chief Protector of Aborigines the legal guardian of every Aboriginal child to the age of 16 and permitted authorities to 'send and detain' Aboriginal children in institutions and in 'service' (work); it governed Aboriginal lives in the state for nearly 60 years, until it was repealed in 1964.",
+     "https://www.findandconnect.gov.au/entity/aborigines-act-1905/"
+    ],
+    [
+     "In New South Wales the Aborigines Protection Board had sought the power to remove children, but the 1909 Act gave it only the powers that applied to neglected white children; the 1915 amendments gave it the power to remove any Indigenous child at any time and for any reason, and led to thousands of children being taken from their parents on the basis of race alone.",
+     "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act"
+    ],
+    [
+     "Babies were sent to the United Aborigines Mission Home at Bomaderry, girls to the Cootamundra Girls Home and boys to the Kinchela Aboriginal Boys Training Home; the Board said the children received care and education, but oral histories from the children show the homes to be harsh and desolate places, the children were brought up to reject their Aboriginal heritage, and abuse was widespread.",
+     "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act"
+    ],
+    [
+     "Because of poor record keeping no one knows how many children were removed: the historian Peter Read has suggested that up to 50,000 'would not be unreasonable', and the 1997 Bringing Them Home report suggested that at most one in three and at least one in ten Indigenous children were removed.",
+     "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act"
+    ],
+    [
+     "Aboriginal people organised against the removals: in early 1925 Fred Maynard and others helped Aboriginal families at Nambucca Heads rescue their own children from the Board's custody on Stuart Island, and the Australian Aboriginal Progressive Association he launched demanded that children no longer be separated from their families or indentured as domestics and menial labourers.",
+     "https://adb.anu.edu.au/biography/maynard-charles-frederick-fred-11095"
+    ],
+    [
+     "The NSW Aborigines Protection Act was repealed in 1969; a main recommendation of the 1997 Bringing Them Home report was a national apology to the Stolen Generations, which the Australian Government made on 13 February 2008.",
+     "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "As it is the proud boast of Australia that every person born beneath the Southern Cross is born free, irrespective of origin, race, color, creed, religion or any other impediment we, the representatives of the original people, in conference assembled, demand that we shall be accorded, the same full right, and privileges of citizenship as are enjoyed by all other sections of the community.",
+     "who": "Resolution of the Australian Aboriginal Progressive Association, read by 'the president' (the report does not make clear whether this was the chairman, Kempsey branch president Eugene Miranda, or the association's president Fred Maynard, who had just spoken) and carried unanimously at its Kempsey conference, attended, the paper says, by about 200 Aboriginal people. Printed in the Macleay Chronicle (Kempsey), 7 October 1925, pp. 4 and 8, in an unsigned contributed report",
+     "date": "October 1925",
+     "doc": "'Australian Aboriginal Progressive Association', The Macleay Chronicle, 7 October 1925, p. 8 (Trove)",
+     "url": "https://trove.nla.gov.au/newspaper/article/174390965",
+     "lic": "Public domain (Australian newspaper, published 1925)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "He declared that on the North Coast of New South Wales he had found 60 native men, women, and children suffering from starvation. The public did not hear of these conditions because there was a \"hush\" policy. He said that help from the police was not sought, as it was feared that the children would be taken from their parents. That was considered crueller than starvation.",
+     "who": "The chief spokesman (not named in the report) of a deputation of seven Aboriginal members of the Australian Aborigines Progressive Association, two of them women, meeting the Bishop Coadjutor of Sydney and the chairman of the Australian Board of Missions; his words are given in indirect speech by the Sydney correspondent of the Christchurch Press (Press, 7 December 1927, Papers Past; a shorter cable in the Hawke's Bay Tribune, 16 November 1927, calls the spokesman the association's president). Published 1927, public domain",
+     "date": "November 1927",
+     "url": "https://paperspast.natlib.govt.nz/newspapers/CHP19271207.2.125"
+    }
+   ],
+   "official": [
+    {
+     "text": "The Board may assume full control and custody of the child of any aborigine, if after due inquiry it is satisfied that such a course is in the interest of the moral or physical welfare of such child. The Board may thereupon remove such child to such control and care as it thinks best. The parents of any such child so removed may appeal against any such action on the part of the Board to a Court as defined in the Neglected Children and Juvenile Offenders Act, 1905, in a manner to be prescribed by regulations.",
+     "who": "Parliament of New South Wales, Aborigines Protection Amending Act 1915 (Act No. 2, 1915, assented to 15 February 1915), section 4, inserting section 13A into the Aborigines Protection Act 1909 (Government Printer's official print, p. 122, archived copy of the NSW Government's PDF; New South Wales Crown copyright in a work published in 1915 has expired). The National Museum of Australia's reproduction prints 'moral and physical'; the official print reads 'moral or physical'",
+     "date": "15 February 1915",
+     "url": "https://web.archive.org/web/20200131115959/https://www.legislation.nsw.gov.au/acts/1915-2.pdf"
+    },
+    {
+     "text": "The object of the Board is to rescue these children from the environment of camp life, where they have little chance of reaching 15 or 16 years of age without getting into trouble, and to afford them an opportunity to earn their own living and reach years of discretion in good surroundings and under helpful influences before they are thrown on their own responsibility. Some criticism of this system has found expression, it being contended that the separation of the sexes will only tend to expedite the passing of the Aboriginal race. The Board, however, takes a very different view. Its object is to save the children from certain moral degradation on the Reserves and Camps, and give them a chance to reach maturity, after which they are given every facility to return either on holiday or permanently, according to their wish, to their own districts, where they are expected to take up suitable employment.",
+     "who": "New South Wales Board for Protection of Aborigines, annual report for the year ended 30 June 1925 (dated 11 December 1925; NSW Legislative Assembly paper, printed 14 January 1926), section 'Cootamundra Home', p. 2 (National Library of Australia digitised copy; NSW Crown copyright in a paper published in 1926 has expired, though the library lists its copyright as undetermined)",
+     "date": "December 1925",
+     "url": "https://nla.gov.au/nla.obj-53849855/view?partId=nla.obj-53856611"
+    }
+   ],
+   "today": {
+    "text": "We apologise for the laws and policies of successive Parliaments and governments that have inflicted profound grief, suffering and loss on these our fellow Australians. We apologise especially for the removal of Aboriginal and Torres Strait Islander children from their families, their communities and their country. For the pain, suffering and hurt of these Stolen Generations, their descendants and for their families left behind, we say sorry.",
+    "who": "Prime Minister Kevin Rudd, 'Apology to Australia's Indigenous Peoples', motion moved in the House of Representatives, Canberra (PM Transcripts, transcript 15758; licensed from the Commonwealth of Australia under a Creative Commons Attribution 4.0 International Licence)",
+    "date": "13 February 2008",
+    "url": "https://pmtranscripts.pmc.gov.au/release/transcript-15758"
+   },
+   "note": "Research in progress: no words of a removed child or of a parent written or printed before 1931 were found; the survivors' testimonies collected for the 1997 Bringing Them Home report are not quoted because the report is excluded from the Australian Human Rights Commission's Creative Commons licence and carries an 'all rights reserved' notice (it is described in facts and linked in reading). Living survivors are not named. Australian Hansard (CC BY-NC-ND) is not quoted; the 2008 apology comes from PM Transcripts (CC BY 4.0). Section 13A is quoted from the official 1915 print (NSW Government PDF, Wayback capture of 31 January 2020); it reads 'moral or physical welfare', and the National Museum of Australia's reproduction ('moral and physical') differs on that word.",
+   "warn": "The documents use the racial language of their time ('aborigine', 'half-caste', 'camp life', 'the passing of the Aboriginal race'). The 1927 spokesman's words are a correspondent's indirect report, not his own text. This story concerns the removal of children from their families; Aboriginal and Torres Strait Islander readers are advised that linked sources may contain names and images of people who have died.",
+   "disputed": [
+    [
+     "How many children? Bringing Them Home estimated between one in three and one in ten Indigenous children; Peter Read has suggested up to 50,000; Robert Manne has said the lower figure of one in ten is more likely, estimating 20,000 to 25,000 children over six decades; in April 2000 the federal minister John Herron tabled a report saying that, as 'only 10%' had been removed, they did not constitute a whole 'generation'. Manne defended the term as a metaphor for a collective experience.",
+     [
+      "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act",
+      "https://en.wikipedia.org/wiki/Stolen_Generations"
+     ]
+    ],
+    [
+     "Rescue or removal? The Board wrote in 1925 that its object was to rescue children from camp life, and the historian Keith Windschuttle has argued that the removals were done for the children's good and that the abuses have been exaggerated; many historians, including Read and Manne, reject this, and the National Museum notes oral histories describing the homes as harsh and desolate and abuse as widespread. The anthropologist Ron Brunton criticised the 1997 inquiry because testimony was not cross-examined; the inquiry's Sir Ronald Wilson replied that state governments themselves had acknowledged a lot of cruelty in applying the laws.",
+     [
+      "https://nla.gov.au/nla.obj-53849855/view?partId=nla.obj-53856611",
+      "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act",
+      "https://en.wikipedia.org/wiki/Stolen_Generations"
+     ]
+    ],
+    [
+     "Was it genocide? Bringing Them Home found that the removals amounted to genocide under international law as well as systematic racial discrimination; in Kruger v Commonwealth the High Court rejected the plaintiffs' claim that the 1918 Northern Territory Aboriginals Ordinance authorised genocide as defined by the Convention; others dispute that the policies were intended to destroy Indigenous people, and Manne writes that the report's genocide argument has since been 'generally acknowledged' to be wrong in law, because cultural assimilation is not legally genocide, while comparing A. O. Neville's 'breeding out the colour' aims to Nazi racial views. The Genocide theme is left off this card because the question is in live dispute.",
+     [
+      "https://en.wikipedia.org/wiki/Stolen_Generations"
+     ]
+    ],
+    [
+     "What have courts and governments decided? In Kruger v Commonwealth (1997) the High Court majority found the Northern Territory's 1918 Aboriginals Ordinance beneficial in intent and without the purpose of genocide; in Williams (NSW Court of Appeal, 2000) a claimant placed under the Board's control at the Bomaderry children's home lost a negligence claim because the court found no duty of care, and a Federal Court claim, Cubillo v Commonwealth (2000), was also heard; in 2007 Bruce Trevorrow, removed from his parents as a baby, became the first member of the Stolen Generations to be awarded compensation by a court (A$525,000; South Australia lost its appeal in 2010). New South Wales ran a compensation scheme from 2017 to 2022 (A$75,000 per survivor), and in 2021 the federal government announced a A$378 million fund offering A$75,000 payments to survivors from the Northern Territory, the Australian Capital Territory and Jervis Bay Territory.",
+     [
+      "https://en.wikipedia.org/wiki/Stolen_Generations"
+     ]
+    ]
+   ],
+   "blind": "The Protection Boards and Protectors wrote annual reports year after year, and governments, a royal commission and the 1997 inquiry produced the paper trail; the removed children themselves left almost nothing in print before 1931, and their later testimony (the heart of Bringing Them Home) cannot be quoted here for licence reasons. Aboriginal adults appear in the 1920s press mainly through the Australian Aboriginal Progressive Association, often summarised by white reporters; many records of individual removals were never made or were destroyed.",
+   "reading": [
+    [
+     "Aborigines Protection Act: 1915, NSW Government gains power to remove Aboriginal children (National Museum of Australia, Defining Moments)",
+     "https://www.nma.gov.au/defining-moments/resources/aborigines-protection-act"
+    ],
+    [
+     "Bringing Them Home: Report of the National Inquiry into the Separation of Aboriginal and Torres Strait Islander Children from Their Families, 1997 (Australian Human Rights Commission; read online, not licensed for reuse)",
+     "https://humanrights.gov.au/resource-hub/older-peoples-rights/bringing-them-home-full-contents-page"
+    ],
+    [
+     "Apology to Australia's Indigenous Peoples, 13 February 2008 (PM Transcripts)",
+     "https://pmtranscripts.pmc.gov.au/release/transcript-15758"
+    ],
+    [
+     "Charles Frederick (Fred) Maynard, by Heather Goodall and John Maynard (Australian Dictionary of Biography)",
+     "https://adb.anu.edu.au/biography/maynard-charles-frederick-fred-11095"
+    ],
+    [
+     "Aborigines Act 1905, Western Australia (Find and Connect)",
+     "https://www.findandconnect.gov.au/entity/aborigines-act-1905/"
+    ],
+    [
+     "Reports of the NSW Aborigines Protection Board, 1894–1938 (National Library of Australia)",
+     "https://nla.gov.au/nla.obj-53849807"
     ]
    ]
   }
