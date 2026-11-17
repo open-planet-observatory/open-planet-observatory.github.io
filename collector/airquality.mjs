@@ -13,8 +13,9 @@ export const D = 4, NY = 45, NX = 90, SLICES = 9, PER = (NY * NX) / SLICES, CYCL
 const API = 'https://air-quality-api.open-meteo.com/v1/air-quality';
 export const latOf = r => 88 - D * r, lonOf = c => -180 + D * c;
 const iso = d => new Date(d).toISOString().slice(0, 16) + 'Z';
-// the points of one slice, in grid order
-export function slicePoints(k) { const out = []; for (let i = k * PER; i < (k + 1) * PER; i++) out.push([i, latOf(Math.floor(i / NX)), lonOf(i % NX)]); return out; }
+// The points of one slice. Slices are interleaved (every ninth point, staggered row by row), so the first run already covers
+// the whole globe thinly and each later run fills in between, instead of filling from the north pole down over nine runs.
+export function slicePoints(k) { const out = []; for (let i = 0; i < NY * NX; i++) { const r = Math.floor(i / NX), c = i % NX; if ((c + 4 * r) % SLICES === k) out.push([i, latOf(r), lonOf(c)]); } return out; }
 export async function fetchSlice(k, fetchImpl = fetch) { const pts = slicePoints(k), vals = new Map(); let time = '';
   for (let a = 0; a < pts.length; a += 150) { const part = pts.slice(a, a + 150);
     const u = `${API}?latitude=${part.map(p => p[1]).join(',')}&longitude=${part.map(p => p[2]).join(',')}&current=pm2_5&domains=cams_global`;
@@ -25,11 +26,11 @@ export async function fetchSlice(k, fetchImpl = fetch) { const pts = slicePoints
       vals.set(part[i][0], Number.isFinite(v) && v >= 0 && v < 5000 ? Math.round(v * 10) / 10 : null); }); }
   const have = [...vals.values()].filter(v => v != null).length; if (have < pts.length * 0.9) throw new Error(`slice ${k}: only ${have} of ${pts.length} points have a value`);
   return { vals, time }; }
-const blank = now => ({ v: 1, built: iso(now), source: SOURCE, unit: 'µg/m³', what: 'PM2.5 near the ground, CAMS global model forecast for the hour it was fetched',
+const blank = now => ({ v: 2, built: iso(now), source: SOURCE, unit: 'µg/m³', what: 'PM2.5 near the ground, CAMS global model forecast for the hour it was fetched',
   grid: { ny: NY, nx: NX, lat0: 88, dlat: -D, lon0: -180, dlon: D }, cycle: { start: iso(now), next: 0 }, sliceAt: Array(SLICES).fill(null), modelTime: '', pm25: Array(NY * NX).fill(null) });
 // One run. prev: the published data/air.json (or null). Returns { out, status }.
 export async function runAir({ now = new Date(), prev = null, fetchImpl = fetch } = {}) {
-  let S = prev && prev.v === 1 && Array.isArray(prev.pm25) && prev.pm25.length === NY * NX && prev.cycle ? JSON.parse(JSON.stringify(prev)) : blank(now); delete S.failed; delete S.error;
+  let S = prev && prev.v === 2 && Array.isArray(prev.pm25) && prev.pm25.length === NY * NX && prev.cycle ? JSON.parse(JSON.stringify(prev)) : blank(now); delete S.failed; delete S.error;
   // drop slices that are too old to pass off as current
   S.sliceAt.forEach((t, k) => { if (t && (now - new Date(t)) / 36e5 > MAX_AGE_H) { S.sliceAt[k] = null; for (const [i] of slicePoints(k)) S.pm25[i] = null; } });
   if (S.cycle.next >= SLICES && (now - new Date(S.cycle.start)) / 36e5 >= CYCLE_H) S.cycle = { start: iso(now), next: 0 };
