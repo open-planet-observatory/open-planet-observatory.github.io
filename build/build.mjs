@@ -38,16 +38,25 @@ if (mode === 'hosted') {
   s = s.replace(/<!--DATA:(\w+)-->/g, (m, n) => `<script src="data/${n}.js"></script>`);
   s = s.replace('<!--EXTRAS_JS-->', () => `<script>${extras}</script>\n<script>${nature}</script>\n<script>${country}</script>\n<script>${ops}</script>\n<script src="vendor/astronomy.browser.min.js"></script>\n<script>${moon}</script>\n<script>${ai}</script>\n<script>${owl}</script>\n<script>${chk}</script>\n<script>${clim}</script>\n<script>window.CESIUM_BASE_URL='vendor/cesium/';${ionToken ? `window.OBS_ION_TOKEN=${JSON.stringify(ionToken)};` : ''}</script>\n<link rel="stylesheet" href="vendor/cesium/Widgets/widgets.css">\n<script src="vendor/cesium/Cesium.js"></script>\n<script>${globe3d}</script>\n<script>${haz}</script>\n<script>${grav}</script>\n<script>${live}</script>\n<script>${tips}</script>\n<script>${worlds}</script>\n<script>${voyager}</script>\n<script>${almanac}</script>\n<script>${music}</script>\n<script>${navjs}</script>\n<script>${gamejs}</script>\n<script>${sitetour}</script>\n<script>${histjs}</script>\n<script>${recjs}</script>\n<script>${pagejs}</script>\n<script>${untoldjs}</script>\n<script>${skyjs}</script>\n<script>${skyfind}</script>\n<script>${insidejs}</script>\n<script>${predjs}</script>\n<script>${fdjs}</script>\n<script>window.OWL_API=${JSON.stringify(process.env.OWL_API || '')};</script>\n<script>${boardsjs}</script>\n<script>${huntjs}</script>\n<script>${themesjs}</script>\n<script>${weeklyjs}</script>\n<script>${spacejs}</script>\n<script>${owljs}</script>\n<script>${hubjs}</script>\n<script>${moonjs}</script>\n<script type="importmap">{"imports":{"three":"./vendor/three/three.module.min.js","three/addons/":"./vendor/three/addons/"}}</script>\n<script type="module">${uni.replace("import('./stars.js')", () => `import('./stars.js?v=${STARS_VER}')`).replace("import('./cosmos.js')", () => `import('./cosmos.js?v=${COSMOS_VER}')`)}</script>`);
   s = s.replace('<!--OPS_CSS-->', () => `<style>${opsCss}</style>`);
+  // Search engines (18 Nov 2026): one canonical address (the site is also reachable at theowlmanac.pages.dev and
+  // open-planet-observatory.github.io) and a schema.org WebSite description. No personal names here, ever.
+  const SITE_URL = 'https://theowlmanac.com/';
+  const SITE_DESC = "Free, open-source live map of earthquakes, fires, storms, satellites, disruptions and the planet's vital signs, from public sources. Built to inform, not to surveil.";
+  const LD = { '@context': 'https://schema.org', '@type': 'WebSite', name: 'The Owlmanac Observatory', url: SITE_URL, description: SITE_DESC, inLanguage: 'en', isAccessibleForFree: true,
+    publisher: { '@type': 'Organization', name: 'The Owlmanac', url: SITE_URL, logo: SITE_URL + 'brand/owl-icon-512.png',
+      sameAs: ['https://www.youtube.com/@TheOwlmanac', 'https://bsky.app/profile/theowlmanac.com', 'https://mastodon.social/@theowlmanac'] } };
   const head = `<!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="description" content="Free, open-source live map of earthquakes, fires, storms, satellites, disruptions and the planet's vital signs, from public sources. Built to inform, not to surveil.">
+<meta name="description" content="${SITE_DESC}">
 <meta property="og:title" content="The Owlmanac Observatory">
 <link rel="icon" type="image/png" sizes="32x32" href="brand/owlmanac-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="brand/owl-touch-180.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://theowlmanac.com/">
+<link rel="canonical" href="${SITE_URL}">
+<script type="application/ld+json">${JSON.stringify(LD).replace(/</g, '\\u003c')}</script>
 <meta property="og:image" content="https://theowlmanac.com/brand/owl-share-1200x630.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -80,6 +89,10 @@ ${SPLASH}
   }
   await fs.copyFile(path.join(ROOT, 'node_modules', 'astronomy-engine', 'astronomy.browser.min.js'), path.join(out, 'vendor', 'astronomy.browser.min.js'));
   await fs.cp(path.join(ROOT, 'src', 'brand'), path.join(out, 'brand'), { recursive: true });
+  // files served at the site root (robots.txt, ...): everything in src/root, plus a sitemap dated with the build day.
+  // The site is one page; hash routes (#page=...) are not separate addresses, so the sitemap lists only the home page.
+  await fs.cp(path.join(ROOT, 'src', 'root'), out, { recursive: true });
+  await fs.writeFile(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${SITE_URL}</loc>\n    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>\n  </url>\n</urlset>\n`);
   await fs.cp(path.join(ROOT, 'src', 'assets'), path.join(out, 'assets'), { recursive: true });
   await fs.copyFile(path.join(ROOT, 'src', 'stars.js'), path.join(out, 'stars.js'));
   await fs.copyFile(path.join(ROOT, 'src', 'cosmos.js'), path.join(out, 'cosmos.js'));
