@@ -1520,3 +1520,14 @@ html.slim .brand-em{display:none}
 .ecl-list{list-style:none;padding:0;margin:6px 0;columns:2;column-gap:12px}.ecl-list li{break-inside:avoid;margin:2px 0}.ecl-sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
 @media (max-width:760px){.ecl-card{bottom:auto;top:calc(var(--top-h,64px) + 8px);max-height:45vh}.ecl-list{columns:1}}
 .ecl-leg .ecl-grad{width:70px;background:linear-gradient(90deg,rgba(245,225,140,.25),rgba(245,105,40,.8))}
+
+/* Header fit (nav.js measures and sets html[data-hfit] 0-4): each step frees room so every menu stays visible */
+@media (min-width:861px){
+html:is([data-hfit="1"],[data-hfit="2"],[data-hfit="3"],[data-hfit="4"]) .gn-vy .gv-l,html:is([data-hfit="1"],[data-hfit="2"],[data-hfit="3"],[data-hfit="4"]) .gn-vy .gv-m{display:none}
+html:is([data-hfit="1"],[data-hfit="2"],[data-hfit="3"],[data-hfit="4"]) .gn-vy .gv-s{display:inline}
+html:is([data-hfit="2"],[data-hfit="3"],[data-hfit="4"]) .gn-b{padding-left:8px;padding-right:8px}
+html:is([data-hfit="2"],[data-hfit="3"],[data-hfit="4"]) .gn-act{gap:4px}
+html:is([data-hfit="3"],[data-hfit="4"]) .gn-act .gn-tour .gn-tw{display:none}
+html:is([data-hfit="3"],[data-hfit="4"]) .gn-act .gn-tour{padding:6px 10px}
+html[data-hfit="4"] .gn-vy,html[data-hfit="4"] .gn-vyv{display:none}
+}

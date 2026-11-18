@@ -7,8 +7,9 @@
 // slows, drops lower and loses its consonant notes, then falls silent; a low drone, a slow heartbeat and a dark tremolo
 // rise underneath. Flying back reverses all of it, so returning to Earth sounds like coming home.
 (function () {
-  const AC = window.AudioContext || window.webkitAudioContext; if (!AC) { window.OwlMusic = { on: false, toggle() { }, setScale() { }, autoOn() { }, start() { }, stop() { } }; return; }
+  const AC = window.AudioContext || window.webkitAudioContext; if (!AC) { window.OwlMusic = { on: false, toggle() { }, setScale() { }, setMode() { }, autoOn() { }, start() { }, stop() { } }; return; }
   let ctx = null, master = null, verb = null, L = {}, scale = 0, melT = null, pulseT = null, on = false, melPos = 3, melCount = 0;
+  let mode = '', beat = 0; /* mode 'deck': the Observation Deck's own cue (see deckBeat and deckPing below) */
   const hz = m => 440 * Math.pow(2, (m - 69) / 12); // MIDI note → Hz
   const band = (s, a, b) => Math.max(0, Math.min(1, (s - a) / (b - a))); // 0 below a, 1 above b
   const ramp = (p, v, t = 0.8) => { p.cancelScheduledValues(ctx.currentTime); p.setTargetAtTime(v, ctx.currentTime, t); };
@@ -44,10 +45,27 @@
     // 6. the edge: a wide swell of filtered noise
     L.edge = layer(900, 0.4); const nb = ctx.createBuffer(1, ctx.sampleRate * 4, ctx.sampleRate), nd = nb.getChannelData(0); for (let i = 0; i < nd.length; i++) nd[i] = Math.random() * 2 - 1; const ns = ctx.createBufferSource(); ns.buffer = nb; ns.loop = true; const ng = ctx.createGain(); ng.gain.value = 0.25; ns.connect(ng); ng.connect(L.edge.f); ns.start();
     [36, 37, 42].forEach(m => L.edge.v.push(voice('triangle', hz(m), 0, 0.07, L.edge.f)));
+    // 7. the Observation Deck: a muted bass line and signal tones, scheduled below
+    L.deck = layer(520, 2.5); L.sig = layer(5200, 0.6);
   }
 
+  // ---------- The Observation Deck cue (the maintainer, 18 Nov 2026: "more situation-room-ish") ----------
+  // A control room at night: a steady muted bass line in D minor that never resolves, a held low chord, a slow sonar-like
+  // tone every few seconds, and now and then a short burst of quiet data blips. All synthesised; the blips are decoration and
+  // carry no data.
+  const BASS = [38, 38, 38, 41, 38, 38, 36, 38, 38, 38, 38, 43, 41, 38, 36, 33]; /* D2 with F2, C2, G2, A1 */
+  function deckBeat() { const t = ctx.currentTime, m = BASS[beat % BASS.length], acc = beat % 4 === 0;
+    const o = ctx.createOscillator(); o.type = 'sawtooth'; o.frequency.value = hz(m); const g = ctx.createGain();
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(acc ? 0.5 : 0.3, t + 0.012); g.gain.exponentialRampToValueAtTime(0.0005, t + 0.26);
+    o.connect(g); g.connect(L.deck.f); o.start(t); o.stop(t + 0.3);
+    if (beat % 8 === 0) { const k = ctx.createOscillator(); k.type = 'sine'; k.frequency.setValueAtTime(70, t); k.frequency.exponentialRampToValueAtTime(40, t + 0.3); const kg = ctx.createGain(); kg.gain.setValueAtTime(0, t); kg.gain.linearRampToValueAtTime(0.5, t + 0.01); kg.gain.exponentialRampToValueAtTime(0.0005, t + 0.5); k.connect(kg); kg.connect(L.pulse.f); k.start(t); k.stop(t + 0.55); } /* a low thud every two bars */
+    beat++; }
+  function deckPing() { const t = ctx.currentTime;
+    if (Math.random() < 0.3) { const n = 4 + Math.floor(Math.random() * 5); for (let i = 0; i < n; i++) { const o = ctx.createOscillator(); o.type = 'square'; o.frequency.value = hz([86, 89, 91, 93, 98][Math.floor(Math.random() * 5)]); const g = ctx.createGain(), at = t + i * 0.07; g.gain.setValueAtTime(0, at); g.gain.linearRampToValueAtTime(0.012, at + 0.004); g.gain.setValueAtTime(0.012, at + 0.035); g.gain.linearRampToValueAtTime(0, at + 0.045); o.connect(g); g.connect(L.sig.f); o.start(at); o.stop(at + 0.06); } return; } /* data blips */
+    const m = [81, 81, 86, 77][Math.floor(Math.random() * 4)], o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = hz(m); const g = ctx.createGain(); /* the sonar tone: A5, D6 or F5 over the D bass */
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.07, t + 0.01); g.gain.exponentialRampToValueAtTime(0.0005, t + 2.6); o.connect(g); g.connect(L.sig.f); o.start(t); o.stop(t + 2.7); }
   // the melody: a gentle random walk over the scale, in phrases with rests; higher, quicker and brighter near home
-  function melody() { if (!on || !ctx) return; const s = scale, lvl = 1 - band(s, 0.55, 0.86);
+  function melody() { if (!on || !ctx) return; if (mode === 'deck') { deckPing(); melT = setTimeout(melody, 3800 + Math.random() * 4200); return; } const s = scale, lvl = 1 - band(s, 0.55, 0.86);
     const gap = 420 + 1500 * band(s, 0, 0.75);
     if (lvl > 0.02) {
       const sc = harmony(s).scale; melPos = Math.max(0, Math.min(sc.length - 1, melPos + [-2, -1, -1, 1, 1, 2][Math.floor(Math.random() * 6)]));
@@ -60,10 +78,17 @@
         const g = ctx.createGain(); g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(0.13 * lvl, t + 0.015); g.gain.exponentialRampToValueAtTime(0.0005, t + dur);
         o.connect(g); o2.connect(g2); g2.connect(g); g.connect(L.mel.f); o.start(t); o2.start(t); o.stop(t + dur + 0.1); o2.stop(t + dur + 0.1); } }
     melT = setTimeout(melody, gap * (0.85 + Math.random() * 0.3)); }
-  function pulse() { if (!on || !ctx) return; const lvl = band(scale, 0.45, 0.7) + 0.6 * band(scale, 0.75, 0.95); if (lvl > 0.02) { const t = ctx.currentTime; [0, 0.28].forEach((dt, k) => { const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.setValueAtTime(58, t + dt); o.frequency.exponentialRampToValueAtTime(38, t + dt + 0.25); const g = ctx.createGain(); g.gain.setValueAtTime(0, t + dt); g.gain.linearRampToValueAtTime((k ? 0.22 : 0.32) * Math.min(1, lvl), t + dt + 0.015); g.gain.exponentialRampToValueAtTime(0.0005, t + dt + 0.45); o.connect(g); g.connect(L.pulse.f); o.start(t + dt); o.stop(t + dt + 0.5); }); }
+  function pulse() { if (!on || !ctx) return; if (mode === 'deck') { deckBeat(); pulseT = setTimeout(pulse, 330); return; } /* eighth notes at about 91 beats a minute */ const lvl = band(scale, 0.45, 0.7) + 0.6 * band(scale, 0.75, 0.95); if (lvl > 0.02) { const t = ctx.currentTime; [0, 0.28].forEach((dt, k) => { const o = ctx.createOscillator(); o.type = 'sine'; o.frequency.setValueAtTime(58, t + dt); o.frequency.exponentialRampToValueAtTime(38, t + dt + 0.25); const g = ctx.createGain(); g.gain.setValueAtTime(0, t + dt); g.gain.linearRampToValueAtTime((k ? 0.22 : 0.32) * Math.min(1, lvl), t + dt + 0.015); g.gain.exponentialRampToValueAtTime(0.0005, t + dt + 0.45); o.connect(g); g.connect(L.pulse.f); o.start(t + dt); o.stop(t + dt + 0.5); }); }
     pulseT = setTimeout(pulse, scale > 0.75 ? 1100 : 1600); } /* the heartbeat quickens out in the web */
 
-  function mix() { if (!ctx) return; const s = scale, root = rootAt(s), ch = harmony(s).chord;
+  function mix() { if (!ctx) return;
+    ramp(L.deck.g.gain, mode === 'deck' ? 0.8 : 0, 0.6); ramp(L.sig.g.gain, mode === 'deck' ? 1 : 0, 0.6);
+    if (mode === 'deck') { /* a held D minor (add 9) chord, low and dim, over a quiet drone and a trace of the dark tremolo */
+      [38, 45, 53, 52].forEach((m, i) => { ramp(L.pad.v[2 * i].o.frequency, hz(m), 1.2); ramp(L.pad.v[2 * i + 1].o.frequency, hz(m), 1.2); });
+      ramp(L.pad.g.gain, 0.5, 1.2); ramp(L.pad.f.frequency, 620, 1.5); ramp(L.mel.g.gain, 0, 0.4);
+      L.drone.v.forEach((v, i) => ramp(v.o.frequency, hz(38 + L.drone.int[i]), 1.2)); ramp(L.drone.g.gain, 0.35, 1.5); ramp(L.drone.f.frequency, 260, 2);
+      ramp(L.pulse.g.gain, 1, 0.5); ramp(L.dark.g.gain, 0.1, 2); ramp(L.dark.f.frequency, 380, 2); ramp(L.edge.g.gain, 0, 1); return; }
+    const s = scale, root = rootAt(s), ch = harmony(s).chord;
     // the chord: each voice glides to its note (two oscillators per note), brightness falls with distance
     ch.forEach((iv, i) => { const f = hz(root + iv); ramp(L.pad.v[2 * i].o.frequency, f, 1.4); ramp(L.pad.v[2 * i + 1].o.frequency, f, 1.4); });
     ramp(L.pad.g.gain, 0.85 - 0.35 * band(s, 0.6, 1), 1.2); ramp(L.pad.f.frequency, 3000 - 2400 * band(s, 0, 0.9), 2);
@@ -83,6 +108,8 @@
     stop(temp) { on = false; if (ctx) { ramp(master.gain, 0, 0.6); setTimeout(() => { if (!on && ctx) ctx.suspend(); }, 2500); } clearTimeout(melT); clearTimeout(pulseT); if (!temp) try { sessionStorage.setItem('owl-music', 'off'); } catch (e) { } dispatchEvent(new Event('owlmusic')); },
     autoOn() { let pref = null; try { pref = sessionStorage.getItem('owl-music'); } catch (e) { } if (!on && pref !== 'off') this.start(); }, /* the tour starts the music unless the visitor has turned it off before */
     setScale(s, force) { scale = Math.max(0, Math.min(1, s)); const now = performance.now(); if (on && (force || now - lastMix > 400)) { lastMix = now; mix(); } }, /* the audio ramps do the smoothing */
+    setMode(m) { m = m === 'deck' ? 'deck' : ''; if (m === mode) return; mode = m; beat = 0; if (on && ctx) { clearTimeout(melT); clearTimeout(pulseT); mix(); melT = setTimeout(melody, m ? 1500 : 600); pulse(); } }, /* 'deck' while the Observation Deck is open */
+    get mode() { return mode; },
     get scale() { return scale; }
   };
   window.OwlMusic = api;

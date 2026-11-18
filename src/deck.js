@@ -58,7 +58,7 @@ const W={
  tsunami:{title:'Tsunami messages',w:4,h:5,src:()=>'NOAA Tsunami Warning Centers · public domain',asof:()=>((window.SNAP||{}).tsunami||{}).asOf,draw:drawTsunami},
  aurora:{title:'Aurora forecast',w:4,h:5,src:()=>'NOAA SWPC OVATION · public domain',asof:()=>((window.SNAP||{}).aurora||{}).asOf,draw:drawAurora},
  volcanoes:{title:'U.S. volcano alerts',w:4,h:6,src:()=>'USGS Volcano Hazards Program · public domain',asof:()=>((window.SNAP||{}).volcanoes||{}).asOf,draw:drawVolcanoes}};
-const DEFAULT={look:'mix',place:0,panels:['map','qscope','wind','quakes','disasters','space','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
+const DEFAULT={look:'mix',place:0,panels:['map','qscope','wind','quakes','disasters','space','status','ascope','planet','launches','clocks'].map(t=>({t,s:'m'}))};
 let st=Object.assign({},DEFAULT,load()||{}),root,grid,timer,anim,prevLoop=null,opened=false;
 if(!Array.isArray(st.panels))st.panels=DEFAULT.panels.slice();st.panels=st.panels.filter(p=>W[p.t]);
 const size=p=>{const w=W[p.t];const k=p.s==='s'?.75:p.s==='l'?1.5:1;return{w:Math.min(12,Math.max(3,Math.round(w.w*k))),h:Math.max(3,Math.round(w.h*k))}};
@@ -183,8 +183,8 @@ function drawWarnings(el){const w=(window.DIS||{}).weather;if(!w||!w.byEvent){el
 function drawWho(el){const a=(window.SIT||{}).who||[];el.innerHTML=a.length?`<div class="dk-tab">${a.slice(0,N(el,12)).map(x=>row(String(x[1]).slice(5),x[0],BIG(el)&&x[2]?String(x[2]):'',x[3]&&/^https?:/.test(x[3])?x[3]:'https://www.who.int/emergencies/disease-outbreak-news')).join('')}</div>`:none('No WHO outbreak news loaded.')}
 function drawRelief(el){const R=((window.SNAP||{}).relief)||{},A=(R.appeals||[]).slice().sort((a,b)=>String(b[9]).localeCompare(String(a[9])));
  el.innerHTML=A.length?`<div class="dk-row"><span><b>${A.length}</b> active appeals and DREF operations</span></div><div class="dk-tab">${A.slice(0,N(el,25)).map(x=>row(x[1]||'',x[0],`${x[3]||''}${x[7]?` · requested ${fmt(x[7])} ${R.currency||'CHF'}`:''}${BIG(el)&&x[7]?` · funded ${fmt(x[8]||0)} (${Math.round(100*(x[8]||0)/x[7])}%)`:''} · from ${x[9]}${BIG(el)&&x[10]?' to '+x[10]:''}${BIG(el)&&x[12]?' · '+x[12]:''}`,x[11])).join('')}</div>`:none('No IFRC appeals loaded.')}
-function drawStatus(el){const D=window.DIS||{},S=D.services||[],bad=S.filter(x=>x[1]&&x[1]!=='none'),err=D.errors||[];
- el.innerHTML=S.length?`<div class="dk-row"><span><b>${bad.length}</b> reporting a problem</span><span><b>${S.length-bad.length}</b> all clear</span>${err.length?`<span><b>${err.length}</b> not read</span>`:''}</div><div class="dk-tab">${(BIG(el)?S:bad).map(x=>row(x[1]==='none'?'ok':x[1],x[0],x[2],x[5])).join('')||'<p class="dk-dim">Every status page read says all systems are working.</p>'}</div>${err.length?`<p class="dk-dim">Not read this time: ${esc(err.map(e=>String(e).replace(/ Failed to fetch$/,'')).join(', '))}.</p>`:''}`:none('No status pages loaded.')}
+function drawStatus(el){const D=window.DIS||{},S=D.services||[],bad=S.filter(x=>(x[1]&&x[1]!=='none')||(x[3]&&x[3].length)||(x[4]&&x[4].length)),err=(D.errors||[]).filter(e=>!/^(NVD|NWS|MBTA|MTA|BART|WMATA|CTA|Transit|FAA|GDELT)\b/.test(String(e)));
+ el.innerHTML=S.length?`<div class="dk-row"><span><b>${bad.length}</b> reporting a problem</span><span><b>${S.length-bad.length}</b> all clear</span>${err.length?`<span><b>${err.length}</b> not read</span>`:''}</div><div class="dk-tab">${(BIG(el)?S:bad).map(x=>row(x[1]==='none'&&!(x[3]&&x[3].length)?'ok':x[1]==='none'?'issue':x[1],x[0],(x[3]&&x[3][0]&&x[3][0][0])||x[2],x[5])).join('')||'<p class="dk-dim">Every status page read says all systems are working.</p>'}</div>${err.length?`<p class="dk-dim">Not read this time: ${esc(err.map(e=>String(e).replace(/ Failed to fetch$/,'')).join(', '))}.</p>`:''}`:none('No status pages loaded.')}
 function drawStations(el){const T=(window.SNAP||{}).tle||[];if(!T.length||!window.satellite){el.innerHTML=none('Orbital elements not loaded.');return}el.innerHTML='<div class="dk-tab dk-st"></div><p class="dk-dim">The point on the ground under each station, worked out from its orbit; updates every second.</p>';el._st=T.filter(x=>/ISS|Tiangong/i.test(x[0]));stationsTick(el)}
 function stationsTick(el){const S=window.satellite,box=el.querySelector('.dk-st');if(!box||!S||!el._st)return;const now=new Date(),g=S.gstime(now);
  box.innerHTML=el._st.map(([n,a,b])=>{try{const r=S.twoline2satrec(a,b),pv=S.propagate(r,now),d=S.eciToGeodetic(pv.position,g),la=S.degreesLat(d.latitude),lo=S.degreesLong(d.longitude),v=pv.velocity,sp=Math.hypot(v.x,v.y,v.z)*3600;
@@ -211,20 +211,22 @@ function tick(){if(root){root.querySelectorAll('.dk-p[data-t="stations"] .dk-bod
 function topPx(){const t=document.getElementById('ops-top');const r=t&&t.getBoundingClientRect();return r&&r.height?Math.round(r.bottom+6):0}
 function open(){if(opened)return;opened=true;const O=window.__obs;try{if(O&&O.setSlim)O.setSlim(true)}catch(e){}
  root=document.createElement('div');root.id='owlDeck';root.dataset.look=st.look;root.setAttribute('role','region');root.setAttribute('aria-label','Observation Deck');document.body.appendChild(root);
- document.documentElement.classList.add('deck-on');frame();
+ document.documentElement.classList.add('deck-on');frame();try{if(window.OwlMusic&&window.OwlMusic.setMode)window.OwlMusic.setMode('deck')}catch(e){}
  const place=()=>{root.style.top=topPx()+'px'};place();setTimeout(()=>{place();render()},350);root._place=place;addEventListener('resize',place);
  const g=window.__obs3d;if(g&&g.viewer){prevLoop=g.viewer.useDefaultRenderLoop;g.viewer.useDefaultRenderLoop=false}
  timer=setInterval(()=>{tick()},1000);root._data=setInterval(render,60000);const b=document.getElementById('gnDeck');if(b)b.setAttribute('aria-pressed','true')}
 function close(){if(!opened)return;opened=false;clearInterval(timer);if(root){clearInterval(root._data);removeEventListener('resize',root._place);root.querySelectorAll('canvas').forEach(c=>cancelAnimationFrame(c._raf));root.remove()}root=grid=null;
- document.documentElement.classList.remove('deck-on');const g=window.__obs3d;if(g&&g.viewer&&prevLoop!==null){g.viewer.useDefaultRenderLoop=prevLoop;prevLoop=null}
+ document.documentElement.classList.remove('deck-on');try{if(window.OwlMusic&&window.OwlMusic.setMode)window.OwlMusic.setMode('')}catch(e){}const g=window.__obs3d;if(g&&g.viewer&&prevLoop!==null){g.viewer.useDefaultRenderLoop=prevLoop;prevLoop=null}
  const b=document.getElementById('gnDeck');if(b)b.setAttribute('aria-pressed','false')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened){const m=root.querySelector('#dkMenu');if(m&&!m.hidden){m.hidden=true;return}close()}});
 let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resizeT);resizeT=setTimeout(render,250)});
 // Header button, beside the site tour.
 addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
 addEventListener('obs:home',()=>close());
+/* Picking anything in a header menu, or a header button that opens something else, closes the deck first: the page it opens used to load behind the deck (the maintainer, 18 Nov 2026). The menus themselves drop down in front of the deck (CSS below). */
+document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnSearch,#featRow button,#featRow a'))close()},true);
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
- b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.textContent='▦ Observation Deck';b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
+ b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.innerHTML='▦<span class="gn-tw"> Observation Deck</span>';b.setAttribute('aria-label','Observation Deck');b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);
 window.__owlDeck={open,close,state:()=>JSON.parse(JSON.stringify(st)),opened:()=>opened};
 const s=document.createElement('style');s.textContent=`
@@ -236,6 +238,7 @@ const s=document.createElement('style');s.textContent=`
 #owlDeck[data-look=phosphor]{--dk-bg:#030703;--dk-panel:#07100a;--dk-line:rgb(70 255 120 / .18);--dk-ink:#b9f7c6;--dk-dim:#6aa978;--dk-accent:#3dff72;--dk-scope:#3dff72;--dk-land:#0a1a0f;--dk-coast:rgb(61 255 114 / .28);--dk-quake:#ff5d4f;--dk-fire:#ffb340}
 #owlDeck[data-look=mix]{--dk-scope:#3dff72;--dk-coast:rgb(61 255 114 / .25)}
 html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
+html.deck-on .gn-m{z-index:2600}
 #owlDeck button,#owlDeck select{font:inherit;color:inherit;background:transparent;border:1px solid var(--dk-line);border-radius:4px;padding:3px 8px;cursor:pointer}
 #owlDeck a{color:inherit;text-decoration:underline;text-decoration-color:var(--dk-line)}
 #owlDeck .dk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:4px 2px 8px;border-bottom:1px solid var(--dk-line);margin-bottom:8px}

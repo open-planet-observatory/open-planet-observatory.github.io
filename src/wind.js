@@ -75,7 +75,7 @@ function particles(viewer,C){const scene=viewer.scene,host=viewer.container;cons
  const push=p=>{ecef(p.lon,p.lat,q);p.h.push(q[0],q[1],q[2]);if(p.h.length>3*HL)p.h.splice(0,3)};
  function size(){const d=Math.min(2,devicePixelRatio||1),w=Math.round(cv.clientWidth*d),h=Math.round(cv.clientHeight*d);if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}dpr=d}
  const BUCKETS=[.25,.45,.7,.95];const a=[0,0],b=[0,0];
- function draw(){if(!on||!field||document.hidden||document.documentElement.classList.contains('map2d')){if(on)ctx.clearRect(0,0,cv.width,cv.height);return}size();
+ function draw(){const hc=document.documentElement.classList;/* the wind is on by default (18 Nov 2026), so it steps aside for the games, the Moon and the lightning view */if(!on||!field||document.hidden||hc.contains('map2d')||hc.contains('game-on')||hc.contains('moon-on')||(window.OwlLightning&&window.OwlLightning.on)){if(on)ctx.clearRect(0,0,cv.width,cv.height);return}size();
   const c=scene.camera;C.Matrix4.multiply(c.frustum.projectionMatrix,c.viewMatrix,VP);m=VP;cx=c.positionWC.x;cy=c.positionWC.y;cz=c.positionWC.z;
   const hgt=Math.max(1e5,c.positionCartographic.height),f=SPEED*Math.min(1.4,Math.max(.01,hgt/1.6e7));tick++;
   while(P.length<count()){const p=spawn({});if(reduce){for(let i=0;i<HL;i++){step(p,f*EVERY);push(p)}}P.push(p)}if(P.length>count())P.length=count();

@@ -390,7 +390,7 @@ const WX={
   note:'Daily difference from the long-term average (GHRSST MUR, 0.25°). The warm tongue along the equator in the Pacific is El Niño.',make:()=>[new C.ImageryLayer(gibs4326('GHRSST_L4_MUR25_Sea_Surface_Temperature_Anomalies','2km',5),{alpha:.8})]},
 };
 const wxLayers={};
-Object.entries(WX).forEach(([id,w])=>{document.documentElement.style.setProperty('--c-'+id,w.color);O.addLayer({id,name:w.name,color:'--c-'+id,shape:'square',count:'3D only',on:false,group:'Weather & ocean'});
+Object.entries(WX).forEach(([id,w])=>{document.documentElement.style.setProperty('--c-'+id,w.color);/* the moving wind starts switched on (the maintainer, 18 Nov 2026) */O.addLayer({id,name:w.name,color:'--c-'+id,shape:'square',count:'3D only',on:id==='wx-wind',group:'Weather & ocean'});
  const b=document.getElementById('chip-'+id);if(b)b.title=w.note});
 if(window.OwlWind)window.OwlWind.attach(viewer,C);
 function syncWx(){Object.entries(WX).forEach(([id,w])=>{const on=chipOn(id)&&active;
