@@ -192,6 +192,7 @@ function drawStatus(el){const D=window.DIS||{},S=D.services||[],isBad=x=>(x[1]&&
  <div class="dk-tab">${bad.map(x=>row(lv(x),x[0],(x[3]&&x[3][0]&&x[3][0][0])||x[2],(x[3]&&x[3][0]&&x[3][0][3])||x[5])).join('')||'<p class="dk-dim">Every status page read reports no problem.</p>'}</div>
  ${ok.length?(BIG(el)?`<div class="dk-tab">${ok.map(x=>row('ok',x[0],x[2],x[5])).join('')}</div>`:`<p class="dk-dim"><b>No problem reported (${ok.length}):</b> ${ok.map(x=>esc(x[0])).join(' · ')}</p>`):''}
  ${err.length?`<p class="dk-dim">Not read this time: ${esc(err.map(e=>String(e).replace(/ (HTTP \d+|fetch failed|Failed to fetch|timeout|not a status summary|unexpected format|not a feed).*$/i,'')).join(', '))}.</p>`:''}`;
+ {const ro=((D.radar||{}).outages)||[];if(ro.length){const open=ro.filter(o=>o[3]&&!o[4]).length;el.insertAdjacentHTML('beforeend',`<p class="dk-dim"><b>Cloudflare Radar:</b> ${ro.length} measured outage${ro.length===1?'':'s'} listed in the last 7 days${open?', '+open+' with no end time yet':''}.</p>`)}}
  const b=el.querySelector('[data-ns]');if(b)b.onclick=()=>{close();dispatchEvent(new Event('obs:netstatus'))}}
 function drawStations(el){const T=(window.SNAP||{}).tle||[];if(!T.length||!window.satellite){el.innerHTML=none('Orbital elements not loaded.');return}el.innerHTML='<div class="dk-tab dk-st"></div><p class="dk-dim">The point on the ground under each station, worked out from its orbit; updates every second.</p>';el._st=T.filter(x=>/ISS|Tiangong/i.test(x[0]));stationsTick(el)}
 function stationsTick(el){const S=window.satellite,box=el.querySelector('.dk-st');if(!box||!S||!el._st)return;const now=new Date(),g=S.gstime(now);
@@ -232,7 +233,7 @@ let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resize
 addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
 addEventListener('obs:home',()=>close());
 /* Picking anything in a header menu, or a header button that opens something else, closes the deck first: the page it opens used to load behind the deck (the maintainer, 18 Nov 2026). The menus themselves drop down in front of the deck (CSS below). */
-document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnSearch,#featRow button,#featRow a'))close()},true);
+document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnNet,#netBanner .nb-open,#gnSearch,#featRow button,#featRow a'))close()},true);
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
  b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.innerHTML='▦<span class="gn-tw"> Observation Deck</span>';b.setAttribute('aria-label','Observation Deck');b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);
