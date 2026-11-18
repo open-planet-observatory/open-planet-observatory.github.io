@@ -6,6 +6,8 @@ workers_dev = true
 
 [vars]
 SITE = "https://theowlmanac.com"
+# The repository whose "Collect and publish" workflow the 10-minute timer starts (src/index.js: startCollector)
+GH_REPO = "open-planet-observatory/open-planet-observatory.github.io"
 
 [[d1_databases]]
 binding = "DB"
@@ -29,9 +31,9 @@ name = "RL_NEW"      # new players
 namespace_id = "1003"
 simple = { limit = 5, period = 60 }
 
-# Daily: delete Forecast Desk guesses older than 35 days
+# Daily: delete Forecast Desk guesses older than 35 days. Every 10 minutes: start the site's collector on GitHub.
 [triggers]
-crons = ["17 4 * * *"]
+crons = ["17 4 * * *", "*/10 * * * *"]
 
 [observability]
 enabled = false

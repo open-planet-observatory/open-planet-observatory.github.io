@@ -1,6 +1,7 @@
 # Deploys the games server (worker/: Cloudflare Worker + D1) when its code changes, or by hand from the Actions tab.
 # Needs repository secrets CLOUDFLARE_API_TOKEN (Workers Scripts: Edit + D1: Edit on the maintainer's account only) and
-# CLOUDFLARE_ACCOUNT_ID; optional ADMIN_KEY (24+ characters) enables name removal. The D1 database "owlmanac-games" is
+# CLOUDFLARE_ACCOUNT_ID; optional ADMIN_KEY (24+ characters) enables name removal; optional TIMER_TOKEN (a GitHub key
+# allowed to start workflows on this repository) switches on the 10-minute timer that starts "Collect and publish". The D1 database "owlmanac-games" is
 # created on the first run if it doesn't exist, and its id is filled into wrangler.toml at deploy time.
 # Database migrations in worker/migrations are applied before each deploy.
 name: Deploy games server
@@ -69,3 +70,12 @@ jobs:
           ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
         run: |
           if [ ${#ADMIN_KEY} -ge 24 ]; then printf '%s' "$ADMIN_KEY" | npx --yes wrangler@4.157.0 secret put ADMIN_KEY; else echo "no ADMIN_KEY secret: name removal stays off"; fi
+      - name: Set the timer key
+        if: steps.chk.outputs.skip != '1'
+        working-directory: worker
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          TIMER_TOKEN: ${{ secrets.TIMER_TOKEN }}
+        run: |
+          if [ ${#TIMER_TOKEN} -ge 24 ]; then printf '%s' "$TIMER_TOKEN" | npx --yes wrangler@4.157.0 secret put GH_DISPATCH_TOKEN; else echo "no TIMER_TOKEN secret: the 10-minute timer sends nothing (GitHub's own schedule still runs)"; fi
