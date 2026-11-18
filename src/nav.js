@@ -168,6 +168,15 @@
   const mb = document.getElementById('gnMusic'); const syncM = () => { const on = !!(window.OwlMusic && window.OwlMusic.on); mb.setAttribute('aria-pressed', String(on)); mb.classList.toggle('on', on); };
   mb.onclick = () => { if (window.OwlMusic) { window.OwlMusic.toggle(); syncM(); } }; addEventListener('owlmusic', syncM); syncM();
   document.getElementById('gnPlay').onclick = () => dispatchEvent(new Event('obs:hub'));
+  /* Header fit (18 Nov 2026): on a narrower window the last menu ("About") slid under the Voyager chip and the header buttons.
+     Instead of fixed breakpoints, measure: while the menu strip is wider than its room, tighten one step at a time
+     (short Voyager chip, tighter menus, icon-only header buttons, no Voyager chip). CSS: html[data-hfit] in ops.css. */
+  (() => { const sc = nav.querySelector('.gn-scroll'), act = nav.querySelector('.gn-act'); if (!sc) return; let raf = 0;
+    const fit = () => { raf = 0; if (innerWidth < 861) { html.removeAttribute('data-hfit'); return; } let l = 0; html.dataset.hfit = '0'; while (l < 4 && sc.scrollWidth > sc.clientWidth + 1) html.dataset.hfit = String(++l); };
+    const ask = () => { if (!raf) raf = requestAnimationFrame(fit); };
+    addEventListener('resize', ask); new MutationObserver(ask).observe(html, { attributes: true, attributeFilter: ['class'] });
+    if (act) new MutationObserver(ask).observe(act, { childList: true, subtree: true, attributes: true, attributeFilter: ['hidden'], characterData: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(ask); setTimeout(ask, 1500); ask(); })();
   /* the title and logo go back to the start: the whole globe, panels open, Situations showing */
   const home = () => { close(); if (window.OwlSiteTour) window.OwlSiteTour.end(); const gx = document.querySelector('#woe .woe-x'); if (gx && html.classList.contains('game-on')) gx.click(); if (window.OwlFindOwl && document.getElementById('findowl')) window.OwlFindOwl.close();
     if (document.querySelector('#uni.on') && O.closeUniverse) O.closeUniverse(); if (O.moonOpen && O.moonOpen() && O.closeMoon) O.closeMoon(); setSlim(false); if (innerWidth > 860) html.classList.remove('rail-closed'); if (O.openPanel) O.openPanel('situations');

@@ -156,6 +156,8 @@ Never listed: street, traffic, city-square and business cams; private or unsecur
 
 - The score is generated in the browser with the Web Audio API from a few oscillators and filtered noise: no recordings, no samples, nothing licensed. It plays by default from the visitor's first click, tap or key (browsers allow no sound before one); ♪ stops it, and that choice is remembered on that device only. It changes with the camera's distance from Earth: a high, bright melody in D major near Earth that sinks about two octaves and turns minor, then dissonant, as you fly out, and comes back as you return. It does not encode any data.
 
+The Observation Deck has its own cue while it is open (18 November 2026): a steady low bass line, a held chord, a slow sonar-like tone and occasional quiet blips. It is synthesised in the browser like the rest of the score; the blips are decoration and carry no data.
+
 ## Other worlds (exoplanets)
 
 - Every figure is the NASA Exoplanet Archive's own (Planetary Systems Composite Parameters), refreshed weekly. The site writes only the explanations of discovery methods.

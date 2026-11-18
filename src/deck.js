@@ -211,20 +211,22 @@ function tick(){if(root){root.querySelectorAll('.dk-p[data-t="stations"] .dk-bod
 function topPx(){const t=document.getElementById('ops-top');const r=t&&t.getBoundingClientRect();return r&&r.height?Math.round(r.bottom+6):0}
 function open(){if(opened)return;opened=true;const O=window.__obs;try{if(O&&O.setSlim)O.setSlim(true)}catch(e){}
  root=document.createElement('div');root.id='owlDeck';root.dataset.look=st.look;root.setAttribute('role','region');root.setAttribute('aria-label','Observation Deck');document.body.appendChild(root);
- document.documentElement.classList.add('deck-on');frame();
+ document.documentElement.classList.add('deck-on');frame();try{if(window.OwlMusic&&window.OwlMusic.setMode)window.OwlMusic.setMode('deck')}catch(e){}
  const place=()=>{root.style.top=topPx()+'px'};place();setTimeout(()=>{place();render()},350);root._place=place;addEventListener('resize',place);
  const g=window.__obs3d;if(g&&g.viewer){prevLoop=g.viewer.useDefaultRenderLoop;g.viewer.useDefaultRenderLoop=false}
  timer=setInterval(()=>{tick()},1000);root._data=setInterval(render,60000);const b=document.getElementById('gnDeck');if(b)b.setAttribute('aria-pressed','true')}
 function close(){if(!opened)return;opened=false;clearInterval(timer);if(root){clearInterval(root._data);removeEventListener('resize',root._place);root.querySelectorAll('canvas').forEach(c=>cancelAnimationFrame(c._raf));root.remove()}root=grid=null;
- document.documentElement.classList.remove('deck-on');const g=window.__obs3d;if(g&&g.viewer&&prevLoop!==null){g.viewer.useDefaultRenderLoop=prevLoop;prevLoop=null}
+ document.documentElement.classList.remove('deck-on');try{if(window.OwlMusic&&window.OwlMusic.setMode)window.OwlMusic.setMode('')}catch(e){}const g=window.__obs3d;if(g&&g.viewer&&prevLoop!==null){g.viewer.useDefaultRenderLoop=prevLoop;prevLoop=null}
  const b=document.getElementById('gnDeck');if(b)b.setAttribute('aria-pressed','false')}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&opened){const m=root.querySelector('#dkMenu');if(m&&!m.hidden){m.hidden=true;return}close()}});
 let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resizeT);resizeT=setTimeout(render,250)});
 // Header button, beside the site tour.
 addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
 addEventListener('obs:home',()=>close());
+/* Picking anything in a header menu, or a header button that opens something else, closes the deck first: the page it opens used to load behind the deck (the maintainer, 18 Nov 2026). The menus themselves drop down in front of the deck (CSS below). */
+document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnSearch,#featRow button,#featRow a'))close()},true);
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
- b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.textContent='▦ Observation Deck';b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
+ b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.innerHTML='▦<span class="gn-tw"> Observation Deck</span>';b.setAttribute('aria-label','Observation Deck');b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);
 window.__owlDeck={open,close,state:()=>JSON.parse(JSON.stringify(st)),opened:()=>opened};
 const s=document.createElement('style');s.textContent=`
@@ -236,6 +238,7 @@ const s=document.createElement('style');s.textContent=`
 #owlDeck[data-look=phosphor]{--dk-bg:#030703;--dk-panel:#07100a;--dk-line:rgb(70 255 120 / .18);--dk-ink:#b9f7c6;--dk-dim:#6aa978;--dk-accent:#3dff72;--dk-scope:#3dff72;--dk-land:#0a1a0f;--dk-coast:rgb(61 255 114 / .28);--dk-quake:#ff5d4f;--dk-fire:#ffb340}
 #owlDeck[data-look=mix]{--dk-scope:#3dff72;--dk-coast:rgb(61 255 114 / .25)}
 html.deck-on #ops-map,html.deck-on #ops-bottom{visibility:hidden}
+html.deck-on .gn-m{z-index:2600}
 #owlDeck button,#owlDeck select{font:inherit;color:inherit;background:transparent;border:1px solid var(--dk-line);border-radius:4px;padding:3px 8px;cursor:pointer}
 #owlDeck a{color:inherit;text-decoration:underline;text-decoration-color:var(--dk-line)}
 #owlDeck .dk-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:4px 2px 8px;border-bottom:1px solid var(--dk-line);margin-bottom:8px}
