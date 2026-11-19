@@ -638,10 +638,11 @@ window.voyagerVideoList=function(){var V=window.VOYAGER_VIDEOS||{},L=[].concat(V
   <div class="sec-head">
     <div class="eyebrow">Live cams</div>
     <h2 id="h-cams">Watch the planet, not the people</h2>
-    <p class="muted">Official cameras pointed at volcanoes, wildlife, the sky and Earth from orbit. Each card opens the owner's own page; nothing is re-streamed or recorded here. Some cams are seasonal or only light up in daylight.</p>
+    <p class="muted">Official cameras pointed at volcanoes, wildlife, the sky and Earth from orbit. Every card links to the owner's own page, and some can also play right here in the owner's own YouTube player once you press play. Nothing is copied, re-streamed or recorded. Some cams are seasonal or only light up in daylight.</p>
   </div>
   <div class="sit-tabs" id="camTabs" role="group" aria-label="Filter cams"></div>
   <div class="cam-grid" id="camGrid"></div>
+  <p id="camNote"></p>
   <div class="sec-head" style="margin-top:6px"><h3>Stories from NASA</h3><p class="small muted">Official NASA channels, each paired with the layer it explains. Specific videos can be added as cards here; NASA's own videos are public domain, embedded or linked under YouTube's rules (never behind a paywall, never with ads on the player).</p></div>
   <div class="cam-grid" id="storyGrid"></div>
   <div class="rules">
@@ -946,6 +947,7 @@ window.LIBRARY=[
 ["Space","NOAA Space Weather Prediction Center","K-index, solar flares, aurora forecast","Every few minutes","go","Public domain","https://www.swpc.noaa.gov/","chart"],
 ["Space","NASA Near-Earth Object API","Asteroid close approaches","Daily","go","Free","https://api.nasa.gov/","link"],
 ["Air & sea","The OpenSky Network","Aircraft positions from volunteer receivers","5–10 s","lim","Non-commercial; paid tier","https://opensky-network.org/","map"],
+["Nature","YouTube oEmbed (live cam check)","Whether each live cam stream that can play on this page still exists and still allows embedding. The streams themselves belong to NASA, USGS, Monterey Bay Aquarium, Cornell Lab Bird Cams and explore.org, and play only in YouTube's own player after a visitor presses play","Hourly","lim","YouTube Terms of Service and API Services Terms; each stream is its owner's (NASA and USGS video: public domain)","https://oembed.com/","panel"],
 ["Air & sea","adsb.lol","Scheduled airline flights near six busy hubs, for the Observation Deck's Airliner scope and the globe's Scheduled airliners layer: airline code and aircraft type only, positions rounded to about 10 km, shown at least 15 minutes after they were recorded","Hourly","go","Open Database License (ODbL 1.0), attribution","https://www.adsb.lol/docs/open-data/api/","panel"],
 ["Air & sea","airplanes.live / adsb.fi","Community aircraft feeds","Live","lim","Non-commercial","https://airplanes.live/","link"],
 ["Air & sea","aisstream.io","Live ship positions (needs free key)","Live","ask","No published terms","https://aisstream.io/","link"],

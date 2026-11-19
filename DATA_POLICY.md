@@ -34,6 +34,8 @@ A cam is listed only if:
 - people in view are too small or far away to be identified;
 - the site links to it, never copies, stores or re-streams it.
 
+**Players (Nov 2026).** Where the owner runs a YouTube live stream and allows it to be embedded, the card also offers a play button. Pressing it loads the owner's own stream in YouTube's player (youtube-nocookie.com); nothing is requested from YouTube before that press, and after it YouTube's terms and privacy policy apply. YouTube may show its own adverts on streams from owners that are not government agencies; this site earns nothing from them. The stream list lives in `collector/cams.mjs` (13 streams from NASA, USGS, Monterey Bay Aquarium, Cornell Lab Bird Cams and explore.org, each approved by the maintainer). About once an hour the collector asks YouTube's public oEmbed endpoint whether each video still exists and still allows embedding and writes `data/cams.json`; a stream that fails loses its player, and if the check itself fails or is more than 6 hours old every player is switched off. The check cannot tell a live stream from one that has ended, and the page says so. Stream titles are shown in the owners' own words.
+
 Never listed: street, traffic, city-square and business cams; private or unsecured cameras; beach, campus or venue cams where faces or plates are readable; cams in or near active conflict zones. A cam whose view changes to show identifiable people is removed. Owners can ask for removal at any time.
 
 ## Satellites
