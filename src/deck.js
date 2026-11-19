@@ -15,10 +15,18 @@ const ago=h=>h<1?'<1 h ago':h<48?Math.round(h)+' h ago':Math.round(h/24)+' d ago
 const R=Math.PI/180,dist=(a,b,c,d)=>{const x=Math.sin((c-a)*R/2)**2+Math.cos(a*R)*Math.cos(c*R)*Math.sin((d-b)*R/2)**2;return 12742*Math.asin(Math.sqrt(x))};
 const bear=(a,b,c,d)=>{const y=Math.sin((d-b)*R)*Math.cos(c*R),x=Math.cos(a*R)*Math.sin(c*R)-Math.sin(a*R)*Math.cos(c*R)*Math.cos((d-b)*R);return(Math.atan2(y,x)/R+360)%360};
 const dir=b=>['N','NE','E','SE','S','SW','W','NW'][Math.round(b/45)%8];
-// Scope centres: a short list of cities (rounded to 0.1°). The visitor's own location is never asked for.
+// Scope centres: a short list of cities (rounded to 0.1°), or the visitor's own place (the maintainer, 19 Nov 2026): only when they
+// choose "My location", rounded to 0.1° (about 10 km), kept in this browser only and never sent anywhere, as in Sky tonight.
 const PLACES=[['Tokyo',35.7,139.7],['Jakarta',-6.2,106.8],['Manila',14.6,121.0],['Los Angeles',34.1,-118.2],['Mexico City',19.4,-99.1],['Santiago',-33.4,-70.7],
  ['Lima',-12.0,-77.0],['Istanbul',41.0,29.0],['Tehran',35.7,51.4],['Kathmandu',27.7,85.3],['Wellington',-41.3,174.8],['Anchorage',61.2,-149.9],['Reykjavík',64.1,-21.9],
  ['New York',40.7,-74.0],['Chicago',41.9,-87.6],['London',51.5,-0.1],['Nairobi',-1.3,36.8],['Sydney',-33.9,151.2]];
+const curPlace=()=>st.place===-1&&st.me&&isFinite(st.me.lat)&&isFinite(st.me.lon)?['My location',st.me.lat,st.me.lon]:(PLACES[st.place]||PLACES[0]);
+/* "My location": use the place already set in Sky tonight if there is one, otherwise ask the browser once, on this press only */
+function useMine(done){const r1=v=>Math.round(v*10)/10,set=(lat,lon)=>{st.me={lat:r1(lat),lon:r1(lon)};st.place=-1;save(st);done(true)};
+ try{const k=JSON.parse(localStorage.getItem('owl-sky-loc')||'null');if(k&&isFinite(k.lat)&&isFinite(k.lon)){set(k.lat,k.lon);return}}catch(e){}
+ if(st.me&&isFinite(st.me.lat)){st.place=-1;save(st);done(true);return}
+ if(!navigator.geolocation){done(false,'This browser cannot give a location.');return}
+ navigator.geolocation.getCurrentPosition(p=>set(p.coords.latitude,p.coords.longitude),()=>done(false,'The browser did not give a location. Pick a city instead.'),{enableHighAccuracy:false,timeout:15000,maximumAge:36e5})}
 const quakes=()=>{const s=(window.SNAP||{}).quakes||'';return s?s.split(';').map(r=>{const[a,place]=r.split('|');const[lon,lat,mag,dep,hrs]=a.split(',').map(Number);return{lon,lat,mag,dep,hrs,place:place||''}}).filter(q=>isFinite(q.lat)&&isFinite(q.lon)):[]};
 const cells=s=>(s||'').split(';').filter(Boolean).map(r=>r.split(',').map(Number));
 const SRC={usgs:'USGS Earthquake Hazards · public domain',firms:'NASA FIRMS · VIIRS NOAA-20',eonet:'NASA EONET',gdacs:'GDACS (UN / European Commission)',swpc:'NOAA SWPC · public domain',
@@ -103,11 +111,11 @@ function drawMap(el){const d3=window.d3,O=window.__obs;if(!d3||!O||!O.countries)
  (S.eonet||[]).forEach(e=>{const p=pr([e[2],e[3]]);if(!p)return;g.strokeStyle=css('--dk-accent');g.beginPath();g.moveTo(p[0]-4,p[1]);g.lineTo(p[0]+4,p[1]);g.moveTo(p[0],p[1]-4);g.lineTo(p[0],p[1]+4);g.stroke()});
  quakes().forEach(q=>{const p=pr([q.lon,q.lat]);if(!p)return;g.fillStyle=css('--dk-quake');g.globalAlpha=Math.max(.25,1-q.hrs/170);g.beginPath();g.arc(p[0],p[1],Math.max(1.2,(q.mag-2)*1.6),0,7);g.fill()});g.globalAlpha=1;
  g.fillStyle=css('--dk-dim');g.font='11px "Owl Plex Mono",monospace';g.fillText('● quakes (fade with age)   ■ fire detections   + natural events',10,h-10)}
-function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind==='q'?2000:kind==='l'?600:3000;if(kind==='l')loadAir();
- el.innerHTML=`<div class="dk-scope-top"><select aria-label="Scope centre">${PLACES.map((x,i)=>`<option value="${i}"${i===st.place?' selected':''}>${esc(x[0])}</option>`).join('')}</select><span>${max.toLocaleString()} km range</span></div><div class="dk-scope-row"><div class="dk-scope"></div><div class="dk-list"></div></div>`;
+function scope(el,p,kind){const pl=curPlace();const max=kind==='q'?2000:kind==='l'?600:3000;if(kind==='l')loadAir();
+ el.innerHTML=`<div class="dk-scope-top"><select aria-label="Scope centre" title="Where the scope is centred. My location is rounded to about 10 km and stays in this browser."><option value="-1"${st.place===-1&&st.me?' selected':''}>My location${st.place===-1&&st.me?` (${Math.abs(st.me.lat).toFixed(1)}°${st.me.lat<0?'S':'N'} ${Math.abs(st.me.lon).toFixed(1)}°${st.me.lon<0?'W':'E'})`:''}</option>${PLACES.map((x,i)=>`<option value="${i}"${i===st.place?' selected':''}>${esc(x[0])}</option>`).join('')}</select><span>${max.toLocaleString()} km range</span></div><div class="dk-scope-row"><div class="dk-scope"></div><div class="dk-list"></div></div>`;
  // a wide panel puts the list beside the scope, so the scope can use the full height
  if(el.clientWidth>=400)el.querySelector('.dk-scope-row').classList.add('wide');
- el.querySelector('select').onchange=e=>{st.place=+e.target.value;save(st);render()};
+ el.querySelector('select').onchange=e=>{const v=+e.target.value;if(v===-1){const sel=e.target;useMine((ok,why)=>{if(ok)render();else{sel.value=String(st.place===-1?0:st.place);const n=el.querySelector('.dk-scope-top span');if(n)n.textContent=why}});return}st.place=v;save(st);render()};
  const planes=kind==='l'&&AIR.data&&!AIR.data.failed?AIR.data.planes||[]:[];
  const pts=kind==='l'?planes.map(([la,lo,alt,trk,gs,op,ty])=>({lat:la,lon:lo,alt,trk,gs,op,ty,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max):kind==='q'?quakes().map(q=>({...q,d:dist(pl[1],pl[2],q.lat,q.lon)})).filter(q=>q.d<=max):cells(((window.SNAP||{}).air||{}).cells).map(([lo,la,n])=>({lon:lo,lat:la,n,d:dist(pl[1],pl[2],la,lo)})).filter(q=>q.d<=max);
  pts.forEach(q=>q.b=bear(pl[1],pl[2],q.lat,q.lon));
@@ -136,7 +144,7 @@ function scope(el,p,kind){const pl=PLACES[st.place]||PLACES[0];const max=kind===
 function drawWind(el){const OW=window.OwlWind,d3=window.d3,O=window.__obs;
  if(!OW||!d3||!O||!O.countries){el.innerHTML='<p class="dk-dim">The wind panel needs the 3D globe’s forecast data and the page’s country shapes, which have not loaded.</p>';return}
  el.innerHTML='<p class="dk-dim">Loading the forecast…</p>';
- const pl=PLACES[st.place]||PLACES[0];
+ const pl=curPlace();
  // the city line, written before the map is measured: if it wraps to a second line later, the map box would shrink and redraw
  const wpt=f=>{if(!f)return'&nbsp;';const s=f.sample(pl[2],pl[1]),sp=Math.hypot(s[0],s[1]),from=(Math.atan2(-s[0],-s[1])/R+360)%360;
   return isFinite(sp)?`<b>${esc(pl[0])}</b> <span>${Math.round(sp*3.6)} km/h (${Math.round(sp*2.237)} mph) from the ${dir(from)}</span> <span>${isFinite(s[2])?Math.round(s[2])+' °C ('+Math.round(s[2]*9/5+32)+' °F)':''}</span> <span class="dk-dim">model forecast; scope centre city</span>`:'&nbsp;'};
@@ -185,13 +193,14 @@ function drawWarnings(el){const w=(window.DIS||{}).weather;if(!w||!w.byEvent){el
 function drawWho(el){const a=(window.SIT||{}).who||[];el.innerHTML=a.length?`<div class="dk-tab">${a.slice(0,N(el,12)).map(x=>row(String(x[1]).slice(5),x[0],BIG(el)&&x[2]?String(x[2]):'',x[3]&&/^https?:/.test(x[3])?x[3]:'https://www.who.int/emergencies/disease-outbreak-news')).join('')}</div>`:none('No WHO outbreak news loaded.')}
 function drawRelief(el){const R=((window.SNAP||{}).relief)||{},A=(R.appeals||[]).slice().sort((a,b)=>String(b[9]).localeCompare(String(a[9])));
  el.innerHTML=A.length?`<div class="dk-row"><span><b>${A.length}</b> active appeals and DREF operations</span></div><div class="dk-tab">${A.slice(0,N(el,25)).map(x=>row(x[1]||'',x[0],`${x[3]||''}${x[7]?` · requested ${fmt(x[7])} ${R.currency||'CHF'}`:''}${BIG(el)&&x[7]?` · funded ${fmt(x[8]||0)} (${Math.round(100*(x[8]||0)/x[7])}%)`:''} · from ${x[9]}${BIG(el)&&x[10]?' to '+x[10]:''}${BIG(el)&&x[12]?' · '+x[12]:''}`,x[11])).join('')}</div>`:none('No IFRC appeals loaded.')}
-function drawStatus(el){const D=window.DIS||{},S=D.services||[],isBad=x=>(x[1]&&x[1]!=='none')||(x[3]&&x[3].length)||(x[4]&&x[4].length),bad=S.filter(isBad),ok=S.filter(x=>!isBad(x)),err=(D.errors||[]).filter(e=>!/^(NVD|NWS|MBTA|MTA|BART|WMATA|CTA|Transit|FAA|GDELT)\b/.test(String(e)));
+function drawStatus(el){const D=window.DIS||{},S=D.services||[],NS=window.OwlNetStatus,isBad=x=>NS&&NS.kind?NS.kind(x)==='bad':((x[1]&&x[1]!=='none')||(x[3]&&x[3].length)||(x[4]&&x[4].length)),bad=S.filter(isBad),ok=S.filter(x=>!isBad(x)),err=(D.errors||[]).filter(e=>!/^(NVD|NWS|MBTA|MTA|BART|WMATA|CTA|Transit|FAA|GDELT)\b/.test(String(e)));
  if(!S.length){el.innerHTML=none('No status pages loaded.');return}
  const lv=x=>/major|critical/.test(x[1])?'major':x[1]==='maintenance'?'maint':x[1]==='none'?'issue':x[1];
  el.innerHTML=`<div class="dk-row"><span><b>${bad.length}</b> reporting a problem</span><span><b>${ok.length}</b> no problem</span>${err.length?`<span><b>${err.length}</b> not read</span>`:''}<span><button type="button" data-ns title="Open the full Internet & cloud status page">Full page</button></span></div>
- <div class="dk-tab">${bad.map(x=>row(lv(x),x[0],(x[3]&&x[3][0]&&x[3][0][0])||x[2],(x[3]&&x[3][0]&&x[3][0][3])||x[5])).join('')||'<p class="dk-dim">Every status page read reports no problem.</p>'}</div>
- ${ok.length?(BIG(el)?`<div class="dk-tab">${ok.map(x=>row('ok',x[0],x[2],x[5])).join('')}</div>`:`<p class="dk-dim"><b>No problem reported (${ok.length}):</b> ${ok.map(x=>esc(x[0])).join(' · ')}</p>`):''}
+ <div class="dk-tab">${bad.map(x=>{const f=(NS&&NS.first&&NS.first(x))||(x[3]&&x[3][0]);return row(lv(x),x[0],(f&&f[0])||x[2],(f&&f[3])||x[5])}).join('')||'<p class="dk-dim">Every status page read reports no problem.</p>'}</div>
+ ${ok.length?(BIG(el)?`<div class="dk-tab">${ok.map(x=>row('ok',x[0],x[2],x[5])).join('')}</div>`:`<p class="dk-dim"><b>No problem reported (${ok.length}, advisories and maintenance aside):</b> ${ok.map(x=>esc(x[0])).join(' · ')}</p>`):''}
  ${err.length?`<p class="dk-dim">Not read this time: ${esc(err.map(e=>String(e).replace(/ (HTTP \d+|fetch failed|Failed to fetch|timeout|not a status summary|unexpected format|not a feed).*$/i,'')).join(', '))}.</p>`:''}`;
+ {const ro=((D.radar||{}).outages)||[];if(ro.length){const open=ro.filter(o=>o[3]&&!o[4]).length;el.insertAdjacentHTML('beforeend',`<p class="dk-dim"><b>Cloudflare Radar:</b> ${ro.length} measured outage${ro.length===1?'':'s'} listed in the last 7 days${open?', '+open+' with no end time yet':''}.</p>`)}}
  const b=el.querySelector('[data-ns]');if(b)b.onclick=()=>{close();dispatchEvent(new Event('obs:netstatus'))}}
 function drawStations(el){const T=(window.SNAP||{}).tle||[];if(!T.length||!window.satellite){el.innerHTML=none('Orbital elements not loaded.');return}el.innerHTML='<div class="dk-tab dk-st"></div><p class="dk-dim">The point on the ground under each station, worked out from its orbit; updates every second.</p>';el._st=T.filter(x=>/ISS|Tiangong/i.test(x[0]));stationsTick(el)}
 function stationsTick(el){const S=window.satellite,box=el.querySelector('.dk-st');if(!box||!S||!el._st)return;const now=new Date(),g=S.gstime(now);
@@ -232,7 +241,7 @@ let resizeT;addEventListener('resize',()=>{if(!opened)return;clearTimeout(resize
 addEventListener('obs:deck',()=>open()); /* What's new "Try it" */
 addEventListener('obs:home',()=>close());
 /* Picking anything in a header menu, or a header button that opens something else, closes the deck first: the page it opens used to load behind the deck (the maintainer, 18 Nov 2026). The menus themselves drop down in front of the deck (CSS below). */
-document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnSearch,#featRow button,#featRow a'))close()},true);
+document.addEventListener('click',e=>{if(!opened||!e.target.closest)return;if(e.target.closest('.gn-m button,.gn-m a,#gnPlay,#gnSiteTour,#gnTour,#gnVoyager,#gnNet,#netBanner .nb-open,#gnSearch,#featRow button,#featRow a'))close()},true);
 let tries=0;const wait=setInterval(()=>{const t=document.getElementById('gnSiteTour');if(t){clearInterval(wait);const b=document.createElement('button');b.type='button';b.id='gnDeck';b.className=t.className;b.setAttribute('aria-pressed','false');
  b.title='Observation Deck: a full-screen board of live panels you can arrange (work in progress)';b.innerHTML='▦<span class="gn-tw"> Observation Deck</span>';b.setAttribute('aria-label','Observation Deck');b.onclick=()=>opened?close():open();t.before(b)}else if(++tries>120)clearInterval(wait)},500);
 if(/[?&]deck=open\b/.test(location.search)||/#deck$/.test(location.hash))setTimeout(open,1500);

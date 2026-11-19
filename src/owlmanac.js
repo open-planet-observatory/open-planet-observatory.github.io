@@ -87,6 +87,7 @@ function wire(sp,again){let gone=false;const rm=matchMedia('(prefers-reduced-mot
  sp.querySelectorAll('[data-sp]').forEach(b=>b.addEventListener('click',()=>{const k=b.dataset.sp;go();
   if(k==='site')when(()=>window.OwlSiteTour,()=>window.OwlSiteTour.start());
   else if(k==='owl')when(()=>window.OwlFindOwl&&window.__obs3d&&window.__obs3d.viewer,()=>dispatchEvent(new Event('obs:findowl'))); /* 9 Nov 2026: Find the owl and the Classroom featured on the landing page */
+  else if(k==='net')when(()=>window.OwlNetStatus&&window.OwlPage,()=>window.OwlNetStatus.open()); /* 18 Nov 2026: Internet & cloud status as a starting point */
   else if(k==='new')when(()=>window.__obs&&window.__obs.openPanel&&window.OwlPage,()=>{window.__obs.openPanel('changes');window.OwlPage.open('changes',{solo:true})});
   else if(k==='class')when(()=>window.__obs&&window.__obs.openPanel&&window.OwlPage,()=>window.__obs.openPanel('classroom'));
   else{const M=window.OwlMusic;if(k==='fly'){if(M&&M.start&&!M.on){M.start(true);window.__owlTempMusic=true}}/* start the score inside the click, where browsers allow sound; the flight hands it back afterwards */else if(M&&M.autoOn)M.autoOn();

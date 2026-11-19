@@ -4,7 +4,7 @@ The Owlmanac Observatory (formerly Open Planet Observatory) is built to inform, 
 
 ## What the page shows
 
-- **Places, not people.** No data about identifiable individuals. Aircraft are counted per map cell, with one exception: the Observation Deck's Airliner scope shows scheduled airline flights near six busy hubs, each as an airline code and aircraft type at a position rounded to about 10 km, published at least 15 minutes after it was recorded. Registrations, flight numbers and transponder codes are never stored or shown, and private, business, government and military aircraft are left out.
+- **Places, not people.** No data about identifiable individuals. Aircraft are counted per map cell, with one exception: the Observation Deck's Airliner scope, and since 19 November 2026 the globe layer "Scheduled airliners near six hubs (delayed)", show scheduled airline flights near six busy hubs, each as an airline code and aircraft type at a position rounded to about 10 km, published at least 15 minutes after it was recorded. Registrations, flight numbers and transponder codes are never stored or shown, and private, business, government and military aircraft are left out. On the globe each mark glides along its recorded heading at its recorded speed for ten minutes and starts again: that movement is drawn by the site and labelled as not a live position; a snapshot more than four hours old is not drawn.
 - **Source words only.** Situation descriptions, incident text and headlines are the source's own words. The site does not write, summarize or rephrase them, and no AI-written summaries appear in data panels.
 - **Every number has a source.** Each layer and card names its provider and links to the original.
 - **Blind spots shown.** Coverage gaps, delays and sensor limits are stated where they shape what you see.
@@ -33,6 +33,8 @@ A cam is listed only if:
 - it points at nature, the sky, space or a science site;
 - people in view are too small or far away to be identified;
 - the site links to it, never copies, stores or re-streams it.
+
+**Players (Nov 2026).** Where the owner runs a YouTube live stream and allows it to be embedded, the card also offers a play button. Pressing it loads the owner's own stream in YouTube's player (youtube-nocookie.com); nothing is requested from YouTube before that press, and after it YouTube's terms and privacy policy apply. YouTube may show its own adverts on streams from owners that are not government agencies; this site earns nothing from them. The stream list lives in `collector/cams.mjs` (13 streams from NASA, USGS, Monterey Bay Aquarium, Cornell Lab Bird Cams and explore.org, each approved by the maintainer). About once an hour the collector asks YouTube's public oEmbed endpoint whether each video still exists and still allows embedding and writes `data/cams.json`; a stream that fails loses its player, and if the check itself fails or is more than 6 hours old every player is switched off. The check cannot tell a live stream from one that has ended, and the page says so. Stream titles are shown in the owners' own words.
 
 Never listed: street, traffic, city-square and business cams; private or unsecured cameras; beach, campus or venue cams where faces or plates are readable; cams in or near active conflict zones. A cam whose view changes to show identifiable people is removed. Owners can ask for removal at any time.
 
@@ -361,3 +363,20 @@ Added 18 November 2026 at the maintainer's request: a page (People > Internet & 
 - **What is not done.** No score or "health index" is made from them. A page that cannot be read is listed as not read; an older answer is never shown as current.
 - **Terms.** These pages are public and published so that people and tools can check a service's state; each remains under its company's own terms. If a company asks not to be read, it is removed.
 - **Blind spots.** Self-reported, often late, and silent about small or regional faults. Phone and home-internet providers publish no open feeds and are absent. Independent measurements (Cloudflare Radar, IODA) are linked, not merged in.
+- **Featured spots (18 November 2026).** A header chip, a banner card, a landing-page button and a strip above the panels point to this page. They count the status pages reporting a problem and quote incident titles as published; the strip appears only when a company itself rates a problem major or critical, or Cloudflare Radar lists an outage with no end time, and can be hidden until something new is reported.
+- **Measured outages.** The page also lists the outages in Cloudflare Radar's Outage Center for the last 7 days, in Cloudflare's words (CC BY-NC 4.0), kept apart from the companies' self-reports.
+- **Advisories and maintenance (19 November 2026).** Items a company words as an advisory, bulletin, notice, informational message or scheduled maintenance, and parts it marks as under maintenance, are listed in their own section and are not counted as problems. The rule is only those words in the company's own title, impact or state. The notice above the panels is shown only for problems that began in the last 24 hours.
+
+## Observation Deck: "My location" on the scopes
+
+Added 19 November 2026 at the maintainer's request. The Quake scope, the Air traffic scope and the deck's wind readout can be centred on the visitor's own place instead of a listed city. The browser is asked only when the visitor chooses "My location" (or the place already set in Sky tonight is reused); the position is rounded to 0.1° (about 10 km), kept in this browser's storage only and never sent anywhere. What the scopes show does not change: earthquakes as USGS lists them, aircraft counts per 10° area, and scheduled airliners delayed and coarsened without registrations.
+
+## Measured internet outages (IODA)
+
+Added 19 November 2026. The Internet & cloud status page and the globe layer "Internet outages by country (measured)" show IODA's country-level outage events of the last 24 hours (Internet Outage Detection and Analysis, Georgia Tech).
+
+- **What is kept.** For each event: the country, the start time, the length, which of IODA's signals saw it (routing, active probing, network telescope, Google traffic) and whether it was still running when collected. One request about every 30 minutes.
+- **What is not kept.** IODA's severity scores, and anything about single networks, regions or addresses. The site makes no score of its own.
+- **How it is labelled.** As automated detections, not confirmed outages. A list more than three hours old is not shown.
+- **Terms.** IODA's site states no licence or terms of use. The maintainer approved this limited, credited use on 19 November 2026 and wrote to IODA the same day to ask whether it is acceptable and how to credit them; the display will be changed or removed if they ask.
+- **Blind spots.** Small countries and territories trigger more often; outages limited to mobile networks or to part of a country can be missed; countries too small for the site's country shapes are listed but not drawn on the globe.

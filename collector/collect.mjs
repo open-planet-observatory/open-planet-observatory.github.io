@@ -16,6 +16,8 @@ import { DOMParser } from 'linkedom';
 import { GROUPS, EVERY } from './snap.mjs';
 import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
 import { runChecks } from './checks.mjs';
+import { ioda } from './ioda.mjs';
+import { cams as collectCams } from './cams.mjs';
 import { collectGrace } from './grace.mjs';
 import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar.mjs';
 import { collectGame } from './game.mjs';
@@ -151,6 +153,8 @@ async function runSteps(meta) {
   }
   try { status.radar = await radar(targets.disruptions); } catch (e) { status.radar = 'error: ' + e.message.slice(0, 160); }
   log('step', 'radar', status.radar);
+  try { status.ioda = await ioda(targets.disruptions); } catch (e) { status.ioda = 'error: ' + e.message.slice(0, 160); }
+  log('step', 'ioda', status.ioda);
   // A step's own errors list is shown on the page; keep it short.
   for (const t of Object.values(targets)) if (Array.isArray(t.errors)) t.errors = t.errors.slice(0, 20);
   return { targets, status };
@@ -286,6 +290,11 @@ if (process.env.AIRLINERS === '1') { let p = null; if (PREV) { try { const r = a
     await writeHold(HOLD, r.hold); if (r.took) meta.airliners.took = r.took; if (r.released) meta.airliners.released = r.released; airl = { out: r.publish, status: r.status }; }
   catch (e) { airl = { out: { v: 1, failed: true, asOf: stamp, error: e.message.slice(0, 160), planes: [] }, status: 'error: ' + e.message.slice(0, 160) }; }
   if (airl.out) await fs.writeFile(path.join(OUT, 'airliners.json'), JSON.stringify(airl.out)); log('airliners', airl.status); }
+// Live cams (collector/cams.mjs): data/cams.json, which of the owners' YouTube live streams still exist and allow embedding.
+let camsR = { out: null, status: 'not run' };
+{ let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/cams.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  try { camsR = await collectCams({ prev: p, nowMs: now.getTime() }); } catch (e) { camsR = { out: { v: 1, failed: true, asOf: stamp, streams: [] }, status: 'error: ' + e.message.slice(0, 160) }; }
+  if (camsR.out) await fs.writeFile(path.join(OUT, 'cams.json'), JSON.stringify(camsR.out)); log('cams', camsR.status); }
 // Wind and temperature forecast (collector/forecast.mjs): data/fcst/index.json + f0..f8.bin, NOAA GFS via PacIOOS ERDDAP.
 // Fetched once per 6-hour step; in between, the published files are carried over. Feeds the globe's moving wind.
 let fcst = { status: 'not run' };
@@ -348,7 +357,7 @@ let whunt = { status: 'not run' };
   else try { whunt = await collectWeeklyHunt(OUT, p, now.getTime()); } catch (e) { whunt = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (whunt.out) await fs.writeFile(path.join(OUT, 'hunt.json'), JSON.stringify(whunt.out)); log('weekly hunt', whunt.status); }
 meta.updated = now.toISOString();
-meta.lastRun = { weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, forecast: fcst.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { cams: camsR.status, weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, forecast: fcst.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
