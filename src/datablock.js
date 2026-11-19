@@ -52,7 +52,7 @@ const R={
  faa:{n:'FAA National Airspace System status',u:'https://nasstatus.faa.gov/',lic:'Public domain',cad:'Live'},
  transit:{n:'MBTA, MTA and BART alerts',u:'https://www.mbta.com/developers',lic:'Open data',cad:'Live'},
  gdelt:{n:'GDELT Project',u:'https://www.gdeltproject.org/',lic:'Free with citation',cad:'15 min'},
- ioda:{n:'IODA (Georgia Tech)',u:'https://ioda.inetintel.cc.gatech.edu/',lic:'Free for research',cad:'Live'},
+ ioda:{n:'IODA (Georgia Tech)',u:'https://ioda.inetintel.cc.gatech.edu/',lic:'No licence stated; used with credit, permission asked 19 Nov 2026',cad:'About every 30 minutes'},
  radar:{n:'Cloudflare Radar',u:'https://radar.cloudflare.com/outage-center',lic:'CC BY-NC 4.0',cad:'Live'},
  nws:{n:'National Weather Service API',u:'https://api.weather.gov/',lic:'Public domain',cad:'Live',
   b:'U.S. only; alerts follow forecasters’ judgement and do not measure damage.'},

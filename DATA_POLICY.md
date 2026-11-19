@@ -368,3 +368,13 @@ Added 18 November 2026 at the maintainer's request: a page (People > Internet & 
 ## Observation Deck: "My location" on the scopes
 
 Added 19 November 2026 at the maintainer's request. The Quake scope, the Air traffic scope and the deck's wind readout can be centred on the visitor's own place instead of a listed city. The browser is asked only when the visitor chooses "My location" (or the place already set in Sky tonight is reused); the position is rounded to 0.1° (about 10 km), kept in this browser's storage only and never sent anywhere. What the scopes show does not change: earthquakes as USGS lists them, aircraft counts per 10° area, and scheduled airliners delayed and coarsened without registrations.
+
+## Measured internet outages (IODA)
+
+Added 19 November 2026. The Internet & cloud status page and the globe layer "Internet outages by country (measured)" show IODA's country-level outage events of the last 24 hours (Internet Outage Detection and Analysis, Georgia Tech).
+
+- **What is kept.** For each event: the country, the start time, the length, which of IODA's signals saw it (routing, active probing, network telescope, Google traffic) and whether it was still running when collected. One request about every 30 minutes.
+- **What is not kept.** IODA's severity scores, and anything about single networks, regions or addresses. The site makes no score of its own.
+- **How it is labelled.** As automated detections, not confirmed outages. A list more than three hours old is not shown.
+- **Terms.** IODA's site states no licence or terms of use. The maintainer approved this limited, credited use on 19 November 2026 and wrote to IODA the same day to ask whether it is acceptable and how to credit them; the display will be changed or removed if they ask.
+- **Blind spots.** Small countries and territories trigger more often; outages limited to mobile networks or to part of a country can be missed; countries too small for the site's country shapes are listed but not drawn on the globe.

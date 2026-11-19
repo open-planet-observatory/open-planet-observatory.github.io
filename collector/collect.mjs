@@ -16,6 +16,7 @@ import { DOMParser } from 'linkedom';
 import { GROUPS, EVERY } from './snap.mjs';
 import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
 import { runChecks } from './checks.mjs';
+import { ioda } from './ioda.mjs';
 import { collectGrace } from './grace.mjs';
 import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar.mjs';
 import { collectGame } from './game.mjs';
@@ -151,6 +152,8 @@ async function runSteps(meta) {
   }
   try { status.radar = await radar(targets.disruptions); } catch (e) { status.radar = 'error: ' + e.message.slice(0, 160); }
   log('step', 'radar', status.radar);
+  try { status.ioda = await ioda(targets.disruptions); } catch (e) { status.ioda = 'error: ' + e.message.slice(0, 160); }
+  log('step', 'ioda', status.ioda);
   // A step's own errors list is shown on the page; keep it short.
   for (const t of Object.values(targets)) if (Array.isArray(t.errors)) t.errors = t.errors.slice(0, 20);
   return { targets, status };
