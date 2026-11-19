@@ -222,7 +222,23 @@ export default {
       return json({ error: 'not found' }, 404, req);
     } catch (e) { return json({ error: 'server error' }, 500, req); }
   },
-  // daily: forget Forecast Desk guesses after FD_KEEP_DAYS (their graded scores stay on the boards)
-  async scheduled(evt, env) { await env.DB.prepare('DELETE FROM fd_guesses WHERE day < ?').bind(addDays(todayUTC(), -FD_KEEP_DAYS)).run(); }
+  // Two timers (wrangler.toml [triggers]):
+  // - daily (17 4 * * *): forget Forecast Desk guesses after FD_KEEP_DAYS (their graded scores stay on the boards)
+  // - every 10 minutes: start the site's "Collect and publish" workflow on GitHub. GitHub's own 10-minute schedule fires
+  //   about once an hour in practice and sometimes skips for hours; this timer is punctual. GitHub's schedule stays as the
+  //   fallback. Needs the secret GH_DISPATCH_TOKEN (a GitHub key allowed to start workflows); without it nothing is sent.
+  async scheduled(evt, env) {
+    if (evt.cron === DAILY_CRON) { await env.DB.prepare('DELETE FROM fd_guesses WHERE day < ?').bind(addDays(todayUTC(), -FD_KEEP_DAYS)).run(); return; }
+    await startCollector(env); }
 };
-export { isWeek, weekOf, seasonOf, seasonWeeks, isSeason, scoreWoe, scoreFd, woePts, norm, nameProblem, plain, leet };
+const DAILY_CRON = '17 4 * * *';
+// Asks GitHub to run the collector now. Throws when GitHub refuses, so the failure shows in Cloudflare's cron history
+// (the key itself is never logged or returned).
+async function startCollector(env, fetchImpl = fetch) {
+  if (!env.GH_DISPATCH_TOKEN || !env.GH_REPO) return 'off';
+  const r = await fetchImpl(`https://api.github.com/repos/${env.GH_REPO}/actions/workflows/${env.GH_WORKFLOW || 'observatory.yml'}/dispatches`, { method: 'POST',
+    headers: { authorization: 'Bearer ' + env.GH_DISPATCH_TOKEN, accept: 'application/vnd.github+json', 'x-github-api-version': '2022-11-28', 'user-agent': 'owlmanac-games-timer', 'content-type': 'application/json' },
+    body: JSON.stringify({ ref: 'main' }) });
+  if (r.status !== 204) throw new Error('GitHub did not start the collector: HTTP ' + r.status);
+  return 'started'; }
+export { startCollector, DAILY_CRON, isWeek, weekOf, seasonOf, seasonWeeks, isSeason, scoreWoe, scoreFd, woePts, norm, nameProblem, plain, leet };
