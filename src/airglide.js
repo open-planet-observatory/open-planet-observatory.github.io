@@ -34,6 +34,9 @@ let L=null;
 function layer(viewer,C){const scene=viewer.scene,host=viewer.container,cv=document.createElement('canvas');cv.className='al-glide';cv.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1';host.appendChild(cv);
  const tip=document.createElement('div');tip.className='al-tip';tip.hidden=true;tip.style.cssText='position:absolute;z-index:3;pointer-events:none;padding:5px 8px;border-radius:8px;font-size:.74rem;line-height:1.35;background:rgb(10 14 22 / .9);color:#eaf2ff;border:1px solid rgb(143 211 255 / .4);max-width:240px';host.appendChild(tip);
  const ctx=cv.getContext('2d'),reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,RAD=Math.PI/180,A=6378137,E2=0.00669437999014;
+ // the airplane outline, nose at +x, in units of PS pixels: fuselage, swept wings, tailplane
+ const PLANE=new Path2D('M1.7 0L1.25 .2L.5 .22L-.35 1.5L-.75 1.5L-.3 .22L-1.05 .18L-1.4 .68L-1.68 .68L-1.5 0L-1.68 -.68L-1.4 -.68L-1.05 -.18L-.3 -.22L-.75 -1.5L-.35 -1.5L.5 -.22L1.25 -.2Z');
+ const PS=matchMedia('(pointer: coarse)').matches?5.4:4.8;
  let on=false,dpr=1,t0=performance.now(),S=[],mx=-1,my=-1;const VP=new C.Matrix4();let m=VP,cx=0,cy=0,cz=0;const q=[0,0,0],o=[0,0];
  const ecef=(lon,lat)=>{const la=lat*RAD,lo=lon*RAD,sl=Math.sin(la),cl=Math.cos(la),n=A/Math.sqrt(1-E2*sl*sl);q[0]=n*cl*Math.cos(lo);q[1]=n*cl*Math.sin(lo);q[2]=n*(1-E2)*sl};
  function proj(lon,lat){ecef(lon,lat);const x=q[0],y=q[1],z=q[2];if((cx-x)*x+(cy-y)*y+(cz-z)*z/(1-E2)<=0)return false;const w=m[3]*x+m[7]*y+m[11]*z+m[15];if(w<=0)return false;
@@ -45,15 +48,17 @@ function layer(viewer,C){const scene=viewer.scene,host=viewer.container,cv=docum
  function draw(){const hc=html.classList;if(!on||!usable()||document.hidden||hc.contains('map2d')||hc.contains('game-on')||hc.contains('moon-on')||(window.OwlLightning&&window.OwlLightning.on)){if(cv.width)ctx.clearRect(0,0,cv.width,cv.height);S.length=0;tip.hidden=true;return}size();
   const c=scene.camera;C.Matrix4.multiply(c.frustum.projectionMatrix,c.viewMatrix,VP);m=VP;cx=c.positionWC.x;cy=c.positionWC.y;cz=c.positionWC.z;
   const t=reduce?0:((performance.now()-t0)/1000)%LOOP,fade=reduce?1:Math.min(1,t/2,(LOOP-t)/2);
-  ctx.clearRect(0,0,cv.width,cv.height);S.length=0;const col='143,211,255';
+  ctx.clearRect(0,0,cv.width,cv.height);S.length=0;const col='143,211,255';const hgt=C.Cartographic.fromCartesian(c.positionWC).height,zk=hgt>1.4e7?.72:hgt>8e6?.86:hgt<2.5e6?1.3:1; /* smaller from far away, where hundreds overlap; larger close in */
   for(const p of DATA.planes){const lat=p[0],lon=p[1],trk=p[3],gs=p[4];const moving=trk!=null&&gs!=null&&!reduce;
    const now=moving?ahead(lat,lon,trk,gs*KT*t):[lat,lon];if(!proj(now[1],now[0]))continue;const x=o[0],y=o[1];
    // the trail back to the recorded position, and the heading on screen from a point a little ahead
    let ang=null;if(trk!=null){const f=ahead(now[0],now[1],trk,20000);if(proj(f[1],f[0]))ang=Math.atan2(o[1]-y,o[0]-x)}
    if(moving&&t>1&&proj(lon,lat)){const g=ctx.createLinearGradient(o[0],o[1],x,y);g.addColorStop(0,`rgba(${col},0)`);g.addColorStop(1,`rgba(${col},${(.45*fade).toFixed(3)})`);ctx.strokeStyle=g;ctx.lineWidth=1.2*dpr;ctx.beginPath();ctx.moveTo(o[0],o[1]);ctx.lineTo(x,y);ctx.stroke()}
-   const s=4.2*dpr;ctx.fillStyle=`rgba(${col},${(.95*fade).toFixed(3)})`;ctx.beginPath();
-   if(ang==null)ctx.arc(x,y,s*.55,0,6.3);else{const ca=Math.cos(ang),sa=Math.sin(ang);ctx.moveTo(x+ca*s*1.5,y+sa*s*1.5);ctx.lineTo(x-ca*s-sa*s*.8,y-sa*s+ca*s*.8);ctx.lineTo(x-ca*s*.4,y-sa*s*.4);ctx.lineTo(x-ca*s+sa*s*.8,y-sa*s-ca*s*.8);ctx.closePath()}
-   ctx.fill();S.push([x/dpr,y/dpr,p])}
+   // a small airplane seen from above, nose along the heading (20 Nov 2026: so the layer cannot be mistaken for wind streaks or dots)
+   const s=PS*dpr*zk;ctx.fillStyle=`rgba(${col},${(.97*fade).toFixed(3)})`;ctx.strokeStyle=`rgba(6,12,22,${(.85*fade).toFixed(3)})`;
+   if(ang==null){ctx.lineWidth=dpr;ctx.beginPath();ctx.arc(x,y,s*.6,0,6.3);ctx.fill();ctx.stroke()}
+   else{ctx.setTransform(s*Math.cos(ang),s*Math.sin(ang),-s*Math.sin(ang),s*Math.cos(ang),x,y);ctx.lineWidth=.22;ctx.lineJoin='round';ctx.stroke(PLANE);ctx.fill(PLANE);ctx.setTransform(1,0,0,1,0,0)}
+   S.push([x/dpr,y/dpr,p])}
   // hover card: the nearest mark within 12 px
   if(mx>=0){let best=null,bd=144;for(const k of S){const d=(k[0]-mx)**2+(k[1]-my)**2;if(d<bd){bd=d;best=k}}
    if(best){const p=best[2];tip.innerHTML=`<b>${esc(p[5]||'Airline')}${p[6]?' · '+esc(p[6]):''}</b><br>${p[2]!=null?Number(p[2]).toLocaleString('en-US')+' ft':''}${p[4]!=null?' · '+p[4]+' kt':''}${p[3]!=null?' · heading '+p[3]+'°':''}<br><span style="opacity:.75">Recorded ${esc(fmtT(DATA.asOf))}, rounded to about 10 km. The glide is drawn, not live.</span>`;
