@@ -17,6 +17,7 @@ import { GROUPS, EVERY } from './snap.mjs';
 import { GROUPS as NGROUPS, EVERY as NEVERY } from './nature.mjs';
 import { runChecks } from './checks.mjs';
 import { ioda } from './ioda.mjs';
+import { radarTrends } from './radartrends.mjs';
 import { cams as collectCams } from './cams.mjs';
 import { collectGrace } from './grace.mjs';
 import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar.mjs';
@@ -110,7 +111,7 @@ async function radar(T) {
     (a.asnsDetails || []).map(x => x.name).join(', '),
     [a.outage?.outageType, a.outage?.outageCause].filter(Boolean).join(' · '),
     (a.startDate || '').slice(0, 16).replace('T', ' '), (a.endDate || '').slice(0, 16).replace('T', ' '),
-    (a.description || '').slice(0, 240), a.linkedUrl || '']);
+    (a.description || '').slice(0, 240), a.linkedUrl || '', String(a.scope || '').slice(0, 120), (a.locations || []).filter(c => /^[A-Z]{2}$/.test(c)).slice(0, 12)]);
   T.radar = { asOf: stamp, outages: out };
   return 'ok';
 }
@@ -153,6 +154,8 @@ async function runSteps(meta) {
   }
   try { status.radar = await radar(targets.disruptions); } catch (e) { status.radar = 'error: ' + e.message.slice(0, 160); }
   log('step', 'radar', status.radar);
+  try { status.radarTrends = await radarTrends(targets.disruptions); } catch (e) { status.radarTrends = 'error: ' + e.message.slice(0, 160); }
+  log('step', 'radarTrends', status.radarTrends);
   try { status.ioda = await ioda(targets.disruptions); } catch (e) { status.ioda = 'error: ' + e.message.slice(0, 160); }
   log('step', 'ioda', status.ioda);
   // A step's own errors list is shown on the page; keep it short.

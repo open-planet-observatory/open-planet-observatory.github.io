@@ -297,6 +297,16 @@ table.lib{border-collapse:collapse;width:100%;font-size:.86rem;min-width:760px}
 .cam .why{font-size:.8rem;color:var(--ink-2);border-top:1px dashed var(--line);padding-top:8px}
 .cam .go{margin-top:auto;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:.86rem;text-decoration:none}
 .cam .go:hover{text-decoration:underline}
+.cam-plays{display:flex;flex-direction:column;gap:6px}
+.cam-play{display:flex;align-items:flex-start;gap:8px;text-align:left;font:inherit;font-size:.84rem;font-weight:600;color:var(--ink);background:var(--accent-soft);border:1px solid var(--line);border-radius:9px;padding:8px 10px;min-height:40px;cursor:pointer}
+.cam-play:hover,.cam-play:focus-visible{border-color:var(--accent)}
+.cam-pt{overflow-wrap:anywhere}
+.cam-by{font-size:.74rem;color:var(--ink-3)}
+.cam-frame{display:flex;flex-direction:column;gap:6px}
+.cam-frame iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:9px;background:#000}
+.cam-x{align-self:flex-start;font:inherit;font-size:.78rem;color:var(--ink-2);background:none;border:1px solid var(--line);border-radius:8px;padding:5px 10px;min-height:32px;cursor:pointer}
+#camNote{margin:10px 0 0;font-size:.78rem;color:var(--ink-3);max-width:90ch}
+#camNote:empty{display:none}
 .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
 .rules > div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
 .rules ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:5px;font-size:.88rem}
@@ -948,6 +958,7 @@ window.LIBRARY=[
 ["Space","NASA Near-Earth Object API","Asteroid close approaches","Daily","go","Free","https://api.nasa.gov/","link"],
 ["Air & sea","The OpenSky Network","Aircraft positions from volunteer receivers","5–10 s","lim","Non-commercial; paid tier","https://opensky-network.org/","map"],
 ["Nature","YouTube oEmbed (live cam check)","Whether each live cam stream that can play on this page still exists and still allows embedding. The streams themselves belong to NASA, USGS, Monterey Bay Aquarium, Cornell Lab Bird Cams and explore.org, and play only in YouTube's own player after a visitor presses play","Hourly","lim","YouTube Terms of Service and API Services Terms; each stream is its owner's (NASA and USGS video: public domain)","https://oembed.com/","panel"],
+["Infrastructure & internet","Cloudflare Radar: traffic and attack trends","Worldwide internet traffic, application-layer attacks and network-layer attacks on Cloudflare's own network, hour by hour for the last 7 days beside the 7 days before, plus how attacks were stopped and which protocols they used. Cloudflare's scaled values, not counts; where attacks come from is not collected","Hourly","lim","CC BY-NC 4.0 (non-commercial, attribution)","https://radar.cloudflare.com/","panel"],
 ["Air & sea","adsb.lol","Scheduled airline flights near six busy hubs, for the Observation Deck's Airliner scope and the globe's Scheduled airliners layer: airline code and aircraft type only, positions rounded to about 10 km, shown at least 15 minutes after they were recorded","Hourly","go","Open Database License (ODbL 1.0), attribution","https://www.adsb.lol/docs/open-data/api/","panel"],
 ["Air & sea","airplanes.live / adsb.fi","Community aircraft feeds","Live","lim","Non-commercial","https://airplanes.live/","link"],
 ["Air & sea","aisstream.io","Live ship positions (needs free key)","Live","ask","No published terms","https://aisstream.io/","link"],
