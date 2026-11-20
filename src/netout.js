@@ -21,16 +21,23 @@ function centres(){if(CEN)return CEN;CEN={};const d3=window.d3,F=O.countries||[]
   /* a country in several pieces: use its largest piece, so the ring sits on the mainland */
   if(g.type==='MultiPolygon'){let best=null,ba=-1;for(const co of g.coordinates){const p={type:'Polygon',coordinates:co},a=d3.geoArea(p);if(a>ba){ba=a;best=p}}g=best}
   const k=d3.geoCentroid(g);if(isFinite(k[0])&&isFinite(k[1]))CEN[c]=k}return CEN}
-function marks(){const I=data();if(!I||!fresh())return[];const C=centres(),by=new Map();
- for(const e of I.events){const k=C[e[0]];if(!k)continue;const m=by.get(e[0])||{code:e[0],name:e[1],lon:k[0],lat:k[1],on:0,ev:[]};m.on=m.on||e[5];m.ev.push(e);by.set(e[0],m)}return[...by.values()]}
+// Cloudflare Radar's Outage Center entries that name a country (disruptions.radar, 7 days). These are outages Cloudflare has
+// confirmed and described; they get a diamond around the country's mark. Entries that name only a network have no place to draw.
+const RADAR_STALE_H=3;
+const radar=()=>{const R=(window.DIS||{}).radar;if(!R||!Array.isArray(R.outages)||!R.asOf||(Date.now()-Date.parse(R.asOf))/36e5>RADAR_STALE_H)return[];return R.outages.filter(o=>Array.isArray(o[8])&&o[8].length)};
+function marks(){const I=data(),C=centres(),by=new Map();
+ if(I&&fresh())for(const e of I.events){const k=C[e[0]];if(!k)continue;const m=by.get(e[0])||{code:e[0],name:e[1],lon:k[0],lat:k[1],on:0,ev:[],rad:[]};m.on=m.on||e[5];m.ev.push(e);by.set(e[0],m)}
+ for(const o of radar())for(const code of o[8]){const k=C[code];if(!k)continue;const m=by.get(code)||{code,name:(o[8].length===1&&o[0])||A2[code]||code,lon:k[0],lat:k[1],on:0,ev:[],rad:[]};m.rad.push(o);by.set(code,m)}
+ return[...by.values()]}
 O.addLayer({id:'netout',name:'Internet outages by country (measured)',color:'--c-netout',shape:'circle',count:'3D only',on:false,group:'People & systems'});
 html.style.setProperty('--c-netout','#ffb347');
 const chip=()=>document.getElementById('chip-netout');{const b=chip();if(b)b.title='Countries where IODA (Georgia Tech) detected an internet outage in the last 24 hours. Automated detections, not confirmed outages. A pulsing ring was still running when collected.'}
 const isOn=()=>{const c=chip();return !!c&&c.getAttribute('aria-pressed')==='true'};
-function legend(){const I=data();if(!I)return'<span>No measured outage list has been collected yet. Nothing is drawn in its place.</span>';
- if(!fresh())return`<span>The last list is from ${esc(fmtT(I.asOf))}, more than ${STALE_H} hours ago, so it is not drawn.</span>`;
- const M=marks(),on=M.filter(m=>m.on).length,listed=new Set(I.events.map(e=>e[0])).size;
- return`<span><b>${listed}</b> countries with a detected outage in the last 24 hours; <b>${on}</b> drawn as still running when collected (pulsing ring), ${M.length-on} as ended (plain ring).${listed>M.length?' '+(listed-M.length)+' small countries or territories are on the list but too small for this map.':''}</span>
+const radarLine=()=>{const n=marks().filter(m=>m.rad.length).length;return n?`<span><b>${n}</b> ${n===1?'country has':'countries have'} an outage that Cloudflare confirmed in the last 7 days (diamond). Those are Cloudflare Radar's own entries, in its words on the list.</span>`+(window.owlSrc?window.owlSrc('radar',{t:((window.DIS||{}).radar||{}).asOf}):''):''};
+function legend(){const I=data();if(!I)return'<span>No measured outage list has been collected yet. Nothing is drawn in its place.</span>'+radarLine();
+ if(!fresh())return`<span>The last list is from ${esc(fmtT(I.asOf))}, more than ${STALE_H} hours ago, so it is not drawn.</span>`+radarLine();
+ const M=marks().filter(m=>m.ev.length),on=M.filter(m=>m.on).length,listed=new Set(I.events.map(e=>e[0])).size;
+ return radarLine()+`<span><b>${listed}</b> countries with a detected outage in the last 24 hours; <b>${on}</b> drawn as still running when collected (pulsing ring), ${M.length-on} as ended (plain ring).${listed>M.length?' '+(listed-M.length)+' small countries or territories are on the list but too small for this map.':''}</span>
  <span><b>Automated detections, not confirmed outages.</b> IODA watches routing, probing and traffic signals; a ring means one of them dropped for that country. Small places trigger more often.</span>
  <span><button type="button" class="btn" onclick="dispatchEvent(new Event('obs:netstatus'))">See the list with times</button></span>`+
  (window.owlSrc?window.owlSrc('ioda',{t:I.asOf,b:'Automated detections; not every one is a real outage, and local or mobile-only outages can be missed.'}):'')}
@@ -48,11 +55,13 @@ function layer(viewer,C){const scene=viewer.scene,host=viewer.container,cv=docum
   const c=scene.camera;C.Matrix4.multiply(c.frustum.projectionMatrix,c.viewMatrix,VP);m=VP;cx=c.positionWC.x;cy=c.positionWC.y;cz=c.positionWC.z;
   ctx.clearRect(0,0,cv.width,cv.height);S.length=0;const ph=reduce?.5:(performance.now()/1600)%1,col='255,179,71';
   for(const k of M){if(!proj(k.lon,k.lat))continue;const x=o[0],y=o[1],r=7*dpr;
+   if(k.rad.length){const d=r*1.55;ctx.strokeStyle='rgba(255,236,200,.95)';ctx.lineWidth=1.6*dpr;ctx.beginPath();ctx.moveTo(x,y-d);ctx.lineTo(x+d,y);ctx.lineTo(x,y+d);ctx.lineTo(x-d,y);ctx.closePath();ctx.stroke()}
+   if(!k.ev.length){S.push([x/dpr,y/dpr,k]);continue}
    if(k.on){ctx.strokeStyle=`rgba(${col},${(.75*(1-ph)).toFixed(3)})`;ctx.lineWidth=2*dpr;ctx.beginPath();ctx.arc(x,y,r*(.8+1.9*ph),0,6.3);ctx.stroke();ctx.fillStyle=`rgba(${col},.95)`;ctx.beginPath();ctx.arc(x,y,r*.55,0,6.3);ctx.fill()}
    else{ctx.strokeStyle=`rgba(${col},.6)`;ctx.lineWidth=1.5*dpr;ctx.beginPath();ctx.arc(x,y,r*.7,0,6.3);ctx.stroke()}
    S.push([x/dpr,y/dpr,k])}
   if(mx>=0){let best=null,bd=324;for(const s of S){const d=(s[0]-mx)**2+(s[1]-my)**2;if(d<bd){bd=d;best=s}}
-   if(best){const k=best[2];tip.innerHTML=`<b>${esc(k.name)}</b><br>${k.ev.slice(0,3).map(e=>`${e[5]?'Still running when collected':'Ended'}: ${esc(SIG(e[4]))}. From ${esc(fmtT(e[2]))}, ${esc(len(e[3]))}${e[5]?' so far':''}.`).join('<br>')}<br><span style="opacity:.75">Automated detection by IODA, not a confirmed outage.</span>`;
+   if(best){const k=best[2];tip.innerHTML=`<b>${esc(k.name)}</b><br>${k.rad.slice(0,2).map(o=>`Cloudflare Radar: ${esc([o[2].replace(/_/g,' ').toLowerCase(),o[7]].filter(Boolean).join(' · ')||'outage')}. From ${esc(o[3])} UTC${o[4]?' to '+esc(o[4])+' UTC':', no end time given'}.<br>`).join('')}${k.ev.slice(0,3).map(e=>`${e[5]?'Still running when collected':'Ended'}: ${esc(SIG(e[4]))}. From ${esc(fmtT(e[2]))}, ${esc(len(e[3]))}${e[5]?' so far':''}.`).join('<br>')}${k.ev.length?'<br><span style="opacity:.75">Automated detection by IODA, not a confirmed outage.</span>':''}`;
     tip.style.left=Math.max(4,Math.min(cv.clientWidth-270,best[0]+14))+'px';tip.style.top=Math.max(4,best[1]-10)+'px';tip.hidden=false}else tip.hidden=true}else tip.hidden=true}
  scene.postRender.addEventListener(()=>{try{draw()}catch(e){/* never stop the globe's render loop */}});
  host.addEventListener('pointermove',e=>{if(!on)return;const r=host.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});host.addEventListener('pointerleave',()=>{mx=my=-1});
@@ -60,7 +69,7 @@ function layer(viewer,C){const scene=viewer.scene,host=viewer.container,cv=docum
 function sync(){const g=window.__obs3d,C=window.Cesium;const on=isOn();
  let lg=document.getElementById('lg-netout');const c=chip();if(on&&!lg&&c){lg=document.createElement('div');lg.id='lg-netout';lg.className='wx-legend fc-legend';c.after(lg)}
  if(lg){lg.hidden=!on;if(on)lg.innerHTML=legend()}
- const ct=c&&c.querySelector('.ct');if(ct&&on)ct.textContent=fresh()?marks().length+' shown':'none now';
+ const ct=c&&c.querySelector('.ct');if(ct&&on){const n=marks().length;ct.textContent=n?n+' shown':'none now'}
  if(!g||!C){if(on)setTimeout(sync,800);return}
  if(!on){if(L)L.set(false);return}
  if(!L)L=layer(g.viewer,C);L.set(true)}

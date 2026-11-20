@@ -19,6 +19,7 @@ import { runChecks } from './checks.mjs';
 import { ioda } from './ioda.mjs';
 import { radarTrends } from './radartrends.mjs';
 import { cams as collectCams } from './cams.mjs';
+import { peeringdb } from './peeringdb.mjs';
 import { collectGrace } from './grace.mjs';
 import { collectSolar, collectExoplanets, collectVoyagerLightDay } from './solar.mjs';
 import { collectGame } from './game.mjs';
@@ -298,6 +299,11 @@ let camsR = { out: null, status: 'not run' };
 { let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/cams.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   try { camsR = await collectCams({ prev: p, nowMs: now.getTime() }); } catch (e) { camsR = { out: { v: 1, failed: true, asOf: stamp, streams: [] }, status: 'error: ' + e.message.slice(0, 160) }; }
   if (camsR.out) await fs.writeFile(path.join(OUT, 'cams.json'), JSON.stringify(camsR.out)); log('cams', camsR.status); }
+// Internet exchanges (collector/peeringdb.mjs): data/ix.json, once a day, with PeeringDB's permission (see that file).
+let ixR = { out: null, status: 'not run' };
+{ let p = null; if (PREV) { try { const r = await fetch(`${PREV}/data/ix.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
+  try { ixR = await peeringdb({ prev: p, now: new Date() }); } catch (e) { ixR = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
+  if (ixR.out) await fs.writeFile(path.join(OUT, 'ix.json'), JSON.stringify(ixR.out)); log('ix', ixR.status); }
 // Wind and temperature forecast (collector/forecast.mjs): data/fcst/index.json + f0..f8.bin, NOAA GFS via PacIOOS ERDDAP.
 // Fetched once per 6-hour step; in between, the published files are carried over. Feeds the globe's moving wind.
 let fcst = { status: 'not run' };
@@ -360,7 +366,7 @@ let whunt = { status: 'not run' };
   else try { whunt = await collectWeeklyHunt(OUT, p, now.getTime()); } catch (e) { whunt = { out: p, status: 'error: ' + e.message.slice(0, 160) }; }
   if (whunt.out) await fs.writeFile(path.join(OUT, 'hunt.json'), JSON.stringify(whunt.out)); log('weekly hunt', whunt.status); }
 meta.updated = now.toISOString();
-meta.lastRun = { cams: camsR.status, weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, forecast: fcst.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
+meta.lastRun = { cams: camsR.status, ix: ixR.status, weeklyHunt: whunt.status, snap: snap.status, nature: nature.status, steps: steps.status, orbits: orb.status, grace: grace.status, solar: solar.status, exoplanets: exo.status, sun: sunImg.status, game: game.status, history: history.status, records: records.status, predictions: preds.status, recordWatch: rwatch.status, forecastDesk: fdesk.status, airliners: airl.status, forecast: fcst.status, moonFeatures: moonf.status, checks: { passed: checks.passed, failed: checks.failed, warnings: checks.warnings } };
 // If nothing has ever been collected successfully, say so on the page instead of claiming fresh data.
 const anyOk = Object.values({ ...snap.status, ...nature.status, ...steps.status, orbits: orb.status }).some(v => v.startsWith('ok'));
 if (usedSeed && !anyOk) meta.seed = true; else delete meta.seed;
