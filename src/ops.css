@@ -701,6 +701,9 @@ html.ops.slim .gn-act .gn-play{display:inline-flex}
 #owlSplash.ready .load i{animation:none;width:100%;transition:width .6s ease-out}
 /* phones, full header: the five menus get their own row, the buttons sit on the row below; the slim bar stays one row */
 @media (max-width:860px){html.ops:not(.slim) .gnav{flex-wrap:wrap;row-gap:6px}html.ops:not(.slim) .gnav .gn-scroll{flex:1 1 100%}html.ops:not(.slim) .gnav .gn-act{margin-left:auto}}
+/* 20 Nov 2026: on phones the action row had grown wider than the screen (network chip + Voyager chip), which cut off the Observation Deck,
+   tour and music buttons. It now wraps onto a second line when it has to, and the deck button keeps its name. */
+@media (max-width:860px){html.ops .gnav{min-width:0;max-width:100%}html.ops .gnav .gn-act{flex:1 1 100%;flex-wrap:wrap;row-gap:6px;margin-left:0;min-width:0}html.ops .gnav .gn-act #gnDeck .gn-tw{display:inline}html.ops .gnav .gn-act #gnDeck{padding:6px 10px}}
 /* Records */
 .rc-g{margin:20px 0 8px;font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3)}
 .rc{border:1px solid var(--glass-line);border-radius:12px;padding:12px 14px;margin:0 0 12px;background:rgba(255,255,255,.02)}

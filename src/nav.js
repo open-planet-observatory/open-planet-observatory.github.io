@@ -82,7 +82,7 @@
     contact: ['Write to us, report a problem, make a suggestion, or sign up for the weekly letter.', () => null],
     library: ['Every source on the site with its licence, its update cadence and what it can’t show.', () => window.LIBRARY ? `${window.LIBRARY.length} sources` : null],
     layers: ['What each map layer and reading means, and where it comes from.', () => null],
-    free: ['How the site stays free: no ads, no tracking, open source, and the data never for sale.', () => null],
+    free: ['How the site stays free: no ads, no cookies, open source, and the data never for sale.', () => null],
     about: ['What this site is, the rules it keeps, and the lines it does not cross.', () => null] };
   const NOW = {
     world: () => { const g = ((window.SIT || {}).gdacs || [])[0]; return g ? [g[1], 'GDACS'] : null; },
