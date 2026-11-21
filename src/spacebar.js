@@ -14,12 +14,12 @@ const isOn=()=>{const u=uni();return !!u&&!u.hidden&&u.classList.contains('on')}
 const quiet=()=>{const c=uni().classList;return c.contains('clean')||c.contains('flight')||c.contains('touring')};
 const gameUp=()=>hc.contains('game-on')||['spacefind','hunt','weekly','woe','findowl'].some(id=>{const e=document.getElementById(id);return !!e&&!e.hidden&&e.getClientRects().length>0});
 let saved=null,acted=false,busy=false,poll=0,leaving=false;
-function button(){const u=uni();if(!u)return null;let b=document.getElementById('uniMenu');if(!b){const back=u.querySelector('#uniBack');if(!back)return null;b=document.createElement('button');b.type='button';b.id='uniMenu';b.className='chip';b.innerHTML='☰ Menu';b.setAttribute('aria-expanded','false');b.title='Show the site\'s menus';b.onclick=()=>{hc.toggle('uni-menu');apply()};back.after(b)}return b}
+function button(){const u=uni();if(!u)return null;let b=document.getElementById('uniMenu');if(!b){const back=u.querySelector('#uniBack');if(!back)return null;b=document.createElement('button');b.type='button';b.id='uniMenu';b.className='chip';b.innerHTML='☰<span class="um-t"> Menu</span>';b.setAttribute('aria-label','Menu');b.setAttribute('aria-expanded','false');b.title='Show the site\'s menus';b.onclick=()=>{hc.toggle('uni-menu');apply()};u.appendChild(b) /* its own corner, outside the view's top row: one more button in that row made it wrap and overlap on phones */}return b}
 function apply(){if(busy)return;busy=true;try{const u=uni();if(!u)return;const on=isOn();
  if(on&&!saved){saved={slim:hc.contains('slim'),rail:hc.contains('rail-closed'),drawer:hc.contains('drawer-closed')};acted=false;clearInterval(poll);poll=setInterval(apply,1200)}
  const show=on&&!quiet()&&!gameUp()&&(!phone()||hc.contains('uni-menu'));
  hc.toggle('uni-on',on);hc.toggle('uni-bar',show);
- const b=on?button():document.getElementById('uniMenu');if(b){b.hidden=!phone();b.setAttribute('aria-expanded',String(show&&phone()));b.innerHTML=show&&phone()?'✕ Close menu':'☰ Menu'}
+ const b=on?button():document.getElementById('uniMenu');if(b){b.hidden=!phone()||(on&&(quiet()||gameUp()));b.setAttribute('aria-expanded',String(show&&phone()));const open=show&&phone();b.innerHTML=open?'✕<span class="um-t"> Close menu</span>':'☰<span class="um-t"> Menu</span>';b.setAttribute('aria-label',open?'Close menu':'Menu')}
  if(show&&leaving){/* a choice is being carried out: leave the header as that choice sets it */}
  else if(show){if(!phone()&&!hc.contains('slim')&&O.setSlim)O.setSlim(true);const t=top();const y=t?Math.ceil(t.getBoundingClientRect().bottom)+6:0;if(u.style.top!==y+'px')u.style.top=y+'px'}
  else if(u.style.top)u.style.top='';
@@ -35,7 +35,9 @@ document.addEventListener('click',e=>{if(!isOn()||!e.target.closest||!e.target.c
 const st=document.createElement('style');st.textContent=`
 html.uni-bar #uni{transition:opacity .7s ease,top .25s ease}
 html.uni-bar #ops{z-index:auto}
+#uniMenu{position:absolute;top:14px;right:14px;z-index:3}
 #uniMenu[hidden]{display:none}
+@media (max-width:479px){#uniMenu .um-t{display:none}#uniMenu{min-width:40px;justify-content:center}} /* the view's title needs the room on narrow phones */
 @media (max-width:860px){html.uni-bar #ops-top{max-height:70vh;overflow:auto}}
 `;document.head.appendChild(st);
 const watch=()=>{const u=uni();if(!u)return false;new MutationObserver(apply).observe(u,{attributes:true,attributeFilter:['class','hidden']});new MutationObserver(apply).observe(html,{attributes:true,attributeFilter:['class']});addEventListener('resize',apply);apply();return true};
