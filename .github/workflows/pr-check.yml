@@ -93,3 +93,32 @@ jobs:
           retention-days: 7
       - if: steps.run.outcome == 'failure'
         run: exit 1
+
+  # Advisory (21 Nov 2026): pictures of the main views at both sizes, so a change can be looked at before it is merged.
+  # Never required and never red: a missing picture is reported in the summary, nothing more.
+  shots:
+    name: Screenshots (advisory)
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci --no-audit --no-fund && npm install --no-save --no-audit --no-fund playwright@1.63.0
+      - run: npx playwright install --with-deps chromium
+      - name: Build from the seed data
+        run: npm run build:seed
+      - name: Take the pictures
+        run: node tests/shots.mjs dist --out shots-results || true
+      - name: Add the list to the run summary
+        if: always()
+        run: cat shots-results/report.md >> "$GITHUB_STEP_SUMMARY" || echo "no screenshots were taken" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pr-screenshots
+          path: shots-results
+          retention-days: 7
