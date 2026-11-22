@@ -55,6 +55,7 @@
       <section class="ns-g ns-how small"><h3>How to read this</h3>
         <p><b>These are self-reports.</b> A company decides what to post and when, often some time after people notice a problem, and small or regional faults may never be posted. "No problem" means the company reports none, not that everything works.</p>
         <p><b>What is missing.</b> Phone and home-internet providers publish no open outage feeds, so they are not here. For measured, independent views of internet outages by country and network, see <a href="https://radar.cloudflare.com/outage-center" target="_blank" rel="noopener">Cloudflare Radar's Outage Center ↗</a> and <a href="https://ioda.inetintel.cc.gatech.edu/" target="_blank" rel="noopener">IODA at Georgia Tech ↗</a>.</p>
+        <p><b>The cables under the sea.</b> Nearly all traffic between continents travels through cables laid on the sea floor, and a cut cable is behind many of the outages listed above. No open, worldwide data set of those cables exists for this site to draw, so they are not on the globe. TeleGeography keeps the reference map: <a href="https://www.submarinecablemap.com/" target="_blank" rel="noopener">Submarine Cable Map ↗</a>.</p>
         <p><b>Not copied.</b> This page does not reproduce any company's dashboard, uptime figures or history: only its current state, with a link to the source.</p>
       </section>
       ${window.owlSrc ? window.owlSrc('status', { t: D.asOf, b: 'Self-reported, often late; a clean page is not proof of no fault.' }) : ''}
