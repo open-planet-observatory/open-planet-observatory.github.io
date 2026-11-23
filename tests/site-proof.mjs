@@ -85,6 +85,26 @@ const SCENARIOS = [
     'People menu → Situations': p => menuItem(p, 'world', 'data-k', 'situations'), 'Space menu → Solar System, then Back to Earth': async p => { await menuItem(p, 'space', 'data-u', 'solar'); await p.waitForSelector('#uni.on', { timeout: 150000 * SLOW }); await w(1500); await click(p, '#uniBack'); } } },
   { key: 'solar', name: 'The Solar System', open: p => openSpace(p, 'zuni', 'solar'), exits: {
     'Esc': esc, '← Back to Earth': p => click(p, '#uniBack'), '⊕ Earth pill': p => click(p, '#zearth'), 'logo (back to the start)': p => click(p, '.brand h1'), 'People menu → Situations': p => menuItem(p, 'world', 'data-k', 'situations'), 'Space menu → The Moon, then Esc': async p => { await menuItem(p, 'space', 'data-u', 'moon'); await w(2500); await esc(p); } } },
+  /* zooming out to space without the tour (23 Nov 2026: the slider jumped, and on phones a pinch never left Earth) */
+  { key: 'slider', name: 'Space view: the zoom slider', open: async p => { await openSpace(p, 'zuni', 'solar'); await w(1500);
+      const dist = () => p.evaluate(() => { const S = window.__obs.uniState(); return Math.log10(S.camera.position.distanceTo(S.controls.target)); });
+      const t = await p.evaluate(() => { const r = document.querySelector('#uniZoom .uz-track').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top, h: r.height, w: r.width }; });
+      if (await p.evaluate(() => matchMedia('(pointer:coarse)').matches) && t.w < 40) throw new Error(`slider lane is ${Math.round(t.w)} px wide on a touch screen (needs 44)`);
+      await p.mouse.move(t.x, t.y + t.h * 0.2); await p.mouse.down(); for (let i = 1; i <= 8; i++) { await p.mouse.move(t.x, t.y + t.h * (0.2 + 0.7 * i / 8)); await w(60); }
+      await p.waitForFunction(() => { const S = window.__obs.uniState(); return S.camera.position.distanceTo(S.controls.target) > 1e12; }, null, { timeout: 20000 * SLOW, polling: 250 }).catch(() => { }); const far = await dist(); await p.mouse.up();
+      if (!(far > 12)) throw new Error(`dragging the slider down did not zoom out (10^${far.toFixed(1)} AU)`);
+      await p.mouse.move(t.x, t.y + t.h * 0.9); await p.mouse.down(); await p.mouse.move(t.x, t.y + t.h * 0.25, { steps: 6 }); await p.waitForFunction(() => { const S = window.__obs.uniState(); return S.camera.position.distanceTo(S.controls.target) < 1e4; }, null, { timeout: 20000 * SLOW, polling: 250 }).catch(() => { }); const near = await dist(); await p.mouse.up();
+      if (!(near < 4 && isFinite(near))) throw new Error(`dragging the slider up did not zoom back in (10^${near.toFixed(1)} AU)`); }, exits: { 'Esc': esc } },
+  { key: 'pinch', name: 'Pinch out from Earth into space (touch)', open: async p => {
+      if (p.context().browser().browserType().name() !== 'chromium' || !(await p.evaluate(() => navigator.maxTouchPoints > 0))) throw new NotOffered('needs a touch screen (run in Chromium at the phone size)');
+      const cdp = await p.context().newCDPSession(p); const touch = (type, pts) => cdp.send('Input.dispatchTouchEvent', { type, touchPoints: pts.map((q, i) => ({ x: q[0], y: q[1], id: i })) });
+      const pinch = async (cx, cy, from, to) => { await touch('touchStart', [[cx - from / 2, cy], [cx + from / 2, cy]]); for (let i = 1; i <= 10; i++) { const d = from + (to - from) * i / 10; await touch('touchMove', [[cx - d / 2, cy], [cx + d / 2, cy]]); await w(30); } await touch('touchEnd', []); await w(400); };
+      const c = await p.evaluate(() => { const r = document.querySelector('#ops-map').getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+      for (let i = 0; i < 8 && !(await p.$('#uni.on')); i++) await pinch(c.x, c.y, 280, 60);
+      await p.waitForSelector('#uni.on', { timeout: 150000 * SLOW }).catch(() => { throw new Error('eight pinches out on the globe did not open the space view'); }); await w(2500);
+      const u = await p.evaluate(() => { const S = window.__obs.uniState(); return { x: (innerWidth / 2), y: innerHeight / 2, l: Math.log10(S.camera.position.distanceTo(S.controls.target)) }; });
+      for (let i = 0; i < 3; i++) await pinch(u.x, u.y, 300, 60); await w(1500); const l2 = await p.evaluate(() => { const S = window.__obs.uniState(); return Math.log10(S.camera.position.distanceTo(S.controls.target)); });
+      if (!(l2 - u.l > 4)) throw new Error(`three pinches in the space view moved only ${(l2 - u.l).toFixed(1)} powers of ten (needs more than 4)`); }, exits: { 'Esc': esc } },
   { key: 'galaxy', name: 'The Milky Way', open: p => openSpace(p, 'zgal', 'galaxy'), exits: { 'Esc': esc, '← Back to Earth': p => click(p, '#uniBack'), '⊕ Earth pill': p => click(p, '#zearth'), 'logo (back to the start)': p => click(p, '.brand h1') } },
   { key: 'web', name: 'The cosmic web', open: p => openSpace(p, 'zweb', 'web'), exits: { 'Esc': esc, '← Back to Earth': p => click(p, '#uniBack'), '⊕ Earth pill': p => click(p, '#zearth'), 'logo (back to the start)': p => click(p, '.brand h1') } },
   { key: 'edge', name: 'The edge of the observable universe', open: p => openSpace(p, 'zweb-none', 'edge'), exits: { 'Esc': esc, '← Back to Earth': p => click(p, '#uniBack'), 'logo (back to the start)': p => click(p, '.brand h1') } },

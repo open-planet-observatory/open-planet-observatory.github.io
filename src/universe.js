@@ -47,6 +47,12 @@ addButtons(); setTimeout(addButtons, 3000); setTimeout(addButtons, 9000);
   g.viewer.canvas.addEventListener('wheel', e => { if (open || e.deltaY <= 0 || document.documentElement.classList.contains('game-on')) return; /* no fly-out during the daily game */ const h = g.viewer.camera.positionCartographic.height;
     if (h < sscc.maximumZoomDistance * 0.9 || sscc.maximumZoomDistance > 1e8) { pushes = 0; return; }
     const n = Date.now(); if (n - t0 > 1200) pushes = 0; t0 = n; if (++pushes >= 6) { pushes = 0; openUniverse(); } }, { passive: true });
+  /* touch screens (23 Nov 2026): a pinch that starts with the globe already pulled back as far as it goes carries on into the Solar System, as the wheel does. The pinch that first reaches the limit only reaches it. */
+  let pin = null; const span = e => Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+  const atMax = () => sscc.maximumZoomDistance <= 1e8 && g.viewer.camera.positionCartographic.height >= sscc.maximumZoomDistance * 0.9;
+  g.viewer.canvas.addEventListener('touchstart', e => { pin = e.touches.length === 2 && !open && !document.documentElement.classList.contains('game-on') && atMax() ? span(e) : null; }, { passive: true });
+  g.viewer.canvas.addEventListener('touchmove', e => { if (!pin || e.touches.length !== 2 || open) return; if (span(e) < pin * 0.62) { pin = null; openUniverse(); } }, { passive: true });
+  ['touchend', 'touchcancel'].forEach(k => g.viewer.canvas.addEventListener(k, () => { pin = null; }, { passive: true }));
 })();
 
 // ---------- geometry helpers ----------
@@ -194,10 +200,21 @@ async function build() {
      there over ~150 ms, scaling about the point under the pointer (pinch on touch screens still goes through OrbitControls). */
   root.addEventListener('wheel', e => { if (e.target !== canvas) return; e.preventDefault(); e.stopPropagation();
     let dy = e.deltaY * (e.deltaMode === 1 ? 33 : e.deltaMode === 2 ? 400 : 1); if (e.ctrlKey) dy *= 4; dy = Math.max(-240, Math.min(240, dy));
-    const now = performance.now(); S._lastInput = now; if (S.tour) stopTour(); S.anim = null; flyStop();
+    const now = performance.now(); S._lastInput = now; S._zGoal = null; if (S.tour) stopTour(); S.anim = null; flyStop();
     if (dy < 0) S._zoomIn = now;
     if (dy < 0 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { closeUniverse(); return; }
     const z = S.zoom || (S.zoom = { v: 0, x: 0, y: 0 }); z.v = Math.max(-3, Math.min(3, z.v + dy * 0.0021)); z.x = e.clientX; z.y = e.clientY; }, { capture: true, passive: false });
+  /* pinch (23 Nov 2026): OrbitControls' own pinch moves ~0.8 of a decade per full pinch, about 19 pinches from the planets to the edge. The pinch also feeds the eased zoom above (3.2 x the log of the finger ratio), so four or five pinches cross every scale, about the point between the fingers. */
+  let pz = null; const tspan = e => Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+  canvas.addEventListener('touchstart', e => { pz = e.touches.length === 2 ? tspan(e) : null; }, { passive: true });
+  canvas.addEventListener('touchmove', e => { if (e.touches.length !== 2 || !pz) return; const d = tspan(e); if (!(d > 8)) return; const r = pz / d; pz = d; if (!(r > 0.5 && r < 2) || Math.abs(r - 1) < 0.004) return;
+    const now = performance.now(); S._lastInput = now; S._zGoal = null; if (S.tour) stopTour(); S.anim = null; flyStop(); if (r < 1) S._zoomIn = now;
+    if (r < 1 && S.focus && S.focus.name === 'Earth' && camera.position.distanceTo(controls.target) < 3.2e-4) { pz = null; closeUniverse(); return; }
+    const z = S.zoom || (S.zoom = { v: 0, x: 0, y: 0 }); z.v = Math.max(-4, Math.min(4, z.v + Math.log(r) * 3.2)); z.x = (e.touches[0].clientX + e.touches[1].clientX) / 2; z.y = (e.touches[0].clientY + e.touches[1].clientY) / 2; }, { passive: true });
+  ['touchend', 'touchcancel'].forEach(k => canvas.addEventListener(k, e => { if (e.touches.length < 2) pz = null; }, { passive: true }));
+  /* if the device takes the graphics away (phones short of memory do), say so and offer the ways on, instead of a frozen picture */
+  canvas.addEventListener('webglcontextlost', e => { e.preventDefault(); let n = document.getElementById('uniLost'); if (!n) { n = document.createElement('div'); n.id = 'uniLost'; n.setAttribute('role', 'alert'); n.innerHTML = '<b>The 3D view stopped</b><p>This device took the graphics away, which phones do when memory runs short. Nothing is lost.</p><div><button type="button" data-lost="reload">Reload the page</button><button type="button" data-lost="earth">Back to Earth</button></div>'; n.addEventListener('click', ev => { const b = ev.target.closest('[data-lost]'); if (!b) return; if (b.dataset.lost === 'reload') location.reload(); else { n.hidden = true; closeUniverse(); } }); root.appendChild(n); } n.hidden = false; });
+  canvas.addEventListener('webglcontextrestored', () => { const n = document.getElementById('uniLost'); if (n) n.hidden = true; });
   ['pointerdown', 'keydown'].forEach(k => root.addEventListener(k, () => { S._lastInput = performance.now(); }, true));
   root.querySelector('#uniNear').onclick = () => nearCard();
   root.querySelector('#uniGal').onclick = () => galaxyView();
@@ -209,7 +226,7 @@ async function build() {
   { const mb = root.querySelector('#uniMusic'); const sync = () => { const on = !!(window.OwlMusic && OwlMusic.on); mb.setAttribute('aria-pressed', String(on)); mb.classList.toggle('on', on); }; mb.onclick = () => { if (window.OwlMusic) OwlMusic.toggle(); sync(); }; addEventListener('owlmusic', sync); sync(); }
   root.querySelector('#uniModel').onclick = () => { S.focus = null; card(GLOW_MODEL); };
   root.querySelector('#uniWebInfo').onclick = () => { if (!COS) return; S.focus = null; const eo = S.camera.position.length() >= 1.5e15 && S.objs.find(o => o.edge); card(eo || COS.about); };
-  canvas.addEventListener('pointerdown', () => { if (S.tour) stopTour(); if (S.craft) S.craft.on = false; }); canvas.addEventListener('wheel', () => { if (S.craft) S.craft.on = false; }, { passive: true });
+  canvas.addEventListener('pointerdown', () => { S._zGoal = null; if (S.tour) stopTour(); if (S.craft) S.craft.on = false; }); canvas.addEventListener('wheel', () => { if (S.craft) S.craft.on = false; }, { passive: true });
   root.addEventListener('selectstart', e => { const t = e.target.nodeType === 3 ? e.target.parentElement : e.target; if (!t || !t.closest || !t.closest('.uni-card')) e.preventDefault(); }); /* no text selection from dragging the sky */
   root.addEventListener('scroll', () => { root.scrollTop = 0; root.scrollLeft = 0; });
   zoomSlider();
@@ -445,17 +462,18 @@ const TICKS = [['The Sun', 0.03], ['Planets', 60], ['Nearest stars', 3.5e5], ['1
 function zoomSlider() { const el = document.getElementById('uniZoom'), tr = el.querySelector('.uz-track'), tk = document.getElementById('uniTicks');
   const toV = d => Math.max(0, Math.min(1, (Math.log10(Math.max(d, 1e-9)) - ZMIN) / (ZMAX - ZMIN)));
   tk.innerHTML = TICKS.map(([n, d]) => `<button style="top:${(toV(d) * 100).toFixed(1)}%" data-zd="${d}">${n}</button>`).join('');
-  tk.querySelectorAll('[data-zd]').forEach(b => b.onclick = () => { stopTour(); const d = +b.dataset.zd; ui.card.hidden = true; if (d >= 1.5e10 && d < 1e12) return galaxyView(3200, true); if (d >= 1e15) return edgeView(); if (d >= 1e13) return webView(); if (d >= 1e12) return neighboursView(); S.focus = null; animateTo(new T.Vector3(0, 0, 0), d, 2200); });
+  tk.querySelectorAll('[data-zd]').forEach(b => b.onclick = () => { S._zGoal = null; stopTour(); const d = +b.dataset.zd; ui.card.hidden = true; if (d >= 1.5e10 && d < 1e12) return galaxyView(3200, true); if (d >= 1e15) return edgeView(); if (d >= 1e13) return webView(); if (d >= 1e12) return neighboursView(); S.focus = null; animateTo(new T.Vector3(0, 0, 0), d, 2200); });
   const setDist = d => { const t = S.controls.target; d = Math.min(3e16, Math.max(0.012, d)); S.zoom = null;
     if (!(S.focus && S.focus.rKm && d < 200)) { S.focus = null; const base = S._zBase || t.clone(); const bl = base.length(); t.copy(base).multiplyScalar(bl > 0 ? Math.min(1, d / (2 * bl)) : 0); } // keeps your pan when zooming out; glides back to the Sun as you zoom in
     const dir = S.camera.position.clone().sub(t).normalize(); if (!isFinite(dir.x)) dir.set(0.4, -0.8, 0.45).normalize(); S.camera.position.copy(t).add(dir.multiplyScalar(d)); S.anim = null; };
-  const fromY = y => { const r = tr.getBoundingClientRect(); const v = Math.max(0, Math.min(1, (y - r.top) / r.height)); setDist(Math.pow(10, ZMIN + v * (ZMAX - ZMIN))); };
+  /* the slider sets a goal and the view glides to it over a few frames (23 Nov 2026): 16 powers of ten sit on one short track, so jumping straight to the finger made every small move a lurch */
+  const fromY = y => { const r = tr.getBoundingClientRect(); const v = Math.max(0, Math.min(1, (y - r.top) / r.height)); S._zGoal = Math.pow(10, ZMIN + v * (ZMAX - ZMIN)); S.zoom = null; S.anim = null; };
   let drag = false;
   tr.addEventListener('pointerdown', e => { drag = true; S._zBase = S.focus && S.focus.rKm ? null : S.controls.target.clone(); tr.setPointerCapture(e.pointerId); stopTour(); fromY(e.clientY); });
   tr.addEventListener('pointermove', e => { if (drag) fromY(e.clientY); });
   tr.addEventListener('pointerup', () => { drag = false; }); tr.addEventListener('pointercancel', () => { drag = false; });
-  el.addEventListener('keydown', e => { const k = { ArrowUp: -1, ArrowDown: 1, PageUp: -4, PageDown: 4 }[e.key]; if (!k) return; e.preventDefault(); e.stopPropagation(); stopTour(); S._zBase = null; setDist(S.camera.position.distanceTo(S.controls.target) * Math.pow(10, k * 0.25)); });
-  ui.zoomThumb = document.getElementById('uniThumb'); ui.zoomV = toV; }
+  el.addEventListener('keydown', e => { const k = { ArrowUp: -1, ArrowDown: 1, PageUp: -4, PageDown: 4 }[e.key]; if (!k) return; e.preventDefault(); e.stopPropagation(); stopTour(); S._zBase = null; S._zGoal = null; setDist(S.camera.position.distanceTo(S.controls.target) * Math.pow(10, k * 0.25)); });
+  ui.zoomThumb = document.getElementById('uniThumb'); ui.zoomV = toV; ui.zoomSet = setDist; }
 
 // ---------- the guided tour ----------
 /* "Fly to Voyager 1" (8 Nov 2026: "a mini tour of the solar system and its relation to it, like the universe tour but shorter,
@@ -735,6 +753,8 @@ function frame(now) { if (!open) return; if (!REC.stepping) requestAnimationFram
   update();
   if (S.anim) S.anim(now); else if (S.focus && prevFocus) { const p = S.focus.shown || S.focus.pos; if (p) { const d = V().fromArray(p).sub(prevFocus); S.camera.position.add(d); S.controls.target.add(d); } }
   S.controls.minDistance = S.focus && S.focus.dispR ? S.focus.dispR * 1.3 : 1e-6;
+  if (S._zGoal && S.anim) S._zGoal = null; if (S._zGoal && ui.zoomSet && dt > 0) { /* slider glide: close most of the remaining gap in log distance each frame */ const d0 = S.camera.position.distanceTo(S.controls.target), l0 = Math.log10(Math.max(d0, 1e-9)), l1 = Math.log10(S._zGoal), goal = S._zGoal;
+    const ln = Math.abs(l1 - l0) < 0.004 ? l1 : l0 + (l1 - l0) * Math.min(1, dt * 12); ui.zoomSet(Math.pow(10, ln)); S._zGoal = ln === l1 ? null : goal; }
   const z = S.zoom; if (z && Math.abs(z.v) > 1e-4 && dt > 0) { /* eased wheel zoom about the point under the pointer */
     const step = z.v * Math.min(1, dt * 14); z.v -= step; const t = S.controls.target, c = S.camera.position; const d = c.distanceTo(t);
     const dn = Math.min(S.controls.maxDistance, Math.max(S.controls.minDistance, d * Math.exp(step))), k = dn / d;
@@ -759,7 +779,7 @@ function frame(now) { if (!open) return; if (!REC.stepping) requestAnimationFram
     else if (S._good) { c.copy(S._good.c); t.copy(S._good.t); S.anim = null; console.warn('camera reset after a bad value'); } }
   S.renderer.render(S.scene, S.camera); craftRender(now); labels(); scaleBar();
   if (S.focus && !ui.card.hidden && !S.focus.star && !S.focus.host && !S.focus.model && S.focus.kind !== 'galactic centre' && (now - (S._cardT || 0)) > 1000) { S._cardT = now; card(S.focus); }
-  if (ui.zoomThumb) { const v = ui.zoomV(S.camera.position.distanceTo(S.controls.target)); ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; const el = ui.zoomThumb.closest('.uni-zoom'); if (el) { const vn = Math.round(v * 100); if (el.getAttribute('aria-valuenow') != vn) { el.setAttribute('aria-valuenow', vn); el.setAttribute('aria-valuetext', document.getElementById('uniScale').textContent.split(' · ')[0] + ' across'); } ui.sliderW = el.offsetWidth; } }
+  if (ui.zoomThumb) { const v = ui.zoomV(S._zGoal || S.camera.position.distanceTo(S.controls.target)); /* while the slider is held the thumb stays under the finger */ ui.zoomThumb.style.top = (v * 100).toFixed(2) + '%'; const el = ui.zoomThumb.closest('.uni-zoom'); if (el) { const vn = Math.round(v * 100); if (el.getAttribute('aria-valuenow') != vn) { el.setAttribute('aria-valuenow', vn); el.setAttribute('aria-valuetext', document.getElementById('uniScale').textContent.split(' · ')[0] + ' across'); } ui.sliderW = el.offsetWidth; } }
   { const n = document.getElementById('uniNote'); if (n) { const far = camAU > 3000; const pcC = camAU / 206264.806, dT = S.camera.position.distanceTo(S.controls.target) / 206264.806;
       const lost = far && pcC > 3000 && dT < 300 && !S.tour && !S.anim; /* zoomed right in, far from every catalogued star */
       const cosErr = S.cosErr && camAU > 1e13; const key = cosErr ? 'coserr' : lost ? 'lost' : String(far); if (n.dataset.far !== key) { n.dataset.far = key; n.hidden = far && !lost && !cosErr; if (cosErr) n.textContent = 'The cosmic web could not be loaded (' + S.cosErr + '). Nothing is drawn rather than an old or invented copy.'; else if (lost) n.textContent = 'No catalogued stars here: the million measured stars all sit within about 16,000 light-years of the Sun. Zoom out, or press Milky Way.'; else if (!far) note(); } } }
