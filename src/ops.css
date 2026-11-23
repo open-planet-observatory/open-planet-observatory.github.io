@@ -344,6 +344,11 @@ html.ops:not(.drawer-closed) #ops-map .sat-card{right:calc(var(--drawer-w) + 24p
 .uni-list li{margin:.3rem 0}
 @media (max-width:900px){.uz-ticks{display:none}.uni-zoom{width:30px}#uni .uni-card{right:48px}.uni-model{right:48px}.uni-cap{width:calc(100% - 80px)}}
 @media (max-width:640px){.uni-zoom{top:140px;bottom:auto;height:calc(100% - 370px);right:4px}.uni-scale{left:12px;right:auto;align-items:flex-start;top:140px;bottom:auto}#uni .uni-card{right:44px}.uni-model{right:auto;left:10px;bottom:auto;top:168px;max-width:calc(100% - 60px)}.uni-cap{bottom:auto;top:52%}}
+/* touch screens (23 Nov 2026): the slider was 18 px wide against the screen edge; a finger gets a 44 px lane and a thumb it can see */
+@media (pointer:coarse){.uz-track{width:44px;right:0}.uz-track::before{left:auto;right:16px}.uz-thumb{left:auto;right:5px;width:24px;height:8px;margin-top:-4px;border-radius:4px}#uni .uni-card{right:56px}}
+@media (pointer:coarse) and (max-width:640px){.uni-zoom{right:8px}}
+#uniLost{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:40;width:min(340px,calc(100% - 32px));padding:16px 18px;border-radius:14px;background:rgba(12,14,20,.94);border:1px solid rgba(255,255,255,.22);color:#f1f4f9;text-align:center;font-size:.92rem}
+#uniLost[hidden]{display:none}#uniLost b{display:block;font-size:1.05rem;margin-bottom:6px}#uniLost p{margin:0 0 12px;color:#c8d0dc}#uniLost div{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}#uniLost button{min-height:44px;padding:8px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:#f4f7fb;color:#10131a;font-weight:600;cursor:pointer}#uniLost button+button{background:transparent;color:#f1f4f9}
 /* Safari: a drag on the sky started a text selection, which tints the whole canvas blue and can scroll the overlay */
 #uni{overflow:hidden;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
 #uni .uni-card,#uni .uni-card *{-webkit-user-select:text;user-select:text}
