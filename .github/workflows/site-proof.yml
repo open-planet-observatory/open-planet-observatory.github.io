@@ -34,7 +34,8 @@ jobs:
   proof:
     if: github.event_name != 'workflow_run' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    # 110: the 23 Nov run cancelled Chromium at the phone size at 60 minutes, so its results were lost (the sweep has grown: game cards, slider, pinch; failed steps are tried twice)
+    timeout-minutes: 110
     strategy:
       fail-fast: false
       matrix:

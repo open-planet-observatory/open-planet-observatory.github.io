@@ -262,7 +262,7 @@ let moonf = { out: null, status: 'not run' };
   try { moonf = await collectMoonFeatures({ prev: p, now }); } catch (e) { moonf = { out: p, status: 'error: ' + e.message.slice(0, 160) + (p ? ' (kept last week\'s names)' : '') }; }
   if (moonf.out) await fs.writeFile(path.join(OUT, 'moon-features.json'), JSON.stringify(moonf.out));
   if (moonf.outAll) await fs.writeFile(path.join(OUT, 'moon-features-all.json'), JSON.stringify(moonf.outAll));
-  else if (moonf.status === 'kept' && PREV) { try { const r = await fetch(`${PREV}/data/moon-features-all.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) await fs.writeFile(path.join(OUT, 'moon-features-all.json'), await r.text()); } catch { } }
+  else if (moonf.status === 'kept' && PREV) { try { const r = await fetch(`${PREV}/data/moon-features-all.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) { const t = await r.text(); JSON.parse(t); /* the host answers 200 with the page itself for a missing file: never save that as data */ await fs.writeFile(path.join(OUT, 'moon-features-all.json'), t); } } catch { } }
   log('moon features', moonf.status); }
 // Records (collector/records.mjs): data/records.json, rebuilt weekly from Wikidata and the agencies; a failed record is retried within the hour.
 let records = { out: null, status: 'not run' };
@@ -334,7 +334,10 @@ let exo = { out: null, status: 'not run' };
   if (PREV) { try { const r = await fetch(`${PREV}/data/exoplanets.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) p = await r.json(); } catch { } }
   if (p.hosts && !due(meta.solar, 'exo2', 10080)) exo = { out: p, status: 'kept' };
   else { try { exo = { out: await collectExoplanets(), status: 'ok' }; meta.solar.exo2 = now.toISOString(); } catch (e) { exo = { out: p.hosts ? p : null, status: 'error: ' + e.message.slice(0, 160) }; } }
-  if (exo.out) { const { sec, ...full } = exo.out; await fs.writeFile(path.join(OUT, 'exoplanets.json'), JSON.stringify(full)); if (sec) await fs.writeFile(path.join(OUT, 'worlds.json'), JSON.stringify(sec)); else { try { const r = await fetch(`${PREV}/data/worlds.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) await fs.writeFile(path.join(OUT, 'worlds.json'), await r.text()); } catch { } } }
+  if (exo.out) { const { sec, ...full } = exo.out; await fs.writeFile(path.join(OUT, 'exoplanets.json'), JSON.stringify(full)); if (sec) await fs.writeFile(path.join(OUT, 'worlds.json'), JSON.stringify(sec)); else {
+      /* Kept from last week: the Other worlds lists are copied from the live site. The host answers 200 with the page itself for a missing file, and on 20-24 Nov 2026 that page was saved as worlds.json and the panel stayed empty. The copy must be the real lists; if it is not, ask NASA again now instead of waiting for the weekly turn. */
+      let okPrev = false; try { const r = await fetch(`${PREV}/data/worlds.json?t=${Date.now()}`, { signal: AbortSignal.timeout(30000) }); if (r.ok) { const t = await r.text(); const j = JSON.parse(t); if (j && Array.isArray(j.newest) && Array.isArray(j.nearest) && j.planets > 0) { await fs.writeFile(path.join(OUT, 'worlds.json'), t); okPrev = true; } } } catch { }
+      if (!okPrev) { try { const fresh = await collectExoplanets(); const { sec: s2, ...f2 } = fresh; await fs.writeFile(path.join(OUT, 'exoplanets.json'), JSON.stringify(f2)); await fs.writeFile(path.join(OUT, 'worlds.json'), JSON.stringify(s2)); exo = { out: fresh, status: 'ok (Other worlds lists were missing: rebuilt)' }; meta.solar.exo2 = now.toISOString(); } catch (e) { exo.status += '; Other worlds lists missing and not rebuilt: ' + String(e.message).slice(0, 120); } } } }
   log('exoplanets', exo.status); }
 // Today's Sun for the star view's close-up (NASA SDO, AIA 304 Å, public). Fetched every run; if NASA does not answer,
 // no image is published and the page says so (an old picture is never passed off as today's).
