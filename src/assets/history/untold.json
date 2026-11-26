@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-16",
+ "built": "2026-11-26",
  "stories": [
   {
    "id": "cherokee",
@@ -7024,6 +7024,1231 @@
      "https://nla.gov.au/nla.obj-53849807"
     ]
    ]
+  },
+  {
+   "id": "jewish-revolt-66",
+   "title": "The First Jewish Revolt and the destruction of Jerusalem",
+   "region": "Middle East",
+   "where": "Roman Judaea, Galilee and the cities of Syria; pin: the Temple Mount in Jerusalem, where the Second Temple was burned in 70. The last fortress, Masada, stands above the Dead Sea to the south",
+   "lat": 31.778,
+   "lon": 35.2354,
+   "from": 66,
+   "to": 73,
+   "themes": [
+    "Uprising",
+    "War",
+    "Massacre",
+    "Famine",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "The First Jewish Revolt (66–70 CE; the last fortress, Masada, held out until April 73) was a Jewish rebellion against Roman rule in Judaea. In the autumn of 66 the Jews drove the Romans out of Jerusalem and defeated a punitive force under Gallus, the imperial legate in Syria, in the pass of Beth-Horon, and a revolutionary government was set up. The emperor Nero sent Vespasian, later joined by his son Titus; the Romans took Galilee, where the historian Josephus commanded the Jewish forces, and Josephus surrendered after the fall of Jotapata.",
+     "https://www.britannica.com/event/First-Jewish-Revolt"
+    ],
+    [
+     "The killing ran in both directions from the start. According to Josephus, the Roman garrison in Jerusalem surrendered its arms on a sworn promise of safety and was then cut down by Eleazar's men, with only the commander Metilius spared; on the same day the people of Caesarea killed more than 20,000 of their Jewish neighbours, Jewish bands then raided and burned Syrian villages and cities, and the Syrian cities killed Jews living among them, more than 13,000 at Scythopolis alone.",
+     "https://lexundria.com/j_bj/2.449-2.480/wst"
+    ],
+    [
+     "Inside Jerusalem the rebel factions killed other Jews. Josephus writes that after the Idumaeans joined the Zealots, 8,500 dead lay in the Temple courts after one night, that the Idumaeans killed the high priests Ananus and Jesus, and that Zealots and Idumaeans together then put to death about 12,000 of the nobility.",
+     "https://penelope.uchicago.edu/josephus/war-4.html"
+    ],
+    [
+     "Josephus writes that the Sicarii who held Masada came down at the feast of unleavened bread on the small town of Engaddi, drove out those who could resist, killed more than 700 women and children who could not flee, and carried the plunder back to the fortress.",
+     "https://lexundria.com/j_bj/4.398-4.409/wst"
+    ],
+    [
+     "Titus besieged Jerusalem in April 70, around Passover, and the Romans built a wall round the city to starve it. By August 70 they had broken through the last defences, killed much of the remaining population and destroyed the Second Temple; Rome commemorated the victory with the Arch of Titus.",
+     "https://www.britannica.com/event/Siege-of-Jerusalem-70"
+    ],
+    [
+     "Josephus, who was with the Roman army, writes that people who slipped out of the city to look for food, most of them poor and some of them fighting men, were caught, whipped, tortured and crucified before the walls, about 500 a day and sometimes more. He says Titus pitied them but let it continue because it was not safe to release so many captives and guarding them would tie up his men, and in the hope that the sight would bring the defenders to yield.",
+     "https://lexundria.com/j_bj/5.446-5.451/wst"
+    ],
+    [
+     "After the fall, by Josephus's account, the soldiers killed the old and infirm; captives over seventeen were sent in chains to the mines of Egypt or to the provinces to die in the arenas, those under seventeen were sold, and 11,000 died of hunger while being sorted. He gives 97,000 captives for the whole war and 1,100,000 dead in the siege, totals that modern historians do not accept as they stand.",
+     "https://penelope.uchicago.edu/josephus/war-6.html"
+    ],
+    [
+     "The fortress of Masada fell to the Romans under Flavius Silva on the fifteenth day of the month Xanthicus, which this edition dates to 73 (the year is argued; see Disputed). Josephus is the only source for what happened inside: he writes that 960 people, women and children included, died at one another's hands, and that two women and five children who had hidden underground survived.",
+     "https://penelope.uchicago.edu/josephus/war-7.html"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "because it had so come to pass, that our city Jerusalem had arrived at an higher degree of felicity than any other city under the Roman government, and yet at last fell into the sorest of calamities again. Accordingly it appears to me, that the misfortunes of all men, from the beginning of the world, if they be compared to these of the Jews, are not so considerable as they were; while the authors of them were not foreigners neither. This makes it impossible for me to contain my lamentations.",
+     "who": "Josephus (Yosef ben Mattityahu), a priest of Jerusalem who commanded the rebel forces in Galilee, surrendered in 67 and wrote this history in Rome as a client of the Flavian emperors; by 'the authors of them' he means the Jewish rebel leaders, whom he blames for the ruin of the city",
+     "date": "written about 75–79, on the war of 66–70",
+     "doc": "Josephus, The Jewish War, Preface, section 4, translated by William Whiston (London, 1737)",
+     "url": "https://penelope.uchicago.edu/josephus/war-pref.html",
+     "lic": "Public domain (translation published 1737)"
+    },
+    {
+     "text": "But what is still more terrible; there was one Jesus, the son of Ananus, a plebeian, and an husbandman, who, four years before the war began; and at a time when the city was in very great peace and prosperity; came to that feast whereon it is our custom for every one to make tabernacles to God in the temple, began on a sudden to cry aloud, “A voice from the east; a voice from the west; a voice from the four winds; a voice against Jerusalem, and the holy house; a voice against the bridegrooms, and the brides; and a voice against this whole people.” This was his cry, as he went about by day and by night, in all the lanes of the city.",
+     "who": "Jesus son of Ananus, a countryman who cried this in the streets of Jerusalem from four years before the war until a stone from a Roman engine killed him on the wall during the siege, as recorded by Josephus (the narration is Josephus's; he says the Roman procurator Albinus had the man whipped and released him as mad)",
+     "date": "from about 62 to 70; written about 75–79",
+     "doc": "Josephus, The Jewish War, book 6, chapter 5, section 3, translated by William Whiston (London, 1737)",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html",
+     "lic": "Public domain (translation published 1737)"
+    },
+    {
+     "text": "לגאלת ציון",
+     "who": "Legend in Hebrew on a bronze coin struck by the rebel government in besieged Jerusalem in the fourth year of the revolt; in plain English: 'For the redemption of Zion'. Bronze coins from the earlier part of the revolt read 'Freedom of Zion'. These few words are the only ones on this card that come from the rebels themselves without passing through Josephus",
+     "date": "year 4 of the revolt, 69–70",
+     "doc": "Bronze coin of year 4 marked 'half' (catalogued by the project as a half shekel), Jerusalem mint, obverse legend, as published by the 'Judaism and Rome' research project (entry by Samuele Rocca)",
+     "url": "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/403",
+     "lic": "Public domain (ancient coin legend)"
+    },
+    {
+     "text": "R. Johanan b. Zakkai once went out of Jerusalem, followed by R. Joshua, and seeing the destroyed Temple, R. Joshua said: \"Woe to us, that this is destroyed, the only place where the sins of the Israelites were atoned!\" R. Johanan corrected him, saying: \"My son, do not grieve over it. We have other means of atonement as effective--namely, bestowal of favors, as it is written [Hosea, vi. 6]: 'For kindness I desired, and not sacrifice.'\"",
+     "who": "Rabbinic memory of the years after the destruction: Rabban Johanan ben Zakkai, who by the same text was carried out of besieged Jerusalem in a coffin, and his disciple Joshua, as told in Aboth of Rabbi Nathan, a rabbinic compilation put together centuries after the event",
+     "date": "set soon after 70; compiled centuries later",
+     "doc": "Aboth of R. Nathan, in the passage headed 'Upon bestowal of favors', printed as the Tosephtha to Tract Aboth, Mishna B, in Michael L. Rodkinson (trans.), Babylonian Talmud, Book 5 (vols. IX and X), 1918 edition",
+     "url": "https://archive.sacred-texts.com/jud/t05/abo05.htm",
+     "lic": "Public domain (this edition published 1918)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "I have heard that the total number of the besieged, of every age and both sexes, amounted to six hundred thousand. All who were able bore arms, and a number, more than proportionate to the population, had the courage to do so. Men and women showed equal resolution, and life seemed more terrible than death, if they were to be forced to leave their country.",
+     "who": "Tacitus, Roman senator and historian, Histories, book 5, chapter 13, translated by A. J. Church and W. J. Brodribb (1876); his account of the siege itself is lost, and the book is hostile to Jewish religion and customs",
+     "date": "written about 100–110, on the year 70",
+     "url": "https://classics.mit.edu/Tacitus/histories.5.v.html"
+    },
+    {
+     "text": "Since we long ago, my generous friends, resolved never to be servants to the Romans, nor to any other than to God himself, who alone is the true and just lord of mankind; the time is now come that obliges us to make that resolution true in practice. And let us not at this time bring a reproach upon our selves for self contradiction; while we formerly would not undergo slavery, though it were then without danger; but must now, together with slavery, chuse such punishments also as are intolerable. I mean this upon the supposition that the Romans once reduce us under their power while we are alive. We were the very first that revolted from them; and we are the last that fight against them.",
+     "who": "Speech given by Josephus to Eleazar son of Jairus, leader of the Sicarii at Masada, on the night before the fortress fell. Josephus was not there and wrote in Rome under Flavian patronage; ancient historians composed such speeches, and this one is his composition, not a record of Eleazar's words (The Jewish War, book 7, chapter 8, section 6, translated by William Whiston, 1737)",
+     "date": "written about 75–79, on the spring of 73",
+     "url": "https://penelope.uchicago.edu/josephus/war-7.html"
+    },
+    {
+     "text": "The populace was stationed below in the court, the senators on the steps, and the priests in the sanctuary itself. And though they were but a handful fighting against a far superior force, they were not conquered until a part of the temple was set on fire. Then they met death willingly, some throwing themselves on the swords of the Romans, some slaying one another, others taking their own lives, and still others leaping into the flames. And it seemed to everybody, and especially to them, that so far from being destruction, it was victory and salvation and happiness to them that they perished along with the temple.",
+     "who": "Cassius Dio, Roman senator and historian writing in Greek, Roman History, epitome of book 65 (66 in some numberings), chapter 6, in the Loeb Classical Library translation by Earnest Cary, vol. VIII (1925); this part of Dio survives only in a Byzantine abridgement",
+     "date": "written in the early 3rd century, on the year 70",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html"
+    }
+   ],
+   "official": [
+    {
+     "text": "Senatus populusq(ue) Romanus Imp(eratori) Tito Caesari divi Vespasiani f(ilio) Vespasian[o] Augusto pontif(ici) max(imo) trib(unicia) pot(estate) X imp(eratori) XVII [c]o(n)s(uli) VIII p(atri) p(atriae) principi suo quod praeceptis patri consiliisq(ue) et auspiciis gentem Iudaeorum domuit et urbem Hierusolymam omnibus ante se ducibus regibus gentibus aut frustra petitam aut omnino intemptatam delevit",
+     "who": "The Senate and People of Rome, dedication of the lost Arch of Titus in the Circus Maximus (CIL VI 944), in Latin with the editors' expansions in brackets. In plain English: the Senate and People of Rome to the emperor Titus, their leader, because on his father's instructions, advice and auspices he subdued the Jewish people and destroyed the city of Jerusalem, which all generals, kings and peoples before him had either attacked in vain or never attempted. The stone is lost and the text survives in a medieval copy; Pompey took Jerusalem in 63 BCE and Sosius in 37 BCE, so the claim of a first conquest does not hold (see Disputed)",
+     "date": "81",
+     "url": "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+    },
+    {
+     "text": "But Titus said, that “Although the Jews should get upon that holy house, and fight us thence, yet ought we not to revenge ourselves on things that are inanimate, instead of the men themselves: and that he was not in any case for burning down so vast a work as that was: because this would be a mischief to the Romans themselves; as it would be an ornament to their government while it continued.”",
+     "who": "Titus, commander of the Roman army and later emperor, at his council of war before the Temple was burned, as reported by Josephus, who was in his camp and whose history Titus approved for publication (The Jewish War, book 6, chapter 4, section 3, translated by William Whiston, 1737). This is the Flavian version of events; another ancient account says the opposite (see Disputed)",
+     "date": "August 70; written about 75–79",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html"
+    },
+    {
+     "text": "It can therefore be nothing certainly but the kindness of us Romans which hath excited you against us. Who in the first place have given you this land to possess; and in the next place have set over you Kings of your own nation; and in the third place have preserved the laws of your forefathers to you; and have withal permitted you to live either by yourselves, or among others, as it should please you. And, what is our chief favour of all, we have given you leave to gather up that tribute which is paid to God; with such other gifts that are dedicated to him.",
+     "who": "Titus, addressing the rebel leaders John and Simon after the Temple had burned, in a speech written for him by Josephus (The Jewish War, book 6, chapter 6, section 2, translated by William Whiston, 1737); it sets out the Roman case that Rome had been generous and the rebels alone were to blame",
+     "date": "August 70; written about 75–79",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html"
+    }
+   ],
+   "today": {
+    "text": "After Judaea became a province of the Roman Empire, it was the refuge of the last survivors of the Jewish revolt, who chose death rather than slavery when the Roman besiegers broke through their defences. As such it has an emblematic value for the Jewish people.",
+    "who": "UNESCO World Heritage Centre, 'Brief synthesis' in the statement of Outstanding Universal Value for Masada (Israel), which is on the World Heritage List. This is the listing text of an international body, not a statement made by the State of Israel; it follows Josephus's account of the deaths, which some historians doubt (see Disputed)",
+    "date": "page accessed 26 November 2026",
+    "url": "https://whc.unesco.org/en/list/1040"
+   },
+   "disputed": [
+    [
+     "How many died and were enslaved? Josephus gives 1,100,000 dead in the siege, most of them pilgrims caught in the city at Passover, and 97,000 captives in the whole war; he also reports a count of 115,880 bodies carried out through a single gate, and deserters' reports of 600,000 bodies of the poor thrown out at the gates. Tacitus gives the same number with a different meaning: he had heard that 600,000 people were besieged. As Wikipedia's survey reports the scholarship, Menahem Stern rejected the death toll as exaggerated, Seth Schwartz puts the whole population of Roman Palestine at about a million, roughly half of them Jews, and Guy Rogers estimates the siege dead in the tens of thousands, probably 20,000 to 30,000. The scholars cited there all reject Josephus's totals, and no agreed figure has replaced them; that very large numbers were killed and enslaved is not in dispute.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-6.html",
+      "https://lexundria.com/j_bj/5.567-5.569/wst",
+      "https://classics.mit.edu/Tacitus/histories.5.v.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)"
+     ]
+    ],
+    [
+     "Did Titus want the Temple spared? Josephus says Titus told his council he would not burn it, that a soldier threw a firebrand without orders and that Titus tried to have the fire put out. The Christian chronicler Sulpicius Severus, writing about 400, says the reverse: that some of the council wished it kept as evidence of Roman moderation, but 'others and Titus himself' thought it should be overthrown so that the religion of the Jews and of the Christians might be more thoroughly subverted. Sulpicius may have drawn on the lost part of Tacitus's Histories, and a paper by Kelly Shannon-Henderson treats the passage as a possible fragment of Tacitus. Cassius Dio says only that the soldiers hung back from the Temple out of superstition and went in under compulsion from Titus, and he does not say who wanted it burned. As Wikipedia's survey reports the scholarship, most modern scholars reject Josephus's version (Lester Grabbe calls it unbelievable); some suggest he played down Titus's part to protect Titus's reputation, while Grabbe and Fausto Parente think he wished to discourage Jewish vengeance. Martin Goodman finds an accidental fire plausible in the dry heat of summer, and Doron Mendels holds that the Romans targeted the Temple as the centre of the rebellion. The question remains open.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-6.html",
+      "https://www.newadvent.org/fathers/35052.htm",
+      "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)",
+      "https://classicalstudies.org/tacitus-destruction-temple"
+     ]
+    ],
+    [
+     "What happened at Masada? Josephus, the only source, says the 960 defenders burned their goods, that ten men chosen by lot killed the rest and then one another, and that one of the surviving women told the Romans what had been said and done. The excavator Yigael Yadin (1963–65) found three skeletons in the northern palace and 25 in a cave, and suggested that the Romans had thrown the 25 there. Shaye Cohen argued in 1982 that the account is partly invented: the remains show many separate fires where Josephus has one, storerooms holding provisions were burnt although Josephus has Eleazar order the food spared, the 25 in the cave look like people who tried to hide, and the speeches and the orderly unanimous suicide serve literary ends; he concluded that at least some Sicarii killed themselves and that others may have hidden, fought or been killed by the Romans. Jodi Magness holds that archaeology can neither prove nor disprove Josephus; Menahem Stern accepted the suicide as historical. There is no consensus, and the date is also argued (spring 73 or 74).",
+     [
+      "https://penelope.uchicago.edu/josephus/war-7.html",
+      "https://www.pbs.org/wgbh/pages/frontline/shows/religion/portrait/masada.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Masada"
+     ]
+    ],
+    [
+     "Who was to blame? Josephus puts the destruction on the 'seditious temper' of the rebel leaders, whom he calls tyrants and robbers, and presents the Romans as unwilling destroyers; that view suited both his patrons and his own position as a commander who had changed sides. He also records Roman provocations himself, including the governor Florus's soldiers killing about 3,600 people in Jerusalem in 66 and crucifying Jews of equestrian rank. Britannica gives the causes as heavy taxation, resentment of imperial rule and conflict between Jews and Gentiles. The Senate's inscription for Titus presents the war simply as the taming of a people and claims a first conquest of Jerusalem, which Caroline Barron's commentary for the 'Judaism and Rome' project calls 'undeniably false', since Pompey took the city in 63 BCE and Sosius in 37 BCE.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-pref.html",
+      "https://penelope.uchicago.edu/josephus/war-2.html",
+      "https://www.britannica.com/event/Siege-of-Jerusalem-70",
+      "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+     ]
+    ]
+   ],
+   "blind": "Almost everything known about this war comes from one man, Josephus, who fought for the rebels, went over to the Romans and wrote under the emperors who destroyed Jerusalem; the leaders he blames, John of Gischala, Simon son of Gioras and the Zealot and Sicarii commanders, left no account of their own, and the words he gives them are his. What survives directly from the rebels is a few words stamped on their coins. The tens of thousands sold into slavery, sent to the mines or killed in the arenas left nothing, and the women and children of Jerusalem, Engaddi, Caesarea and Masada are counted, not heard. Rabbinic memory of the destruction was written down generations later. The Roman side survives in Tacitus (whose narrative of the siege is lost), in an abridged Cassius Dio, and in two arches of Titus, one still standing in Rome and one known only from a copied inscription. The Greek and Syrian townspeople who killed their Jewish neighbours, and those killed by Jewish raiders, speak nowhere.",
+   "reading": [
+    [
+     "Flavius Josephus, The Wars of the Jews, trans. William Whiston (1737; University of Chicago, Penelope)",
+     "https://penelope.uchicago.edu/josephus/index.html"
+    ],
+    [
+     "Tacitus, The Histories, book 5, trans. A. J. Church and W. J. Brodribb (1876; MIT Internet Classics Archive)",
+     "https://classics.mit.edu/Tacitus/histories.5.v.html"
+    ],
+    [
+     "Cassius Dio, Roman History, epitome of book 65, trans. Earnest Cary (Loeb, 1925; LacusCurtius, University of Chicago)",
+     "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html"
+    ],
+    [
+     "First Jewish Revolt (Britannica)",
+     "https://www.britannica.com/event/First-Jewish-Revolt"
+    ],
+    [
+     "Caroline Barron, The Arch of Titus in the Circus Maximus (CIL VI 944) (Judaism and Rome project)",
+     "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+    ],
+    [
+     "Shaye J. D. Cohen, Masada: Literary Tradition, Archaeological Remains, and the Credibility of Josephus (1982; extract at PBS Frontline)",
+     "https://www.pbs.org/wgbh/pages/frontline/shows/religion/portrait/masada.html"
+    ]
+   ],
+   "warn": "Josephus is both a voice of the defeated and a client of the victors: a Jerusalem priest and rebel general who surrendered, tried to talk the defenders into surrender during the siege and says himself, in his Life, that Titus signed his books and ordered them published. His speeches for Eleazar and for Titus are literary compositions, his numbers are not reliable, and he blames the rebel factions throughout. The English is William Whiston's of 1737, in the spelling and punctuation of that printing (chuse, our selves); later printings punctuate differently. The rabbinic passage is from Rodkinson's free and abridged translation (1918 edition) and the story was written down long after the event. The Latin inscription and the Hebrew coin legend are given in the original with a plain gloss, because no public-domain English version was found; the Latin is known only from a medieval copy of the lost stone. Dates vary between sources: Josephus puts the burning of the Temple on the 10th of the month Lous (Ab), Jewish tradition and Britannica on the 9th. The sources describe famine, crucifixion and the killing of children.",
+   "note": "Research in progress: the Talmud's account of the destruction (Gittin 55b–58a) is not quoted because no public-domain English translation of that tractate was found. Sulpicius Severus is summarised, not quoted. No statement by the State of Israel was looked up; the 'today' entry is UNESCO's. Modern estimates of the dead are taken from Wikipedia's survey of the scholarship, not from the books themselves."
+  },
+  {
+   "id": "zanj869",
+   "title": "The Zanj rebellion",
+   "region": "Middle East",
+   "where": "The salt flats, canals and marshes of southern Iraq around Basra. The pin marks the modern district of Abu al-Khasib, south-east of Basra on the Shatt al-Arab, which shares its name with the canal (Nahr Abi al-Khasib) on which the rebel city of al-Mukhtara stood; it is approximate, because the site of the city has never been exactly identified",
+   "lat": 30.44,
+   "lon": 48.0,
+   "from": 869,
+   "to": 883,
+   "themes": [
+    "Slavery",
+    "Forced labour",
+    "Uprising",
+    "Massacre",
+    "War"
+   ],
+   "facts": [
+    [
+     "Landowners of Basra had brought enslaved East Africans (the Zanj) to drain the salt marshes east of the city, where they were worked hard and fed little. In 869 Ali ibn Muhammad won over several of the work gangs by promising them freedom and wealth, and the revolt against the Abbasid caliphate lasted until 883.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Ali ibn Muhammad was not one of the Zanj and was not enslaved. Al-Tabari reports that he claimed descent from Ali ibn Abi Talib, that his real name was said to be Ali ibn Muhammad ibn Abd al-Rahim of the Arab tribe of Abd al-Qays, that he grew up in Warzanin, a village near Rayy in Iran, lived for a time in Samarra among men of the caliph al-Muntasir's household, praising them in verse and asking for gifts, and had already tried to raise a following in Bahrain.",
+     "https://shamela.ws/book/9783/5418"
+    ],
+    [
+     "According to al-Tabari, the leader went from one work site to the next taking the slaves with him (fifty at one, five hundred at another) and, when he had gathered them, swore to them that he would not betray or abandon them. He told the slaves to fetch whips, had the masters and overseers given five hundred lashes each, and released them on their oath not to reveal where he was or how many men he had; the same page says there were fifteen thousand slaves at the works across the Tigris that one of the released men went to warn.",
+     "https://shamela.ws/book/9783/5422"
+    ],
+    [
+     "The rebels built a fortified capital, al-Mukhtara, in the salt flats, took the port of al-Ubulla, sacked Basra in 871, defeated the caliph's brother al-Muwaffaq in 872 and seized Wasit in 878, and they were joined by soldiers who changed sides and by discontented peasants.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Basra fell in September 871 and a massacre followed. Theodor Nöldeke (1892) wrote that the lowest estimate put the dead at 300,000, that the captured women and children were carried into slavery, that women of the houses of Ali and of the ruling Abbasid family were sold to the highest bidder, and that many of the rebels were said to have received ten slaves or more as their share; the figure of 300,000 is a medieval one and is not accepted today (see Disputed).",
+     "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    ],
+    [
+     "Ali ibn Muhammad did not promise to end slavery: he promised his followers that they would have homes, money and slaves of their own, and the record shows the Zanj enslaving others and plundering villages and towns.",
+     "https://daily.jstor.org/what-was-the-zanj-rebellion"
+    ],
+    [
+     "Al-Muwaffaq began a great offensive in 879, took the second rebel city, al-Mani'a, drove the rebels out of Khuzistan, and after a long siege of al-Mukhtara crushed the revolt in 883; Ali ibn Muhammad's head was carried to Baghdad.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Al-Tabari records that in the final fighting many Zanj were killed, drowned or captured, and that of about a thousand who were cut off and turned inland most died of thirst and the survivors were seized and enslaved by Bedouin.",
+     "https://shamela.ws/book/9783/5669"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "فسألني عن أخبار غلمان الشورجيين وما يجري لكل غلام منهم من الدقيق والسويق والتمر وعمن يعمل في الشورج من الأحرار والعبيد، فأعلمته ذلك، فدعاني إلى ما هو عليه، فأجبته، فقال لي: احتل فيمن قدرت عليه من الغلمان، فأقبل بهم إلي ووعدني أن يقودني على من آتيه به منهم، وأن يحسن إلي",
+     "who": "Rayhan ibn Salih, one of the ghilman of the shurajiyyin, the men who ran the salt-flat works (ghilman covers slaves, servants and young men; the page does not use the word 'abd, slave, of Rayhan himself); he carried flour from Basra to his master's ghilman and was, the chronicler says, the first of them to join the leader; as recorded by al-Tabari (died 923), a scholar of Baghdad who wrote under the Abbasid caliphs, from the side that put the rebellion down; the page says only 'it is reported from Rayhan ibn Salih' and names no one who passed the account on. Plain gloss: he asked me about the ghilman of the salt-flat owners, how much flour, parched-grain meal and dates each slave was given, and who worked the salt flats, free men and slaves; I told him; he called me to his cause and I accepted; he said to me: win over whichever of the slaves you can and bring them to me; and he promised to put me in command of those I brought him and to treat me well",
+     "date": "September 869 (Ramadan 255 AH); written down before 915",
+     "doc": "al-Tabari, Tarikh al-rusul wa'l-muluk (History of the Prophets and Kings), year 255 AH, section 'Khuruj awwal Alawi bi'l-Basra'; ed. Muhammad Abu al-Fadl Ibrahim (Cairo, Dar al-Ma'arif, 2nd ed. 1967), vol. 9, p. 413, as transcribed by al-Maktaba al-Shamela",
+     "url": "https://shamela.ws/book/9783/5421",
+     "lic": "Public domain (Arabic text of the early 10th century). The wording follows the online transcription of the 1967 Cairo edition; commas and colons are the modern editor's. Quoted in Arabic because the only full English translation (SUNY Press, 1992) is in copyright"
+    },
+    {
+     "text": "قد أردت ضرب أعناقكم لما كنتم تأتون إلى هؤلاء الغلمان الذين استضعفتموهم وقهرتموهم، وفعلتم بهم ما حرم الله عليكم أن تفعلوه بهم، وجعلتم عليهم ما لا يطيقون، فكلمني أصحابي فيكم، فرأيت إطلاقكم",
+     "who": "Ali ibn Muhammad, leader of the revolt (himself neither Zanj nor enslaved), speaking to the slaves' masters whom he had seized, as recorded by al-Tabari, the Abbasid-side chronicler; the page does not name the informant for this speech. Plain gloss: I meant to cut off your heads for what you have been doing to these slaves, whom you treated as weak and crushed; you did to them what God has forbidden you to do to them and laid on them more than they can bear; but my companions spoke to me on your behalf, and I have decided to let you go",
+     "date": "September 869 (Ramadan 255 AH); written down before 915",
+     "doc": "al-Tabari, Tarikh al-rusul wa'l-muluk, year 255 AH, section 'Khuruj awwal Alawi bi'l-Basra'; ed. Muhammad Abu al-Fadl Ibrahim (Cairo, Dar al-Ma'arif, 2nd ed. 1967), vol. 9, p. 414, as transcribed by al-Maktaba al-Shamela",
+     "url": "https://shamela.ws/book/9783/5422",
+     "lic": "Public domain (Arabic text of the early 10th century). The wording follows the online transcription of the 1967 Cairo edition; commas are the modern editor's"
+    }
+   ],
+   "witness": [
+    {
+     "text": "L'insolence de l'armée des Zendj était telle qu'on y vendait à l'encan les femmes de la famille de Haçan, de Huçeïn et d'Abbas, les descendantes de Hachem, de Koreïch et des plus nobles familles arabes. Une jeune fille se vendait de deux à trois dirhems ; le crieur annonçait sa généalogie en ces termes: «Une telle, fille d'un tel, de telle famille!» Chaque noir possédait dix, vingt et même trente de ces femmes; elles servaient de concubines aux noirs et remplissaient auprès de leurs femmes les fonctions des plus humbles esclaves.",
+     "who": "Al-Mas'udi (died 956), historian from Baghdad who wrote some sixty years after the war ended, Muruj al-dhahab (Meadows of Gold), in the French translation of C. Barbier de Meynard, Les Prairies d'or, vol. 8 (Paris, 1874), p. 60. Plain gloss: the Zanj army was so insolent that women of the families of Hasan, Husayn and Abbas, descendants of Hashim and Quraysh and of the noblest Arab families, were sold in it by auction; a girl sold for two or three dirhams, and the crier called out her descent: 'So-and-so, daughter of so-and-so, of such a family!'; each black man owned ten, twenty, even thirty of these women, who served the men as concubines and their wives as the lowest slaves",
+     "date": "written about 947 (French translation 1874)",
+     "url": "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt"
+    },
+    {
+     "text": "The work in such a case is very hard, and the supervision must be strict. The feeling of affection which in the East binds the slave very closely to the family in which he lives and has grown up, is here altogether wanting. On the other hand, among such masses of slaves working together there easily springs up a certain community of feeling, a common sense of embitterment against their masters, and, under favourable circumstances, a consciousness of their own strength; thus are combined the conditions of a powerful insurrection.",
+     "who": "Theodor Nöldeke, German orientalist, 'A Servile War in the East', in Sketches from Eastern History, translated by John Sutherland Black (London and Edinburgh, 1892), p. 149; an outside historian working from al-Tabari a thousand years later",
+     "date": "1892",
+     "url": "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    },
+    {
+     "text": "It was not till Monday that the Zenj took full possession. The massacre that followed was frightful. It is even alleged that many inhabitants were induced, by offers of quarter, to gather together at certain places, where they could more easily be cut down. The chief had vowed direst vengeance on the city which had deceived his hopes.",
+     "who": "Theodor Nöldeke on the sack of Basra in September 871, 'A Servile War in the East', in Sketches from Eastern History, translated by John Sutherland Black (1892), p. 159",
+     "date": "1892",
+     "url": "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "كتب إليه كتابا يدعوه فيه إلى التوبة والإنابة إلى الله تعالى مما ركب من سفك الدماء وانتهاك المحارم وإخراب البلدان والأمصار، واستحلال الفروج والأموال، وانتحال ما لم يجعله الله له أهلا من النبوة والرسالة، ويعلمه أن التوبة له مبسوطة، والأمان له موجود، فإن هو نزع عما هو عليه من الأمور التي يسخطها الله، ودخل في جماعة المسلمين، محا ذلك ما سلف من عظيم جرائمه، وكان له به الحظ الجزيل في دنياه",
+     "who": "Al-Tabari's report of the letter that Abu Ahmad al-Muwaffaq, the caliph's brother and commander of his armies, sent to the rebel leader before besieging al-Mukhtara (Tarikh al-rusul wa'l-muluk, year 267 AH; Cairo edition of 1967, vol. 9, p. 581); al-Tabari gives the letter's content, not its text, and names as his source Muhammad ibn al-Hasan ibn Sahl, reporting from Muhammad ibn Hammad; the date and the source stand at the foot of the preceding page (p. 580, https://shamela.ws/book/9783/5588). Plain gloss: he wrote him a letter calling on him to repent and turn back to God from what he had done, the shedding of blood, the violation of what is sacred, the ruin of lands and cities, the taking of women and property as if lawful, and the claim to prophethood and a divine mission for which God had not made him fit; and telling him that repentance was open to him and safe-conduct ready: if he gave up the things that anger God and joined the community of the Muslims, that would wipe out his great past crimes and he would have a rich share in this world. The page goes on to say that the leader read the letter and gave no answer",
+     "date": "February 881 (mid-Rajab 267 AH); written down before 915",
+     "url": "https://shamela.ws/book/9783/5589"
+    }
+   ],
+   "disputed": [
+    [
+     "Was it a slave revolt? Nöldeke (1892) called it a 'servile war' and compared it with the slave wars of the late Roman republic, and Britannica describes a revolt of enslaved East Africans. M. A. Shaban (1976) argued that it was not a slave revolt at all but a rising of 'blacks' in which a few runaway slaves joined a majority of Arabs and free East Africans, on the ground that slaves alone could not have sustained so long a war. Ghada Hashem Talhami (1977) sees a religious and social rising of the lowest classes of the Basra region, joined by Bahrainis, Bedouin and others, and says the sources do not show that the Zanj were the majority. The sources cited here agree that the leader was a free man who claimed Alid descent and used Kharijite slogans, and that Bedouin, peasants and deserting soldiers joined him. Against Shaban, al-Tabari's account of the first day counts slaves taken from named work sites by the fifty and the five hundred. There is no consensus on the label.",
+     [
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://www.britannica.com/event/Zanj-rebellion",
+      "https://shamela.ws/book/9783/5422"
+     ]
+    ],
+    [
+     "How many died? Al-Mas'udi wrote that the more moderate estimate of all the dead was 500,000 and that 300,000 were killed in a single battle near Basra, but in the same passage he says that both the high and the moderate figures rest on empty conjecture and that no exact count is possible. Later medieval writers went higher: al-Suli is cited for 1,500,000 and Ibn al-Tiqtaqa for 2,500,000. Al-Tabari gives no total. Wikipedia's article says modern historians consider the medieval figures gross exaggerations. For Basra, Wikipedia's article on the battle says modern historians reject al-Mas'udi's 300,000 as excessive and, citing Alexandre Popovic's monograph, that other authors give 10,000 to 20,000; Adam Ali, a University of Toronto lecturer writing for Medievalists.net, says most scholars agree on that range. Nöldeke judged the 300,000 fighting men claimed for the rebel leader greatly exaggerated, and William Muir called the figures given for the armies and the captives 'clearly fabulous'; neither was speaking of the dead. No reliable total exists.",
+     [
+      "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://en.wikipedia.org/wiki/Battle_of_Basra_(871)",
+      "https://www.medievalists.net/2019/02/zanj-revolt-slave-war-medieval-iraq/",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://answering-islam.org/Books/Muir/Caliphate/chap70.htm"
+     ]
+    ],
+    [
+     "Who were the 'Zanj'? The older view, followed by Nöldeke and Britannica, takes the word in its geographical sense: people brought from the East African coast. Nöldeke himself noted that the 'Zenj, properly so called' mostly knew no Arabic and needed an interpreter, while other black slaves, from Nubia and elsewhere, spoke it; al-Tabari says the leader's festival sermon had to be repeated by those who understood Arabic for those who did not. Talhami argues that 'Zanj' was used loosely for black Africans in general, and JSTOR Daily cites her for the view that most of those who took part were black slaves of Nubian and Ethiopian origin. Wikipedia's article reports that, because there is little evidence of a large slave trade on the Swahili coast at this date, the word is thought in this case to mean Africans generally, though JSTOR Daily calls the origin of the rebels still a point of scholarly contention. The Arabic sources give no account of where individual rebels came from.",
+     [
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://shamela.ws/book/9783/5423",
+      "https://daily.jstor.org/what-was-the-zanj-rebellion",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion"
+     ]
+    ],
+    [
+     "Who was Ali ibn Muhammad and what did he believe? He claimed descent from Ali and Fatima; al-Tabari gives another name and an Arab tribal origin and reports that he changed his claimed genealogy between Bahrain and Iraq, al-Mas'udi calls the genealogy false, and Muslim historians of the period generally rejected it. Britannica calls him a Persian; Wikipedia's article reports that other historians think a Persian origin unlikely. Al-Mas'udi says he followed the Azraqite branch of the Kharijites and killed women, children and the old; Britannica says the movement adopted Kharijite doctrine after it began. Nöldeke thought him 'a man of genius'; al-Tabari, as Nöldeke notes, prefers to call him 'the abominable one', 'the wicked one' or 'the traitor'. Whether he acted from belief or used religious claims to win power cannot be settled from sources written by his enemies.",
+     [
+      "https://shamela.ws/book/9783/5418",
+      "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt",
+      "https://www.britannica.com/event/Zanj-rebellion",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "Almost everything known comes from al-Tabari, who lived in Baghdad during the war and wrote under the dynasty that won it; al-Mas'udi, writing some sixty years after the war ended, is as hostile. The Zanj left no document of their own: no letter, nothing beyond their coins, which carried Kharijite formulas (one was published in 1933 as 'A Rare Coin of the Zanj'), and no account by any of the thousands who cleared the salt flats. Their words reach us only where al-Tabari passes on what former rebels told his informants, as with the slave Rayhan ibn Salih, and the leader's speeches come the same way. Al-Mas'udi says the first history of the revolt was written by Muhammad ibn al-Hasan ibn Sahl; al-Tabari cites him by name, but his book is lost. The people of Basra who were killed or sold are heard mainly through the Baghdad poet Ibn al-Rumi's elegy for the city and through the chroniclers. The women held by both sides, and the enslaved people whom the rebels themselves took, do not speak at all.",
+   "reading": [
+    [
+     "Theodor Nöldeke, 'A Servile War in the East', in Sketches from Eastern History, trans. J. S. Black (1892, archive.org), pp. 146–175",
+     "https://archive.org/details/cu31924027985088"
+    ],
+    [
+     "Zanj rebellion (Encyclopaedia Britannica)",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "al-Tabari, Tarikh al-rusul wa'l-muluk, vol. 9 (Cairo edition of 1967, Arabic text, al-Maktaba al-Shamela): the start of the revolt, year 255 AH",
+     "https://shamela.ws/book/9783/5418"
+    ],
+    [
+     "al-Mas'udi (Maçoudi), Les Prairies d'or, Arabic text and French translation by C. Barbier de Meynard, vol. 8 (1874, archive.org), pp. 31–33 and 57–61",
+     "https://archive.org/details/lesprairiesdor08masuuoft"
+    ],
+    [
+     "Ghada Hashem Talhami, 'The Zanj Rebellion Reconsidered' (International Journal of African Historical Studies, 1977, JSTOR)",
+     "https://www.jstor.org/stable/216737"
+    ],
+    [
+     "'What Was the Zanj Rebellion?' (JSTOR Daily)",
+     "https://daily.jstor.org/what-was-the-zanj-rebellion"
+    ]
+   ],
+   "warn": "The Arabic quotations are al-Tabari's text as printed in the 1967 Cairo edition and transcribed online; their punctuation is the modern editor's, and the glosses in 'who' are this site's plain summaries, not translations. The standard English translation (The History of al-Tabari, vols 36 and 37, SUNY Press, 1992) is in copyright and is not quoted. Al-Mas'udi is quoted in Barbier de Meynard's French of 1874. Nöldeke writes in the racial language of 1892: on the same page as the passage on Basra he speaks of 'brutal negro slaves', and he uses 'negroes' throughout. Every account of what the rebels said and did was written by their enemies; the numbers in these sources (300,000 dead at Basra, 500,000 in all, fifteen thousand slaves at one group of works, women sold for two or three dirhams) cannot be checked. The Arabic word ghilman, given as 'slaves' in the facts, also means servants or young men. JSTOR Daily says the leader promised that his followers would enslave their former masters; al-Tabari's page on his festival sermon (vol. 9, p. 415) has him promise slaves, wealth and houses without naming the masters, and on p. 414 he lets the masters go. Spellings vary: Zanj, Zenj, Zendj; al-Mukhtara, Mokhtara; al-Muwaffaq, Mowaffak, Mouaffak.",
+   "note": "Research in progress: no words of the Zanj survive outside the hostile chronicle, so 'In their own words' has only two entries, both taken from al-Tabari: an account by one of the salt-flat ghilman, reported without a named transmitter, and a speech of the rebel leader, who was a free man and not one of the enslaved. Ibn al-Rumi's elegy on the sack of Basra, in which he says the city's people were struck down by their own slaves, is described but not quoted, because no reliable edition of the Arabic could be read online in the time allowed. The coins the rebels minted, and al-Tabari's account of the final victory in 883, have not yet been added, and nothing is quoted on what the caliph's army did to the rebels in 879–883. The modern figure for the dead at Basra rests on Wikipedia and Medievalists.net, not on Popovic's book itself. The page numbers for Nöldeke agree with the running heads in the scan's text; those for al-Mas'udi were worked out from the scan's leaf numbers and should be confirmed against the page images."
+  },
+  {
+   "id": "chamorro1668",
+   "title": "The Spanish–CHamoru Wars and the emptying of the northern Marianas",
+   "region": "Oceania",
+   "where": "Guam and the Mariana Islands (Rota, Tinian, Aguiguan, Saipan and the northern islands called Gani); pin: Hagåtña (Agaña), Guam, where the mission and the Spanish garrison stood",
+   "lat": 13.4745,
+   "lon": 144.7504,
+   "from": 1668,
+   "to": 1699,
+   "themes": [
+    "Colonial rule",
+    "War",
+    "Uprising",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "The Jesuit Diego Luis de San Vitores landed on Guam on 16 June 1668 with four other priests, four missionary brothers and 32 soldiers. Kepuha (Quipuha), a chief of Hagåtña, housed the missionaries and gave land for the first church, which opened on 2 February 1669.",
+     "https://www.guampedia.com/chiefs-kepuha-quipuha-3/"
+    ],
+    [
+     "The first welcome did not last. The Jesuits rejected the veneration of ancestors, ordered the young men's houses destroyed and taught that all the baptised were equal, which cut across the ranks of CHamoru society; a Chinese castaway named Choco, married to a CHamoru woman of Saipan, spread the word that the water and oils of baptism were killing people.",
+     "https://www.guampedia.com/father-diego-luis-de-san-vitores/"
+    ],
+    [
+     "After a CHamoru leader named Gufac was killed while trying to free an arrested man, Hurao, a high-caste chief of Hagåtña, raised about 2,000 warriors against the mission. The Spanish seized him early in the fighting and San Vitores later freed him; a Spanish soldier killed Hurao on 11 May 1672.",
+     "https://www.guampedia.com/chiefs-hurao/"
+    ],
+    [
+     "CHamoru fighters also killed missionaries and their helpers. On 2 April 1672 San Vitores and his assistant Pedro Calungsod (Calangsod) entered the home of Matå'pang, a chief of Tomhom (Tumon) who had himself been baptised, without permission, to baptise his daughter; on learning of the baptism Matå'pang and a man named Hirao killed both, and Matå'pang weighted the bodies and threw them into the sea.",
+     "https://www.guampedia.com/chiefs-matapang-matapang/"
+    ],
+    [
+     "Other deaths on the mission's side included the priest Luis de Medina and his catechist Hipolito de la Cruz on Saipan in early 1670, and Diego Bazan, two Filipino catechists and a Spanish escort in March 1672. From 1674 Spanish commanders answered with punitive raids on villages.",
+     "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars"
+    ],
+    [
+     "Agualin (Aguarin), a chief from Hagåtña, went from village to village raising a second war in 1676; his forces burned a church and mission buildings and attacked the Spanish for months. He was captured on Rota in August 1680 and hanged.",
+     "https://www.guampedia.com/chiefs-aguarin/"
+    ],
+    [
+     "José de Quiroga, who arrived in 1679, pursued those who resisted, burned villages and canoes, and by 1680 the people of Guam were being 'reduced' into a handful of church villages; on Saipan his men killed more than 200 men in one attack. CHamoru also fought on the Spanish side: in the rising of July 1684 led by Yula (Yura), Ignacio Hineti, a lower-caste clan leader, brought 50 warriors to defend the garrison.",
+     "https://www.guampedia.com/jose-de-quiroga-y-losada/"
+    ],
+    [
+     "The last resisters were defeated on the rock island of Aguiguan (Aguijan) in 1695, and the people of the northern islands were then forced to move to Guam, with deaths at sea. A Spanish census of 1710 counted 3,539 CHamoru.",
+     "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/"
+    ]
+   ],
+   "voices": [],
+   "witness": [
+    {
+     "text": "Ces Européans auroient bien fait, leur disoit-il, de demeurer dans leur païs. Nous n'avions pas besoin de leur secours pour vivre heureux. Contens de ce que nos Isles fournissoient, nous nous en servions sans rien desirer au delà. Les connoissances qu'ils nous ont données, n'ont fait qu'augmenter nos besoins, & qu'irriter nos desirs.",
+     "who": "A speech Le Gobien attributes to Hurao, a high-caste CHamoru chief of Hagåtña. It was composed in French from mission reports by Charles Le Gobien, a French Jesuit who published in Paris and was procurator of the French Jesuits' China mission; he never visited the islands and wrote from García's 1683 life of San Vitores and the Jesuits' annual letters. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris: Nicolas Pepie, 1700), p. 140. Plain gloss: these Europeans would have done well to stay in their own country; we did not need their help to live happily; content with what our islands gave, we used it and wanted nothing more; the knowledge they have given us has only increased our needs and sharpened our desires",
+     "date": "Printed 1700; set in the first war, which modern accounts date 1670 or 1671",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "Ils nous traitent de gens grossiers, & ils nous regardent comme des Barbares. Mais devons-nous les en croire ? Ne voïons-nous pas que sous pretexte de nous instruire & de cultiver nos mœurs, ils les corrompent ; qu'ils nous tirent de cette premiere simplicité, dans laquelle nous vivions, & qu'ils nous ostent enfin nostre liberté, qui nous doit estre plus chere que la vie ?",
+     "who": "The same speech, which Le Gobien attributes to Hurao; composed in French from mission reports by Le Gobien, a French Jesuit who never visited the islands. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris, 1700), p. 141. Plain gloss: they call us coarse people and look on us as barbarians, but must we believe them? Do we not see that, on the pretext of teaching us and improving our ways, they corrupt them; that they take us out of the first simplicity in which we lived, and in the end take away our liberty, which should be dearer to us than life?",
+     "date": "Printed 1700; set in the first war, which modern accounts date 1670 or 1671",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "Il nous est aisé de les accabler par la multitude. Vous craignez peut-estre de les attaquer, & de vous exposer à leurs armes meurtrieres ? Mais une mort glorieuse n'est-elle pas à preferer à la vie honteuse que nous menons ?",
+     "who": "A speech Le Gobien attributes to Aguarin (Agualin), the CHamoru chief whom he calls the author of the second war against the Spaniards; composed in French from mission reports by Le Gobien, a French Jesuit who never visited the islands. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris, 1700), livre VII, p. 247. Plain gloss: it is easy for us to overwhelm them by our numbers; perhaps you are afraid to attack them and face their deadly weapons? But is a glorious death not better than the shameful life we are leading?",
+     "date": "Printed 1700; set in the second war, which began in 1676",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "A war of extermination now began, which lasted twenty-three years, suspended from time to time when the Spaniards found themselves too weak to continue it, but resumed at the arrival of each ship bringing reinforcements, no matter whether in the meantime peace with the natives had been declared or not. Often whole villages were punished for the act of a single man, and innocent natives who had committed no crime whatever were shot down wantonly.",
+     "who": "William Edwin Safford, botanist and US Navy lieutenant who was assistant governor of Guam from August 1899 to August 1900, just after the United States took the island from Spain; his footnotes here cite García's Jesuit history. The Useful Plants of the Island of Guam (Contributions from the United States National Herbarium, vol. 9, Washington, 1905), p. 15",
+     "date": "1905, on 1672–1695",
+     "url": "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    },
+    {
+     "text": "Écrasés, décimés, les Chamorros ne se soumirent pas, mais moururent. En 1710, on n’en compte plus que 3,539; en 1741, il n’en restait que 1,816. Rarement pareille dépopulation sévit sur un pays; rarement aussi modifications plus profondes se produisirent chez un peuple dans un aussi court espace de temps.",
+     "who": "C. de Varigny, French writer, 'L'Océanie moderne', part V, Revue des Deux Mondes, 3rd period, vol. 85 (1888). Plain gloss: crushed and decimated, the Chamorros did not submit but died; in 1710 only 3,539 were counted, in 1741 only 1,816 remained; rarely has such depopulation struck a country, and rarely have deeper changes come over a people in so short a time. Varigny wrote two centuries later and gives the islanders 60,000 people and bows and arrows, neither of which is established",
+     "date": "1888",
+     "url": "https://fr.wikisource.org/wiki/L%E2%80%99Oc%C3%A9anie_moderne/05"
+    }
+   ],
+   "official": [
+    {
+     "text": "Padre Solano, calling together the soldiers of the post, declared to them that though arms used in their proper time and season were the defense of that Christianity, yet wielded intempestively they would be its destruction, since they would not only irritate with reason the Indians, but would become unworthy of the favor of the Lord, without which what could twenty or thirty men do against thirty thousand?",
+     "who": "Francisco García SJ, reporting the address of Francisco Solano SJ, head of the mission after San Vitores was killed in 1672, to the garrison; from García's life of San Vitores (Madrid, 1683, p. 447), here in W. E. Safford's English rendering (The Useful Plants of the Island of Guam, Washington, 1905, p. 16)",
+     "date": "1672 (García 1683; English 1905)",
+     "url": "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    },
+    {
+     "text": "His apostolic zeal and complete dedication to those people in need of spiritual and human promotion characterized the years of this exemplary missionary, who, in imitation of the words of the Master “greater love has no man than this, that a man lay down his life for his friends” (Jn. 15, 13), shed his blood in sacrifice, while asking God to forgive those responsible for his death.",
+     "who": "Pope John Paul II, speaking of Diego Luis de San Vitores in his homily at the Mass of beatification of San Vitores and two other Jesuits (Holy See website, an English paragraph on the Spanish-language page)",
+     "date": "6 October 1985",
+     "url": "https://www.vatican.va/content/john-paul-ii/es/homilies/1985/documents/hf_jp-ii_hom_19851006_beatificazione-tre-gesuiti.html"
+    }
+   ],
+   "today": {
+    "text": "In 1680, Captain Don Joseph de Quiroga was appointed the new governor of Guam and began a brutal campaign to subjugate the island and the rest of the Marianas. He ordered that any rebellious CHamoru be executed and instituted a policy known as reduccíon.",
+    "who": "US National Park Service, War in the Pacific National Historical Park, Guam, in its history of the village of Assan (spelling 'reduccíon' as on the page; Guam has been a US territory since 1898)",
+    "date": "page last updated 5 May 2025, read 26 November 2026",
+    "url": "https://www.nps.gov/articles/000/assan-through-the-ages.htm"
+   },
+   "disputed": [
+    [
+     "How many CHamoru were there in 1668? San Vitores wrote of about 100,000 on Guam; the lowest modern estimate cited is 24,000; the Jesuit historian Francis Hezel works from 40,000; Quiroga, looking back in 1720, put Guam at 50,000 at the start of the conquest and 4,000 by then; the 1911 Encyclopædia Britannica gave 40,000 to 60,000 for the islands, and the mission superior Solano, in García's account, spoke of thirty thousand. There is no agreed figure. What is agreed is the scale of the fall: a Spanish census of 1710 counted about 3,500 CHamoru, and the numbers kept falling until the later 1700s.",
+     [
+      "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/",
+      "https://www.guampedia.com/jose-de-quiroga-y-losada/",
+      "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Marianas_(archipelago)",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ],
+    [
+     "War, disease or removal? Older histories (Safford in 1905, Varigny in 1888, and Guam histories of the 1960s) describe a war of extermination and blame Spanish arms, Quiroga above all. Francis Hezel argues that introduced disease killed far more than fighting did and rejects the word genocide; one count Wikipedia cites him for (his 2015 study was not read) is 917 deaths recorded on Guam and Rota in 1680–83 against about twenty from hostilities. Richard Shell and others answer that the forced herding into mission villages, the destruction of canoes and the removal of the northern islanders spread the epidemics and broke the society, so that disease and conquest cannot be separated. Epidemics are recorded in 1683, 1690 and about 1699–1700. There is no agreed view: Guampedia's survey says the question is still contested, Wikipedia's article calls the wars a genocide, and Hezel rejects that word. The sources also disagree on dates: Hurao's rising is put in 1670 (Wikipedia's summary) or after July 1671 (the same article's narrative), the Yula rising in 1683 or 1684, the fall of Aguiguan in 1695 or 1696.",
+     [
+      "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/",
+      "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ],
+    [
+     "Did Hurao say it? The speech is printed only by Le Gobien, in Paris, in 1700, twenty-eight years after Hurao's death. Guampedia presents it as recorded as it was told to Le Gobien and says it is often quoted as an example of CHamoru resistance. The historian Carlo Ginzburg (died 2026) argued that so polished a text cannot be an accurate record of a real speech: Le Gobien never went to the islands, and his sources (García's 1683 life of San Vitores and the Jesuits' annual letters) mention Hurao only as a man imprisoned and released. Ginzburg added that those letters do report the islanders' belief that rats, flies, mosquitoes and sickness came with the ships, a complaint Le Gobien put into the speech and mocked in a note, so that an Indigenous argument survives inside a European composition; he also noted that Diderot's Supplément au voyage de Bougainville seems to echo it. The page that reprints his chapter dates the revolt 1685, which does not fit Hurao's death in 1672. The excerpt does not mention Aguarin's speech, which comes from the same book by the same author.",
+     [
+      "https://storiamestre.it/2026/06/20/le-voci-dellaltro-una-rivolta-indigena-nelle-isole-marianne/",
+      "https://www.guampedia.com/chiefs-hurao/"
+     ]
+    ],
+    [
+     "Was Choco a slanderer? The Jesuit accounts make the Chinese castaway Choco the first great obstacle, a man who turned the islanders against baptism with a lie; Safford repeats this, while allowing that many of the baptised did die shortly afterwards. Guampedia's writers point out that many baptised children and old people died soon after, that San Vitores baptised children daily without their parents' permission, and that Matå'pang believed the water would kill his daughter. Wikipedia's article says that, by Spanish accounts of the time, people in places with regular contact with the mission, such as Hagåtña, did not seem to believe the rumour, while villages whose only contact was the baptism of the dying and the newborn may have. Choco's own words are not recorded.",
+     [
+      "https://www.guampedia.com/father-diego-luis-de-san-vitores/",
+      "https://www.guampedia.com/chiefs-matapang-matapang/",
+      "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "This card has no words written or dictated by a CHamoru of the time, so 'In their own words' is empty. Everything written then comes from the mission's side: Jesuit letters and annual reports, García's life of San Vitores (1683) and Le Gobien's history (1700), plus soldiers' and governors' papers. Hurao, Aguarin, Matå'pang and Yula are known only through men who wanted them defeated, and the speeches printed under their names were composed by a Jesuit in France; the CHamoru who fought for the Spanish, such as Hineti, are known only through the same men's praise. Choco is heard only in his opponents' summary. The people of the northern islands who were shipped to Guam, the women, and the lower-ranking CHamoru left no words at all. The assistants who died with the priests, such as Pedro Calungsod and Hipolito de la Cruz, also left none.",
+   "reading": [
+    [
+     "Charles Le Gobien SJ, Histoire des isles Marianes (Paris, 1700; facsimile, archive.org)",
+     "https://archive.org/details/histoire-des-isles-marianes-nouvellement-converties"
+    ],
+    [
+     "Francisco García SJ, Vida y martyrio de el venerable padre Diego Luis de Sanvitores (Madrid, 1683; Boston College copy, archive.org)",
+     "https://archive.org/details/vidaymartyriodee00garc"
+    ],
+    [
+     "W. E. Safford, The Useful Plants of the Island of Guam, historical introduction (1905, archive.org)",
+     "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    ],
+    [
+     "Nicholas J. Goetzfridt, 'Spanish Response to CHamoru/Chamorro Depopulation' (Guampedia)",
+     "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/"
+    ],
+    [
+     "'Hurao' (Guampedia), with the speech in a modern English translation",
+     "https://www.guampedia.com/chiefs-hurao/"
+    ],
+    [
+     "Carlo Ginzburg, 'Le voci dell'altro. Una rivolta indigena nelle isole Marianne', excerpt from Rapporti di forza. Storia, retorica, prova (Quodlibet, 2022, ch. 3), posted by storiAmestre, 20 June 2026; in Italian",
+     "https://storiamestre.it/2026/06/20/le-voci-dellaltro-una-rivolta-indigena-nelle-isole-marianne/"
+    ]
+   ],
+   "warn": "'In their own words' is empty because no words written or dictated by a CHamoru of these years survive. The first three passages under 'Outside witnesses' are speeches that Charles Le Gobien attributes to the chiefs Hurao and Aguarin. He was a French Jesuit who never saw the Marianas and worked from missionaries' reports; such set speeches were a convention of history-writing then, and they are not the chiefs' own words. They are given in his French of 1700 with its old spelling (païs, nostre, estre, & for et); the glosses in 'who' are the site's plain summaries, not translations. No public-domain English translation was found. The French was read from a poor machine-read text of a facsimile and restored, so single letters, accents and punctuation may differ from the printed page. No order or report by a Spanish governor is quoted: the two official texts are a missionary's plea for restraint and a papal homily, and neither gives the Spanish reasons for the war or the removals. Names vary: CHamoru or Chamorro; Hurao; Agualin or Aguarin; Matå'pang or Matapang; Kepuha or Quipuha; Yula or Yura; Sanvitores or San Vitores; Calungsod or Calangsod; Guam is Guahan in Le Gobien. 'War of extermination' is Safford's phrase; he was an officer of the United States, which had just taken Guam from Spain, and 'thirty thousand' comes from his English rendering of García. The National Park Service calls Quiroga governor; Guampedia says he acted as governor several times but was never formally appointed. Modern accounts differ by a year on several dates.",
+   "note": "Research in progress: no words written or dictated by a CHamoru of 1668–1699 were found, because none are known to survive; the only speeches under CHamoru names are Le Gobien's compositions, shown under 'Outside witnesses'. Their wording has not yet been checked against the page images of the 1700 printing (about leaves n163, n164 and n270 of the archive.org facsimile), only against its machine-read text, and the year Le Gobien himself gives for each speech was not confirmed. García's own Spanish account of the killing of San Vitores (1683) and any royal or governor's order for the removal of the northern islanders were not reached, so the official side is represented by Solano's address in Safford's 1905 English and by the 1985 beatification homily. No statement by the Government of Guam, its Commission on Decolonization or a CHamoru cultural body was found on an official page; the 'today' entry is a US federal one. Blair and Robertson's The Philippine Islands was not searched."
+  },
+  {
+   "id": "atlantic-trade-1700s",
+   "title": "The Atlantic slave trade at its height, in the words of two Africans who wrote of being carried across it",
+   "region": "Africa",
+   "where": "The West African coast and the Atlantic crossing to the Caribbean; pin: Cape Coast Castle, Ghana. It marks Cape Coast, where Ottobah Cugoano says the ship that carried him to Grenada lay 'ready to sail'; he does not name the fort in which he was first imprisoned",
+   "lat": 5.1036,
+   "lon": -1.2414,
+   "from": 1700,
+   "to": 1808,
+   "themes": [
+    "Slavery",
+    "Removal and dispossession",
+    "Forced labour"
+   ],
+   "facts": [
+    [
+     "Britannica puts the transatlantic slave trade at an estimated 10 to 12 million enslaved Africans carried across the Atlantic from the 16th to the 19th century (the voyage database below gives a higher estimate), with nearly three-fifths of the total volume in the 18th century, when English and French merchants controlled about half of the trade. Europeans largely stayed on the coast and bought captives from Africans who brought them from the interior, often after a march of up to 300 miles (485 km) on which an estimated 10 to 15 percent died.",
+     "https://www.britannica.com/topic/transatlantic-slave-trade"
+    ],
+    [
+     "The estimates table of the Trans-Atlantic Slave Trade Database (SlaveVoyages) gives 12,521,337 people embarked in Africa in all, including 1,088,909 in 1701–1725, 1,471,725 in 1726–1750, 1,925,315 in 1751–1775 and 2,008,670 in 1776–1800. Its column totals by flag are 5,848,266 for Portugal / Brazil and 3,259,441 for Great Britain.",
+     "https://legacy.slavevoyages.org/assessment/estimates"
+    ],
+    [
+     "The database's own methodology essay says its estimates suggest that 12.52 million captives left Africa and 10.7 million disembarked. In its sample of 6,430 voyages with usable figures, 12.1 percent of those embarked died on the crossing: 12.2 percent on voyages from the Gold Coast and 18.8 percent from the Bight of Biafra.",
+     "https://legacy.slavevoyages.org/blog/methodology-trans-atlantic"
+    ],
+    [
+     "Olaudah Equiano writes that his own father held many slaves, and that his people sold to traders prisoners of war and people convicted of crimes such as kidnapping and adultery, while those they kept did no more work than other members of the community. He says he was kidnapped at about eleven, passed through several African masters, some of whom treated him well, over six or seven months before he reached the sea, and was shipped to Barbados, where the captives were sold in a yard at the beat of a drum and relations and friends were separated.",
+     "https://gutenberg.org/cache/epub/15399/pg15399.txt"
+    ],
+    [
+     "Ottobah Cugoano writes that he was born at Agimaque on the coast of Fantyn and was seized with some eighteen or twenty other children; the African man who handed him over at the coast took a gun, a piece of cloth and some lead for him. He says the captives on his ship planned to burn and blow it up, that the plan was betrayed by one of their own countrywomen, and that he was landed in Grenada and worked there some eight or nine months before being taken to England.",
+     "https://docsouth.unc.edu/neh/cugoano/cugoano.html"
+    ],
+    [
+     "UNESCO lists Cape Coast Castle as one of three castles among the fortified trading posts founded on the coast of Ghana between 1482 and 1786 by traders from Portugal, Spain, Denmark, Sweden, Holland, Germany and Britain. It says the posts first served the gold trade of European chartered companies and later played a significant part in the developing slave trade.",
+     "https://whc.unesco.org/en/list/34/"
+    ],
+    [
+     "The British Act for the Abolition of the Slave Trade (47 Geo. 3 Sess. 1 c. 36, 25 March 1807) made the African slave trade unlawful from 1 May 1807 and set a penalty of £100 for each enslaved person involved.",
+     "https://teachinglegalhistory.unl.edu/s/oer/item/1312"
+    ],
+    [
+     "The United States Constitution barred Congress from prohibiting the importation of persons before 1808, and the US act prohibiting the importation of slaves took effect on 1 January 1808. The US National Archives says the ban drove the trade underground and did not end slavery or the sale of enslaved people within the country, and a coastwise trade between US ports continued.",
+     "https://www.archives.gov/education/lessons/slave-trade.html"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "One day, when all our people were gone out to their works as usual, and only I and my dear sister were left to mind the house, two men and a woman got over our walls, and in a moment seized us both, and, without giving us time to cry out, or make resistance, they stopped our mouths, and ran off with us, into the nearest wood.",
+     "who": "Olaudah Equiano (Gustavus Vassa), on being kidnapped as a child of about eleven from his home, which he places in 'Eboe' (Igbo country, in present-day Nigeria); the kidnappers were Africans. Whether he was born in Africa is disputed (see below)",
+     "date": "published 1789; by his own chronology about 1756",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African. Written by Himself (London, 1789), vol. I, chapter II, p. 48",
+     "url": "https://docsouth.unc.edu/neh/equiano1/equiano1.html",
+     "lic": "Public domain (1789). Electronic edition of the 1789 London first edition, volume I, by Documenting the American South (University of North Carolina at Chapel Hill)"
+    },
+    {
+     "text": "I was soon conducted to a prison, for three days, where I heard the groans and cries of many, and saw some of my fellow-captives. But when a vessel arrived to conduct us away to the ship, it was a most horrible scene; there was nothing to be heard but the rattling of chains, smacking of whips, and the groans and cries of our fellow-men. Some would not stir from the ground, when they were lashed and beat in the most horrible manner.",
+     "who": "Quobna Ottobah Cugoano, a Fante taken as a boy, on the fort on the Gold Coast where he was held before being put aboard a ship that he says was ready to sail from Cape Coast",
+     "date": "published 1787; the reprint quoted here gives no year for his capture",
+     "doc": "'Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa; published by himself, in the Year 1787', the autobiographical part of his Thoughts and Sentiments (1787) as reprinted in the appendix to The Negro's Memorial; or, Abolitionist's Catechism, by an Abolitionist (London: Hatchard and Co., and J. and A. Arch, 1825), p. 124",
+     "url": "https://docsouth.unc.edu/neh/cugoano/cugoano.html",
+     "lic": "Public domain (written 1787; this printing 1825)"
+    },
+    {
+     "text": "The closeness of the place, and the heat of the climate, added to the number in the ship, which was so crowded that each had scarcely room to turn himself, almost suffocated us. This produced copious perspirations, so that the air soon became unfit for respiration, from a variety of loathsome smells, and brought on a sickness among the slaves, of which many died, thus falling victims to the improvident avarice, as I may call it, of their purchasers. This wretched situation was again aggravated by the galling of the chains, now become insupportable; and the filth of the necessary tubs, into which the children often fell, and were almost suffocated. The shrieks of the women, and the groans of the dying, rendered the whole a scene of horror almost inconceivable.",
+     "who": "Olaudah Equiano (Gustavus Vassa), on the hold of the slave ship that carried him from the African coast to Barbados (see the dispute below over whether he made this crossing himself)",
+     "date": "published 1789; by his own chronology about 1756",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African. Written by Himself (London, 1789), vol. I, chapter II, p. 79",
+     "url": "https://docsouth.unc.edu/neh/equiano1/equiano1.html",
+     "lic": "Public domain (1789). Electronic edition of the 1789 London first edition, volume I, by Documenting the American South (University of North Carolina at Chapel Hill)"
+    },
+    {
+     "text": "But I must own, to the shame of my own countrymen, that I was first kidnapped and betrayed by some of my own complexion, who were the first cause of my exile, and slavery; but if there were no buyers there would be no sellers. So far as I can remember, some of the Africans in my country keep slaves, which they take in war, or for debt; but those which they keep are well fed, and good care taken of them, and treated well; and as to their clothing, they differ according to the custom of the country.",
+     "who": "Quobna Ottobah Cugoano, writing in London as a free man, on the Africans who seized and sold him and on slavery in his own country",
+     "date": "published 1787",
+     "doc": "'Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa; published by himself, in the Year 1787', as reprinted in the appendix to The Negro's Memorial; or, Abolitionist's Catechism, by an Abolitionist (London, 1825), p. 126",
+     "url": "https://docsouth.unc.edu/neh/cugoano/cugoano.html",
+     "lic": "Public domain (written 1787; this printing 1825)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "the Slaves lie in two rows, one above the other, on each side of the ship, close to each other, like books upon a shelf. I have known them so close, that the shelf would not, easily, contain one more. And I have known a white man sent down among the men, to lay them in these rows to the greatest advantage, so that as little space as possible might be lost.",
+     "who": "John Newton, a former slave-ship captain who became a Church of England clergyman (rector of St Mary Woolnoth, London) and wrote against the trade he had worked in; Thoughts upon the African Slave Trade (London: J. Buckland and J. Johnson, 1788), pp. 33–34. The linked text is uncorrected scan text of the 1788 printing, in which the long s appears as f ('fhip', 'clofe'); it is transcribed here as s",
+     "date": "1788",
+     "url": "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "That from and after the First Day of May One thousand eight hundred and seven, the African Slave Trade, and all and all manner of dealing and trading in the Purchase, Sale, Barter, or Transfer of Slaves, or of Persons intended to be sold, transferred, used, or dealt with as Slaves, practiced or carried on, in, at, to or from any Part of the Coast or Countries of Africa, shall be, and the same is hereby utterly abolished, prohibited, and declared to be unlawful;",
+     "who": "Parliament of the United Kingdom, An Act for the Abolition of the Slave Trade (47 Geo. 3 Sess. 1 c. 36), section I: the state's own wording when it outlawed the trade it had earlier called very advantageous ('practiced' is the spelling of the linked transcription)",
+     "date": "25 March 1807",
+     "url": "https://teachinglegalhistory.unl.edu/s/oer/item/1312"
+    }
+   ],
+   "today": {
+    "text": "Declaration of the Trafficking of Enslaved Africans and Racialized Chattel Enslavement of Africans as the Gravest Crime against Humanity",
+    "who": "United Nations General Assembly, the title of resolution 80/250 (A/RES/80/250), a resolution led by Ghana; the UN Digital Library records the vote as 123 in favour, 3 against and 52 abstaining. The title was read from the United Nations' own copy of the document",
+    "date": "adopted 25 March 2026",
+    "url": "https://docs.un.org/en/A/RES/80/250"
+   },
+   "disputed": [
+    [
+     "Was Equiano born in Africa? In his book he says he was born in 1745 at Essaka in 'Eboe', kidnapped and carried across the Atlantic. The literary historian Vincent Carretta found two records that say otherwise: the register of his baptism at St Margaret's, Westminster, on 9 February 1759, which gives his birthplace as 'Carolina', and the muster roll of Constantine Phipps's Arctic expedition of 1773, which gives 'South Carolina' (the Equiano's World project says the name in that entry is Weston); Carretta argues that he may have been born there and built the African chapters from other people's accounts and from books. The Equiano's World project, which cites the historian Paul Lovejoy, holds that he was born in Igboland as he says, about 1742: his names are Igbo, and the baptismal entry, it says, was dictated by relatives of his master and is unreliable. The literary scholar Brycchan Carey, setting out both cases, calls Carretta's two records compelling but not quite enough to settle the matter, says historians and critics are divided, and concludes that we just do not know. There is no consensus. The passages quoted above are therefore certain as what a formerly enslaved African published in 1789, and uncertain as an eyewitness memory of his own childhood and crossing.",
+     [
+      "https://brycchancarey.com/equiano/nativity.htm",
+      "https://equianosworld.org/questioning.php",
+      "https://gutenberg.org/cache/epub/15399/pg15399.txt"
+     ]
+    ],
+    [
+     "How many people, and how many died? Before 1969 published figures ranged from 3.5 million to 100 million, with 15 or 20 million often repeated. Philip Curtin's census of 1969 estimated 9,566,000 people landed in the Americas. J. E. Inikori and James Rawley argued that this was too low; Paul Lovejoy's 1982 synthesis found Curtin remarkably accurate and put exports from Africa at 11,698,000 and imports at 9.8 to 9.9 million. The voyage-by-voyage database built since the 1990s now estimates 12.52 million embarked and 10.7 million disembarked, and its authors wrote in 2010 that the new aggregate was thirteen percent greater than they had thought eight years earlier. The order of magnitude is now a broad scholarly consensus; the exact totals are estimates that have moved with each new archive. Deaths are less certain. The database's sample gives a mean of 12.1 percent dying at sea, with wide variation between voyages and regions; the former captain John Newton wrote in 1788 that one fourth of those purchased might be allotted to mortality; and none of these figures counts those who died in capture, on the march to the coast (Britannica cites an estimated 10 to 15 percent) or in the forts.",
+     [
+      "https://en.wikipedia.org/wiki/Philip_D._Curtin",
+      "https://www.cambridge.org/core/journals/journal-of-african-history/article/abs/volume-of-the-atlantic-slave-trade-a-synthesis1/CF6D409D16D57CDD49065FAA43B3B86C",
+      "https://legacy.slavevoyages.org/blog/methodology-trans-atlantic",
+      "https://www.SlaveVoyages.org/documents/download/2010estimates-method.pdf",
+      "https://www.neh.gov/humanities/2010/septemberoctober/feature/gross-injustice",
+      "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt",
+      "https://www.britannica.com/topic/transatlantic-slave-trade"
+     ]
+    ],
+    [
+     "Did the trade's profits pay for Britain's industrial revolution? Eric Williams argued in Capitalism and Slavery (1944) that profits from the slave trade and slave-grown sugar helped finance British industrialisation, and that abolition followed economic interest more than humanitarian feeling. Critics answered with ratios which are given here as Wikipedia summarises them: Stanley Engerman (1972) calculated that the combined profits of the slave trade and the West Indian plantations were under 5 percent of the British economy in any year of the industrial revolution, and David Richardson put slave-trade profits at under 1 percent of domestic investment. Joseph Inikori has challenged that rejection using the trade of the whole Atlantic, and Kenneth Morgan takes a middle position, that the slave-based Atlantic trades had an important though not decisive effect. Richardson wrote in 2002 that most scholars of British industrialisation were highly sceptical of the Williams thesis while some still found much merit in it. The argument has continued since and is not settled; that slavery and its trades mattered to the British economy is not seriously denied.",
+     [
+      "https://en.wikipedia.org/wiki/Capitalism_and_Slavery",
+      "https://archives.history.ac.uk/ihr/Focus/Empire/reviews/richardson.html"
+     ]
+    ],
+    [
+     "What is owed now? On 25 March 2026 the UN General Assembly, on a text led by Ghana for the African Group, declared the trafficking and enslavement of Africans the gravest crime against humanity and called for dialogue on reparatory justice, including a formal apology; 123 states voted for it. Argentina, Israel and the United States voted against and 52 states abstained; the United States representative called the text highly problematic and said his government does not recognise a legal right to reparations for historical wrongs that were not illegal under international law when they occurred. Human Rights Watch reports that the United Kingdom, Canada and all the European Union's member states abstained, calling the trade a tragedy while questioning the legal basis for reparations for acts that predate modern international law. In the UN's transcript of the meeting the European Union's speaker says the word 'gravest' implies a hierarchy among atrocity crimes that does not exist in law, and the Holy See's observer says the draft contains a partial narrative.",
+     [
+      "https://news.un.org/en/story/2026/03/1167199",
+      "https://digitallibrary.un.org/record/4107547",
+      "https://mfa.gov.gh/wp-content/uploads/2026/04/n2606533-2.pdf",
+      "https://www.hrw.org/news/2026/03/30/landmark-un-resolution-on-the-slave-trade",
+      "https://transcripts.un.org/en/ga/80/75"
+     ]
+    ]
+   ],
+   "blind": "Of the millions the database counts as embarked in the eighteenth century, the two voices here belong to men who became free, literate and Christian in London and wrote in English for British readers in the middle of the abolition campaign; one of them may not have been born in Africa. No account written by a woman carried across in this century was found, though Equiano records the shrieks of the women in the hold. Those who died on the march, in the forts, at sea and on the plantations left no words here. The African traders and rulers who sold captives speak here only through the people they sold; the British state and a planters' agent speak for themselves.",
+   "reading": [
+    [
+     "Olaudah Equiano, The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African, vol. I (London, 1789; Documenting the American South, University of North Carolina)",
+     "https://docsouth.unc.edu/neh/equiano1/equiano1.html"
+    ],
+    [
+     "Ottobah Cugoano, Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa (1787; 1825 printing, Documenting the American South, University of North Carolina)",
+     "https://docsouth.unc.edu/neh/cugoano/cugoano.html"
+    ],
+    [
+     "Trans-Atlantic Slave Trade Database, Estimates (SlaveVoyages, legacy site; data as revised to 2018–19)",
+     "https://legacy.slavevoyages.org/assessment/estimates"
+    ],
+    [
+     "John Newton, Thoughts upon the African Slave Trade (1788, archive.org)",
+     "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt"
+    ],
+    [
+     "Brycchan Carey, 'Where Was Olaudah Equiano Born?' (2003–2026, brycchancarey.com)",
+     "https://brycchancarey.com/equiano/nativity.htm"
+    ],
+    [
+     "Transatlantic slave trade (Britannica)",
+     "https://www.britannica.com/topic/transatlantic-slave-trade"
+    ]
+   ],
+   "warn": "Equiano's two passages follow the 1789 London printing as transcribed by the Text Creation Partnership; the Project Gutenberg copy of the book differs in small points of punctuation (it has no comma after 'ran off with us'). Cugoano's passages are quoted from an abolitionist reprint of 1825, not from his 1787 first edition, and its spelling may have been modernised ('clothing'). Both men wrote as campaigners against the trade, and Equiano's account of his African childhood and crossing is disputed. Newton's text is linked as raw scan text with the long s read as f. 'Negroes' and 'slaves' are the sources' words. The passages describe chaining, flogging, suffocation and the deaths of children.",
+   "note": "Research in progress: the 1787 first edition of Cugoano's Thoughts and Sentiments could not be opened as text (the University of Michigan copy returned an error), so the 1825 reprint is quoted. The full text of the 1750 Act (23 Geo. 2 c. 31) and William Snelgrave's 1734 defence of the trade could not be read and are not quoted. The current SlaveVoyages estimates page could not be read by the research tools, so the figures are those of its legacy estimates page and may have been revised since. Carretta's and Lovejoy's own articles were not read; their positions are given from Brycchan Carey's page and the Equiano's World project. No account by Ayuba Suleiman Diallo or Venture Smith was added. The 1750 Act's preamble, in which Parliament called the trade 'very advantageous to Great Britain', is held back until a copy can be checked word for word, so the official account here is only the Act that ended the trade. Only the title of UN resolution 80/250 is quoted; its operative paragraphs are described under 'Still disputed'."
+  },
+  {
+   "id": "khmelnytsky1648",
+   "title": "The Khmelnytsky uprising and the massacres of 1648–49",
+   "region": "Europe",
+   "where": "The Ukrainian lands of the Polish–Lithuanian Commonwealth (Kyiv, Bratslav, Chernihiv, Podolia and Volhynia); pin: Nemyriv (Nemirov, Niemirów), Vinnytsia region, Ukraine, the town whose Jewish community was destroyed on 10 June 1648 (approximate; the pin marks one massacre site, not the centre of the uprising)",
+   "lat": 48.97,
+   "lon": 28.84,
+   "from": 1648,
+   "to": 1657,
+   "themes": [
+    "Uprising",
+    "Massacre",
+    "War",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "In 1648 Ukraine was part of the Polish–Lithuanian Commonwealth: most of the land belonged to Catholic Polish nobles, and the peasants, mostly Orthodox Ukrainians, bore heavy taxes and mistreatment sharpened by religious tension. Perhaps a third of Polish Jewry lived in Ukraine, many of them in the nobles' service, some as tax collectors, so that peasants saw them as part of the system that oppressed them.",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "Bohdan Khmelnytsky, a petty nobleman and Cossack officer who could not get justice from the Polish authorities, fled to the Zaporozhian Sich at the end of 1647, was elected hetman and early in 1648 secured Crimean Tatar military support; two Polish defeats in May set off a mass popular uprising.",
+     "https://www.britannica.com/place/Ukraine/The-Cossacks"
+    ],
+    [
+     "Three peoples were killed in this war. Cossacks and peasants turned on those they associated with Polish rule: landlords, officials, Latin and Uniate clergy, and Jews. The Poles retaliated brutally against the rebel population.",
+     "https://www.britannica.com/place/Ukraine/The-Cossacks"
+    ],
+    [
+     "The Encyclopedia of Ukraine states both sides of the killing in one passage: during the fighting of summer 1648 Polish troops systematically killed Cossacks and peasants, including women, children and the elderly, and the rebels treated nobles, Catholic clergy and Jews in a similar fashion.",
+     "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+    ],
+    [
+     "The Jewish community of Nemyriv was destroyed on 10 June 1648, and Tulchyn and Bar were destroyed early in the fighting; the chronicler Nathan Hanover describes nobles at Tulchyn handing the Jews over to the rebels. Some Jews converted to Christianity to save their lives, thousands fled, and possibly several thousand were captured and sold as slaves in the Ottoman Empire, where Jews of Turkey and the Mediterranean raised money to ransom them.",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "The Tatar alliance was paid for in captives. The Cossack 'Eyewitness' chronicle records under 1648 that the Horde went home to Crimea enriched with prisoners from the defeated Crown army, and under 1649, at the withdrawal from Zbarazh, that the Tatars carried people off into captivity while the Cossacks took property. The chronicle does not say whose people these were.",
+     "http://litopys.org.ua/samovyd/sam02.htm"
+    ],
+    [
+     "By the Compact of Zboriv (Zborów) in August 1649 King John Casimir let Khmelnytsky set up a virtually independent Cossack principality; it satisfied neither the Polish gentry nor his followers, many of whom stayed under Polish landlords. Defeated at Berestechko in June 1651, he had to accept a less favourable treaty; in 1654 he had his Cossacks swear allegiance to Tsar Alexis at Pereiaslav. He died in 1657, and Moscow went on to control Ukraine east of the Dnieper and to reduce Cossack liberties.",
+     "https://www.britannica.com/biography/Bohdan-Khmelnytsky"
+    ],
+    [
+     "Khmelnytsky is generally regarded in Ukraine as a national hero: his monument has stood in central Kyiv since 1888, his portrait is on Ukrainian banknotes, a Ukrainian military decoration and a city bear his name. Wikipedia's summary is that his role in Polish history has been viewed mostly in a negative light and that his assessment in Jewish historiography is overwhelmingly negative.",
+     "https://en.wikipedia.org/wiki/Bohdan_Khmelnytsky"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Початок и причина войни Хмелницкого ест едино от ляхов на православіе гоненіе и козаком отягощеніе. Тогда бо оным не хотячи, чего не звикли были панщини робити, на службу замковую обернено, которих з листами и в городі до хандоження коней старостове держали, в дворах грубу, тоест печи палити, псов хандожити, дворі змітати и до инших незносных діл приставляли.",
+     "who": "The anonymous Cossack 'Eyewitness' (Samovydets), a chronicler from the rebels' own side, usually identified as the Cossack officer Roman Rakushka-Romanovsky. Plain gloss: the beginning and cause of Khmelnytsky's war is solely the Poles' persecution of Orthodoxy and the burdening of the Cossacks; unwilling to do labour-service (panshchyna) they were not used to, they were put to castle service; the district governors (starostas) kept them to carry letters and groom horses in the towns, and set them to stoke the stoves in the manors, tend the dogs, sweep the yards and do other unbearable tasks",
+     "date": "written in the later 17th century, on the years before 1648",
+     "doc": "Litopys Samovydtsia (the Eyewitness Chronicle), opening section 'О началі войни Хмелницкого', p. 45 of the edition reproduced on litopys.org.ua (before page marker \\46\\); first printed by O. Bodiansky, Moscow 1846",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm",
+     "lic": "Public domain (anonymous work of the 17th century, first printed 1846). The wording is that of the online text, which follows a modern scholarly transcription with slightly normalised letters; the editors' footnote numbers are left out"
+    },
+    {
+     "text": "When the Jews discovered this treacherous intention, they immediately resolved to dispose of the Poles, whom they excelled in numbers. But the Rosh-Yeshibah of Tulchyn, Rabbi Aaron, implored them not to touch the pans, on the ground that such action might draw upon the Jews all over the Empire the hatred of the Polish population. \"Let us rather perish,\" he exclaimed, \"as did our brethren in Niemirov, and let us not endanger the lives of our brethren in all the places of their dispersion.\" The Jews yielded.",
+     "who": "A historian's retelling, not the chronicle itself: Rabbi Aaron, head of the Talmudic academy (rosh yeshivah) of Tulchyn, speaking to the Jews who had defended the fortress beside the Polish nobles (pans) and learned that the nobles meant to hand them to the Cossacks; his words come from the Jewish chronicles of the massacres (the story is Nathan Hanover's) and are given here as retold by the Jewish historian Simon Dubnow, not in a direct translation of the Hebrew. 'The Empire' is the translator's word for the Polish–Lithuanian Commonwealth. 'Treacherous' is Dubnow's judgement of the nobles; on the same page he writes that another detachment of Cossacks then entered Tulchyn and killed all the Catholics, among them the nobles' leader, Count Chetvertinski",
+     "date": "summer 1648 (chronicle printed 1653; this retelling 1916)",
+     "doc": "S. M. Dubnow, History of the Jews in Russia and Poland, vol. 1, translated from the Russian by Israel Friedlaender (Philadelphia: Jewish Publication Society, 1916), p. 154",
+     "url": "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+     "lic": "Public domain (English translation by I. Friedlaender, published 1916)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "гдеколвек знайшлася шляхта, слуги замковіе, жиди й уряди міскіе — усе забияли, не щадячи ані жон и дітей їх, маетности рабовали, костели палили, обваліовали, ксіонзов забияли, дворі зась и замки шляхецкіе и двори жидовскіе пустошили, не зоставаючи жадного цілого. Рідкій в той кріві на тот час рук своїх не умочил и того грабленія тих добр не чинил.",
+     "who": "The Cossack 'Eyewitness' chronicler (Samovydets), himself of the rebel side, on what the Cossacks did in the towns in 1648 (Litopys Samovydtsia, 'Война самая', year 1648, p. 52 of the edition reproduced online). Plain gloss: wherever nobles, castle servants, Jews and town officials were found, they killed them all, sparing neither their wives nor their children; they plundered estates, burned and wrecked Catholic churches, killed priests, and laid waste the nobles' manors and castles and the Jews' houses, leaving none whole; rare was the man who did not then dip his hands in that blood and share in that plunder. A little further on he writes that most Jews perished at Nemyriv and Tulchyn, 'a number beyond counting'",
+     "date": "written in the later 17th century, on 1648",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm"
+    },
+    {
+     "text": "they did not content themselves with receiving taxes from them, nor yet tithes, but began to give authority to the Jews and Armenians over them, till these went to such extremities as to debauch their wives and daughters; so that the Cossacks, after having been Princes to rule, became slaves, to yield obedience to the accursed Jews. This was the first grievance.",
+     "who": "Paul of Aleppo, an archdeacon of the Greek Orthodox Patriarchate of Antioch, from Aleppo in Syria, who crossed the Cossack country in 1654 with his father, Patriarch Macarius of Antioch, and admired the Cossacks; he is repeating what his hosts told him about the Poles ('they'), and the charge against Jews and Armenians is his hosts' accusation in his own hostile words (The Travels of Macarius, translated from the Arabic by F. C. Belfour, vol. 1, London 1836, p. 197). This is hearsay from the side that did the killing, written by a man who approved of it; it is evidence of what the rebels said about Jews, not of what Jews did",
+     "date": "1654 (English translation 1836)",
+     "url": "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    },
+    {
+     "text": "When in Moldavia, we asked Yanaki the Jew, who had taken refuge there, what the Khatman Akhmil had done to the Jews in Poland: he answered, \"He has done to them more injury, and made greater slaughter of them, than ever Aspasianus (Vespasian) did of old:\" — at which we laughed.",
+     "who": "A Jewish refugee in Moldavia, named in the source only as Yanaki, as recorded by Paul of Aleppo, the Greek Orthodox archdeacon from Syria and admirer of the Cossacks, who notes his own party's laughter ('the Khatman Akhmil' is Hetman Khmelnytsky; Vespasian is the Roman emperor whose armies destroyed Jerusalem). The Travels of Macarius, tr. F. C. Belfour, vol. 1 (1836), p. 229",
+     "date": "about 1653–54 (English translation 1836)",
+     "url": "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Ponieważ podług konstytucyi szczęśliwey Koronacyi naszey, w uspokoieniu Kozakow Zaporowskich dosyć się stało, tedy tę deklaracyą łaski naszey uczynioną pod Zborowem woysku Zaporowskiemu, authoritate Conventus praesentis, za zgodą wszech Stanow, approbuiemy.",
+     "who": "King John II Casimir and the Sejm (parliament) of the Polish–Lithuanian Commonwealth, the law ratifying the Zboriv settlement (Volumina Legum, vol. 4, St Petersburg reprint of 1859, Sejm of 1649, article 18, indexed as 'Approbacya deklaracyi laski ... pod Zborowem woysku Zaporowskiemu daney'). Plain gloss: since what the statute of our happy coronation required for the settling of the Zaporozhian Cossacks has been done, we approve, by the authority of the present Sejm and with the consent of all the estates, the declaration of our grace made at Zboriv to the Zaporozhian army",
+     "date": "Sejm of November 1649 – January 1650",
+     "url": "https://archive.org/stream/volumina-legum/VOLUMINA%20LEGUM_djvu.txt"
+    },
+    {
+     "text": "В городах зась от жидов тая была кривда, же неволно Козакові в дому своем жадного напитку на потребу свою держати, не тилко меду, горілки, пива, але и браги.",
+     "who": "The rebels' stated grievance against Jews, in the words of their own chronicler, the anonymous Cossack 'Eyewitness' (Samovydets), on the leaseholding (arenda) system, under which nobles leased monopolies such as the sale of drink, often to Jewish leaseholders. Plain gloss: in the towns the wrong done by the Jews was this, that a Cossack was not free to keep any drink in his own house for his own use, not only mead, vodka and beer but even braha (home brew). This is the rebels' grievance as they stated it, not a finding of fact (Litopys Samovydtsia, section 'О началі войни Хмелницкого', p. 46 of the edition reproduced on litopys.org.ua (between page markers \\46\\ and \\47\\))",
+     "date": "written in the later 17th century, on the years before 1648",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm"
+    }
+   ],
+   "disputed": [
+    [
+     "How many Jews died? The seventeenth-century Jewish chronicles gave very large figures: Wikipedia's summary of the literature reports 60,000–80,000 for Nathan Hanover and 100,000 for Sabbatai Cohen, and writers into the twentieth century repeated 100,000 or more; Dubnow in 1916 wrote that the chroniclers' reports of the number of Jewish victims vary between one hundred thousand and five hundred thousand, and himself wrote of about ten thousand Jews killed or carried off at Polonne alone and of some seven hundred communities massacred or pillaged. Modern demographic work is much lower. Shaul Stampfer argues that the chroniclers could not count the dead and wrote to commemorate, that roughly 40,000 Jews lived in the Ukrainian lands before the uprising and perhaps 20,000 were lost, and that it cannot be known how many of those died by violence and how many of disease, hunger and flight. The YIVO Encyclopedia concludes that most Jews fled and fewer than 20,000 died, possibly far fewer. As summarised on Wikipedia, which follows the historians Paul Robert Magocsi and Orest Subtelny, Jaroslaw Pelenski's estimate is 6,000–14,000, and Bernard Weinryb and Shmuel Ettinger wrote of tens of thousands, Weinryb adding that the catastrophe may not have been as great as had been assumed. Recent specialist studies agree that the chronicles' totals are too high and that no exact figure can be recovered, though, by Wikipedia's account, many modern general works still repeat 100,000 or more. The sources used here give no comparable count for the Polish nobles and townspeople, the Catholic and Uniate clergy, or the Ukrainian peasants killed in reprisals or enslaved.",
+     [
+      "https://judaicaukrainica.ukma.edu.ua/node/175",
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://en.wikipedia.org/wiki/Khmelnytsky_Uprising",
+      "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction"
+     ]
+    ],
+    [
+     "What was it? In Ukraine the uprising is called the National Liberation War and Khmelnytsky is credited with founding the Cossack Hetmanate, which some call the first Ukrainian state. In Jewish memory the same years are gzeyres takh vetat, the evil decrees of 5408–5409, mourned by a fast on 20 Sivan and long regarded as the greatest catastrophe since the destruction of the Temple; the YIVO Encyclopedia adds that this image of total destruction was stronger than the reality, since the communities recovered within about half a century. In Polish memory the uprising opens the period of the Deluge and the decline of the Commonwealth, and Khmelnytsky's role is mostly judged negatively. Amelia Glaser's introduction to a Stanford University Press volume on these competing memories notes that Jews have likened him to Haman and Hitler, that Ukraine has memorialised him as a nation builder, and that in Polish history he is a prelude to the Deluge. The Encyclopedia of Ukraine, the YIVO Encyclopedia and Britannica, written from different traditions, each record the killing of all three.",
+     [
+      "https://en.wikipedia.org/wiki/Khmelnytsky_Uprising",
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://www.britannica.com/place/Ukraine/The-Cossacks",
+      "https://en.wikipedia.org/wiki/Bohdan_Khmelnytsky",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction",
+      "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+     ]
+    ],
+    [
+     "How far was Khmelnytsky himself responsible for the massacres? Jewish tradition holds him personally responsible, and so, approvingly, did his contemporary admirer Paul of Aleppo, who wrote that 'Akhmil' had 'purified the earth' of thousands of Jews; Dubnow wrote (p. 152) that Khmelnytsky sent the detachment that took Nemyriv. The YIVO Encyclopedia states that there was no consistent Cossack policy to kill all Jews, that many of the Jewish casualties were at the hands of the Cossacks' Tatar allies, and that some Jews survived in towns that held out; the Cossack Eyewitness chronicle, for its part, says that few on the rebel side kept their hands out of the blood and plunder. By Dubnow's account and that of the Jewish Encyclopedia of 1906, the Zboriv settlement that Khmelnytsky negotiated barred Jews from living in the Cossack-held regions, a right restored by the treaty of Bila Tserkva in 1651; the king let Jews baptised under threat of death return to their faith, and women forcibly baptised and married to Cossacks fled back to their families. None of the sources used for this card records an order by him to kill Jews, Poles or clergy, or an attempt by him to stop the killing. Glaser's introduction notes that the early Jewish chronicles make his colonel Maksym Kryvonis the man responsible for the most brutal attacks on Jews and Poles, that it was Hanover's portrait that led later Jewish writers to lay the massacres directly on the hetman, that his letters, as Hrushevsky read them, complained of extortion by Jews, and that there is no reason to think him sympathetic to the Jews of his time.",
+     [
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt",
+      "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+      "http://litopys.org.ua/samovyd/sam02.htm",
+      "https://www.jewishencyclopedia.com/articles/4685",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction"
+     ]
+    ],
+    [
+     "What did Pereiaslav (1654) mean? Britannica reports that Russian historians have emphasized Ukraine's acceptance of the tsar's suzerainty, which they say legitimised Russian rule, while Ukrainian historians stress Moscow's recognition of Ukraine's autonomy, including an elected hetman, self-government and the right to conduct foreign relations, which they hold was nearly the same as independence. The Encyclopedia of Ukraine describes it as a protectorate of the Muscovite tsar with complete autonomy. There is no consensus.",
+     [
+      "https://www.britannica.com/place/Ukraine/The-Cossacks",
+      "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+     ]
+    ]
+   ],
+   "blind": "Three peoples have a claim to be the people this happened to, and they are not equally heard. The Ukrainian side speaks here through one literate Cossack officer writing years later; the peasants who rose, and those the Polish reprisals killed or the Tatars led away, left nothing in their own hand. The Jewish dead are known through chronicles written by survivors and refugees to mourn them, which reach this card only at second hand (a 1916 historian's retelling, and one refugee's remark written down by a man who laughed at it); the women forced into baptism and marriage (Dubnow, pp. 153 and 157) and the captives sold in the Ottoman markets are not heard at all. The Polish and Catholic townspeople, nobles and Uniate and Catholic priests who were killed appear only in the Cossack chronicler's list of victims and in Dubnow's line on the nobles killed at Tulchyn; the Sejm statute quoted here says nothing of them, and no account by one of them was found in a quotable printing. The Tatars, who took the captives, do not speak.",
+   "reading": [
+    [
+     "Gzeyres Takh Vetat (YIVO Encyclopedia of Jews in Eastern Europe)",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "Orest Subtelny, 'Cossack-Polish War' (Encyclopedia of Ukraine, vol. 1, 1984; Internet Encyclopedia of Ukraine)",
+     "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+    ],
+    [
+     "Shaul Stampfer, 'Jewish Population Losses in the Course of the Khmelnytsky Uprising' (Judaica Ukrainica 4, 2015, National University of Kyiv-Mohyla Academy)",
+     "https://judaicaukrainica.ukma.edu.ua/node/175"
+    ],
+    [
+     "Litopys Samovydtsia, the Eyewitness Chronicle (17th century; online text, litopys.org.ua)",
+     "http://litopys.org.ua/samovyd/sam02.htm"
+    ],
+    [
+     "S. M. Dubnow, History of the Jews in Russia and Poland, vol. 1, tr. I. Friedlaender (1916, archive.org)",
+     "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt"
+    ],
+    [
+     "Paul of Aleppo, The Travels of Macarius, Patriarch of Antioch, tr. F. C. Belfour, vol. 1 (1836, archive.org)",
+     "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    ]
+   ],
+   "warn": "Read every voice here against the others. The Cossack chronicler's complaint about Jews, placed under the official account as the rebels' own justification, and Paul of Aleppo's 'accursed Jews' are accusations by the side that did the killing; Paul's charge about wives and daughters is hostile hearsay, and he wrote with open approval of the slaughter. The Jewish chronicles were written to mourn and their numbers are not counts. Rabbi Aaron's words are not a direct translation of Nathan Hanover's Hebrew (the standard English translation, by Abraham Mesch, 1950, is in copyright) but Dubnow's retelling, translated from Russian in 1916; the charge that the Tulchyn nobles betrayed the Jews is the chronicler's, and the same account has the nobles killed afterwards. The Ruthenian and Polish quotations are given in the original with plain glosses by the site, not published translations; the Ruthenian follows a modern transcription. 'Жиди' and 'ляхи' are the period's ordinary words for Jews and Poles; the first is an offensive word in modern Russian and is generally avoided in modern Ukrainian. Place names vary (Nemyriv, Nemirov, Niemirów; Zboriv, Zborów; Polonne, Polonnoye), and Paul's 'Akhmil' is Khmelnytsky. The passages describe the killing of women and children.",
+   "note": "Research in progress: no quotation in Nathan Hanover's own Hebrew words (Yeven Metzulah, Venice 1653) could be checked against an open text, so the Jewish voice here is at second hand. No letter or universal of Khmelnytsky himself, no text of the Zboriv articles (including the clause on Jews), no Polish account of the rebellion or account by a Polish or Catholic victim, and no present-day official Ukrainian, Polish or Israeli statement was found in a form that could be quoted; Pierre Chevalier's history (English 1672) could not be opened. The edition behind the online Eyewitness Chronicle text is not named on its page."
+  },
+  {
+   "id": "lebanon-famine1915",
+   "title": "The Great Famine of Mount Lebanon (kafno)",
+   "region": "Middle East",
+   "where": "The autonomous Ottoman district (mutasarrifate) of Mount Lebanon and the port of Beirut below it; pin: Aley ('Aleih), a Mount Lebanon town above Beirut where the American eyewitness Margaret McGilvary wrote that the dead were gathered from the streets in the morning (her p. 234; approximate)",
+   "lat": 33.81,
+   "lon": 35.6,
+   "from": 1915,
+   "to": 1918,
+   "themes": [
+    "Famine",
+    "War"
+   ],
+   "facts": [
+    [
+     "Mount Lebanon had been an autonomous Ottoman district under a Christian governor since 1861, with 414,747 inhabitants counted in 1913. After the Ottoman Empire entered the war the district came under the control of the Ottoman army and martial law and Jamal (Djemal) Pasha assumed power; its governor, Ohannes Pasha, resigned in June 1915.",
+     "https://en.wikipedia.org/wiki/Mount_Lebanon_Mutasarrifate"
+    ],
+    [
+     "The historian Graham Pitts writes that hunger and related diseases cost Beirut and Mount Lebanon around 200,000 people, a death rate of more than one in three and the highest of any bounded territory in the First World War. He notes that the Lebanese imported most of their staple crops and that money sent home by emigrants in the Americas had become the largest source of income by 1914.",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "From March to October 1915 locust swarms stripped vegetation across Palestine, Mount Lebanon and Syria; the historian Zachary Foster estimates that the winter grain harvest fell by 10 to 15 per cent and that summer and autumn fruit and vegetable crops lost between 60 and 100 per cent, depending on the crop.",
+     "https://en.wikipedia.org/wiki/1915_Ottoman_Syria_locust_plague"
+    ],
+    [
+     "The Allied navies blockaded the Syrian coast. In May 1916 the British Foreign Office told the American ambassador that France objected to any modification of that blockade, even to land supplies for Jewish hospitals in Jerusalem, and that Britain shared the French view.",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/d1230"
+    ],
+    [
+     "On 26 July 1916 the Ottoman Minister for Foreign Affairs told the American chargé that his government would not permit supplies to be imported for distribution by a neutral commission in Syria and the Lebanon. He said Djemal Pasha denied the reports of famine and claimed to have sent about 3,500,000 bushels of wheat to Beirut and the Lebanon.",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/d1241"
+    ],
+    [
+     "Some people gained from the shortage: Pitts writes that a group of influential merchants dominated the grain trade and moved wheat to wherever prices were highest, and that land changed hands as those with cash reserves took advantage of the food crisis.",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "On 6 May 1916 Jamal Pasha had seven men publicly executed in Damascus and fourteen in Beirut, Muslim and Christian Arab nationalists, for alleged pro-Entente activities; the day is kept in Lebanon and Syria as Martyrs' Day.",
+     "https://en.wikipedia.org/wiki/Martyrs%27_Day_(Lebanon_and_Syria)"
+    ],
+    [
+     "A monument to the famine, the Memory Tree by the Lebanese artist Yazan Halwani, was put up on Damascus Road in Beirut in 2018, commissioned by the Université Saint-Joseph and the writer Ramzi Toufic Salame; Arab News described it as the first memorial ever erected to the disaster.",
+     "https://arabnews.com/node/1350886"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "As for the sacrifices Lebanon made because of its having from the first taken side with the Entente, they are plain to everyone. Over half its population was wiped out through exile, hanging and systematic famishing at the hands of the Turks. With due proportion, this country is among those which suffered most owing to the attitude it adopted and preserved until the end.",
+     "who": "Daoud Ammoun (printed as 'Daoud Bey Mammom'), president of the delegation sent to Paris by the Administrative Council of Mount Lebanon, reading its statement to the Council of Ten; the delegation was asking for independence, wider frontiers and French help, and its words reach us in the English of the conference secretaries",
+     "date": "15 February 1919",
+     "doc": "Secretary's Notes of a Conversation Held in M. Pichon's Room at the Quai d'Orsay, 15 February 1919 (BC-33), in Papers Relating to the Foreign Relations of the United States, The Paris Peace Conference, 1919, vol. IV, p. 3",
+     "url": "https://history.state.gov/historicaldocuments/frus1919Parisv04/d1",
+     "lic": "US government publication (Department of State), public domain"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Disease and starvation spread abroad throughout the land. In the city, refugees from Lebanon, driven down to the coast by the hope of there obtaining work, or at least of escaping from the bitter winter of the mountains, died in the streets. There were days when on the walk of a mile from our house to the office, Mr. Dana and I would pass as many as ten or twelve people either dead or dying by the roadside; or with death only a few hours distant.",
+     "who": "Margaret McGilvary, an American, secretary to her uncle Charles A. Dana, manager of the American Mission Press in Beirut, and secretary of the Beirut chapter of the American Red Cross, The Dawn of a New Era in Syria (New York, 1920), p. 234; she held the Ottoman authorities chiefly to blame, and also wrote of the Entente blockade, food speculators and the cutting off of money from abroad",
+     "date": "published 1920, on the winter of 1916–17",
+     "url": "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt"
+    },
+    {
+     "text": "There was a great deal of profiteering and war wealth, all made on wheat. Among the Syrian masses, famine in its crudest form was fast approaching. In the rich streets of Beirut, men in rags and with famished faces, solitary waifs and strays of both sexes, wandered; lonely children, with wavering, stick-like legs, faces wrinkled like centenarians, eyes sunken with bitter and unconscious irony, hair thinned or entirely gone, moved along.",
+     "who": "Halidé Edib, Turkish writer who ran schools and orphanages in Syria and Lebanon under Djemal Pasha and so wrote from the Ottoman side, Memoirs of Halidé Edib (New York, 1926), p. 510",
+     "date": "published 1926, on her time in Syria during the war",
+     "url": "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt"
+    },
+    {
+     "text": "No party foresaw that the war would last long enough to cause a famine. Neither the Ottoman government nor France or Britain acted decisively to save Lebanon’s civilian population. Paris and London refused to allow aid through their blockade. Ottoman authorities, in conjunction with German advisers, continued to prosecute their war effort at the expense of their population’s welfare.",
+     "who": "Graham Auman Pitts, historian, 'Was Capitalism the Crisis? Mount Lebanon's World War I Famine', Environment & Society Portal, Arcadia (Spring 2021), no. 3, Rachel Carson Center; text licensed CC BY 4.0",
+     "date": "2021",
+     "url": "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    }
+   ],
+   "official": [
+    {
+     "text": "The Minister admits there is some suffering in Syria and the Lebanon, as is also the case in Constantinople or Smyrna, but denies that anyone has died of starvation. He and his colleagues, he says, believe that alarming reports are spread in the United States by the Entente powers for a double purpose; firstly, on the supposition that Turkey will refuse the distribution of relief and thus become embroiled with the United States; secondly, that if Turkey should consent, Entente powers would manipulate the matter so as to be considered by the inhabitants of Syria and the Lebanon as the real benefactors.",
+     "who": "The Ottoman Minister for Foreign Affairs, as reported by the American chargé in Constantinople, Hoffman Philip, in a telegram to the Secretary of State (Foreign Relations of the United States, 1916, Supplement, File No. 867.48/362, p. 934); the position is the minister's, the wording is the American diplomat's",
+     "date": "26 July 1916",
+     "url": "https://history.state.gov/historicaldocuments/frus1916Supp/d1241"
+    },
+    {
+     "text": "At this time the English were blockading all the coasts of the Empire, but the coast of the Hedjaz was excepted and they permitted the Arabian Zambuks to get as much food and corn as they liked from Egyptian ports. I took no exception to this, because the Beduins of the Hedjaz, the local fixed population, and the inhabitants of the Holy Places were almost starving. In this way Syria, which could hardly feed itself, was relieved of the necessity of sending food supplies to that region.",
+     "who": "Djemal (Jamal) Pasha, commander of the Ottoman Fourth Army and ruler of Syria in the war, Memories of a Turkish Statesman, 1913–1919 (London, 1922), p. 218; zambuks are Red Sea sailing boats. The passage concerns food for the Hejaz, not Lebanon; he does not discuss the Lebanese famine in this book",
+     "date": "published 1922, on the war years",
+     "url": "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt"
+    },
+    {
+     "text": "As your excellency will understand, repeated relaxations of the blockade are not free from very serious inconvenience from the military standpoint. It will therefore be impossible for our authorities to grant repeated renewals of this authorization.",
+     "who": "Jules Jusserand, French ambassador in Washington, telling the Secretary of State that France would let one American navy collier, the Caesar, carry supplies to the Syrians through the blockade (Foreign Relations of the United States, 1916, Supplement, File No. 867.48/473, pp. 939–940; printed there in the State Department's translation)",
+     "date": "November 1916",
+     "url": "https://history.state.gov/historicaldocuments/frus1916Supp/d1252"
+    }
+   ],
+   "disputed": [
+    [
+     "How many died? There are no reliable statistics. Pitts gives around 200,000 for Beirut and Mount Lebanon together, more than one in three; Melanie Tanielian writes that historians' estimates for Mount Lebanon run from 150,000 to 300,000, and that for Greater Syria George Antonius gave 350,000 famine deaths and Linda Schilcher, from German records, about 500,000. Figures from the time vary as widely: a report from Cairo passed on by Washington in June 1916 said 80,000 had starved in Lebanon alone by early May, which the American consul general at Beirut, W. Stanley Hollis, reached by a cipher telegram sent through the German ambassador, reduced to 50,000 while reporting that well-informed people said the facts were worse than reported; in 1919 the Lebanese delegation in Paris said over half the population had been lost to exile, hanging and famishing together, Chekri Ganem of the Central Syrian Committee spoke of four or five hundred thousand dead of famine and want in Syria, and McGilvary wrote that three-fourths of Lebanon's half a million had starved. Wikipedia's article on the district gives about 100,000 dead of famine and disease. No figure is agreed.",
+     [
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1232",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1234",
+      "https://history.state.gov/historicaldocuments/frus1919Parisv04/d1",
+      "https://history.state.gov/historicaldocuments/frus1919Parisv03/d68",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://en.wikipedia.org/wiki/Mount_Lebanon_Mutasarrifate"
+     ]
+    ],
+    [
+     "Who was responsible? Many who lived through it blamed the Ottoman government: the 1916 Cairo report spoke of a 'political design' to exterminate the Christian population by starvation and of a military cordon keeping food out of Lebanon; McGilvary wrote of Jemal Pasha's and the Beirut governor Azmi Bey's 'plan of starvation'; Gibran wrote privately to Mary Haskell in May 1916 that the famine was planned by the Turkish government; and the Lebanese delegation of 1919 spoke of 'systematic famishing'. The Ottoman government denied in 1916 that anyone had starved and called the reports Entente propaganda. Djemal's memoir does not discuss the Lebanese famine; in passing it describes the English blockade of the coasts and a Syria that 'could hardly feed itself'. The Allies kept the blockade, and Pitts writes that Paris and London refused to allow aid through it; he notes that an older explanation, set against the charge of an Ottoman plot, blamed the French blockade. Recent historians tend to reject a single cause: Pitts says recent scholarship treats the famine as multicausal, that neither side acted decisively to save civilians, and that no party foresaw a war long enough to cause a famine; Tylor Brand says explanations by deliberate Ottoman or deliberate Allied action are too simple and points to poor rains, locusts, heavy conscription, speculation and high prices, the loss of work under the Allied blockade, and state measures such as price fixing and paper money that did little to help; Tanielian calls the famine man-made and looks at the choices of both state and local actors.",
+     [
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1232",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://www.thenationalnews.com/world/lebanon-s-dark-days-of-hunger-the-great-famine-of-1915-18-1.70379",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1241",
+      "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt",
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction"
+     ]
+    ],
+    [
+     "Was it a genocide? Some Maronite organisations say so: the president of the Syriac Maronite Union spoke in 2020 of the 'Kafno Genocide', at a commemoration that set it beside the killing of Armenians and Syriac Christians in 1915. According to Wikipedia, neither the Lebanese government nor any other government has recognised it as one. The historians cited on this card describe a famine with several causes and do not settle the question of intent, and the witnesses pull both ways: McGilvary, who accused Jemal and Azmi of a plan, also wrote that Lebanon's own wartime governors, Ali Munif and Ismail Hakki, tried to deal fairly with the province, and Halidé Edib wrote that Djemal gave some of the army's supplies to charities feeding children. For that reason this card is not filed under Genocide.",
+     [
+      "https://syriacpress.com/blog/2020/04/26/president-of-maronite-syriac-union-we-must-inform-coming-generations-about-the-kafno-genocide-of-24-april-whoever-fears-to-talk-about-the-past-will-repeat-it/",
+      "https://en.wikipedia.org/wiki/Great_Famine_of_Mount_Lebanon",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt"
+     ]
+    ],
+    [
+     "How much was done by local hands? Pitts writes that the standard interpretation blamed an Ottoman plot to starve the mountain, and Tanielian notes that official remembrance centred on the men hanged by Jamal Pasha while the famine had no plaque or statue. Yet contemporaries on both sides described profiteers: McGilvary wrote that the country's whole reserve of food was in the hands of speculators who were granted permits for buying and moving food, and Halidé Edib, in a passage on the rich of Beirut and Lebanon, that much war wealth was 'all made on wheat'. Pitts argues that the famine followed class lines, with merchants and those holding cash gaining land while the poorest died first. Djemal's memoir, in another connection, calls the Christians of the Lebanon 'very rich'.",
+     [
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt",
+      "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "The people who starved were mostly villagers, silk workers and the urban poor, and none of them speaks here. The one Lebanese voice quoted is a notable speaking to the peace conference with a political claim to press; the poet Gibran, who wrote about the famine from New York, is described but not quoted; the rest are an American relief worker, a Turkish writer in Djemal Pasha's service, diplomats and the commander himself. The fullest account by someone who stayed, Father Antoun Yammine's, exists in Arabic (1919) and French (1922) but was not found in a text reliable enough to quote, and the later Arabic memoirs and novels are in copyright. Muslim and Druze villagers of the mountain and the poor of Beirut, Tripoli and the Bekaa, who also went hungry, are almost absent from these sources; the Druze and Muslim delegates who spoke after Ammoun in Paris addressed the country's political future and did not mention the famine.",
+   "reading": [
+    [
+     "Margaret McGilvary, The Dawn of a New Era in Syria (1920, archive.org)",
+     "https://archive.org/details/dawnofnewerainsy00mcgi"
+    ],
+    [
+     "'Relief in Turkish territories', Papers Relating to the Foreign Relations of the United States, 1916, Supplement (US Department of State, Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/subch44"
+    ],
+    [
+     "Graham Auman Pitts, 'Was Capitalism the Crisis? Mount Lebanon's World War I Famine' (2021, Environment & Society Portal, Rachel Carson Center)",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "Melanie S. Tanielian, The Charity of War: Famine, Humanitarian Aid, and World War I in the Middle East, introduction (2017, Stanford University Press)",
+     "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction"
+    ],
+    [
+     "Antoun Yammine (Yamin), account of Lebanon in the war, Arabic edition (1919, scan on archive.org)",
+     "https://archive.org/details/antoine-yammine-famine"
+    ],
+    [
+     "Djemal Pasha, Memories of a Turkish Statesman, 1913–1919 (1922, archive.org)",
+     "https://archive.org/details/memoriesofturkis00ahmeuoft"
+    ]
+   ],
+   "warn": "Kafno, in the title, is a Classical Syriac word meaning starvation, one of the names given to the famine. The Lebanese delegate's name is misprinted in the American record ('Mammom', once 'Mammon'); the identification with Daoud Ammoun (also spelled Amoun) rests on the other delegates' names, which match the membership of the Lebanese delegation of 15 February 1919 as listed by Les clés du Moyen-Orient. His statement is a political plea, and its 'over half' counts exile and hanging together with hunger. McGilvary wrote as an American who held the Turks guilty, Halidé Edib as a friend of Djemal Pasha, and Djemal to defend himself: his passage on the blockade is about the Hejaz, a search of the scanned text of the English edition found no use of the word famine, and none of its mentions of the Lebanon concerns food. The Ottoman minister's position survives here only in an American diplomat's telegram. The two memoir passages were read from archive.org's scanned text; obvious scanning slips (a broken 'permitted', 'solitarv' for 'solitary') are corrected to the printed words.",
+   "note": "Research in progress: this card has one quotation under 'In their own words' where the section normally has two to four. Only one quotation by a Lebanese speaker could be verified, and he was a delegate, not a survivor. Gibran's prose poem 'Dead Are My People' (1916) is described, not quoted: its Arabic text was found on only one unlabelled website and could not be checked against a printed edition. No statement about the famine on an official Lebanese government or Maronite Patriarchate page was found, so there is no 'today' quotation. Father Yammine's Quatre ans de misère (Cairo, 1922) was not found in a French scan; the Maronite Patriarch's wartime appeals, the American Committee for Armenian and Syrian Relief bulletins and British parliamentary statements on the Syrian blockade were not located in quotable form."
+  },
+  {
+   "id": "sharpeville1960",
+   "title": "The Sharpeville massacre",
+   "region": "Africa",
+   "where": "Sharpeville township, near Vereeniging, Gauteng (then Transvaal), South Africa; pin: Sharpeville, where the crowd stood outside the police station (approximate)",
+   "lat": -26.69,
+   "lon": 27.87,
+   "from": 1952,
+   "to": 1966,
+   "themes": [
+    "Massacre",
+    "Protest and dissent"
+   ],
+   "facts": [
+    [
+     "Pass laws required non-white South Africans to carry documents authorising their presence in restricted areas. The Natives (Abolition of Passes and Co-ordination of Documents) Act of 1952 replaced the earlier passes with 'reference books' holding employment records and fingerprints, which every Black man aged 16 or over had to carry at all times.",
+     "https://www.britannica.com/topic/pass-law"
+    ],
+    [
+     "The Pan-Africanist Congress (PAC), which split from the African National Congress in 1959, called on people to surrender their passes and invite arrest on 21 March 1960. At Sharpeville police opened fire with submachine guns on a crowd that Britannica puts at some 20,000 after, according to police, demonstrators began stoning officers and armoured cars; about 69 people were killed and more than 180 wounded, and some 50 of the victims were women and children.",
+     "https://www.britannica.com/event/Sharpeville-massacre"
+    ],
+    [
+     "PAC representatives told South Africa's Truth and Reconciliation Commission (TRC) that it was 'an absolutely non-violent campaign', and the Commission's report records that the PAC wrote to the commissioner of police beforehand and that its leader Robert Sobukwe reportedly announced that its members were ready to die for their cause but not ready to kill. The campaign was not free of coercion: the same report says evidence suggests that some non-politicised Sharpeville residents were pressurised into taking part, though most supported the protest, that telephone wires linking Sharpeville with Vereeniging were cut on the Sunday evening, and that a bus driver said PAC activists took drivers from their homes in the night and released them only after sunrise.",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm"
+    ],
+    [
+     "Eight weeks earlier, on 24 January 1960, a crowd at Cato Manor, Durban, killed nine policemen, four white and five Black, who were raiding for illegal liquor at a time of forced removals from the area.",
+     "https://www.sahistory.org.za/dated-event/nine-policemen-are-killed-cato-manor-riots-durban-shortly-infamous-sharpville-massacre"
+    ],
+    [
+     "The TRC report says that at 13h15, with nearly 300 police facing a crowd of 5 000, a scuffle broke out; police witnesses said stones were thrown at them and inexperienced constables began firing, while the Commission's own witnesses described a degree of deliberation. It says the majority of those killed or wounded were shot in the back, that seventy-seven people were arrested afterwards, and that wounded people were held under police guard in hospital until they could be taken into custody.",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm"
+    ],
+    [
+     "The African National Congress (ANC) had declared in December 1959 that a nationwide anti-pass campaign would start on 31 March 1960; the PAC's began ten days before that date. Sobukwe and other PAC leaders were charged with incitement to riot on 23 March, a state of emergency was declared on 30 March and over 11,000 people were detained, the United Nations Security Council adopted Resolution 134 on 1 April by nine votes, with France and the United Kingdom abstaining, and the ANC and PAC were banned on 8 April.",
+     "https://www.sahistory.org.za/article/sharpeville-timeline"
+    ],
+    [
+     "On 26 October 1966, by resolution 2142 (XXI), the United Nations General Assembly proclaimed 21 March, the anniversary of the Sharpeville massacre, as the International Day for the Elimination of Racial Discrimination.",
+     "https://www.un.org/en/chronicle/article/long-road-durban-united-nations-role-fighting-racism-and-racial-discrimination"
+    ],
+    [
+     "Reports of the shooting helped focus international criticism on apartheid. On 10 December 1996 President Nelson Mandela chose Sharpeville as the place to sign South Africa's new constitution into law.",
+     "https://www.britannica.com/event/Sharpeville-massacre"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We were still at the singing … not even one person was armed. I saw men and women and young men just holding their umbrellas because it was a hot day. Those who might have had guns, maybe they were hidden somewhere but I didn’t see anyone carrying any weapon, not even a stick and knobkierrie [club], not even a knobkierrie. I only saw umbrellas ... They were not going there to fight. They were peaceful. They didn’t have anything in their hands …",
+     "who": "A survivor of the shooting, wounded in the knee, testifying to the Truth and Reconciliation Commission, as printed in the Commission's report (the ellipses and the bracketed gloss are the report's)",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 35 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    },
+    {
+     "text": "I don’t know what happened but I was on the ground and I decided that I would run until my legs go off me but I didn't know what happened. People were just trampling on me. I tried to push them but I couldn’t and now this leg was now troubling me and I decided to sit down. I said no ways, I cannot carry on.",
+     "who": "A second survivor, shot in the hip, who the report says then spent five months in hospital, testifying to the Truth and Reconciliation Commission, as printed in the Commission's report",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 36 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    },
+    {
+     "text": "They asked me where have we shot you. And I showed them my knee … He said Africa is no longer a thumb facing upwards, it is a thumb facing downwards now.",
+     "who": "The first survivor again, telling the Truth and Reconciliation Commission what a police officer said to him after he had been wounded; as printed in the Commission's report",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 38 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Deplores that the recent disturbances in the Union of South Africa should have led to the loss of life of so many Africans and extends to the families of the victims its deepest sympathies;",
+     "who": "United Nations Security Council, Resolution 134 (1960), operative paragraph 2, adopted by 9 votes to none with France and the United Kingdom abstaining; the next paragraphs deplore the South African government's policies and call on it to abandon apartheid",
+     "date": "1 April 1960",
+     "url": "https://digitallibrary.un.org/record/112105/files/S_RES_134%281960%29-EN.pdf"
+    },
+    {
+     "text": "THE COMMISSION FINDS THAT THE POLICE DELIBERATELY OPENED FIRE ON AN UNARMED CROWD THAT HAD GATHERED PEACEFULLY AT SHARPVILLE ON 21 MARCH 1960 TO PROTEST AGAINST THE PASS LAWS. THE COMMISSION FINDS FURTHER THAT THE SAP FAILED TO GIVE THE CROWD AN ORDER TO DISPERSE BEFORE THEY BEGAN FIRING AND THAT THEY CONTINUED TO FIRE UPON THE FLEEING CROWD, RESULTING IN HUNDREDS OF PEOPLE BEING SHOT IN THE BACK.",
+     "who": "Truth and Reconciliation Commission of South Africa, a commission set up by the post-apartheid state, in its formal finding on Sharpeville (Report, volume 3, chapter 6, after paragraph 42; the capitals and the spelling 'Sharpville' are the report's; SAP is the South African Police)",
+     "date": "1998",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm"
+    },
+    {
+     "text": "Police testimony makes it clear that the officer in charge gave the order to shoot, with the machine gunners firing directly into the crowd from a distance of no more than 3-5 metres.",
+     "who": "The historians Nancy L. Clark and William H. Worger, authors of Voices of Sharpeville, summarising their research in police and national archive records, in The Conversation (article published under a Creative Commons Attribution/No Derivatives licence, CC BY-ND)",
+     "date": "November 2023",
+     "url": "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+    }
+   ],
+   "official": [
+    {
+     "text": "By intimidating and threatening persons who do not belong to the group, the extremists managed to gather a crowd of approximately 20,000 people in a township, Sharpeville, in the Transvaal and a crowd of about 6,000 at Langa in the Cape Province.",
+     "who": "Mr. Fourie, representative of the Union of South Africa, invited to the United Nations Security Council table after the agenda had been adopted, protesting that under Article 2, paragraph 7 of the Charter the Council should not have taken up the matter (Official Records, 851st meeting, paragraph 65, page 12); by 'the group' he means what he calls a splinter organization of extremists; he does not name it, but it is the PAC",
+     "date": "30 March 1960",
+     "url": "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    },
+    {
+     "text": "Indeed, shots were fired at the police before the police returned fire in order to defend their own lives and also to forestall what might have led to even greater and more tragic bloodshed. I need hardly say how deeply the Union Government regrets that there was this tragic loss of life.",
+     "who": "Mr. Fourie, representative of the Union of South Africa, to the United Nations Security Council (Official Records, 851st meeting, paragraph 69, page 13); he had just said that the police were attacked with pangas, axes, iron bars, knives, sticks and firearms, and had been asked by the President to keep to the question of the agenda; earlier he had said that full judicial inquiries had been arranged, and he went on to recall that nine policemen had been killed by a crowd less than two months before",
+     "date": "30 March 1960",
+     "url": "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    }
+   ],
+   "today": {
+    "text": "The apartheid police shot and killed 69 of the protesters at Sharpeville, many of them shot while fleeing. Many other people were killed in other parts of the country. The tragedy came to be known as the Sharpeville Massacre and it exposed the apartheid government’s deliberate violation of human rights to the world.",
+    "who": "Government of South Africa, official page for Human Rights Day, the national day kept each year on 21 March",
+    "date": "page written for Human Rights Day 2014 (it announces an address by President Jacob Zuma), still online and read 26 November 2026",
+    "url": "https://www.gov.za/news/events/commemorative-events/human-rights-day-1"
+   },
+   "disputed": [
+    [
+     "How large was the crowd, and was it hostile? South Africa's representative told the Security Council nine days later that extremists had gathered approximately 20,000 people by intimidation and that the police were attacked with pangas, axes, iron bars, knives, sticks and firearms and were fired on first. The TRC report gives a crowd of 5 000 facing nearly 300 police (an earlier paragraph of the same chapter speaks of approximately 300 marchers) and prints survivors' testimony that nobody was armed, while also recording that some residents had been pressurised into joining. Clark and Worger, working from police and national archive records, describe a peaceful crowd of about 4,000. South African History Online reports that journalists found the mood festive rather than belligerent and that only three policemen were reported hit by stones. On size, the government's figure of 20,000 is also the one Britannica gives; the TRC, South African History Online and the archival research give 4,000 to 5,000. On weapons and on who fired first the 1960 government account stands alone among the sources used here: the TRC found the crowd unarmed and Clark and Worger describe it as peaceful. What the government's own 1960 commission of inquiry found is not given here because its report was not found.",
+     [
+      "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf",
+      "https://www.britannica.com/event/Sharpeville-massacre",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828",
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960"
+     ]
+    ],
+    [
+     "Was an order to fire given? Police witnesses said that stones were thrown and that inexperienced constables began firing of their own accord, as the TRC report records, and the police commander, Lieutenant Colonel Pienaar, denied giving any order to fire, according to Bishop Ambrose Reeves's account as cited by Wikipedia. South African History Online's account has one policeman on an armoured car panicking and firing, followed by the others. The TRC report says its witnesses' evidence reveals a degree of deliberation in the decision to open fire, and the Commission found formally that the police deliberately opened fire without first giving an order to disperse; one survivor told it a white man 'gave a sign' before the shots. Clark and Worger say police testimony itself makes clear that the officer in charge gave the order. There is no agreed account.",
+     [
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://en.wikipedia.org/wiki/Sharpeville_massacre",
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+     ]
+    ],
+    [
+     "How many were killed and wounded, and how many from behind? The figures used since 1960 are 69 dead and 180 wounded: Clark and Worger call them the official police figures first published in 1960, and South African History Online attributes the 180 seriously wounded to the official inquest. The TRC found sixty-nine killed and more than 300 injured, with hundreds shot in the back. Clark and Worger, using autopsy and hospital records in the police archives and the national archives in Pretoria together with interviews, put the toll at at least 91 dead and 281 injured, say the police understated the number of victims by at least one third, and find that over three quarters of the dead and injured were shot in the back as they fled. Their count was published in 2023; the government's Human Rights Day page still gives 69, and Clark and Worger write that residents used their research in 2023 to update the Wall of Names at Freedom Park in Pretoria. The toll at Langa, Cape Town, on the same day is also given differently: the TRC report has two dead and more than fifty injured, while South African History Online has three killed and 26 injured when police charged a crowd, and adds that a newspaper employee was killed by the rioting crowd.",
+     [
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960",
+      "https://www.gov.za/news/events/commemorative-events/human-rights-day-1",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+     ]
+    ]
+   ],
+   "blind": "Clark and Worger draw on testimony given to the government's 1960 commission of inquiry and at the criminal trial of Sharpeville residents, and on sworn statements that survivors and families made in 1961 and 1962 for compensation claims that did not succeed; none of that was found online in a form that can be quoted. What is quoted here comes from the Truth and Reconciliation Commission, thirty-six years later: a few lines the Commission printed from two witnesses heard at Sebokeng on 5 August 1996, out of the 46 statements it received about Sharpeville. Clark and Worger call the Commission's examination of the massacre perfunctory and say only three witnesses from the community were invited to testify, during part of one day. The dead left no words, and the report says wounded people were kept under police guard in hospital until they could be taken into custody. The 1960 government speaks at length through its diplomat at the United Nations; its commission's report, laid before Parliament in January 1961 as a typewritten document in Afrikaans, was not found online. The policemen who fired, Black and white, are not heard in these sources in their own words, and neither are the residents who said they were forced to join the protest.",
+   "reading": [
+    [
+     "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, 'The Sharpville massacre' (SABC / South African History Archive copy)",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm"
+    ],
+    [
+     "United Nations Security Council, Resolution 134 (1960), 1 April 1960 (UN Digital Library)",
+     "https://digitallibrary.un.org/record/112105"
+    ],
+    [
+     "United Nations Security Council, Official Records, 851st meeting, 30 March 1960 (UN Digital Library)",
+     "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    ],
+    [
+     "Nancy L. Clark and William H. Worger, 'Sharpeville: new research on 1960 South African massacre shows the number of dead and injured was massively undercounted' (2023, The Conversation)",
+     "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+    ],
+    [
+     "Sharpeville Massacre, 21 March 1960 (South African History Online)",
+     "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960"
+    ],
+    [
+     "House of Commons written answer of 26 January 1961 on the South African commission's Sharpeville report (UK Parliament, Historic Hansard)",
+     "https://api.parliament.uk/historic-hansard/written-answers/1961/jan/26/sharpeville-shooting-report"
+    ]
+   ],
+   "warn": "The survivors' words are quoted as the TRC report prints them, with the report's own cuts (the ellipses) and its bracketed gloss; they are recollections given thirty-six years after the event, and the report's page names the witnesses, which this card does not. The TRC report spells the township 'Sharpville'. The Security Council record is a scanned document: the wording was checked against its machine-read text, which misreads a few letters (for example 'UDion' for 'Union'), and is given here as the printed page reads. Mr. Fourie's statement is the South African government's case as put to the Council nine days after the shooting, before any inquiry had reported.",
+   "note": "Research in progress: the report of the government's own judicial commission of inquiry (laid before the South African Parliament on 23 January 1961, according to a British ministerial answer of 26 January 1961 in Hansard) was not found online, so its findings are not given here. Lieutenant Colonel Pienaar's denial is given from Wikipedia's citation of Bishop Ambrose Reeves, whose own text could not be opened. No official copy of Prime Minister Verwoerd's statements to Parliament in March 1960 was reached, and the text of the Unlawful Organizations Act 1960 could not be opened. Robert Sobukwe's instructions to PAC members were not found in a source that may be quoted, so they are described from the TRC report only. The quotations were checked against the source pages through a reading tool that returns short excerpts; a letter-by-letter check against the page is still due."
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
