@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-16",
+ "built": "2026-11-26",
  "stories": [
   {
    "id": "cherokee",
@@ -7024,6 +7024,711 @@
      "https://nla.gov.au/nla.obj-53849807"
     ]
    ]
+  },
+  {
+   "id": "jewish-revolt-66",
+   "title": "The First Jewish Revolt and the destruction of Jerusalem",
+   "region": "Middle East",
+   "where": "Roman Judaea, Galilee and the cities of Syria; pin: the Temple Mount in Jerusalem, where the Second Temple was burned in 70. The last fortress, Masada, stands above the Dead Sea to the south",
+   "lat": 31.778,
+   "lon": 35.2354,
+   "from": 66,
+   "to": 73,
+   "themes": [
+    "Uprising",
+    "War",
+    "Massacre",
+    "Famine",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "The First Jewish Revolt (66–70 CE; the last fortress, Masada, held out until April 73) was a Jewish rebellion against Roman rule in Judaea. In the autumn of 66 the Jews drove the Romans out of Jerusalem and defeated a punitive force under Gallus, the imperial legate in Syria, in the pass of Beth-Horon, and a revolutionary government was set up. The emperor Nero sent Vespasian, later joined by his son Titus; the Romans took Galilee, where the historian Josephus commanded the Jewish forces, and Josephus surrendered after the fall of Jotapata.",
+     "https://www.britannica.com/event/First-Jewish-Revolt"
+    ],
+    [
+     "The killing ran in both directions from the start. According to Josephus, the Roman garrison in Jerusalem surrendered its arms on a sworn promise of safety and was then cut down by Eleazar's men, with only the commander Metilius spared; on the same day the people of Caesarea killed more than 20,000 of their Jewish neighbours, Jewish bands then raided and burned Syrian villages and cities, and the Syrian cities killed Jews living among them, more than 13,000 at Scythopolis alone.",
+     "https://lexundria.com/j_bj/2.449-2.480/wst"
+    ],
+    [
+     "Inside Jerusalem the rebel factions killed other Jews. Josephus writes that after the Idumaeans joined the Zealots, 8,500 dead lay in the Temple courts after one night, that the Idumaeans killed the high priests Ananus and Jesus, and that Zealots and Idumaeans together then put to death about 12,000 of the nobility.",
+     "https://penelope.uchicago.edu/josephus/war-4.html"
+    ],
+    [
+     "Josephus writes that the Sicarii who held Masada came down at the feast of unleavened bread on the small town of Engaddi, drove out those who could resist, killed more than 700 women and children who could not flee, and carried the plunder back to the fortress.",
+     "https://lexundria.com/j_bj/4.398-4.409/wst"
+    ],
+    [
+     "Titus besieged Jerusalem in April 70, around Passover, and the Romans built a wall round the city to starve it. By August 70 they had broken through the last defences, killed much of the remaining population and destroyed the Second Temple; Rome commemorated the victory with the Arch of Titus.",
+     "https://www.britannica.com/event/Siege-of-Jerusalem-70"
+    ],
+    [
+     "Josephus, who was with the Roman army, writes that people who slipped out of the city to look for food, most of them poor and some of them fighting men, were caught, whipped, tortured and crucified before the walls, about 500 a day and sometimes more. He says Titus pitied them but let it continue because it was not safe to release so many captives and guarding them would tie up his men, and in the hope that the sight would bring the defenders to yield.",
+     "https://lexundria.com/j_bj/5.446-5.451/wst"
+    ],
+    [
+     "After the fall, by Josephus's account, the soldiers killed the old and infirm; captives over seventeen were sent in chains to the mines of Egypt or to the provinces to die in the arenas, those under seventeen were sold, and 11,000 died of hunger while being sorted. He gives 97,000 captives for the whole war and 1,100,000 dead in the siege, totals that modern historians do not accept as they stand.",
+     "https://penelope.uchicago.edu/josephus/war-6.html"
+    ],
+    [
+     "The fortress of Masada fell to the Romans under Flavius Silva on the fifteenth day of the month Xanthicus, which this edition dates to 73 (the year is argued; see Disputed). Josephus is the only source for what happened inside: he writes that 960 people, women and children included, died at one another's hands, and that two women and five children who had hidden underground survived.",
+     "https://penelope.uchicago.edu/josephus/war-7.html"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "because it had so come to pass, that our city Jerusalem had arrived at an higher degree of felicity than any other city under the Roman government, and yet at last fell into the sorest of calamities again. Accordingly it appears to me, that the misfortunes of all men, from the beginning of the world, if they be compared to these of the Jews, are not so considerable as they were; while the authors of them were not foreigners neither. This makes it impossible for me to contain my lamentations.",
+     "who": "Josephus (Yosef ben Mattityahu), a priest of Jerusalem who commanded the rebel forces in Galilee, surrendered in 67 and wrote this history in Rome as a client of the Flavian emperors; by 'the authors of them' he means the Jewish rebel leaders, whom he blames for the ruin of the city",
+     "date": "written about 75–79, on the war of 66–70",
+     "doc": "Josephus, The Jewish War, Preface, section 4, translated by William Whiston (London, 1737)",
+     "url": "https://penelope.uchicago.edu/josephus/war-pref.html",
+     "lic": "Public domain (translation published 1737)"
+    },
+    {
+     "text": "But what is still more terrible; there was one Jesus, the son of Ananus, a plebeian, and an husbandman, who, four years before the war began; and at a time when the city was in very great peace and prosperity; came to that feast whereon it is our custom for every one to make tabernacles to God in the temple, began on a sudden to cry aloud, “A voice from the east; a voice from the west; a voice from the four winds; a voice against Jerusalem, and the holy house; a voice against the bridegrooms, and the brides; and a voice against this whole people.” This was his cry, as he went about by day and by night, in all the lanes of the city.",
+     "who": "Jesus son of Ananus, a countryman who cried this in the streets of Jerusalem from four years before the war until a stone from a Roman engine killed him on the wall during the siege, as recorded by Josephus (the narration is Josephus's; he says the Roman procurator Albinus had the man whipped and released him as mad)",
+     "date": "from about 62 to 70; written about 75–79",
+     "doc": "Josephus, The Jewish War, book 6, chapter 5, section 3, translated by William Whiston (London, 1737)",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html",
+     "lic": "Public domain (translation published 1737)"
+    },
+    {
+     "text": "לגאלת ציון",
+     "who": "Legend in Hebrew on a bronze coin struck by the rebel government in besieged Jerusalem in the fourth year of the revolt; in plain English: 'For the redemption of Zion'. Bronze coins from the earlier part of the revolt read 'Freedom of Zion'. These few words are the only ones on this card that come from the rebels themselves without passing through Josephus",
+     "date": "year 4 of the revolt, 69–70",
+     "doc": "Bronze coin of year 4 marked 'half' (catalogued by the project as a half shekel), Jerusalem mint, obverse legend, as published by the 'Judaism and Rome' research project (entry by Samuele Rocca)",
+     "url": "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/403",
+     "lic": "Public domain (ancient coin legend)"
+    },
+    {
+     "text": "R. Johanan b. Zakkai once went out of Jerusalem, followed by R. Joshua, and seeing the destroyed Temple, R. Joshua said: \"Woe to us, that this is destroyed, the only place where the sins of the Israelites were atoned!\" R. Johanan corrected him, saying: \"My son, do not grieve over it. We have other means of atonement as effective--namely, bestowal of favors, as it is written [Hosea, vi. 6]: 'For kindness I desired, and not sacrifice.'\"",
+     "who": "Rabbinic memory of the years after the destruction: Rabban Johanan ben Zakkai, who by the same text was carried out of besieged Jerusalem in a coffin, and his disciple Joshua, as told in Aboth of Rabbi Nathan, a rabbinic compilation put together centuries after the event",
+     "date": "set soon after 70; compiled centuries later",
+     "doc": "Aboth of R. Nathan, in the passage headed 'Upon bestowal of favors', printed as the Tosephtha to Tract Aboth, Mishna B, in Michael L. Rodkinson (trans.), Babylonian Talmud, Book 5 (vols. IX and X), 1918 edition",
+     "url": "https://archive.sacred-texts.com/jud/t05/abo05.htm",
+     "lic": "Public domain (this edition published 1918)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "I have heard that the total number of the besieged, of every age and both sexes, amounted to six hundred thousand. All who were able bore arms, and a number, more than proportionate to the population, had the courage to do so. Men and women showed equal resolution, and life seemed more terrible than death, if they were to be forced to leave their country.",
+     "who": "Tacitus, Roman senator and historian, Histories, book 5, chapter 13, translated by A. J. Church and W. J. Brodribb (1876); his account of the siege itself is lost, and the book is hostile to Jewish religion and customs",
+     "date": "written about 100–110, on the year 70",
+     "url": "https://classics.mit.edu/Tacitus/histories.5.v.html"
+    },
+    {
+     "text": "Since we long ago, my generous friends, resolved never to be servants to the Romans, nor to any other than to God himself, who alone is the true and just lord of mankind; the time is now come that obliges us to make that resolution true in practice. And let us not at this time bring a reproach upon our selves for self contradiction; while we formerly would not undergo slavery, though it were then without danger; but must now, together with slavery, chuse such punishments also as are intolerable. I mean this upon the supposition that the Romans once reduce us under their power while we are alive. We were the very first that revolted from them; and we are the last that fight against them.",
+     "who": "Speech given by Josephus to Eleazar son of Jairus, leader of the Sicarii at Masada, on the night before the fortress fell. Josephus was not there and wrote in Rome under Flavian patronage; ancient historians composed such speeches, and this one is his composition, not a record of Eleazar's words (The Jewish War, book 7, chapter 8, section 6, translated by William Whiston, 1737)",
+     "date": "written about 75–79, on the spring of 73",
+     "url": "https://penelope.uchicago.edu/josephus/war-7.html"
+    },
+    {
+     "text": "The populace was stationed below in the court, the senators on the steps, and the priests in the sanctuary itself. And though they were but a handful fighting against a far superior force, they were not conquered until a part of the temple was set on fire. Then they met death willingly, some throwing themselves on the swords of the Romans, some slaying one another, others taking their own lives, and still others leaping into the flames. And it seemed to everybody, and especially to them, that so far from being destruction, it was victory and salvation and happiness to them that they perished along with the temple.",
+     "who": "Cassius Dio, Roman senator and historian writing in Greek, Roman History, epitome of book 65 (66 in some numberings), chapter 6, in the Loeb Classical Library translation by Earnest Cary, vol. VIII (1925); this part of Dio survives only in a Byzantine abridgement",
+     "date": "written in the early 3rd century, on the year 70",
+     "url": "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html"
+    }
+   ],
+   "official": [
+    {
+     "text": "Senatus populusq(ue) Romanus Imp(eratori) Tito Caesari divi Vespasiani f(ilio) Vespasian[o] Augusto pontif(ici) max(imo) trib(unicia) pot(estate) X imp(eratori) XVII [c]o(n)s(uli) VIII p(atri) p(atriae) principi suo quod praeceptis patri consiliisq(ue) et auspiciis gentem Iudaeorum domuit et urbem Hierusolymam omnibus ante se ducibus regibus gentibus aut frustra petitam aut omnino intemptatam delevit",
+     "who": "The Senate and People of Rome, dedication of the lost Arch of Titus in the Circus Maximus (CIL VI 944), in Latin with the editors' expansions in brackets. In plain English: the Senate and People of Rome to the emperor Titus, their leader, because on his father's instructions, advice and auspices he subdued the Jewish people and destroyed the city of Jerusalem, which all generals, kings and peoples before him had either attacked in vain or never attempted. The stone is lost and the text survives in a medieval copy; Pompey took Jerusalem in 63 BCE and Sosius in 37 BCE, so the claim of a first conquest does not hold (see Disputed)",
+     "date": "81",
+     "url": "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+    },
+    {
+     "text": "But Titus said, that “Although the Jews should get upon that holy house, and fight us thence, yet ought we not to revenge ourselves on things that are inanimate, instead of the men themselves: and that he was not in any case for burning down so vast a work as that was: because this would be a mischief to the Romans themselves; as it would be an ornament to their government while it continued.”",
+     "who": "Titus, commander of the Roman army and later emperor, at his council of war before the Temple was burned, as reported by Josephus, who was in his camp and whose history Titus approved for publication (The Jewish War, book 6, chapter 4, section 3, translated by William Whiston, 1737). This is the Flavian version of events; another ancient account says the opposite (see Disputed)",
+     "date": "August 70; written about 75–79",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html"
+    },
+    {
+     "text": "It can therefore be nothing certainly but the kindness of us Romans which hath excited you against us. Who in the first place have given you this land to possess; and in the next place have set over you Kings of your own nation; and in the third place have preserved the laws of your forefathers to you; and have withal permitted you to live either by yourselves, or among others, as it should please you. And, what is our chief favour of all, we have given you leave to gather up that tribute which is paid to God; with such other gifts that are dedicated to him.",
+     "who": "Titus, addressing the rebel leaders John and Simon after the Temple had burned, in a speech written for him by Josephus (The Jewish War, book 6, chapter 6, section 2, translated by William Whiston, 1737); it sets out the Roman case that Rome had been generous and the rebels alone were to blame",
+     "date": "August 70; written about 75–79",
+     "url": "https://penelope.uchicago.edu/josephus/war-6.html"
+    }
+   ],
+   "today": {
+    "text": "After Judaea became a province of the Roman Empire, it was the refuge of the last survivors of the Jewish revolt, who chose death rather than slavery when the Roman besiegers broke through their defences. As such it has an emblematic value for the Jewish people.",
+    "who": "UNESCO World Heritage Centre, 'Brief synthesis' in the statement of Outstanding Universal Value for Masada (Israel), which is on the World Heritage List. This is the listing text of an international body, not a statement made by the State of Israel; it follows Josephus's account of the deaths, which some historians doubt (see Disputed)",
+    "date": "page accessed 26 November 2026",
+    "url": "https://whc.unesco.org/en/list/1040"
+   },
+   "disputed": [
+    [
+     "How many died and were enslaved? Josephus gives 1,100,000 dead in the siege, most of them pilgrims caught in the city at Passover, and 97,000 captives in the whole war; he also reports a count of 115,880 bodies carried out through a single gate, and deserters' reports of 600,000 bodies of the poor thrown out at the gates. Tacitus gives the same number with a different meaning: he had heard that 600,000 people were besieged. As Wikipedia's survey reports the scholarship, Menahem Stern rejected the death toll as exaggerated, Seth Schwartz puts the whole population of Roman Palestine at about a million, roughly half of them Jews, and Guy Rogers estimates the siege dead in the tens of thousands, probably 20,000 to 30,000. The scholars cited there all reject Josephus's totals, and no agreed figure has replaced them; that very large numbers were killed and enslaved is not in dispute.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-6.html",
+      "https://lexundria.com/j_bj/5.567-5.569/wst",
+      "https://classics.mit.edu/Tacitus/histories.5.v.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)"
+     ]
+    ],
+    [
+     "Did Titus want the Temple spared? Josephus says Titus told his council he would not burn it, that a soldier threw a firebrand without orders and that Titus tried to have the fire put out. The Christian chronicler Sulpicius Severus, writing about 400, says the reverse: that some of the council wished it kept as evidence of Roman moderation, but 'others and Titus himself' thought it should be overthrown so that the religion of the Jews and of the Christians might be more thoroughly subverted. Sulpicius may have drawn on the lost part of Tacitus's Histories, and a paper by Kelly Shannon-Henderson treats the passage as a possible fragment of Tacitus. Cassius Dio says only that the soldiers hung back from the Temple out of superstition and went in under compulsion from Titus, and he does not say who wanted it burned. As Wikipedia's survey reports the scholarship, most modern scholars reject Josephus's version (Lester Grabbe calls it unbelievable); some suggest he played down Titus's part to protect Titus's reputation, while Grabbe and Fausto Parente think he wished to discourage Jewish vengeance. Martin Goodman finds an accidental fire plausible in the dry heat of summer, and Doron Mendels holds that the Romans targeted the Temple as the centre of the rebellion. The question remains open.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-6.html",
+      "https://www.newadvent.org/fathers/35052.htm",
+      "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Jerusalem_(70_CE)",
+      "https://classicalstudies.org/tacitus-destruction-temple"
+     ]
+    ],
+    [
+     "What happened at Masada? Josephus, the only source, says the 960 defenders burned their goods, that ten men chosen by lot killed the rest and then one another, and that one of the surviving women told the Romans what had been said and done. The excavator Yigael Yadin (1963–65) found three skeletons in the northern palace and 25 in a cave, and suggested that the Romans had thrown the 25 there. Shaye Cohen argued in 1982 that the account is partly invented: the remains show many separate fires where Josephus has one, storerooms holding provisions were burnt although Josephus has Eleazar order the food spared, the 25 in the cave look like people who tried to hide, and the speeches and the orderly unanimous suicide serve literary ends; he concluded that at least some Sicarii killed themselves and that others may have hidden, fought or been killed by the Romans. Jodi Magness holds that archaeology can neither prove nor disprove Josephus; Menahem Stern accepted the suicide as historical. There is no consensus, and the date is also argued (spring 73 or 74).",
+     [
+      "https://penelope.uchicago.edu/josephus/war-7.html",
+      "https://www.pbs.org/wgbh/pages/frontline/shows/religion/portrait/masada.html",
+      "https://en.wikipedia.org/wiki/Siege_of_Masada"
+     ]
+    ],
+    [
+     "Who was to blame? Josephus puts the destruction on the 'seditious temper' of the rebel leaders, whom he calls tyrants and robbers, and presents the Romans as unwilling destroyers; that view suited both his patrons and his own position as a commander who had changed sides. He also records Roman provocations himself, including the governor Florus's soldiers killing about 3,600 people in Jerusalem in 66 and crucifying Jews of equestrian rank. Britannica gives the causes as heavy taxation, resentment of imperial rule and conflict between Jews and Gentiles. The Senate's inscription for Titus presents the war simply as the taming of a people and claims a first conquest of Jerusalem, which Caroline Barron's commentary for the 'Judaism and Rome' project calls 'undeniably false', since Pompey took the city in 63 BCE and Sosius in 37 BCE.",
+     [
+      "https://penelope.uchicago.edu/josephus/war-pref.html",
+      "https://penelope.uchicago.edu/josephus/war-2.html",
+      "https://www.britannica.com/event/Siege-of-Jerusalem-70",
+      "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+     ]
+    ]
+   ],
+   "blind": "Almost everything known about this war comes from one man, Josephus, who fought for the rebels, went over to the Romans and wrote under the emperors who destroyed Jerusalem; the leaders he blames, John of Gischala, Simon son of Gioras and the Zealot and Sicarii commanders, left no account of their own, and the words he gives them are his. What survives directly from the rebels is a few words stamped on their coins. The tens of thousands sold into slavery, sent to the mines or killed in the arenas left nothing, and the women and children of Jerusalem, Engaddi, Caesarea and Masada are counted, not heard. Rabbinic memory of the destruction was written down generations later. The Roman side survives in Tacitus (whose narrative of the siege is lost), in an abridged Cassius Dio, and in two arches of Titus, one still standing in Rome and one known only from a copied inscription. The Greek and Syrian townspeople who killed their Jewish neighbours, and those killed by Jewish raiders, speak nowhere.",
+   "reading": [
+    [
+     "Flavius Josephus, The Wars of the Jews, trans. William Whiston (1737; University of Chicago, Penelope)",
+     "https://penelope.uchicago.edu/josephus/index.html"
+    ],
+    [
+     "Tacitus, The Histories, book 5, trans. A. J. Church and W. J. Brodribb (1876; MIT Internet Classics Archive)",
+     "https://classics.mit.edu/Tacitus/histories.5.v.html"
+    ],
+    [
+     "Cassius Dio, Roman History, epitome of book 65, trans. Earnest Cary (Loeb, 1925; LacusCurtius, University of Chicago)",
+     "https://penelope.uchicago.edu/Thayer/E/Roman/Texts/Cassius_Dio/65*.html"
+    ],
+    [
+     "First Jewish Revolt (Britannica)",
+     "https://www.britannica.com/event/First-Jewish-Revolt"
+    ],
+    [
+     "Caroline Barron, The Arch of Titus in the Circus Maximus (CIL VI 944) (Judaism and Rome project)",
+     "https://heurist.huma-num.fr/heurist/judaism_and_rome/tpl/public-record/227"
+    ],
+    [
+     "Shaye J. D. Cohen, Masada: Literary Tradition, Archaeological Remains, and the Credibility of Josephus (1982; extract at PBS Frontline)",
+     "https://www.pbs.org/wgbh/pages/frontline/shows/religion/portrait/masada.html"
+    ]
+   ],
+   "warn": "Josephus is both a voice of the defeated and a client of the victors: a Jerusalem priest and rebel general who surrendered, tried to talk the defenders into surrender during the siege and says himself, in his Life, that Titus signed his books and ordered them published. His speeches for Eleazar and for Titus are literary compositions, his numbers are not reliable, and he blames the rebel factions throughout. The English is William Whiston's of 1737, in the spelling and punctuation of that printing (chuse, our selves); later printings punctuate differently. The rabbinic passage is from Rodkinson's free and abridged translation (1918 edition) and the story was written down long after the event. The Latin inscription and the Hebrew coin legend are given in the original with a plain gloss, because no public-domain English version was found; the Latin is known only from a medieval copy of the lost stone. Dates vary between sources: Josephus puts the burning of the Temple on the 10th of the month Lous (Ab), Jewish tradition and Britannica on the 9th. The sources describe famine, crucifixion and the killing of children.",
+   "note": "Research in progress: the Talmud's account of the destruction (Gittin 55b–58a) is not quoted because no public-domain English translation of that tractate was found. Sulpicius Severus is summarised, not quoted. No statement by the State of Israel was looked up; the 'today' entry is UNESCO's. Modern estimates of the dead are taken from Wikipedia's survey of the scholarship, not from the books themselves."
+  },
+  {
+   "id": "zanj869",
+   "title": "The Zanj rebellion",
+   "region": "Middle East",
+   "where": "The salt flats, canals and marshes of southern Iraq around Basra. The pin marks the modern district of Abu al-Khasib, south-east of Basra on the Shatt al-Arab, which shares its name with the canal (Nahr Abi al-Khasib) on which the rebel city of al-Mukhtara stood; it is approximate, because the site of the city has never been exactly identified",
+   "lat": 30.44,
+   "lon": 48.0,
+   "from": 869,
+   "to": 883,
+   "themes": [
+    "Slavery",
+    "Forced labour",
+    "Uprising",
+    "Massacre",
+    "War"
+   ],
+   "facts": [
+    [
+     "Landowners of Basra had brought enslaved East Africans (the Zanj) to drain the salt marshes east of the city, where they were worked hard and fed little. In 869 Ali ibn Muhammad won over several of the work gangs by promising them freedom and wealth, and the revolt against the Abbasid caliphate lasted until 883.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Ali ibn Muhammad was not one of the Zanj and was not enslaved. Al-Tabari reports that he claimed descent from Ali ibn Abi Talib, that his real name was said to be Ali ibn Muhammad ibn Abd al-Rahim of the Arab tribe of Abd al-Qays, that he grew up in Warzanin, a village near Rayy in Iran, lived for a time in Samarra among men of the caliph al-Muntasir's household, praising them in verse and asking for gifts, and had already tried to raise a following in Bahrain.",
+     "https://shamela.ws/book/9783/5418"
+    ],
+    [
+     "According to al-Tabari, the leader went from one work site to the next taking the slaves with him (fifty at one, five hundred at another) and, when he had gathered them, swore to them that he would not betray or abandon them. He told the slaves to fetch whips, had the masters and overseers given five hundred lashes each, and released them on their oath not to reveal where he was or how many men he had; the same page says there were fifteen thousand slaves at the works across the Tigris that one of the released men went to warn.",
+     "https://shamela.ws/book/9783/5422"
+    ],
+    [
+     "The rebels built a fortified capital, al-Mukhtara, in the salt flats, took the port of al-Ubulla, sacked Basra in 871, defeated the caliph's brother al-Muwaffaq in 872 and seized Wasit in 878, and they were joined by soldiers who changed sides and by discontented peasants.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Basra fell in September 871 and a massacre followed. Theodor Nöldeke (1892) wrote that the lowest estimate put the dead at 300,000, that the captured women and children were carried into slavery, that women of the houses of Ali and of the ruling Abbasid family were sold to the highest bidder, and that many of the rebels were said to have received ten slaves or more as their share; the figure of 300,000 is a medieval one and is not accepted today (see Disputed).",
+     "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    ],
+    [
+     "Ali ibn Muhammad did not promise to end slavery: he promised his followers that they would have homes, money and slaves of their own, and the record shows the Zanj enslaving others and plundering villages and towns.",
+     "https://daily.jstor.org/what-was-the-zanj-rebellion"
+    ],
+    [
+     "Al-Muwaffaq began a great offensive in 879, took the second rebel city, al-Mani'a, drove the rebels out of Khuzistan, and after a long siege of al-Mukhtara crushed the revolt in 883; Ali ibn Muhammad's head was carried to Baghdad.",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "Al-Tabari records that in the final fighting many Zanj were killed, drowned or captured, and that of about a thousand who were cut off and turned inland most died of thirst and the survivors were seized and enslaved by Bedouin.",
+     "https://shamela.ws/book/9783/5669"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "فسألني عن أخبار غلمان الشورجيين وما يجري لكل غلام منهم من الدقيق والسويق والتمر وعمن يعمل في الشورج من الأحرار والعبيد، فأعلمته ذلك، فدعاني إلى ما هو عليه، فأجبته، فقال لي: احتل فيمن قدرت عليه من الغلمان، فأقبل بهم إلي ووعدني أن يقودني على من آتيه به منهم، وأن يحسن إلي",
+     "who": "Rayhan ibn Salih, one of the ghilman of the shurajiyyin, the men who ran the salt-flat works (ghilman covers slaves, servants and young men; the page does not use the word 'abd, slave, of Rayhan himself); he carried flour from Basra to his master's ghilman and was, the chronicler says, the first of them to join the leader; as recorded by al-Tabari (died 923), a scholar of Baghdad who wrote under the Abbasid caliphs, from the side that put the rebellion down; the page says only 'it is reported from Rayhan ibn Salih' and names no one who passed the account on. Plain gloss: he asked me about the ghilman of the salt-flat owners, how much flour, parched-grain meal and dates each slave was given, and who worked the salt flats, free men and slaves; I told him; he called me to his cause and I accepted; he said to me: win over whichever of the slaves you can and bring them to me; and he promised to put me in command of those I brought him and to treat me well",
+     "date": "September 869 (Ramadan 255 AH); written down before 915",
+     "doc": "al-Tabari, Tarikh al-rusul wa'l-muluk (History of the Prophets and Kings), year 255 AH, section 'Khuruj awwal Alawi bi'l-Basra'; ed. Muhammad Abu al-Fadl Ibrahim (Cairo, Dar al-Ma'arif, 2nd ed. 1967), vol. 9, p. 413, as transcribed by al-Maktaba al-Shamela",
+     "url": "https://shamela.ws/book/9783/5421",
+     "lic": "Public domain (Arabic text of the early 10th century). The wording follows the online transcription of the 1967 Cairo edition; commas and colons are the modern editor's. Quoted in Arabic because the only full English translation (SUNY Press, 1992) is in copyright"
+    },
+    {
+     "text": "قد أردت ضرب أعناقكم لما كنتم تأتون إلى هؤلاء الغلمان الذين استضعفتموهم وقهرتموهم، وفعلتم بهم ما حرم الله عليكم أن تفعلوه بهم، وجعلتم عليهم ما لا يطيقون، فكلمني أصحابي فيكم، فرأيت إطلاقكم",
+     "who": "Ali ibn Muhammad, leader of the revolt (himself neither Zanj nor enslaved), speaking to the slaves' masters whom he had seized, as recorded by al-Tabari, the Abbasid-side chronicler; the page does not name the informant for this speech. Plain gloss: I meant to cut off your heads for what you have been doing to these slaves, whom you treated as weak and crushed; you did to them what God has forbidden you to do to them and laid on them more than they can bear; but my companions spoke to me on your behalf, and I have decided to let you go",
+     "date": "September 869 (Ramadan 255 AH); written down before 915",
+     "doc": "al-Tabari, Tarikh al-rusul wa'l-muluk, year 255 AH, section 'Khuruj awwal Alawi bi'l-Basra'; ed. Muhammad Abu al-Fadl Ibrahim (Cairo, Dar al-Ma'arif, 2nd ed. 1967), vol. 9, p. 414, as transcribed by al-Maktaba al-Shamela",
+     "url": "https://shamela.ws/book/9783/5422",
+     "lic": "Public domain (Arabic text of the early 10th century). The wording follows the online transcription of the 1967 Cairo edition; commas are the modern editor's"
+    }
+   ],
+   "witness": [
+    {
+     "text": "L'insolence de l'armée des Zendj était telle qu'on y vendait à l'encan les femmes de la famille de Haçan, de Huçeïn et d'Abbas, les descendantes de Hachem, de Koreïch et des plus nobles familles arabes. Une jeune fille se vendait de deux à trois dirhems ; le crieur annonçait sa généalogie en ces termes: «Une telle, fille d'un tel, de telle famille!» Chaque noir possédait dix, vingt et même trente de ces femmes; elles servaient de concubines aux noirs et remplissaient auprès de leurs femmes les fonctions des plus humbles esclaves.",
+     "who": "Al-Mas'udi (died 956), historian from Baghdad who wrote some sixty years after the war ended, Muruj al-dhahab (Meadows of Gold), in the French translation of C. Barbier de Meynard, Les Prairies d'or, vol. 8 (Paris, 1874), p. 60. Plain gloss: the Zanj army was so insolent that women of the families of Hasan, Husayn and Abbas, descendants of Hashim and Quraysh and of the noblest Arab families, were sold in it by auction; a girl sold for two or three dirhams, and the crier called out her descent: 'So-and-so, daughter of so-and-so, of such a family!'; each black man owned ten, twenty, even thirty of these women, who served the men as concubines and their wives as the lowest slaves",
+     "date": "written about 947 (French translation 1874)",
+     "url": "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt"
+    },
+    {
+     "text": "The work in such a case is very hard, and the supervision must be strict. The feeling of affection which in the East binds the slave very closely to the family in which he lives and has grown up, is here altogether wanting. On the other hand, among such masses of slaves working together there easily springs up a certain community of feeling, a common sense of embitterment against their masters, and, under favourable circumstances, a consciousness of their own strength; thus are combined the conditions of a powerful insurrection.",
+     "who": "Theodor Nöldeke, German orientalist, 'A Servile War in the East', in Sketches from Eastern History, translated by John Sutherland Black (London and Edinburgh, 1892), p. 149; an outside historian working from al-Tabari a thousand years later",
+     "date": "1892",
+     "url": "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    },
+    {
+     "text": "It was not till Monday that the Zenj took full possession. The massacre that followed was frightful. It is even alleged that many inhabitants were induced, by offers of quarter, to gather together at certain places, where they could more easily be cut down. The chief had vowed direst vengeance on the city which had deceived his hopes.",
+     "who": "Theodor Nöldeke on the sack of Basra in September 871, 'A Servile War in the East', in Sketches from Eastern History, translated by John Sutherland Black (1892), p. 159",
+     "date": "1892",
+     "url": "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "كتب إليه كتابا يدعوه فيه إلى التوبة والإنابة إلى الله تعالى مما ركب من سفك الدماء وانتهاك المحارم وإخراب البلدان والأمصار، واستحلال الفروج والأموال، وانتحال ما لم يجعله الله له أهلا من النبوة والرسالة، ويعلمه أن التوبة له مبسوطة، والأمان له موجود، فإن هو نزع عما هو عليه من الأمور التي يسخطها الله، ودخل في جماعة المسلمين، محا ذلك ما سلف من عظيم جرائمه، وكان له به الحظ الجزيل في دنياه",
+     "who": "Al-Tabari's report of the letter that Abu Ahmad al-Muwaffaq, the caliph's brother and commander of his armies, sent to the rebel leader before besieging al-Mukhtara (Tarikh al-rusul wa'l-muluk, year 267 AH; Cairo edition of 1967, vol. 9, p. 581); al-Tabari gives the letter's content, not its text, and names as his source Muhammad ibn al-Hasan ibn Sahl, reporting from Muhammad ibn Hammad; the date and the source stand at the foot of the preceding page (p. 580, https://shamela.ws/book/9783/5588). Plain gloss: he wrote him a letter calling on him to repent and turn back to God from what he had done, the shedding of blood, the violation of what is sacred, the ruin of lands and cities, the taking of women and property as if lawful, and the claim to prophethood and a divine mission for which God had not made him fit; and telling him that repentance was open to him and safe-conduct ready: if he gave up the things that anger God and joined the community of the Muslims, that would wipe out his great past crimes and he would have a rich share in this world. The page goes on to say that the leader read the letter and gave no answer",
+     "date": "February 881 (mid-Rajab 267 AH); written down before 915",
+     "url": "https://shamela.ws/book/9783/5589"
+    }
+   ],
+   "disputed": [
+    [
+     "Was it a slave revolt? Nöldeke (1892) called it a 'servile war' and compared it with the slave wars of the late Roman republic, and Britannica describes a revolt of enslaved East Africans. M. A. Shaban (1976) argued that it was not a slave revolt at all but a rising of 'blacks' in which a few runaway slaves joined a majority of Arabs and free East Africans, on the ground that slaves alone could not have sustained so long a war. Ghada Hashem Talhami (1977) sees a religious and social rising of the lowest classes of the Basra region, joined by Bahrainis, Bedouin and others, and says the sources do not show that the Zanj were the majority. The sources cited here agree that the leader was a free man who claimed Alid descent and used Kharijite slogans, and that Bedouin, peasants and deserting soldiers joined him. Against Shaban, al-Tabari's account of the first day counts slaves taken from named work sites by the fifty and the five hundred. There is no consensus on the label.",
+     [
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://www.britannica.com/event/Zanj-rebellion",
+      "https://shamela.ws/book/9783/5422"
+     ]
+    ],
+    [
+     "How many died? Al-Mas'udi wrote that the more moderate estimate of all the dead was 500,000 and that 300,000 were killed in a single battle near Basra, but in the same passage he says that both the high and the moderate figures rest on empty conjecture and that no exact count is possible. Later medieval writers went higher: al-Suli is cited for 1,500,000 and Ibn al-Tiqtaqa for 2,500,000. Al-Tabari gives no total. Wikipedia's article says modern historians consider the medieval figures gross exaggerations. For Basra, Wikipedia's article on the battle says modern historians reject al-Mas'udi's 300,000 as excessive and, citing Alexandre Popovic's monograph, that other authors give 10,000 to 20,000; Adam Ali, a University of Toronto lecturer writing for Medievalists.net, says most scholars agree on that range. Nöldeke judged the 300,000 fighting men claimed for the rebel leader greatly exaggerated, and William Muir called the figures given for the armies and the captives 'clearly fabulous'; neither was speaking of the dead. No reliable total exists.",
+     [
+      "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://en.wikipedia.org/wiki/Battle_of_Basra_(871)",
+      "https://www.medievalists.net/2019/02/zanj-revolt-slave-war-medieval-iraq/",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://answering-islam.org/Books/Muir/Caliphate/chap70.htm"
+     ]
+    ],
+    [
+     "Who were the 'Zanj'? The older view, followed by Nöldeke and Britannica, takes the word in its geographical sense: people brought from the East African coast. Nöldeke himself noted that the 'Zenj, properly so called' mostly knew no Arabic and needed an interpreter, while other black slaves, from Nubia and elsewhere, spoke it; al-Tabari says the leader's festival sermon had to be repeated by those who understood Arabic for those who did not. Talhami argues that 'Zanj' was used loosely for black Africans in general, and JSTOR Daily cites her for the view that most of those who took part were black slaves of Nubian and Ethiopian origin. Wikipedia's article reports that, because there is little evidence of a large slave trade on the Swahili coast at this date, the word is thought in this case to mean Africans generally, though JSTOR Daily calls the origin of the rebels still a point of scholarly contention. The Arabic sources give no account of where individual rebels came from.",
+     [
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt",
+      "https://shamela.ws/book/9783/5423",
+      "https://daily.jstor.org/what-was-the-zanj-rebellion",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion"
+     ]
+    ],
+    [
+     "Who was Ali ibn Muhammad and what did he believe? He claimed descent from Ali and Fatima; al-Tabari gives another name and an Arab tribal origin and reports that he changed his claimed genealogy between Bahrain and Iraq, al-Mas'udi calls the genealogy false, and Muslim historians of the period generally rejected it. Britannica calls him a Persian; Wikipedia's article reports that other historians think a Persian origin unlikely. Al-Mas'udi says he followed the Azraqite branch of the Kharijites and killed women, children and the old; Britannica says the movement adopted Kharijite doctrine after it began. Nöldeke thought him 'a man of genius'; al-Tabari, as Nöldeke notes, prefers to call him 'the abominable one', 'the wicked one' or 'the traitor'. Whether he acted from belief or used religious claims to win power cannot be settled from sources written by his enemies.",
+     [
+      "https://shamela.ws/book/9783/5418",
+      "https://archive.org/stream/lesprairiesdor08masuuoft/lesprairiesdor08masuuoft_djvu.txt",
+      "https://www.britannica.com/event/Zanj-rebellion",
+      "https://en.wikipedia.org/wiki/Zanj_Rebellion",
+      "https://archive.org/stream/cu31924027985088/cu31924027985088_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "Almost everything known comes from al-Tabari, who lived in Baghdad during the war and wrote under the dynasty that won it; al-Mas'udi, writing some sixty years after the war ended, is as hostile. The Zanj left no document of their own: no letter, nothing beyond their coins, which carried Kharijite formulas (one was published in 1933 as 'A Rare Coin of the Zanj'), and no account by any of the thousands who cleared the salt flats. Their words reach us only where al-Tabari passes on what former rebels told his informants, as with the slave Rayhan ibn Salih, and the leader's speeches come the same way. Al-Mas'udi says the first history of the revolt was written by Muhammad ibn al-Hasan ibn Sahl; al-Tabari cites him by name, but his book is lost. The people of Basra who were killed or sold are heard mainly through the Baghdad poet Ibn al-Rumi's elegy for the city and through the chroniclers. The women held by both sides, and the enslaved people whom the rebels themselves took, do not speak at all.",
+   "reading": [
+    [
+     "Theodor Nöldeke, 'A Servile War in the East', in Sketches from Eastern History, trans. J. S. Black (1892, archive.org), pp. 146–175",
+     "https://archive.org/details/cu31924027985088"
+    ],
+    [
+     "Zanj rebellion (Encyclopaedia Britannica)",
+     "https://www.britannica.com/event/Zanj-rebellion"
+    ],
+    [
+     "al-Tabari, Tarikh al-rusul wa'l-muluk, vol. 9 (Cairo edition of 1967, Arabic text, al-Maktaba al-Shamela): the start of the revolt, year 255 AH",
+     "https://shamela.ws/book/9783/5418"
+    ],
+    [
+     "al-Mas'udi (Maçoudi), Les Prairies d'or, Arabic text and French translation by C. Barbier de Meynard, vol. 8 (1874, archive.org), pp. 31–33 and 57–61",
+     "https://archive.org/details/lesprairiesdor08masuuoft"
+    ],
+    [
+     "Ghada Hashem Talhami, 'The Zanj Rebellion Reconsidered' (International Journal of African Historical Studies, 1977, JSTOR)",
+     "https://www.jstor.org/stable/216737"
+    ],
+    [
+     "'What Was the Zanj Rebellion?' (JSTOR Daily)",
+     "https://daily.jstor.org/what-was-the-zanj-rebellion"
+    ]
+   ],
+   "warn": "The Arabic quotations are al-Tabari's text as printed in the 1967 Cairo edition and transcribed online; their punctuation is the modern editor's, and the glosses in 'who' are this site's plain summaries, not translations. The standard English translation (The History of al-Tabari, vols 36 and 37, SUNY Press, 1992) is in copyright and is not quoted. Al-Mas'udi is quoted in Barbier de Meynard's French of 1874. Nöldeke writes in the racial language of 1892: on the same page as the passage on Basra he speaks of 'brutal negro slaves', and he uses 'negroes' throughout. Every account of what the rebels said and did was written by their enemies; the numbers in these sources (300,000 dead at Basra, 500,000 in all, fifteen thousand slaves at one group of works, women sold for two or three dirhams) cannot be checked. The Arabic word ghilman, given as 'slaves' in the facts, also means servants or young men. JSTOR Daily says the leader promised that his followers would enslave their former masters; al-Tabari's page on his festival sermon (vol. 9, p. 415) has him promise slaves, wealth and houses without naming the masters, and on p. 414 he lets the masters go. Spellings vary: Zanj, Zenj, Zendj; al-Mukhtara, Mokhtara; al-Muwaffaq, Mowaffak, Mouaffak.",
+   "note": "Research in progress: no words of the Zanj survive outside the hostile chronicle, so 'In their own words' has only two entries, both taken from al-Tabari: an account by one of the salt-flat ghilman, reported without a named transmitter, and a speech of the rebel leader, who was a free man and not one of the enslaved. Ibn al-Rumi's elegy on the sack of Basra, in which he says the city's people were struck down by their own slaves, is described but not quoted, because no reliable edition of the Arabic could be read online in the time allowed. The coins the rebels minted, and al-Tabari's account of the final victory in 883, have not yet been added, and nothing is quoted on what the caliph's army did to the rebels in 879–883. The modern figure for the dead at Basra rests on Wikipedia and Medievalists.net, not on Popovic's book itself. The page numbers for Nöldeke agree with the running heads in the scan's text; those for al-Mas'udi were worked out from the scan's leaf numbers and should be confirmed against the page images."
+  },
+  {
+   "id": "chamorro1668",
+   "title": "The Spanish–CHamoru Wars and the emptying of the northern Marianas",
+   "region": "Oceania",
+   "where": "Guam and the Mariana Islands (Rota, Tinian, Aguiguan, Saipan and the northern islands called Gani); pin: Hagåtña (Agaña), Guam, where the mission and the Spanish garrison stood",
+   "lat": 13.4745,
+   "lon": 144.7504,
+   "from": 1668,
+   "to": 1699,
+   "themes": [
+    "Colonial rule",
+    "War",
+    "Uprising",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "The Jesuit Diego Luis de San Vitores landed on Guam on 16 June 1668 with four other priests, four missionary brothers and 32 soldiers. Kepuha (Quipuha), a chief of Hagåtña, housed the missionaries and gave land for the first church, which opened on 2 February 1669.",
+     "https://www.guampedia.com/chiefs-kepuha-quipuha-3/"
+    ],
+    [
+     "The first welcome did not last. The Jesuits rejected the veneration of ancestors, ordered the young men's houses destroyed and taught that all the baptised were equal, which cut across the ranks of CHamoru society; a Chinese castaway named Choco, married to a CHamoru woman of Saipan, spread the word that the water and oils of baptism were killing people.",
+     "https://www.guampedia.com/father-diego-luis-de-san-vitores/"
+    ],
+    [
+     "After a CHamoru leader named Gufac was killed while trying to free an arrested man, Hurao, a high-caste chief of Hagåtña, raised about 2,000 warriors against the mission. The Spanish seized him early in the fighting and San Vitores later freed him; a Spanish soldier killed Hurao on 11 May 1672.",
+     "https://www.guampedia.com/chiefs-hurao/"
+    ],
+    [
+     "CHamoru fighters also killed missionaries and their helpers. On 2 April 1672 San Vitores and his assistant Pedro Calungsod (Calangsod) entered the home of Matå'pang, a chief of Tomhom (Tumon) who had himself been baptised, without permission, to baptise his daughter; on learning of the baptism Matå'pang and a man named Hirao killed both, and Matå'pang weighted the bodies and threw them into the sea.",
+     "https://www.guampedia.com/chiefs-matapang-matapang/"
+    ],
+    [
+     "Other deaths on the mission's side included the priest Luis de Medina and his catechist Hipolito de la Cruz on Saipan in early 1670, and Diego Bazan, two Filipino catechists and a Spanish escort in March 1672. From 1674 Spanish commanders answered with punitive raids on villages.",
+     "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars"
+    ],
+    [
+     "Agualin (Aguarin), a chief from Hagåtña, went from village to village raising a second war in 1676; his forces burned a church and mission buildings and attacked the Spanish for months. He was captured on Rota in August 1680 and hanged.",
+     "https://www.guampedia.com/chiefs-aguarin/"
+    ],
+    [
+     "José de Quiroga, who arrived in 1679, pursued those who resisted, burned villages and canoes, and by 1680 the people of Guam were being 'reduced' into a handful of church villages; on Saipan his men killed more than 200 men in one attack. CHamoru also fought on the Spanish side: in the rising of July 1684 led by Yula (Yura), Ignacio Hineti, a lower-caste clan leader, brought 50 warriors to defend the garrison.",
+     "https://www.guampedia.com/jose-de-quiroga-y-losada/"
+    ],
+    [
+     "The last resisters were defeated on the rock island of Aguiguan (Aguijan) in 1695, and the people of the northern islands were then forced to move to Guam, with deaths at sea. A Spanish census of 1710 counted 3,539 CHamoru.",
+     "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/"
+    ]
+   ],
+   "voices": [],
+   "witness": [
+    {
+     "text": "Ces Européans auroient bien fait, leur disoit-il, de demeurer dans leur païs. Nous n'avions pas besoin de leur secours pour vivre heureux. Contens de ce que nos Isles fournissoient, nous nous en servions sans rien desirer au delà. Les connoissances qu'ils nous ont données, n'ont fait qu'augmenter nos besoins, & qu'irriter nos desirs.",
+     "who": "A speech Le Gobien attributes to Hurao, a high-caste CHamoru chief of Hagåtña. It was composed in French from mission reports by Charles Le Gobien, a French Jesuit who published in Paris and was procurator of the French Jesuits' China mission; he never visited the islands and wrote from García's 1683 life of San Vitores and the Jesuits' annual letters. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris: Nicolas Pepie, 1700), p. 140. Plain gloss: these Europeans would have done well to stay in their own country; we did not need their help to live happily; content with what our islands gave, we used it and wanted nothing more; the knowledge they have given us has only increased our needs and sharpened our desires",
+     "date": "Printed 1700; set in the first war, which modern accounts date 1670 or 1671",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "Ils nous traitent de gens grossiers, & ils nous regardent comme des Barbares. Mais devons-nous les en croire ? Ne voïons-nous pas que sous pretexte de nous instruire & de cultiver nos mœurs, ils les corrompent ; qu'ils nous tirent de cette premiere simplicité, dans laquelle nous vivions, & qu'ils nous ostent enfin nostre liberté, qui nous doit estre plus chere que la vie ?",
+     "who": "The same speech, which Le Gobien attributes to Hurao; composed in French from mission reports by Le Gobien, a French Jesuit who never visited the islands. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris, 1700), p. 141. Plain gloss: they call us coarse people and look on us as barbarians, but must we believe them? Do we not see that, on the pretext of teaching us and improving our ways, they corrupt them; that they take us out of the first simplicity in which we lived, and in the end take away our liberty, which should be dearer to us than life?",
+     "date": "Printed 1700; set in the first war, which modern accounts date 1670 or 1671",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "Il nous est aisé de les accabler par la multitude. Vous craignez peut-estre de les attaquer, & de vous exposer à leurs armes meurtrieres ? Mais une mort glorieuse n'est-elle pas à preferer à la vie honteuse que nous menons ?",
+     "who": "A speech Le Gobien attributes to Aguarin (Agualin), the CHamoru chief whom he calls the author of the second war against the Spaniards; composed in French from mission reports by Le Gobien, a French Jesuit who never visited the islands. No CHamoru wrote or dictated it. Histoire des isles Marianes (Paris, 1700), livre VII, p. 247. Plain gloss: it is easy for us to overwhelm them by our numbers; perhaps you are afraid to attack them and face their deadly weapons? But is a glorious death not better than the shameful life we are leading?",
+     "date": "Printed 1700; set in the second war, which began in 1676",
+     "url": "https://archive.org/stream/histoire-des-isles-marianes-nouvellement-converties/Histoire%20des%20isles%20Marianes%20nouvellement%20converties_djvu.txt"
+    },
+    {
+     "text": "A war of extermination now began, which lasted twenty-three years, suspended from time to time when the Spaniards found themselves too weak to continue it, but resumed at the arrival of each ship bringing reinforcements, no matter whether in the meantime peace with the natives had been declared or not. Often whole villages were punished for the act of a single man, and innocent natives who had committed no crime whatever were shot down wantonly.",
+     "who": "William Edwin Safford, botanist and US Navy lieutenant who was assistant governor of Guam from August 1899 to August 1900, just after the United States took the island from Spain; his footnotes here cite García's Jesuit history. The Useful Plants of the Island of Guam (Contributions from the United States National Herbarium, vol. 9, Washington, 1905), p. 15",
+     "date": "1905, on 1672–1695",
+     "url": "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    },
+    {
+     "text": "Écrasés, décimés, les Chamorros ne se soumirent pas, mais moururent. En 1710, on n’en compte plus que 3,539; en 1741, il n’en restait que 1,816. Rarement pareille dépopulation sévit sur un pays; rarement aussi modifications plus profondes se produisirent chez un peuple dans un aussi court espace de temps.",
+     "who": "C. de Varigny, French writer, 'L'Océanie moderne', part V, Revue des Deux Mondes, 3rd period, vol. 85 (1888). Plain gloss: crushed and decimated, the Chamorros did not submit but died; in 1710 only 3,539 were counted, in 1741 only 1,816 remained; rarely has such depopulation struck a country, and rarely have deeper changes come over a people in so short a time. Varigny wrote two centuries later and gives the islanders 60,000 people and bows and arrows, neither of which is established",
+     "date": "1888",
+     "url": "https://fr.wikisource.org/wiki/L%E2%80%99Oc%C3%A9anie_moderne/05"
+    }
+   ],
+   "official": [
+    {
+     "text": "Padre Solano, calling together the soldiers of the post, declared to them that though arms used in their proper time and season were the defense of that Christianity, yet wielded intempestively they would be its destruction, since they would not only irritate with reason the Indians, but would become unworthy of the favor of the Lord, without which what could twenty or thirty men do against thirty thousand?",
+     "who": "Francisco García SJ, reporting the address of Francisco Solano SJ, head of the mission after San Vitores was killed in 1672, to the garrison; from García's life of San Vitores (Madrid, 1683, p. 447), here in W. E. Safford's English rendering (The Useful Plants of the Island of Guam, Washington, 1905, p. 16)",
+     "date": "1672 (García 1683; English 1905)",
+     "url": "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    },
+    {
+     "text": "His apostolic zeal and complete dedication to those people in need of spiritual and human promotion characterized the years of this exemplary missionary, who, in imitation of the words of the Master “greater love has no man than this, that a man lay down his life for his friends” (Jn. 15, 13), shed his blood in sacrifice, while asking God to forgive those responsible for his death.",
+     "who": "Pope John Paul II, speaking of Diego Luis de San Vitores in his homily at the Mass of beatification of San Vitores and two other Jesuits (Holy See website, an English paragraph on the Spanish-language page)",
+     "date": "6 October 1985",
+     "url": "https://www.vatican.va/content/john-paul-ii/es/homilies/1985/documents/hf_jp-ii_hom_19851006_beatificazione-tre-gesuiti.html"
+    }
+   ],
+   "today": {
+    "text": "In 1680, Captain Don Joseph de Quiroga was appointed the new governor of Guam and began a brutal campaign to subjugate the island and the rest of the Marianas. He ordered that any rebellious CHamoru be executed and instituted a policy known as reduccíon.",
+    "who": "US National Park Service, War in the Pacific National Historical Park, Guam, in its history of the village of Assan (spelling 'reduccíon' as on the page; Guam has been a US territory since 1898)",
+    "date": "page last updated 5 May 2025, read 26 November 2026",
+    "url": "https://www.nps.gov/articles/000/assan-through-the-ages.htm"
+   },
+   "disputed": [
+    [
+     "How many CHamoru were there in 1668? San Vitores wrote of about 100,000 on Guam; the lowest modern estimate cited is 24,000; the Jesuit historian Francis Hezel works from 40,000; Quiroga, looking back in 1720, put Guam at 50,000 at the start of the conquest and 4,000 by then; the 1911 Encyclopædia Britannica gave 40,000 to 60,000 for the islands, and the mission superior Solano, in García's account, spoke of thirty thousand. There is no agreed figure. What is agreed is the scale of the fall: a Spanish census of 1710 counted about 3,500 CHamoru, and the numbers kept falling until the later 1700s.",
+     [
+      "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/",
+      "https://www.guampedia.com/jose-de-quiroga-y-losada/",
+      "https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Marianas_(archipelago)",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ],
+    [
+     "War, disease or removal? Older histories (Safford in 1905, Varigny in 1888, and Guam histories of the 1960s) describe a war of extermination and blame Spanish arms, Quiroga above all. Francis Hezel argues that introduced disease killed far more than fighting did and rejects the word genocide; one count Wikipedia cites him for (his 2015 study was not read) is 917 deaths recorded on Guam and Rota in 1680–83 against about twenty from hostilities. Richard Shell and others answer that the forced herding into mission villages, the destruction of canoes and the removal of the northern islanders spread the epidemics and broke the society, so that disease and conquest cannot be separated. Epidemics are recorded in 1683, 1690 and about 1699–1700. There is no agreed view: Guampedia's survey says the question is still contested, Wikipedia's article calls the wars a genocide, and Hezel rejects that word. The sources also disagree on dates: Hurao's rising is put in 1670 (Wikipedia's summary) or after July 1671 (the same article's narrative), the Yula rising in 1683 or 1684, the fall of Aguiguan in 1695 or 1696.",
+     [
+      "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/",
+      "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ],
+    [
+     "Did Hurao say it? The speech is printed only by Le Gobien, in Paris, in 1700, twenty-eight years after Hurao's death. Guampedia presents it as recorded as it was told to Le Gobien and says it is often quoted as an example of CHamoru resistance. The historian Carlo Ginzburg (died 2026) argued that so polished a text cannot be an accurate record of a real speech: Le Gobien never went to the islands, and his sources (García's 1683 life of San Vitores and the Jesuits' annual letters) mention Hurao only as a man imprisoned and released. Ginzburg added that those letters do report the islanders' belief that rats, flies, mosquitoes and sickness came with the ships, a complaint Le Gobien put into the speech and mocked in a note, so that an Indigenous argument survives inside a European composition; he also noted that Diderot's Supplément au voyage de Bougainville seems to echo it. The page that reprints his chapter dates the revolt 1685, which does not fit Hurao's death in 1672. The excerpt does not mention Aguarin's speech, which comes from the same book by the same author.",
+     [
+      "https://storiamestre.it/2026/06/20/le-voci-dellaltro-una-rivolta-indigena-nelle-isole-marianne/",
+      "https://www.guampedia.com/chiefs-hurao/"
+     ]
+    ],
+    [
+     "Was Choco a slanderer? The Jesuit accounts make the Chinese castaway Choco the first great obstacle, a man who turned the islanders against baptism with a lie; Safford repeats this, while allowing that many of the baptised did die shortly afterwards. Guampedia's writers point out that many baptised children and old people died soon after, that San Vitores baptised children daily without their parents' permission, and that Matå'pang believed the water would kill his daughter. Wikipedia's article says that, by Spanish accounts of the time, people in places with regular contact with the mission, such as Hagåtña, did not seem to believe the rumour, while villages whose only contact was the baptism of the dying and the newborn may have. Choco's own words are not recorded.",
+     [
+      "https://www.guampedia.com/father-diego-luis-de-san-vitores/",
+      "https://www.guampedia.com/chiefs-matapang-matapang/",
+      "https://en.wikipedia.org/wiki/Spanish%E2%80%93Chamorro_Wars",
+      "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "This card has no words written or dictated by a CHamoru of the time, so 'In their own words' is empty. Everything written then comes from the mission's side: Jesuit letters and annual reports, García's life of San Vitores (1683) and Le Gobien's history (1700), plus soldiers' and governors' papers. Hurao, Aguarin, Matå'pang and Yula are known only through men who wanted them defeated, and the speeches printed under their names were composed by a Jesuit in France; the CHamoru who fought for the Spanish, such as Hineti, are known only through the same men's praise. Choco is heard only in his opponents' summary. The people of the northern islands who were shipped to Guam, the women, and the lower-ranking CHamoru left no words at all. The assistants who died with the priests, such as Pedro Calungsod and Hipolito de la Cruz, also left none.",
+   "reading": [
+    [
+     "Charles Le Gobien SJ, Histoire des isles Marianes (Paris, 1700; facsimile, archive.org)",
+     "https://archive.org/details/histoire-des-isles-marianes-nouvellement-converties"
+    ],
+    [
+     "Francisco García SJ, Vida y martyrio de el venerable padre Diego Luis de Sanvitores (Madrid, 1683; Boston College copy, archive.org)",
+     "https://archive.org/details/vidaymartyriodee00garc"
+    ],
+    [
+     "W. E. Safford, The Useful Plants of the Island of Guam, historical introduction (1905, archive.org)",
+     "https://archive.org/stream/usefulplantsofis00saff/usefulplantsofis00saff_djvu.txt"
+    ],
+    [
+     "Nicholas J. Goetzfridt, 'Spanish Response to CHamoru/Chamorro Depopulation' (Guampedia)",
+     "https://www.guampedia.com/spanish-response-to-chamorro-depopulation/"
+    ],
+    [
+     "'Hurao' (Guampedia), with the speech in a modern English translation",
+     "https://www.guampedia.com/chiefs-hurao/"
+    ],
+    [
+     "Carlo Ginzburg, 'Le voci dell'altro. Una rivolta indigena nelle isole Marianne', excerpt from Rapporti di forza. Storia, retorica, prova (Quodlibet, 2022, ch. 3), posted by storiAmestre, 20 June 2026; in Italian",
+     "https://storiamestre.it/2026/06/20/le-voci-dellaltro-una-rivolta-indigena-nelle-isole-marianne/"
+    ]
+   ],
+   "warn": "'In their own words' is empty because no words written or dictated by a CHamoru of these years survive. The first three passages under 'Outside witnesses' are speeches that Charles Le Gobien attributes to the chiefs Hurao and Aguarin. He was a French Jesuit who never saw the Marianas and worked from missionaries' reports; such set speeches were a convention of history-writing then, and they are not the chiefs' own words. They are given in his French of 1700 with its old spelling (païs, nostre, estre, & for et); the glosses in 'who' are the site's plain summaries, not translations. No public-domain English translation was found. The French was read from a poor machine-read text of a facsimile and restored, so single letters, accents and punctuation may differ from the printed page. No order or report by a Spanish governor is quoted: the two official texts are a missionary's plea for restraint and a papal homily, and neither gives the Spanish reasons for the war or the removals. Names vary: CHamoru or Chamorro; Hurao; Agualin or Aguarin; Matå'pang or Matapang; Kepuha or Quipuha; Yula or Yura; Sanvitores or San Vitores; Calungsod or Calangsod; Guam is Guahan in Le Gobien. 'War of extermination' is Safford's phrase; he was an officer of the United States, which had just taken Guam from Spain, and 'thirty thousand' comes from his English rendering of García. The National Park Service calls Quiroga governor; Guampedia says he acted as governor several times but was never formally appointed. Modern accounts differ by a year on several dates.",
+   "note": "Research in progress: no words written or dictated by a CHamoru of 1668–1699 were found, because none are known to survive; the only speeches under CHamoru names are Le Gobien's compositions, shown under 'Outside witnesses'. Their wording has not yet been checked against the page images of the 1700 printing (about leaves n163, n164 and n270 of the archive.org facsimile), only against its machine-read text, and the year Le Gobien himself gives for each speech was not confirmed. García's own Spanish account of the killing of San Vitores (1683) and any royal or governor's order for the removal of the northern islanders were not reached, so the official side is represented by Solano's address in Safford's 1905 English and by the 1985 beatification homily. No statement by the Government of Guam, its Commission on Decolonization or a CHamoru cultural body was found on an official page; the 'today' entry is a US federal one. Blair and Robertson's The Philippine Islands was not searched."
+  },
+  {
+   "id": "atlantic-trade-1700s",
+   "title": "The Atlantic slave trade at its height, in the words of two Africans who wrote of being carried across it",
+   "region": "Africa",
+   "where": "The West African coast and the Atlantic crossing to the Caribbean; pin: Cape Coast Castle, Ghana. It marks Cape Coast, where Ottobah Cugoano says the ship that carried him to Grenada lay 'ready to sail'; he does not name the fort in which he was first imprisoned",
+   "lat": 5.1036,
+   "lon": -1.2414,
+   "from": 1700,
+   "to": 1808,
+   "themes": [
+    "Slavery",
+    "Removal and dispossession",
+    "Forced labour"
+   ],
+   "facts": [
+    [
+     "Britannica puts the transatlantic slave trade at an estimated 10 to 12 million enslaved Africans carried across the Atlantic from the 16th to the 19th century (the voyage database below gives a higher estimate), with nearly three-fifths of the total volume in the 18th century, when English and French merchants controlled about half of the trade. Europeans largely stayed on the coast and bought captives from Africans who brought them from the interior, often after a march of up to 300 miles (485 km) on which an estimated 10 to 15 percent died.",
+     "https://www.britannica.com/topic/transatlantic-slave-trade"
+    ],
+    [
+     "The estimates table of the Trans-Atlantic Slave Trade Database (SlaveVoyages) gives 12,521,337 people embarked in Africa in all, including 1,088,909 in 1701–1725, 1,471,725 in 1726–1750, 1,925,315 in 1751–1775 and 2,008,670 in 1776–1800. Its column totals by flag are 5,848,266 for Portugal / Brazil and 3,259,441 for Great Britain.",
+     "https://legacy.slavevoyages.org/assessment/estimates"
+    ],
+    [
+     "The database's own methodology essay says its estimates suggest that 12.52 million captives left Africa and 10.7 million disembarked. In its sample of 6,430 voyages with usable figures, 12.1 percent of those embarked died on the crossing: 12.2 percent on voyages from the Gold Coast and 18.8 percent from the Bight of Biafra.",
+     "https://legacy.slavevoyages.org/blog/methodology-trans-atlantic"
+    ],
+    [
+     "Olaudah Equiano writes that his own father held many slaves, and that his people sold to traders prisoners of war and people convicted of crimes such as kidnapping and adultery, while those they kept did no more work than other members of the community. He says he was kidnapped at about eleven, passed through several African masters, some of whom treated him well, over six or seven months before he reached the sea, and was shipped to Barbados, where the captives were sold in a yard at the beat of a drum and relations and friends were separated.",
+     "https://gutenberg.org/cache/epub/15399/pg15399.txt"
+    ],
+    [
+     "Ottobah Cugoano writes that he was born at Agimaque on the coast of Fantyn and was seized with some eighteen or twenty other children; the African man who handed him over at the coast took a gun, a piece of cloth and some lead for him. He says the captives on his ship planned to burn and blow it up, that the plan was betrayed by one of their own countrywomen, and that he was landed in Grenada and worked there some eight or nine months before being taken to England.",
+     "https://docsouth.unc.edu/neh/cugoano/cugoano.html"
+    ],
+    [
+     "UNESCO lists Cape Coast Castle as one of three castles among the fortified trading posts founded on the coast of Ghana between 1482 and 1786 by traders from Portugal, Spain, Denmark, Sweden, Holland, Germany and Britain. It says the posts first served the gold trade of European chartered companies and later played a significant part in the developing slave trade.",
+     "https://whc.unesco.org/en/list/34/"
+    ],
+    [
+     "The British Act for the Abolition of the Slave Trade (47 Geo. 3 Sess. 1 c. 36, 25 March 1807) made the African slave trade unlawful from 1 May 1807 and set a penalty of £100 for each enslaved person involved.",
+     "https://teachinglegalhistory.unl.edu/s/oer/item/1312"
+    ],
+    [
+     "The United States Constitution barred Congress from prohibiting the importation of persons before 1808, and the US act prohibiting the importation of slaves took effect on 1 January 1808. The US National Archives says the ban drove the trade underground and did not end slavery or the sale of enslaved people within the country, and a coastwise trade between US ports continued.",
+     "https://www.archives.gov/education/lessons/slave-trade.html"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "One day, when all our people were gone out to their works as usual, and only I and my dear sister were left to mind the house, two men and a woman got over our walls, and in a moment seized us both, and, without giving us time to cry out, or make resistance, they stopped our mouths, and ran off with us, into the nearest wood.",
+     "who": "Olaudah Equiano (Gustavus Vassa), on being kidnapped as a child of about eleven from his home, which he places in 'Eboe' (Igbo country, in present-day Nigeria); the kidnappers were Africans. Whether he was born in Africa is disputed (see below)",
+     "date": "published 1789; by his own chronology about 1756",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African. Written by Himself (London, 1789), vol. I, chapter II, p. 48",
+     "url": "https://docsouth.unc.edu/neh/equiano1/equiano1.html",
+     "lic": "Public domain (1789). Electronic edition of the 1789 London first edition, volume I, by Documenting the American South (University of North Carolina at Chapel Hill)"
+    },
+    {
+     "text": "I was soon conducted to a prison, for three days, where I heard the groans and cries of many, and saw some of my fellow-captives. But when a vessel arrived to conduct us away to the ship, it was a most horrible scene; there was nothing to be heard but the rattling of chains, smacking of whips, and the groans and cries of our fellow-men. Some would not stir from the ground, when they were lashed and beat in the most horrible manner.",
+     "who": "Quobna Ottobah Cugoano, a Fante taken as a boy, on the fort on the Gold Coast where he was held before being put aboard a ship that he says was ready to sail from Cape Coast",
+     "date": "published 1787; the reprint quoted here gives no year for his capture",
+     "doc": "'Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa; published by himself, in the Year 1787', the autobiographical part of his Thoughts and Sentiments (1787) as reprinted in the appendix to The Negro's Memorial; or, Abolitionist's Catechism, by an Abolitionist (London: Hatchard and Co., and J. and A. Arch, 1825), p. 124",
+     "url": "https://docsouth.unc.edu/neh/cugoano/cugoano.html",
+     "lic": "Public domain (written 1787; this printing 1825)"
+    },
+    {
+     "text": "The closeness of the place, and the heat of the climate, added to the number in the ship, which was so crowded that each had scarcely room to turn himself, almost suffocated us. This produced copious perspirations, so that the air soon became unfit for respiration, from a variety of loathsome smells, and brought on a sickness among the slaves, of which many died, thus falling victims to the improvident avarice, as I may call it, of their purchasers. This wretched situation was again aggravated by the galling of the chains, now become insupportable; and the filth of the necessary tubs, into which the children often fell, and were almost suffocated. The shrieks of the women, and the groans of the dying, rendered the whole a scene of horror almost inconceivable.",
+     "who": "Olaudah Equiano (Gustavus Vassa), on the hold of the slave ship that carried him from the African coast to Barbados (see the dispute below over whether he made this crossing himself)",
+     "date": "published 1789; by his own chronology about 1756",
+     "doc": "The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African. Written by Himself (London, 1789), vol. I, chapter II, p. 79",
+     "url": "https://docsouth.unc.edu/neh/equiano1/equiano1.html",
+     "lic": "Public domain (1789). Electronic edition of the 1789 London first edition, volume I, by Documenting the American South (University of North Carolina at Chapel Hill)"
+    },
+    {
+     "text": "But I must own, to the shame of my own countrymen, that I was first kidnapped and betrayed by some of my own complexion, who were the first cause of my exile, and slavery; but if there were no buyers there would be no sellers. So far as I can remember, some of the Africans in my country keep slaves, which they take in war, or for debt; but those which they keep are well fed, and good care taken of them, and treated well; and as to their clothing, they differ according to the custom of the country.",
+     "who": "Quobna Ottobah Cugoano, writing in London as a free man, on the Africans who seized and sold him and on slavery in his own country",
+     "date": "published 1787",
+     "doc": "'Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa; published by himself, in the Year 1787', as reprinted in the appendix to The Negro's Memorial; or, Abolitionist's Catechism, by an Abolitionist (London, 1825), p. 126",
+     "url": "https://docsouth.unc.edu/neh/cugoano/cugoano.html",
+     "lic": "Public domain (written 1787; this printing 1825)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "the Slaves lie in two rows, one above the other, on each side of the ship, close to each other, like books upon a shelf. I have known them so close, that the shelf would not, easily, contain one more. And I have known a white man sent down among the men, to lay them in these rows to the greatest advantage, so that as little space as possible might be lost.",
+     "who": "John Newton, a former slave-ship captain who became a Church of England clergyman (rector of St Mary Woolnoth, London) and wrote against the trade he had worked in; Thoughts upon the African Slave Trade (London: J. Buckland and J. Johnson, 1788), pp. 33–34. The linked text is uncorrected scan text of the 1788 printing, in which the long s appears as f ('fhip', 'clofe'); it is transcribed here as s",
+     "date": "1788",
+     "url": "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "That from and after the First Day of May One thousand eight hundred and seven, the African Slave Trade, and all and all manner of dealing and trading in the Purchase, Sale, Barter, or Transfer of Slaves, or of Persons intended to be sold, transferred, used, or dealt with as Slaves, practiced or carried on, in, at, to or from any Part of the Coast or Countries of Africa, shall be, and the same is hereby utterly abolished, prohibited, and declared to be unlawful;",
+     "who": "Parliament of the United Kingdom, An Act for the Abolition of the Slave Trade (47 Geo. 3 Sess. 1 c. 36), section I: the state's own wording when it outlawed the trade it had earlier called very advantageous ('practiced' is the spelling of the linked transcription)",
+     "date": "25 March 1807",
+     "url": "https://teachinglegalhistory.unl.edu/s/oer/item/1312"
+    }
+   ],
+   "today": {
+    "text": "Declaration of the Trafficking of Enslaved Africans and Racialized Chattel Enslavement of Africans as the Gravest Crime against Humanity",
+    "who": "United Nations General Assembly, the title of resolution 80/250 (A/RES/80/250), a resolution led by Ghana; the UN Digital Library records the vote as 123 in favour, 3 against and 52 abstaining. The title was read from the United Nations' own copy of the document",
+    "date": "adopted 25 March 2026",
+    "url": "https://docs.un.org/en/A/RES/80/250"
+   },
+   "disputed": [
+    [
+     "Was Equiano born in Africa? In his book he says he was born in 1745 at Essaka in 'Eboe', kidnapped and carried across the Atlantic. The literary historian Vincent Carretta found two records that say otherwise: the register of his baptism at St Margaret's, Westminster, on 9 February 1759, which gives his birthplace as 'Carolina', and the muster roll of Constantine Phipps's Arctic expedition of 1773, which gives 'South Carolina' (the Equiano's World project says the name in that entry is Weston); Carretta argues that he may have been born there and built the African chapters from other people's accounts and from books. The Equiano's World project, which cites the historian Paul Lovejoy, holds that he was born in Igboland as he says, about 1742: his names are Igbo, and the baptismal entry, it says, was dictated by relatives of his master and is unreliable. The literary scholar Brycchan Carey, setting out both cases, calls Carretta's two records compelling but not quite enough to settle the matter, says historians and critics are divided, and concludes that we just do not know. There is no consensus. The passages quoted above are therefore certain as what a formerly enslaved African published in 1789, and uncertain as an eyewitness memory of his own childhood and crossing.",
+     [
+      "https://brycchancarey.com/equiano/nativity.htm",
+      "https://equianosworld.org/questioning.php",
+      "https://gutenberg.org/cache/epub/15399/pg15399.txt"
+     ]
+    ],
+    [
+     "How many people, and how many died? Before 1969 published figures ranged from 3.5 million to 100 million, with 15 or 20 million often repeated. Philip Curtin's census of 1969 estimated 9,566,000 people landed in the Americas. J. E. Inikori and James Rawley argued that this was too low; Paul Lovejoy's 1982 synthesis found Curtin remarkably accurate and put exports from Africa at 11,698,000 and imports at 9.8 to 9.9 million. The voyage-by-voyage database built since the 1990s now estimates 12.52 million embarked and 10.7 million disembarked, and its authors wrote in 2010 that the new aggregate was thirteen percent greater than they had thought eight years earlier. The order of magnitude is now a broad scholarly consensus; the exact totals are estimates that have moved with each new archive. Deaths are less certain. The database's sample gives a mean of 12.1 percent dying at sea, with wide variation between voyages and regions; the former captain John Newton wrote in 1788 that one fourth of those purchased might be allotted to mortality; and none of these figures counts those who died in capture, on the march to the coast (Britannica cites an estimated 10 to 15 percent) or in the forts.",
+     [
+      "https://en.wikipedia.org/wiki/Philip_D._Curtin",
+      "https://www.cambridge.org/core/journals/journal-of-african-history/article/abs/volume-of-the-atlantic-slave-trade-a-synthesis1/CF6D409D16D57CDD49065FAA43B3B86C",
+      "https://legacy.slavevoyages.org/blog/methodology-trans-atlantic",
+      "https://www.SlaveVoyages.org/documents/download/2010estimates-method.pdf",
+      "https://www.neh.gov/humanities/2010/septemberoctober/feature/gross-injustice",
+      "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt",
+      "https://www.britannica.com/topic/transatlantic-slave-trade"
+     ]
+    ],
+    [
+     "Did the trade's profits pay for Britain's industrial revolution? Eric Williams argued in Capitalism and Slavery (1944) that profits from the slave trade and slave-grown sugar helped finance British industrialisation, and that abolition followed economic interest more than humanitarian feeling. Critics answered with ratios which are given here as Wikipedia summarises them: Stanley Engerman (1972) calculated that the combined profits of the slave trade and the West Indian plantations were under 5 percent of the British economy in any year of the industrial revolution, and David Richardson put slave-trade profits at under 1 percent of domestic investment. Joseph Inikori has challenged that rejection using the trade of the whole Atlantic, and Kenneth Morgan takes a middle position, that the slave-based Atlantic trades had an important though not decisive effect. Richardson wrote in 2002 that most scholars of British industrialisation were highly sceptical of the Williams thesis while some still found much merit in it. The argument has continued since and is not settled; that slavery and its trades mattered to the British economy is not seriously denied.",
+     [
+      "https://en.wikipedia.org/wiki/Capitalism_and_Slavery",
+      "https://archives.history.ac.uk/ihr/Focus/Empire/reviews/richardson.html"
+     ]
+    ],
+    [
+     "What is owed now? On 25 March 2026 the UN General Assembly, on a text led by Ghana for the African Group, declared the trafficking and enslavement of Africans the gravest crime against humanity and called for dialogue on reparatory justice, including a formal apology; 123 states voted for it. Argentina, Israel and the United States voted against and 52 states abstained; the United States representative called the text highly problematic and said his government does not recognise a legal right to reparations for historical wrongs that were not illegal under international law when they occurred. Human Rights Watch reports that the United Kingdom, Canada and all the European Union's member states abstained, calling the trade a tragedy while questioning the legal basis for reparations for acts that predate modern international law. In the UN's transcript of the meeting the European Union's speaker says the word 'gravest' implies a hierarchy among atrocity crimes that does not exist in law, and the Holy See's observer says the draft contains a partial narrative.",
+     [
+      "https://news.un.org/en/story/2026/03/1167199",
+      "https://digitallibrary.un.org/record/4107547",
+      "https://mfa.gov.gh/wp-content/uploads/2026/04/n2606533-2.pdf",
+      "https://www.hrw.org/news/2026/03/30/landmark-un-resolution-on-the-slave-trade",
+      "https://transcripts.un.org/en/ga/80/75"
+     ]
+    ]
+   ],
+   "blind": "Of the millions the database counts as embarked in the eighteenth century, the two voices here belong to men who became free, literate and Christian in London and wrote in English for British readers in the middle of the abolition campaign; one of them may not have been born in Africa. No account written by a woman carried across in this century was found, though Equiano records the shrieks of the women in the hold. Those who died on the march, in the forts, at sea and on the plantations left no words here. The African traders and rulers who sold captives speak here only through the people they sold; the British state and a planters' agent speak for themselves.",
+   "reading": [
+    [
+     "Olaudah Equiano, The Interesting Narrative of the Life of Olaudah Equiano, or Gustavus Vassa, the African, vol. I (London, 1789; Documenting the American South, University of North Carolina)",
+     "https://docsouth.unc.edu/neh/equiano1/equiano1.html"
+    ],
+    [
+     "Ottobah Cugoano, Narrative of the Enslavement of Ottobah Cugoano, a Native of Africa (1787; 1825 printing, Documenting the American South, University of North Carolina)",
+     "https://docsouth.unc.edu/neh/cugoano/cugoano.html"
+    ],
+    [
+     "Trans-Atlantic Slave Trade Database, Estimates (SlaveVoyages, legacy site; data as revised to 2018–19)",
+     "https://legacy.slavevoyages.org/assessment/estimates"
+    ],
+    [
+     "John Newton, Thoughts upon the African Slave Trade (1788, archive.org)",
+     "https://archive.org/stream/thoughtsuponafri00newt/thoughtsuponafri00newt_djvu.txt"
+    ],
+    [
+     "Brycchan Carey, 'Where Was Olaudah Equiano Born?' (2003–2026, brycchancarey.com)",
+     "https://brycchancarey.com/equiano/nativity.htm"
+    ],
+    [
+     "Transatlantic slave trade (Britannica)",
+     "https://www.britannica.com/topic/transatlantic-slave-trade"
+    ]
+   ],
+   "warn": "Equiano's two passages follow the 1789 London printing as transcribed by the Text Creation Partnership; the Project Gutenberg copy of the book differs in small points of punctuation (it has no comma after 'ran off with us'). Cugoano's passages are quoted from an abolitionist reprint of 1825, not from his 1787 first edition, and its spelling may have been modernised ('clothing'). Both men wrote as campaigners against the trade, and Equiano's account of his African childhood and crossing is disputed. Newton's text is linked as raw scan text with the long s read as f. 'Negroes' and 'slaves' are the sources' words. The passages describe chaining, flogging, suffocation and the deaths of children.",
+   "note": "Research in progress: the 1787 first edition of Cugoano's Thoughts and Sentiments could not be opened as text (the University of Michigan copy returned an error), so the 1825 reprint is quoted. The full text of the 1750 Act (23 Geo. 2 c. 31) and William Snelgrave's 1734 defence of the trade could not be read and are not quoted. The current SlaveVoyages estimates page could not be read by the research tools, so the figures are those of its legacy estimates page and may have been revised since. Carretta's and Lovejoy's own articles were not read; their positions are given from Brycchan Carey's page and the Equiano's World project. No account by Ayuba Suleiman Diallo or Venture Smith was added. The 1750 Act's preamble, in which Parliament called the trade 'very advantageous to Great Britain', is held back until a copy can be checked word for word, so the official account here is only the Act that ended the trade. Only the title of UN resolution 80/250 is quoted; its operative paragraphs are described under 'Still disputed'."
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
