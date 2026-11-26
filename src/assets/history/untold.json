@@ -8249,6 +8249,200 @@
    ],
    "warn": "The survivors' words are quoted as the TRC report prints them, with the report's own cuts (the ellipses) and its bracketed gloss; they are recollections given thirty-six years after the event, and the report's page names the witnesses, which this card does not. The TRC report spells the township 'Sharpville'. The Security Council record is a scanned document: the wording was checked against its machine-read text, which misreads a few letters (for example 'UDion' for 'Union'), and is given here as the printed page reads. Mr. Fourie's statement is the South African government's case as put to the Council nine days after the shooting, before any inquiry had reported.",
    "note": "Research in progress: the report of the government's own judicial commission of inquiry (laid before the South African Parliament on 23 January 1961, according to a British ministerial answer of 26 January 1961 in Hansard) was not found online, so its findings are not given here. Lieutenant Colonel Pienaar's denial is given from Wikipedia's citation of Bishop Ambrose Reeves, whose own text could not be opened. No official copy of Prime Minister Verwoerd's statements to Parliament in March 1960 was reached, and the text of the Unlawful Organizations Act 1960 could not be opened. Robert Sobukwe's instructions to PAC members were not found in a source that may be quoted, so they are described from the TRC report only. The quotations were checked against the source pages through a reading tool that returns short excerpts; a letter-by-letter check against the page is still due."
+  },
+  {
+   "id": "cambodia1975",
+   "title": "Democratic Kampuchea: the Khmer Rouge years",
+   "region": "Asia",
+   "where": "Cambodia (Democratic Kampuchea); pin: the former S-21 security centre at Tuol Sleng, Phnom Penh, now the Tuol Sleng Genocide Museum (approximate)",
+   "lat": 11.5494,
+   "lon": 104.9176,
+   "from": 1975,
+   "to": 1979,
+   "themes": [
+    "Genocide",
+    "Detention and torture",
+    "Forced labour",
+    "Famine",
+    "Massacre",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "Khmer Rouge forces captured Phnom Penh in April 1975 after nearly five years of civil war and set up a national government; Pol Pot became its prime minister. Britannica gives an estimated 1.5 million deaths, and possibly up to 2 million, under their rule, which ended when invading Vietnamese troops overthrew the government in 1979.",
+     "https://www.britannica.com/topic/Khmer-Rouge"
+    ],
+    [
+     "As summarised in the court's press release, the UN-backed Extraordinary Chambers in the Courts of Cambodia (ECCC) found in 2014 that at least two million people were forcibly transferred from Phnom Penh in April 1975, including hospital patients, monks and women who had just given birth, and that soldiers shot civilians while many others died of exhaustion, malnutrition or disease. It found that a further 330,000 to 430,000 people were forcibly displaced between September 1975 and December 1977, and that at least 250 officials of the defeated Lon Nol government were executed at Tuol Po Chrey straight after 17 April 1975.",
+     "https://d.dccam.org/Archives/Chronology/pdf/Press_Release_07_August_2014_EN.pdf"
+    ],
+    [
+     "In the cooperatives of Tram Kak district the court found that people were deliberately forced to work in a climate of control, threats, fear, hunger and discrimination, that people died of malnutrition, overwork and sickness, and that religious practices were forcibly abolished. It also found a nationwide policy to regulate marriage, under which Party cadres arranged marriages in a climate of fear.",
+     "https://d.dccam.org/Archives/Chronology/pdf/Summary_of_Judgement_Case_002-02_EN.pdf"
+    ],
+    [
+     "The court found that S-21, at the Ponhea Yat High School in Phnom Penh, was operating by October 1975 at the latest, that almost all its prisoners were interrogated under mistreatment and then executed, and that at the very least 11,742 prisoners were executed at or near S-21 and Choeung Ek, children among them.",
+     "https://d.dccam.org/Archives/Chronology/pdf/Summary_of_Judgement_Case_002-02_EN.pdf"
+    ],
+    [
+     "Kaing Guek Eav, alias Duch, deputy and then chairman of S-21, was tried in the ECCC's Case 001. On 26 July 2010 the Trial Chamber convicted him of crimes against humanity and grave breaches of the Geneva Conventions and sentenced him to 35 years' imprisonment; on 3 February 2012 the Supreme Court Chamber sentenced him to life imprisonment.",
+     "https://eccc.gov.kh/en/node/66"
+    ],
+    [
+     "On 16 November 2018 the ECCC found Nuon Chea and Khieu Samphan guilty of crimes against humanity, grave breaches of the Geneva Conventions and genocide of the Vietnamese group; Nuon Chea was also convicted of genocide of the Cham group, as a superior. Both were sentenced to life imprisonment.",
+     "https://eccc.gov.kh/en/case/topic/1298"
+    ],
+    [
+     "Violence ran in more than one direction. After the March 1970 coup, forces of Lon Nol's government killed ethnic Vietnamese civilians in Cambodia and much of the Vietnamese community left or was sent to South Vietnam. The figures usually given (thousands killed; about 200,000 forcibly repatriated) are later scholars' estimates as reported by Wikipedia, and were not checked against their books.",
+     "https://en.wikipedia.org/wiki/1970_Cambodian_coup"
+    ],
+    [
+     "Fighting also crossed the borders. A US Library of Congress study records Khmer Rouge attacks on Thai border villages and renewed attacks on villages in Vietnam's border areas in 1977, Vietnamese air strikes on Cambodia in turn, as many as 1,000 Vietnamese civilian casualties in border fighting that September, and a Vietnamese counter-attack that withdrew from January 1978. Vietnam launched a full offensive on 22 December 1978 and Phnom Penh fell on 7 January 1979, after which the Khmer Rouge fought on as insurgents.",
+     "http://countrystudies.us/cambodia/33.htm"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "The conditions were so inhumane and the food was so little. There was a big pot of gruel to be distributed among 50 or 60 of us, so we only had three spoons of gruel for each meal and the spoon was like a coffee spoon -- so little. It's not like a normal rice spoon. And the spoons would be collected and if any prisoner hid or concealed a spoon and if they found it out, then they would beat up or kick. So the living conditions and the food during the two or three days was so inhumane. I lost my dignity because the condition of the prisoners and the guards were so distant. It's like humans compared to animals. Even with animals they would give enough food.",
+     "who": "Vann Nath, painter, held at S-21 from 7 January 1978 and kept alive, by his account, to paint, testifying at the ECCC in the trial of Duch (Case 001), describing the shackled common room where he was first held",
+     "date": "29 June 2009 (on January 1978)",
+     "doc": "ECCC Trial Chamber, Transcript of Trial Proceedings, Case File 001/18-07-2007-ECCC/TC, Trial Day 35, 29 June 2009, document E1/39.1, p. 20 line 16 to p. 21 line 2",
+     "url": "https://cambodiatribunal.org/sites/default/files/transcripts/ecc_6_29_transcript.pdf",
+     "lic": "Official public transcript of an ECCC hearing (UN-backed Cambodian court); brief credited quotation of a tribunal document. The English is the court's interpretation of testimony given in Khmer."
+    },
+    {
+     "text": "One day, while I was being interrogated and then they were beating me and then I put my hands up to protect myself, then it broke my fingers. And one day they removed my nails from the toes and I was trembling in pain. And later on, about 10 days later, I was electrocuted.",
+     "who": "Chum Mey, a mechanic taken into S-21 on 28 October 1978, one of the very few prisoners to survive it, testifying at the ECCC as a civil party in the trial of Duch (Case 001)",
+     "date": "30 June 2009 (on late 1978)",
+     "doc": "ECCC Trial Chamber, Transcript of Trial Proceedings, Case File 001/18-07-2007-ECCC/TC, Trial Day 36, 30 June 2009, document E1/40.1, p. 11 lines 21–25",
+     "url": "https://cambodiatribunal.org/sites/default/files/transcripts/ecc_6_30_transcript.pdf",
+     "lic": "Official public transcript of an ECCC hearing (UN-backed Cambodian court); brief credited quotation of a tribunal document. The English is the court's interpretation of testimony given in Khmer."
+    },
+    {
+     "text": "I know the truth because I was living there amongst those families, and some of the families died. I took care of some people there as well, and I was also involved in the burial of some of those people. And I still remember the location where the burial took place.",
+     "who": "A Cham civil party from Svay Khleang, Krouch Chhmar district, testifying at the ECCC in Case 002/02. He had just told the court that of 20 Cham families moved with him to another village only seven were left after the deaths from malaria or starvation, and was asked how he knew how they died",
+     "date": "9 September 2015 (on 1975 and after)",
+     "doc": "ECCC Trial Chamber, Transcript of Trial Proceedings, Case File 002/19-09-2007-ECCC/TC, Trial Day 325, 9 September 2015, document E1/344.1, p. 5 lines 10–14",
+     "url": "https://www.eccc.gov.kh/sites/default/files/documents/courtdoc/%5Bdate-in-tz%5D/E1_344.1_TR002_20150909_Final_EN_Pub.pdf",
+     "lic": "Official public transcript of an ECCC hearing (UN-backed Cambodian court); brief credited quotation of a tribunal document. The English is the court's interpretation of testimony given in Khmer."
+    },
+    {
+     "text": "What I want is something that is intangible, that is justice for those that already died. Whatever way the justice could be done is my only hope that can be achieved by this Chamber. And I hope by the end of the Tribunal that justice can be tangible, can be seen by everybody, and that it is something that I expect as a result, as an outcome of this Chamber of this Tribunal, and this is what I wanted, Your Honour.",
+     "who": "Vann Nath, S-21 survivor, testifying at the ECCC, answering Judge Lavergne's question whether he wished for something particular from the trial",
+     "date": "29 June 2009",
+     "doc": "ECCC Trial Chamber, Transcript of Trial Proceedings, Case File 001/18-07-2007-ECCC/TC, Trial Day 35, 29 June 2009, document E1/39.1, p. 55 line 25 to p. 56 line 6",
+     "url": "https://cambodiatribunal.org/sites/default/files/transcripts/ecc_6_29_transcript.pdf",
+     "lic": "Official public transcript of an ECCC hearing (UN-backed Cambodian court); brief credited quotation of a tribunal document. The English is the court's interpretation of testimony given in Khmer."
+    }
+   ],
+   "witness": [
+    {
+     "text": "The soldiers of the Khmer Rouge quickly emptied the capital, which had swelled to some 2 million people owing to the influx of refugees during the war. It is believed that many thousands, especially among the aged and the young, died from lack of food, water and medical assistance during forced marches to the countryside. Witnesses reported numerous instances of hospital patients being dragged from their beds and dying on roads out of the city. By the end of the evacuation, the capital had as few as 20,000 residents.",
+     "who": "The UN Group of Experts for Cambodia (Sir Ninian Stephen of Australia, chairman; Judge Rajsoomer Lallah of Mauritius; Professor Steven R. Ratner of the United States), appointed by the UN Secretary-General in 1998, in their report to him (UN document A/53/850, paragraph 20)",
+     "date": "report of 22 February 1999, on April 1975",
+     "url": "https://hrlibrary.umn.edu/cambodia-1999.html"
+    },
+    {
+     "text": "The misery caused by the methods used by the Khmer Rouge in implementing its policy of transforming the Cambodian economy constituted the single largest source of deaths during the Khmer Rouge period. Starvation, disease and physical exhaustion, caused by overwork and inadequate food, medicine and sanitation, killed hundreds of thousands. According to witness reports, the Khmer Rouge overseers also routinely killed many thousands who refused or could no longer work, often murdering their family members as well.",
+     "who": "The UN Group of Experts for Cambodia, report to the Secretary-General (UN document A/53/850, paragraph 23)",
+     "date": "report of 22 February 1999, on 1975–79",
+     "url": "https://hrlibrary.umn.edu/cambodia-1999.html"
+    },
+    {
+     "text": "These deliberate killings occurred on a massive scale, were systematically organised and directed against the Vietnamese. In each case, Vietnamese were targeted not as individuals but based on their membership of the group and their perceived ethnicity. This happened under the umbrella of the CPK’s policy to specifically target the Vietnamese, including civilians, as a group. Until late 1976, the Vietnamese were targeted for expulsion, from April 1977, for destruction as such.",
+     "who": "The Trial Chamber of the ECCC, a court of Cambodian and international judges, in the summary of its judgment in Case 002/02 read in court (paragraph 32; CPK is the Communist Party of Kampuchea). The copy linked is marked 'courtesy copy - not checked against delivery'; the full written judgment is the authoritative text",
+     "date": "16 November 2018, on 1975–79",
+     "url": "https://d.dccam.org/Archives/Chronology/pdf/Summary_of_Judgement_Case_002-02_EN.pdf"
+    }
+   ],
+   "official": [
+    {
+     "text": "After having led the people’s national democratic revolution to the total and decisive victory of 17 April 1975, the Party continues now to have an absolute monopoly of leadership in all domains of the socialist revolution and in the building of socialism.",
+     "who": "The 1976 Statute of the Communist Party of Kampuchea, the ruling party of Democratic Kampuchea, first page, as read out in court by Duch on 31 March 2009 and printed in the ECCC's compilation of his statements (the court's English translation). Duch, on trial, chose this sentence as evidence for his argument that the Party alone was responsible for the crimes; no printed text of the Statute is linked",
+     "date": "1976 (quoted in court 31 March 2009)",
+     "url": "https://eccc.gov.kh/sites/default/files/publications/Case001Apology_En.pdf"
+    },
+    {
+     "text": "During the S-21 era, I valued my life and the lives of my family as more important than the lives of those who were detained at S-21. During that period I never dared even to think about disputing or opposing the orders from the top, despite knowing that they were criminal. It was a matter of life and death for me and my family. As the director of S-21, I did not dare to seek any alternatives to obeying the orders from the upper echelon, despite knowing that carrying them out would lead to the loss of thousands of lives.",
+     "who": "Kaing Guek Eav, alias Duch, chairman of S-21, in a statement to the ECCC Trial Chamber during his trial, as printed in the court's own 'Compilation of statements of apology made by Kaing Guek Eav alias Duch during the proceedings' (p. 3; the court's translation from the Khmer). In the same statement he says he is still responsible for the crimes",
+     "date": "31 March 2009 (probable: the compilation prints this paragraph, which begins 'Thirdly', without a date, ahead of the first and second points of his statement of 31 March 2009)",
+     "url": "https://eccc.gov.kh/sites/default/files/publications/Case001Apology_En.pdf"
+    }
+   ],
+   "today": {
+    "text": "Following the defeat of the Khmer Rouge regime, the Cambodian Memorial Sites became places of memorialisation to honour victims. As places of reflection and learning, the serial property encourages peaceful coexistence among peoples and fosters a commitment to never repeat such atrocities. The property provides an example of the ongoing process of navigating the joint goals of justice and national reconciliation.",
+    "who": "Not a Cambodian government statement: this is the UNESCO World Heritage Centre's 'Brief synthesis' for the property 'Cambodian Memorial Sites: From centres of repression to places of peace and reflection' (the former M-13 prison, Tuol Sleng and Choeung Ek), in Cambodia, added to the World Heritage List in 2025. Whether the tribunal served justice is contested (see What is disputed)",
+    "date": "page accessed 26 November 2026 (the linked page does not print the inscription date; see the note)",
+    "url": "https://whc.unesco.org/en/list/1748"
+   },
+   "disputed": [
+    [
+     "How many died? There is no agreed count. The UN Group of Experts in 1999 reported scholars' figures of 1.5 million and nearly 1.7 million, about 20 per cent of an April 1975 population of 7.3 to 7.9 million, and said historians had rejected the 2 to 3 million often used by Cambodian governments since 1979. Yale's Cambodian Genocide Program gives about 1.7 million, 21 per cent of the population. The demographer Patrick Heuveline (2015) puts the 95 per cent range for excess deaths at 1.2 to 2.8 million with a median of 1.9 million, of which about 1.09 million violent; he finds Michael Vickery's 740,800 and the post-1979 government's 3.315 million both very unlikely. UNESCO's World Heritage text says one quarter of the population perished in a single decade, a longer period than 1975–79; the US Holocaust Memorial Museum says almost two million. The sources cited here agree on a range of roughly 1.5 to 2 million or somewhat more, not on a number.",
+     [
+      "https://hrlibrary.umn.edu/cambodia-1999.html",
+      "https://escholarship.org/content/qt0n9512vk/qt0n9512vk.pdf?t=rhmad3",
+      "https://macmillan.yale.edu/gsp/cambodian-genocide-program",
+      "https://whc.unesco.org/en/list/1748",
+      "https://www.ushmm.org/genocide-prevention/countries/cambodia"
+     ]
+    ],
+    [
+     "Was it genocide, and of whom? The legal finding is narrow: the ECCC convicted for genocide of the Vietnamese and (Nuon Chea only, as a superior) of the Cham, made no genocide finding concerning ethnic Khmer, and judged the deaths in the cooperatives, worksites and security centres as crimes against humanity. It found that Cham were killed on a massive scale; it held that Khieu Samphan was not responsible for that genocide as an aider or a superior. The Supreme Court Chamber upheld the Vietnamese finding on 22 September 2022; Nuon Chea died in 2019 before his appeal was decided, so the Cham finding was never tested on appeal, although the Chamber found no legal reason to vacate it. The UN Group of Experts in 1999 said the Khmer are a national group under the Genocide Convention but took no position on whether genocide was committed against part of them, because that turns on the Khmer Rouge's intent. Inside Cambodia the word genocide has been used for the whole population's suffering since the 1979 trial, which used a wider definition than the Convention's, and the legal scholar Rachel Killean reports that Judge You Ottara's separate opinion called the court's approach overly formalistic. The question the experts left open, whether the killing of Khmer by Khmer (often called 'auto-genocide') meets the Convention's definition, was not decided by the court. Yale's Cambodian Genocide Program uses the word for the whole period.",
+     [
+      "https://d.dccam.org/Archives/Chronology/pdf/Summary_of_Judgement_Case_002-02_EN.pdf",
+      "https://hrlibrary.umn.edu/cambodia-1999.html",
+      "https://opiniojuris.org/2022/10/31/symposium-on-the-eccc-the-case-002-02-appeal-judgments-implications-for-genocide-recognition-in-cambodia/",
+      "https://news.un.org/en/story/2022/09/1127521",
+      "https://macmillan.yale.edu/gsp/cambodian-genocide-program"
+     ]
+    ],
+    [
+     "How much did the American bombing help the Khmer Rouge to power? Taylor Owen and Ben Kiernan (2006) argue that civilian casualties drove ordinary Cambodians to an insurgency that had been small, and that the Khmer Rouge used the bomb damage as propaganda. Their 2006 figure of 2,756,941 tons of bombs (for 1965–73) rested on a database error; in 2010 and again in 2015 the same authors corrected it to about 500,000 tons, close to the 539,129 tons in the US Library of Congress study. The Library of Congress study records the opposing view too: the bombing bought time for the Lon Nol government without stopping the communist advance, the former US officials Emory Swank and General John Vogt disputed William Shawcross's argument that it forged the Khmer Rouge, and the insurgents depended heavily on North Vietnamese help. Estimates of bombing deaths in that study run from 30,000 to 500,000; Owen and Kiernan cite 50,000 to 150,000 civilians. The sources cited here do not agree on the weight to give the bombing against the 1970 coup, Vietnamese support and Prince Sihanouk's alliance with the Khmer Rouge.",
+     [
+      "https://gsp.yale.edu:443/sites/default/files/walrus_cambodiabombing_oct06.pdf",
+      "https://apjjf.org/?p=15332",
+      "http://countrystudies.us/cambodia/24.htm"
+     ]
+    ],
+    [
+     "Did the tribunal deliver justice? It convicted three people after more than 13 years of hearings, at a reported cost of about 330 million US dollars; of the two other accused in Case 002, Ieng Sary died in 2013 during the trial and Ieng Thirith was found unfit to stand trial, and Pol Pot died in 1998 before any charge. The Open Society Justice Initiative (2020) says Cambodian officials consistently acted to block further cases (003 and 004), reporting that Prime Minister Hun Sen told the UN Secretary-General in October 2010 that Case 003 would not be allowed; it describes the Cambodian and international judges reaching opposite conclusions and the cases as deadlocked. Against this, the court's own record is that the two most senior surviving leaders were tried and convicted and that 185 witnesses, civil parties and experts were heard in public in Case 002/02 alone. Vann Nath told the judges that testifying in public was an honour and that what he wanted was justice for those who died.",
+     [
+      "https://news.un.org/en/story/2022/09/1127521",
+      "https://www.justiceinitiative.org/uploads/9e0af740-d7b6-4c70-ba0c-96df88328b2c/briefing-eccc-end0304-20200429.pdf",
+      "https://eccc.gov.kh/en/case/topic/1298",
+      "https://cambodiatribunal.org/sites/default/files/transcripts/ecc_6_29_transcript.pdf"
+     ]
+    ]
+   ],
+   "blind": "The voices here are survivors who lived to speak in a courtroom thirty years later, through interpreters, in answer to lawyers' questions. Of the thousands held at S-21 very few survived; the dead speak, if at all, through confessions extracted under torture, which are not quoted. The Cham and Vietnamese victims are represented by one Cham civil party; no ethnic Vietnamese voice is quoted here, although a civil party whose ethnic Vietnamese wife and children were killed testified in December 2015, and the transcripts of that part of the trial were not read for this card. The people of the cooperatives who starved, the women forced to marry, the monks disrobed and the Khmer Republic soldiers shot in 1975 are present only in the court's findings. The regime is heard only at second hand: one sentence of its Party Statute, chosen and read out by a prison chairman on trial in his own defence, and that chairman's own statement; Pol Pot and most of the leadership never answered in court.",
+   "reading": [
+    [
+     "ECCC Trial Chamber, Summary of Judgement, Case 002/02 (16 November 2018; copy hosted by the Documentation Center of Cambodia)",
+     "https://d.dccam.org/Archives/Chronology/pdf/Summary_of_Judgement_Case_002-02_EN.pdf"
+    ],
+    [
+     "ECCC Trial Chamber, Judgement in Case 001, Kaing Guek Eav alias Duch (26 July 2010, eccc.gov.kh)",
+     "https://eccc.gov.kh/sites/default/files/documents/E188_EN.PDF"
+    ],
+    [
+     "Report of the Group of Experts for Cambodia established pursuant to General Assembly resolution 52/135 (UN document A/53/850, 1999; University of Minnesota Human Rights Library)",
+     "https://hrlibrary.umn.edu/cambodia-1999.html"
+    ],
+    [
+     "ECCC, Compilation of statements of apology made by Kaing Guek Eav alias Duch during the proceedings (eccc.gov.kh)",
+     "https://eccc.gov.kh/sites/default/files/publications/Case001Apology_En.pdf"
+    ],
+    [
+     "Patrick Heuveline, The Boundaries of Genocide: Quantifying the Uncertainty of the Death Toll During the Pol Pot Regime (1975–79), Population Studies 69(2), 2015 (eScholarship, University of California)",
+     "https://escholarship.org/content/qt0n9512vk/qt0n9512vk.pdf?t=rhmad3"
+    ],
+    [
+     "Cambodian Genocide Program (Yale University, Genocide Studies Program)",
+     "https://macmillan.yale.edu/gsp/cambodian-genocide-program"
+    ]
+   ],
+   "warn": "The theme 'Genocide' is used here in the court's sense: the ECCC found genocide of the ethnic Vietnamese and of the Cham. It made no finding of genocide against ethnic Khmer: the mass deaths in the cooperatives, worksites and security centres across the country it judged as crimes against humanity. Whether those were also genocide is disputed (see What is disputed). All the testimony is the court's English interpretation of words spoken in Khmer, printed as spoken, with the transcript's own double hyphens and rough grammar; a reviewed transcript can differ slightly from the live interpretation. The transcripts name guards and describe torture and killing. Duch's statement is the court's translation and is his own account of his motives. The Case 002/02 summary is a courtesy copy; the written judgment of more than 2,000 pages is the authority. Khmer names are spelled several ways (Kroch Chhmar or Krouch Chhmar; Kaing Guek Eav or Kang Kek Iew). The Ba Chuc figure in the note rests on Vietnamese official counts reported in the press.",
+   "note": "Research in progress: the full trial judgments were too long to read through and only their opening parts, the court's summaries and press releases were used, so no survivor is quoted from the Case 002/02 judgment itself and no ethnic Vietnamese survivor is quoted. The 1970 killings of ethnic Vietnamese under Lon Nol rest on Wikipedia's report of later scholars (Kiernan for the killings, Duncan for the 200,000 repatriated); no better page was found, and the Library of Congress study and Britannica do not mention them. Not covered in the facts: Democratic Kampuchea kept Cambodia's United Nations seat during the 1980s (UN Group of Experts, paragraph 38, https://hrlibrary.umn.edu/cambodia-1999.html). The demographic report written for the court by Ewa Tabeau and They Kheam (2009) could not be opened. No Democratic Kampuchea document was found in a quotable printing other than the Party Statute sentence read in court; the 1976 Constitution and Pol Pot's speech of 27 September 1977 exist online only in modern scholars' translations. The killing of 3,157 villagers at Ba Chuc in Vietnam by Khmer Rouge troops in April 1978 is reported by Wikipedia from press accounts (https://en.wikipedia.org/wiki/Ba_Ch%C3%BAc_massacre) and was not checked against a primary source. Cambodia's 20 May National Day of Remembrance was confirmed only from Wikipedia. The UNESCO inscription date, 11 July 2025 at the World Heritage Committee's 47th session in Paris, is from Cambodia's state news agency (https://akp.gov.kh/post/detail/341997), not from the UNESCO page; no Royal Government statement was quoted, because the foreign ministry's page (mfaic.gov.kh) refused to open and the others were not checked word for word."
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
