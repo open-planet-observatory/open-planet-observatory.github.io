@@ -7729,6 +7729,526 @@
    ],
    "warn": "Equiano's two passages follow the 1789 London printing as transcribed by the Text Creation Partnership; the Project Gutenberg copy of the book differs in small points of punctuation (it has no comma after 'ran off with us'). Cugoano's passages are quoted from an abolitionist reprint of 1825, not from his 1787 first edition, and its spelling may have been modernised ('clothing'). Both men wrote as campaigners against the trade, and Equiano's account of his African childhood and crossing is disputed. Newton's text is linked as raw scan text with the long s read as f. 'Negroes' and 'slaves' are the sources' words. The passages describe chaining, flogging, suffocation and the deaths of children.",
    "note": "Research in progress: the 1787 first edition of Cugoano's Thoughts and Sentiments could not be opened as text (the University of Michigan copy returned an error), so the 1825 reprint is quoted. The full text of the 1750 Act (23 Geo. 2 c. 31) and William Snelgrave's 1734 defence of the trade could not be read and are not quoted. The current SlaveVoyages estimates page could not be read by the research tools, so the figures are those of its legacy estimates page and may have been revised since. Carretta's and Lovejoy's own articles were not read; their positions are given from Brycchan Carey's page and the Equiano's World project. No account by Ayuba Suleiman Diallo or Venture Smith was added. The 1750 Act's preamble, in which Parliament called the trade 'very advantageous to Great Britain', is held back until a copy can be checked word for word, so the official account here is only the Act that ended the trade. Only the title of UN resolution 80/250 is quoted; its operative paragraphs are described under 'Still disputed'."
+  },
+  {
+   "id": "khmelnytsky1648",
+   "title": "The Khmelnytsky uprising and the massacres of 1648–49",
+   "region": "Europe",
+   "where": "The Ukrainian lands of the Polish–Lithuanian Commonwealth (Kyiv, Bratslav, Chernihiv, Podolia and Volhynia); pin: Nemyriv (Nemirov, Niemirów), Vinnytsia region, Ukraine, the town whose Jewish community was destroyed on 10 June 1648 (approximate; the pin marks one massacre site, not the centre of the uprising)",
+   "lat": 48.97,
+   "lon": 28.84,
+   "from": 1648,
+   "to": 1657,
+   "themes": [
+    "Uprising",
+    "Massacre",
+    "War",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "In 1648 Ukraine was part of the Polish–Lithuanian Commonwealth: most of the land belonged to Catholic Polish nobles, and the peasants, mostly Orthodox Ukrainians, bore heavy taxes and mistreatment sharpened by religious tension. Perhaps a third of Polish Jewry lived in Ukraine, many of them in the nobles' service, some as tax collectors, so that peasants saw them as part of the system that oppressed them.",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "Bohdan Khmelnytsky, a petty nobleman and Cossack officer who could not get justice from the Polish authorities, fled to the Zaporozhian Sich at the end of 1647, was elected hetman and early in 1648 secured Crimean Tatar military support; two Polish defeats in May set off a mass popular uprising.",
+     "https://www.britannica.com/place/Ukraine/The-Cossacks"
+    ],
+    [
+     "Three peoples were killed in this war. Cossacks and peasants turned on those they associated with Polish rule: landlords, officials, Latin and Uniate clergy, and Jews. The Poles retaliated brutally against the rebel population.",
+     "https://www.britannica.com/place/Ukraine/The-Cossacks"
+    ],
+    [
+     "The Encyclopedia of Ukraine states both sides of the killing in one passage: during the fighting of summer 1648 Polish troops systematically killed Cossacks and peasants, including women, children and the elderly, and the rebels treated nobles, Catholic clergy and Jews in a similar fashion.",
+     "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+    ],
+    [
+     "The Jewish community of Nemyriv was destroyed on 10 June 1648, and Tulchyn and Bar were destroyed early in the fighting; the chronicler Nathan Hanover describes nobles at Tulchyn handing the Jews over to the rebels. Some Jews converted to Christianity to save their lives, thousands fled, and possibly several thousand were captured and sold as slaves in the Ottoman Empire, where Jews of Turkey and the Mediterranean raised money to ransom them.",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "The Tatar alliance was paid for in captives. The Cossack 'Eyewitness' chronicle records under 1648 that the Horde went home to Crimea enriched with prisoners from the defeated Crown army, and under 1649, at the withdrawal from Zbarazh, that the Tatars carried people off into captivity while the Cossacks took property. The chronicle does not say whose people these were.",
+     "http://litopys.org.ua/samovyd/sam02.htm"
+    ],
+    [
+     "By the Compact of Zboriv (Zborów) in August 1649 King John Casimir let Khmelnytsky set up a virtually independent Cossack principality; it satisfied neither the Polish gentry nor his followers, many of whom stayed under Polish landlords. Defeated at Berestechko in June 1651, he had to accept a less favourable treaty; in 1654 he had his Cossacks swear allegiance to Tsar Alexis at Pereiaslav. He died in 1657, and Moscow went on to control Ukraine east of the Dnieper and to reduce Cossack liberties.",
+     "https://www.britannica.com/biography/Bohdan-Khmelnytsky"
+    ],
+    [
+     "Khmelnytsky is generally regarded in Ukraine as a national hero: his monument has stood in central Kyiv since 1888, his portrait is on Ukrainian banknotes, a Ukrainian military decoration and a city bear his name. Wikipedia's summary is that his role in Polish history has been viewed mostly in a negative light and that his assessment in Jewish historiography is overwhelmingly negative.",
+     "https://en.wikipedia.org/wiki/Bohdan_Khmelnytsky"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "Початок и причина войни Хмелницкого ест едино от ляхов на православіе гоненіе и козаком отягощеніе. Тогда бо оным не хотячи, чего не звикли были панщини робити, на службу замковую обернено, которих з листами и в городі до хандоження коней старостове держали, в дворах грубу, тоест печи палити, псов хандожити, дворі змітати и до инших незносных діл приставляли.",
+     "who": "The anonymous Cossack 'Eyewitness' (Samovydets), a chronicler from the rebels' own side, usually identified as the Cossack officer Roman Rakushka-Romanovsky. Plain gloss: the beginning and cause of Khmelnytsky's war is solely the Poles' persecution of Orthodoxy and the burdening of the Cossacks; unwilling to do labour-service (panshchyna) they were not used to, they were put to castle service; the district governors (starostas) kept them to carry letters and groom horses in the towns, and set them to stoke the stoves in the manors, tend the dogs, sweep the yards and do other unbearable tasks",
+     "date": "written in the later 17th century, on the years before 1648",
+     "doc": "Litopys Samovydtsia (the Eyewitness Chronicle), opening section 'О началі войни Хмелницкого', p. 45 of the edition reproduced on litopys.org.ua (before page marker \\46\\); first printed by O. Bodiansky, Moscow 1846",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm",
+     "lic": "Public domain (anonymous work of the 17th century, first printed 1846). The wording is that of the online text, which follows a modern scholarly transcription with slightly normalised letters; the editors' footnote numbers are left out"
+    },
+    {
+     "text": "When the Jews discovered this treacherous intention, they immediately resolved to dispose of the Poles, whom they excelled in numbers. But the Rosh-Yeshibah of Tulchyn, Rabbi Aaron, implored them not to touch the pans, on the ground that such action might draw upon the Jews all over the Empire the hatred of the Polish population. \"Let us rather perish,\" he exclaimed, \"as did our brethren in Niemirov, and let us not endanger the lives of our brethren in all the places of their dispersion.\" The Jews yielded.",
+     "who": "A historian's retelling, not the chronicle itself: Rabbi Aaron, head of the Talmudic academy (rosh yeshivah) of Tulchyn, speaking to the Jews who had defended the fortress beside the Polish nobles (pans) and learned that the nobles meant to hand them to the Cossacks; his words come from the Jewish chronicles of the massacres (the story is Nathan Hanover's) and are given here as retold by the Jewish historian Simon Dubnow, not in a direct translation of the Hebrew. 'The Empire' is the translator's word for the Polish–Lithuanian Commonwealth. 'Treacherous' is Dubnow's judgement of the nobles; on the same page he writes that another detachment of Cossacks then entered Tulchyn and killed all the Catholics, among them the nobles' leader, Count Chetvertinski",
+     "date": "summer 1648 (chronicle printed 1653; this retelling 1916)",
+     "doc": "S. M. Dubnow, History of the Jews in Russia and Poland, vol. 1, translated from the Russian by Israel Friedlaender (Philadelphia: Jewish Publication Society, 1916), p. 154",
+     "url": "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+     "lic": "Public domain (English translation by I. Friedlaender, published 1916)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "гдеколвек знайшлася шляхта, слуги замковіе, жиди й уряди міскіе — усе забияли, не щадячи ані жон и дітей їх, маетности рабовали, костели палили, обваліовали, ксіонзов забияли, дворі зась и замки шляхецкіе и двори жидовскіе пустошили, не зоставаючи жадного цілого. Рідкій в той кріві на тот час рук своїх не умочил и того грабленія тих добр не чинил.",
+     "who": "The Cossack 'Eyewitness' chronicler (Samovydets), himself of the rebel side, on what the Cossacks did in the towns in 1648 (Litopys Samovydtsia, 'Война самая', year 1648, p. 52 of the edition reproduced online). Plain gloss: wherever nobles, castle servants, Jews and town officials were found, they killed them all, sparing neither their wives nor their children; they plundered estates, burned and wrecked Catholic churches, killed priests, and laid waste the nobles' manors and castles and the Jews' houses, leaving none whole; rare was the man who did not then dip his hands in that blood and share in that plunder. A little further on he writes that most Jews perished at Nemyriv and Tulchyn, 'a number beyond counting'",
+     "date": "written in the later 17th century, on 1648",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm"
+    },
+    {
+     "text": "they did not content themselves with receiving taxes from them, nor yet tithes, but began to give authority to the Jews and Armenians over them, till these went to such extremities as to debauch their wives and daughters; so that the Cossacks, after having been Princes to rule, became slaves, to yield obedience to the accursed Jews. This was the first grievance.",
+     "who": "Paul of Aleppo, an archdeacon of the Greek Orthodox Patriarchate of Antioch, from Aleppo in Syria, who crossed the Cossack country in 1654 with his father, Patriarch Macarius of Antioch, and admired the Cossacks; he is repeating what his hosts told him about the Poles ('they'), and the charge against Jews and Armenians is his hosts' accusation in his own hostile words (The Travels of Macarius, translated from the Arabic by F. C. Belfour, vol. 1, London 1836, p. 197). This is hearsay from the side that did the killing, written by a man who approved of it; it is evidence of what the rebels said about Jews, not of what Jews did",
+     "date": "1654 (English translation 1836)",
+     "url": "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    },
+    {
+     "text": "When in Moldavia, we asked Yanaki the Jew, who had taken refuge there, what the Khatman Akhmil had done to the Jews in Poland: he answered, \"He has done to them more injury, and made greater slaughter of them, than ever Aspasianus (Vespasian) did of old:\" — at which we laughed.",
+     "who": "A Jewish refugee in Moldavia, named in the source only as Yanaki, as recorded by Paul of Aleppo, the Greek Orthodox archdeacon from Syria and admirer of the Cossacks, who notes his own party's laughter ('the Khatman Akhmil' is Hetman Khmelnytsky; Vespasian is the Roman emperor whose armies destroyed Jerusalem). The Travels of Macarius, tr. F. C. Belfour, vol. 1 (1836), p. 229",
+     "date": "about 1653–54 (English translation 1836)",
+     "url": "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Ponieważ podług konstytucyi szczęśliwey Koronacyi naszey, w uspokoieniu Kozakow Zaporowskich dosyć się stało, tedy tę deklaracyą łaski naszey uczynioną pod Zborowem woysku Zaporowskiemu, authoritate Conventus praesentis, za zgodą wszech Stanow, approbuiemy.",
+     "who": "King John II Casimir and the Sejm (parliament) of the Polish–Lithuanian Commonwealth, the law ratifying the Zboriv settlement (Volumina Legum, vol. 4, St Petersburg reprint of 1859, Sejm of 1649, article 18, indexed as 'Approbacya deklaracyi laski ... pod Zborowem woysku Zaporowskiemu daney'). Plain gloss: since what the statute of our happy coronation required for the settling of the Zaporozhian Cossacks has been done, we approve, by the authority of the present Sejm and with the consent of all the estates, the declaration of our grace made at Zboriv to the Zaporozhian army",
+     "date": "Sejm of November 1649 – January 1650",
+     "url": "https://archive.org/stream/volumina-legum/VOLUMINA%20LEGUM_djvu.txt"
+    },
+    {
+     "text": "В городах зась от жидов тая была кривда, же неволно Козакові в дому своем жадного напитку на потребу свою держати, не тилко меду, горілки, пива, але и браги.",
+     "who": "The rebels' stated grievance against Jews, in the words of their own chronicler, the anonymous Cossack 'Eyewitness' (Samovydets), on the leaseholding (arenda) system, under which nobles leased monopolies such as the sale of drink, often to Jewish leaseholders. Plain gloss: in the towns the wrong done by the Jews was this, that a Cossack was not free to keep any drink in his own house for his own use, not only mead, vodka and beer but even braha (home brew). This is the rebels' grievance as they stated it, not a finding of fact (Litopys Samovydtsia, section 'О началі войни Хмелницкого', p. 46 of the edition reproduced on litopys.org.ua (between page markers \\46\\ and \\47\\))",
+     "date": "written in the later 17th century, on the years before 1648",
+     "url": "http://litopys.org.ua/samovyd/sam02.htm"
+    }
+   ],
+   "disputed": [
+    [
+     "How many Jews died? The seventeenth-century Jewish chronicles gave very large figures: Wikipedia's summary of the literature reports 60,000–80,000 for Nathan Hanover and 100,000 for Sabbatai Cohen, and writers into the twentieth century repeated 100,000 or more; Dubnow in 1916 wrote that the chroniclers' reports of the number of Jewish victims vary between one hundred thousand and five hundred thousand, and himself wrote of about ten thousand Jews killed or carried off at Polonne alone and of some seven hundred communities massacred or pillaged. Modern demographic work is much lower. Shaul Stampfer argues that the chroniclers could not count the dead and wrote to commemorate, that roughly 40,000 Jews lived in the Ukrainian lands before the uprising and perhaps 20,000 were lost, and that it cannot be known how many of those died by violence and how many of disease, hunger and flight. The YIVO Encyclopedia concludes that most Jews fled and fewer than 20,000 died, possibly far fewer. As summarised on Wikipedia, which follows the historians Paul Robert Magocsi and Orest Subtelny, Jaroslaw Pelenski's estimate is 6,000–14,000, and Bernard Weinryb and Shmuel Ettinger wrote of tens of thousands, Weinryb adding that the catastrophe may not have been as great as had been assumed. Recent specialist studies agree that the chronicles' totals are too high and that no exact figure can be recovered, though, by Wikipedia's account, many modern general works still repeat 100,000 or more. The sources used here give no comparable count for the Polish nobles and townspeople, the Catholic and Uniate clergy, or the Ukrainian peasants killed in reprisals or enslaved.",
+     [
+      "https://judaicaukrainica.ukma.edu.ua/node/175",
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://en.wikipedia.org/wiki/Khmelnytsky_Uprising",
+      "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction"
+     ]
+    ],
+    [
+     "What was it? In Ukraine the uprising is called the National Liberation War and Khmelnytsky is credited with founding the Cossack Hetmanate, which some call the first Ukrainian state. In Jewish memory the same years are gzeyres takh vetat, the evil decrees of 5408–5409, mourned by a fast on 20 Sivan and long regarded as the greatest catastrophe since the destruction of the Temple; the YIVO Encyclopedia adds that this image of total destruction was stronger than the reality, since the communities recovered within about half a century. In Polish memory the uprising opens the period of the Deluge and the decline of the Commonwealth, and Khmelnytsky's role is mostly judged negatively. Amelia Glaser's introduction to a Stanford University Press volume on these competing memories notes that Jews have likened him to Haman and Hitler, that Ukraine has memorialised him as a nation builder, and that in Polish history he is a prelude to the Deluge. The Encyclopedia of Ukraine, the YIVO Encyclopedia and Britannica, written from different traditions, each record the killing of all three.",
+     [
+      "https://en.wikipedia.org/wiki/Khmelnytsky_Uprising",
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://www.britannica.com/place/Ukraine/The-Cossacks",
+      "https://en.wikipedia.org/wiki/Bohdan_Khmelnytsky",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction",
+      "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+     ]
+    ],
+    [
+     "How far was Khmelnytsky himself responsible for the massacres? Jewish tradition holds him personally responsible, and so, approvingly, did his contemporary admirer Paul of Aleppo, who wrote that 'Akhmil' had 'purified the earth' of thousands of Jews; Dubnow wrote (p. 152) that Khmelnytsky sent the detachment that took Nemyriv. The YIVO Encyclopedia states that there was no consistent Cossack policy to kill all Jews, that many of the Jewish casualties were at the hands of the Cossacks' Tatar allies, and that some Jews survived in towns that held out; the Cossack Eyewitness chronicle, for its part, says that few on the rebel side kept their hands out of the blood and plunder. By Dubnow's account and that of the Jewish Encyclopedia of 1906, the Zboriv settlement that Khmelnytsky negotiated barred Jews from living in the Cossack-held regions, a right restored by the treaty of Bila Tserkva in 1651; the king let Jews baptised under threat of death return to their faith, and women forcibly baptised and married to Cossacks fled back to their families. None of the sources used for this card records an order by him to kill Jews, Poles or clergy, or an attempt by him to stop the killing. Glaser's introduction notes that the early Jewish chronicles make his colonel Maksym Kryvonis the man responsible for the most brutal attacks on Jews and Poles, that it was Hanover's portrait that led later Jewish writers to lay the massacres directly on the hetman, that his letters, as Hrushevsky read them, complained of extortion by Jews, and that there is no reason to think him sympathetic to the Jews of his time.",
+     [
+      "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat",
+      "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt",
+      "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt",
+      "http://litopys.org.ua/samovyd/sam02.htm",
+      "https://www.jewishencyclopedia.com/articles/4685",
+      "https://www.sup.org/books/history/stories-khmelnytsky/excerpt/introduction"
+     ]
+    ],
+    [
+     "What did Pereiaslav (1654) mean? Britannica reports that Russian historians have emphasized Ukraine's acceptance of the tsar's suzerainty, which they say legitimised Russian rule, while Ukrainian historians stress Moscow's recognition of Ukraine's autonomy, including an elected hetman, self-government and the right to conduct foreign relations, which they hold was nearly the same as independence. The Encyclopedia of Ukraine describes it as a protectorate of the Muscovite tsar with complete autonomy. There is no consensus.",
+     [
+      "https://www.britannica.com/place/Ukraine/The-Cossacks",
+      "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+     ]
+    ]
+   ],
+   "blind": "Three peoples have a claim to be the people this happened to, and they are not equally heard. The Ukrainian side speaks here through one literate Cossack officer writing years later; the peasants who rose, and those the Polish reprisals killed or the Tatars led away, left nothing in their own hand. The Jewish dead are known through chronicles written by survivors and refugees to mourn them, which reach this card only at second hand (a 1916 historian's retelling, and one refugee's remark written down by a man who laughed at it); the women forced into baptism and marriage (Dubnow, pp. 153 and 157) and the captives sold in the Ottoman markets are not heard at all. The Polish and Catholic townspeople, nobles and Uniate and Catholic priests who were killed appear only in the Cossack chronicler's list of victims and in Dubnow's line on the nobles killed at Tulchyn; the Sejm statute quoted here says nothing of them, and no account by one of them was found in a quotable printing. The Tatars, who took the captives, do not speak.",
+   "reading": [
+    [
+     "Gzeyres Takh Vetat (YIVO Encyclopedia of Jews in Eastern Europe)",
+     "https://yivoencyclopedia.org/article.aspx/Gzeyres_Takh_Vetat"
+    ],
+    [
+     "Orest Subtelny, 'Cossack-Polish War' (Encyclopedia of Ukraine, vol. 1, 1984; Internet Encyclopedia of Ukraine)",
+     "https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CC%5CO%5CCossack6PolishWar.htm"
+    ],
+    [
+     "Shaul Stampfer, 'Jewish Population Losses in the Course of the Khmelnytsky Uprising' (Judaica Ukrainica 4, 2015, National University of Kyiv-Mohyla Academy)",
+     "https://judaicaukrainica.ukma.edu.ua/node/175"
+    ],
+    [
+     "Litopys Samovydtsia, the Eyewitness Chronicle (17th century; online text, litopys.org.ua)",
+     "http://litopys.org.ua/samovyd/sam02.htm"
+    ],
+    [
+     "S. M. Dubnow, History of the Jews in Russia and Poland, vol. 1, tr. I. Friedlaender (1916, archive.org)",
+     "https://archive.org/stream/historyofjewsinr01dubn/historyofjewsinr01dubn_djvu.txt"
+    ],
+    [
+     "Paul of Aleppo, The Travels of Macarius, Patriarch of Antioch, tr. F. C. Belfour, vol. 1 (1836, archive.org)",
+     "https://archive.org/stream/travelsmacarius01pauluoft/travelsmacarius01pauluoft_djvu.txt"
+    ]
+   ],
+   "warn": "Read every voice here against the others. The Cossack chronicler's complaint about Jews, placed under the official account as the rebels' own justification, and Paul of Aleppo's 'accursed Jews' are accusations by the side that did the killing; Paul's charge about wives and daughters is hostile hearsay, and he wrote with open approval of the slaughter. The Jewish chronicles were written to mourn and their numbers are not counts. Rabbi Aaron's words are not a direct translation of Nathan Hanover's Hebrew (the standard English translation, by Abraham Mesch, 1950, is in copyright) but Dubnow's retelling, translated from Russian in 1916; the charge that the Tulchyn nobles betrayed the Jews is the chronicler's, and the same account has the nobles killed afterwards. The Ruthenian and Polish quotations are given in the original with plain glosses by the site, not published translations; the Ruthenian follows a modern transcription. 'Жиди' and 'ляхи' are the period's ordinary words for Jews and Poles; the first is an offensive word in modern Russian and is generally avoided in modern Ukrainian. Place names vary (Nemyriv, Nemirov, Niemirów; Zboriv, Zborów; Polonne, Polonnoye), and Paul's 'Akhmil' is Khmelnytsky. The passages describe the killing of women and children.",
+   "note": "Research in progress: no quotation in Nathan Hanover's own Hebrew words (Yeven Metzulah, Venice 1653) could be checked against an open text, so the Jewish voice here is at second hand. No letter or universal of Khmelnytsky himself, no text of the Zboriv articles (including the clause on Jews), no Polish account of the rebellion or account by a Polish or Catholic victim, and no present-day official Ukrainian, Polish or Israeli statement was found in a form that could be quoted; Pierre Chevalier's history (English 1672) could not be opened. The edition behind the online Eyewitness Chronicle text is not named on its page."
+  },
+  {
+   "id": "lebanon-famine1915",
+   "title": "The Great Famine of Mount Lebanon (kafno)",
+   "region": "Middle East",
+   "where": "The autonomous Ottoman district (mutasarrifate) of Mount Lebanon and the port of Beirut below it; pin: Aley ('Aleih), a Mount Lebanon town above Beirut where the American eyewitness Margaret McGilvary wrote that the dead were gathered from the streets in the morning (her p. 234; approximate)",
+   "lat": 33.81,
+   "lon": 35.6,
+   "from": 1915,
+   "to": 1918,
+   "themes": [
+    "Famine",
+    "War"
+   ],
+   "facts": [
+    [
+     "Mount Lebanon had been an autonomous Ottoman district under a Christian governor since 1861, with 414,747 inhabitants counted in 1913. After the Ottoman Empire entered the war the district came under the control of the Ottoman army and martial law and Jamal (Djemal) Pasha assumed power; its governor, Ohannes Pasha, resigned in June 1915.",
+     "https://en.wikipedia.org/wiki/Mount_Lebanon_Mutasarrifate"
+    ],
+    [
+     "The historian Graham Pitts writes that hunger and related diseases cost Beirut and Mount Lebanon around 200,000 people, a death rate of more than one in three and the highest of any bounded territory in the First World War. He notes that the Lebanese imported most of their staple crops and that money sent home by emigrants in the Americas had become the largest source of income by 1914.",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "From March to October 1915 locust swarms stripped vegetation across Palestine, Mount Lebanon and Syria; the historian Zachary Foster estimates that the winter grain harvest fell by 10 to 15 per cent and that summer and autumn fruit and vegetable crops lost between 60 and 100 per cent, depending on the crop.",
+     "https://en.wikipedia.org/wiki/1915_Ottoman_Syria_locust_plague"
+    ],
+    [
+     "The Allied navies blockaded the Syrian coast. In May 1916 the British Foreign Office told the American ambassador that France objected to any modification of that blockade, even to land supplies for Jewish hospitals in Jerusalem, and that Britain shared the French view.",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/d1230"
+    ],
+    [
+     "On 26 July 1916 the Ottoman Minister for Foreign Affairs told the American chargé that his government would not permit supplies to be imported for distribution by a neutral commission in Syria and the Lebanon. He said Djemal Pasha denied the reports of famine and claimed to have sent about 3,500,000 bushels of wheat to Beirut and the Lebanon.",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/d1241"
+    ],
+    [
+     "Some people gained from the shortage: Pitts writes that a group of influential merchants dominated the grain trade and moved wheat to wherever prices were highest, and that land changed hands as those with cash reserves took advantage of the food crisis.",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "On 6 May 1916 Jamal Pasha had seven men publicly executed in Damascus and fourteen in Beirut, Muslim and Christian Arab nationalists, for alleged pro-Entente activities; the day is kept in Lebanon and Syria as Martyrs' Day.",
+     "https://en.wikipedia.org/wiki/Martyrs%27_Day_(Lebanon_and_Syria)"
+    ],
+    [
+     "A monument to the famine, the Memory Tree by the Lebanese artist Yazan Halwani, was put up on Damascus Road in Beirut in 2018, commissioned by the Université Saint-Joseph and the writer Ramzi Toufic Salame; Arab News described it as the first memorial ever erected to the disaster.",
+     "https://arabnews.com/node/1350886"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "As for the sacrifices Lebanon made because of its having from the first taken side with the Entente, they are plain to everyone. Over half its population was wiped out through exile, hanging and systematic famishing at the hands of the Turks. With due proportion, this country is among those which suffered most owing to the attitude it adopted and preserved until the end.",
+     "who": "Daoud Ammoun (printed as 'Daoud Bey Mammom'), president of the delegation sent to Paris by the Administrative Council of Mount Lebanon, reading its statement to the Council of Ten; the delegation was asking for independence, wider frontiers and French help, and its words reach us in the English of the conference secretaries",
+     "date": "15 February 1919",
+     "doc": "Secretary's Notes of a Conversation Held in M. Pichon's Room at the Quai d'Orsay, 15 February 1919 (BC-33), in Papers Relating to the Foreign Relations of the United States, The Paris Peace Conference, 1919, vol. IV, p. 3",
+     "url": "https://history.state.gov/historicaldocuments/frus1919Parisv04/d1",
+     "lic": "US government publication (Department of State), public domain"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Disease and starvation spread abroad throughout the land. In the city, refugees from Lebanon, driven down to the coast by the hope of there obtaining work, or at least of escaping from the bitter winter of the mountains, died in the streets. There were days when on the walk of a mile from our house to the office, Mr. Dana and I would pass as many as ten or twelve people either dead or dying by the roadside; or with death only a few hours distant.",
+     "who": "Margaret McGilvary, an American, secretary to her uncle Charles A. Dana, manager of the American Mission Press in Beirut, and secretary of the Beirut chapter of the American Red Cross, The Dawn of a New Era in Syria (New York, 1920), p. 234; she held the Ottoman authorities chiefly to blame, and also wrote of the Entente blockade, food speculators and the cutting off of money from abroad",
+     "date": "published 1920, on the winter of 1916–17",
+     "url": "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt"
+    },
+    {
+     "text": "There was a great deal of profiteering and war wealth, all made on wheat. Among the Syrian masses, famine in its crudest form was fast approaching. In the rich streets of Beirut, men in rags and with famished faces, solitary waifs and strays of both sexes, wandered; lonely children, with wavering, stick-like legs, faces wrinkled like centenarians, eyes sunken with bitter and unconscious irony, hair thinned or entirely gone, moved along.",
+     "who": "Halidé Edib, Turkish writer who ran schools and orphanages in Syria and Lebanon under Djemal Pasha and so wrote from the Ottoman side, Memoirs of Halidé Edib (New York, 1926), p. 510",
+     "date": "published 1926, on her time in Syria during the war",
+     "url": "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt"
+    },
+    {
+     "text": "No party foresaw that the war would last long enough to cause a famine. Neither the Ottoman government nor France or Britain acted decisively to save Lebanon’s civilian population. Paris and London refused to allow aid through their blockade. Ottoman authorities, in conjunction with German advisers, continued to prosecute their war effort at the expense of their population’s welfare.",
+     "who": "Graham Auman Pitts, historian, 'Was Capitalism the Crisis? Mount Lebanon's World War I Famine', Environment & Society Portal, Arcadia (Spring 2021), no. 3, Rachel Carson Center; text licensed CC BY 4.0",
+     "date": "2021",
+     "url": "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    }
+   ],
+   "official": [
+    {
+     "text": "The Minister admits there is some suffering in Syria and the Lebanon, as is also the case in Constantinople or Smyrna, but denies that anyone has died of starvation. He and his colleagues, he says, believe that alarming reports are spread in the United States by the Entente powers for a double purpose; firstly, on the supposition that Turkey will refuse the distribution of relief and thus become embroiled with the United States; secondly, that if Turkey should consent, Entente powers would manipulate the matter so as to be considered by the inhabitants of Syria and the Lebanon as the real benefactors.",
+     "who": "The Ottoman Minister for Foreign Affairs, as reported by the American chargé in Constantinople, Hoffman Philip, in a telegram to the Secretary of State (Foreign Relations of the United States, 1916, Supplement, File No. 867.48/362, p. 934); the position is the minister's, the wording is the American diplomat's",
+     "date": "26 July 1916",
+     "url": "https://history.state.gov/historicaldocuments/frus1916Supp/d1241"
+    },
+    {
+     "text": "At this time the English were blockading all the coasts of the Empire, but the coast of the Hedjaz was excepted and they permitted the Arabian Zambuks to get as much food and corn as they liked from Egyptian ports. I took no exception to this, because the Beduins of the Hedjaz, the local fixed population, and the inhabitants of the Holy Places were almost starving. In this way Syria, which could hardly feed itself, was relieved of the necessity of sending food supplies to that region.",
+     "who": "Djemal (Jamal) Pasha, commander of the Ottoman Fourth Army and ruler of Syria in the war, Memories of a Turkish Statesman, 1913–1919 (London, 1922), p. 218; zambuks are Red Sea sailing boats. The passage concerns food for the Hejaz, not Lebanon; he does not discuss the Lebanese famine in this book",
+     "date": "published 1922, on the war years",
+     "url": "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt"
+    },
+    {
+     "text": "As your excellency will understand, repeated relaxations of the blockade are not free from very serious inconvenience from the military standpoint. It will therefore be impossible for our authorities to grant repeated renewals of this authorization.",
+     "who": "Jules Jusserand, French ambassador in Washington, telling the Secretary of State that France would let one American navy collier, the Caesar, carry supplies to the Syrians through the blockade (Foreign Relations of the United States, 1916, Supplement, File No. 867.48/473, pp. 939–940; printed there in the State Department's translation)",
+     "date": "November 1916",
+     "url": "https://history.state.gov/historicaldocuments/frus1916Supp/d1252"
+    }
+   ],
+   "disputed": [
+    [
+     "How many died? There are no reliable statistics. Pitts gives around 200,000 for Beirut and Mount Lebanon together, more than one in three; Melanie Tanielian writes that historians' estimates for Mount Lebanon run from 150,000 to 300,000, and that for Greater Syria George Antonius gave 350,000 famine deaths and Linda Schilcher, from German records, about 500,000. Figures from the time vary as widely: a report from Cairo passed on by Washington in June 1916 said 80,000 had starved in Lebanon alone by early May, which the American consul general at Beirut, W. Stanley Hollis, reached by a cipher telegram sent through the German ambassador, reduced to 50,000 while reporting that well-informed people said the facts were worse than reported; in 1919 the Lebanese delegation in Paris said over half the population had been lost to exile, hanging and famishing together, Chekri Ganem of the Central Syrian Committee spoke of four or five hundred thousand dead of famine and want in Syria, and McGilvary wrote that three-fourths of Lebanon's half a million had starved. Wikipedia's article on the district gives about 100,000 dead of famine and disease. No figure is agreed.",
+     [
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1232",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1234",
+      "https://history.state.gov/historicaldocuments/frus1919Parisv04/d1",
+      "https://history.state.gov/historicaldocuments/frus1919Parisv03/d68",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://en.wikipedia.org/wiki/Mount_Lebanon_Mutasarrifate"
+     ]
+    ],
+    [
+     "Who was responsible? Many who lived through it blamed the Ottoman government: the 1916 Cairo report spoke of a 'political design' to exterminate the Christian population by starvation and of a military cordon keeping food out of Lebanon; McGilvary wrote of Jemal Pasha's and the Beirut governor Azmi Bey's 'plan of starvation'; Gibran wrote privately to Mary Haskell in May 1916 that the famine was planned by the Turkish government; and the Lebanese delegation of 1919 spoke of 'systematic famishing'. The Ottoman government denied in 1916 that anyone had starved and called the reports Entente propaganda. Djemal's memoir does not discuss the Lebanese famine; in passing it describes the English blockade of the coasts and a Syria that 'could hardly feed itself'. The Allies kept the blockade, and Pitts writes that Paris and London refused to allow aid through it; he notes that an older explanation, set against the charge of an Ottoman plot, blamed the French blockade. Recent historians tend to reject a single cause: Pitts says recent scholarship treats the famine as multicausal, that neither side acted decisively to save civilians, and that no party foresaw a war long enough to cause a famine; Tylor Brand says explanations by deliberate Ottoman or deliberate Allied action are too simple and points to poor rains, locusts, heavy conscription, speculation and high prices, the loss of work under the Allied blockade, and state measures such as price fixing and paper money that did little to help; Tanielian calls the famine man-made and looks at the choices of both state and local actors.",
+     [
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1232",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://www.thenationalnews.com/world/lebanon-s-dark-days-of-hunger-the-great-famine-of-1915-18-1.70379",
+      "https://history.state.gov/historicaldocuments/frus1916Supp/d1241",
+      "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt",
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction"
+     ]
+    ],
+    [
+     "Was it a genocide? Some Maronite organisations say so: the president of the Syriac Maronite Union spoke in 2020 of the 'Kafno Genocide', at a commemoration that set it beside the killing of Armenians and Syriac Christians in 1915. According to Wikipedia, neither the Lebanese government nor any other government has recognised it as one. The historians cited on this card describe a famine with several causes and do not settle the question of intent, and the witnesses pull both ways: McGilvary, who accused Jemal and Azmi of a plan, also wrote that Lebanon's own wartime governors, Ali Munif and Ismail Hakki, tried to deal fairly with the province, and Halidé Edib wrote that Djemal gave some of the army's supplies to charities feeding children. For that reason this card is not filed under Genocide.",
+     [
+      "https://syriacpress.com/blog/2020/04/26/president-of-maronite-syriac-union-we-must-inform-coming-generations-about-the-kafno-genocide-of-24-april-whoever-fears-to-talk-about-the-past-will-repeat-it/",
+      "https://en.wikipedia.org/wiki/Great_Famine_of_Mount_Lebanon",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt"
+     ]
+    ],
+    [
+     "How much was done by local hands? Pitts writes that the standard interpretation blamed an Ottoman plot to starve the mountain, and Tanielian notes that official remembrance centred on the men hanged by Jamal Pasha while the famine had no plaque or statue. Yet contemporaries on both sides described profiteers: McGilvary wrote that the country's whole reserve of food was in the hands of speculators who were granted permits for buying and moving food, and Halidé Edib, in a passage on the rich of Beirut and Lebanon, that much war wealth was 'all made on wheat'. Pitts argues that the famine followed class lines, with merchants and those holding cash gaining land while the poorest died first. Djemal's memoir, in another connection, calls the Christians of the Lebanon 'very rich'.",
+     [
+      "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine",
+      "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction",
+      "https://archive.org/stream/dawnofnewerainsy00mcgi/dawnofnewerainsy00mcgi_djvu.txt",
+      "https://archive.org/stream/memoirsofhalide00haliuoft/memoirsofhalide00haliuoft_djvu.txt",
+      "https://archive.org/stream/memoriesofturkis00ahmeuoft/memoriesofturkis00ahmeuoft_djvu.txt"
+     ]
+    ]
+   ],
+   "blind": "The people who starved were mostly villagers, silk workers and the urban poor, and none of them speaks here. The one Lebanese voice quoted is a notable speaking to the peace conference with a political claim to press; the poet Gibran, who wrote about the famine from New York, is described but not quoted; the rest are an American relief worker, a Turkish writer in Djemal Pasha's service, diplomats and the commander himself. The fullest account by someone who stayed, Father Antoun Yammine's, exists in Arabic (1919) and French (1922) but was not found in a text reliable enough to quote, and the later Arabic memoirs and novels are in copyright. Muslim and Druze villagers of the mountain and the poor of Beirut, Tripoli and the Bekaa, who also went hungry, are almost absent from these sources; the Druze and Muslim delegates who spoke after Ammoun in Paris addressed the country's political future and did not mention the famine.",
+   "reading": [
+    [
+     "Margaret McGilvary, The Dawn of a New Era in Syria (1920, archive.org)",
+     "https://archive.org/details/dawnofnewerainsy00mcgi"
+    ],
+    [
+     "'Relief in Turkish territories', Papers Relating to the Foreign Relations of the United States, 1916, Supplement (US Department of State, Office of the Historian)",
+     "https://history.state.gov/historicaldocuments/frus1916Supp/subch44"
+    ],
+    [
+     "Graham Auman Pitts, 'Was Capitalism the Crisis? Mount Lebanon's World War I Famine' (2021, Environment & Society Portal, Rachel Carson Center)",
+     "https://www.environmentandsociety.org/arcadia/was-capitalism-crisis-mount-lebanons-world-war-i-famine"
+    ],
+    [
+     "Melanie S. Tanielian, The Charity of War: Famine, Humanitarian Aid, and World War I in the Middle East, introduction (2017, Stanford University Press)",
+     "https://sup.org/books/middle-east-studies/charity-war/excerpt/excerpt-introduction"
+    ],
+    [
+     "Antoun Yammine (Yamin), account of Lebanon in the war, Arabic edition (1919, scan on archive.org)",
+     "https://archive.org/details/antoine-yammine-famine"
+    ],
+    [
+     "Djemal Pasha, Memories of a Turkish Statesman, 1913–1919 (1922, archive.org)",
+     "https://archive.org/details/memoriesofturkis00ahmeuoft"
+    ]
+   ],
+   "warn": "Kafno, in the title, is a Classical Syriac word meaning starvation, one of the names given to the famine. The Lebanese delegate's name is misprinted in the American record ('Mammom', once 'Mammon'); the identification with Daoud Ammoun (also spelled Amoun) rests on the other delegates' names, which match the membership of the Lebanese delegation of 15 February 1919 as listed by Les clés du Moyen-Orient. His statement is a political plea, and its 'over half' counts exile and hanging together with hunger. McGilvary wrote as an American who held the Turks guilty, Halidé Edib as a friend of Djemal Pasha, and Djemal to defend himself: his passage on the blockade is about the Hejaz, a search of the scanned text of the English edition found no use of the word famine, and none of its mentions of the Lebanon concerns food. The Ottoman minister's position survives here only in an American diplomat's telegram. The two memoir passages were read from archive.org's scanned text; obvious scanning slips (a broken 'permitted', 'solitarv' for 'solitary') are corrected to the printed words.",
+   "note": "Research in progress: this card has one quotation under 'In their own words' where the section normally has two to four. Only one quotation by a Lebanese speaker could be verified, and he was a delegate, not a survivor. Gibran's prose poem 'Dead Are My People' (1916) is described, not quoted: its Arabic text was found on only one unlabelled website and could not be checked against a printed edition. No statement about the famine on an official Lebanese government or Maronite Patriarchate page was found, so there is no 'today' quotation. Father Yammine's Quatre ans de misère (Cairo, 1922) was not found in a French scan; the Maronite Patriarch's wartime appeals, the American Committee for Armenian and Syrian Relief bulletins and British parliamentary statements on the Syrian blockade were not located in quotable form."
+  },
+  {
+   "id": "sharpeville1960",
+   "title": "The Sharpeville massacre",
+   "region": "Africa",
+   "where": "Sharpeville township, near Vereeniging, Gauteng (then Transvaal), South Africa; pin: Sharpeville, where the crowd stood outside the police station (approximate)",
+   "lat": -26.69,
+   "lon": 27.87,
+   "from": 1952,
+   "to": 1966,
+   "themes": [
+    "Massacre",
+    "Protest and dissent"
+   ],
+   "facts": [
+    [
+     "Pass laws required non-white South Africans to carry documents authorising their presence in restricted areas. The Natives (Abolition of Passes and Co-ordination of Documents) Act of 1952 replaced the earlier passes with 'reference books' holding employment records and fingerprints, which every Black man aged 16 or over had to carry at all times.",
+     "https://www.britannica.com/topic/pass-law"
+    ],
+    [
+     "The Pan-Africanist Congress (PAC), which split from the African National Congress in 1959, called on people to surrender their passes and invite arrest on 21 March 1960. At Sharpeville police opened fire with submachine guns on a crowd that Britannica puts at some 20,000 after, according to police, demonstrators began stoning officers and armoured cars; about 69 people were killed and more than 180 wounded, and some 50 of the victims were women and children.",
+     "https://www.britannica.com/event/Sharpeville-massacre"
+    ],
+    [
+     "PAC representatives told South Africa's Truth and Reconciliation Commission (TRC) that it was 'an absolutely non-violent campaign', and the Commission's report records that the PAC wrote to the commissioner of police beforehand and that its leader Robert Sobukwe reportedly announced that its members were ready to die for their cause but not ready to kill. The campaign was not free of coercion: the same report says evidence suggests that some non-politicised Sharpeville residents were pressurised into taking part, though most supported the protest, that telephone wires linking Sharpeville with Vereeniging were cut on the Sunday evening, and that a bus driver said PAC activists took drivers from their homes in the night and released them only after sunrise.",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm"
+    ],
+    [
+     "Eight weeks earlier, on 24 January 1960, a crowd at Cato Manor, Durban, killed nine policemen, four white and five Black, who were raiding for illegal liquor at a time of forced removals from the area.",
+     "https://www.sahistory.org.za/dated-event/nine-policemen-are-killed-cato-manor-riots-durban-shortly-infamous-sharpville-massacre"
+    ],
+    [
+     "The TRC report says that at 13h15, with nearly 300 police facing a crowd of 5 000, a scuffle broke out; police witnesses said stones were thrown at them and inexperienced constables began firing, while the Commission's own witnesses described a degree of deliberation. It says the majority of those killed or wounded were shot in the back, that seventy-seven people were arrested afterwards, and that wounded people were held under police guard in hospital until they could be taken into custody.",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm"
+    ],
+    [
+     "The African National Congress (ANC) had declared in December 1959 that a nationwide anti-pass campaign would start on 31 March 1960; the PAC's began ten days before that date. Sobukwe and other PAC leaders were charged with incitement to riot on 23 March, a state of emergency was declared on 30 March and over 11,000 people were detained, the United Nations Security Council adopted Resolution 134 on 1 April by nine votes, with France and the United Kingdom abstaining, and the ANC and PAC were banned on 8 April.",
+     "https://www.sahistory.org.za/article/sharpeville-timeline"
+    ],
+    [
+     "On 26 October 1966, by resolution 2142 (XXI), the United Nations General Assembly proclaimed 21 March, the anniversary of the Sharpeville massacre, as the International Day for the Elimination of Racial Discrimination.",
+     "https://www.un.org/en/chronicle/article/long-road-durban-united-nations-role-fighting-racism-and-racial-discrimination"
+    ],
+    [
+     "Reports of the shooting helped focus international criticism on apartheid. On 10 December 1996 President Nelson Mandela chose Sharpeville as the place to sign South Africa's new constitution into law.",
+     "https://www.britannica.com/event/Sharpeville-massacre"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "We were still at the singing … not even one person was armed. I saw men and women and young men just holding their umbrellas because it was a hot day. Those who might have had guns, maybe they were hidden somewhere but I didn’t see anyone carrying any weapon, not even a stick and knobkierrie [club], not even a knobkierrie. I only saw umbrellas ... They were not going there to fight. They were peaceful. They didn’t have anything in their hands …",
+     "who": "A survivor of the shooting, wounded in the knee, testifying to the Truth and Reconciliation Commission, as printed in the Commission's report (the ellipses and the bracketed gloss are the report's)",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 35 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    },
+    {
+     "text": "I don’t know what happened but I was on the ground and I decided that I would run until my legs go off me but I didn't know what happened. People were just trampling on me. I tried to push them but I couldn’t and now this leg was now troubling me and I decided to sit down. I said no ways, I cannot carry on.",
+     "who": "A second survivor, shot in the hip, who the report says then spent five months in hospital, testifying to the Truth and Reconciliation Commission, as printed in the Commission's report",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 36 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    },
+    {
+     "text": "They asked me where have we shot you. And I showed them my knee … He said Africa is no longer a thumb facing upwards, it is a thumb facing downwards now.",
+     "who": "The first survivor again, telling the Truth and Reconciliation Commission what a police officer said to him after he had been wounded; as printed in the Commission's report",
+     "date": "testimony given at the TRC hearing at Sebokeng on 5 August 1996 about 21 March 1960; report published 1998",
+     "doc": "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, paragraph 38 (original page 535)",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+     "lic": "Brief credited quotation from a South African government commission report"
+    }
+   ],
+   "witness": [
+    {
+     "text": "Deplores that the recent disturbances in the Union of South Africa should have led to the loss of life of so many Africans and extends to the families of the victims its deepest sympathies;",
+     "who": "United Nations Security Council, Resolution 134 (1960), operative paragraph 2, adopted by 9 votes to none with France and the United Kingdom abstaining; the next paragraphs deplore the South African government's policies and call on it to abandon apartheid",
+     "date": "1 April 1960",
+     "url": "https://digitallibrary.un.org/record/112105/files/S_RES_134%281960%29-EN.pdf"
+    },
+    {
+     "text": "THE COMMISSION FINDS THAT THE POLICE DELIBERATELY OPENED FIRE ON AN UNARMED CROWD THAT HAD GATHERED PEACEFULLY AT SHARPVILLE ON 21 MARCH 1960 TO PROTEST AGAINST THE PASS LAWS. THE COMMISSION FINDS FURTHER THAT THE SAP FAILED TO GIVE THE CROWD AN ORDER TO DISPERSE BEFORE THEY BEGAN FIRING AND THAT THEY CONTINUED TO FIRE UPON THE FLEEING CROWD, RESULTING IN HUNDREDS OF PEOPLE BEING SHOT IN THE BACK.",
+     "who": "Truth and Reconciliation Commission of South Africa, a commission set up by the post-apartheid state, in its formal finding on Sharpeville (Report, volume 3, chapter 6, after paragraph 42; the capitals and the spelling 'Sharpville' are the report's; SAP is the South African Police)",
+     "date": "1998",
+     "url": "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm"
+    },
+    {
+     "text": "Police testimony makes it clear that the officer in charge gave the order to shoot, with the machine gunners firing directly into the crowd from a distance of no more than 3-5 metres.",
+     "who": "The historians Nancy L. Clark and William H. Worger, authors of Voices of Sharpeville, summarising their research in police and national archive records, in The Conversation (article published under a Creative Commons Attribution/No Derivatives licence, CC BY-ND)",
+     "date": "November 2023",
+     "url": "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+    }
+   ],
+   "official": [
+    {
+     "text": "By intimidating and threatening persons who do not belong to the group, the extremists managed to gather a crowd of approximately 20,000 people in a township, Sharpeville, in the Transvaal and a crowd of about 6,000 at Langa in the Cape Province.",
+     "who": "Mr. Fourie, representative of the Union of South Africa, invited to the United Nations Security Council table after the agenda had been adopted, protesting that under Article 2, paragraph 7 of the Charter the Council should not have taken up the matter (Official Records, 851st meeting, paragraph 65, page 12); by 'the group' he means what he calls a splinter organization of extremists; he does not name it, but it is the PAC",
+     "date": "30 March 1960",
+     "url": "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    },
+    {
+     "text": "Indeed, shots were fired at the police before the police returned fire in order to defend their own lives and also to forestall what might have led to even greater and more tragic bloodshed. I need hardly say how deeply the Union Government regrets that there was this tragic loss of life.",
+     "who": "Mr. Fourie, representative of the Union of South Africa, to the United Nations Security Council (Official Records, 851st meeting, paragraph 69, page 13); he had just said that the police were attacked with pangas, axes, iron bars, knives, sticks and firearms, and had been asked by the President to keep to the question of the agenda; earlier he had said that full judicial inquiries had been arranged, and he went on to recall that nine policemen had been killed by a crowd less than two months before",
+     "date": "30 March 1960",
+     "url": "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    }
+   ],
+   "today": {
+    "text": "The apartheid police shot and killed 69 of the protesters at Sharpeville, many of them shot while fleeing. Many other people were killed in other parts of the country. The tragedy came to be known as the Sharpeville Massacre and it exposed the apartheid government’s deliberate violation of human rights to the world.",
+    "who": "Government of South Africa, official page for Human Rights Day, the national day kept each year on 21 March",
+    "date": "page written for Human Rights Day 2014 (it announces an address by President Jacob Zuma), still online and read 26 November 2026",
+    "url": "https://www.gov.za/news/events/commemorative-events/human-rights-day-1"
+   },
+   "disputed": [
+    [
+     "How large was the crowd, and was it hostile? South Africa's representative told the Security Council nine days later that extremists had gathered approximately 20,000 people by intimidation and that the police were attacked with pangas, axes, iron bars, knives, sticks and firearms and were fired on first. The TRC report gives a crowd of 5 000 facing nearly 300 police (an earlier paragraph of the same chapter speaks of approximately 300 marchers) and prints survivors' testimony that nobody was armed, while also recording that some residents had been pressurised into joining. Clark and Worger, working from police and national archive records, describe a peaceful crowd of about 4,000. South African History Online reports that journalists found the mood festive rather than belligerent and that only three policemen were reported hit by stones. On size, the government's figure of 20,000 is also the one Britannica gives; the TRC, South African History Online and the archival research give 4,000 to 5,000. On weapons and on who fired first the 1960 government account stands alone among the sources used here: the TRC found the crowd unarmed and Clark and Worger describe it as peaceful. What the government's own 1960 commission of inquiry found is not given here because its report was not found.",
+     [
+      "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf",
+      "https://www.britannica.com/event/Sharpeville-massacre",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828",
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960"
+     ]
+    ],
+    [
+     "Was an order to fire given? Police witnesses said that stones were thrown and that inexperienced constables began firing of their own accord, as the TRC report records, and the police commander, Lieutenant Colonel Pienaar, denied giving any order to fire, according to Bishop Ambrose Reeves's account as cited by Wikipedia. South African History Online's account has one policeman on an armoured car panicking and firing, followed by the others. The TRC report says its witnesses' evidence reveals a degree of deliberation in the decision to open fire, and the Commission found formally that the police deliberately opened fire without first giving an order to disperse; one survivor told it a white man 'gave a sign' before the shots. Clark and Worger say police testimony itself makes clear that the officer in charge gave the order. There is no agreed account.",
+     [
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://en.wikipedia.org/wiki/Sharpeville_massacre",
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+     ]
+    ],
+    [
+     "How many were killed and wounded, and how many from behind? The figures used since 1960 are 69 dead and 180 wounded: Clark and Worger call them the official police figures first published in 1960, and South African History Online attributes the 180 seriously wounded to the official inquest. The TRC found sixty-nine killed and more than 300 injured, with hundreds shot in the back. Clark and Worger, using autopsy and hospital records in the police archives and the national archives in Pretoria together with interviews, put the toll at at least 91 dead and 281 injured, say the police understated the number of victims by at least one third, and find that over three quarters of the dead and injured were shot in the back as they fled. Their count was published in 2023; the government's Human Rights Day page still gives 69, and Clark and Worger write that residents used their research in 2023 to update the Wall of Names at Freedom Park in Pretoria. The toll at Langa, Cape Town, on the same day is also given differently: the TRC report has two dead and more than fifty injured, while South African History Online has three killed and 26 injured when police charged a crowd, and adds that a newspaper employee was killed by the rioting crowd.",
+     [
+      "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960",
+      "https://www.gov.za/news/events/commemorative-events/human-rights-day-1",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection5.htm",
+      "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm",
+      "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+     ]
+    ]
+   ],
+   "blind": "Clark and Worger draw on testimony given to the government's 1960 commission of inquiry and at the criminal trial of Sharpeville residents, and on sworn statements that survivors and families made in 1961 and 1962 for compensation claims that did not succeed; none of that was found online in a form that can be quoted. What is quoted here comes from the Truth and Reconciliation Commission, thirty-six years later: a few lines the Commission printed from two witnesses heard at Sebokeng on 5 August 1996, out of the 46 statements it received about Sharpeville. Clark and Worger call the Commission's examination of the massacre perfunctory and say only three witnesses from the community were invited to testify, during part of one day. The dead left no words, and the report says wounded people were kept under police guard in hospital until they could be taken into custody. The 1960 government speaks at length through its diplomat at the United Nations; its commission's report, laid before Parliament in January 1961 as a typewritten document in Afrikaans, was not found online. The policemen who fired, Black and white, are not heard in these sources in their own words, and neither are the residents who said they were forced to join the protest.",
+   "reading": [
+    [
+     "Truth and Reconciliation Commission of South Africa Report (1998), volume 3, chapter 6, 'The Sharpville massacre' (SABC / South African History Archive copy)",
+     "https://sabctrc.saha.org.za/reports/volume3/chapter6/subsection4.htm"
+    ],
+    [
+     "United Nations Security Council, Resolution 134 (1960), 1 April 1960 (UN Digital Library)",
+     "https://digitallibrary.un.org/record/112105"
+    ],
+    [
+     "United Nations Security Council, Official Records, 851st meeting, 30 March 1960 (UN Digital Library)",
+     "https://digitallibrary.un.org/record/629457/files/S_PV-851-EN.pdf"
+    ],
+    [
+     "Nancy L. Clark and William H. Worger, 'Sharpeville: new research on 1960 South African massacre shows the number of dead and injured was massively undercounted' (2023, The Conversation)",
+     "https://theconversation.com/sharpeville-new-research-on-1960-south-african-massacre-shows-the-number-of-dead-and-injured-was-massively-undercounted-217828"
+    ],
+    [
+     "Sharpeville Massacre, 21 March 1960 (South African History Online)",
+     "https://sahistory.org.za/article/sharpeville-massacre-21-march-1960"
+    ],
+    [
+     "House of Commons written answer of 26 January 1961 on the South African commission's Sharpeville report (UK Parliament, Historic Hansard)",
+     "https://api.parliament.uk/historic-hansard/written-answers/1961/jan/26/sharpeville-shooting-report"
+    ]
+   ],
+   "warn": "The survivors' words are quoted as the TRC report prints them, with the report's own cuts (the ellipses) and its bracketed gloss; they are recollections given thirty-six years after the event, and the report's page names the witnesses, which this card does not. The TRC report spells the township 'Sharpville'. The Security Council record is a scanned document: the wording was checked against its machine-read text, which misreads a few letters (for example 'UDion' for 'Union'), and is given here as the printed page reads. Mr. Fourie's statement is the South African government's case as put to the Council nine days after the shooting, before any inquiry had reported.",
+   "note": "Research in progress: the report of the government's own judicial commission of inquiry (laid before the South African Parliament on 23 January 1961, according to a British ministerial answer of 26 January 1961 in Hansard) was not found online, so its findings are not given here. Lieutenant Colonel Pienaar's denial is given from Wikipedia's citation of Bishop Ambrose Reeves, whose own text could not be opened. No official copy of Prime Minister Verwoerd's statements to Parliament in March 1960 was reached, and the text of the Unlawful Organizations Act 1960 could not be opened. Robert Sobukwe's instructions to PAC members were not found in a source that may be quoted, so they are described from the TRC report only. The quotations were checked against the source pages through a reading tool that returns short excerpts; a letter-by-letter check against the page is still due."
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
