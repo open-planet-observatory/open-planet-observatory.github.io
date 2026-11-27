@@ -1,6 +1,6 @@
 {
  "v": 1,
- "built": "2026-11-26",
+ "built": "2026-11-27",
  "stories": [
   {
    "id": "cherokee",
@@ -8443,6 +8443,618 @@
    ],
    "warn": "The theme 'Genocide' is used here in the court's sense: the ECCC found genocide of the ethnic Vietnamese and of the Cham. It made no finding of genocide against ethnic Khmer: the mass deaths in the cooperatives, worksites and security centres across the country it judged as crimes against humanity. Whether those were also genocide is disputed (see What is disputed). All the testimony is the court's English interpretation of words spoken in Khmer, printed as spoken, with the transcript's own double hyphens and rough grammar; a reviewed transcript can differ slightly from the live interpretation. The transcripts name guards and describe torture and killing. Duch's statement is the court's translation and is his own account of his motives. The Case 002/02 summary is a courtesy copy; the written judgment of more than 2,000 pages is the authority. Khmer names are spelled several ways (Kroch Chhmar or Krouch Chhmar; Kaing Guek Eav or Kang Kek Iew). The Ba Chuc figure in the note rests on Vietnamese official counts reported in the press.",
    "note": "Research in progress: the full trial judgments were too long to read through and only their opening parts, the court's summaries and press releases were used, so no survivor is quoted from the Case 002/02 judgment itself and no ethnic Vietnamese survivor is quoted. The 1970 killings of ethnic Vietnamese under Lon Nol rest on Wikipedia's report of later scholars (Kiernan for the killings, Duncan for the 200,000 repatriated); no better page was found, and the Library of Congress study and Britannica do not mention them. Not covered in the facts: Democratic Kampuchea kept Cambodia's United Nations seat during the 1980s (UN Group of Experts, paragraph 38, https://hrlibrary.umn.edu/cambodia-1999.html). The demographic report written for the court by Ewa Tabeau and They Kheam (2009) could not be opened. No Democratic Kampuchea document was found in a quotable printing other than the Party Statute sentence read in court; the 1976 Constitution and Pol Pot's speech of 27 September 1977 exist online only in modern scholars' translations. The killing of 3,157 villagers at Ba Chuc in Vietnam by Khmer Rouge troops in April 1978 is reported by Wikipedia from press accounts (https://en.wikipedia.org/wiki/Ba_Ch%C3%BAc_massacre) and was not checked against a primary source. Cambodia's 20 May National Day of Remembrance was confirmed only from Wikipedia. The UNESCO inscription date, 11 July 2025 at the World Heritage Committee's 47th session in Paris, is from Cambodia's state news agency (https://akp.gov.kh/post/detail/341997), not from the UNESCO page; no Royal Government statement was quoted, because the foreign ministry's page (mfaic.gov.kh) refused to open and the others were not checked word for word."
+  },
+  {
+   "id": "columbus1492",
+   "title": "Columbus and the Taíno of Hispaniola, 1492–1500",
+   "region": "Americas",
+   "where": "La Isabela, the town Columbus founded in January 1494 on the north coast of Hispaniola, Dominican Republic (the pin marks the archaeological site)",
+   "lat": 19.889,
+   "lon": -71.081,
+   "from": 1492,
+   "to": 1500,
+   "themes": [
+    "Colonial rule",
+    "Forced labour",
+    "Slavery",
+    "Uprising",
+    "War"
+   ],
+   "facts": [
+    [
+     "Land was sighted on 12 October 1492; the island of the first landfall, called Guanahani, is disputed, though San Salvador (Watlings) Island in the Bahamas is generally preferred. Britannica says Columbus was determined to take back both material and human cargo to his sovereigns and for himself.",
+     "https://www.britannica.com/biography/Christopher-Columbus/The-first-voyage"
+    ],
+    [
+     "After the Santa María ran aground on 25 December 1492, Columbus set up a stockade on the north coast of Hispaniola with the help of a Taíno cacique, Guacanagarí, and posted 39 men there, La Navidad, to wait for his return.",
+     "https://www.britannica.com/biography/Christopher-Columbus/The-first-voyage"
+    ],
+    [
+     "Columbus left Cádiz on 25 September 1493 with at least 17 ships and some 1,300 salaried men; an expedition to La Navidad found the stockade destroyed and the men dead, and a town named La Isabela, for the queen, was founded on 2 January 1494. On 2 February Antonio de Torres left La Isabela with 12 ships carrying gold, spices, parrots and captives, most of whom died en route; while Torres sailed for Spain, Alonso de Ojeda and Pedro Margarit took revenge for the massacre at Navidad and captured slaves, and the following year Columbus began a determined conquest of Hispaniola, spreading devastation among the Taíno.",
+     "https://www.britannica.com/biography/Christopher-Columbus/The-second-and-third-voyages"
+    ],
+    [
+     "The Taíno fought back: the cacique Caonabó led the 1493 attack that killed the men at La Navidad; after his capture by Alonso de Ojeda (by a trick, in Las Casas's account) the Taíno rose, and a force gathered by Manicatex was defeated, largely by the Spaniards' cavalry. Caonabó died in captivity on the voyage to Spain.",
+     "https://en.wikipedia.org/wiki/Caonabo"
+    ],
+    [
+     "In February 1495 Columbus rounded up about 1,500 Arawaks, some of whom had rebelled, in a great slave raid; about 500 of the strongest were shipped to Spain as slaves, and about two hundred of them died on the way.",
+     "https://en.wikipedia.org/wiki/Christopher_Columbus"
+    ],
+    [
+     "Las Casas records that Columbus imposed a tribute on everyone aged fourteen and over in the Cibao, the Vega Real and near the mines: every three months a Flemish hawk's bell full of gold, or an arroba of cotton from those far from the mines, with a copper or brass token worn at the neck to show who had paid.",
+     "https://archive.org/stream/historiadelasind50351gut/50351-0.txt"
+    ],
+    [
+     "A revolt by La Isabela's mayor, Francisco Roldán, led to appeals to the Spanish court, and Columbus tried to restore order partly by hangings; Francisco de Bobadilla, sent with a royal commission, put Columbus and his two brothers in irons in 1500 and shipped them to Spain, where they reached Cádiz in late October.",
+     "https://www.britannica.com/biography/Christopher-Columbus/The-second-and-third-voyages"
+    ],
+    [
+     "A manuscript copy of Bobadilla's inquiry, found in the Archive of Simancas and published in 2006, records Bobadilla's report that Columbus had a man found guilty of stealing corn punished by having his ears and nose cut off and then sold him into slavery.",
+     "https://en.wikipedia.org/wiki/Christopher_Columbus"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "And they say that this cacique affirmed that he had spoken with Giocauuaghamat who had told him that whoever remained alive after his death should enjoy the rule over them only a short time, because they would see in their country a people clothed which was to rule them and to slay them and that they would die of hunger. At first they thought these would be the Canibales; but reflecting that they only plundered and fled they believed that it must be another people that the cemi spoke of. Wherefore they now believe that it was the Admiral and the people he brought with him.",
+     "who": "Taíno tradition of a prophecy by the cacique whom Pané calls Cazziuaquel (Caizzihu), father of Guarionex, as recorded by Fray Ramón Pané, a Hieronymite friar whom Columbus sent to live among the Taíno and learn their beliefs; Pané worked for the Spanish side",
+     "date": "recorded in the mid-1490s (Bourne gives Pané as arriving with the second voyage in 1493 and staying two years with Guarionex, and Columbus as reporting his work in an account drawn up in 1496); Pané's Spanish is lost; Italian printing 1571; this English translation 1906",
+     "doc": "Ramón Pané, Account of the Antiquities of the Indians, in Edward Gaylord Bourne, Columbus, Ramon Pane and the Beginnings of American Anthropology (Worcester, Mass.: American Antiquarian Society, 1906), p. 27; translated from Alfonso Ulloa's Italian in Fernando Colón's Historie (Venice, 1571)",
+     "url": "https://archive.org/stream/columbusramonpan00bour/columbusramonpan00bour_djvu.txt",
+     "lic": "Public domain (Bourne's translation, 1906)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "I haue byn aduertised (moste mighty prince) that you haue of late with greate power subdued many landes and Regions hytherto vnknowen to you: and haue browght no little feare vppon all the people and inhabitantes of the same. The which your good fortune, you shal beare with lesse insolencie, if you remember that the soules of men haue two iourneyes after they are departed from this bodye. The one fowle and darke, prepared for suche as are iniurious and cruell to mankynde: The other pleasaunt and delectable, ordeyned for them which in theyr lyfe tyme, loued peace and quietnes. If therefore you acknowleage your selfe to bee mortall, and consyder that euery man shall receaue condigne rewarde or punyshement for such thinges as he hath done in this life, you wyl wrongefully hurte no man.",
+     "who": "An elder of Cuba, speaking to Columbus on the shore after a mass during his 1494 voyage along Cuba, through the interpreter Didacus (Diego), as recorded by Peter Martyr d'Anghiera, an Italian humanist at the Spanish court who was not present and wrote from the reports of Columbus's men; a speech composed by Martyr in Latin, not words any Taíno wrote or dictated. Peter Martyr, Decades, Decade I, Book 3, in Richard Eden's translation The Decades of the Newe Worlde (1555), reprinted in Edward Arber, The First Three English Books on America (1885), p. 78; public domain",
+     "date": "1494; Martyr's Latin written in the 1490s–1510s; Eden's English 1555",
+     "url": "https://archive.org/stream/firstthreeenglis00arberich/firstthreeenglis00arberich_djvu.txt"
+    },
+    {
+     "text": "we also learned that they had shown where the bodies of eleven of the dead Spaniards were laid, which were already covered with the grass that had grown over them; and they all with one voice asserted that Caonabó and Mayreni had killed them; but notwithstanding all this, we began to hear complaints that one of the Spaniards had taken three women to himself, and another four, from whence we drew the inference that jealousy was the cause of the misfortune that had occurred.",
+     "who": "Diego Álvarez Chanca, physician of Columbus's second fleet, on what the Taíno told the Spaniards about La Navidad, letter to the city of Seville; Major's translation, Select Letters of Christopher Columbus, 2nd ed. (Hakluyt Society, 1870), p. 53 (page read from the scan's running heads)",
+     "date": "November 1493; letter written 1494; translation 1847/1870",
+     "url": "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt"
+    },
+    {
+     "text": "Ordenóse despues de hacer una cierta moneda de cobre ó de laton en la cual se hiciese una señal, y esta se mudase á cada tributo, para que cada indio de los tributarios la trajese al cuello, porque se cognosciese quién la habia pagado y quién no; por manera que, el que no la trajese habia de ser castigado, aunque, diz que, moderadamente, por no haber pagado el tributo.",
+     "who": "Bartolomé de las Casas, Historia de las Indias, book I, ch. CV (Madrid printing 1875, tomo II), on the tribute of c. 1495; Las Casas reached Hispaniola in 1502 and later campaigned against the conquest, and the word 'diz que' (it is said) marks the moderation as hearsay. Plain gloss: 'It was then ordered that a certain coin of copper or brass be made with a mark on it, the mark to be changed at each tribute, so that every tributary Indian should wear it at the neck, so that it would be known who had paid and who had not; so that whoever did not wear it was to be punished, though, it is said, moderately, for not having paid the tribute.'",
+     "date": "c. 1495; written from 1527; printed 1875",
+     "url": "https://archive.org/stream/historiadelasind50351gut/50351-0.txt"
+    },
+    {
+     "text": "Como por las cartas postreras del Almirante, que vinieron en los dos dichos navíos, supiese la Reina, de gloriosa memoria, que el Almirante habia dado á cada uno de los que allí venian un indio por esclavo, y que, si no se me ha olvidado, eran 300 hombres, hobo muy gran enojo, diciendo estas palabras: «¿qué poder tiene mio el Almirante para dar á nadie mis vasallos?» y otras semejantes; mandó luego apregonar en Granada y en Sevilla, donde ya estaba la corte, que todos los que hobiesen llevado indios á Castilla, que les hobiese dado el Almirante, los volviesen luego acá, so pena de muerte, en los primeros navíos, ó los enviasen;",
+     "who": "Bartolomé de las Casas, Historia de las Indias, book I, ch. CLXXVII (1875 printing, tomo II), reporting Queen Isabella's words; his own father had been given one of these Indians and had taken him to Spain, and, Las Casas adds, 'tornó á esta isla, con el mismo comendador Bobadilla, y lo trajo' (came back to this island with the same commander Bobadilla, and brought him back). Plain gloss: 'When the Queen, of glorious memory, learned from the Admiral's last letters, which came in those two ships, that the Admiral had given each of the men who came home an Indian as a slave, and, if I have not forgotten, they were 300 men, she was very angry and said these words: \"What power of mine has the Admiral to give my vassals to anyone?\" and others like them; she at once had it proclaimed in Granada and Seville, where the court then was, that all who had taken to Castile Indians given them by the Admiral should bring them back here at once, on pain of death, in the first ships, or send them;'",
+     "date": "c. 1499–1500 (the year is not stated in the passage; inferred from Las Casas's chronology); written from 1527; printed 1875",
+     "url": "https://archive.org/stream/historiadelasind50351gut/50351-0.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "It might be converted into an island in two days, though I do not see that it would be necessary, for these people are very simple as regards the use of arms, as your Highnesses will see from the seven that I caused to be taken, to bring home and learn our language and return; unless your Highnesses should order them all to be brought to Castille, or to be kept as captives on the same island; for with fifty men they can all be subjugated and made to do what is required of them.",
+     "who": "Christopher Columbus, journal of the first voyage, 14 October 1492, writing to Ferdinand and Isabella of a piece of land in the Bahamas that could be made a fortified island; the journal survives only in Las Casas's abstract, which gives this passage in Columbus's first person; Clements Markham's translation (Hakluyt Society, 1893), p. 41",
+     "date": "14 October 1492",
+     "url": "https://archive.org/stream/cihm_05312/cihm_05312_djvu.txt"
+    },
+    {
+     "text": "Considering what great need we have of cattle and of beasts of burthen, both for food and to assist the settlers in this and all these islands, both for peopling the land and cultivating the soil, their Highnesses might authorize a suitable number of caravels to come here every year to bring over the said cattle, and provisions, and other articles; these cattle, etc., might be sold at moderate prices for account of the bearers, and the latter might be paid with slaves, taken from among the Caribbees, who are a wild people, fit for any work, well proportioned and very intelligent, and who, when they have got rid of the cruel habits to which they have become accustomed, will be better than any other kind of slaves.",
+     "who": "Christopher Columbus, memorandum for Antonio de Torres to present to the sovereigns, La Isabela; the sovereigns' reply in the margin: 'The consideration of this subject has been suspended for a time, until fresh advices arrive from the other side: let the Admiral write what he thinks upon the subject.' R. H. Major's translation, Select Letters of Christopher Columbus, 2nd ed. (Hakluyt Society, 1870), pp. 88–89",
+     "date": "30 January 1494",
+     "url": "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt"
+    },
+    {
+     "text": "I ought to be judged as a captain sent from Spain to the Indies, to conquer a nation numerous and war-like, with customs and religion altogether different to ours; a people who dwell in the mountains, without regular habitations for themselves or for us; and where, by the Divine will, I have subdued another world to the dominion of the King and Queen, our sovereigns; in consequence of which, Spain, that used to be called poor, is now the most wealthy of kingdoms.",
+     "who": "Christopher Columbus, defending his rule after his arrest by Bobadilla, letter to Doña Juana de la Torre, former nurse of Prince John; Major's translation (1870), p. 170",
+     "date": "late 1500",
+     "url": "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt"
+    }
+   ],
+   "disputed": [
+    [
+     "What the first years did to the Taíno. In 1495–96 some Taíno refused to plant or harvest, in hopes of frustrating the Spaniards, and a famine followed; the figure of some 50,000 dead is footnoted to Peter Martyr's De Orbe Novo, written at the Spanish court, and cannot be checked. The demographer Massimo Livi Bacci finds no historical evidence of deadly epidemics on the island before the smallpox of 1518–19 and puts the weight on forced labour in the mines, hunger and the break-up of communities and families; others hold that disease was the main cause (the long-run argument, and the dispute over numbers, are on the card 'The Taíno and the Spanish conquest of the Caribbean'). Livi Bacci's estimate for Hispaniola in 1492, most probably 200,000 to 300,000, is far below the multi-million figures of other scholars, and the recorded counts he cites fall to just over 26,000 by 1514.",
+     [
+      "https://en.wikipedia.org/wiki/Ta%C3%ADno_genocide",
+      "https://flore.unifi.it/retrieve/e398c37b-8e9c-179a-e053-3705fe0a4cff/550-1035-1-PB.pdf"
+     ]
+    ],
+    [
+     "How far the violence was Columbus's own policy. Britannica holds the Columbus family partly responsible for the colony's troubles because it was intent on enslaving the Taíno and shipping them to Europe, and Columbus's own memorandum of 1494 proposes a regular slave trade, which the sovereigns put off. Columbus answered that he should be judged as a captain conquering a warlike people, not as a governor of a settled province. The Bobadilla inquiry of 1500 records mutilations ordered by Columbus and his brothers, but historians have disputed its neutrality, pointing to Spanish hostility to the Italian Columbus and Bobadilla's wish to take his place.",
+     [
+      "https://www.britannica.com/biography/Christopher-Columbus/The-second-and-third-voyages",
+      "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt",
+      "https://en.wikipedia.org/wiki/Christopher_Columbus"
+     ]
+    ],
+    [
+     "Why La Navidad fell. The Taíno told Chanca's party that Caonabó and Mayreni had killed the Spaniards, and the Spaniards themselves inferred that the garrison's seizure of women was the cause. Anacaona, Caonabó's wife, is reported to have said later that she urged him to attack because she was incensed at the Spaniards' treatment of the people. Both accounts reach us only through Spanish writers.",
+     [
+      "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt",
+      "https://en.wikipedia.org/wiki/Caonabo"
+     ]
+    ]
+   ],
+   "blind": "The Taíno left no writing, and the record for these eight years is thin: the only passage that reports Taíno words through a direct recorder is one cacique's prophecy, noted by a friar Columbus sent among them, and it reaches us through a lost Spanish text and an Italian printing. Everything else is at second hand: a speech an Italian humanist at court composed from sailors' reports, and what Spanish officers and chroniclers chose to say they had been told. Guacanagarí, Caonabó, Anacaona and Guarionex appear only through the men who fought, allied with or arrested them. The 500 people shipped to Spain in 1495, the women taken by the Navidad garrison and the families who starved in 1495–96 have no voice in this record at all; even their numbers come from the men who shipped, governed or wrote about them. The Spanish side is well documented, by Columbus himself, by his son, by Las Casas and by the inquiry that removed him.",
+   "reading": [
+    [
+     "Columbus, Journal of the First Voyage, translated by Clements R. Markham (Hakluyt Society, 1893; scan, archive.org)",
+     "https://archive.org/stream/cihm_05312/cihm_05312_djvu.txt"
+    ],
+    [
+     "Select Letters of Christopher Columbus, translated and edited by R. H. Major, 2nd ed. (Hakluyt Society, 1870; scan, archive.org), with the Torres memorandum and Chanca's letter",
+     "https://archive.org/stream/selectlettersofc00colurich/selectlettersofc00colurich_djvu.txt"
+    ],
+    [
+     "Edward Gaylord Bourne, Columbus, Ramon Pane and the Beginnings of American Anthropology (1906; scan, archive.org)",
+     "https://archive.org/stream/columbusramonpan00bour/columbusramonpan00bour_djvu.txt"
+    ],
+    [
+     "Bartolomé de las Casas, Historia de las Indias, tomo II (Madrid, 1875; Project Gutenberg text, archive.org)",
+     "https://archive.org/stream/historiadelasind50351gut/50351-0.txt"
+    ],
+    [
+     "Edward Arber, ed., The First Three English Books on America (1885; scan, archive.org), with Eden's Peter Martyr",
+     "https://archive.org/stream/firstthreeenglis00arberich/firstthreeenglis00arberich_djvu.txt"
+    ],
+    [
+     "Massimo Livi Bacci, 'Las múltiples causas de la catástrofe', Revista de Indias 63 (2003), open PDF, University of Florence",
+     "https://flore.unifi.it/retrieve/e398c37b-8e9c-179a-e053-3705fe0a4cff/550-1035-1-PB.pdf"
+    ]
+   ],
+   "warn": "Columbus's journal is lost and survives only in Las Casas's abstract, part paraphrase and part copied first person. Peter Martyr was not in Cuba and wrote the elder's speech up from others' reports; it is a humanist's oration, not a transcript, which is why it stands among the outside witnesses, and Eden's 1555 English keeps its old spelling (u for v, i for j). Pané's account reaches us through a lost Spanish text, a 1571 Italian version and a 1906 English one, and its Taíno names are spelled as the Italian version gives them. The two Las Casas passages are quoted in the Spanish of the 1875 printing with a plain gloss, because no public-domain English translation of the Historia was found; Las Casas wrote decades later and with a cause. 'Caribbees' and 'cannibals' are the Spaniards' labels for the peoples they claimed the right to enslave. The scanned texts have OCR errors; the quotations give what the printed page reads.",
+   "note": "Research in progress: the card has one quotation in 'In their own words' because no other Taíno words from 1492–1500 recorded at first hand were found; the Cuban elder's speech is a humanist's composition and is placed with the outside witnesses. The Italian original of Michele da Cuneo's 1495 letter on the slave shipment (Raccolta Colombiana, 1890s) was not found in a linkable public-domain printing and is not quoted; Fernando Colón's Historie (1571) and the Bobadilla inquiry (modern edition, in copyright) were not quoted; no 'today' statement was found under a quotable licence. See also the card 'The Taíno and the Spanish conquest of the Caribbean' (taino) for 1492–1542, including the population and disease-versus-violence disputes."
+  },
+  {
+   "id": "kalinga261bc",
+   "title": "Ashoka's conquest of Kalinga",
+   "region": "Asia",
+   "where": "Dhauli hill near Bhubaneswar, Odisha, India: the pin marks the Dhauli rock, where Ashoka's edicts addressed to his officials in conquered Kalinga are carved and where the battle is traditionally placed",
+   "lat": 20.192,
+   "lon": 85.84,
+   "from": -261,
+   "to": -256,
+   "themes": [
+    "War",
+    "Removal and dispossession"
+   ],
+   "facts": [
+    [
+     "The Mauryan emperor Ashoka conquered Kalinga in the eighth year of his reign; the sufferings the war inflicted on the defeated moved him to such remorse that he renounced armed conquest, and after the war he adopted Buddhism.",
+     "https://www.britannica.com/biography/Ashoka"
+    ],
+    [
+     "Kalinga lay on the coast of the Bay of Bengal between the Mahanadi and Godavari rivers, and after the war it was annexed to the Mauryan empire.",
+     "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    ],
+    [
+     "Ashoka's own Thirteenth Rock Edict says that 150,000 people were carried away captive from Kalinga, 100,000 were slain there, and many times that number died. No source independent of Ashoka's own edicts gives any figures.",
+     "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    ],
+    [
+     "The Thirteenth Rock Edict is not carved in Kalinga itself: at Dhauli and Jaugada, Edicts XI to XIII were left out and two separate edicts addressed to the officials governing the conquered province were carved in their place; Vincent Smith wrote that the omitted edicts were 'considered unsuitable locally'.",
+     "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    ],
+    [
+     "The Dhauli rock carries Rock Edicts I to X and XIV and the two Kalinga Edicts; the Government of India's tourism site says the battle of Kalinga is presumed to have been fought at the Dhauli hills, about 8 km from Bhubaneswar, and repeats the tradition that the Daya river ran red with blood.",
+     "https://incredibleindia.gov.in/en/odisha/bhubaneswar/dhauligiri-hills"
+    ],
+    [
+     "In one of the Kalinga Edicts Ashoka tells his officials that people in the province were being imprisoned or tortured, sometimes without due cause, and orders them to act justly. His Fourth Pillar Edict, which he says was written when he had been consecrated twenty-six years, keeps the death sentence, granting men condemned to death a respite of three days.",
+     "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    ],
+    [
+     "Ashoka's remorse did not end the use of force: the same Thirteenth Rock Edict tells the forest peoples inside his dominions of his power to punish them in spite of his repentance, so that they may be ashamed of their crimes and not be killed.",
+     "https://archive.org/stream/InscriptionsOfAsoka.NewEditionByE.Hultzsch/HultzschCorpusAsokaSearchable_djvu.txt"
+    ],
+    [
+     "Kalinga rose to prominence again under its own king Kharavela, dated with some debate to the first century BC, who claimed campaigns in the western Deccan and against Magadha (the Mauryas' old home kingdom), the Yavanas and the Pandyas of the south.",
+     "https://www.britannica.com/biography/Kharavela"
+    ]
+   ],
+   "voices": [],
+   "witness": [
+    {
+     "text": "But the horrors which must accompany war, even successful war, made a deep impression on the heart of the victorious monarch, who has recorded on the rocks in imperishable words the sufferings of the vanquished and the remorse of the victor. The record is instinct with personal feeling, and still carries across the ages the moan of a human soul. The words clearly are those of the king himself, for no Secretary of State would dare to express in such a language 'the profound sorrow and regret' felt by His Sacred Majesty.",
+     "who": "Vincent A. Smith, British historian and former Indian Civil Service officer under the British Raj, Asoka, the Buddhist Emperor of India, 3rd edition (Oxford, Clarendon Press, 1920), chapter I, p. 24. Smith takes the edict as a sincere personal confession; that reading is disputed (see below)",
+     "date": "1920",
+     "url": "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "Kalinga was (or \"the Kalingas were\") conquered by His Sacred and Gracious Majesty the King when he had been consecrated eight years. One hundred and fifty thousand persons were thence carried away captive, one hundred thousand were there slain, and many times that number died. Directly after the Kalingas had been annexed began His Sacred Majesty's zealous protection of the Law of Piety, his love of that Law, and his inculcation of that Law. Thence arises the remorse of His Sacred Majesty for having conquered the Kalingas, because the conquest of a country previously unconquered involves the slaughter, death, and carrying away captive of the people. That is a matter of profound sorrow and regret to His Sacred Majesty.",
+     "who": "Ashoka (who calls himself Devanampiya Piyadasi, 'His Sacred and Gracious Majesty' in this translation), Rock Edict XIII, 'True Conquest', in the English translation of Vincent A. Smith, Asoka, 3rd edition (Oxford, 1920), Rock Edicts section, p. 185. The edict is carved at sites across the empire, but not in Kalinga",
+     "date": "c. 256 BC (edict); translation 1920",
+     "url": "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    },
+    {
+     "text": "\"All men are my children;\" and, just as I desire for my children that they may enjoy every kind of prosperity and happiness both in this world and in the next, so also I desire the same for all men. You, however, do not grasp this truth to its full extent. Some individual, perchance, pays heed, but to a part only, not the whole. See then to this, for the principle of government is well established. Again, it happens that some individual incurs imprisonment or torture, and when the result is his imprisonment without due cause, many other people are deeply grieved.",
+     "who": "Ashoka, addressing the High Officers governing the town of Tosali (Dhauli) in conquered Kalinga, in the Kalinga Edict carved at Dhauli and Jaugada in place of Rock Edicts XI to XIII; Smith's 'Provincials' Edict' (Hultzsch's First Separate Rock Edict), in Vincent A. Smith's translation, Asoka, 3rd edition (Oxford, 1920), pp. 194-195",
+     "date": "c. 256 BC (edict); translation 1920",
+     "url": "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    },
+    {
+     "text": "Even upon the forest folk in his dominions, His Sacred Majesty looks kindly, and he seeks to make them think [aright], for [otherwise] repentance would come upon His Sacred Majesty. They are bidden to turn from their [evil] ways that they be not chastised. Because His Sacred Majesty desires for all animate beings security, self-control, peace of mind, and joyousness.",
+     "who": "Ashoka, Rock Edict XIII, on the forest peoples within his dominions, in the English translation of Vincent A. Smith, Asoka, 3rd edition (Oxford, 1920), p. 186; the square brackets are Smith's",
+     "date": "c. 256 BC (edict); translation 1920",
+     "url": "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "There are moments in history, forever etched in time, that change the course of destiny. The Dhauli Giri Hills stand testament to the pivot of Ashoka from magnificent warrior to pilgrim of peace, for it is here that the battle of Kalinga is presumed to have been fought and where Ashoka renounced war.",
+    "who": "Incredible India, the Government of India's Ministry of Tourism site, page 'Dhauligiri Hills'",
+    "date": "current page, read 2026-11-26",
+    "url": "https://incredibleindia.gov.in/en/odisha/bhubaneswar/dhauligiri-hills"
+   },
+   "disputed": [
+    [
+     "How literal are the numbers? The only figures (150,000 carried off, 100,000 killed, many times that number dead) come from the conqueror's own edict. Wikipedia's Kalinga War article, citing Hemchandra Raychaudhuri, gives the war's cost as nearly 250,000 lives; Ananda W. P. Guruge (1995), as cited in Wikipedia's Ashoka article, suggested the war and its consequences as the edicts describe them may be 'more imaginary than real'. Both views are known here only through Wikipedia's citations. No independent count, archaeological or textual, exists.",
+     [
+      "https://en.wikipedia.org/wiki/Kalinga_War",
+      "https://en.wikipedia.org/wiki/Ashoka"
+     ]
+    ],
+    [
+     "Sincere remorse or royal self-presentation? Vincent Smith (1920) read Edict XIII as the king's own voice of personal feeling. John S. Strong suggests reading Ashoka's messages as propaganda by a politician presenting a favourable image of himself (as cited in Wikipedia), and Upinder Singh, as reported by David Shulman (New York Review of Books, 2018), classes some of the texts as political propaganda by a relatively weak king in need of support; Shulman himself notes that the remorse comes only 'now that the Kalingas have been taken', and that the king is not above threatening the forest peoples. Scholars agree the words are Ashoka's; they disagree on what they were for.",
+     [
+      "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt",
+      "https://en.wikipedia.org/wiki/Ashoka",
+      "https://www.nybooks.com/articles/2018/04/05/violence-ancient-india-off-with-their-heads/"
+     ]
+    ],
+    [
+     "Why is the confession missing in Kalinga? At Dhauli and Jaugada the remorse edict was not carved. Smith (1920) says only that it was 'considered unsuitable locally'; Wikipedia's Ashoka article reports the suggestion that Ashoka did not think it politically appropriate to make such a confession to the people of Kalinga. The separate edicts carved there instead speak of fatherly care and of officials' injustices, not of the war. (Wikipedia says Edicts 13 and 14 were replaced; Smith and the Government of India's Dhauli page say XIV is present and XI to XIII are missing.)",
+     [
+      "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt",
+      "https://en.wikipedia.org/wiki/Ashoka",
+      "https://incredibleindia.gov.in/en/odisha/bhubaneswar/dhauligiri-hills"
+     ]
+    ],
+    [
+     "Did Kalinga convert him? Britannica, following the edict, says he came to Buddhism after the war. Some scholars, notably P. H. L. Eggermont, reading the Sri Lankan tradition, hold that he was already a Buddhist before Kalinga; Romila Thapar and others see a gradual process, and his Minor Rock Edict says he was a lay follower for more than two and a half years without much progress before drawing closer to the Buddhist order. Later Buddhist legends such as the Ashokavadana paint a cruel 'Chandashoka' before his conversion; Wikipedia says such portrayals of an evil Ashoka before his conversion appear to be a fabrication of Buddhist authors.",
+     [
+      "https://www.britannica.com/biography/Ashoka",
+      "https://en.wikipedia.org/wiki/Ashoka"
+     ]
+    ]
+   ],
+   "blind": "Every word quoted here is the conqueror's, his modern translators', a British historian's or the Indian state's. Ashoka's edicts are the only record of the war: no Kalinga text, song or inscription from 261 BC survives, so the 150,000 deported and 100,000 killed are known only as the victor's round numbers, and nothing tells us where the deported were taken or what became of them. The nearest Kalinga voice is the Hathigumpha inscription of King Kharavela, carved about two centuries later: a king's boast of his own wars, not a memory of the conquered, and it does not mention Ashoka; it is not quoted here. The forest peoples threatened in Edict XIII and the people imprisoned or tortured by Mauryan officials appear only as the objects of royal instructions.",
+   "reading": [
+    [
+     "Vincent A. Smith, Asoka, the Buddhist Emperor of India, 3rd ed. (1920, archive.org full text)",
+     "https://archive.org/stream/asokabuddhistemp00smitiala/asokabuddhistemp00smitiala_djvu.txt"
+    ],
+    [
+     "E. Hultzsch, Inscriptions of Asoka, Corpus Inscriptionum Indicarum vol. I (1925, archive.org full text)",
+     "https://archive.org/stream/InscriptionsOfAsoka.NewEditionByE.Hultzsch/HultzschCorpusAsokaSearchable_djvu.txt"
+    ],
+    [
+     "David Shulman, 'Off With Their Heads', review of Upinder Singh, Political Violence in Ancient India (New York Review of Books, 2018)",
+     "https://www.nybooks.com/articles/2018/04/05/violence-ancient-india-off-with-their-heads/"
+    ],
+    [
+     "Monica L. Smith and others, 'Finding history: the locational geography of Ashokan inscriptions in the Indian subcontinent' (Antiquity 90, no. 350, 2016, pp. 376-392, UCLA PDF)",
+     "https://anthro.ucla.edu/wp-content/uploads/2025/11/2016smithashokaninscriptions.pdf"
+    ],
+    [
+     "Ashoka (Encyclopaedia Britannica)",
+     "https://www.britannica.com/biography/Ashoka"
+    ],
+    [
+     "Dhauligiri Hills (Incredible India, Government of India Ministry of Tourism)",
+     "https://incredibleindia.gov.in/en/odisha/bhubaneswar/dhauligiri-hills"
+    ]
+   ],
+   "warn": "All three edict passages are Vincent Smith's 1920 English translation of the Prakrit inscriptions (public domain). E. Hultzsch's 1925 translation, used in the facts, differs in wording: where Smith has the forest folk 'bidden to turn from their [evil] ways that they be not chastised', Hultzsch has 'may not be killed'. Words in round or square brackets are the translators' additions. The edicts are numbered differently in different editions: Smith's 'Provincials' Edict' is Hultzsch's First Separate Rock Edict. Smith wrote as a historian of British India who admired Ashoka. The edicts are royal proclamations and tell the king's side.",
+   "note": "Research in progress: the people of Kalinga have no surviving voice from the war, so 'In their own words' is left empty. The Hathigumpha inscription of Kharavela (1st century BC; K. P. Jayaswal and R. D. Banerji, Epigraphia Indica vol. 20) was not quoted: it is a later king's text, it does not concern Ashoka's war, and a public-domain printing whose wording could be checked was not found in the time allowed. The Greek and Aramaic versions of Ashoka's edicts at Kandahar, which include part of Edict XIII, were not consulted."
+  },
+  {
+   "id": "turanganui1769",
+   "title": "Cook's landing at Tūranganui-a-Kiwa (Poverty Bay), October 1769",
+   "region": "Oceania",
+   "where": "Tūranganui-a-Kiwa (Poverty Bay), Gisborne, Aotearoa New Zealand; pin: the mouth of the Tūranganui River, near Cook's first landing place (approximate)",
+   "lat": -38.676,
+   "lon": 178.023,
+   "from": 1769,
+   "to": 1769,
+   "themes": [
+    "Massacre"
+   ],
+   "facts": [
+    [
+     "James Cook's Endeavour reached the bay in October 1769 and Cook landed on 8 October near present-day Gisborne; that day a Ngāti Oneone leader, Te Maro, was shot dead by one of Cook's men.",
+     "https://nzhistory.govt.nz/culture/encounters/early-meetings"
+    ],
+    [
+     "Cook's journal says Māori approached the ship's boats, the pinnace's coxswain fired two muskets over their heads, and a third shot killed one man 'just as he was going to dart his spear at the Boat'.",
+     "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    ],
+    [
+     "The next day, by Cook's account, one man snatched Mr Green's hanger (a short sword) and would not give it up; Cook had him fired on and he was wounded so badly that he died soon after. When others came back and carried off his arms, small shot wounded three more.",
+     "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    ],
+    [
+     "NZHistory names the Rongowhakaata chief Te Rākau as killed that day, with others wounded, and suggests Māori may have been trying to exchange weapons; the Tahitian tahua Tupaia, sailing with Cook, acted as a go-between in these first days, and Māori came to regard the Endeavour as 'Tupaia's ship'.",
+     "https://nzhistory.govt.nz/culture/encounters/early-meetings"
+    ],
+    [
+     "Later the same day Cook rowed to a fishing canoe 'in order to Seize upon the People'; Tupaia called to them, and when they tried to get away a musket was fired over their heads, the people in the canoe fought back with whatever they had in the boat, and Cook's men fired on them, killing two or three by Cook's count and wounding one. Three young men who jumped overboard were taken on board the Endeavour.",
+     "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    ],
+    [
+     "Cook wrote that the three captives, the eldest not above 20, were clothed and treated kindly, and they were put ashore the following day; he named the bay Poverty Bay 'because it afforded us no one thing we wanted'.",
+     "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    ],
+    [
+     "In Gisborne, 250 years after the landing, the British High Commissioner to New Zealand expressed regret on behalf of the British government for the killing of nine Māori by Cook's crew.",
+     "https://blogs.fcdo.gov.uk/lauraclarke/2020/01/07/heres-why-the-uk-wants-to-strengthen-its-relationship-with-new-zealand-maori"
+    ],
+    [
+     "Puhi Kai Iti / Cook Landing National Historic Reserve marks the landing place; its granite obelisk of 1906 was the first monument to a European explorer in the country, and Te Maro is remembered by a monument at Ruatanuika lookout.",
+     "https://www.doc.govt.nz/parks-and-recreation/places-to-go/east-coast/places/gisborne-area/puhi-kai-iti-cook-landing-national-reserve/"
+    ]
+   ],
+   "voices": [
+    {
+     "text": "In describing the simplicity of their ancestors, the chiefs would tell me that their fathers were fools, who knew nothing. “Ah !” said Rakou, the son of the chief who had been wounded by Cook, “I wish I had been sufficiently old at the time ; would I have thrown away an axe or a nail ? try me !”",
+     "who": "Rakou, son of a Tūranga chief wounded by Cook's party, and the Tūranga chiefs, as recorded by Joel Samuel Polack, an English trader who visited Poverty Bay in 1836 and had no part in the events of 1769 (the first sentence is Polack's report of what the chiefs said, the second Rakou's words). Polack had just told how gifts of an axe, a tomahawk and nails thrown to the people by Cook were cast into the sea",
+     "date": "told to Polack in 1836, about events of October 1769",
+     "doc": "J. S. Polack, New Zealand: being a narrative of travels and adventures during a residence in that country between the years 1831 and 1837 (London: Bentley, 1838), vol. I, ch. I, p. 19",
+     "url": "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt",
+     "lic": "Public domain (published 1838)"
+    },
+    {
+     "text": "A long time afterwards Captain Cook came to this Island, and his vessel lay at anchor at Turanga-nui-o-kiwa (the long standing of Kiwa) (d), and his boat was pulled on shore to buy provisions for himself and his men; but the people of the land stood up with their weapons in their hands to kill him and his men",
+     "who": "A Ngāti Porou tradition (headed 'Nga-i-Porou'), as collected and put into English by John White, a colonial government interpreter and ethnographer; the narrator is not named. It is told from the coast to the north: after the Poverty Bay landing it goes on to Cook at U-awa and the chief Whakatatare-o-te-rangi, and it does not mention the killings. The passage continues with the weapons the people held, Cook's withdrawal to the ship and his naming of 'Bay without Food'. '(d)' is White's note mark",
+     "date": "printed 1888; tradition about October 1769",
+     "doc": "John White, The Ancient History of the Maori, his Mythology and Traditions, vol. V (Tai-nui) (Wellington: Government Printer, 1888), section 'Captain Cook (Nga-i-Porou)', p. 152",
+     "url": "https://archive.org/stream/ancienthistorym00whitgoog/ancienthistorym00whitgoog_djvu.txt",
+     "lic": "Public domain (published 1888; White's own English)"
+    }
+   ],
+   "witness": [
+    {
+     "text": "In relating Cook's transactions in this bay, I must also mention the account given me by Manutai, grandson of Te Ratu, a principal chief, who headed the attack on the Englishmen, and was the first native killed by Europeans, which was done in self-defence. It appears that the tribes who now assaulted Cook had not been long in possession of the land, as they were originally a party of strangers from the southward, who had made war on the inhabitants of the place, and had defeated and destroyed them.",
+     "who": "Joel Samuel Polack, English trader, retelling in his own words what Manutai of Tūranga told him (New Zealand, 1838, vol. I, ch. I, pp. 14–15). Polack's naming of Te Ratu as the first man killed conflicts with the journals and with later tradition (see Disputed)",
+     "date": "1836 visit, printed 1838",
+     "url": "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt"
+    },
+    {
+     "text": "Another chief was shot in the shoulder ; this man recovered, and had died within a few years previously to my visiting those localities in 1836. I saw the son of this wounded warrior, an elderly man, who pointed out to me, on his body, the spot where the ball had passed through the shoulders of his father.",
+     "who": "Joel Samuel Polack, English trader, on a Tūranga man wounded by Cook's party and the son who showed him where the ball went (New Zealand, 1838, vol. I, ch. I, p. 15)",
+     "date": "1836 visit, printed 1838",
+     "url": "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "I am aware that most Humane men who have not experienced things of this nature will Censure my Conduct in firing upon the People in their Boat, nor do I myself think that the reason I had for seizing upon her will at all justify me; and had I thought that they would have made the Least Resistance I would not have come near them ; but as they did, I was not to stand still and suffer either myself or those that were with me to be knocked on the head.",
+     "who": "Lieutenant James Cook, commander of HM Bark Endeavour, on the firing on the fishing canoe, in Captain Cook's Journal during his First Voyage round the World, ed. W. J. L. Wharton (London, 1893), entry 'Tuesday, 10th' (ship's time), p. 132",
+     "date": "October 1769",
+     "url": "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    },
+    {
+     "text": "Soon after we intercepted a native canoe; but when we came up with it, the owners made so desperate a resistance that we were compelled to fire upon them, killing four; the other three (boys) attempted to swim to shore, but were captured and taken on board the ship. On finding that they were not to be killed, they at once recovered their spirits, and soon appeared to have forgotten everything that had happened. At supper they ate an enormous quantity of bread, and drank over a quart of water apiece. Thus ended the most disagreeable day my life has yet seen ; black be the mark for it, and heaven send that such may never return to embitter future reflection.",
+     "who": "Joseph Banks, naturalist of the Endeavour, who was in the boats that day, in Journal of the Right Hon. Sir Joseph Banks, ed. Sir Joseph D. Hooker (London, 1896), entry for the 9th, pp. 184–185 (Hooker's abridged and modernised text, not Banks's manuscript wording)",
+     "date": "October 1769",
+     "url": "https://archive.org/stream/journalofrightho00bankuoft/journalofrightho00bankuoft_djvu.txt"
+    }
+   ],
+   "today": {
+    "text": "When I expressed regret, on behalf of the British government, for the killing of 9 Māori by Captain Cook’s crew 250 years ago, it was met with a wide range of responses. The response that mattered most was that of the local Tūranga iwi and hapū, the descendants of those killed, who responded with tears, warmth and friendship.",
+    "who": "Laura Clarke, British High Commissioner to New Zealand, on the official FCDO blog ('Here’s why the UK wants to strengthen its relationship with New Zealand Māori'), looking back on the expression of regret she delivered in Gisborne 250 years after the landing",
+    "date": "7 January 2020",
+    "url": "https://blogs.fcdo.gov.uk/lauraclarke/2020/01/07/heres-why-the-uk-wants-to-strengthen-its-relationship-with-new-zealand-maori"
+   },
+   "disputed": [
+    [
+     "How many were killed? Cook's journal records one man shot on the first evening, the man who took Mr Green's hanger, and two or three killed in the canoe with one wounded; Hooker's edition of Banks says four were killed in the canoe, and Polack was told of four chiefs killed in the canoe. The British High Commissioner, speaking for the British government 250 years later, and the Department of Conservation both give nine Māori killed. The journals do not name the canoe dead.",
+     [
+      "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt",
+      "https://archive.org/stream/journalofrightho00bankuoft/journalofrightho00bankuoft_djvu.txt",
+      "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt",
+      "https://blogs.fcdo.gov.uk/lauraclarke/2020/01/07/heres-why-the-uk-wants-to-strengthen-its-relationship-with-new-zealand-maori",
+      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/east-coast/places/gisborne-area/puhi-kai-iti-cook-landing-national-reserve/"
+     ]
+    ],
+    [
+     "Attack or challenge? Cook and Banks wrote that their men fired in self-defence, against a man about to throw a spear, a man who seized a sword and people in the canoe who fought back. NZHistory (Ministry for Culture and Heritage) says the people were likely undertaking a ceremonial challenge that the Europeans read as an attack, and that the second day's clash may have come from an attempt to exchange weapons. Cook himself wrote that his reason for trying to seize the canoe would not justify firing on it.",
+     [
+      "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt",
+      "https://archive.org/stream/journalofrightho00bankuoft/journalofrightho00bankuoft_djvu.txt",
+      "https://nzhistory.govt.nz/culture/encounters/early-meetings"
+     ]
+    ],
+    [
+     "Who was killed first, and of which people? NZHistory names Te Maro of Ngāti Oneone, killed on 8 October, and Te Rākau of Rongowhakaata the following day; the Department of Conservation counts Te Maro, 'the Ngāti Oneone ancestor', among the nine Māori who died. Polack in 1838 relayed Manutai's account that Te Ratu headed the attack and was the first killed, but a 2022 intern report for the Prime Minister's Chief Science Advisor describes Te Rātū as an ariki of Rongowhakaata and Ngāti Kaipoho who sent a war party, led by Te Rākau, to oppose the landing. The same report records competing claims to Te Maro's affiliation, to Ngāti Rakai and to Ngāti Rongokauae.",
+     [
+      "https://nzhistory.govt.nz/culture/encounters/early-meetings",
+      "https://www.doc.govt.nz/parks-and-recreation/places-to-go/east-coast/places/gisborne-area/puhi-kai-iti-cook-landing-national-reserve/",
+      "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt",
+      "https://dpmc.govt.nz/sites/default/files/2024-07/PMCSA-22-06-02-V1-Te-Paepae-o-Te-Ratu-_The-collision-narrative-V1-wcs.pdf"
+     ]
+    ],
+    [
+     "Regret or apology? The British High Commissioner framed her words as an expression of regret on behalf of the British government; she wrote that the Tūranga iwi and hapū, descendants of those killed, received it warmly, while for some it did not go far enough in addressing the wrongs of the past.",
+     [
+      "https://blogs.fcdo.gov.uk/lauraclarke/2020/01/07/heres-why-the-uk-wants-to-strengthen-its-relationship-with-new-zealand-maori"
+     ]
+    ]
+   ],
+   "blind": "The journals of Cook and Banks, men of the ship that did the killing, are the only written accounts from 1769, and they name none of the dead. Tūranga voices reach us later and through outsiders: Polack's trader's report of 1836, John White's translation of a Ngāti Porou tradition printed in 1888, and land-court and family testimony from the 1850s onward that is not quoted here. The three young men taken aboard are named in the 2022 report (Hikirangi, Haurangi and Marukawiti), but what they said reaches us only through later tellings that are not quoted here; the families of the canoe dead speak only through what Cook and Banks thought they understood.",
+   "reading": [
+    [
+     "W. J. L. Wharton (ed.), Captain Cook's Journal during his First Voyage round the World (1893, archive.org)",
+     "https://archive.org/stream/cihm_14800/cihm_14800_djvu.txt"
+    ],
+    [
+     "Sir Joseph D. Hooker (ed.), Journal of the Right Hon. Sir Joseph Banks (1896, archive.org)",
+     "https://archive.org/stream/journalofrightho00bankuoft/journalofrightho00bankuoft_djvu.txt"
+    ],
+    [
+     "J. S. Polack, New Zealand: being a narrative of travels and adventures, vol. I (1838, archive.org)",
+     "https://archive.org/stream/newzealandbeingn00pola/newzealandbeingn00pola_djvu.txt"
+    ],
+    [
+     "John White, The Ancient History of the Maori, vol. V (1888, archive.org)",
+     "https://archive.org/stream/ancienthistorym00whitgoog/ancienthistorym00whitgoog_djvu.txt"
+    ],
+    [
+     "Early meetings between peoples (NZHistory, Ministry for Culture and Heritage)",
+     "https://nzhistory.govt.nz/culture/encounters/early-meetings"
+    ],
+    [
+     "Tanith Wirihana Te Waitohioterangi, Te Paepae o Te Rātū: the collision narrative (intern report, internal to the Office of the Prime Minister's Chief Science Advisor, 2022)",
+     "https://dpmc.govt.nz/sites/default/files/2024-07/PMCSA-22-06-02-V1-Te-Paepae-o-Te-Ratu-_The-collision-narrative-V1-wcs.pdf"
+    ]
+   ],
+   "warn": "Cook kept ship's time, in which the day began at noon, so his 'Monday 9th' and 'Tuesday 10th' afternoons are 8 and 9 October by the calendar; Banks's and later dates differ by a day for the same events, and the Department of Conservation's page, which puts the landing two days after the sighting of 7 October, follows Cook's dates. Hooker's 1896 edition shortens Banks's journal and modernises his spelling, so its wording is Hooker's printing, not Banks's hand. Polack wrote two generations after the event and is known for embellishment; White's tradition is his English, its narrator unnamed. Old spellings are kept (Turunga, Turanga-nui-o-kiwa, Te Ratu, Rakou), without the macrons used today. The quotations describe people shot dead.",
+   "note": "Research in progress: the eyewitness statement of Hine Kapu (recorded for Donald McLean in 1852) and Riperata Kahutia's evidence to the Native Land Court (Kaiti hearing, 1873) were found only as citations in the 2022 report and could not be read; Sydney Parkinson's journal (1773) was not quoted because the scanned text could not be read reliably; the full text of the October 2019 statement of regret was not found on a government site; the Rongowhakaata Claims Settlement Act 2012 (https://www.legislation.govt.nz/act/public/2012/54/en/latest/) was checked and its historical account does not mention 1769. Bishop W. L. Williams's 1902 account of Te Ratu and the Te Aroha News item of 1888 on Te Maro's hapū, both on Papers Past, could not be opened and are no longer cited."
+  },
+  {
+   "id": "delhi1398",
+   "title": "Timur's sack of Delhi",
+   "region": "Asia",
+   "where": "Delhi, India; the pin marks the area of Siri and Jahanpanah, two of the walled cities of Delhi that were plundered in December 1398",
+   "lat": 28.546,
+   "lon": 77.216,
+   "from": 1398,
+   "to": 1399,
+   "themes": [
+    "Massacre",
+    "War",
+    "Slavery"
+   ],
+   "facts": [
+    [
+     "By 1394 the Delhi sultanate had two rival sultans, both in or near Delhi, and a civil war followed; when Timur invaded in 1398 he defeated the army of Sultan Mahmud Tughluq and sacked the city, which Britannica calls the final blow to the sultanate's effective power and prestige.",
+     "https://www.britannica.com/place/India/Decline-of-the-sultanate"
+    ],
+    [
+     "Timur, who ruled Central Asia from Samarkand, invaded India in late summer 1398, alleging that Sultan Nasiruddin Mahmud of Delhi was too lenient towards his Hindu subjects; his horsemen plundered and massacred as they advanced, and the battle of Delhi was fought on 17 December 1398.",
+     "https://www.britannica.com/event/Battle-of-Delhi-1398"
+    ],
+    [
+     "Before the battle Timur ordered the captives in his camp to be killed. The memoirs attributed to him give the number slain that day as 100,000 and say that any man who failed to kill his prisoners was to be executed himself.",
+     "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    ],
+    [
+     "After the battle, Sultan Mahmud and Ikbal Khan fled Delhi by night. Yahya Sirhindi, writing under the next dynasty, records that Timur granted the city quarter and took a ransom, and on the fourth day ordered all its people to be made prisoners.",
+     "https://archive.org/stream/cu31924073036745/cu31924073036745_djvu.txt"
+    ],
+    [
+     "Timur's memoirs say the quarter of the sayyids, the 'ulama and the other Muslims was exempted from the sack and given a guard, and that Hindus who gathered in the great mosque of Old Delhi were attacked and killed there.",
+     "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    ],
+    [
+     "The townspeople fought back. Firishta says that the Hindus of Delhi, seeing their women disgraced and their property seized, set fire to their houses, killed their wives and children and rushed out to fight; he also reports Nizam-ud-din Ahmad's account that citizens killed some of Timur's soldiers after the ransom collectors used torture.",
+     "https://archive.org/stream/historyofriseofm01feri/historyofriseofm01feri_djvu.txt"
+    ],
+    [
+     "Timur's court historian Yazdi writes that several thousand craftsmen were taken out of the city and divided among Timur's princes and amirs, and that the stonemasons were kept back to build a great mosque in Samarkand. Timur's memoirs say he stayed fifteen days at Delhi.",
+     "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    ],
+    [
+     "Britannica writes that Timur's warriors destroyed so much that Delhi took a century to recover, and that no reliable casualty figures exist.",
+     "https://www.britannica.com/event/Battle-of-Delhi-1398"
+    ]
+   ],
+   "voices": [],
+   "witness": [
+    {
+     "text": "When night came on, Ikbál Khán and Sultán Mahmúd, leaving their wives and children behind, came out of the city. The Sultán fled to Gujarát, and Ikbál Khán crossed the river Jumna and went to Baran. Next day Amír Tímúr granted quarter to the city, and took the ransom money from the inhabitants. On the fourth day he gave orders that all the people in the city should be made prisoners, and this was done.",
+     "who": "Yahya bin Ahmad Sirhindi, a Muslim chronicler of the Delhi sultanate, in his Tarikh-i Mubarak-Shahi, written for Sultan Mubarak Shah of Delhi, translated by John Dowson in Elliot and Dowson, The History of India as Told by its Own Historians, vol. 4 (London 1872), p. 35. Mubarak Shah was the son of Khizr Khan, to whom, as Yahya records on the next page, Timur granted the fiefs of Multan and Dibalpur. Yahya was not one of the people taken prisoner",
+     "date": "15th century (the only surviving copy ends in 1448); English 1872",
+     "url": "https://archive.org/stream/cu31924073036745/cu31924073036745_djvu.txt"
+    },
+    {
+     "text": "The first intimation he obtained was from the city being in flames ; for the Hindoos, according to custom, seeing their females disgraced, and their wealth seized by the soldiery, shut the gates, set fire to their houses, murdered their wives and children, and rushed out on their enemies. This led to a general massacre, some streets were rendered impassable, by the heaps of dead ; and the gates being forced, the whole Mogul army gained admittance, and a scene of horror ensued easier to be imagined than described.",
+     "who": "Muhammad Qasim Firishta (spelled Ferishta by his translator), a historian writing in India about two centuries later, whose history runs to A.D. 1612; English translation by John Briggs (London 1829), vol. 1, pp. 493–494, in the Calcutta reprint of 1908. 'He' is Timur; Firishta writes that Timur was holding a victory festival in his camp and heard nothing for five days",
+     "date": "about 1612 (English 1829)",
+     "url": "https://archive.org/stream/historyofriseofm01feri/historyofriseofm01feri_djvu.txt"
+    }
+   ],
+   "official": [
+    {
+     "text": "My object in the invasion of Hindustán is to lead an expedition against the infidels that, according to the law of Muhammad (upon whom and his family be the blessing and peace of God), we may convert to the true faith the people of that country, and purify the land itself from the filth of infidelity and polytheism; and that we may overthrow their temples and idols and become gházis and mujáhids before God.",
+     "who": "Timur, answering nobles who doubted the campaign, in the Malfuzat-i Timuri, the 'memoirs' attributed to him (a Persian text presented by Abu Talib Husaini to the Mughal emperor Shah Jahan in the 17th century; its authenticity is doubted, see below). Elliot's text is from Muhammad Afzal Bukhari's revision of Abu Talib's version, made in 1637 to bring it into line with the Zafar-nama; the editor found the Indian portion identical in both. English by C. E. Chapman in Elliot and Dowson, The History of India as Told by its Own Historians, vol. 3 (London 1871), p. 397. Gházis and mujáhids are fighters in a holy war",
+     "date": "set in 1398 (text 17th century; English 1871)",
+     "url": "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    },
+    {
+     "text": "I asked their advice about the prisoners, and they said that on the great day of battle these 100,000 prisoners could not be left with the baggage, and that it would be entirely opposed to the rules of war to set these idolaters and foes of Islám at liberty. In fact, no other course remained but that of making them all food for the sword. When I heard these words I found them in accordance with the rules of war, and I directly gave my command for the Tawáchís to proclaim throughout the camp that every man who had infidel prisoners was to put them to death, and whoever neglected to do so should himself be executed and his property given to the informer.",
+     "who": "Timur, in the Malfuzat-i Timuri (attributed memoirs, authenticity doubted), on the eve of the battle of Delhi. Just before this passage his amirs tell him the prisoners had rejoiced when the Delhi army attacked and might break free and join it. English by John Dowson in Elliot and Dowson, vol. 3 (1871), p. 436, under the heading 'Massacre of 100,000 Hindus'. Tawáchís were heralds",
+     "date": "set in December 1398 (text 17th century; English 1871)",
+     "url": "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    },
+    {
+     "text": "On the 16th of the month a number of soldiers collected at the gate of Dehlí and derided the inhabitants. When Tímúr heard of this he directed some of the amirs to put a stop to it. But it was the divine pleasure to ruin the city and to punish the inhabitants, and that was brought about in this way.",
+     "who": "Sharaf al-Din Ali Yazdi, historian of the Timurid court, in his Zafar-nama ('Book of Victory'), written in 1424 (the date Elliot gives); English extract in Elliot and Dowson, vol. 3 (1871), pp. 502–503. He goes on to tell how ladies from the camp and treasury officers collecting the ransom entered the city, and fighting broke out",
+     "date": "15th century (English 1871)",
+     "url": "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    }
+   ],
+   "disputed": [
+    [
+     "Are Timur's memoirs genuine? Abu Talib Husaini, who presented the Malfuzat to Shah Jahan, said he had translated a Turki original found in Yemen; no such original survives. Major Davy, Charles Stewart and John Dowson argued that the work was not Abu Talib's own invention and that it matches Yazdi's Zafar-nama event for event (though the version Dowson translated had been revised in 1637 to agree with the Zafar-nama). The Encyclopaedia Iranica notes that many later Western scholars, among them Sachau, Rieu, Ethé, Beveridge and Browne, dismissed it as apocryphal and probably forged. The order to kill the prisoners and the sack are also told by Yazdi, an authentic 15th-century court history, so the events do not rest on the memoirs alone.",
+     [
+      "https://www.iranicaonline.org/?p=4851",
+      "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+     ]
+    ],
+    [
+     "How many captives were killed before the battle? The memoirs and Yazdi give 100,000 killed; Firishta says there were above 100,000 prisoners and that Timur had all above the age of fifteen put to the sword, nearly 100,000 men; Yahya Sirhindi, the nearest Indian chronicler, puts the prisoners put to the sword at Loni at '50,000 men, more or less: God knows the truth.' Britannica's article on the battle gives possibly around 100,000, while its history of the sultanate says 'at least 50,000'. The memoirs and Yazdi say the prisoners were killed for fear they would join the Delhi army; Britannica says the army was so encumbered with loot and captured slaves that its military efficiency was imperilled. No count of the dead in the sack itself is reliable: Britannica notes that some sources give an Indian death toll of 1,000,000 but that no reliable figures exist.",
+     [
+      "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt",
+      "https://archive.org/stream/cu31924073036745/cu31924073036745_djvu.txt",
+      "https://archive.org/stream/historyofriseofm01feri/historyofriseofm01feri_djvu.txt",
+      "https://www.britannica.com/event/Battle-of-Delhi-1398",
+      "https://www.britannica.com/place/India/Decline-of-the-sultanate"
+     ]
+    ],
+    [
+     "Was the sack ordered? Timur's memoirs say the city was plundered 'by no wish or direction of mine', and Yazdi calls it 'the divine pleasure'; both blame quarrels between soldiers and townspeople and the inhabitants' resistance. Yahya Sirhindi says that on the fourth day Timur 'gave orders that all the people in the city should be made prisoners', Firishta's own account says soldiers sent in to enforce the ransom began plundering beyond their officers' control while Timur feasted in his camp, then gives Nizam-ud-din Ahmad's different version, in which citizens killed collectors who had used torture and Timur ordered a general pillage. Britannica writes that Timur set his warriors loose on the city.",
+     [
+      "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt",
+      "https://archive.org/stream/cu31924073036745/cu31924073036745_djvu.txt",
+      "https://archive.org/stream/historyofriseofm01feri/historyofriseofm01feri_djvu.txt",
+      "https://www.britannica.com/event/Battle-of-Delhi-1398"
+     ]
+    ],
+    [
+     "Why did Timur invade? The memoirs state a religious aim (to convert the people and overthrow temples and idols), but just before it Timur sets out India's mines of gold, silver and gems and says his wazirs told him its revenue was six arbs. Britannica calls Timur's charge that the sultan was too lenient to his Hindu subjects a pretext, and describes his army near Delhi as encumbered with loot and captured slaves.",
+     [
+      "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt",
+      "https://www.britannica.com/event/Battle-of-Delhi-1398",
+      "https://www.britannica.com/place/India/Decline-of-the-sultanate"
+     ]
+    ]
+   ],
+   "blind": "Every passage on this card comes from men writing on the conquerors' side or long after the event: Timur's court historian, the doubtful 'memoirs' produced at the Mughal court, a Delhi chronicler writing for the next dynasty, and Firishta two centuries later. All of them wrote in Persian, and all reach us here in 19th-century British translations. No words of the captives killed before the battle, the townspeople taken as slaves, the women, or the craftsmen marched to Samarkand were found. The sources describe the victims mainly as 'infidels' and 'Hindus'; what happened to Delhi's Muslim poor, beyond the protected quarter of the sayyids and scholars, is barely recorded.",
+   "reading": [
+    [
+     "Elliot and Dowson, The History of India as Told by its Own Historians, vol. 3 (1871): Malfuzat-i Timuri and Zafar-nama extracts (archive.org)",
+     "https://archive.org/stream/cu31924073036737/cu31924073036737_djvu.txt"
+    ],
+    [
+     "Elliot and Dowson, The History of India as Told by its Own Historians, vol. 4 (1872): Tarikh-i Mubarak-Shahi (archive.org)",
+     "https://archive.org/stream/cu31924073036745/cu31924073036745_djvu.txt"
+    ],
+    [
+     "Mahomed Kasim Ferishta, History of the Rise of the Mahomedan Power in India, tr. John Briggs, vol. 1 (1829; reprint 1908, archive.org)",
+     "https://archive.org/stream/historyofriseofm01feri/historyofriseofm01feri_djvu.txt"
+    ],
+    [
+     "Hameed ud-Din, 'Abu Taleb Hosayni', Encyclopaedia Iranica (1983), on the authenticity of the memoirs",
+     "https://www.iranicaonline.org/?p=4851"
+    ],
+    [
+     "Battle of Delhi, 1398 (Britannica)",
+     "https://www.britannica.com/event/Battle-of-Delhi-1398"
+    ]
+   ],
+   "warn": "All five quotations are English translations from Persian; none are by the people of Delhi. The quotations have been checked letter by letter against the page images of the printed editions, accents included. The spaces before semicolons are those of the printed text. The Malfuzat-i Timuri is widely thought to be a later compilation or forgery, and the version printed by Elliot and Dowson was revised in 1637 to agree with Yazdi; both it and Yazdi are written to praise Timur. The figures of 100,000 and 1,000,000 are the sources' own and cannot be checked.",
+   "note": "Research in progress: no words of Delhi's inhabitants, captives or deported craftsmen were found in any public-domain printing, so 'In their own words' is empty; the two Indian chroniclers are placed among the outside witnesses. Darby's 1723 English Yazdi (The History of Timur-Bec) was not read in full text, and Charles Stewart's 1830 Mulfuzat Timury stops before the Indian campaign. A modern study of the deportation of Indian craftsmen to Samarkand was not found."
   }
  ],
  "themesNote": "Themes are the site's own tags, to help find related stories; they are not findings."
